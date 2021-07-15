@@ -1,0 +1,8 @@
+fig:virtualbox-menu
+intro
+引言-1
+安裝-virtualbox
+於虛擬機器安裝作業系統
+新增-ubuntu-作業系統設定
+於-virtualbox-安裝作業系統
+literature
