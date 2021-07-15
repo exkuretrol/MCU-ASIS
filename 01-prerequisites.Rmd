@@ -63,3 +63,33 @@ knitr::include_graphics("./figures/virtualbox-menu.png", dpi = NA)
 完成後，會在 Virtual Machine 的選單左邊看見剛剛新建的虛擬機器，不過此時的虛擬機器內還沒有作業系統。
 
 ### 於 VirtualBox 安裝作業系統
+
+在安裝作業系統之前，要先下載作業系統，因為目前的院伺服器系統是 Ubuntu 、我自己的 VPS 也是 Ubuntu ，而且我摸得比較熟的也是 Ubuntu 那有什麼理由換掉呢？所以這裡我也以 Ubuntu 作為我們院伺服器主要的系統。
+
+![](figures/ubuntu.com-download-page.png){.figure}
+
+進到 Ubuntu 官方網站的下載介面，這次我們選擇伺服器版本 (Ubuntu Server) 代替以往的桌面版本 (Ubuntu Desktop)。因為如果是伺服器，不需要圖形介面就可以管理了，相對於桌面版本也較節省資源。
+
+![](figures/ubuntu.com-download-server-page.png){.figure}
+
+選擇「Option 2 - Manual server Installation」選項之後，按上面的綠色按鈕「Download Ubuntu Server 20.04.2 LTS」會跳轉到下載頁面，開始下載 Ubuntu 系統映像檔案 (\*.iso)。
+
+其他選項的簡易說明:
+
+-   `Option 1 - Instant Ubuntu VMs`: Multipass 是快速部屬虛擬機器的軟體，詳細說明可以看[這裡](https://github.com/canonical/multipass)，而這裡我們已經選用 VirtualBox 了所以不會用到
+
+-   `Option 2 - Manual server installation`: 傳統的下載映像檔案
+
+-   `Option 3 - Automated server provisioning`: 利用 [MaaS](https://maas.io/) (Metal-as-a-Service) 安裝虛擬機。MaaS是管理數台虛擬主機用的服務，並不局限於 Ubuntu，Windows、CentOS 與 ESXi都可以在上面部屬。
+
+![](figures/ubuntu-install-select-iso.png){.figure}
+
+待下載完成後，開啟剛剛創建的「MCU-ASIS」虛擬主機，會跳出一個選擇啟動磁碟的訊息提示視窗，這裡我們點擊右下角的資料夾📁。
+
+![](figures/select-iso.png){.figure}
+
+按「加入」並選擇剛剛下載下來的映像檔案 (ubuntu-20.04.2-live-server-amd64.iso)。加入完成後按「選擇」，接著按「開始」掛載映像檔案至虛擬主機中開始安裝。
+
+![](figures/ubuntu-configuration-select-lang.png){.figure}
+
+稍待 Ubuntu 作業系統映像檔載入後，安裝程式會跳出選擇語言的畫面，在這裡選擇適合你的語言。

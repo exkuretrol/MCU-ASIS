@@ -15,6 +15,10 @@
   background-image: url("figures/icons/post-it.png");
 }
 
+.caution {
+  background-image: url("figures/icons/caution.png");
+}
+
 .infobox p {
   margin-top: .85em !important;
 }
