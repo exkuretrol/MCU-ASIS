@@ -148,7 +148,7 @@ Figure 1.1: VirtualBox 的操作介面
 <p>類型與版本記得設定為 Linux 與 Ubuntu 64位元 版本。完成之後點擊「建立」。</p>
 <p><img src="figures/new-virtual-machine_1.png" title="new virtual machine" class="figure" /></p>
 <p>這裡我會選 VMDK 格式的原因是因為，如果要轉移虛擬主機檔案時，單一個檔案會輕易地超過 4Gb，而超過此上限得檔案在複製時，如果目的地的裝置格式不是 ntfs 的話，會沒有辦法複製。為了預防這個問題，我在這邊先選擇 VMDK 作為我虛擬主機的檔案格式。</p>
-<div class="infobox caution">
+<div class="infobox info">
 <p>這裡如果選擇「固定大小」會新增一個跟你設定的檔案大小一樣大的虛擬機器檔案，除非你的硬碟很大，否則不建議這麼做。</p>
 </div>
 <!--# TODO: 這邊可以再加如果虛擬主機已經是 VDI 格式怎麼轉換成 VMDK 格式的教學 -->
@@ -157,6 +157,23 @@ Figure 1.1: VirtualBox 的操作介面
 </div>
 <div id="於-virtualbox-安裝作業系統" class="section level3" number="1.3.2">
 <h3><span class="header-section-number">1.3.2</span> 於 VirtualBox 安裝作業系統</h3>
+<p>在安裝作業系統之前，要先下載作業系統，因為目前的院伺服器系統是 Ubuntu 、我自己的 VPS 也是 Ubuntu ，而且我摸得比較熟的也是 Ubuntu 那有什麼理由換掉呢？所以這裡我也以 Ubuntu 作為我們院伺服器主要的系統。</p>
+<p>進到 Ubuntu 官方網站的下載介面，這次我們選擇伺服器版本 (Ubuntu Server) 代替以往的桌面版本 (Ubuntu Desktop)。因為如果是伺服器，不需要圖形介面就可以管理了，相對於桌面版本也較節省資源。</p>
+<p><img src="figures/ubuntu.com-download-page.png" class="figure" /></p>
+<p>選擇「Option 2 - Manual server Installation」選項之後，按上面的綠色按鈕「Download Ubuntu Server 20.04.2 LTS」會跳轉到下載頁面，開始下載 Ubuntu 系統映像檔案 (*.iso)。</p>
+<p>其他選項的簡易說明:</p>
+<ul>
+<li><p><code>Option 1 - Instant Ubuntu VMs</code>: Multipass 是快速部屬虛擬機器的軟體，詳細說明可以看<a href="https://github.com/canonical/multipass">這裡</a>，而這裡我們已經選用 VirtualBox 了所以不會用到</p></li>
+<li><p><code>Option 2 - Manual server installation</code>: 傳統的下載映像檔案</p></li>
+<li><p><code>Option 3 - Automated server provisioning</code>: 利用 <a href="https://maas.io/">MaaS</a> (Metal-as-a-Service) 安裝虛擬機。MaaS是管理數台虛擬主機用的服務，並不局限於 Ubuntu，Windows、CentOS 與 ESXi都可以在上面部屬。</p></li>
+</ul>
+<p><img src="figures/ubuntu.com-download-server-page.png" class="figure" /></p>
+<p>待下載完成後，開啟剛剛創建的「MCU-ASIS」虛擬主機，會跳出一個選擇啟動磁碟的訊息提示視窗，這裡我們點擊右下角的資料夾📁。</p>
+<p><img src="figures/ubuntu-install-select-iso.png" class="figure" /></p>
+<p>按「加入」並選擇剛剛下載下來的映像檔案 (ubuntu-20.04.2-live-server-amd64.iso)。加入完成後按「選擇」，接著按「開始」掛載映像檔案至虛擬主機中開始安裝。</p>
+<p><img src="figures/select-iso.png" class="figure" /></p>
+<p>稍待 Ubuntu 作業系統映像檔載入後，安裝程式會跳出選擇語言的畫面，在這裡選擇適合你的語言。</p>
+<p><img src="figures/ubuntu-configuration-select-lang.png" class="figure" /></p>
 
 </div>
 </div>
