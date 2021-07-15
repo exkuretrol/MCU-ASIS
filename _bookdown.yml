@@ -1,4 +1,6 @@
 book_filename: "MCU-ASIS"
+edit: https://github.com/exkuretrol/MCU-ASIS/edit/main/%s
+view: https://github.com/exkuretrol/MCU-ASIS/blob/main/%s
 delete_merged_file: true
 language:
   ui:
@@ -6,3 +8,4 @@ language:
   label:
     figure: "圖 "
     table: "表 "
+clean: ["packages.bib"]

@@ -4,18 +4,18 @@ author: "Chiawei Chen"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
-output:
-    html_document:
-        css: style.css
 bibliography:
 - book.bib
 - packages.bib
 biblio-style: apalike
 link-citations: yes
 description: This is a book.
+output:
+  html_document:
+    css: "style.css"
 ---
 
-# 引言 {-}
+# 引言 {.unnumbered}
 
 這是一本用 **Markdown** 寫的書。邊把我架設系上 Ubuntu 伺服器時的過程記錄下來，這是我第一次寫書，撰寫時考慮的沒有那麼多，所以可能會有閱讀困難的情形。
 

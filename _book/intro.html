@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-07-15" />
+<meta name="date" content="2021-07-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -130,11 +130,11 @@ Figure 1.1: VirtualBox 的操作介面
 </div>
 <p>如 <a href="intro.html#fig:virtualbox-menu">1.1</a> 所示，右邊主要功能圖示由左而右的功能分別是:</p>
 <ol style="list-style-type: decimal">
-<li><strong>喜好設定:</strong> 設定 VirtualBox 的整體設定，像是軟體語言、虛擬機器預設存放位置…等等</li>
-<li><strong>匯入:</strong> 匯入虛擬機器檔案 (.ovf)</li>
-<li><strong>匯出:</strong> 匯出虛擬機器檔案</li>
-<li><strong>新增:</strong> 新增<em>新的</em>虛擬主機</li>
-<li><strong>加入:</strong> 加入<em>已經存在</em>的虛擬主機</li>
+<li><code>喜好設定</code>: 設定 VirtualBox 的整體設定，像是軟體語言、虛擬機器預設存放位置…等等</li>
+<li><code>匯入</code>: 匯入虛擬機器檔案 (.ovf)</li>
+<li><code>匯出</code>: 匯出虛擬機器檔案</li>
+<li><code>新增</code>: 新增<em>新的</em>虛擬主機</li>
+<li><code>加入</code>: 加入<em>已經存在的</em>虛擬主機</li>
 </ol>
 <div id="新增-ubuntu-作業系統設定" class="section level3" number="1.3.1">
 <h3><span class="header-section-number">1.3.1</span> 新增 Ubuntu 作業系統設定</h3>
@@ -148,7 +148,9 @@ Figure 1.1: VirtualBox 的操作介面
 <p>類型與版本記得設定為 Linux 與 Ubuntu 64位元 版本。完成之後點擊「建立」。</p>
 <p><img src="figures/new-virtual-machine_1.png" title="new virtual machine" class="figure" /></p>
 <p>這裡我會選 VMDK 格式的原因是因為，如果要轉移虛擬主機檔案時，單一個檔案會輕易地超過 4Gb，而超過此上限得檔案在複製時，如果目的地的裝置格式不是 ntfs 的話，會沒有辦法複製。為了預防這個問題，我在這邊先選擇 VMDK 作為我虛擬主機的檔案格式。</p>
+<div class="infobox info">
 <p>這裡如果選擇「固定大小」會新增一個跟你設定的檔案大小一樣大的虛擬機器檔案，除非你的硬碟很大，否則不建議這麼做。</p>
+</div>
 <!--# TODO: 這邊可以再加如果虛擬主機已經是 VDI 格式怎麼轉換成 VMDK 格式的教學 -->
 <p><img src="figures/virtual-machine-created.png" title="virtual machine created" class="figure" /></p>
 <p>完成後，會在 Virtual Machine 的選單左邊看見剛剛新建的虛擬機器，不過此時的虛擬機器內還沒有作業系統。</p>
@@ -197,15 +199,15 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https://github.com/exkuretrol/MCU-ASIS/edit/main/01-prerequisites.Rmd",
+"text": "Edit"
 },
 "history": {
 "link": null,
 "text": null
 },
 "view": {
-"link": null,
+"link": "https://github.com/exkuretrol/MCU-ASIS/blob/main/01-prerequisites.Rmd",
 "text": null
 },
 "download": ["MCU-ASIS.pdf", "MCU-ASIS.epub"],
