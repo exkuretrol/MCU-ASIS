@@ -6,13 +6,13 @@
 
 ## 安裝 VirtualBox
 
-先到 [VirtualBox 官方網站](https://www.virtualbox.org/wiki/Downloads)的下載頁面，下載適合你電腦系統的安裝執行檔，假如是 Windows 系統就點擊 「Windows hosts」的下載連結，如果是其他作業系統就根據你的作業系統下載對應的檔案。
-
 ![](figures/www.virtualbox.org-downloads-page.png "official virtualbox downloads page"){.figure}
 
-安裝的過程中只需使用預設的設定即可，預設設定做了安裝虛擬機器的驅動程式、關聯檔案...等等，正常安裝不需要變更它。
+先到 [VirtualBox 官方網站](https://www.virtualbox.org/wiki/Downloads)的下載頁面，下載適合你電腦系統的安裝執行檔，假如是 Windows 系統就點擊 「Windows hosts」的下載連結，如果是其他作業系統就根據你的作業系統下載對應的檔案。
 
 ![](figures/virtual-box-installer.png "virtualbox installer"){.figure}
+
+安裝的過程中只需使用預設的設定即可，預設設定做了安裝虛擬機器的驅動程式、關聯檔案...等等，正常安裝不需要變更它。
 
 ## 於虛擬機器安裝作業系統
 
@@ -46,9 +46,31 @@ knitr::include_graphics("./figures/virtualbox-menu.png", dpi = NA)
 
     C:\Users\qaz85\VirtualBox VMs
 
-類型與版本記得設定為 Linux 與 Ubuntu 64位元 版本。完成之後點擊「建立」。
+從這張圖可以看到院伺服器的磁碟配置是由兩個 1Tb 的硬碟組成，且用[Raid-1](http://linux.vbird.org/linux_basic/0420quota.php#raid1) (映射模式) 將伺服器同時映射備份至另一個硬碟。
+
+    $ lsblk
+    NAME                       MAJ:MIN RM   SIZE RO TYPE   MOUNTPOINT
+    sdb                          8:16   0 931.5G  0 disk
+    ├─sdb2                       8:18   0 852.5G  0 part
+    ├─sdb3                       8:19   0    32G  0 part
+    ├─sdb1                       8:17   0   512M  0 part
+    └─isw_ecbbadhihd_Raid1     253:0    0   885G  0 dmraid
+      ├─isw_ecbbadhihd_Raid1p1 253:1    0   512M  0 part   /boot/efi
+      ├─isw_ecbbadhihd_Raid1p2 253:2    0 852.5G  0 part   /
+      └─isw_ecbbadhihd_Raid1p3 253:3    0    32G  0 part   [SWAP]
+    sr0                         11:0    1  1024M  0 rom
+    sda                          8:0    0 931.5G  0 disk
+    ├─sda2                       8:2    0 852.5G  0 part
+    ├─sda3                       8:3    0    32G  0 part
+    ├─sda1                       8:1    0   512M  0 part
+    └─isw_ecbbadhihd_Raid1     253:0    0   885G  0 dmraid
+      ├─isw_ecbbadhihd_Raid1p1 253:1    0   512M  0 part   /boot/efi
+      ├─isw_ecbbadhihd_Raid1p2 253:2    0 852.5G  0 part   /
+      └─isw_ecbbadhihd_Raid1p3 253:3    0    32G  0 part   [SWAP]
 
 ![](figures/new-virtual-machine_1.png "new virtual machine"){.figure}
+
+所以這裡也選擇跟院伺服器一樣的1000Gb做為系統硬碟，類型與版本記得設定為 Linux 與 Ubuntu 64位元 版本。完成之後點擊「建立」。
 
 這裡我會選 VMDK 格式的原因是因為，如果要轉移虛擬主機檔案時，單一個檔案會輕易地超過 4Gb，而超過此上限得檔案在複製時，如果目的地的裝置格式不是 ntfs 的話，會沒有辦法複製。為了預防這個問題，我在這邊先選擇 VMDK 作為我虛擬主機的檔案格式。
 
@@ -62,13 +84,23 @@ knitr::include_graphics("./figures/virtualbox-menu.png", dpi = NA)
 
 完成後，會在 Virtual Machine 的選單左邊看見剛剛新建的虛擬機器，不過此時的虛擬機器內還沒有作業系統。
 
+![](figures/virtual-machine-setting-storage.png)
+
+![](figures/virtual-machine-setting-storage-new.png)
+
+![](figures/virtual-machine-setting-storage-new_1.png)
+
+![](figures/virtual-machine-setting-storage-new_2.png)
+
 ### 於 VirtualBox 安裝作業系統
 
 在安裝作業系統之前，要先下載作業系統，因為目前的院伺服器系統是 Ubuntu 、我自己的 VPS 也是 Ubuntu ，而且我摸得比較熟的也是 Ubuntu 那有什麼理由換掉呢？所以這裡我也以 Ubuntu 作為我們院伺服器主要的系統。
 
+![](figures/ubuntu.com-download-page.png){.figure}
+
 進到 Ubuntu 官方網站的下載介面，這次我們選擇伺服器版本 (Ubuntu Server) 代替以往的桌面版本 (Ubuntu Desktop)。因為如果是伺服器，不需要圖形介面就可以管理了，相對於桌面版本也較節省資源。
 
-![](figures/ubuntu.com-download-page.png){.figure}
+![](figures/ubuntu.com-download-server-page.png){.figure}
 
 選擇「Option 2 - Manual server Installation」選項之後，按上面的綠色按鈕「Download Ubuntu Server 20.04.2 LTS」會跳轉到下載頁面，開始下載 Ubuntu 系統映像檔案 (\*.iso)。
 
@@ -80,16 +112,166 @@ knitr::include_graphics("./figures/virtualbox-menu.png", dpi = NA)
 
 -   `Option 3 - Automated server provisioning`: 利用 [MaaS](https://maas.io/) (Metal-as-a-Service) 安裝虛擬機。MaaS是管理數台虛擬主機用的服務，並不局限於 Ubuntu，Windows、CentOS 與 ESXi都可以在上面部屬。
 
-![](figures/ubuntu.com-download-server-page.png){.figure}
+![](figures/ubuntu-install-select-iso.png){.figure}
 
 待下載完成後，開啟剛剛創建的「MCU-ASIS」虛擬主機，會跳出一個選擇啟動磁碟的訊息提示視窗，這裡我們點擊右下角的資料夾📁。
 
-![](figures/ubuntu-install-select-iso.png){.figure}
+![](figures/select-iso.png){.figure}
 
 按「加入」並選擇剛剛下載下來的映像檔案 (ubuntu-20.04.2-live-server-amd64.iso)。加入完成後按「選擇」，接著按「開始」掛載映像檔案至虛擬主機中開始安裝。
 
-![](figures/select-iso.png){.figure}
+#### 語言
+
+![](figures/ubuntu-configuration-select-lang.png){.figure}
 
 稍待 Ubuntu 作業系統映像檔載入後，安裝程式會跳出選擇語言的畫面，在這裡選擇適合你的語言。
 
-![](figures/ubuntu-configuration-select-lang.png){.figure}
+在安裝過程中使用方向鍵⬆️⬇️⬅️➡️ (選擇)、Enter↪️ (確認) 與 Esc (返回) 操控安裝程式介面。
+
+#### 鍵盤配置
+
+![](figures/installer-keyboard.png)
+
+這裡可以設定鍵盤的:
+
+-   `Layout` (布局): 鍵盤的語言
+
+-   `Variant` (鍵位): 一般在台灣都是用 QWERTY 配置，詳細說明可以在[這](https://zh.wikipedia.org/wiki/%E9%94%AE%E7%9B%98%E5%B8%83%E5%B1%80)找到
+
+#### 網路連線
+
+![](figures/installer-network.png)
+
+這裡可以設定 Ubuntu 的網路連線，預設是由 DHCP 設定，通常不用變更，如果這裡連線失敗，也可以等開機後再做設定。
+
+#### Proxy
+
+![](figures/installer-proxy.png)
+
+除非網路需要設定 proxy (代理伺服器)，否則不需要設定。
+
+#### 鏡像 (Mirror)
+
+![](figures/installer-mirror.png)
+
+同上，不需要特別設定 mirror (鏡像)，安裝程式會自動判斷選擇哪個地方的鏡像網址更新。
+
+#### 安裝程式更新 (可能不會出現)
+
+![](figures/installer-update.png)
+
+如果出現了這個畫面代表安裝程式有新的版本，可以在安裝時順便更新，當然，也可以在系統安裝完後更新。
+
+#### 系統空間配置 (Raid-1)
+
+<!--# TODO: 補充前言 -->
+
+![](figures/installer-storage.png)
+
+這裡選擇下面的「Custom storage layout」。以下 Raid-1 相關的設定是參考 [@evangelou_2020] 的 Gist 翻譯成中文寫的。
+
+![](figures/installer-storage_1.png)
+
+-   如果選錯了、或是硬碟中有已經分割好的磁區也沒關係，從 AVAILABLE DEVICES 下面選擇硬碟 ➜ 「Reformat」 ➜ 「Reformat」，這會把硬碟格式化。
+
+<!-- -->
+
+-   選擇第一個磁碟 ➜ 「Use As Boot Device」 當作開機磁碟
+
+    ![](figures/installer-storage_2.png)
+
+-   對第二個磁碟「VBOX_HARDDISK_VBdc8cc122-e9b43569」也做同樣的事情。
+
+::: {.infobox .caution}
+目前版本 20.04.2 live server 有個 bug，當你要新增為開機硬碟 (Boot Device) 時，要在建立其他三個分區 (`/` 、 `/boot` 和 `[SWAP]`)之前，先設定好，不然 1Mb 的 grub 分區會消失。(我只有從現過錯誤一次 2021.07.21)
+:::
+
+-   接著為 `/` 、 `/boot` 和 `[SWAP]` 做分區。
+
+    -   `/`: 系統根目錄磁區
+
+    -   `/boot`: 開機磁區
+
+    -   `[SWAP]`: [SWAP](http://linux.vbird.org/linux_basic/0230filesystem.php#swap) (記憶體置換空間) 主要功能是當記憶體滿載時，會把現在沒有用到的程序先放到 SWAP 中，空給目前正在運行的程式使用
+
+-   首先為 `/boot` 分區，通常開機磁區 512 Mb \~ 1Gb 就很夠用了，看你喜好，這裡我選擇 1Gb。選擇第一個磁碟 ➜ 「Add GPT Partitation」，照下面的設定設定後，按「Create」。
+
+    -   Size: `1G`
+
+    -   Format: `[ Leave unformatted ▾ ]`
+
+-   對第二顆硬碟做同樣的事。
+
+    ![](figures/installer-storage_3.png)
+
+-   再來是 `[SWAP]` 磁區，一般來說會用實體記憶體容量 ⨉ 2 作為 `[SWAP]` 磁區的容量，這裡我怕空間太少先用 32Gb。選擇第一個磁碟 ➜ 「Add GPT Partitation」，照下面的設定設定後，按「Create」。
+
+    -   Size: `32G`
+
+    -   Format: `[ Leave unformatted ▾ ]`
+
+-   對第二顆硬碟做同樣的事。
+
+    ![](figures/installer-storage_4.png)
+
+-   最後才是系統硬碟 `/` ，系統硬碟使用 `/boot` 、`[SWAP]` 與 `grub` 剩下來的空間。選擇第一個磁碟 ➜ 「Add GPT Partitation」，照下面的設定設定後，按「Create」。
+
+    -   Size: `留空` 預設為剩下硬碟的容量，正是我們所要的
+
+    -   Format: `[ Leave unformatted ▾ ]`
+
+-   對第二顆硬碟做同樣的事。
+
+    ![](figures/installer-storage_5.png)
+
+-   接著設定 Raid-1。選取「[ Create software RAID (md) ▸ ]」，選取兩個「partition 2」建立 `md0` softRaid 磁區
+
+    ![](figures/installer-storage_6.png)
+
+-   同上，選取「[ Create software RAID (md) ▸ ]」，選取兩個「partition 3」建立 `md1` softRaid 磁區
+
+-   同上，選取「[ Create software RAID (md) ▸ ]」，選取兩個「partition 4」建立 `md2` softRaid 磁區
+
+    ![](figures/installer-storage_7.png)
+
+-   選擇 `md0 (new)` ➜ format ➜ Format: 選擇 `ext4` 格式 ➜ Mount: 掛載於 `/boot` ➜ 完成後選擇 Done
+
+-   選擇 `md1 (new)` ➜ format ➜ Format: 選擇 `swap` 格式 ➜ 完成後選擇 Done
+
+-   選擇 `md2 (new)` ➜ format ➜ Format: 選擇 `ext4` 格式 ➜ Mount: 掛載於 `/` ➜ 完成後選擇 Done
+
+-   設定完成🎉，整體設定截圖:
+
+    ![](figures/installer-storage_8.png)
+
+    ![](figures/installer-storage_9.png)
+
+-   在最下面選擇「Done」，跳至下一步
+
+#### 使用者設定
+
+這邊我是用院伺服器預設的 hostname 與 使用者設定。
+
+![](figures/installer-profile-configuration.png)
+
+-   Your name: `fintech`
+
+-   Your server's name: `fintech06`
+
+-   Pick a username: `fintech`
+
+-   Choose a password: `fintech`
+
+-   Confirm your password: `fintech`
+
+#### OpenSSH 設定
+
+![](figures/installer-SSH.png)
+
+<!--# TODO: 補充說明 OpenSSH -->
+
+![](figures/installer-SSH_1.png)
+
+![](figures/installer-installing-system.png)
+
+![](figures/installer-install-complete.png)

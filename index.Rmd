@@ -13,6 +13,7 @@ description: This is a book.
 output:
   html_document:
     css: "style.css"
+    highlight: tango
 ---
 
 # 引言 {.unnumbered}

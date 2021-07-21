@@ -5,4 +5,13 @@ intro
 於虛擬機器安裝作業系統
 新增-ubuntu-作業系統設定
 於-virtualbox-安裝作業系統
-literature
+語言
+鍵盤配置
+網路連線
+proxy
+鏡像-mirror
+安裝程式更新-可能不會出現
+系統空間配置-raid-1
+使用者設定
+openssh-設定
+ubuntu

@@ -22,3 +22,7 @@
 .infobox p {
   margin-top: .85em !important;
 }
+
+pre {
+  line-height: 1.4 !important;
+}
