@@ -14,4 +14,5 @@ proxy
 系統空間配置-raid-1
 使用者設定
 openssh-設定
+從-github-匯入已經儲存的-public-key
 ubuntu

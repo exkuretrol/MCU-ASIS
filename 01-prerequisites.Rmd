@@ -266,12 +266,26 @@ knitr::include_graphics("./figures/virtualbox-menu.png", dpi = NA)
 
 #### OpenSSH 設定
 
+OpenSSH 是使用 SSH 通訊協定來遠端連線電腦的工具。防止連線中被竊聽、劫持或是其他攻擊。詳細設定可以參考 DigitalOcean 中的[教學](https://docs.digitalocean.com/products/droplets/how-to/add-ssh-keys/)。
+
+#### 從 Github 匯入已經儲存的 public key
+
+這裡將 Allow password authentication over SSH 取消打勾，經由 SSH 連線至虛擬主機時，關閉使用者密碼認證，改由 SSH key pairs 登入。
+
+另外，我已經透過 Github 儲存過我的 public key 副本，所以這邊可以直接從 Github 匯入 public key。
+
 ![](figures/installer-SSH.png)
 
-<!--# TODO: 補充說明 OpenSSH -->
+::: {.infobox .info}
+如果這邊不匯入的話，也可以待稍後開機後再用指令 `gh-import-id-github <username>` 匯入。
+:::
 
 ![](figures/installer-SSH_1.png)
 
 ![](figures/installer-installing-system.png)
 
+匯入成功後就能經由含有 Github 副本的 SSH key pairs 主機連線至虛擬機器
+
 ![](figures/installer-install-complete.png)
+
+安裝完成後重新啟動
