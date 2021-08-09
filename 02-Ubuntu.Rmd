@@ -1,3 +1,134 @@
-# Ubuntu
+# Ubuntu 的基本設定
 
 <!--# TODO: https://superuser.com/questions/1200355/wsl-is-it-possible-to-access-and-manipulate-a-virtual-linux-machine-with-wsl -->
+
+這章主重心主要會在從本機存取虛擬機器與虛擬機器的基本設定。
+
+## OpenSSH
+
+前面第一章在安裝時，也有碰到 OpenSSH 伺服器設定的環節，不過那並不完整，是給已經擁有透過 `ssh-keygen` 產生的 ssh key pairs 的人看的。在這個小節會逐步解釋，從 OpenSSH client 安裝、產生 ssh key pairs 最後到連線。
+
+### 適合各個系統的連線流程
+
+要連接到虛擬機器的 OpenSSH 伺服器之前，你需要有一個可以讓你連接的 OpenSSH 客戶端。
+
+#### MacOS 或 其他 Unix-like 系統
+
+如果你是 Linux 或是 MacOS 系統，通常都有內建 OpenSSH 客戶端，可以直接跳至 [以 OpenSSH Client 產生 key] 的環節，Windows 與 Linux 使用 OpenSSH Utility 產生 ssh key pairs 的流程是一樣的。
+
+#### Windows 系統
+
+而 Windows 用戶不用擔心，Windows 用戶連線至 OpenSSH 伺服器的方法有很多種，就我已知的方法如下:
+
+1.  已經擁有 SSH key pairs 的前提下，可以使用 SSH 通訊協定連線的軟體，如:
+
+    -   PuTTY
+
+    -   Termius
+
+    -   Chrome 瀏覽器的任何一個 SSH 擴充套件\
+
+    **pros:**
+
+    -   很快；安裝完就能設定 SSH 連線
+
+    **cons:**
+
+    -   經由第三方軟體連線，PuTTY 調整終端機主題很辛苦
+
+2.  直接在 Windows 10 內啟動 OpenSSH 用戶端，透過內建的 PowerShell SSH 連線至虛擬主機。\
+    \
+    **pros:**
+
+    -   跟第一個方法差不多快，也可以使用 Windows Terminal 客製化主題
+
+    **cons:**
+
+    -   你要額外學習 Windows 怎麼對檔案設定權限
+
+3.  在 Windows 10 內安裝 Windows 子系統 (Windows Subsystem for Linux; WSL)，然後直接在 Linux 環境透過 OpenSSH 連線至虛擬主機。\
+    \
+    **pros:**
+
+    -   可以學習到很多東西， Linux 可以用的在 Windows 的 WSL 內都可以使用，操作可以照搬到 WSL 上面。目前我是使用這個方式連線。
+
+    **cons:**
+
+    -   安裝過程所需的時間會根據每個人的經驗有所差異，需要從頭開始設定 Linux。
+
+### 產生供 ssh 連線用的 key pairs
+
+在 Windows 要產生 ssh key pairs 有兩種辦法，第一種是經由內建的 OpenSSH Client 產生，另一種是經由 PuTTY 所附的工具產生。
+
+#### 以 OpenSSH Client 產生 key
+
+Windows 10 已經有內建在 Windows 的「應用程式與功能」內，預設是沒有安裝的。啟動流程如下:
+
+-   點擊「開始」
+
+-   打開「設定⚙」
+
+-   選取「應用程式」 ➜ 「應用程式與功能」 ➜ 找到黑體字「程式與功能」，並點選下面的「選用功能」
+
+-   在已安裝的篩選列上面篩選 `ssh` ，如果沒有，請在頁面頂端點選「新增功能」，然後:
+
+    -   找到「OpenSSH 用戶端」後，點選安裝
+
+安裝完成後，你可以打開「命令提示字元」或是「PowerShell」輸入 ssh 來確認是否安裝完成。
+
+``` {.powershell}
+PS C:\Users\qaz85> ssh
+usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]
+           [-b bind_address] [-c cipher_spec] [-D [bind_address:]port]
+           [-E log_file] [-e escape_char] [-F configfile] [-I pkcs11]
+           [-i identity_file] [-J [user@]host[:port]] [-L address]
+           [-l login_name] [-m mac_spec] [-O ctl_cmd] [-o option] [-p port]
+           [-Q query_option] [-R address] [-S ctl_path] [-W host:port]
+           [-w local_tun[:remote_tun]] destination [command]
+```
+
+接著，可以使用 `ssh-keygen` 指令產生 key pairs，加密方式有 rsa、dsa、ed25519 與 ecdsa ，預設的加密方式是 rsa ，詳細指令用法可以透過 `ssh-keygen --help` 指令查詢，這裡我們用最簡單的 `ssh-keygen` 指令就行。
+
+``` {.powershell}
+ssh-keygen
+```
+
+Windows 的用戶預設會把 key pair 儲存在 `C:\Users\<USERNAME>\.ssh\` 的位置，而 Linux 的用戶會儲存在 `~/.ssh/` 的位置。
+
+``` {.powershell}
+Generating public/private rsa key pair.
+Enter file in which to save the key (C:\Users\<USERNAME>/.ssh/id_rsa):
+```
+
+這裡是詢問你要不要把產生的 ssh key 重新命名，一般不會動到它的名字，按 Enter↩，接續下一步。
+
+``` {.powershell}
+Created directory 'C:\Users\<USERNAME>/.ssh'.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+```
+
+一旦你設定了 key pairs 的密碼，你每次連線時，都要再輸入一次密碼才能連線。如果不想那麼麻煩的話，可以按 Enter↩ 保持留空。
+
+``` {.powershell}
+Your identification has been saved in C:\Users\<USERNAME>/.ssh/id_rsa.
+Your public key has been saved in C:\Users\<USERNAME>/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:8NE76AD294Tjze76pEPtvZgqaqw9OuCF7T8HWPo6fUc qaz85@DESKTOP-OH6HA84
+The key's randomart image is:
++---[RSA 3072]----+
+|                 |
+|         .       |
+|    o . . .      |
+|   . + o + .     |
+|  o + o S.+      |
+|.. = . =.E..     |
+|..o.o ..+.=.     |
+| ..+++.o.=.o.    |
+|  o**++.=** ..   |
++----[SHA256]-----+
+```
+
+到這裡產生完畢，儲存在 `C:\Users\<USERNAME>\.ssh\id_rsa` 的檔案是 private key，而另一個 `id_rsa.pub` 的檔案是 public key。
+
+#### 以 PuTTY 產生 key

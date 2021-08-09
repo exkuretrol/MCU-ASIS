@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | MCU ASIS Ubuntu 系統安裝指南</title>
+  <title>Chapter 2 Ubuntu 的基本設定 | MCU ASIS Ubuntu 系統安裝指南</title>
   <meta name="description" content="This is a book." />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta property="og:title" content="Chapter 2 Ubuntu 的基本設定 | MCU ASIS Ubuntu 系統安裝指南" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta name="twitter:title" content="Chapter 2 Ubuntu 的基本設定 | MCU ASIS Ubuntu 系統安裝指南" />
   
   <meta name="twitter:description" content="This is a book." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="ubuntu-的基本設定.html"/>
-
+<link rel="prev" href="intro.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -218,12 +218,118 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered">
-<h1>References</h1>
+<div id="ubuntu-的基本設定" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Ubuntu 的基本設定</h1>
+<!--# TODO: https://superuser.com/questions/1200355/wsl-is-it-possible-to-access-and-manipulate-a-virtual-linux-machine-with-wsl -->
+<p>這章主重心主要會在從本機存取虛擬機器與虛擬機器的基本設定。</p>
+<div id="openssh" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> OpenSSH</h2>
+<p>前面第一章在安裝時，也有碰到 OpenSSH 伺服器設定的環節，不過那並不完整，是給已經擁有透過 <code>ssh-keygen</code> 產生的 ssh key pairs 的人看的。在這個小節會逐步解釋，從 OpenSSH client 安裝、產生 ssh key pairs 最後到連線。</p>
+<div id="適合各個系統的連線流程" class="section level3" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> 適合各個系統的連線流程</h3>
+<p>要連接到虛擬機器的 OpenSSH 伺服器之前，你需要有一個可以讓你連接的 OpenSSH 客戶端。</p>
+<div id="macos-或-其他-unix-like-系統" class="section level4" number="2.1.1.1">
+<h4><span class="header-section-number">2.1.1.1</span> MacOS 或 其他 Unix-like 系統</h4>
+<p>如果你是 Linux 或是 MacOS 系統，通常都有內建 OpenSSH 客戶端，可以直接跳至 <a href="ubuntu-的基本設定.html#以-openssh-client-產生-key">以 OpenSSH Client 產生 key</a> 的環節，Windows 與 Linux 使用 OpenSSH Utility 產生 ssh key pairs 的流程是一樣的。</p>
+</div>
+<div id="windows-系統" class="section level4" number="2.1.1.2">
+<h4><span class="header-section-number">2.1.1.2</span> Windows 系統</h4>
+<p>而 Windows 用戶不用擔心，Windows 用戶連線至 OpenSSH 伺服器的方法有很多種，就我已知的方法如下:</p>
+<ol style="list-style-type: decimal">
+<li><p>已經擁有 SSH key pairs 的前提下，可以使用 SSH 通訊協定連線的軟體，如:</p>
+<ul>
+<li><p>PuTTY</p></li>
+<li><p>Termius</p></li>
+<li><p>Chrome 瀏覽器的任何一個 SSH 擴充套件<br />
+</p></li>
+</ul>
+<p><strong>pros:</strong></p>
+<ul>
+<li>很快；安裝完就能設定 SSH 連線</li>
+</ul>
+<p><strong>cons:</strong></p>
+<ul>
+<li>經由第三方軟體連線，PuTTY 調整終端機主題很辛苦</li>
+</ul></li>
+<li><p>直接在 Windows 10 內啟動 OpenSSH 用戶端，透過內建的 PowerShell SSH 連線至虛擬主機。<br />
+<br />
+<strong>pros:</strong></p>
+<ul>
+<li>跟第一個方法差不多快，也可以使用 Windows Terminal 客製化主題</li>
+</ul>
+<p><strong>cons:</strong></p>
+<ul>
+<li>你要額外學習 Windows 怎麼對檔案設定權限</li>
+</ul></li>
+<li><p>在 Windows 10 內安裝 Windows 子系統 (Windows Subsystem for Linux; WSL)，然後直接在 Linux 環境透過 OpenSSH 連線至虛擬主機。<br />
+<br />
+<strong>pros:</strong></p>
+<ul>
+<li>可以學習到很多東西， Linux 可以用的在 Windows 的 WSL 內都可以使用，操作可以照搬到 WSL 上面。目前我是使用這個方式連線。</li>
+</ul>
+<p><strong>cons:</strong></p>
+<ul>
+<li>安裝過程所需的時間會根據每個人的經驗有所差異，需要從頭開始設定 Linux。</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="產生供-ssh-連線用的-key-pairs" class="section level3" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> 產生供 ssh 連線用的 key pairs</h3>
+<p>在 Windows 要產生 ssh key pairs 有兩種辦法，第一種是經由內建的 OpenSSH Client 產生，另一種是經由 PuTTY 所附的工具產生。</p>
+<div id="以-openssh-client-產生-key" class="section level4" number="2.1.2.1">
+<h4><span class="header-section-number">2.1.2.1</span> 以 OpenSSH Client 產生 key</h4>
+<p>Windows 10 已經有內建在 Windows 的「應用程式與功能」內，預設是沒有安裝的。啟動流程如下:</p>
+<ul>
+<li><p>點擊「開始」</p></li>
+<li><p>打開「設定⚙」</p></li>
+<li><p>選取「應用程式」 ➜ 「應用程式與功能」 ➜ 找到黑體字「程式與功能」，並點選下面的「選用功能」</p></li>
+<li><p>在已安裝的篩選列上面篩選 <code>ssh</code> ，如果沒有，請在頁面頂端點選「新增功能」，然後:</p>
+<ul>
+<li>找到「OpenSSH 用戶端」後，點選安裝</li>
+</ul></li>
+</ul>
+<p>安裝完成後，你可以打開「命令提示字元」或是「PowerShell」輸入 ssh 來確認是否安裝完成。</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb3-1"><a href="ubuntu-的基本設定.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">PS</span> C:\Users\qaz85&gt; ssh</span>
+<span id="cb3-2"><a href="ubuntu-的基本設定.html#cb3-2" aria-hidden="true" tabindex="-1"></a>usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]</span>
+<span id="cb3-3"><a href="ubuntu-的基本設定.html#cb3-3" aria-hidden="true" tabindex="-1"></a>           [-b bind_address] [-c cipher_spec] [-D [bind_address:]port]</span>
+<span id="cb3-4"><a href="ubuntu-的基本設定.html#cb3-4" aria-hidden="true" tabindex="-1"></a>           [-E log_file] [-e escape_char] [-F configfile] [-I pkcs11]</span>
+<span id="cb3-5"><a href="ubuntu-的基本設定.html#cb3-5" aria-hidden="true" tabindex="-1"></a>           [-i identity_file] [-J [user@]host[:port]] [-L address]</span>
+<span id="cb3-6"><a href="ubuntu-的基本設定.html#cb3-6" aria-hidden="true" tabindex="-1"></a>           [-l login_name] [-m mac_spec] [-O ctl_cmd] [-o option] [-p port]</span>
+<span id="cb3-7"><a href="ubuntu-的基本設定.html#cb3-7" aria-hidden="true" tabindex="-1"></a>           [-Q query_option] [-R address] [-S ctl_path] [-W host:port]</span>
+<span id="cb3-8"><a href="ubuntu-的基本設定.html#cb3-8" aria-hidden="true" tabindex="-1"></a>           [-w local_tun[:remote_tun]] destination [command]</span></code></pre></div>
+<p>接著，可以使用 <code>ssh-keygen</code> 指令產生 key pairs，加密方式有 rsa、dsa、ed25519 與 ecdsa ，預設的加密方式是 rsa ，詳細指令用法可以透過 <code>ssh-keygen --help</code> 指令查詢，這裡我們用最簡單的 <code>ssh-keygen</code> 指令就行。</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb4-1"><a href="ubuntu-的基本設定.html#cb4-1" aria-hidden="true" tabindex="-1"></a>ssh-keygen</span></code></pre></div>
+<p>Windows 的用戶預設會把 key pair 儲存在 <code>C:\Users\&lt;USERNAME&gt;\.ssh\</code> 的位置，而 Linux 的用戶會儲存在 <code>~/.ssh/</code> 的位置。</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb5-1"><a href="ubuntu-的基本設定.html#cb5-1" aria-hidden="true" tabindex="-1"></a>Generating public/private rsa key pair.</span>
+<span id="cb5-2"><a href="ubuntu-的基本設定.html#cb5-2" aria-hidden="true" tabindex="-1"></a>Enter file <span class="kw">in</span> which to save the key (C:\Users\&lt;USERNAME&gt;/.<span class="fu">ssh</span>/id_rsa):</span></code></pre></div>
+<p>這裡是詢問你要不要把產生的 ssh key 重新命名，一般不會動到它的名字，按 Enter↩︎，接續下一步。</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb6-1"><a href="ubuntu-的基本設定.html#cb6-1" aria-hidden="true" tabindex="-1"></a>Created directory &#39;C:\Users\&lt;USERNAME&gt;/.<span class="fu">ssh</span>&#39;.</span>
+<span id="cb6-2"><a href="ubuntu-的基本設定.html#cb6-2" aria-hidden="true" tabindex="-1"></a>Enter passphrase (empty <span class="kw">for</span> no passphrase):</span>
+<span id="cb6-3"><a href="ubuntu-的基本設定.html#cb6-3" aria-hidden="true" tabindex="-1"></a>Enter same passphrase again:</span></code></pre></div>
+<p>一旦你設定了 key pairs 的密碼，你每次連線時，都要再輸入一次密碼才能連線。如果不想那麼麻煩的話，可以按 Enter↩︎ 保持留空。</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb7-1"><a href="ubuntu-的基本設定.html#cb7-1" aria-hidden="true" tabindex="-1"></a>Your identification has been saved <span class="kw">in</span> C:\Users\&lt;USERNAME&gt;/.<span class="fu">ssh</span>/id_rsa.</span>
+<span id="cb7-2"><a href="ubuntu-的基本設定.html#cb7-2" aria-hidden="true" tabindex="-1"></a>Your public key has been saved <span class="kw">in</span> C:\Users\&lt;USERNAME&gt;/.<span class="fu">ssh</span>/id_rsa.<span class="fu">pub</span>.</span>
+<span id="cb7-3"><a href="ubuntu-的基本設定.html#cb7-3" aria-hidden="true" tabindex="-1"></a>The key fingerprint is:</span>
+<span id="cb7-4"><a href="ubuntu-的基本設定.html#cb7-4" aria-hidden="true" tabindex="-1"></a>SHA256:8NE76AD294Tjze76pEPtvZgqaqw9OuCF7T8HWPo6fUc qaz85@DESKTOP-OH6HA84</span>
+<span id="cb7-5"><a href="ubuntu-的基本設定.html#cb7-5" aria-hidden="true" tabindex="-1"></a>The key&#39;s randomart image is:</span>
+<span id="cb7-6"><a href="ubuntu-的基本設定.html#cb7-6" aria-hidden="true" tabindex="-1"></a>+---[RSA 3072]----+</span>
+<span id="cb7-7"><a href="ubuntu-的基本設定.html#cb7-7" aria-hidden="true" tabindex="-1"></a>|                 |</span>
+<span id="cb7-8"><a href="ubuntu-的基本設定.html#cb7-8" aria-hidden="true" tabindex="-1"></a>|         .       |</span>
+<span id="cb7-9"><a href="ubuntu-的基本設定.html#cb7-9" aria-hidden="true" tabindex="-1"></a>|    o . . .      |</span>
+<span id="cb7-10"><a href="ubuntu-的基本設定.html#cb7-10" aria-hidden="true" tabindex="-1"></a>|   . + o + .     |</span>
+<span id="cb7-11"><a href="ubuntu-的基本設定.html#cb7-11" aria-hidden="true" tabindex="-1"></a>|  o + o S.+      |</span>
+<span id="cb7-12"><a href="ubuntu-的基本設定.html#cb7-12" aria-hidden="true" tabindex="-1"></a>|.. = . =.<span class="fu">E</span>..     |</span>
+<span id="cb7-13"><a href="ubuntu-的基本設定.html#cb7-13" aria-hidden="true" tabindex="-1"></a>|..<span class="fu">o</span>.<span class="fu">o</span> ..+.=.     |</span>
+<span id="cb7-14"><a href="ubuntu-的基本設定.html#cb7-14" aria-hidden="true" tabindex="-1"></a>| ..+++.<span class="fu">o</span>.=.<span class="fu">o</span>.    |</span>
+<span id="cb7-15"><a href="ubuntu-的基本設定.html#cb7-15" aria-hidden="true" tabindex="-1"></a>|  o**++.=** ..   |</span>
+<span id="cb7-16"><a href="ubuntu-的基本設定.html#cb7-16" aria-hidden="true" tabindex="-1"></a>+----[SHA256]-----+</span></code></pre></div>
+<p>到這裡產生完畢，儲存在 <code>C:\Users\&lt;USERNAME&gt;\.ssh\id_rsa</code> 的檔案是 private key，而另一個 <code>id_rsa.pub</code> 的檔案是 public key。</p>
+</div>
+<div id="以-putty-產生-key" class="section level4" number="2.1.2.2">
+<h4><span class="header-section-number">2.1.2.2</span> 以 PuTTY 產生 key</h4>
 
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div class="csl-entry">
-Evangelou, Fotis. 2020. <span>“Looking to Create a Software RAID 1 Setup for Your 2-Disk Server on Ubuntu Server 20.04?”</span> <em>Gist.io</em>. <a href="https://gist.io/@fevangelou/2f7aa0d9b5cb42d783302727665bf80a">https://gist.io/@fevangelou/2f7aa0d9b5cb42d783302727665bf80a</a>.
+</div>
 </div>
 </div>
 </div>
@@ -232,8 +338,8 @@ Evangelou, Fotis. 2020. <span>“Looking to Create a Software RAID 1 Setup for Y
           </div>
         </div>
       </div>
-<a href="ubuntu-的基本設定.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -265,7 +371,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/exkuretrol/MCU-ASIS/edit/main/99-references.Rmd",
+"link": "https://github.com/exkuretrol/MCU-ASIS/edit/main/02-Ubuntu.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -273,7 +379,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/exkuretrol/MCU-ASIS/blob/main/99-references.Rmd",
+"link": "https://github.com/exkuretrol/MCU-ASIS/blob/main/02-Ubuntu.Rmd",
 "text": null
 },
 "download": ["MCU-ASIS.pdf", "MCU-ASIS.epub"],

@@ -15,4 +15,11 @@ proxy
 使用者設定
 openssh-設定
 從-github-匯入已經儲存的-public-key
-ubuntu
+ubuntu-的基本設定
+openssh
+適合各個系統的連線流程
+macos-或-其他-unix-like-系統
+windows-系統
+產生供-ssh-連線用的-key-pairs
+以-openssh-client-產生-key
+以-putty-產生-key
