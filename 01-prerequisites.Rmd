@@ -268,9 +268,13 @@ knitr::include_graphics("./figures/virtualbox-menu.png", dpi = NA)
 
 OpenSSH 是使用 SSH 通訊協定來遠端連線電腦的工具。防止連線中被竊聽、劫持或是其他攻擊。詳細設定可以參考 DigitalOcean 中的[教學](https://docs.digitalocean.com/products/droplets/how-to/add-ssh-keys/)。
 
-#### 從 Github 匯入已經儲存的 public key
+##### 從 Github 匯入已經儲存的 public key
 
 這裡將 Allow password authentication over SSH 取消打勾，經由 SSH 連線至虛擬主機時，關閉使用者密碼認證，改由 SSH key pairs 登入。
+
+::: {.infobox .info}
+如果沒有持有 Github 帳號儲存的 public key，請把 Allow password authentication over SSH 打勾，待上傳完 public key 再把使用密碼登入關閉。
+:::
 
 另外，我已經透過 Github 儲存過我的 public key 副本，所以這邊可以直接從 Github 匯入 public key。
 
