@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2.2 OpenSSH | MCU ASIS Ubuntu 系統安裝指南</title>
+  <meta name="description" content="This is a book." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2.2 OpenSSH | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a book." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2.2 OpenSSH | MCU ASIS Ubuntu 系統安裝指南" />
+  
+  <meta name="twitter:description" content="This is a book." />
+  
+
+<meta name="author" content="Chiawei Chen" />
+
+
+<meta name="date" content="2021-08-11" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="事前準備.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">MCU ASIS Ubuntu 系統安裝指南</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>引言</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> 事前準備</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="引言-1.html"><a href="引言-1.html"><i class="fa fa-check"></i><b>1.1</b> 引言</a></li>
+<li class="chapter" data-level="1.2" data-path="安裝-virtualbox.html"><a href="安裝-virtualbox.html"><i class="fa fa-check"></i><b>1.2</b> 安裝 VirtualBox</a></li>
+<li class="chapter" data-level="1.3" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html"><i class="fa fa-check"></i><b>1.3</b> 於虛擬機器安裝作業系統</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#新增-ubuntu-作業系統設定"><i class="fa fa-check"></i><b>1.3.1</b> 新增 Ubuntu 作業系統設定</a></li>
+<li class="chapter" data-level="1.3.2" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#於-virtualbox-安裝作業系統"><i class="fa fa-check"></i><b>1.3.2</b> 於 VirtualBox 安裝作業系統</a>
+<ul>
+<li class="chapter" data-level="1.3.2.1" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#語言"><i class="fa fa-check"></i><b>1.3.2.1</b> 語言</a></li>
+<li class="chapter" data-level="1.3.2.2" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#鍵盤配置"><i class="fa fa-check"></i><b>1.3.2.2</b> 鍵盤配置</a></li>
+<li class="chapter" data-level="1.3.2.3" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#網路連線"><i class="fa fa-check"></i><b>1.3.2.3</b> 網路連線</a></li>
+<li class="chapter" data-level="1.3.2.4" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#proxy"><i class="fa fa-check"></i><b>1.3.2.4</b> Proxy</a></li>
+<li class="chapter" data-level="1.3.2.5" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#鏡像-mirror"><i class="fa fa-check"></i><b>1.3.2.5</b> 鏡像 (Mirror)</a></li>
+<li class="chapter" data-level="1.3.2.6" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#安裝程式更新-可能不會出現"><i class="fa fa-check"></i><b>1.3.2.6</b> 安裝程式更新 (可能不會出現)</a></li>
+<li class="chapter" data-level="1.3.2.7" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#系統空間配置-raid-1"><i class="fa fa-check"></i><b>1.3.2.7</b> 系統空間配置 (Raid-1)</a></li>
+<li class="chapter" data-level="1.3.2.8" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#使用者設定"><i class="fa fa-check"></i><b>1.3.2.8</b> 使用者設定</a></li>
+<li class="chapter" data-level="1.3.2.9" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#openssh-設定"><i class="fa fa-check"></i><b>1.3.2.9</b> OpenSSH 設定</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="ubuntu-的基本設定.html"><a href="ubuntu-的基本設定.html"><i class="fa fa-check"></i><b>2</b> Ubuntu 的基本設定</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="事前準備.html"><a href="事前準備.html"><i class="fa fa-check"></i><b>2.1</b> 事前準備</a></li>
+<li class="chapter" data-level="2.2" data-path="openssh.html"><a href="openssh.html"><i class="fa fa-check"></i><b>2.2</b> OpenSSH</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="openssh.html"><a href="openssh.html#適合各個系統的連線流程"><i class="fa fa-check"></i><b>2.2.1</b> 適合各個系統的連線流程</a>
+<ul>
+<li class="chapter" data-level="2.2.1.1" data-path="openssh.html"><a href="openssh.html#macos-或-其他-unix-like-系統"><i class="fa fa-check"></i><b>2.2.1.1</b> MacOS 或 其他 Unix-like 系統</a></li>
+<li class="chapter" data-level="2.2.1.2" data-path="openssh.html"><a href="openssh.html#windows-系統"><i class="fa fa-check"></i><b>2.2.1.2</b> Windows 系統</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2.2" data-path="openssh.html"><a href="openssh.html#產生供-ssh-連線用的-key-pairs"><i class="fa fa-check"></i><b>2.2.2</b> 產生供 ssh 連線用的 key pairs</a>
+<ul>
+<li class="chapter" data-level="2.2.2.1" data-path="openssh.html"><a href="openssh.html#以-openssh-client-產生-key"><i class="fa fa-check"></i><b>2.2.2.1</b> 以 OpenSSH Client 產生 key</a></li>
+<li class="chapter" data-level="2.2.2.2" data-path="openssh.html"><a href="openssh.html#以-putty-產生-key"><i class="fa fa-check"></i><b>2.2.2.2</b> 以 PuTTY 產生 key</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2.3" data-path="openssh.html"><a href="openssh.html#將新增的-key-pairs-上傳至目的地主機"><i class="fa fa-check"></i><b>2.2.3</b> 將新增的 key pairs 上傳至目的地主機</a>
+<ul>
+<li class="chapter" data-level="2.2.3.1" data-path="openssh.html"><a href="openssh.html#上傳以-openssh-client-產生的-ssh-key-pairs"><i class="fa fa-check"></i><b>2.2.3.1</b> 上傳以 OpenSSH Client 產生的 ssh key pairs</a></li>
+<li class="chapter" data-level="2.2.3.2" data-path="openssh.html"><a href="openssh.html#上傳以-putty-產生的-ssh-key-pairs"><i class="fa fa-check"></i><b>2.2.3.2</b> 上傳以 PuTTY 產生的 ssh key pairs</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2.4" data-path="openssh.html"><a href="openssh.html#使用-ssh-連線至遠端主機"><i class="fa fa-check"></i><b>2.2.4</b> 使用 SSH 連線至遠端主機</a>
+<ul>
+<li class="chapter" data-level="2.2.4.1" data-path="openssh.html"><a href="openssh.html#openssh-client-產生的-key-pairs-的連線方式"><i class="fa fa-check"></i><b>2.2.4.1</b> OpenSSH Client 產生的 key pairs 的連線方式:</a></li>
+<li class="chapter" data-level="2.2.4.2" data-path="openssh.html"><a href="openssh.html#puttygen-產生的-key-pairs-的連線方式"><i class="fa fa-check"></i><b>2.2.4.2</b> PuTTYgen 產生的 key pairs 的連線方式:</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">MCU ASIS Ubuntu 系統安裝指南</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="openssh" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> OpenSSH</h2>
+<p>前面第一章在安裝時，也有碰到 OpenSSH 伺服器設定的環節，不過那並不完整，是給已經擁有透過 <code>ssh-keygen</code> 產生的 ssh key pairs 的人看的。在這個小節會逐步解釋，從 OpenSSH client 安裝、產生 ssh key pairs 最後到連線。</p>
+<div id="適合各個系統的連線流程" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> 適合各個系統的連線流程</h3>
+<p>要連接到虛擬機器的 OpenSSH 伺服器之前，你需要有一個可以讓你連接的 OpenSSH 客戶端。</p>
+<div id="macos-或-其他-unix-like-系統" class="section level4" number="2.2.1.1">
+<h4><span class="header-section-number">2.2.1.1</span> MacOS 或 其他 Unix-like 系統</h4>
+<p>如果你是 Linux 或是 MacOS 系統，通常都有內建 OpenSSH 客戶端，可以直接跳至 <a href="openssh.html#以-openssh-client-產生-key">以 OpenSSH Client 產生 key</a> 的環節，Windows 與 Linux 使用 OpenSSH Utility 產生 ssh key pairs 的流程是一樣的。</p>
+</div>
+<div id="windows-系統" class="section level4" number="2.2.1.2">
+<h4><span class="header-section-number">2.2.1.2</span> Windows 系統</h4>
+<p>而 Windows 用戶不用擔心，Windows 用戶連線至 OpenSSH 伺服器的方法有很多種，就我已知的方法如下:</p>
+<ol style="list-style-type: decimal">
+<li><p>已經擁有 SSH key pairs 的前提下，可以使用 SSH 通訊協定連線的軟體，如:</p>
+<ul>
+<li><p>PuTTY</p></li>
+<li><p>Termius</p></li>
+<li><p>Chrome 瀏覽器的任何一個 SSH 擴充套件<br />
+</p></li>
+</ul>
+<p><strong>pros:</strong></p>
+<ul>
+<li>很快；安裝完就能設定 SSH 連線</li>
+</ul>
+<p><strong>cons:</strong></p>
+<ul>
+<li>經由第三方軟體連線，PuTTY 調整終端機主題很辛苦</li>
+</ul></li>
+<li><p>直接在 Windows 10 內啟動 OpenSSH 用戶端，透過內建的 PowerShell SSH 連線至虛擬主機。<br />
+<br />
+<strong>pros:</strong></p>
+<ul>
+<li>跟第一個方法差不多快，也可以使用 Windows Terminal 客製化主題</li>
+</ul>
+<p><strong>cons:</strong></p>
+<ul>
+<li>你要額外學習 Windows 怎麼對檔案設定權限</li>
+</ul></li>
+<li><p>在 Windows 10 內安裝 Windows 子系統 (Windows Subsystem for Linux; WSL)，然後直接在 Linux 環境透過 OpenSSH 連線至虛擬主機。<br />
+<br />
+<strong>pros:</strong></p>
+<ul>
+<li>可以學習到很多東西， Linux 可以用的在 Windows 的 WSL 內都可以使用，操作可以照搬到 WSL 上面。目前我是使用這個方式連線。</li>
+</ul>
+<p><strong>cons:</strong></p>
+<ul>
+<li>安裝過程所需的時間會根據每個人的經驗有所差異，需要從頭開始設定 Linux。</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="產生供-ssh-連線用的-key-pairs" class="section level3" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> 產生供 ssh 連線用的 key pairs</h3>
+<p>在 Windows 要產生 ssh key pairs 有兩種辦法，第一種是經由內建的 OpenSSH Client 產生，另一種是經由 PuTTY 所附的工具產生。</p>
+<div id="以-openssh-client-產生-key" class="section level4" number="2.2.2.1">
+<h4><span class="header-section-number">2.2.2.1</span> 以 OpenSSH Client 產生 key</h4>
+<div id="step-1-安裝-openssh-client-linux-使用者可以跳過" class="section level5" number="2.2.2.1.1">
+<h5><span class="header-section-number">2.2.2.1.1</span> <strong>Step 1 — 安裝 OpenSSH Client (Linux 使用者可以跳過)</strong></h5>
+<p>Windows 10 已經有內建在 Windows 的「應用程式與功能」內，預設是沒有安裝的。啟動流程如下:</p>
+<ul>
+<li><p>點擊「開始」</p></li>
+<li><p>打開「設定⚙」</p></li>
+<li><p>選取「應用程式」 ➜ 「應用程式與功能」 ➜ 找到黑體字「程式與功能」，並點選下面的「選用功能」</p></li>
+<li><p>在已安裝的篩選列上面篩選 <code>ssh</code> ，如果沒有，請在頁面頂端點選「新增功能」，然後:</p>
+<ul>
+<li>找到「OpenSSH 用戶端」後，點選安裝</li>
+</ul></li>
+</ul>
+<p>安裝完成後，你可以打開「命令提示字元」或是「PowerShell」輸入 ssh 來確認是否安裝完成。</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb3-1"><a href="openssh.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">PS</span> C:\Users\qaz85&gt; ssh</span>
+<span id="cb3-2"><a href="openssh.html#cb3-2" aria-hidden="true" tabindex="-1"></a>usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]</span>
+<span id="cb3-3"><a href="openssh.html#cb3-3" aria-hidden="true" tabindex="-1"></a>           [-b bind_address] [-c cipher_spec] [-D [bind_address:]port]</span>
+<span id="cb3-4"><a href="openssh.html#cb3-4" aria-hidden="true" tabindex="-1"></a>           [-E log_file] [-e escape_char] [-F configfile] [-I pkcs11]</span>
+<span id="cb3-5"><a href="openssh.html#cb3-5" aria-hidden="true" tabindex="-1"></a>           [-i identity_file] [-J [user@]host[:port]] [-L address]</span>
+<span id="cb3-6"><a href="openssh.html#cb3-6" aria-hidden="true" tabindex="-1"></a>           [-l login_name] [-m mac_spec] [-O ctl_cmd] [-o option] [-p port]</span>
+<span id="cb3-7"><a href="openssh.html#cb3-7" aria-hidden="true" tabindex="-1"></a>           [-Q query_option] [-R address] [-S ctl_path] [-W host:port]</span>
+<span id="cb3-8"><a href="openssh.html#cb3-8" aria-hidden="true" tabindex="-1"></a>           [-w local_tun[:remote_tun]] destination [command]</span></code></pre></div>
+</div>
+<div id="step-2-產生-ssh-key-pairs" class="section level5" number="2.2.2.1.2">
+<h5><span class="header-section-number">2.2.2.1.2</span> <strong>Step 2 — 產生 ssh key pairs</strong></h5>
+<p>接著，可以使用 <code>ssh-keygen</code> 指令產生 key pairs，加密方式有 rsa、dsa、ed25519 與 ecdsa ，預設的加密方式是 rsa ，詳細指令用法可以透過 <code>ssh-keygen --help</code> 指令查詢，這裡我們用最簡單的 <code>ssh-keygen</code> 指令就行。</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb4-1"><a href="openssh.html#cb4-1" aria-hidden="true" tabindex="-1"></a>ssh-keygen</span></code></pre></div>
+<p>Windows 的用戶預設會把 key pair 儲存在 <code>C:\Users\&lt;USERNAME&gt;\.ssh\</code> 的位置，而 Linux 的用戶會儲存在 <code>~/.ssh/</code> 的位置。</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb5-1"><a href="openssh.html#cb5-1" aria-hidden="true" tabindex="-1"></a>Generating public/private rsa key pair.</span>
+<span id="cb5-2"><a href="openssh.html#cb5-2" aria-hidden="true" tabindex="-1"></a>Enter file <span class="kw">in</span> which to save the key (C:\Users\&lt;USERNAME&gt;/.<span class="fu">ssh</span>/id_rsa):</span></code></pre></div>
+<p>這裡是詢問你要不要把產生的 ssh key 重新命名，一般不會動到它的名字，按 Enter↩︎，接續下一步。</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb6-1"><a href="openssh.html#cb6-1" aria-hidden="true" tabindex="-1"></a>Created directory &#39;C:\Users\&lt;USERNAME&gt;/.<span class="fu">ssh</span>&#39;.</span>
+<span id="cb6-2"><a href="openssh.html#cb6-2" aria-hidden="true" tabindex="-1"></a>Enter passphrase (empty <span class="kw">for</span> no passphrase):</span>
+<span id="cb6-3"><a href="openssh.html#cb6-3" aria-hidden="true" tabindex="-1"></a>Enter same passphrase again:</span></code></pre></div>
+<p>一旦你設定了 key pairs 的密碼，你每次連線時，都要再輸入一次密碼才能連線。如果不想那麼麻煩的話，可以按 Enter↩︎ 保持留空。</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb7-1"><a href="openssh.html#cb7-1" aria-hidden="true" tabindex="-1"></a>Your identification has been saved <span class="kw">in</span> C:\Users\&lt;USERNAME&gt;/.<span class="fu">ssh</span>/id_rsa.</span>
+<span id="cb7-2"><a href="openssh.html#cb7-2" aria-hidden="true" tabindex="-1"></a>Your public key has been saved <span class="kw">in</span> C:\Users\&lt;USERNAME&gt;/.<span class="fu">ssh</span>/id_rsa.<span class="fu">pub</span>.</span>
+<span id="cb7-3"><a href="openssh.html#cb7-3" aria-hidden="true" tabindex="-1"></a>The key fingerprint is:</span>
+<span id="cb7-4"><a href="openssh.html#cb7-4" aria-hidden="true" tabindex="-1"></a>SHA256:8NE76AD294Tjze76pEPtvZgqaqw9OuCF7T8HWPo6fUc qaz85@DESKTOP-OH6HA84</span>
+<span id="cb7-5"><a href="openssh.html#cb7-5" aria-hidden="true" tabindex="-1"></a>The key&#39;s randomart image is:</span>
+<span id="cb7-6"><a href="openssh.html#cb7-6" aria-hidden="true" tabindex="-1"></a>+---[RSA 3072]----+</span>
+<span id="cb7-7"><a href="openssh.html#cb7-7" aria-hidden="true" tabindex="-1"></a>|                 |</span>
+<span id="cb7-8"><a href="openssh.html#cb7-8" aria-hidden="true" tabindex="-1"></a>|         .       |</span>
+<span id="cb7-9"><a href="openssh.html#cb7-9" aria-hidden="true" tabindex="-1"></a>|    o . . .      |</span>
+<span id="cb7-10"><a href="openssh.html#cb7-10" aria-hidden="true" tabindex="-1"></a>|   . + o + .     |</span>
+<span id="cb7-11"><a href="openssh.html#cb7-11" aria-hidden="true" tabindex="-1"></a>|  o + o S.+      |</span>
+<span id="cb7-12"><a href="openssh.html#cb7-12" aria-hidden="true" tabindex="-1"></a>|.. = . =.<span class="fu">E</span>..     |</span>
+<span id="cb7-13"><a href="openssh.html#cb7-13" aria-hidden="true" tabindex="-1"></a>|..<span class="fu">o</span>.<span class="fu">o</span> ..+.=.     |</span>
+<span id="cb7-14"><a href="openssh.html#cb7-14" aria-hidden="true" tabindex="-1"></a>| ..+++.<span class="fu">o</span>.=.<span class="fu">o</span>.    |</span>
+<span id="cb7-15"><a href="openssh.html#cb7-15" aria-hidden="true" tabindex="-1"></a>|  o**++.=** ..   |</span>
+<span id="cb7-16"><a href="openssh.html#cb7-16" aria-hidden="true" tabindex="-1"></a>+----[SHA256]-----+</span></code></pre></div>
+<p>產生完畢，儲存在 <code>C:\Users\&lt;USERNAME&gt;\.ssh\id_rsa</code> 的檔案是 private key，而另一個 <code>id_rsa.pub</code> 的檔案是 public key。</p>
+<!--# TODO: 我覺得應該把 PuTTY 的部分獨立出來 -->
+</div>
+</div>
+<div id="以-putty-產生-key" class="section level4" number="2.2.2.2">
+<h4><span class="header-section-number">2.2.2.2</span> 以 PuTTY 產生 key</h4>
+<p>另一個方法不會需要你手動安裝 OpenSSH Client，不過、一樣地，要安裝PuTTY 程式。</p>
+<div id="step-1-安裝-putty" class="section level5" number="2.2.2.2.1">
+<h5><span class="header-section-number">2.2.2.2.1</span> Step 1 — 安裝 PuTTY</h5>
+<p>到開發者的網站，然後下載適合你 Windows 的版本 (副檔名為 *.msi 的安裝程式)</p>
+<ul>
+<li><a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html" class="uri">https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html</a></li>
+</ul>
+<p>根據你的需求設定安裝程式</p>
+<p><img src="figures/putty-installer-configuration.png" class="figure" /></p>
+<p>待安裝程式安裝完成</p>
+<p><img src="figures/putty-installer-finish.png" class="figure" /></p>
+<p>安裝完成後，點選「開始」，找到 PuTTYgen開啟，或是點選「開始」，鍵入 <code>puttygen</code> 後按 Enter↩︎</p>
+</div>
+<div id="step-2-經由-puttygen-產生-ssh-key-pairs" class="section level5" number="2.2.2.2.2">
+<h5><span class="header-section-number">2.2.2.2.2</span> Step 2 — 經由 PuTTYgen 產生 ssh key pairs</h5>
+<p>跟 OpenSSH Client 一樣地，你可以在下方的 Types 選擇你偏好的加密方式。點選「Generate」開始產生 key，此時不要傻傻地在那邊等，要在程式進度條下方空白處隨意移動你的滑鼠鼠標。</p>
+<p><img src="figures/puttygen-genkey.png" class="figure" /></p>
+<p>完成後，可以在 Comment 的輸入框註解一下這個 key 是從哪裡來的，以後擁有多個 key pairs 時才不會搞混。當然你也可以用密碼保護這個 key pairs，如果有需要在 Key passphrase 與 Confirm passphrase 輸入一模一樣的密碼。</p>
+<p><img src="figures/puttygen-genkey-finish.png" class="figure" /></p>
+</div>
+<div id="step-3-妥善保存好產生的-key" class="section level5" number="2.2.2.2.3">
+<h5><span class="header-section-number">2.2.2.2.3</span> Step 3 — 妥善保存好產生的 Key</h5>
+<p>分別按下「Save public key」與「Save private key」找到適合的地方儲存它。</p>
+<div class="infobox caution">
+<p>當你遺失了遠端主機的 key pairs，你再也不能透過遠端存取有使用過該 key pairs 的主機，只能透過直接接觸那台主機來更新的 key pairs。</p>
+</div>
+</div>
+</div>
+</div>
+<div id="將新增的-key-pairs-上傳至目的地主機" class="section level3" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> 將新增的 key pairs 上傳至目的地主機</h3>
+<p>當你擁有了 <a href="openssh.html#產生供-ssh-連線用的-key-pairs">前一步產生的 key pairs</a>，接下來要把 public key 上傳至虛擬機器。另外 public key 給別人看到是沒問題的，前面第一章的 <a href="#從%20Github%20匯入已經儲存的%20public%20key">OpenSSH設定</a> 就已經有出現過我的 public key 了，public key 並不能用來產生 private key，它是用來認證這個 key 是否跟你所持有的 private key 相呼應。</p>
+<div id="上傳以-openssh-client-產生的-ssh-key-pairs" class="section level4" number="2.2.3.1">
+<h4><span class="header-section-number">2.2.3.1</span> 上傳以 OpenSSH Client 產生的 ssh key pairs</h4>
+<p>如果你是的系統是 Linux 那指令會稍微短一些，上傳至遠端電腦的指令如下:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="openssh.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ssh-copy-id</span> -i ~/.ssh/id_ed25519.pub -p 22 fintech@192.168.0.13</span></code></pre></div>
+<ul>
+<li><p><code>-i</code>: i flag 代表的是你要上傳的 public key 檔案路徑</p></li>
+<li><p><code>-p</code>: p flag 則是目的地主機的 OpenSSH 伺服器的埠號</p></li>
+<li><p><code>id_ed25519.pub</code> 為我產生的其他的 key pair，如果你前面是照著我的步驟產生，這裡應該改為 <code>id_rsa.pub</code></p></li>
+<li><p>這裡的 <code>fintech</code> 為第一章的<a href="於虛擬機器安裝作業系統.html#使用者設定">使用者設定</a>的預設使用者</p></li>
+<li><p><code>192.168.0.13</code> 為我虛擬主機的 ip 位址，查詢 ip 位址可以先手動登入虛擬主機後，用 <code>hostname -I</code> 或是 <code>ip addr show</code> 指令查詢</p></li>
+</ul>
+<p>完成後會提示你已經可以使用 ssh 連線</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="openssh.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/usr/bin</span>/ssh-copy-id: <span class="ex">INFO</span>: Source of key(s) <span class="ex">to</span> be installed: <span class="st">&quot;/home/kuaz/.ssh/id_ed25519.pub&quot;</span></span>
+<span id="cb9-2"><a href="openssh.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/usr/bin</span>/ssh-copy-id: <span class="ex">INFO</span>: attempting to log in with the new key(s), <span class="ex">to</span> filter out any that are already installed</span>
+<span id="cb9-3"><a href="openssh.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">/usr/bin</span>/ssh-copy-id: <span class="ex">INFO</span>: 1 key(s) <span class="ex">remain</span> to be installed -- if you are prompted now it is to install the new keys</span>
+<span id="cb9-4"><a href="openssh.html#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="openssh.html#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Number</span> of key(s) <span class="ex">added</span>: 1</span>
+<span id="cb9-6"><a href="openssh.html#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="openssh.html#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Now</span> try logging into the machine, with:   <span class="st">&quot;ssh -p &#39;22&#39; &#39;fintech@192.168.0.13&#39;&quot;</span></span>
+<span id="cb9-8"><a href="openssh.html#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="ex">and</span> check to make sure that only the key(s) <span class="ex">you</span> wanted were added.</span></code></pre></div>
+<p>如果你是 Windows 的使用者也不用擔心多複雜，一樣一行指令就能搞定，這裡我是參考<span class="citation">(<a href="#ref-christopher_2020" role="doc-biblioref">Christopher 2020</a>)</span>的教學，指令如下:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb10-1"><a href="openssh.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">$env</span>:USERPROFILE\.<span class="fu">ssh</span>\id_rsa.<span class="fu">pub</span> | ssh fintech@192.<span class="fu">168</span>.<span class="fu">0</span>.<span class="fu">13</span> <span class="st">&quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;</span></span></code></pre></div>
+<ul>
+<li><p>這裡的 <code>$env:USERPROFILE</code> 為 Windows 內建環境變數，會根據現在的使用者變更，如果我的使用者名稱為 <code>qaz855175b</code> 那 <code>$env:USERPROFILE</code> 對應的路徑就為 <code>C:\Users\qaz855175b\</code>，當然你可以直接把指令的 public key 路徑替換為 <code>C:\Users\qaz855175b\.ssh\id_rsa.pub</code></p></li>
+<li><p><code>id_rsa.pub</code> 為產生的 public key 預設名稱</p></li>
+<li><p>這裡的 <code>fintech</code> 為第一章的<a href="於虛擬機器安裝作業系統.html#使用者設定">使用者設定</a>的預設使用者</p></li>
+<li><p><code>192.168.0.13</code> 為我虛擬主機的 ip 位址，查詢 ip 位址可以先手動登入虛擬主機後，用 <code>hostname -I</code> 或是 <code>ip addr show</code> 指令查詢</p></li>
+</ul>
+<div class="infobox info">
+<p>其實 Linux 的 <code>ssh-copy-id</code>、和第一章的從 Github 匯入 public key <code>ssh-import-id-gh</code> 與這裡的 <code>cat file &gt;&gt; ~/.ssh/authorized_keys</code> 都是在做同一件事情，把 public key 貼到遠端伺服器的使用者的 <code>authorized_keys</code> 檔案裡面。</p>
+</div>
+<p>接著按 Enter↩︎，跳出輸入密碼提示，這裡輸入預設的使用者密碼 <code>fintech</code></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb11-1"><a href="openssh.html#cb11-1" aria-hidden="true" tabindex="-1"></a>fintech@192.<span class="fu">168</span>.<span class="fu">0</span>.<span class="fu">13</span>&#39;s password:</span></code></pre></div>
+<p>輸入完後雖然沒有任何提示訊息，但其實已經可以使用 ssh 連線至遠端主機啦~</p>
+</div>
+<div id="上傳以-putty-產生的-ssh-key-pairs" class="section level4" number="2.2.3.2">
+<h4><span class="header-section-number">2.2.3.2</span> 上傳以 PuTTY 產生的 ssh key pairs</h4>
+<p>PuTTY 產生的 public key 與 private key 格式比較特別，並不能直接把 public key 裡面的文字直接貼到遠端電腦的 <code>~/.ssh/authorized_keys</code> 檔案裡面，需要經由 PuTTYgen.exe 讀取 *.ppk 才能得到正確格式的 public key。首先把 PuTTYgen 程式打開。</p>
+<p><img src="figures/puttygen-menu.png" class="figure" /></p>
+<p>接著按「Load」把剛剛產生的 *.ppk 檔案讀取進來。會看到一行字「Public key for pasting into OpenSSH authorized_keys file」下面的可複製區域就是 public key，把它整段複製起來。</p>
+<p><img src="figures/puttygen-load-ppk.png" class="figure" /></p>
+<p>接著打開「PowerShell」或是「命令提示字元」，輸入:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb12-1"><a href="openssh.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">echo</span> <span class="st">&quot;&lt;YOUR_PUBLIC_KEY&gt;&quot;</span> | ssh fintech@192.<span class="fu">168</span>.<span class="fu">0</span>.<span class="fu">13</span> <span class="st">&quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;</span></span></code></pre></div>
+<ul>
+<li><p>將 <code>&lt;YOUR_PUBLIC_KEY&gt;</code> 替換成自己的 public key</p></li>
+<li><p>這裡的 <code>fintech</code> 為第一章的<a href="於虛擬機器安裝作業系統.html#使用者設定">使用者設定</a>的預設使用者</p></li>
+<li><p><code>192.168.0.13</code> 為我虛擬主機的 ip 位址，查詢 ip 位址可以先手動登入虛擬主機後，用 <code>hostname -I</code> 或是 <code>ip addr show</code> 指令查詢</p></li>
+</ul>
+<p>接著按 Enter↩︎，跳出輸入密碼提示，這裡輸入預設的使用者密碼 <code>fintech</code></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb13-1"><a href="openssh.html#cb13-1" aria-hidden="true" tabindex="-1"></a>fintech@192.<span class="fu">168</span>.<span class="fu">0</span>.<span class="fu">13</span>&#39;s password:</span></code></pre></div>
+<p>輸入完成不會出現任何訊息是正常的，代表操作沒有問題且已經可以使用 PuTTY 連線了。</p>
+</div>
+</div>
+<div id="使用-ssh-連線至遠端主機" class="section level3" number="2.2.4">
+<h3><span class="header-section-number">2.2.4</span> 使用 SSH 連線至遠端主機</h3>
+<p>最後，使用 ssh 指令連接至遠端主機。</p>
+<div id="openssh-client-產生的-key-pairs-的連線方式" class="section level4" number="2.2.4.1">
+<h4><span class="header-section-number">2.2.4.1</span> OpenSSH Client 產生的 key pairs 的連線方式:</h4>
+<p>使用 OpenSSH Client 產生的 pair keys 可以直接使用這個方法連線。這裡介紹幾個常常與 ssh 一起出現的 flag :</p>
+<ul>
+<li><p><code>-v</code>: verbose; 顯示連接時更詳細的訊息，debug時常用</p></li>
+<li><p><code>-p</code>: port; 遠端伺服器的埠號</p></li>
+<li><p><code>-i</code>: 手動指定 private key 位址</p></li>
+</ul>
+<div class="infobox info">
+<p>flag 通常會在指令後面隨後出現，flag前面會插入 <code>-</code>，而 flag 後面有時會需要加入詳細的設定，有時不用。flag 與 flag 之間用空格隔開，詳細指令的使用方法可以在 Linux 系統用 <code>man &lt;指令名稱&gt;</code> 查詢</p>
+<p>假如我們要看連線的詳細訊息，且指定伺服器 port 為 60000與指定 private key 檔案位址等等，組合起來就是:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="openssh.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> -v -p 60000 -i ~/.ssh/id_rsa fintech@192.168.0.13</span></code></pre></div>
+</div>
+<p>目前不需要加上任何 flag，連線指令為:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="openssh.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> fintech@192.168.0.13</span></code></pre></div>
+<p>一樣地，<code>fintech</code> 是使用者名稱，而<code>192.168.0.13</code> 是 OpenSSH 伺服器的 ip 位置，輸入完後按 Enter↩︎</p>
+<p>這邊打 <code>yes</code> 即可，確認連接目的地沒有錯之後，會把 fingerprint 寫入 <code>~/.ssh/known_hosts</code> 中，以後不再詢問。</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode texinfo"><code class="sourceCode texinfo"><span id="cb16-1"><a href="openssh.html#cb16-1" aria-hidden="true" tabindex="-1"></a>The authenticity of host &#39;192.168.0.13 (192.168.0.13)&#39; can&#39;t be established.</span>
+<span id="cb16-2"><a href="openssh.html#cb16-2" aria-hidden="true" tabindex="-1"></a>ECDSA key fingerprint is SHA256:/HoocrLXe63zycdlmkh/+U3RuUfkawNq/xA0gTJmqmM.</span>
+<span id="cb16-3"><a href="openssh.html#cb16-3" aria-hidden="true" tabindex="-1"></a>Are you sure you want to continue connecting (yes/no/[fingerprint])?</span></code></pre></div>
+<div class="infobox info">
+<p>這裡不用指定 private key 的原因是因為，當你用 ssh 連線至目的地伺服器且你沒有指定 Identity File (private key) 時，ssh 會一個 key 一個 key 拿去問伺服器這個 key 可不可以使用。</p>
+</div>
+<p>連接成功~</p>
+<p><img src="figures/ssh-connection-success.png" class="figure" /></p>
+</div>
+<div id="puttygen-產生的-key-pairs-的連線方式" class="section level4" number="2.2.4.2">
+<h4><span class="header-section-number">2.2.4.2</span> PuTTYgen 產生的 key pairs 的連線方式:</h4>
+<p>SSH 連線方式大同小異:</p>
+<ul>
+<li><p>首先點選「開始」，鍵入 <code>PuTTY</code> 打開客戶端</p></li>
+<li><p>在左邊的 「Category:」 下，選取 「Session」</p></li>
+<li><p>於 Host Name 輸入「使用者@目的地 IP」，像是「<code>fintech@192.168.0.13</code>」</p>
+<div class="infobox info">
+<p>你可以點選下面的「Default Settings」後，接著按「Save」會把剛剛輸入的 IP 與 Port 儲存至「Default Settings」內，當然你也可以自己取一個新的名字。</p>
+</div></li>
+<li><p>接著展開左邊 「Category:」 下的「Connection」 ➜ 點選「SSH」 ➜ 再點選「Auth」，於最下面的「Private key file for authentication:」點選「Browse…」選取 <code>*.ppk</code> 檔案位置</p></li>
+<li><p>完成後點選「Open」連線</p></li>
+</ul>
+<p>與使用 ssh 指令連線相同，都會先提醒你目的地是否正確。確認無誤按下「Accept」</p>
+<p><img src="figures/putty-security-alert.png" class="figure" /></p>
+<p>連接成功!</p>
+<p><img src="figures/putty-connection-success.png" class="figure" /></p>
+
+</div>
+</div>
+</div>
+<!-- </div> -->
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-christopher_2020" class="csl-entry">
+Christopher, Hart. 2020. <span>“Windows 10 OpenSSH Equivalent of "Ssh-Copy-Id".”</span> <em>Windows 10 OpenSSH Equivalent of "Ssh-Copy-Id" – Christopher Hart - IT Adventures – Documenting My Discoveries in the IT World</em>. <a href="https://www.chrisjhart.com/Windows-10-ssh-copy-id/">https://www.chrisjhart.com/Windows-10-ssh-copy-id/</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="事前準備.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["twitter", "facebook"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/exkuretrol/MCU-ASIS/edit/main/02-Ubuntu.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/exkuretrol/MCU-ASIS/blob/main/02-Ubuntu.Rmd",
+"text": null
+},
+"download": ["MCU-ASIS.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

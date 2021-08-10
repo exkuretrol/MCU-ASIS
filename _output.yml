@@ -1,5 +1,6 @@
 bookdown::gitbook:
   css: style.css
+  split_by: section
   toc_depth: 4
   config:
     toc:
@@ -7,11 +8,24 @@ bookdown::gitbook:
         <li><a href="./">MCU ASIS Ubuntu 系統安裝指南</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-    download: ["pdf", "epub"]
+    # download: ["pdf", "epub"]
+    download: ["epub"]
+    fontsettings:
+      family: sans
+    sharing:
+      facebook: no
+      github: no
+      twitter: no
+      linkedin: no
+      weibo: no
+      instapaper: no
+      vk: no
+      whatsapp: no
+      all: ['twitter', 'facebook']
 # bookdown::pdf_book:
 #   includes:
 #     in_header: preamble.tex
 #   latex_engine: xelatex
 #   citation_package: natbib
 #   keep_tex: yes
-# bookdown::epub_book: default
+bookdown::epub_book: default
