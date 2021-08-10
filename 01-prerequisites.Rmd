@@ -283,7 +283,7 @@ OpenSSH 是使用 SSH 通訊協定來遠端連線電腦的工具。防止連線�
 ![](figures/installer-SSH.png)
 
 ::: {.infobox .info}
-如果這邊不匯入的話，也可以待稍後開機後再用指令 `gh-import-id-gh <username>` 匯入。
+如果這邊不匯入的話，也可以待稍後開機後再用指令 `ssh-import-id-gh <username>` 匯入。
 :::
 
 ![](figures/installer-SSH_1.png)
