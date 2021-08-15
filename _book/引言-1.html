@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-08-11" />
+<meta name="date" content="2021-08-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -190,24 +190,44 @@ div.csl-indent {
 <li class="chapter" data-level="2.2.1.1" data-path="openssh.html"><a href="openssh.html#macos-或-其他-unix-like-系統"><i class="fa fa-check"></i><b>2.2.1.1</b> MacOS 或 其他 Unix-like 系統</a></li>
 <li class="chapter" data-level="2.2.1.2" data-path="openssh.html"><a href="openssh.html#windows-系統"><i class="fa fa-check"></i><b>2.2.1.2</b> Windows 系統</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2.2" data-path="openssh.html"><a href="openssh.html#產生供-ssh-連線用的-key-pairs"><i class="fa fa-check"></i><b>2.2.2</b> 產生供 ssh 連線用的 key pairs</a>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#step-1-安裝-openssh-client"><i class="fa fa-check"></i>Step 1 — 安裝 OpenSSH Client</a></li>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#step-2-產生-ssh-key-pairs"><i class="fa fa-check"></i>Step 2 — 產生 ssh key pairs</a></li>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#step-3-將新增的-key-pairs-上傳至目的地主機"><i class="fa fa-check"></i>Step 3 — 將新增的 key pairs 上傳至目的地主機</a></li>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#step-4-測試-ssh-連線使用-ssh-連線至遠端主機"><i class="fa fa-check"></i>Step 4 — 測試 SSH 連線，使用 SSH 連線至遠端主機</a></li>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#step-5-使遠端的-openssh-伺服器更加安全"><i class="fa fa-check"></i>Step 5 — 使遠端的 OpenSSH 伺服器更加安全</a>
 <ul>
-<li class="chapter" data-level="2.2.2.1" data-path="openssh.html"><a href="openssh.html#以-openssh-client-產生-key"><i class="fa fa-check"></i><b>2.2.2.1</b> 以 OpenSSH Client 產生 key</a></li>
-<li class="chapter" data-level="2.2.2.2" data-path="openssh.html"><a href="openssh.html#以-putty-產生-key"><i class="fa fa-check"></i><b>2.2.2.2</b> 以 PuTTY 產生 key</a></li>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#變更-ssh-伺服器預設的埠號"><i class="fa fa-check"></i>變更 SSH 伺服器預設的埠號</a></li>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#關閉密碼驗證"><i class="fa fa-check"></i>關閉密碼驗證</a></li>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#關閉遠端-root-登入"><i class="fa fa-check"></i>關閉遠端 root 登入</a></li>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#限制能使用-ssh-連線的使用者"><i class="fa fa-check"></i>限制能使用 SSH 連線的使用者</a></li>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#關閉無密碼的使用者使用-ssh"><i class="fa fa-check"></i>關閉無密碼的使用者使用 SSH</a></li>
+<li><a href="openssh.html#測試-sshd_config-是否有效">測試 <code>sshd_config</code> 是否有效</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2.3" data-path="openssh.html"><a href="openssh.html#將新增的-key-pairs-上傳至目的地主機"><i class="fa fa-check"></i><b>2.2.3</b> 將新增的 key pairs 上傳至目的地主機</a>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="apt.html"><a href="apt.html"><i class="fa fa-check"></i><b>2.3</b> Apt</a></li>
+<li class="chapter" data-level="2.4" data-path="ufw.html"><a href="ufw.html"><i class="fa fa-check"></i><b>2.4</b> UFW</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="附錄.html"><a href="附錄.html"><i class="fa fa-check"></i>附錄</a>
 <ul>
-<li class="chapter" data-level="2.2.3.1" data-path="openssh.html"><a href="openssh.html#上傳以-openssh-client-產生的-ssh-key-pairs"><i class="fa fa-check"></i><b>2.2.3.1</b> 上傳以 OpenSSH Client 產生的 ssh key pairs</a></li>
-<li class="chapter" data-level="2.2.3.2" data-path="openssh.html"><a href="openssh.html#上傳以-putty-產生的-ssh-key-pairs"><i class="fa fa-check"></i><b>2.2.3.2</b> 上傳以 PuTTY 產生的 ssh key pairs</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2.4" data-path="openssh.html"><a href="openssh.html#使用-ssh-連線至遠端主機"><i class="fa fa-check"></i><b>2.2.4</b> 使用 SSH 連線至遠端主機</a>
+<li class="chapter" data-level="" data-path="使用-putty-連線至-openssh-伺服器.html"><a href="使用-putty-連線至-openssh-伺服器.html"><i class="fa fa-check"></i>使用 PuTTY 連線至 OpenSSH 伺服器</a>
 <ul>
-<li class="chapter" data-level="2.2.4.1" data-path="openssh.html"><a href="openssh.html#openssh-client-產生的-key-pairs-的連線方式"><i class="fa fa-check"></i><b>2.2.4.1</b> OpenSSH Client 產生的 key pairs 的連線方式:</a></li>
-<li class="chapter" data-level="2.2.4.2" data-path="openssh.html"><a href="openssh.html#puttygen-產生的-key-pairs-的連線方式"><i class="fa fa-check"></i><b>2.2.4.2</b> PuTTYgen 產生的 key pairs 的連線方式:</a></li>
+<li class="chapter" data-level="" data-path="使用-putty-連線至-openssh-伺服器.html"><a href="使用-putty-連線至-openssh-伺服器.html#以-putty-產生-key"><i class="fa fa-check"></i>以 PuTTY 產生 key</a>
+<ul>
+<li class="chapter" data-level="" data-path="使用-putty-連線至-openssh-伺服器.html"><a href="使用-putty-連線至-openssh-伺服器.html#step-1-安裝-putty"><i class="fa fa-check"></i>Step 1 — 安裝 PuTTY</a></li>
+<li class="chapter" data-level="" data-path="使用-putty-連線至-openssh-伺服器.html"><a href="使用-putty-連線至-openssh-伺服器.html#step-2-經由-puttygen-產生-ssh-key-pairs"><i class="fa fa-check"></i>Step 2 — 經由 PuTTYgen 產生 ssh key pairs</a></li>
+<li class="chapter" data-level="" data-path="使用-putty-連線至-openssh-伺服器.html"><a href="使用-putty-連線至-openssh-伺服器.html#step-3-妥善保存好產生的-key"><i class="fa fa-check"></i>Step 3 — 妥善保存好產生的 Key</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="使用-putty-連線至-openssh-伺服器.html"><a href="使用-putty-連線至-openssh-伺服器.html#上傳以-putty-產生的-ssh-key-pairs"><i class="fa fa-check"></i>上傳以 PuTTY 產生的 ssh key pairs</a></li>
+<li class="chapter" data-level="" data-path="使用-putty-連線至-openssh-伺服器.html"><a href="使用-putty-連線至-openssh-伺服器.html#puttygen-產生的-key-pairs-的連線方式"><i class="fa fa-check"></i>PuTTYgen 產生的 key pairs 的連線方式:</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="文本編輯器.html"><a href="文本編輯器.html"><i class="fa fa-check"></i>文本編輯器</a>
+<ul>
+<li class="chapter" data-level="" data-path="文本編輯器.html"><a href="文本編輯器.html#vim"><i class="fa fa-check"></i>vim</a></li>
+<li class="chapter" data-level="" data-path="文本編輯器.html"><a href="文本編輯器.html#nano"><i class="fa fa-check"></i>nano</a></li>
+<li class="chapter" data-level="" data-path="文本編輯器.html"><a href="文本編輯器.html#更改預設的文本編輯器"><i class="fa fa-check"></i>更改預設的文本編輯器</a></li>
 </ul></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="參考資料.html"><a href="參考資料.html"><i class="fa fa-check"></i>參考資料</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
