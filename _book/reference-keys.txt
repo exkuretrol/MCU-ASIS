@@ -16,7 +16,7 @@ proxy
 openssh-設定
 從-github-匯入已經儲存的-public-key
 ubuntu-的基本設定
-事前準備
+前言
 openssh
 適合各個系統的連線流程
 macos-或-其他-unix-like-系統

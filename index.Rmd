@@ -28,3 +28,13 @@ knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown'
 ), 'packages.bib')
 ```
+
+# TODO List {.unnumbered}
+
+-   需要將過程記錄下來(技術手冊?) + 讓人看得懂
+-   \_\_\_\_\_\_ 不能出現
+-   ✓ Ubuntu 安裝
+-   ✓ Ubuntu 基本設定
+-   LAMP
+-   RStudio + jupyter
+-   備份 & 還原

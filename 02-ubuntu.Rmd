@@ -4,7 +4,7 @@
 
 這章主重心主要會在從本機存取虛擬機器與虛擬機器的基本設定。
 
-## 事前準備
+## 前言
 
 <!--# TODO: appendix -- install Windows Terminal -->
 
@@ -130,8 +130,6 @@ The key's randomart image is:
 ```
 
 產生完畢，儲存在 `C:\Users\<USERNAME>\.ssh\id_rsa` 的檔案是 private key，而另一個 `id_rsa.pub` 的檔案是 public key。
-
-<!--# TODO: 我覺得應該把 PuTTY 的部分獨立出來 -->
 
 ::: {.infobox .caution}
 當你遺失了遠端主機的 key pairs，你再也不能透過遠端存取有使用過該 key pairs 的主機，只能透過直接接觸那台主機來更新的 key pairs。
