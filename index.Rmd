@@ -31,10 +31,21 @@ knitr::write_bib(c(
 
 # TODO List {.unnumbered}
 
+## TODOs: {.unnumbered}
+
 -   需要將過程記錄下來(技術手冊?) + 讓人看得懂
--   \_\_\_\_\_\_ 不能出現
 -   ✓ Ubuntu 安裝
 -   ✓ Ubuntu 基本設定
 -   LAMP
 -   RStudio + jupyter
 -   備份 & 還原
+
+## Issues: {.unnumbered}
+
+-   ~~\_\_\_\_\_\_ 不能出現~~
+
+-   ~~2.2 OpenSSH 太過複雜；Add prefix with css.~~
+
+    -   `PS`: -- PowerShell
+
+    -   `$`: -- shell

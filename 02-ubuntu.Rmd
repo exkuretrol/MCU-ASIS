@@ -74,22 +74,23 @@ Windows 10 已經有內建在 Windows 的「應用程式與功能」內，預設
 
 安裝完成後，你可以打開「命令提示字元」或是「PowerShell」輸入 ssh 來確認是否安裝完成。
 
-``` {.powershell}
-PS C:\Users\qaz85> ssh
-usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]
-           [-b bind_address] [-c cipher_spec] [-D [bind_address:]port]
-           [-E log_file] [-e escape_char] [-F configfile] [-I pkcs11]
-           [-i identity_file] [-J [user@]host[:port]] [-L address]
-           [-l login_name] [-m mac_spec] [-O ctl_cmd] [-o option] [-p port]
-           [-Q query_option] [-R address] [-S ctl_path] [-W host:port]
-           [-w local_tun[:remote_tun]] destination [command]
+``` {.powershell .prefixed_powershell}
+ssh
 ```
+
+    usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]
+               [-b bind_address] [-c cipher_spec] [-D [bind_address:]port]
+               [-E log_file] [-e escape_char] [-F configfile] [-I pkcs11]
+               [-i identity_file] [-J [user@]host[:port]] [-L address]
+               [-l login_name] [-m mac_spec] [-O ctl_cmd] [-o option] [-p port]
+               [-Q query_option] [-R address] [-S ctl_path] [-W host:port]
+               [-w local_tun[:remote_tun]] destination [command]
 
 ### Step 2 --- 產生 ssh key pairs {.unnumbered}
 
 接著，可以使用 `ssh-keygen` 指令產生 key pairs，加密方式有 rsa、dsa、ed25519 與 ecdsa ，預設的加密方式是 rsa ，詳細指令用法可以透過 `ssh-keygen --help` 指令查詢，這裡我們用最簡單的 `ssh-keygen` 指令就行。
 
-``` {.powershell}
+``` {.powershell .prefixed_powershell}
 ssh-keygen
 ```
 
@@ -141,8 +142,8 @@ The key's randomart image is:
 
 如果你是的系統是 Linux 那指令會稍微短一些，上傳至遠端電腦的指令如下:
 
-``` {.bash}
-ssh-copy-id -i ~/.ssh/id_ed25519.pub -p 22 fintech@192.168.0.13
+``` {.bash .prefixed}
+ssh-copy-id -i ~/.ssh/id_ed25519.pub -p 22 asis@192.168.0.13
 ```
 
 -   `-i`: i flag 代表的是你要上傳的 public key 檔案路徑
@@ -151,7 +152,7 @@ ssh-copy-id -i ~/.ssh/id_ed25519.pub -p 22 fintech@192.168.0.13
 
 -   `id_ed25519.pub` 為我產生的其他的 key pair，如果你前面是照著我的步驟產生，這裡應該改為 `id_rsa.pub`
 
--   這裡的 `fintech` 為第一章的[使用者設定](#使用者設定)的預設使用者
+-   這裡的 `asis` 為第一章的[使用者設定](#使用者設定)的預設使用者
 
 -   `192.168.0.13` 為我虛擬主機的 ip 位址，查詢 ip 位址可以先手動登入虛擬主機後，用 `hostname -I` 或是 `ip addr show` 指令查詢
 
@@ -164,21 +165,21 @@ ssh-copy-id -i ~/.ssh/id_ed25519.pub -p 22 fintech@192.168.0.13
 
 Number of key(s) added: 1
 
-Now try logging into the machine, with:   "ssh -p '22' 'fintech@192.168.0.13'"
+Now try logging into the machine, with:   "ssh -p '22' 'asis@192.168.0.13'"
 and check to make sure that only the key(s) you wanted were added.
 ```
 
 如果你是 Windows 的使用者也不用擔心多複雜，一樣一行指令就能搞定，這裡我是參考[@christopher_2020]的教學，指令如下:
 
-``` {.powershell}
-cat $env:USERPROFILE\.ssh\id_rsa.pub | ssh fintech@192.168.0.13 "cat >> ~/.ssh/authorized_keys"
+``` {.powershell .prefixed_powershell}
+cat $env:USERPROFILE\.ssh\id_rsa.pub | ssh asis@192.168.0.13 "cat >> ~/.ssh/authorized_keys"
 ```
 
 -   這裡的 `$env:USERPROFILE` 為 Windows 內建環境變數，會根據現在的使用者變更，如果我的使用者名稱為 `qaz855175b` 那 `$env:USERPROFILE` 對應的路徑就為 `C:\Users\qaz855175b\`，當然你可以直接把指令的 public key 路徑替換為 `C:\Users\qaz855175b\.ssh\id_rsa.pub`
 
 -   `id_rsa.pub` 為產生的 public key 預設名稱
 
--   這裡的 `fintech` 為第一章的[使用者設定](#使用者設定)的預設使用者
+-   這裡的 `asis` 為第一章的[使用者設定](#使用者設定)的預設使用者
 
 -   `192.168.0.13` 為我虛擬主機的 ip 位址，查詢 ip 位址可以先手動登入虛擬主機後，用 `hostname -I` 或是 `ip addr show` 指令查詢
 
@@ -186,10 +187,10 @@ cat $env:USERPROFILE\.ssh\id_rsa.pub | ssh fintech@192.168.0.13 "cat >> ~/.ssh/a
 其實 Linux 的 `ssh-copy-id`、和第一章的從 Github 匯入 public key `ssh-import-id-gh` 與這裡的 `cat file >> ~/.ssh/authorized_keys` 都是在做同一件事情，把 public key 貼到遠端伺服器的使用者的 `authorized_keys` 檔案裡面。
 :::
 
-接著按 Enter↩，跳出輸入密碼提示，這裡輸入預設的使用者密碼 `fintech`
+接著按 Enter↩，跳出輸入密碼提示，這裡輸入預設的使用者密碼 `asis`
 
 ``` {.powershell}
-fintech@192.168.0.13's password:
+asis@192.168.0.13's password:
 ```
 
 輸入完後雖然沒有任何提示訊息，但其實已經可以使用 ssh 連線至遠端主機啦\~
@@ -212,17 +213,17 @@ flag 通常會在指令後面隨後出現，flag前面會插入 `-`，而 flag �
 假如我們要看連線的詳細訊息，且指定伺服器 port 為 60000與指定 private key 檔案位址等等，組合起來就是:
 
 ``` {.bash}
-ssh -v -p 60000 -i ~/.ssh/id_rsa fintech@192.168.0.13
+ssh -v -p 60000 -i ~/.ssh/id_rsa asis@192.168.0.13
 ```
 :::
 
 目前不需要加上任何 flag，連線指令為:
 
-``` {.bash}
-ssh fintech@192.168.0.13
+``` {.bash .prefixed_powershell}
+ssh asis@192.168.0.13
 ```
 
-一樣地，`fintech` 是使用者名稱，而`192.168.0.13` 是 OpenSSH 伺服器的 ip 位置，輸入完後按 Enter↩
+一樣地，`asis` 是使用者名稱，而`192.168.0.13` 是 OpenSSH 伺服器的 ip 位置，輸入完後按 Enter↩
 
 這邊打 `yes` 即可，確認連接目的地沒有錯之後，會把 fingerprint 寫入 `~/.ssh/known_hosts` 中，以後不再詢問。
 
@@ -248,7 +249,7 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])?
 
 #### 變更 SSH 伺服器預設的埠號 {.unnumbered}
 
-``` {.bash}
+``` {.bash .prefixed}
 sudo vi /etc/ssh/sshd_config
 ```
 
@@ -294,7 +295,7 @@ PermitRootLogin no
 #### 限制能使用 SSH 連線的使用者 {.unnumbered}
 
 ``` {.bash}
-AllowUsers fintech
+AllowUsers asis
 ```
 
 #### 關閉無密碼的使用者使用 SSH {.unnumbered}
@@ -305,11 +306,11 @@ PermitEmptyPasswords no
 
 #### 測試 `sshd_config` 是否有效 {.unnumbered}
 
-``` {.bash}
+``` {.bash .prefixed}
 sudo sshd -t
 ```
 
-``` {.bash}
+``` {.bash .prefixed}
 sudo systemctl restart sshd
 ```
 
@@ -325,15 +326,15 @@ sudo systemctl restart sshd
          CGroup: /system.slice/ssh.service
                  └─893 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
 
-    Aug 15 16:08:54 fintech06 systemd[1]: Starting OpenBSD Secure Shell server...
-    Aug 15 16:08:55 fintech06 sshd[893]: Server listening on 0.0.0.0 port 60000.
-    Aug 15 16:08:55 fintech06 sshd[893]: Server listening on :: port 60000.
-    Aug 15 16:08:55 fintech06 systemd[1]: Started OpenBSD Secure Shell server.
+    Aug 15 16:08:54 asis01 systemd[1]: Starting OpenBSD Secure Shell server...
+    Aug 15 16:08:55 asis01 sshd[893]: Server listening on 0.0.0.0 port 60000.
+    Aug 15 16:08:55 asis01 sshd[893]: Server listening on :: port 60000.
+    Aug 15 16:08:55 asis01 systemd[1]: Started OpenBSD Secure Shell server.
 
-重新測試 ssh 遠端連線至伺服器，
+用指令 `exit` 斷開連線，再重新測試 ssh 遠端連線至伺服器，
 
-``` {.bash}
-ssh -p 60000 fintech@192.168.0.13
+``` {.bash .prefixed_powershell}
+ssh -p 60000 asis@192.168.0.13
 ```
 
     Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-81-generic x86_64)
@@ -369,7 +370,7 @@ ssh -p 60000 fintech@192.168.0.13
 
 在 Ubuntu 上安裝任何程式大多都是用 APT (Advanced Packaging Tools) 安裝，這裡有兩個指令，用 `&&` 串接在一起:
 
-``` {.bash}
+``` {.bash .prefixed}
 sudo apt update && sudo apt upgrade -y
 ```
 

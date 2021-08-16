@@ -51,19 +51,19 @@ PuTTY 產生的 public key 與 private key 格式比較特別，並不能直接�
 接著打開「PowerShell」或是「命令提示字元」，輸入:
 
 ``` {.powershell}
-echo "<YOUR_PUBLIC_KEY>" | ssh fintech@192.168.0.13 "cat >> ~/.ssh/authorized_keys"
+echo "<YOUR_PUBLIC_KEY>" | ssh asis@192.168.0.13 "cat >> ~/.ssh/authorized_keys"
 ```
 
 -   將 `<YOUR_PUBLIC_KEY>` 替換成自己的 public key
 
--   這裡的 `fintech` 為第一章的[使用者設定](#使用者設定)的預設使用者
+-   這裡的 `asis` 為第一章的[使用者設定](#使用者設定)的預設使用者
 
 -   `192.168.0.13` 為我虛擬主機的 ip 位址，查詢 ip 位址可以先手動登入虛擬主機後，用 `hostname -I` 或是 `ip addr show` 指令查詢
 
-接著按 Enter↩，跳出輸入密碼提示，這裡輸入預設的使用者密碼 `fintech`
+接著按 Enter↩，跳出輸入密碼提示，這裡輸入預設的使用者密碼 `asis`
 
 ``` {.powershell}
-fintech@192.168.0.13's password:
+asis@192.168.0.13's password:
 ```
 
 輸入完成不會出現任何訊息是正常的，代表操作沒有問題且已經可以使用 PuTTY 連線了。
@@ -76,7 +76,7 @@ SSH 連線方式大同小異:
 
 -   在左邊的 「Category:」 下，選取 「Session」
 
--   於 Host Name 輸入「使用者\@目的地 IP」，像是「`fintech@192.168.0.13`」
+-   於 Host Name 輸入「使用者\@目的地 IP」，像是「`asis@192.168.0.13`」
 
     ::: {.infobox .info}
     你可以點選下面的「Default Settings」後，接著按「Save」會把剛剛輸入的 IP 與 Port 儲存至「Default Settings」內，當然你也可以自己取一個新的名字。

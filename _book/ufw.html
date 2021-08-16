@@ -159,7 +159,11 @@ div.csl-indent {
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>引言</a></li>
-<li class="chapter" data-level="" data-path="todo-list.html"><a href="todo-list.html"><i class="fa fa-check"></i>TODO List</a></li>
+<li class="chapter" data-level="" data-path="todo-list.html"><a href="todo-list.html"><i class="fa fa-check"></i>TODO List</a>
+<ul>
+<li class="chapter" data-level="" data-path="todos.html"><a href="todos.html"><i class="fa fa-check"></i>TODOs:</a></li>
+<li class="chapter" data-level="" data-path="issues.html"><a href="issues.html"><i class="fa fa-check"></i>Issues:</a></li>
+</ul></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> 事前準備</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="引言-1.html"><a href="引言-1.html"><i class="fa fa-check"></i><b>1.1</b> 引言</a></li>
@@ -253,18 +257,18 @@ div.csl-indent {
 <h2><span class="header-section-number">2.4</span> UFW</h2>
 <p>UFW (Uncomplicated Firewall) 是預設在 Ubuntu 系統上的防火牆，這裡先為了 OpenSSH 伺服器而打開埠號 <code>60000</code>。</p>
 <p>首先用 status 查詢 UFW 的狀態，這裡需要輸入超級使用者 (sudo) 的密碼。</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb27-1"><a href="ufw.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb28-1"><a href="ufw.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
 <p>看來預設的 UFW 是關閉的</p>
 <pre><code>Status: inactive</code></pre>
 <p>接著用 <code>systemctl</code> 打開防火牆</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb29-1"><a href="ufw.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable ufw</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb30-1"><a href="ufw.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable ufw</span></code></pre></div>
 <p>查詢防火牆狀態</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb30-1"><a href="ufw.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb31-1"><a href="ufw.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
 <pre><code>Status: active</code></pre>
 <p>允許埠號 <code>60000</code> 從任何地方連入</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb32-1"><a href="ufw.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow 60000</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb33-1"><a href="ufw.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow 60000</span></code></pre></div>
 <p>查詢防火牆狀態</p>
-<div class="sourceCode" id="cb33" data-prefix="&#39;$&#39;"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb33-1"><a href="ufw.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
+<div class="sourceCode" id="cb34" data-prefix="&#39;$&#39;"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb34-1"><a href="ufw.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
 <p>目前只有兩條規則，分別是 從任何地方連入埠號 60000 與 ipv6 從任何地方連入埠號 60000</p>
 <pre><code>Status: active
 

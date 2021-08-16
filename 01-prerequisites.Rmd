@@ -176,8 +176,6 @@ sda                          8:0    0 931.5G  0 disk
 
 -   如果選錯了、或是硬碟中有已經分割好的磁區也沒關係，從 AVAILABLE DEVICES 下面選擇硬碟 ➜ 「Reformat」 ➜ 「Reformat」，這會把硬碟格式化。
 
-<!-- -->
-
 -   選擇第一個磁碟 ➜ 「Use As Boot Device」 當作開機磁碟
 
     ![](figures/installer-storage_2.png)
@@ -252,23 +250,23 @@ sda                          8:0    0 931.5G  0 disk
 
 #### 使用者設定
 
-這邊我是用院伺服器預設的 hostname 與 使用者設定。
+在這邊設定自己的使用者名稱與電腦名稱。
 
 ![](figures/installer-profile-configuration.png)
 
--   Your name: `fintech`
+-   Your name: `asis`
 
--   Your server's name: `fintech06`
+-   Your server's name: `asis01`
 
--   Pick a username: `fintech`
+-   Pick a username: `asis`
 
--   Choose a password: `fintech`
+-   Choose a password: `asis`
 
--   Confirm your password: `fintech`
+-   Confirm your password: `asis`
 
 #### OpenSSH 設定
 
-OpenSSH 是使用 SSH 通訊協定來遠端連線電腦的工具。防止連線中被竊聽、劫持或是其他攻擊。詳細設定可以參考 DigitalOcean 中的[教學](https://docs.digitalocean.com/products/droplets/how-to/add-ssh-keys/)。
+OpenSSH 是使用 SSH 通訊協定來遠端連線電腦的工具。防止連線中被竊聽、劫持或是其他攻擊。如果沒有擁有 Github 帳號這裡可以先跳過，於第二章會重新介紹怎麼設定 OpenSSH 伺服器。
 
 ##### 從 Github 匯入已經儲存的 public key
 
