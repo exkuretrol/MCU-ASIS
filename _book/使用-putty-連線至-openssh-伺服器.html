@@ -204,7 +204,7 @@ div.csl-indent {
 <li><a href="openssh.html#測試-sshd_config-是否有效">測試 <code>sshd_config</code> 是否有效</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="apt.html"><a href="apt.html"><i class="fa fa-check"></i><b>2.3</b> Apt</a></li>
+<li class="chapter" data-level="2.3" data-path="apt.html"><a href="apt.html"><i class="fa fa-check"></i><b>2.3</b> APT</a></li>
 <li class="chapter" data-level="2.4" data-path="ufw.html"><a href="ufw.html"><i class="fa fa-check"></i><b>2.4</b> UFW</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="附錄.html"><a href="附錄.html"><i class="fa fa-check"></i>附錄</a>
@@ -284,14 +284,14 @@ div.csl-indent {
 <p>接著按「Load」把剛剛產生的 *.ppk 檔案讀取進來。會看到一行字「Public key for pasting into OpenSSH authorized_keys file」下面的可複製區域就是 public key，把它整段複製起來。</p>
 <p><img src="figures/puttygen-load-ppk.png" class="figure" /></p>
 <p>接著打開「PowerShell」或是「命令提示字元」，輸入:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb29-1"><a href="使用-putty-連線至-openssh-伺服器.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">echo</span> <span class="st">&quot;&lt;YOUR_PUBLIC_KEY&gt;&quot;</span> | ssh fintech@192.<span class="fu">168</span>.<span class="fu">0</span>.<span class="fu">13</span> <span class="st">&quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb35-1"><a href="使用-putty-連線至-openssh-伺服器.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">echo</span> <span class="st">&quot;&lt;YOUR_PUBLIC_KEY&gt;&quot;</span> | ssh fintech@192.<span class="fu">168</span>.<span class="fu">0</span>.<span class="fu">13</span> <span class="st">&quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;</span></span></code></pre></div>
 <ul>
 <li><p>將 <code>&lt;YOUR_PUBLIC_KEY&gt;</code> 替換成自己的 public key</p></li>
 <li><p>這裡的 <code>fintech</code> 為第一章的<a href="於虛擬機器安裝作業系統.html#使用者設定">使用者設定</a>的預設使用者</p></li>
 <li><p><code>192.168.0.13</code> 為我虛擬主機的 ip 位址，查詢 ip 位址可以先手動登入虛擬主機後，用 <code>hostname -I</code> 或是 <code>ip addr show</code> 指令查詢</p></li>
 </ul>
 <p>接著按 Enter↩︎，跳出輸入密碼提示，這裡輸入預設的使用者密碼 <code>fintech</code></p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb30-1"><a href="使用-putty-連線至-openssh-伺服器.html#cb30-1" aria-hidden="true" tabindex="-1"></a>fintech@192.<span class="fu">168</span>.<span class="fu">0</span>.<span class="fu">13</span>&#39;s password:</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb36-1"><a href="使用-putty-連線至-openssh-伺服器.html#cb36-1" aria-hidden="true" tabindex="-1"></a>fintech@192.<span class="fu">168</span>.<span class="fu">0</span>.<span class="fu">13</span>&#39;s password:</span></code></pre></div>
 <p>輸入完成不會出現任何訊息是正常的，代表操作沒有問題且已經可以使用 PuTTY 連線了。</p>
 </div>
 <div id="puttygen-產生的-key-pairs-的連線方式" class="section level3 unnumbered">

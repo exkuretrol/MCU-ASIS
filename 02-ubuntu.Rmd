@@ -238,9 +238,13 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])?
 這裡不用指定 private key 的原因是因為，當你用 ssh 連線至目的地伺服器且你沒有指定 Identity File (private key) 時，ssh 會一個 key 一個 key 拿去問伺服器這個 key 可不可以使用。
 :::
 
-連接成功\~
+連接成功!
 
 ![](figures/ssh-connection-success.png){.figure}
+
+測試完確認沒問題就可以把虛擬機晾在一旁了\~
+
+![](figures/virtualbox-ubuntu-login.png){.figure}
 
 ### Step 5 --- 使遠端的 OpenSSH 伺服器更加安全 {.unnumbered}
 
@@ -311,27 +315,115 @@ sudo sshd -t
 sudo systemctl restart sshd
 ```
 
-## Apt
+    ● ssh.service - OpenBSD Secure Shell server
+         Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)
+         Active: active (running) since Sun 2021-08-15 16:08:55 UTC; 19h ago
+           Docs: man:sshd(8)
+                 man:sshd_config(5)
+        Process: 850 ExecStartPre=/usr/sbin/sshd -t (code=exited, status=0/SUCCESS)
+       Main PID: 893 (sshd)
+          Tasks: 1 (limit: 4617)
+         Memory: 5.4M
+         CGroup: /system.slice/ssh.service
+                 └─893 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+
+    Aug 15 16:08:54 fintech06 systemd[1]: Starting OpenBSD Secure Shell server...
+    Aug 15 16:08:55 fintech06 sshd[893]: Server listening on 0.0.0.0 port 60000.
+    Aug 15 16:08:55 fintech06 sshd[893]: Server listening on :: port 60000.
+    Aug 15 16:08:55 fintech06 systemd[1]: Started OpenBSD Secure Shell server.
+
+重新測試 ssh 遠端連線至伺服器，
+
+``` {.bash}
+ssh -p 60000 fintech@192.168.0.13
+```
+
+    Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-81-generic x86_64)
+
+     * Documentation:  https://help.ubuntu.com
+     * Management:     https://landscape.canonical.com
+     * Support:        https://ubuntu.com/advantage
+
+      System information as of Mon 16 Aug 2021 12:32:20 PM UTC
+
+      System load:             0.0
+      Usage of /:              0.7% of 974.32GB
+      Memory usage:            5%
+      Swap usage:              0%
+      Processes:               124
+      Users logged in:         0
+      IPv4 address for enp0s3: 192.168.0.13
+      IPv6 address for enp0s3: fd00:1cab:c0bb:acc2:a00:27ff:fed3:8136
+
+     * Super-optimized for small spaces - read how we shrank the memory
+       footprint of MicroK8s to make it the smallest full K8s around.
+
+       https://ubuntu.com/blog/microk8s-memory-optimisation
+
+    0 updates can be applied immediately.
+
+
+    Last login: Mon Aug 16 12:31:35 2021 from 192.168.0.11
+
+連線成功\~
+
+## APT
+
+在 Ubuntu 上安裝任何程式大多都是用 APT (Advanced Packaging Tools) 安裝，這裡有兩個指令，用 `&&` 串接在一起:
 
 ``` {.bash}
 sudo apt update && sudo apt upgrade -y
 ```
 
+-   `apt update`: 更新可安裝的套件列表或版本
+
+-   `apt upgrade`: 安裝程式
+
+-   `&&`: `&&` 以前的指令執行成功才會接續執行 `&&` 後面的指令
+
+-   `-y, --yes, --assume-yes`: 自動對安裝提示回答 yes，安裝時會提示是否確認要安裝該軟體，因為我們清楚自己在做什麼為了方便而把提示關掉
+
 ## UFW
 
-``` {.bash}
+UFW (Uncomplicated Firewall) 是預設在 Ubuntu 系統上的防火牆，這裡先為了 OpenSSH 伺服器而打開埠號 `60000`。
+
+首先用 status 查詢 UFW 的狀態，這裡需要輸入超級使用者 (sudo) 的密碼。
+
+``` {.bash .prefixed}
 sudo ufw status
 ```
+
+看來預設的 UFW 是關閉的
 
     Status: inactive
 
-``` {.bash}
+接著用 `systemctl` 打開防火牆
+
+``` {.bash .prefixed}
+sudo systemctl enable ufw
+```
+
+查詢防火牆狀態
+
+``` {.bash .prefixed}
+sudo ufw status
+```
+
+    Status: active
+
+允許埠號 `60000` 從任何地方連入
+
+``` {.bash .prefixed}
 sudo ufw allow 60000
 ```
 
-``` {.bash}
+查詢防火牆狀態
+
+``` {.bash .prefixed data-prefix="'$'"}
 sudo ufw status
 ```
+
+目前只有兩條規則，分別是 從任何地方連入埠號 60000 與 ipv6 從任何地方連入埠號 60000
 
     Status: active
 
@@ -339,5 +431,3 @@ sudo ufw status
     --                         ------      ----
     60000                      ALLOW       Anywhere
     60000 (v6)                 ALLOW       Anywhere (v6)
-
-l

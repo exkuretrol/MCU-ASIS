@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.3 Apt | MCU ASIS Ubuntu 系統安裝指南</title>
+  <title>2.3 APT | MCU ASIS Ubuntu 系統安裝指南</title>
   <meta name="description" content="This is a book." />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.3 Apt | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta property="og:title" content="2.3 APT | MCU ASIS Ubuntu 系統安裝指南" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.3 Apt | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta name="twitter:title" content="2.3 APT | MCU ASIS Ubuntu 系統安裝指南" />
   
   <meta name="twitter:description" content="This is a book." />
   
@@ -204,7 +204,7 @@ div.csl-indent {
 <li><a href="openssh.html#測試-sshd_config-是否有效">測試 <code>sshd_config</code> 是否有效</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="apt.html"><a href="apt.html"><i class="fa fa-check"></i><b>2.3</b> Apt</a></li>
+<li class="chapter" data-level="2.3" data-path="apt.html"><a href="apt.html"><i class="fa fa-check"></i><b>2.3</b> APT</a></li>
 <li class="chapter" data-level="2.4" data-path="ufw.html"><a href="ufw.html"><i class="fa fa-check"></i><b>2.4</b> UFW</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="附錄.html"><a href="附錄.html"><i class="fa fa-check"></i>附錄</a>
@@ -249,8 +249,15 @@ div.csl-indent {
 
             <section class="normal" id="section-">
 <div id="apt" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Apt</h2>
-<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="apt.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt upgrade -y</span></code></pre></div>
+<h2><span class="header-section-number">2.3</span> APT</h2>
+<p>在 Ubuntu 上安裝任何程式大多都是用 APT (Advanced Packaging Tools) 安裝，這裡有兩個指令，用 <code>&amp;&amp;</code> 串接在一起:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="apt.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt upgrade -y</span></code></pre></div>
+<ul>
+<li><p><code>apt update</code>: 更新可安裝的套件列表或版本</p></li>
+<li><p><code>apt upgrade</code>: 安裝程式</p></li>
+<li><p><code>&amp;&amp;</code>: <code>&amp;&amp;</code> 以前的指令執行成功才會接續執行 <code>&amp;&amp;</code> 後面的指令</p></li>
+<li><p><code>-y, --yes, --assume-yes</code>: 自動對安裝提示回答 yes，安裝時會提示是否確認要安裝該軟體，因為我們清楚自己在做什麼為了方便而把提示關掉</p></li>
+</ul>
 </div>
             </section>
 
@@ -290,7 +297,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/exkuretrol/MCU-ASIS/edit/main/02ubuntu.Rmd",
+"link": "https://github.com/exkuretrol/MCU-ASIS/edit/main/02-ubuntu.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -298,7 +305,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/exkuretrol/MCU-ASIS/blob/main/02ubuntu.Rmd",
+"link": "https://github.com/exkuretrol/MCU-ASIS/blob/main/02-ubuntu.Rmd",
 "text": null
 },
 "download": ["MCU-ASIS.epub"],

@@ -204,7 +204,7 @@ div.csl-indent {
 <li><a href="openssh.html#測試-sshd_config-是否有效">測試 <code>sshd_config</code> 是否有效</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="apt.html"><a href="apt.html"><i class="fa fa-check"></i><b>2.3</b> Apt</a></li>
+<li class="chapter" data-level="2.3" data-path="apt.html"><a href="apt.html"><i class="fa fa-check"></i><b>2.3</b> APT</a></li>
 <li class="chapter" data-level="2.4" data-path="ufw.html"><a href="ufw.html"><i class="fa fa-check"></i><b>2.4</b> UFW</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="附錄.html"><a href="附錄.html"><i class="fa fa-check"></i>附錄</a>
@@ -412,8 +412,10 @@ div.csl-indent {
 <div class="infobox info">
 <p>這裡不用指定 private key 的原因是因為，當你用 ssh 連線至目的地伺服器且你沒有指定 Identity File (private key) 時，ssh 會一個 key 一個 key 拿去問伺服器這個 key 可不可以使用。</p>
 </div>
-<p>連接成功~</p>
+<p>連接成功!</p>
 <p><img src="figures/ssh-connection-success.png" class="figure" /></p>
+<p>測試完確認沒問題就可以把虛擬機晾在一旁了~</p>
+<p><img src="figures/virtualbox-ubuntu-login.png" class="figure" /></p>
 </div>
 <div id="step-5-使遠端的-openssh-伺服器更加安全" class="section level3 unnumbered">
 <h3>Step 5 — 使遠端的 OpenSSH 伺服器更加安全</h3>
@@ -462,6 +464,51 @@ div.csl-indent {
 <h4>測試 <code>sshd_config</code> 是否有效</h4>
 <div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="openssh.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> sshd -t</span></code></pre></div>
 <div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="openssh.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart sshd</span></code></pre></div>
+<pre><code>● ssh.service - OpenBSD Secure Shell server
+     Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sun 2021-08-15 16:08:55 UTC; 19h ago
+       Docs: man:sshd(8)
+             man:sshd_config(5)
+    Process: 850 ExecStartPre=/usr/sbin/sshd -t (code=exited, status=0/SUCCESS)
+   Main PID: 893 (sshd)
+      Tasks: 1 (limit: 4617)
+     Memory: 5.4M
+     CGroup: /system.slice/ssh.service
+             └─893 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+
+Aug 15 16:08:54 fintech06 systemd[1]: Starting OpenBSD Secure Shell server...
+Aug 15 16:08:55 fintech06 sshd[893]: Server listening on 0.0.0.0 port 60000.
+Aug 15 16:08:55 fintech06 sshd[893]: Server listening on :: port 60000.
+Aug 15 16:08:55 fintech06 systemd[1]: Started OpenBSD Secure Shell server.</code></pre>
+<p>重新測試 ssh 遠端連線至伺服器，</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="openssh.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> -p 60000 fintech@192.168.0.13</span></code></pre></div>
+<pre><code>Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-81-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Mon 16 Aug 2021 12:32:20 PM UTC
+
+  System load:             0.0
+  Usage of /:              0.7% of 974.32GB
+  Memory usage:            5%
+  Swap usage:              0%
+  Processes:               124
+  Users logged in:         0
+  IPv4 address for enp0s3: 192.168.0.13
+  IPv6 address for enp0s3: fd00:1cab:c0bb:acc2:a00:27ff:fed3:8136
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+0 updates can be applied immediately.
+
+
+Last login: Mon Aug 16 12:31:35 2021 from 192.168.0.11</code></pre>
+<p>連線成功~</p>
 </div>
 </div>
 </div>
@@ -509,7 +556,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/exkuretrol/MCU-ASIS/edit/main/02ubuntu.Rmd",
+"link": "https://github.com/exkuretrol/MCU-ASIS/edit/main/02-ubuntu.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -517,7 +564,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/exkuretrol/MCU-ASIS/blob/main/02ubuntu.Rmd",
+"link": "https://github.com/exkuretrol/MCU-ASIS/blob/main/02-ubuntu.Rmd",
 "text": null
 },
 "download": ["MCU-ASIS.epub"],

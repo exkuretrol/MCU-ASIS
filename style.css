@@ -48,3 +48,7 @@ pre {
 #cb2-7, #cb2-16 {
   background-color: var(--khaki);
 }
+
+pre.prefixed::before {
+   content: "$ ";
+}
