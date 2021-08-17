@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>文本編輯器 | MCU ASIS Ubuntu 系統安裝指南</title>
   <meta name="description" content="This is a book." />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
   <meta property="og:title" content="文本編輯器 | MCU ASIS Ubuntu 系統安裝指南" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-08-16" />
+<meta name="date" content="2021-08-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,8 @@
   
 <link rel="prev" href="使用-putty-連線至-openssh-伺服器.html"/>
 <link rel="next" href="參考資料.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -59,6 +59,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -264,19 +265,19 @@ div.csl-indent {
 <div id="更改預設的文本編輯器" class="section level3 unnumbered">
 <h3>更改預設的文本編輯器</h3>
 <p>這個指令可以變更系統編輯文件所用的程式</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="文本編輯器.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> update-alternatives --config editor</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="文本編輯器.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> update-alternatives <span class="at">--config</span> editor</span></code></pre></div>
 <p>按了 Enter↩︎ 之後，會出現現在可用的編輯器，輸入對應的編號即可變更。有標 <code>*</code> 號的編輯器為目前設定的預設編輯器。</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="文本編輯器.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">There</span> are 4 choices for the alternative editor (providing /usr/bin/editor)<span class="ex">.</span></span>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="文本編輯器.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">There</span> are 4 choices for the alternative editor <span class="er">(</span><span class="ex">providing</span> /usr/bin/editor<span class="kw">)</span><span class="bu">.</span></span>
 <span id="cb39-2"><a href="文本編輯器.html#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-3"><a href="文本編輯器.html#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">Selection</span>    Path                Priority   Status</span>
 <span id="cb39-4"><a href="文本編輯器.html#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="ex">------------------------------------------------------------</span></span>
 <span id="cb39-5"><a href="文本編輯器.html#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">0</span>            /bin/nano            40        auto mode</span>
-<span id="cb39-6"><a href="文本編輯器.html#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">1</span>            /bin/ed             -100       manual mode</span>
+<span id="cb39-6"><a href="文本編輯器.html#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">1</span>            /bin/ed             <span class="at">-100</span>       manual mode</span>
 <span id="cb39-7"><a href="文本編輯器.html#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="ex">2</span>            /bin/nano            40        manual mode</span>
 <span id="cb39-8"><a href="文本編輯器.html#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="ex">*</span> 3            /usr/bin/vim.basic   30        manual mode</span>
 <span id="cb39-9"><a href="文本編輯器.html#cb39-9" aria-hidden="true" tabindex="-1"></a>  <span class="ex">4</span>            /usr/bin/vim.tiny    15        manual mode</span>
 <span id="cb39-10"><a href="文本編輯器.html#cb39-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-11"><a href="文本編輯器.html#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Press</span> <span class="op">&lt;</span>enter<span class="op">&gt;</span> to keep the current choice[*], or type selection number: 3</span></code></pre></div>
+<span id="cb39-11"><a href="文本編輯器.html#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Press</span> <span class="op">&lt;</span>enter<span class="op">&gt;</span> to keep the current choice[<span class="pp">*</span>], or type selection number: 3</span></code></pre></div>
 
 </div>
 </div>
@@ -331,6 +332,10 @@ gitbook.start({
 "text": null
 },
 "download": ["MCU-ASIS.epub"],
+"search": {
+"engine": "lunr",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

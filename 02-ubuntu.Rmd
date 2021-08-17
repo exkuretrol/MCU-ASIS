@@ -399,7 +399,7 @@ sudo ufw status
 接著用 `systemctl` 打開防火牆
 
 ``` {.bash .prefixed}
-sudo systemctl enable ufw
+sudo ufw enable
 ```
 
 查詢防火牆狀態

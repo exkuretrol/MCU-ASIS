@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.3 APT | MCU ASIS Ubuntu 系統安裝指南</title>
   <meta name="description" content="This is a book." />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.3 APT | MCU ASIS Ubuntu 系統安裝指南" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-08-16" />
+<meta name="date" content="2021-08-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,8 @@
   
 <link rel="prev" href="openssh.html"/>
 <link rel="next" href="ufw.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -59,6 +59,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -256,7 +257,7 @@ div.csl-indent {
 <div id="apt" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> APT</h2>
 <p>在 Ubuntu 上安裝任何程式大多都是用 APT (Advanced Packaging Tools) 安裝，這裡有兩個指令，用 <code>&amp;&amp;</code> 串接在一起:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb27-1"><a href="apt.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt upgrade -y</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb27-1"><a href="apt.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt upgrade <span class="at">-y</span></span></code></pre></div>
 <ul>
 <li><p><code>apt update</code>: 更新可安裝的套件列表或版本</p></li>
 <li><p><code>apt upgrade</code>: 安裝程式</p></li>
@@ -314,6 +315,10 @@ gitbook.start({
 "text": null
 },
 "download": ["MCU-ASIS.epub"],
+"search": {
+"engine": "lunr",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

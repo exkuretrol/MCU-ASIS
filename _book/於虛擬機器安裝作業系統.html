@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1.3 於虛擬機器安裝作業系統 | MCU ASIS Ubuntu 系統安裝指南</title>
   <meta name="description" content="This is a book." />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1.3 於虛擬機器安裝作業系統 | MCU ASIS Ubuntu 系統安裝指南" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-08-16" />
+<meta name="date" content="2021-08-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,8 @@
   
 <link rel="prev" href="安裝-virtualbox.html"/>
 <link rel="next" href="ubuntu-的基本設定.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -59,6 +59,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -256,7 +257,7 @@ div.csl-indent {
 <div id="於虛擬機器安裝作業系統" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> 於虛擬機器安裝作業系統</h2>
 <p>再安裝完 VirtualBox 後，打開並不會有預先安裝好的作業系統，需要在 VirtualBox 內自行安裝作業系統。首先介紹 VirtualBox 的使用者介面:</p>
-<div class="figure" style="text-align: center"><span id="fig:virtualbox-menu"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:virtualbox-menu"></span>
 <img src="figures/virtualbox-menu.png" alt="VirtualBox 的操作介面"  />
 <p class="caption">
 Figure 1.1: VirtualBox 的操作介面
@@ -280,25 +281,25 @@ Figure 1.1: VirtualBox 的操作介面
 <p>預設的虛擬機器存放位置位於使用者資料夾中的<code>Virtual VMs</code>資料夾，像我的使用者是qaz85，那虛擬機器就位於:</p>
 <pre><code>C:\Users\qaz85\VirtualBox VMs</code></pre>
 <p>從這張圖可以看到院伺服器的磁碟配置是由兩個 1Tb 的硬碟組成，且用<a href="http://linux.vbird.org/linux_basic/0420quota.php#raid1">Raid-1</a> (映射模式) 將伺服器同時映射備份至另一個硬碟。</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="於虛擬機器安裝作業系統.html#cb2-1" aria-hidden="true" tabindex="-1"></a>$ <span class="ex">lsblk</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="於虛擬機器安裝作業系統.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> lsblk</span>
 <span id="cb2-2"><a href="於虛擬機器安裝作業系統.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">NAME</span>                       MAJ:MIN RM   SIZE RO TYPE   MOUNTPOINT</span>
 <span id="cb2-3"><a href="於虛擬機器安裝作業系統.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">sdb</span>                          8:16   0 931.5G  0 disk</span>
-<span id="cb2-4"><a href="於虛擬機器安裝作業系統.html#cb2-4" aria-hidden="true" tabindex="-1"></a>├─<span class="ex">sdb2</span>                       8:18   0 852.5G  0 part</span>
-<span id="cb2-5"><a href="於虛擬機器安裝作業系統.html#cb2-5" aria-hidden="true" tabindex="-1"></a>├─<span class="ex">sdb3</span>                       8:19   0    32G  0 part</span>
-<span id="cb2-6"><a href="於虛擬機器安裝作業系統.html#cb2-6" aria-hidden="true" tabindex="-1"></a>├─<span class="ex">sdb1</span>                       8:17   0   512M  0 part</span>
-<span id="cb2-7"><a href="於虛擬機器安裝作業系統.html#cb2-7" aria-hidden="true" tabindex="-1"></a>└─<span class="ex">isw_ecbbadhihd_Raid1</span>     253:0    0   885G  0 dmraid</span>
-<span id="cb2-8"><a href="於虛擬機器安裝作業系統.html#cb2-8" aria-hidden="true" tabindex="-1"></a>  ├─<span class="ex">isw_ecbbadhihd_Raid1p1</span> 253:1    0   512M  0 part   /boot/efi</span>
-<span id="cb2-9"><a href="於虛擬機器安裝作業系統.html#cb2-9" aria-hidden="true" tabindex="-1"></a>  ├─<span class="ex">isw_ecbbadhihd_Raid1p2</span> 253:2    0 852.5G  0 part   /</span>
-<span id="cb2-10"><a href="於虛擬機器安裝作業系統.html#cb2-10" aria-hidden="true" tabindex="-1"></a>  └─<span class="ex">isw_ecbbadhihd_Raid1p3</span> 253:3    0    32G  0 part   [SWAP]</span>
+<span id="cb2-4"><a href="於虛擬機器安裝作業系統.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">├─sdb2</span>                       8:18   0 852.5G  0 part</span>
+<span id="cb2-5"><a href="於虛擬機器安裝作業系統.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">├─sdb3</span>                       8:19   0    32G  0 part</span>
+<span id="cb2-6"><a href="於虛擬機器安裝作業系統.html#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">├─sdb1</span>                       8:17   0   512M  0 part</span>
+<span id="cb2-7"><a href="於虛擬機器安裝作業系統.html#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">└─isw_ecbbadhihd_Raid1</span>     253:0    0   885G  0 dmraid</span>
+<span id="cb2-8"><a href="於虛擬機器安裝作業系統.html#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="ex">├─isw_ecbbadhihd_Raid1p1</span> 253:1    0   512M  0 part   /boot/efi</span>
+<span id="cb2-9"><a href="於虛擬機器安裝作業系統.html#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="ex">├─isw_ecbbadhihd_Raid1p2</span> 253:2    0 852.5G  0 part   /</span>
+<span id="cb2-10"><a href="於虛擬機器安裝作業系統.html#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="ex">└─isw_ecbbadhihd_Raid1p3</span> 253:3    0    32G  0 part   [SWAP]</span>
 <span id="cb2-11"><a href="於虛擬機器安裝作業系統.html#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="ex">sr0</span>                         11:0    1  1024M  0 rom</span>
 <span id="cb2-12"><a href="於虛擬機器安裝作業系統.html#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="ex">sda</span>                          8:0    0 931.5G  0 disk</span>
-<span id="cb2-13"><a href="於虛擬機器安裝作業系統.html#cb2-13" aria-hidden="true" tabindex="-1"></a>├─<span class="ex">sda2</span>                       8:2    0 852.5G  0 part</span>
-<span id="cb2-14"><a href="於虛擬機器安裝作業系統.html#cb2-14" aria-hidden="true" tabindex="-1"></a>├─<span class="ex">sda3</span>                       8:3    0    32G  0 part</span>
-<span id="cb2-15"><a href="於虛擬機器安裝作業系統.html#cb2-15" aria-hidden="true" tabindex="-1"></a>├─<span class="ex">sda1</span>                       8:1    0   512M  0 part</span>
-<span id="cb2-16"><a href="於虛擬機器安裝作業系統.html#cb2-16" aria-hidden="true" tabindex="-1"></a>└─<span class="ex">isw_ecbbadhihd_Raid1</span>     253:0    0   885G  0 dmraid</span>
-<span id="cb2-17"><a href="於虛擬機器安裝作業系統.html#cb2-17" aria-hidden="true" tabindex="-1"></a>  ├─<span class="ex">isw_ecbbadhihd_Raid1p1</span> 253:1    0   512M  0 part   /boot/efi</span>
-<span id="cb2-18"><a href="於虛擬機器安裝作業系統.html#cb2-18" aria-hidden="true" tabindex="-1"></a>  ├─<span class="ex">isw_ecbbadhihd_Raid1p2</span> 253:2    0 852.5G  0 part   /</span>
-<span id="cb2-19"><a href="於虛擬機器安裝作業系統.html#cb2-19" aria-hidden="true" tabindex="-1"></a>  └─<span class="ex">isw_ecbbadhihd_Raid1p3</span> 253:3    0    32G  0 part   [SWAP]</span></code></pre></div>
+<span id="cb2-13"><a href="於虛擬機器安裝作業系統.html#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="ex">├─sda2</span>                       8:2    0 852.5G  0 part</span>
+<span id="cb2-14"><a href="於虛擬機器安裝作業系統.html#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="ex">├─sda3</span>                       8:3    0    32G  0 part</span>
+<span id="cb2-15"><a href="於虛擬機器安裝作業系統.html#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="ex">├─sda1</span>                       8:1    0   512M  0 part</span>
+<span id="cb2-16"><a href="於虛擬機器安裝作業系統.html#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="ex">└─isw_ecbbadhihd_Raid1</span>     253:0    0   885G  0 dmraid</span>
+<span id="cb2-17"><a href="於虛擬機器安裝作業系統.html#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="ex">├─isw_ecbbadhihd_Raid1p1</span> 253:1    0   512M  0 part   /boot/efi</span>
+<span id="cb2-18"><a href="於虛擬機器安裝作業系統.html#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="ex">├─isw_ecbbadhihd_Raid1p2</span> 253:2    0 852.5G  0 part   /</span>
+<span id="cb2-19"><a href="於虛擬機器安裝作業系統.html#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="ex">└─isw_ecbbadhihd_Raid1p3</span> 253:3    0    32G  0 part   [SWAP]</span></code></pre></div>
 <p><img src="figures/new-virtual-machine_1.png" title="new virtual machine" class="figure" /></p>
 <p>所以這裡也選擇跟院伺服器一樣的1000Gb做為系統硬碟，類型與版本記得設定為 Linux 與 Ubuntu 64位元 版本。完成之後點擊「建立」。</p>
 <p>這裡我會選 VMDK 格式的原因是因為，如果要轉移虛擬主機檔案時，單一個檔案會輕易地超過 4Gb，而超過此上限得檔案在複製時，如果目的地的裝置格式不是 ntfs 的話，會沒有辦法複製。為了預防這個問題，我在這邊先選擇 VMDK 作為我虛擬主機的檔案格式。</p>
@@ -515,6 +516,10 @@ gitbook.start({
 "text": null
 },
 "download": ["MCU-ASIS.epub"],
+"search": {
+"engine": "lunr",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }
