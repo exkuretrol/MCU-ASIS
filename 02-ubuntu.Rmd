@@ -396,7 +396,7 @@ sudo ufw status
 
     Status: inactive
 
-接著用 `systemctl` 打開防火牆
+接著用 `ufw enable` 打開防火牆
 
 ``` {.bash .prefixed}
 sudo ufw enable
