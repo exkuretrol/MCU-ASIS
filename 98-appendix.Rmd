@@ -1,8 +1,14 @@
 # 附錄 {.unnumbered}
 
-因為內容太多，書的目錄會變得太複雜，所以我把一些內容放到這裡。
+因為內容太多，書本篇收錄的會變得太混雜，所以我把一些內容放到這裡。
 
-## 使用 PuTTY 連線至 OpenSSH 伺服器 {.unnumbered}
+## 由 Windows 10 系統進入 BIOS {.unnumbered}
+
+## Windows Terminal {.unnumbered}
+
+## PuTTY {.unnumbered}
+
+使用 PuTTY 連線至 OpenSSH 伺服器
 
 ### 以 PuTTY 產生 key {.unnumbered}
 

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>使用 PuTTY 連線至 OpenSSH 伺服器 | MCU ASIS Ubuntu 系統安裝指南</title>
+  <title>Windows Terminal | MCU ASIS Ubuntu 系統安裝指南</title>
   <meta name="description" content="This is a book." />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="使用 PuTTY 連線至 OpenSSH 伺服器 | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta property="og:title" content="Windows Terminal | MCU ASIS Ubuntu 系統安裝指南" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="使用 PuTTY 連線至 OpenSSH 伺服器 | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta name="twitter:title" content="Windows Terminal | MCU ASIS Ubuntu 系統安裝指南" />
   
   <meta name="twitter:description" content="This is a book." />
   
@@ -24,15 +24,15 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-08-17" />
+<meta name="date" content="2021-08-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="附錄.html"/>
-<link rel="next" href="文本編輯器.html"/>
+<link rel="prev" href="由-windows-10-系統進入-bios.html"/>
+<link rel="next" href="putty.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -165,9 +165,9 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="todos.html"><a href="todos.html"><i class="fa fa-check"></i>TODOs:</a></li>
 <li class="chapter" data-level="" data-path="issues.html"><a href="issues.html"><i class="fa fa-check"></i>Issues:</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> 事前準備</a>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> 基礎建設</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="引言-1.html"><a href="引言-1.html"><i class="fa fa-check"></i><b>1.1</b> 引言</a></li>
+<li class="chapter" data-level="1.1" data-path="事前準備.html"><a href="事前準備.html"><i class="fa fa-check"></i><b>1.1</b> 事前準備</a></li>
 <li class="chapter" data-level="1.2" data-path="安裝-virtualbox.html"><a href="安裝-virtualbox.html"><i class="fa fa-check"></i><b>1.2</b> 安裝 VirtualBox</a></li>
 <li class="chapter" data-level="1.3" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html"><i class="fa fa-check"></i><b>1.3</b> 於虛擬機器安裝作業系統</a>
 <ul>
@@ -188,7 +188,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="2" data-path="ubuntu-的基本設定.html"><a href="ubuntu-的基本設定.html"><i class="fa fa-check"></i><b>2</b> Ubuntu 的基本設定</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="前言.html"><a href="前言.html"><i class="fa fa-check"></i><b>2.1</b> 前言</a></li>
+<li class="chapter" data-level="2.1" data-path="事前準備-1.html"><a href="事前準備-1.html"><i class="fa fa-check"></i><b>2.1</b> 事前準備</a></li>
 <li class="chapter" data-level="2.2" data-path="openssh.html"><a href="openssh.html"><i class="fa fa-check"></i><b>2.2</b> OpenSSH</a>
 <ul>
 <li class="chapter" data-level="2.2.1" data-path="openssh.html"><a href="openssh.html#適合各個系統的連線流程"><i class="fa fa-check"></i><b>2.2.1</b> 適合各個系統的連線流程</a>
@@ -212,19 +212,33 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="apt.html"><a href="apt.html"><i class="fa fa-check"></i><b>2.3</b> APT</a></li>
 <li class="chapter" data-level="2.4" data-path="ufw.html"><a href="ufw.html"><i class="fa fa-check"></i><b>2.4</b> UFW</a></li>
+<li class="chapter" data-level="2.5" data-path="bat-可選.html"><a href="bat-可選.html"><i class="fa fa-check"></i><b>2.5</b> Bat （可選）</a></li>
+<li class="chapter" data-level="2.6" data-path="exa-可選.html"><a href="exa-可選.html"><i class="fa fa-check"></i><b>2.6</b> exa （可選）</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="lamp.html"><a href="lamp.html"><i class="fa fa-check"></i><b>3</b> LAMP</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="事前準備-2.html"><a href="事前準備-2.html"><i class="fa fa-check"></i><b>3.1</b> 事前準備</a></li>
+<li class="chapter" data-level="3.2" data-path="step-1-安裝-apache.html"><a href="step-1-安裝-apache.html"><i class="fa fa-check"></i><b>3.2</b> Step 1 — 安裝 Apache</a></li>
+<li class="chapter" data-level="3.3" data-path="step-2-安裝-mysql.html"><a href="step-2-安裝-mysql.html"><i class="fa fa-check"></i><b>3.3</b> Step 2 — 安裝 MySQL</a></li>
+<li class="chapter" data-level="3.4" data-path="step-3-安裝-php.html"><a href="step-3-安裝-php.html"><i class="fa fa-check"></i><b>3.4</b> Step 3 — 安裝 PHP</a></li>
+<li class="chapter" data-level="3.5" data-path="step-4.html"><a href="step-4.html"><i class="fa fa-check"></i><b>3.5</b> Step 4 —</a></li>
+<li class="chapter" data-level="3.6" data-path="step-5.html"><a href="step-5.html"><i class="fa fa-check"></i><b>3.6</b> Step 5 —</a></li>
+<li class="chapter" data-level="3.7" data-path="step-6-phpmyadmin.html"><a href="step-6-phpmyadmin.html"><i class="fa fa-check"></i><b>3.7</b> Step 6 — phpMyAdmin</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="附錄.html"><a href="附錄.html"><i class="fa fa-check"></i>附錄</a>
 <ul>
-<li class="chapter" data-level="" data-path="使用-putty-連線至-openssh-伺服器.html"><a href="使用-putty-連線至-openssh-伺服器.html"><i class="fa fa-check"></i>使用 PuTTY 連線至 OpenSSH 伺服器</a>
+<li class="chapter" data-level="" data-path="由-windows-10-系統進入-bios.html"><a href="由-windows-10-系統進入-bios.html"><i class="fa fa-check"></i>由 Windows 10 系統進入 BIOS</a></li>
+<li class="chapter" data-level="" data-path="windows-terminal.html"><a href="windows-terminal.html"><i class="fa fa-check"></i>Windows Terminal</a></li>
+<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html"><i class="fa fa-check"></i>PuTTY</a>
 <ul>
-<li class="chapter" data-level="" data-path="使用-putty-連線至-openssh-伺服器.html"><a href="使用-putty-連線至-openssh-伺服器.html#以-putty-產生-key"><i class="fa fa-check"></i>以 PuTTY 產生 key</a>
+<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#以-putty-產生-key"><i class="fa fa-check"></i>以 PuTTY 產生 key</a>
 <ul>
-<li class="chapter" data-level="" data-path="使用-putty-連線至-openssh-伺服器.html"><a href="使用-putty-連線至-openssh-伺服器.html#step-1-安裝-putty"><i class="fa fa-check"></i>Step 1 — 安裝 PuTTY</a></li>
-<li class="chapter" data-level="" data-path="使用-putty-連線至-openssh-伺服器.html"><a href="使用-putty-連線至-openssh-伺服器.html#step-2-經由-puttygen-產生-ssh-key-pairs"><i class="fa fa-check"></i>Step 2 — 經由 PuTTYgen 產生 ssh key pairs</a></li>
-<li class="chapter" data-level="" data-path="使用-putty-連線至-openssh-伺服器.html"><a href="使用-putty-連線至-openssh-伺服器.html#step-3-妥善保存好產生的-key"><i class="fa fa-check"></i>Step 3 — 妥善保存好產生的 Key</a></li>
+<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#step-1-安裝-putty"><i class="fa fa-check"></i>Step 1 — 安裝 PuTTY</a></li>
+<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#step-2-經由-puttygen-產生-ssh-key-pairs"><i class="fa fa-check"></i>Step 2 — 經由 PuTTYgen 產生 ssh key pairs</a></li>
+<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#step-3-妥善保存好產生的-key"><i class="fa fa-check"></i>Step 3 — 妥善保存好產生的 Key</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="使用-putty-連線至-openssh-伺服器.html"><a href="使用-putty-連線至-openssh-伺服器.html#上傳以-putty-產生的-ssh-key-pairs"><i class="fa fa-check"></i>上傳以 PuTTY 產生的 ssh key pairs</a></li>
-<li class="chapter" data-level="" data-path="使用-putty-連線至-openssh-伺服器.html"><a href="使用-putty-連線至-openssh-伺服器.html#puttygen-產生的-key-pairs-的連線方式"><i class="fa fa-check"></i>PuTTYgen 產生的 key pairs 的連線方式:</a></li>
+<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#上傳以-putty-產生的-ssh-key-pairs"><i class="fa fa-check"></i>上傳以 PuTTY 產生的 ssh key pairs</a></li>
+<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#puttygen-產生的-key-pairs-的連線方式"><i class="fa fa-check"></i>PuTTYgen 產生的 key pairs 的連線方式:</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="文本編輯器.html"><a href="文本編輯器.html"><i class="fa fa-check"></i>文本編輯器</a>
 <ul>
@@ -254,78 +268,16 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="使用-putty-連線至-openssh-伺服器" class="section level2 unnumbered">
-<h2>使用 PuTTY 連線至 OpenSSH 伺服器</h2>
-<div id="以-putty-產生-key" class="section level3 unnumbered">
-<h3>以 PuTTY 產生 key</h3>
-<p>另一個方法不會需要你手動安裝 OpenSSH Client，不過、一樣地，要安裝PuTTY 程式。</p>
-<div id="step-1-安裝-putty" class="section level4 unnumbered">
-<h4>Step 1 — 安裝 PuTTY</h4>
-<p>到開發者的網站，然後下載適合你 Windows 的版本 (副檔名為 *.msi 的安裝程式)</p>
-<ul>
-<li><a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html" class="uri">https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html</a></li>
-</ul>
-<p>根據你的需求設定安裝程式</p>
-<p><img src="figures/putty-installer-configuration.png" class="figure" /></p>
-<p>待安裝程式安裝完成</p>
-<p><img src="figures/putty-installer-finish.png" class="figure" /></p>
-<p>安裝完成後，點選「開始」，找到 PuTTYgen開啟，或是點選「開始」，鍵入 <code>puttygen</code> 後按 Enter↩︎</p>
-</div>
-<div id="step-2-經由-puttygen-產生-ssh-key-pairs" class="section level4 unnumbered">
-<h4>Step 2 — 經由 PuTTYgen 產生 ssh key pairs</h4>
-<p>跟 OpenSSH Client 一樣地，你可以在下方的 Types 選擇你偏好的加密方式。點選「Generate」開始產生 key，此時不要傻傻地在那邊等，要在程式進度條下方空白處隨意移動你的滑鼠鼠標。</p>
-<p><img src="figures/puttygen-genkey.png" class="figure" /></p>
-<p>完成後，可以在 Comment 的輸入框註解一下這個 key 是從哪裡來的，以後擁有多個 key pairs 時才不會搞混。當然你也可以用密碼保護這個 key pairs，如果有需要在 Key passphrase 與 Confirm passphrase 輸入一模一樣的密碼。</p>
-<p><img src="figures/puttygen-genkey-finish.png" class="figure" /></p>
-</div>
-<div id="step-3-妥善保存好產生的-key" class="section level4 unnumbered">
-<h4>Step 3 — 妥善保存好產生的 Key</h4>
-<p>分別按下「Save public key」與「Save private key」找到適合的地方儲存它。</p>
-</div>
-</div>
-<div id="上傳以-putty-產生的-ssh-key-pairs" class="section level3 unnumbered">
-<h3>上傳以 PuTTY 產生的 ssh key pairs</h3>
-<p>PuTTY 產生的 public key 與 private key 格式比較特別，並不能直接把 public key 裡面的文字直接貼到遠端電腦的 <code>~/.ssh/authorized_keys</code> 檔案裡面，需要經由 PuTTYgen.exe 讀取 *.ppk 才能得到正確格式的 public key。首先把 PuTTYgen 程式打開。</p>
-<p><img src="figures/puttygen-menu.png" class="figure" /></p>
-<p>接著按「Load」把剛剛產生的 *.ppk 檔案讀取進來。會看到一行字「Public key for pasting into OpenSSH authorized_keys file」下面的可複製區域就是 public key，把它整段複製起來。</p>
-<p><img src="figures/puttygen-load-ppk.png" class="figure" /></p>
-<p>接著打開「PowerShell」或是「命令提示字元」，輸入:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb36-1"><a href="使用-putty-連線至-openssh-伺服器.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">echo</span> <span class="st">&quot;&lt;YOUR_PUBLIC_KEY&gt;&quot;</span> | ssh asis@192.<span class="fu">168</span>.<span class="fu">0</span>.<span class="fu">13</span> <span class="st">&quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;</span></span></code></pre></div>
-<ul>
-<li><p>將 <code>&lt;YOUR_PUBLIC_KEY&gt;</code> 替換成自己的 public key</p></li>
-<li><p>這裡的 <code>asis</code> 為第一章的<a href="於虛擬機器安裝作業系統.html#使用者設定">使用者設定</a>的預設使用者</p></li>
-<li><p><code>192.168.0.13</code> 為我虛擬主機的 ip 位址，查詢 ip 位址可以先手動登入虛擬主機後，用 <code>hostname -I</code> 或是 <code>ip addr show</code> 指令查詢</p></li>
-</ul>
-<p>接著按 Enter↩︎，跳出輸入密碼提示，這裡輸入預設的使用者密碼 <code>asis</code></p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb37-1"><a href="使用-putty-連線至-openssh-伺服器.html#cb37-1" aria-hidden="true" tabindex="-1"></a>asis@192.<span class="fu">168</span>.<span class="fu">0</span>.<span class="fu">13</span>&#39;s password:</span></code></pre></div>
-<p>輸入完成不會出現任何訊息是正常的，代表操作沒有問題且已經可以使用 PuTTY 連線了。</p>
-</div>
-<div id="puttygen-產生的-key-pairs-的連線方式" class="section level3 unnumbered">
-<h3>PuTTYgen 產生的 key pairs 的連線方式:</h3>
-<p>SSH 連線方式大同小異:</p>
-<ul>
-<li><p>首先點選「開始」，鍵入 <code>PuTTY</code> 打開客戶端</p></li>
-<li><p>在左邊的 「Category:」 下，選取 「Session」</p></li>
-<li><p>於 Host Name 輸入「使用者@目的地 IP」，像是「<code>asis@192.168.0.13</code>」</p>
-<div class="infobox info">
-<p>你可以點選下面的「Default Settings」後，接著按「Save」會把剛剛輸入的 IP 與 Port 儲存至「Default Settings」內，當然你也可以自己取一個新的名字。</p>
-</div></li>
-<li><p>接著展開左邊 「Category:」 下的「Connection」 ➜ 點選「SSH」 ➜ 再點選「Auth」，於最下面的「Private key file for authentication:」點選「Browse…」選取 <code>*.ppk</code> 檔案位置</p></li>
-<li><p>完成後點選「Open」連線</p></li>
-</ul>
-<p>與使用 ssh 指令連線相同，都會先提醒你目的地是否正確。確認無誤按下「Accept」</p>
-<p><img src="figures/putty-security-alert.png" class="figure" /></p>
-<p>連接成功!</p>
-<p><img src="figures/putty-connection-success.png" class="figure" /></p>
-</div>
+<div id="windows-terminal" class="section level2 unnumbered">
+<h2>Windows Terminal</h2>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="附錄.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="文本編輯器.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="由-windows-10-系統進入-bios.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="putty.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

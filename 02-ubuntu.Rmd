@@ -4,7 +4,7 @@
 
 這章主重心主要會在從本機存取虛擬機器與虛擬機器的基本設定。
 
-## 前言
+## 事前準備
 
 <!--# TODO: appendix -- install Windows Terminal -->
 
@@ -18,7 +18,7 @@
 
 #### MacOS 或 其他 Unix-like 系統
 
-如果你是 Linux 或是 MacOS 系統，通常都有內建 OpenSSH 客戶端，可以直接跳至 [以 OpenSSH Client 產生 key](#以-openssh-client-產生-key) 的環節，Windows 與 Linux 使用 OpenSSH Utility 產生 ssh key pairs 的流程是一樣的。
+如果你是 Linux 或是 MacOS 系統，通常都有內建 OpenSSH 客戶端，可以直接跳至 以 [Step 2 --- 產生 ssh key pairs] 的章節，Windows 與 Linux 使用 OpenSSH Utility 產生 ssh key pairs 的流程是一樣的。
 
 #### Windows 系統
 
@@ -52,10 +52,14 @@
 
     -   安裝過程所需的時間會根據每個人的經驗有所差異，需要從頭開始設定 Linux。
 
-在 Windows 要產生 ssh key pairs 有兩種辦法，第一種是經由內建的 OpenSSH Client 產生，另一種是經由 PuTTY 所附的工具產生 (可以參考附錄的[使用 PuTTY 連線至 OpenSSH 伺服器])。
+在 Windows 要產生 ssh key pairs 有兩種辦法，第一種是經由內建的 OpenSSH Client 產生，另一種是經由 PuTTY 所附的工具產生 (可以參考附錄的[使用 PuTTY 連線至 OpenSSH 伺服器][PuTTY])。
 
 ::: {.infobox .info}
-Linux 的使用者可以使用套件管理程式安裝 `openssh-server`。
+Linux 的使用者可以使用套件管理程式安裝 `openssh-server`，如果系統是則指令為：
+
+``` {.bash .prefixed}
+sudo apt install openssh-server
+```
 :::
 
 ### Step 1 --- 安裝 OpenSSH Client {.unnumbered}
@@ -430,3 +434,11 @@ sudo ufw status
     --                         ------      ----
     60000                      ALLOW       Anywhere
     60000 (v6)                 ALLOW       Anywhere (v6)
+
+## Bat （可選）
+
+另一個版本的 cat ，還有與 Git 整合。
+
+## exa （可選）
+
+ls 更好的版本。

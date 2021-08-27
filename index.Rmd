@@ -36,16 +36,19 @@ knitr::write_bib(c(
 -   需要將過程記錄下來(技術手冊?) + 讓人看得懂
 -   ✓ Ubuntu 安裝
 -   ✓ Ubuntu 基本設定
--   LAMP
+-   LAMP + phpMyAdmin
 -   RStudio + jupyter
+-   附錄
 -   備份 & 還原
 
 ## Issues: {.unnumbered}
 
 -   ~~\_\_\_\_\_\_ 不能出現~~
 
--   ~~2.2 OpenSSH 太過複雜；Add prefix with css.~~
+-   2.2 OpenSSH 太過複雜
 
-    -   `PS`: -- PowerShell
+    -   ✓ `PS`: PowerShell
 
-    -   `$`: -- shell
+    -   ✓ `$`: shell
+
+    -   `OUTPUT`: shell output
