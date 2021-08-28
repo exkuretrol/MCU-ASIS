@@ -45,9 +45,11 @@ pre {
   border-bottom: 1px solid;
 }
 
+/*
 #cb2-7, #cb2-16 {
   background-color: var(--khaki);
 }
+*/
 
 pre.prefixed::before {
    content: "$ ";
@@ -55,4 +57,10 @@ pre.prefixed::before {
 
 pre.prefixed_powershell::before {
    content: "PS ";
+}
+
+pre.console_output::before {
+	content: "OUTPUT\A";
+	color: lightgray;
+	font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
 }

@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-08-27" />
+<meta name="date" content="2021-08-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -305,14 +305,14 @@ div.csl-indent {
 <p>接著按「Load」把剛剛產生的 *.ppk 檔案讀取進來。會看到一行字「Public key for pasting into OpenSSH authorized_keys file」下面的可複製區域就是 public key，把它整段複製起來。</p>
 <p><img src="figures/puttygen-load-ppk.png" class="figure" /></p>
 <p>接著打開「PowerShell」或是「命令提示字元」，輸入:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb37-1"><a href="putty.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">echo</span> <span class="st">&quot;&lt;YOUR_PUBLIC_KEY&gt;&quot;</span> | ssh asis@192.<span class="fu">168</span>.<span class="fu">0</span>.<span class="fu">13</span> <span class="st">&quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb38-1"><a href="putty.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">echo</span> <span class="st">&quot;&lt;YOUR_PUBLIC_KEY&gt;&quot;</span> | ssh asis@192.<span class="fu">168</span>.<span class="fu">0</span>.<span class="fu">13</span> <span class="st">&quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;</span></span></code></pre></div>
 <ul>
 <li><p>將 <code>&lt;YOUR_PUBLIC_KEY&gt;</code> 替換成自己的 public key</p></li>
 <li><p>這裡的 <code>asis</code> 為第一章的<a href="於虛擬機器安裝作業系統.html#使用者設定">使用者設定</a>的預設使用者</p></li>
 <li><p><code>192.168.0.13</code> 為我虛擬主機的 ip 位址，查詢 ip 位址可以先手動登入虛擬主機後，用 <code>hostname -I</code> 或是 <code>ip addr show</code> 指令查詢</p></li>
 </ul>
 <p>接著按 Enter↩︎，跳出輸入密碼提示，這裡輸入預設的使用者密碼 <code>asis</code></p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb38-1"><a href="putty.html#cb38-1" aria-hidden="true" tabindex="-1"></a>asis@192.<span class="fu">168</span>.<span class="fu">0</span>.<span class="fu">13</span>&#39;s password:</span></code></pre></div>
+<pre class="console_output"><code>asis@192.168.0.13&#39;s password:</code></pre>
 <p>輸入完成不會出現任何訊息是正常的，代表操作沒有問題且已經可以使用 PuTTY 連線了。</p>
 </div>
 <div id="puttygen-產生的-key-pairs-的連線方式" class="section level3 unnumbered">

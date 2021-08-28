@@ -6,7 +6,11 @@
 
 ## 事前準備
 
-<!--# TODO: appendix -- install Windows Terminal -->
+-   `PS`: powershell 指令前綴
+
+-   `$`: linux 指令前綴
+
+-   `OUTPUT`: 標準輸出或標準錯誤輸出
 
 ## OpenSSH
 
@@ -82,13 +86,15 @@ Windows 10 已經有內建在 Windows 的「應用程式與功能」內，預設
 ssh
 ```
 
-    usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]
-               [-b bind_address] [-c cipher_spec] [-D [bind_address:]port]
-               [-E log_file] [-e escape_char] [-F configfile] [-I pkcs11]
-               [-i identity_file] [-J [user@]host[:port]] [-L address]
-               [-l login_name] [-m mac_spec] [-O ctl_cmd] [-o option] [-p port]
-               [-Q query_option] [-R address] [-S ctl_path] [-W host:port]
-               [-w local_tun[:remote_tun]] destination [command]
+``` {.console_output}
+usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]
+           [-b bind_address] [-c cipher_spec] [-D [bind_address:]port]
+           [-E log_file] [-e escape_char] [-F configfile] [-I pkcs11]
+           [-i identity_file] [-J [user@]host[:port]] [-L address]
+           [-l login_name] [-m mac_spec] [-O ctl_cmd] [-o option] [-p port]
+           [-Q query_option] [-R address] [-S ctl_path] [-W host:port]
+           [-w local_tun[:remote_tun]] destination [command]
+```
 
 ### Step 2 --- 產生 ssh key pairs {.unnumbered}
 
@@ -100,14 +106,14 @@ ssh-keygen
 
 Windows 的用戶預設會把 key pair 儲存在 `C:\Users\<USERNAME>\.ssh\` 的位置，而 Linux 的用戶會儲存在 `~/.ssh/` 的位置。
 
-``` {.powershell}
+``` {.console_output}
 Generating public/private rsa key pair.
 Enter file in which to save the key (C:\Users\<USERNAME>/.ssh/id_rsa):
 ```
 
 這裡是詢問你要不要把產生的 ssh key 重新命名，一般不會動到它的名字，按 Enter↩，接續下一步。
 
-``` {.powershell}
+``` {.console_output}
 Created directory 'C:\Users\<USERNAME>/.ssh'.
 Enter passphrase (empty for no passphrase):
 Enter same passphrase again:
@@ -115,7 +121,7 @@ Enter same passphrase again:
 
 一旦你設定了 key pairs 的密碼，你每次連線時，都要再輸入一次密碼才能連線。如果不想那麼麻煩的話，可以按 Enter↩ 保持留空。
 
-``` {.powershell}
+``` {.console_output}
 Your identification has been saved in C:\Users\<USERNAME>/.ssh/id_rsa.
 Your public key has been saved in C:\Users\<USERNAME>/.ssh/id_rsa.pub.
 The key fingerprint is:
@@ -162,7 +168,7 @@ ssh-copy-id -i ~/.ssh/id_ed25519.pub -p 22 asis@192.168.0.13
 
 完成後會提示你已經可以使用 ssh 連線
 
-``` {.bash}
+``` {.console_output}
 /usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/kuaz/.ssh/id_ed25519.pub"
 /usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
 /usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
@@ -193,7 +199,7 @@ cat $env:USERPROFILE\.ssh\id_rsa.pub | ssh asis@192.168.0.13 "cat >> ~/.ssh/auth
 
 接著按 Enter↩，跳出輸入密碼提示，這裡輸入預設的使用者密碼 `asis`
 
-``` {.powershell}
+``` {.console_output}
 asis@192.168.0.13's password:
 ```
 
@@ -231,7 +237,7 @@ ssh asis@192.168.0.13
 
 這邊打 `yes` 即可，確認連接目的地沒有錯之後，會把 fingerprint 寫入 `~/.ssh/known_hosts` 中，以後不再詢問。
 
-``` {.texinfo}
+``` {.console_output}
 The authenticity of host '192.168.0.13 (192.168.0.13)' can't be established.
 ECDSA key fingerprint is SHA256:/HoocrLXe63zycdlmkh/+U3RuUfkawNq/xA0gTJmqmM.
 Are you sure you want to continue connecting (yes/no/[fingerprint])?
@@ -318,22 +324,24 @@ sudo sshd -t
 sudo systemctl restart sshd
 ```
 
-    ● ssh.service - OpenBSD Secure Shell server
-         Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)
-         Active: active (running) since Sun 2021-08-15 16:08:55 UTC; 19h ago
-           Docs: man:sshd(8)
-                 man:sshd_config(5)
-        Process: 850 ExecStartPre=/usr/sbin/sshd -t (code=exited, status=0/SUCCESS)
-       Main PID: 893 (sshd)
-          Tasks: 1 (limit: 4617)
-         Memory: 5.4M
-         CGroup: /system.slice/ssh.service
-                 └─893 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+``` {.console_output}
+● ssh.service - OpenBSD Secure Shell server
+     Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sun 2021-08-15 16:08:55 UTC; 19h ago
+       Docs: man:sshd(8)
+             man:sshd_config(5)
+    Process: 850 ExecStartPre=/usr/sbin/sshd -t (code=exited, status=0/SUCCESS)
+   Main PID: 893 (sshd)
+      Tasks: 1 (limit: 4617)
+     Memory: 5.4M
+     CGroup: /system.slice/ssh.service
+             └─893 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
 
-    Aug 15 16:08:54 asis01 systemd[1]: Starting OpenBSD Secure Shell server...
-    Aug 15 16:08:55 asis01 sshd[893]: Server listening on 0.0.0.0 port 60000.
-    Aug 15 16:08:55 asis01 sshd[893]: Server listening on :: port 60000.
-    Aug 15 16:08:55 asis01 systemd[1]: Started OpenBSD Secure Shell server.
+Aug 15 16:08:54 asis01 systemd[1]: Starting OpenBSD Secure Shell server...
+Aug 15 16:08:55 asis01 sshd[893]: Server listening on 0.0.0.0 port 60000.
+Aug 15 16:08:55 asis01 sshd[893]: Server listening on :: port 60000.
+Aug 15 16:08:55 asis01 systemd[1]: Started OpenBSD Secure Shell server.
+```
 
 用指令 `exit` 斷開連線，再重新測試 ssh 遠端連線至伺服器，
 
@@ -341,32 +349,34 @@ sudo systemctl restart sshd
 ssh -p 60000 asis@192.168.0.13
 ```
 
-    Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-81-generic x86_64)
+``` {.console_output}
+Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-81-generic x86_64)
 
-     * Documentation:  https://help.ubuntu.com
-     * Management:     https://landscape.canonical.com
-     * Support:        https://ubuntu.com/advantage
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
 
-      System information as of Mon 16 Aug 2021 12:32:20 PM UTC
+  System information as of Mon 16 Aug 2021 12:32:20 PM UTC
 
-      System load:             0.0
-      Usage of /:              0.7% of 974.32GB
-      Memory usage:            5%
-      Swap usage:              0%
-      Processes:               124
-      Users logged in:         0
-      IPv4 address for enp0s3: 192.168.0.13
-      IPv6 address for enp0s3: fd00:1cab:c0bb:acc2:a00:27ff:fed3:8136
+  System load:             0.0
+  Usage of /:              0.7% of 974.32GB
+  Memory usage:            5%
+  Swap usage:              0%
+  Processes:               124
+  Users logged in:         0
+  IPv4 address for enp0s3: 192.168.0.13
+  IPv6 address for enp0s3: fd00:1cab:c0bb:acc2:a00:27ff:fed3:8136
 
-     * Super-optimized for small spaces - read how we shrank the memory
-       footprint of MicroK8s to make it the smallest full K8s around.
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
 
-       https://ubuntu.com/blog/microk8s-memory-optimisation
+   https://ubuntu.com/blog/microk8s-memory-optimisation
 
-    0 updates can be applied immediately.
+0 updates can be applied immediately.
 
 
-    Last login: Mon Aug 16 12:31:35 2021 from 192.168.0.11
+Last login: Mon Aug 16 12:31:35 2021 from 192.168.0.11
+```
 
 連線成功\~
 
@@ -398,7 +408,9 @@ sudo ufw status
 
 看來預設的 UFW 是關閉的
 
-    Status: inactive
+``` {.console_output}
+Status: inactive
+```
 
 接著用 `ufw enable` 打開防火牆
 
@@ -412,7 +424,9 @@ sudo ufw enable
 sudo ufw status
 ```
 
-    Status: active
+``` {.console_output}
+Status: active
+```
 
 允許埠號 `60000` 從任何地方連入
 
@@ -428,12 +442,14 @@ sudo ufw status
 
 目前只有兩條規則，分別是 從任何地方連入埠號 60000 與 ipv6 從任何地方連入埠號 60000
 
-    Status: active
+``` {.console_output}
+Status: active
 
-    To                         Action      From
-    --                         ------      ----
-    60000                      ALLOW       Anywhere
-    60000 (v6)                 ALLOW       Anywhere (v6)
+To                         Action      From
+--                         ------      ----
+60000                      ALLOW       Anywhere
+60000 (v6)                 ALLOW       Anywhere (v6)
+```
 
 ## Bat （可選）
 

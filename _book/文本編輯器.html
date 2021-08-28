@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-08-27" />
+<meta name="date" content="2021-08-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -279,19 +279,19 @@ div.csl-indent {
 <div id="更改預設的文本編輯器" class="section level3 unnumbered">
 <h3>更改預設的文本編輯器</h3>
 <p>這個指令可以變更系統編輯文件所用的程式</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="文本編輯器.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> update-alternatives <span class="at">--config</span> editor</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="文本編輯器.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> update-alternatives <span class="at">--config</span> editor</span></code></pre></div>
 <p>按了 Enter↩︎ 之後，會出現現在可用的編輯器，輸入對應的編號即可變更。有標 <code>*</code> 號的編輯器為目前設定的預設編輯器。</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="文本編輯器.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">There</span> are 4 choices for the alternative editor <span class="er">(</span><span class="ex">providing</span> /usr/bin/editor<span class="kw">)</span><span class="bu">.</span></span>
-<span id="cb40-2"><a href="文本編輯器.html#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-3"><a href="文本編輯器.html#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">Selection</span>    Path                Priority   Status</span>
-<span id="cb40-4"><a href="文本編輯器.html#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="ex">------------------------------------------------------------</span></span>
-<span id="cb40-5"><a href="文本編輯器.html#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">0</span>            /bin/nano            40        auto mode</span>
-<span id="cb40-6"><a href="文本編輯器.html#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">1</span>            /bin/ed             <span class="at">-100</span>       manual mode</span>
-<span id="cb40-7"><a href="文本編輯器.html#cb40-7" aria-hidden="true" tabindex="-1"></a>  <span class="ex">2</span>            /bin/nano            40        manual mode</span>
-<span id="cb40-8"><a href="文本編輯器.html#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="ex">*</span> 3            /usr/bin/vim.basic   30        manual mode</span>
-<span id="cb40-9"><a href="文本編輯器.html#cb40-9" aria-hidden="true" tabindex="-1"></a>  <span class="ex">4</span>            /usr/bin/vim.tiny    15        manual mode</span>
-<span id="cb40-10"><a href="文本編輯器.html#cb40-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-11"><a href="文本編輯器.html#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Press</span> <span class="op">&lt;</span>enter<span class="op">&gt;</span> to keep the current choice[<span class="pp">*</span>], or type selection number: 3</span></code></pre></div>
+<pre class="console_output"><code>There are 4 choices for the alternative editor (providing /usr/bin/editor).
+
+  Selection    Path                Priority   Status
+------------------------------------------------------------
+  0            /bin/nano            40        auto mode
+  1            /bin/ed             -100       manual mode
+  2            /bin/nano            40        manual mode
+* 3            /usr/bin/vim.basic   30        manual mode
+  4            /usr/bin/vim.tiny    15        manual mode
+
+Press &lt;enter&gt; to keep the current choice[*], or type selection number: 3</code></pre>
 
 </div>
 </div>

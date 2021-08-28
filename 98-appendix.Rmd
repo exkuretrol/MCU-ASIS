@@ -56,7 +56,7 @@ PuTTY 產生的 public key 與 private key 格式比較特別，並不能直接�
 
 接著打開「PowerShell」或是「命令提示字元」，輸入:
 
-``` {.powershell}
+``` {.powershell .prefixed_powershell}
 echo "<YOUR_PUBLIC_KEY>" | ssh asis@192.168.0.13 "cat >> ~/.ssh/authorized_keys"
 ```
 
@@ -68,7 +68,7 @@ echo "<YOUR_PUBLIC_KEY>" | ssh asis@192.168.0.13 "cat >> ~/.ssh/authorized_keys"
 
 接著按 Enter↩，跳出輸入密碼提示，這裡輸入預設的使用者密碼 `asis`
 
-``` {.powershell}
+``` {.console_output}
 asis@192.168.0.13's password:
 ```
 
@@ -116,7 +116,7 @@ sudo update-alternatives --config editor
 
 按了 Enter↩ 之後，會出現現在可用的編輯器，輸入對應的編號即可變更。有標 `*` 號的編輯器為目前設定的預設編輯器。
 
-``` {.bash}
+``` {.console_output}
 There are 4 choices for the alternative editor (providing /usr/bin/editor).
 
   Selection    Path                Priority   Status

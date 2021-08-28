@@ -50,8 +50,11 @@ knitr::include_graphics("./figures/virtualbox-menu.png", dpi = NA)
 
 從這張圖可以看到院伺服器的磁碟配置是由兩個 1Tb 的硬碟組成，且用[Raid-1](http://linux.vbird.org/linux_basic/0420quota.php#raid1) (映射模式) 將伺服器同時映射備份至另一個硬碟。
 
-``` {.bash}
-$ lsblk
+``` {.bash .prefixed}
+lsblk
+```
+
+``` {.console_output}
 NAME                       MAJ:MIN RM   SIZE RO TYPE   MOUNTPOINT
 sdb                          8:16   0 931.5G  0 disk
 ├─sdb2                       8:18   0 852.5G  0 part
