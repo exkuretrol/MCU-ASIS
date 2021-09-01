@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.4 Step 3 — 安裝 PHP | MCU ASIS Ubuntu 系統安裝指南</title>
+  <title>3.3 MySQL | MCU ASIS Ubuntu 系統安裝指南</title>
   <meta name="description" content="This is a book." />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.4 Step 3 — 安裝 PHP | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta property="og:title" content="3.3 MySQL | MCU ASIS Ubuntu 系統安裝指南" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.4 Step 3 — 安裝 PHP | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta name="twitter:title" content="3.3 MySQL | MCU ASIS Ubuntu 系統安裝指南" />
   
   <meta name="twitter:description" content="This is a book." />
   
@@ -24,15 +24,15 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-08-29" />
+<meta name="date" content="2021-09-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="step-2-安裝-mysql.html"/>
-<link rel="next" href="step-4.html"/>
+<link rel="prev" href="apache.html"/>
+<link rel="next" href="php.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -218,12 +218,14 @@ div.csl-indent {
 <li class="chapter" data-level="3" data-path="lamp.html"><a href="lamp.html"><i class="fa fa-check"></i><b>3</b> LAMP</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="事前準備-2.html"><a href="事前準備-2.html"><i class="fa fa-check"></i><b>3.1</b> 事前準備</a></li>
-<li class="chapter" data-level="3.2" data-path="step-1-安裝-apache.html"><a href="step-1-安裝-apache.html"><i class="fa fa-check"></i><b>3.2</b> Step 1 — 安裝 Apache</a></li>
-<li class="chapter" data-level="3.3" data-path="step-2-安裝-mysql.html"><a href="step-2-安裝-mysql.html"><i class="fa fa-check"></i><b>3.3</b> Step 2 — 安裝 MySQL</a></li>
-<li class="chapter" data-level="3.4" data-path="step-3-安裝-php.html"><a href="step-3-安裝-php.html"><i class="fa fa-check"></i><b>3.4</b> Step 3 — 安裝 PHP</a></li>
-<li class="chapter" data-level="3.5" data-path="step-4.html"><a href="step-4.html"><i class="fa fa-check"></i><b>3.5</b> Step 4 —</a></li>
-<li class="chapter" data-level="3.6" data-path="step-5.html"><a href="step-5.html"><i class="fa fa-check"></i><b>3.6</b> Step 5 —</a></li>
-<li class="chapter" data-level="3.7" data-path="step-6-phpmyadmin.html"><a href="step-6-phpmyadmin.html"><i class="fa fa-check"></i><b>3.7</b> Step 6 — phpMyAdmin</a></li>
+<li class="chapter" data-level="3.2" data-path="apache.html"><a href="apache.html"><i class="fa fa-check"></i><b>3.2</b> Apache</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="apache.html"><a href="apache.html#step-1-安裝-apache"><i class="fa fa-check"></i><b>3.2.1</b> Step 1 — 安裝 Apache</a></li>
+<li class="chapter" data-level="3.2.2" data-path="apache.html"><a href="apache.html#step-2-調整防火牆-ufw-設定"><i class="fa fa-check"></i><b>3.2.2</b> Step 2 — 調整防火牆 ufw 設定</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="mysql.html"><a href="mysql.html"><i class="fa fa-check"></i><b>3.3</b> MySQL</a></li>
+<li class="chapter" data-level="3.4" data-path="php.html"><a href="php.html"><i class="fa fa-check"></i><b>3.4</b> PHP</a></li>
+<li class="chapter" data-level="3.5" data-path="step-6-phpmyadmin.html"><a href="step-6-phpmyadmin.html"><i class="fa fa-check"></i><b>3.5</b> Step 6 — phpMyAdmin</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="附錄.html"><a href="附錄.html"><i class="fa fa-check"></i>附錄</a>
 <ul>
@@ -268,16 +270,72 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="step-3-安裝-php" class="section level2" number="3.4">
-<h2><span class="header-section-number">3.4</span> Step 3 — 安裝 PHP</h2>
+<div id="mysql" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> MySQL</h2>
+<div class="sourceCode" id="cb55"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb55-1"><a href="mysql.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install mysql-server <span class="at">-y</span></span></code></pre></div>
+<!--# https://dev.mysql.com/doc/refman/8.0/en/mysql-secure-installation.html -->
+<div class="sourceCode" id="cb56"><pre class="sourceCode bash orefixed"><code class="sourceCode bash"><span id="cb56-1"><a href="mysql.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mysql_secure_installation</span></code></pre></div>
+<pre class="console_output"><code>Securing the MySQL server deployment.
+
+Connecting to MySQL using a blank password.
+
+VALIDATE PASSWORD COMPONENT can be used to test passwords
+and improve security. It checks the strength of password
+and allows the users to set only those passwords which are
+secure enough. Would you like to setup VALIDATE PASSWORD component?
+
+Press y|Y for Yes, any other key for No: </code></pre>
+<pre class="console_output"><code>Securing the MySQL server deployment.
+
+Connecting to MySQL using a blank password.
+The &#39;validate_password&#39; component is installed on the server.
+The subsequent steps will run with the existing configuration
+of the component.
+Please set the password for root here.
+
+New password: </code></pre>
+<pre class="console_output"><code>Re-enter new password: 
+
+Estimated strength of the password: 100 
+Do you wish to continue with the password provided?(Press y|Y for Yes, any other key for No) : Y</code></pre>
+<pre class="console_output"><code>By default, a MySQL installation has an anonymous user,
+allowing anyone to log into MySQL without having to have
+a user account created for them. This is intended only for
+testing, and to make the installation go a bit smoother.
+You should remove them before moving into a production
+environment.
+
+Remove anonymous users? (Press y|Y for Yes, any other key for No) : Y</code></pre>
+<pre class="console_output"><code>Normally, root should only be allowed to connect from
+&#39;localhost&#39;. This ensures that someone cannot guess at
+the root password from the network.
+
+Disallow root login remotely? (Press y|Y for Yes, any other key for No) : Y</code></pre>
+<pre class="console_output"><code> - Dropping test database...
+Success.
+
+ - Removing privileges on test database...
+Success.
+
+Reloading the privilege tables will ensure that all changes
+made so far will take effect immediately.
+
+Reload privilege tables now? (Press y|Y for Yes, any other key for No) : Y
+Success.
+
+All done! </code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb63-1"><a href="mysql.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mysql</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode sqlmysql mysql"><code class="sourceCode sqlmysql"><span id="cb64-1"><a href="mysql.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="kw">show</span> variables <span class="kw">like</span> <span class="st">&#39;validate_password%&#39;</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode sqlmysql"><code class="sourceCode sqlmysql"><span id="cb65-1"><a href="mysql.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="kw">alter</span> <span class="fu">user</span> <span class="st">&#39;root&#39;</span>@<span class="st">&#39;localhost&#39;</span> identified <span class="kw">with</span> caching_sha2_password <span class="kw">by</span> <span class="st">&#39;&lt;你的密碼&gt;&#39;</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode sqlmysql"><code class="sourceCode sqlmysql"><span id="cb66-1"><a href="mysql.html#cb66-1" aria-hidden="true" tabindex="-1"></a>flush <span class="kw">privileges</span>;</span></code></pre></div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="step-2-安裝-mysql.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="step-4.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="apache.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="php.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

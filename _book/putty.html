@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-08-29" />
+<meta name="date" content="2021-09-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -218,12 +218,14 @@ div.csl-indent {
 <li class="chapter" data-level="3" data-path="lamp.html"><a href="lamp.html"><i class="fa fa-check"></i><b>3</b> LAMP</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="事前準備-2.html"><a href="事前準備-2.html"><i class="fa fa-check"></i><b>3.1</b> 事前準備</a></li>
-<li class="chapter" data-level="3.2" data-path="step-1-安裝-apache.html"><a href="step-1-安裝-apache.html"><i class="fa fa-check"></i><b>3.2</b> Step 1 — 安裝 Apache</a></li>
-<li class="chapter" data-level="3.3" data-path="step-2-安裝-mysql.html"><a href="step-2-安裝-mysql.html"><i class="fa fa-check"></i><b>3.3</b> Step 2 — 安裝 MySQL</a></li>
-<li class="chapter" data-level="3.4" data-path="step-3-安裝-php.html"><a href="step-3-安裝-php.html"><i class="fa fa-check"></i><b>3.4</b> Step 3 — 安裝 PHP</a></li>
-<li class="chapter" data-level="3.5" data-path="step-4.html"><a href="step-4.html"><i class="fa fa-check"></i><b>3.5</b> Step 4 —</a></li>
-<li class="chapter" data-level="3.6" data-path="step-5.html"><a href="step-5.html"><i class="fa fa-check"></i><b>3.6</b> Step 5 —</a></li>
-<li class="chapter" data-level="3.7" data-path="step-6-phpmyadmin.html"><a href="step-6-phpmyadmin.html"><i class="fa fa-check"></i><b>3.7</b> Step 6 — phpMyAdmin</a></li>
+<li class="chapter" data-level="3.2" data-path="apache.html"><a href="apache.html"><i class="fa fa-check"></i><b>3.2</b> Apache</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="apache.html"><a href="apache.html#step-1-安裝-apache"><i class="fa fa-check"></i><b>3.2.1</b> Step 1 — 安裝 Apache</a></li>
+<li class="chapter" data-level="3.2.2" data-path="apache.html"><a href="apache.html#step-2-調整防火牆-ufw-設定"><i class="fa fa-check"></i><b>3.2.2</b> Step 2 — 調整防火牆 ufw 設定</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="mysql.html"><a href="mysql.html"><i class="fa fa-check"></i><b>3.3</b> MySQL</a></li>
+<li class="chapter" data-level="3.4" data-path="php.html"><a href="php.html"><i class="fa fa-check"></i><b>3.4</b> PHP</a></li>
+<li class="chapter" data-level="3.5" data-path="step-6-phpmyadmin.html"><a href="step-6-phpmyadmin.html"><i class="fa fa-check"></i><b>3.5</b> Step 6 — phpMyAdmin</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="附錄.html"><a href="附錄.html"><i class="fa fa-check"></i>附錄</a>
 <ul>
@@ -305,7 +307,7 @@ div.csl-indent {
 <p>接著按「Load」把剛剛產生的 *.ppk 檔案讀取進來。會看到一行字「Public key for pasting into OpenSSH authorized_keys file」下面的可複製區域就是 public key，把它整段複製起來。</p>
 <p><img src="figures/puttygen-load-ppk.png" class="figure" /></p>
 <p>接著打開「PowerShell」或是「命令提示字元」，輸入:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb38-1"><a href="putty.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">echo</span> <span class="st">&quot;&lt;YOUR_PUBLIC_KEY&gt;&quot;</span> | ssh asis@192.<span class="fu">168</span>.<span class="fu">0</span>.<span class="fu">13</span> <span class="st">&quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb67-1"><a href="putty.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">echo</span> <span class="st">&quot;&lt;YOUR_PUBLIC_KEY&gt;&quot;</span> | ssh asis@192.<span class="fu">168</span>.<span class="fu">0</span>.<span class="fu">13</span> <span class="st">&quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;</span></span></code></pre></div>
 <ul>
 <li><p>將 <code>&lt;YOUR_PUBLIC_KEY&gt;</code> 替換成自己的 public key</p></li>
 <li><p>這裡的 <code>asis</code> 為第一章的<a href="於虛擬機器安裝作業系統.html#使用者設定">使用者設定</a>的預設使用者</p></li>

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.6 Step 5 — | MCU ASIS Ubuntu 系統安裝指南</title>
+  <title>3.2 Apache | MCU ASIS Ubuntu 系統安裝指南</title>
   <meta name="description" content="This is a book." />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.6 Step 5 — | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta property="og:title" content="3.2 Apache | MCU ASIS Ubuntu 系統安裝指南" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.6 Step 5 — | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta name="twitter:title" content="3.2 Apache | MCU ASIS Ubuntu 系統安裝指南" />
   
   <meta name="twitter:description" content="This is a book." />
   
@@ -24,15 +24,15 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-08-29" />
+<meta name="date" content="2021-09-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="step-4.html"/>
-<link rel="next" href="step-6-phpmyadmin.html"/>
+<link rel="prev" href="事前準備-2.html"/>
+<link rel="next" href="mysql.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -218,12 +218,14 @@ div.csl-indent {
 <li class="chapter" data-level="3" data-path="lamp.html"><a href="lamp.html"><i class="fa fa-check"></i><b>3</b> LAMP</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="事前準備-2.html"><a href="事前準備-2.html"><i class="fa fa-check"></i><b>3.1</b> 事前準備</a></li>
-<li class="chapter" data-level="3.2" data-path="step-1-安裝-apache.html"><a href="step-1-安裝-apache.html"><i class="fa fa-check"></i><b>3.2</b> Step 1 — 安裝 Apache</a></li>
-<li class="chapter" data-level="3.3" data-path="step-2-安裝-mysql.html"><a href="step-2-安裝-mysql.html"><i class="fa fa-check"></i><b>3.3</b> Step 2 — 安裝 MySQL</a></li>
-<li class="chapter" data-level="3.4" data-path="step-3-安裝-php.html"><a href="step-3-安裝-php.html"><i class="fa fa-check"></i><b>3.4</b> Step 3 — 安裝 PHP</a></li>
-<li class="chapter" data-level="3.5" data-path="step-4.html"><a href="step-4.html"><i class="fa fa-check"></i><b>3.5</b> Step 4 —</a></li>
-<li class="chapter" data-level="3.6" data-path="step-5.html"><a href="step-5.html"><i class="fa fa-check"></i><b>3.6</b> Step 5 —</a></li>
-<li class="chapter" data-level="3.7" data-path="step-6-phpmyadmin.html"><a href="step-6-phpmyadmin.html"><i class="fa fa-check"></i><b>3.7</b> Step 6 — phpMyAdmin</a></li>
+<li class="chapter" data-level="3.2" data-path="apache.html"><a href="apache.html"><i class="fa fa-check"></i><b>3.2</b> Apache</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="apache.html"><a href="apache.html#step-1-安裝-apache"><i class="fa fa-check"></i><b>3.2.1</b> Step 1 — 安裝 Apache</a></li>
+<li class="chapter" data-level="3.2.2" data-path="apache.html"><a href="apache.html#step-2-調整防火牆-ufw-設定"><i class="fa fa-check"></i><b>3.2.2</b> Step 2 — 調整防火牆 ufw 設定</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="mysql.html"><a href="mysql.html"><i class="fa fa-check"></i><b>3.3</b> MySQL</a></li>
+<li class="chapter" data-level="3.4" data-path="php.html"><a href="php.html"><i class="fa fa-check"></i><b>3.4</b> PHP</a></li>
+<li class="chapter" data-level="3.5" data-path="step-6-phpmyadmin.html"><a href="step-6-phpmyadmin.html"><i class="fa fa-check"></i><b>3.5</b> Step 6 — phpMyAdmin</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="附錄.html"><a href="附錄.html"><i class="fa fa-check"></i>附錄</a>
 <ul>
@@ -268,16 +270,111 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="step-5" class="section level2" number="3.6">
-<h2><span class="header-section-number">3.6</span> Step 5 —</h2>
+<div id="apache" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Apache</h2>
+<div id="step-1-安裝-apache" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Step 1 — 安裝 Apache</h3>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb38-1"><a href="apache.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb39-1"><a href="apache.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info apache2</span></code></pre></div>
+<pre class="console_output"><code>Package: apache2
+Version: 2.4.41-4ubuntu3.4
+Priority: optional
+Section: web
+Origin: Ubuntu
+Maintainer: Ubuntu Developers &lt;ubuntu-devel-discuss@lists.ubuntu.com&gt;
+Original-Maintainer: Debian Apache Maintainers &lt;debian-apache@lists.debian.org&gt;
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 542 kB
+Provides: httpd, httpd-cgi
+Pre-Depends: dpkg (&gt;= 1.17.14)
+Depends: apache2-bin (= 2.4.41-4ubuntu3.4), apache2-data (= 2.4.41-4ubuntu3.4), apache2-utils (= 2.4.41-4ubuntu3.4), lsb-base, mime-support, perl:any, procps
+Recommends: ssl-cert
+Suggests: apache2-doc, apache2-suexec-pristine | apache2-suexec-custom, www-browser, ufw
+Conflicts: apache2.2-bin, apache2.2-common
+Breaks: libapache2-mod-proxy-uwsgi (&lt;&lt; 2.4.33)
+Replaces: apache2.2-bin, apache2.2-common, libapache2-mod-proxy-uwsgi (&lt;&lt; 2.4.33)
+Homepage: https://httpd.apache.org/
+Task: lamp-server
+Download-Size: 95.5 kB
+APT-Sources: http://tw.archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages
+Description: Apache HTTP Server
+ The Apache HTTP Server Project&#39;s goal is to build a secure, efficient and
+ extensible HTTP server as standards-compliant open source software. The
+ result has long been the number one web server on the Internet.
+ .
+ Installing this package results in a full installation, including the
+ configuration files, init scripts and support scripts.</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb41-1"><a href="apache.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install apache2</span></code></pre></div>
+<pre class="console_output"><code>Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+  apache2-bin apache2-data apache2-utils libapr1 libaprutil1 libaprutil1-dbd-sqlite3 libaprutil1-ldap
+  libjansson4 liblua5.2-0 ssl-cert
+Suggested packages:
+  apache2-doc apache2-suexec-pristine | apache2-suexec-custom www-browser openssl-blacklist
+The following NEW packages will be installed:
+  apache2 apache2-bin apache2-data apache2-utils libapr1 libaprutil1 libaprutil1-dbd-sqlite3
+  libaprutil1-ldap libjansson4 liblua5.2-0 ssl-cert
+0 upgraded, 11 newly installed, 0 to remove and 0 not upgraded.
+Need to get 1,865 kB of archives.
+After this operation, 8,083 kB of additional disk space will be used.
+Do you want to continue? [Y/n] </code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash console_output"><code class="sourceCode bash"><span id="cb43-1"><a href="apache.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install apache2 <span class="at">--yes</span></span></code></pre></div>
+</div>
+<div id="step-2-調整防火牆-ufw-設定" class="section level3" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Step 2 — 調整防火牆 ufw 設定</h3>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb44-1"><a href="apache.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw app list</span></code></pre></div>
+<pre class="console_output"><code>Available applications:
+  Apache
+  Apache Full
+  Apache Secure
+  OpenSSH</code></pre>
+<ul>
+<li><p><strong>Apache</strong>：會在防火牆新增一個埠號 <code>80</code> 的規則。</p></li>
+<li><p><strong>Apache Full</strong>：會在防火牆新增一個埠號 <code>80</code> 與埠號 <code>443</code> 的規則。</p></li>
+<li><p><strong>Apache Secure</strong>：在防火牆新增一個埠號 <code>443</code> 的規則。</p></li>
+</ul>
+<div class="sourceCode" id="cb46"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb46-1"><a href="apache.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow <span class="st">&quot;Apache&quot;</span></span></code></pre></div>
+<pre class="console_output"><code>Rule added
+Rule added (v6)</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb48-1"><a href="apache.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
+<pre class="console_output"><code>Status: active
+
+To                         Action      From
+--                         ------      ----
+60000                      ALLOW       Anywhere                  
+Apache                     ALLOW       Anywhere                  
+60000 (v6)                 ALLOW       Anywhere (v6)             
+Apache (v6)                ALLOW       Anywhere (v6) </code></pre>
+<pre><code>http://&lt;虛擬主機的 ip 地址&gt;/</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb51-1"><a href="apache.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ip</span> show addr</span></code></pre></div>
+<pre class="console_output"><code>1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: enp0s3: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:59:13:f9 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.0.14/24 brd 192.168.0.255 scope global dynamic enp0s3
+       valid_lft 315329303sec preferred_lft 315329303sec
+    inet6 fd00:1cab:c0bb:acc2:a00:27ff:fe59:13f9/64 scope global dynamic mngtmpaddr noprefixroute 
+       valid_lft 535427sec preferred_lft 401570sec
+    inet6 fe80::a00:27ff:fe59:13f9/64 scope link 
+       valid_lft forever preferred_lft forever</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb53-1"><a href="apache.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="ex">hostname-I</span></span></code></pre></div>
+<pre class="console_output"><code>192.168.0.14 fd00:1cab:c0bb:acc2:a00:27ff:fe59:13f9</code></pre>
+<p><img src="figures/apache-main-page.png" /></p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="step-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="step-6-phpmyadmin.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="事前準備-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mysql.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

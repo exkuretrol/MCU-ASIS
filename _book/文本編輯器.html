@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-08-29" />
+<meta name="date" content="2021-09-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -218,12 +218,14 @@ div.csl-indent {
 <li class="chapter" data-level="3" data-path="lamp.html"><a href="lamp.html"><i class="fa fa-check"></i><b>3</b> LAMP</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="事前準備-2.html"><a href="事前準備-2.html"><i class="fa fa-check"></i><b>3.1</b> 事前準備</a></li>
-<li class="chapter" data-level="3.2" data-path="step-1-安裝-apache.html"><a href="step-1-安裝-apache.html"><i class="fa fa-check"></i><b>3.2</b> Step 1 — 安裝 Apache</a></li>
-<li class="chapter" data-level="3.3" data-path="step-2-安裝-mysql.html"><a href="step-2-安裝-mysql.html"><i class="fa fa-check"></i><b>3.3</b> Step 2 — 安裝 MySQL</a></li>
-<li class="chapter" data-level="3.4" data-path="step-3-安裝-php.html"><a href="step-3-安裝-php.html"><i class="fa fa-check"></i><b>3.4</b> Step 3 — 安裝 PHP</a></li>
-<li class="chapter" data-level="3.5" data-path="step-4.html"><a href="step-4.html"><i class="fa fa-check"></i><b>3.5</b> Step 4 —</a></li>
-<li class="chapter" data-level="3.6" data-path="step-5.html"><a href="step-5.html"><i class="fa fa-check"></i><b>3.6</b> Step 5 —</a></li>
-<li class="chapter" data-level="3.7" data-path="step-6-phpmyadmin.html"><a href="step-6-phpmyadmin.html"><i class="fa fa-check"></i><b>3.7</b> Step 6 — phpMyAdmin</a></li>
+<li class="chapter" data-level="3.2" data-path="apache.html"><a href="apache.html"><i class="fa fa-check"></i><b>3.2</b> Apache</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="apache.html"><a href="apache.html#step-1-安裝-apache"><i class="fa fa-check"></i><b>3.2.1</b> Step 1 — 安裝 Apache</a></li>
+<li class="chapter" data-level="3.2.2" data-path="apache.html"><a href="apache.html#step-2-調整防火牆-ufw-設定"><i class="fa fa-check"></i><b>3.2.2</b> Step 2 — 調整防火牆 ufw 設定</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="mysql.html"><a href="mysql.html"><i class="fa fa-check"></i><b>3.3</b> MySQL</a></li>
+<li class="chapter" data-level="3.4" data-path="php.html"><a href="php.html"><i class="fa fa-check"></i><b>3.4</b> PHP</a></li>
+<li class="chapter" data-level="3.5" data-path="step-6-phpmyadmin.html"><a href="step-6-phpmyadmin.html"><i class="fa fa-check"></i><b>3.5</b> Step 6 — phpMyAdmin</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="附錄.html"><a href="附錄.html"><i class="fa fa-check"></i>附錄</a>
 <ul>
@@ -279,7 +281,7 @@ div.csl-indent {
 <div id="更改預設的文本編輯器" class="section level3 unnumbered">
 <h3>更改預設的文本編輯器</h3>
 <p>這個指令可以變更系統編輯文件所用的程式</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="文本編輯器.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> update-alternatives <span class="at">--config</span> editor</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb69-1"><a href="文本編輯器.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> update-alternatives <span class="at">--config</span> editor</span></code></pre></div>
 <p>按了 Enter↩︎ 之後，會出現現在可用的編輯器，輸入對應的編號即可變更。有標 <code>*</code> 號的編輯器為目前設定的預設編輯器。</p>
 <pre class="console_output"><code>There are 4 choices for the alternative editor (providing /usr/bin/editor).
 

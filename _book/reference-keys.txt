@@ -27,9 +27,9 @@ bat-可選
 exa-可選
 lamp
 事前準備-2
+apache
 step-1-安裝-apache
-step-2-安裝-mysql
-step-3-安裝-php
-step-4
-step-5
+step-2-調整防火牆-ufw-設定
+mysql
+php
 step-6-phpmyadmin
