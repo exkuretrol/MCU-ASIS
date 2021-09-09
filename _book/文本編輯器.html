@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-09-02" />
+<meta name="date" content="2021-09-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -224,8 +224,16 @@ div.csl-indent {
 <li class="chapter" data-level="3.2.2" data-path="apache.html"><a href="apache.html#step-2-調整防火牆-ufw-設定"><i class="fa fa-check"></i><b>3.2.2</b> Step 2 — 調整防火牆 ufw 設定</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="mysql.html"><a href="mysql.html"><i class="fa fa-check"></i><b>3.3</b> MySQL</a></li>
-<li class="chapter" data-level="3.4" data-path="php.html"><a href="php.html"><i class="fa fa-check"></i><b>3.4</b> PHP</a></li>
-<li class="chapter" data-level="3.5" data-path="step-6-phpmyadmin.html"><a href="step-6-phpmyadmin.html"><i class="fa fa-check"></i><b>3.5</b> Step 6 — phpMyAdmin</a></li>
+<li class="chapter" data-level="3.4" data-path="php.html"><a href="php.html"><i class="fa fa-check"></i><b>3.4</b> PHP</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="php.html"><a href="php.html#step-1-安裝-php-php-mysql"><i class="fa fa-check"></i><b>3.4.1</b> Step 1 — 安裝 php &amp; php-mysql</a></li>
+<li class="chapter" data-level="3.4.2" data-path="php.html"><a href="php.html#step-2-建立虛擬網站virtualhost可選"><i class="fa fa-check"></i><b>3.4.2</b> Step 2 — 建立虛擬網站（VirtualHost）（可選）</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="phpmyadmin.html"><a href="phpmyadmin.html"><i class="fa fa-check"></i><b>3.5</b> phpMyAdmin</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-1-安裝-phpmyadmin"><i class="fa fa-check"></i><b>3.5.1</b> Step 1 — 安裝 phpmyadmin</a></li>
+<li class="chapter" data-level="3.5.2" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-2-使-phpmyadmin-更加安全"><i class="fa fa-check"></i><b>3.5.2</b> Step 2 — 使 phpmyadmin 更加安全</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="附錄.html"><a href="附錄.html"><i class="fa fa-check"></i>附錄</a>
 <ul>
@@ -281,7 +289,7 @@ div.csl-indent {
 <div id="更改預設的文本編輯器" class="section level3 unnumbered">
 <h3>更改預設的文本編輯器</h3>
 <p>這個指令可以變更系統編輯文件所用的程式</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb69-1"><a href="文本編輯器.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> update-alternatives <span class="at">--config</span> editor</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb117-1"><a href="文本編輯器.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> update-alternatives <span class="at">--config</span> editor</span></code></pre></div>
 <p>按了 Enter↩︎ 之後，會出現現在可用的編輯器，輸入對應的編號即可變更。有標 <code>*</code> 號的編輯器為目前設定的預設編輯器。</p>
 <pre class="console_output"><code>There are 4 choices for the alternative editor (providing /usr/bin/editor).
 

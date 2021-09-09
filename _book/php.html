@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-09-02" />
+<meta name="date" content="2021-09-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="mysql.html"/>
-<link rel="next" href="step-6-phpmyadmin.html"/>
+<link rel="next" href="phpmyadmin.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -224,8 +224,16 @@ div.csl-indent {
 <li class="chapter" data-level="3.2.2" data-path="apache.html"><a href="apache.html#step-2-調整防火牆-ufw-設定"><i class="fa fa-check"></i><b>3.2.2</b> Step 2 — 調整防火牆 ufw 設定</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="mysql.html"><a href="mysql.html"><i class="fa fa-check"></i><b>3.3</b> MySQL</a></li>
-<li class="chapter" data-level="3.4" data-path="php.html"><a href="php.html"><i class="fa fa-check"></i><b>3.4</b> PHP</a></li>
-<li class="chapter" data-level="3.5" data-path="step-6-phpmyadmin.html"><a href="step-6-phpmyadmin.html"><i class="fa fa-check"></i><b>3.5</b> Step 6 — phpMyAdmin</a></li>
+<li class="chapter" data-level="3.4" data-path="php.html"><a href="php.html"><i class="fa fa-check"></i><b>3.4</b> PHP</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="php.html"><a href="php.html#step-1-安裝-php-php-mysql"><i class="fa fa-check"></i><b>3.4.1</b> Step 1 — 安裝 php &amp; php-mysql</a></li>
+<li class="chapter" data-level="3.4.2" data-path="php.html"><a href="php.html#step-2-建立虛擬網站virtualhost可選"><i class="fa fa-check"></i><b>3.4.2</b> Step 2 — 建立虛擬網站（VirtualHost）（可選）</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="phpmyadmin.html"><a href="phpmyadmin.html"><i class="fa fa-check"></i><b>3.5</b> phpMyAdmin</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-1-安裝-phpmyadmin"><i class="fa fa-check"></i><b>3.5.1</b> Step 1 — 安裝 phpmyadmin</a></li>
+<li class="chapter" data-level="3.5.2" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-2-使-phpmyadmin-更加安全"><i class="fa fa-check"></i><b>3.5.2</b> Step 2 — 使 phpmyadmin 更加安全</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="附錄.html"><a href="附錄.html"><i class="fa fa-check"></i>附錄</a>
 <ul>
@@ -272,6 +280,125 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="php" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> PHP</h2>
+<div id="step-1-安裝-php-php-mysql" class="section level3" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Step 1 — 安裝 php &amp; php-mysql</h3>
+<div class="sourceCode" id="cb67"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb67-1"><a href="php.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb68-1"><a href="php.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info php</span></code></pre></div>
+<pre class="console_output"><code>Package: php
+Version: 2:7.4+75
+Priority: optional
+Section: php
+Source: php-defaults (75)
+Origin: Ubuntu
+Maintainer: Ubuntu Developers &lt;ubuntu-devel-discuss@lists.ubuntu.com&gt;
+Original-Maintainer: Debian PHP Maintainers &lt;team+pkg-php@tracker.debian.org&gt;
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 13.3 kB
+Depends: php7.4
+Download-Size: 2,712 B
+APT-Sources: http://tw.archive.ubuntu.com/ubuntu focal/main amd64 Packages
+Description: server-side, HTML-embedded scripting language (default)
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+ .
+ This package is a dependency package, which depends on latest stable
+ PHP version (currently 7.4).</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb70-1"><a href="php.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info php7.4</span></code></pre></div>
+<pre class="console_output"><code>Package: php7.4
+Version: 7.4.3-4ubuntu2.5
+Priority: optional
+Section: php
+Origin: Ubuntu
+Maintainer: Ubuntu Developers &lt;ubuntu-devel-discuss@lists.ubuntu.com&gt;
+Original-Maintainer: Debian PHP Maintainers &lt;team+pkg-php@tracker.debian.org&gt;
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 73.7 kB
+Provides: php
+Depends: libapache2-mod-php7.4 | php7.4-fpm | php7.4-cgi, php7.4-common
+Homepage: http://www.php.net/
+Download-Size: 9,244 B
+APT-Sources: http://tw.archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages
+Description: server-side, HTML-embedded scripting language (metapackage)
+ This package is a metapackage that, when installed, guarantees that you
+ have at least one of the four server-side versions of the PHP interpreter
+ installed. Removing this package won&#39;t remove PHP from your system, however
+ it may remove other packages that depend on this one.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.</code></pre>
+<pre class="console_output"><code>sudo apt info php-mysql</code></pre>
+<pre class="console_output"><code>Package: php-mysql
+Version: 2:7.4+75
+Priority: optional
+Section: php
+Source: php-defaults (75)
+Origin: Ubuntu
+Maintainer: Ubuntu Developers &lt;ubuntu-devel-discuss@lists.ubuntu.com&gt;
+Original-Maintainer: Debian PHP Maintainers &lt;team+pkg-php@tracker.debian.org&gt;
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 13.3 kB
+Depends: php-common, php7.4-mysql
+Task: lamp-server
+Download-Size: 2,000 B
+APT-Sources: http://tw.archive.ubuntu.com/ubuntu focal/main amd64 Packages
+Description: MySQL module for PHP [default]
+ This package provides a MySQL module for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+ .
+ This package is a dependency package, which depends on Debian&#39;s default
+ PHP version (currently 7.4).</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb74-1"><a href="php.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install php php-mysql <span class="at">--yes</span></span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb75-1"><a href="php.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> php</span></code></pre></div>
+<pre class="console_output"><code>/usr/bin/php</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode bash bash"><code class="sourceCode bash"><span id="cb77-1"><a href="php.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="ex">php</span> <span class="at">--version</span></span></code></pre></div>
+<pre class="console_output"><code>PHP 7.4.3 (cli) (built: Jul  5 2021 15:13:35) ( NTS )
+Copyright (c) The PHP Group
+Zend Engine v3.4.0, Copyright (c) Zend Technologies
+    with Zend OPcache v7.4.3, Copyright (c), by Zend Technologies</code></pre>
+</div>
+<div id="step-2-建立虛擬網站virtualhost可選" class="section level3" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Step 2 — 建立虛擬網站（VirtualHost）（可選）</h3>
+<div class="sourceCode" id="cb79"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb79-1"><a href="php.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/sites-available/test.conf</span></code></pre></div>
+<pre><code>&lt;VirtualHost *:80&gt;
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/test
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+&lt;/VirtualHost&gt;</code></pre>
+<div class="sourceCode" id="cb81"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb81-1"><a href="php.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-al</span> /var/www/</span></code></pre></div>
+<pre class="console_output"><code>total 12
+drwxr-xr-x  3 root root 4096 Sep  1 06:51 ./
+drwxr-xr-x 14 root root 4096 Sep  1 06:51 ../
+drwxr-xr-x  2 root root 4096 Sep  1 06:51 html/</code></pre>
+<div class="sourceCode" id="cb83"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb83-1"><a href="php.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir /var/www/test</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb84-1"><a href="php.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /var/www/test/index.html</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb85-1"><a href="php.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></span>
+<span id="cb85-2"><a href="php.html#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html</span><span class="ot"> lang=</span><span class="st">&quot;zh-TW&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb85-3"><a href="php.html#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;head&gt;</span></span>
+<span id="cb85-4"><a href="php.html#cb85-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;UTF-8&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb85-5"><a href="php.html#cb85-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;X-UA-Compatible&quot;</span><span class="ot"> content=</span><span class="st">&quot;IE=edge&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb85-6"><a href="php.html#cb85-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;viewport&quot;</span><span class="ot"> content=</span><span class="st">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb85-7"><a href="php.html#cb85-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;title&gt;</span>Apache VirtualHost config test<span class="kw">&lt;/title&gt;</span></span>
+<span id="cb85-8"><a href="php.html#cb85-8" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/head&gt;</span></span>
+<span id="cb85-9"><a href="php.html#cb85-9" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;body&gt;</span></span>
+<span id="cb85-10"><a href="php.html#cb85-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;h1&gt;</span>成功!<span class="kw">&lt;/h1&gt;</span></span>
+<span id="cb85-11"><a href="php.html#cb85-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;p&gt;</span>您的 Apache2 虛擬網站的設定順利運作中。<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb85-12"><a href="php.html#cb85-12" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/body&gt;</span></span>
+<span id="cb85-13"><a href="php.html#cb85-13" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb86-1"><a href="php.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> a2dissite 000-default.conf</span></code></pre></div>
+<pre class="console_output"><code>Site 000-default disabled.
+To activate the new configuration, you need to run:
+  systemctl reload apache2</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb88-1"><a href="php.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> a2ensite test.conf</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb89-1"><a href="php.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl reload apache2</span></code></pre></div>
+<pre><code>http://&lt;虛擬主機的 ip 地址&gt;/</code></pre>
+<p><img src="figures/apache2-test-virtualhost-conf.png" /></p>
+</div>
 </div>
             </section>
 
@@ -279,7 +406,7 @@ div.csl-indent {
         </div>
       </div>
 <a href="mysql.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="step-6-phpmyadmin.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="phpmyadmin.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
