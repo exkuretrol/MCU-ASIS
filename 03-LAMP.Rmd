@@ -410,7 +410,7 @@ sudo vim /var/www/test/index.html
 </head>
 <body>
   <h1>成功!</h1>
-  <p>你的 Apache2 虛擬網站設定順利運作中。</p>
+  <p>您的 Apache2 虛擬網站的設定順利運作中。</p>
 </body>
 </html>
 ```
