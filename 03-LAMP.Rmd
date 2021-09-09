@@ -251,4 +251,190 @@ flush privileges;
 
 ## PHP
 
-## Step 6 --- phpMyAdmin
+### Step 1 --- 安裝 php & php-mysql
+
+``` {.bash .prefixed}
+sudo apt update
+```
+
+``` {.bash .prefixed}
+sudo apt info php
+```
+
+``` {.console_output}
+Package: php
+Version: 2:7.4+75
+Priority: optional
+Section: php
+Source: php-defaults (75)
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 13.3 kB
+Depends: php7.4
+Download-Size: 2,712 B
+APT-Sources: http://tw.archive.ubuntu.com/ubuntu focal/main amd64 Packages
+Description: server-side, HTML-embedded scripting language (default)
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+ .
+ This package is a dependency package, which depends on latest stable
+ PHP version (currently 7.4).
+```
+
+``` {.bash .prefixed}
+sudo apt info php7.4
+```
+
+``` {.console_output}
+Package: php7.4
+Version: 7.4.3-4ubuntu2.5
+Priority: optional
+Section: php
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 73.7 kB
+Provides: php
+Depends: libapache2-mod-php7.4 | php7.4-fpm | php7.4-cgi, php7.4-common
+Homepage: http://www.php.net/
+Download-Size: 9,244 B
+APT-Sources: http://tw.archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages
+Description: server-side, HTML-embedded scripting language (metapackage)
+ This package is a metapackage that, when installed, guarantees that you
+ have at least one of the four server-side versions of the PHP interpreter
+ installed. Removing this package won't remove PHP from your system, however
+ it may remove other packages that depend on this one.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+```
+
+``` {.console_output}
+sudo apt info php-mysql
+```
+
+``` {.console_output}
+Package: php-mysql
+Version: 2:7.4+75
+Priority: optional
+Section: php
+Source: php-defaults (75)
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 13.3 kB
+Depends: php-common, php7.4-mysql
+Task: lamp-server
+Download-Size: 2,000 B
+APT-Sources: http://tw.archive.ubuntu.com/ubuntu focal/main amd64 Packages
+Description: MySQL module for PHP [default]
+ This package provides a MySQL module for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+ .
+ This package is a dependency package, which depends on Debian's default
+ PHP version (currently 7.4).
+```
+
+``` {.bash .prefixed}
+sudo apt install php php-mysql --yes
+```
+
+``` {.bash .prefixed}
+which php
+```
+
+``` {.console_output}
+/usr/bin/php
+```
+
+``` {.bash .bash}
+php --version
+```
+
+``` {.console_output}
+PHP 7.4.3 (cli) (built: Jul  5 2021 15:13:35) ( NTS )
+Copyright (c) The PHP Group
+Zend Engine v3.4.0, Copyright (c) Zend Technologies
+    with Zend OPcache v7.4.3, Copyright (c), by Zend Technologies
+```
+
+### Step 2 --- 建立虛擬網站（VirtualHost）（可選）
+
+``` {.bash .prefixed}
+sudo vim /etc/apache2/sites-available/test.conf
+```
+
+    <VirtualHost *:80>
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/test
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+    </VirtualHost>
+
+``` {.bash .prefixed}
+ls -al /var/www/
+```
+
+``` {.console_output}
+total 12
+drwxr-xr-x  3 root root 4096 Sep  1 06:51 ./
+drwxr-xr-x 14 root root 4096 Sep  1 06:51 ../
+drwxr-xr-x  2 root root 4096 Sep  1 06:51 html/
+```
+
+``` {.bash .prefixed}
+sudo mkdir /var/www/test
+```
+
+``` {.bash .prefixed}
+sudo vim /var/www/test/index.html
+```
+
+``` {.html}
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apache VirtualHost config test</title>
+</head>
+<body>
+  <h1>成功!</h1>
+  <p>你的 Apache2 虛擬網站設定順利運作中。</p>
+</body>
+</html>
+```
+
+``` {.bash .prefixed}
+sudo a2dissite 000-default.conf
+```
+
+``` {.console_output}
+Site 000-default disabled.
+To activate the new configuration, you need to run:
+  systemctl reload apache2
+```
+
+``` {.bash .prefixed}
+sudo a2ensite test.conf
+```
+
+``` {.bash .prefixed}
+sudo systemctl reload apache2
+```
+
+    http://<虛擬主機的 ip 地址>/
+
+![](figures/apache2-test-virtualhost-conf.png)
+
+## phpMyAdmin
