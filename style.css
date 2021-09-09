@@ -59,6 +59,10 @@ pre.prefixed_powershell::before {
    content: "PS ";
 }
 
+pre.prefixed_mysql::before {
+   content: "mysql> ";
+}
+
 pre.console_output::before {
 	content: "OUTPUT\A";
 	color: lightgray;
