@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3.5 phpMyAdmin | MCU ASIS Ubuntu 系統安裝指南</title>
+  <meta name="description" content="This is a book." />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3.5 phpMyAdmin | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a book." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3.5 phpMyAdmin | MCU ASIS Ubuntu 系統安裝指南" />
+  
+  <meta name="twitter:description" content="This is a book." />
+  
+
+<meta name="author" content="Chiawei Chen" />
+
+
+<meta name="date" content="2021-09-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="php.html"/>
+<link rel="next" href="附錄.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">MCU ASIS Ubuntu 系統安裝指南</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>引言</a></li>
+<li class="chapter" data-level="" data-path="todo-list.html"><a href="todo-list.html"><i class="fa fa-check"></i>TODO List</a>
+<ul>
+<li class="chapter" data-level="" data-path="todos.html"><a href="todos.html"><i class="fa fa-check"></i>TODOs:</a></li>
+<li class="chapter" data-level="" data-path="issues.html"><a href="issues.html"><i class="fa fa-check"></i>Issues:</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> 基礎建設</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="事前準備.html"><a href="事前準備.html"><i class="fa fa-check"></i><b>1.1</b> 事前準備</a></li>
+<li class="chapter" data-level="1.2" data-path="安裝-virtualbox.html"><a href="安裝-virtualbox.html"><i class="fa fa-check"></i><b>1.2</b> 安裝 VirtualBox</a></li>
+<li class="chapter" data-level="1.3" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html"><i class="fa fa-check"></i><b>1.3</b> 於虛擬機器安裝作業系統</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#新增-ubuntu-作業系統設定"><i class="fa fa-check"></i><b>1.3.1</b> 新增 Ubuntu 作業系統設定</a></li>
+<li class="chapter" data-level="1.3.2" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#於-virtualbox-安裝作業系統"><i class="fa fa-check"></i><b>1.3.2</b> 於 VirtualBox 安裝作業系統</a>
+<ul>
+<li class="chapter" data-level="1.3.2.1" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#語言"><i class="fa fa-check"></i><b>1.3.2.1</b> 語言</a></li>
+<li class="chapter" data-level="1.3.2.2" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#鍵盤配置"><i class="fa fa-check"></i><b>1.3.2.2</b> 鍵盤配置</a></li>
+<li class="chapter" data-level="1.3.2.3" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#網路連線"><i class="fa fa-check"></i><b>1.3.2.3</b> 網路連線</a></li>
+<li class="chapter" data-level="1.3.2.4" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#proxy"><i class="fa fa-check"></i><b>1.3.2.4</b> Proxy</a></li>
+<li class="chapter" data-level="1.3.2.5" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#鏡像-mirror"><i class="fa fa-check"></i><b>1.3.2.5</b> 鏡像 (Mirror)</a></li>
+<li class="chapter" data-level="1.3.2.6" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#安裝程式更新-可能不會出現"><i class="fa fa-check"></i><b>1.3.2.6</b> 安裝程式更新 (可能不會出現)</a></li>
+<li class="chapter" data-level="1.3.2.7" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#系統空間配置-raid-1"><i class="fa fa-check"></i><b>1.3.2.7</b> 系統空間配置 (Raid-1)</a></li>
+<li class="chapter" data-level="1.3.2.8" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#使用者設定"><i class="fa fa-check"></i><b>1.3.2.8</b> 使用者設定</a></li>
+<li class="chapter" data-level="1.3.2.9" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#openssh-設定"><i class="fa fa-check"></i><b>1.3.2.9</b> OpenSSH 設定</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="ubuntu-的基本設定.html"><a href="ubuntu-的基本設定.html"><i class="fa fa-check"></i><b>2</b> Ubuntu 的基本設定</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="事前準備-1.html"><a href="事前準備-1.html"><i class="fa fa-check"></i><b>2.1</b> 事前準備</a></li>
+<li class="chapter" data-level="2.2" data-path="openssh.html"><a href="openssh.html"><i class="fa fa-check"></i><b>2.2</b> OpenSSH</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="openssh.html"><a href="openssh.html#適合各個系統的連線流程"><i class="fa fa-check"></i><b>2.2.1</b> 適合各個系統的連線流程</a>
+<ul>
+<li class="chapter" data-level="2.2.1.1" data-path="openssh.html"><a href="openssh.html#macos-或-其他-unix-like-系統"><i class="fa fa-check"></i><b>2.2.1.1</b> MacOS 或 其他 Unix-like 系統</a></li>
+<li class="chapter" data-level="2.2.1.2" data-path="openssh.html"><a href="openssh.html#windows-系統"><i class="fa fa-check"></i><b>2.2.1.2</b> Windows 系統</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#step-1-安裝-openssh-client"><i class="fa fa-check"></i>Step 1 — 安裝 OpenSSH Client</a></li>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#step-2-產生-ssh-key-pairs"><i class="fa fa-check"></i>Step 2 — 產生 ssh key pairs</a></li>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#step-3-將新增的-key-pairs-上傳至目的地主機"><i class="fa fa-check"></i>Step 3 — 將新增的 key pairs 上傳至目的地主機</a></li>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#step-4-測試-ssh-連線使用-ssh-連線至遠端主機"><i class="fa fa-check"></i>Step 4 — 測試 SSH 連線，使用 SSH 連線至遠端主機</a></li>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#step-5-使遠端的-openssh-伺服器更加安全"><i class="fa fa-check"></i>Step 5 — 使遠端的 OpenSSH 伺服器更加安全</a>
+<ul>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#變更-ssh-伺服器預設的埠號"><i class="fa fa-check"></i>變更 SSH 伺服器預設的埠號</a></li>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#關閉密碼驗證"><i class="fa fa-check"></i>關閉密碼驗證</a></li>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#關閉遠端-root-登入"><i class="fa fa-check"></i>關閉遠端 root 登入</a></li>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#限制能使用-ssh-連線的使用者"><i class="fa fa-check"></i>限制能使用 SSH 連線的使用者</a></li>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#關閉無密碼的使用者使用-ssh"><i class="fa fa-check"></i>關閉無密碼的使用者使用 SSH</a></li>
+<li><a href="openssh.html#測試-sshd_config-是否有效">測試 <code>sshd_config</code> 是否有效</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="apt.html"><a href="apt.html"><i class="fa fa-check"></i><b>2.3</b> APT</a></li>
+<li class="chapter" data-level="2.4" data-path="ufw.html"><a href="ufw.html"><i class="fa fa-check"></i><b>2.4</b> UFW</a></li>
+<li class="chapter" data-level="2.5" data-path="bat-可選.html"><a href="bat-可選.html"><i class="fa fa-check"></i><b>2.5</b> Bat （可選）</a></li>
+<li class="chapter" data-level="2.6" data-path="exa-可選.html"><a href="exa-可選.html"><i class="fa fa-check"></i><b>2.6</b> exa （可選）</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="lamp.html"><a href="lamp.html"><i class="fa fa-check"></i><b>3</b> LAMP</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="事前準備-2.html"><a href="事前準備-2.html"><i class="fa fa-check"></i><b>3.1</b> 事前準備</a></li>
+<li class="chapter" data-level="3.2" data-path="apache.html"><a href="apache.html"><i class="fa fa-check"></i><b>3.2</b> Apache</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="apache.html"><a href="apache.html#step-1-安裝-apache"><i class="fa fa-check"></i><b>3.2.1</b> Step 1 — 安裝 Apache</a></li>
+<li class="chapter" data-level="3.2.2" data-path="apache.html"><a href="apache.html#step-2-調整防火牆-ufw-設定"><i class="fa fa-check"></i><b>3.2.2</b> Step 2 — 調整防火牆 ufw 設定</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="mysql.html"><a href="mysql.html"><i class="fa fa-check"></i><b>3.3</b> MySQL</a></li>
+<li class="chapter" data-level="3.4" data-path="php.html"><a href="php.html"><i class="fa fa-check"></i><b>3.4</b> PHP</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="php.html"><a href="php.html#step-1-安裝-php-php-mysql"><i class="fa fa-check"></i><b>3.4.1</b> Step 1 — 安裝 php &amp; php-mysql</a></li>
+<li class="chapter" data-level="3.4.2" data-path="php.html"><a href="php.html#step-2-建立虛擬網站virtualhost可選"><i class="fa fa-check"></i><b>3.4.2</b> Step 2 — 建立虛擬網站（VirtualHost）（可選）</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="phpmyadmin.html"><a href="phpmyadmin.html"><i class="fa fa-check"></i><b>3.5</b> phpMyAdmin</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-1-安裝-phpmyadmin"><i class="fa fa-check"></i><b>3.5.1</b> Step 1 — 安裝 phpmyadmin</a></li>
+<li class="chapter" data-level="3.5.2" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-2-使-phpmyadmin-更加安全"><i class="fa fa-check"></i><b>3.5.2</b> Step 2 — 使 phpmyadmin 更加安全</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="附錄.html"><a href="附錄.html"><i class="fa fa-check"></i>附錄</a>
+<ul>
+<li class="chapter" data-level="" data-path="由-windows-10-系統進入-bios.html"><a href="由-windows-10-系統進入-bios.html"><i class="fa fa-check"></i>由 Windows 10 系統進入 BIOS</a></li>
+<li class="chapter" data-level="" data-path="windows-terminal.html"><a href="windows-terminal.html"><i class="fa fa-check"></i>Windows Terminal</a></li>
+<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html"><i class="fa fa-check"></i>PuTTY</a>
+<ul>
+<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#以-putty-產生-key"><i class="fa fa-check"></i>以 PuTTY 產生 key</a>
+<ul>
+<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#step-1-安裝-putty"><i class="fa fa-check"></i>Step 1 — 安裝 PuTTY</a></li>
+<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#step-2-經由-puttygen-產生-ssh-key-pairs"><i class="fa fa-check"></i>Step 2 — 經由 PuTTYgen 產生 ssh key pairs</a></li>
+<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#step-3-妥善保存好產生的-key"><i class="fa fa-check"></i>Step 3 — 妥善保存好產生的 Key</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#上傳以-putty-產生的-ssh-key-pairs"><i class="fa fa-check"></i>上傳以 PuTTY 產生的 ssh key pairs</a></li>
+<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#puttygen-產生的-key-pairs-的連線方式"><i class="fa fa-check"></i>PuTTYgen 產生的 key pairs 的連線方式:</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="文本編輯器.html"><a href="文本編輯器.html"><i class="fa fa-check"></i>文本編輯器</a>
+<ul>
+<li class="chapter" data-level="" data-path="文本編輯器.html"><a href="文本編輯器.html#vim"><i class="fa fa-check"></i>vim</a></li>
+<li class="chapter" data-level="" data-path="文本編輯器.html"><a href="文本編輯器.html#nano"><i class="fa fa-check"></i>nano</a></li>
+<li class="chapter" data-level="" data-path="文本編輯器.html"><a href="文本編輯器.html#更改預設的文本編輯器"><i class="fa fa-check"></i>更改預設的文本編輯器</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="參考資料.html"><a href="參考資料.html"><i class="fa fa-check"></i>參考資料</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">MCU ASIS Ubuntu 系統安裝指南</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="phpmyadmin" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> phpMyAdmin</h2>
+<div id="step-1-安裝-phpmyadmin" class="section level3" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Step 1 — 安裝 phpmyadmin</h3>
+<div class="sourceCode" id="cb91"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb91-1"><a href="phpmyadmin.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info phpmyadmin</span></code></pre></div>
+<pre class="console_output"><code>Package: phpmyadmin
+Version: 4:4.9.5+dfsg1-2
+Priority: optional
+Section: universe/web
+Origin: Ubuntu
+Maintainer: Ubuntu Developers &lt;ubuntu-devel-discuss@lists.ubuntu.com&gt;
+Original-Maintainer: phpMyAdmin Packaging Team &lt;team+phpmyadmin@tracker.debian.org&gt;
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 27.2 MB
+Depends: php, php-cli, php-mysql, php-json, php-mbstring, php-xml, debconf (&gt;= 0.5) | debconf-2.0, lib
+js-sphinxdoc (&gt;= 1.0), sensible-utils, dbconfig-mysql | dbconfig-no-thanks | dbconfig-common (&lt;&lt; 2.0.0
+), php-phpseclib (&gt;= 2.0), php-common, php-phpmyadmin-sql-parser (&gt;= 4.3.2), php-phpmyadmin-sql-parser
+ (&lt;&lt; 5~~), php-phpmyadmin-motranslator (&gt;= 5.0), php-phpmyadmin-motranslator (&lt;&lt; 6~~), php-phpmyadmin-
+shapefile (&gt;= 2.0), php-phpmyadmin-shapefile (&lt;&lt; 3~~), php-phpseclib (&lt;&lt; 3~~), php-google-recaptcha (&gt;
+= 1.1), php-google-recaptcha (&lt;&lt; 2~~), php-psr-container (&gt;= 1.0), php-psr-container (&lt;&lt; 2~~), php-twi
+g (&gt;= 2.9), php-twig (&lt;&lt; 3~~), php-twig-extensions (&gt;= 1.5.1), php-twig-extensions (&lt;&lt; 1.6~~), php-sym
+fony-expression-language, libjs-openlayers, ucf (&gt;= 0.28)
+Recommends: apache2 | lighttpd | httpd, php-curl, php-gd, php-bz2, php-zip, php-tcpdf
+Suggests: default-mysql-server | virtual-mysql-server, www-browser, php-recode, php-opcache, php-gd2, 
+php-pragmarx-google2fa, php-bacon-qr-code, php-samyoul-u2f-php-server
+Homepage: https://www.phpmyadmin.net/
+Download-Size: 4,426 kB
+
+[...]</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb93-1"><a href="phpmyadmin.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install phpmyadmin <span class="at">--yes</span></span></code></pre></div>
+<p><img src="figures/phpmyadmin-installation_0.png" /></p>
+<p><img src="figures/phpmyadmin-installation_1.png" /></p>
+<p><img src="figures/phpmyadmin-installation_2.png" /></p>
+<p><img src="figures/phpmyadmin-installation-error.png" /></p>
+<div class="infobox warning">
+<div class="sourceCode" id="cb94"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb94-1"><a href="phpmyadmin.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode sqlmysql prefixed_mysql"><code class="sourceCode sqlmysql"><span id="cb95-1"><a href="phpmyadmin.html#cb95-1" aria-hidden="true" tabindex="-1"></a>uninstall component <span class="st">&#39;file://component_valid_password&#39;</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode sqlmysql prefixed_mysql infobox warning"><code class="sourceCode sqlmysql"><span id="cb96-1"><a href="phpmyadmin.html#cb96-1" aria-hidden="true" tabindex="-1"></a>exit;</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode bash prefixed infobox warning"><code class="sourceCode bash"><span id="cb97-1"><a href="phpmyadmin.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install phpmyadmin <span class="at">--yes</span></span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb98-1"><a href="phpmyadmin.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode sqlmysql prefixed_mysql infobox warning"><code class="sourceCode sqlmysql"><span id="cb99-1"><a href="phpmyadmin.html#cb99-1" aria-hidden="true" tabindex="-1"></a>install component <span class="st">&#39;file://component_valid_password&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode sqlmysql prefixed_mysql infobox warning"><code class="sourceCode sqlmysql"><span id="cb100-1"><a href="phpmyadmin.html#cb100-1" aria-hidden="true" tabindex="-1"></a>exit;</span></code></pre></div>
+</div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb101-1"><a href="phpmyadmin.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> phpenmod mbstring</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb102-1"><a href="phpmyadmin.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart apache2</span></code></pre></div>
+<pre><code>http://&lt;虛擬主機的 ip 地址&gt;/phpmyadmin/</code></pre>
+<p><img src="figures/phpmyadmin-main-page-failed.png" /></p>
+<!--# https://askubuntu.com/questions/387062/how-to-solve-the-phpmyadmin-not-found-issue-after-upgrading-php-and-apache -->
+<div class="sourceCode" id="cb104"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb104-1"><a href="phpmyadmin.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb105-1"><a href="phpmyadmin.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> a2enconf phpmyadmin</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb106-1"><a href="phpmyadmin.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart apache2</span></code></pre></div>
+<pre><code>http://&lt;虛擬主機的 ip 地址&gt;/phpmyadmin/</code></pre>
+<p><img src="figures/phpmyadmin-main-page-successed.png" /></p>
+</div>
+<div id="step-2-使-phpmyadmin-更加安全" class="section level3" number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> Step 2 — 使 phpmyadmin 更加安全</h3>
+<div class="sourceCode" id="cb108"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb108-1"><a href="phpmyadmin.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/phpmyadmin/apache.conf</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb109-1"><a href="phpmyadmin.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co"># phpMyAdmin default Apache configuration</span></span>
+<span id="cb109-2"><a href="phpmyadmin.html#cb109-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-3"><a href="phpmyadmin.html#cb109-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Alias</span> /sql /usr/share/phpmyadmin <span class="co"># 變更這裡</span></span>
+<span id="cb109-4"><a href="phpmyadmin.html#cb109-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-5"><a href="phpmyadmin.html#cb109-5" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>Directory <span class="ex">/usr/share/phpmyadmin</span><span class="op">&gt;</span></span>
+<span id="cb109-6"><a href="phpmyadmin.html#cb109-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Options</span> SymLinksIfOwnerMatch</span>
+<span id="cb109-7"><a href="phpmyadmin.html#cb109-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">DirectoryIndex</span> index.php</span>
+<span id="cb109-8"><a href="phpmyadmin.html#cb109-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">AllowOverride</span> All <span class="co"># 新增這行</span></span>
+<span id="cb109-9"><a href="phpmyadmin.html#cb109-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-10"><a href="phpmyadmin.html#cb109-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
+<span id="cb109-11"><a href="phpmyadmin.html#cb109-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-12"><a href="phpmyadmin.html#cb109-12" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>/Directory<span class="op">&gt;</span></span>
+<span id="cb109-13"><a href="phpmyadmin.html#cb109-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-14"><a href="phpmyadmin.html#cb109-14" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb110-1"><a href="phpmyadmin.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /usr/share/phpmyadmin/.htaccess</span></code></pre></div>
+<pre><code>AuthType Basic
+AuthName &quot;限制存取的檔案&quot;
+AuthUserFile /etc/phpmyadmin/.htpasswd
+Require valid-user</code></pre>
+<div class="sourceCode" id="cb112"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb112-1"><a href="phpmyadmin.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> htpasswd <span class="at">-c</span> /etc/phpmyadmin/.htpasswd asis</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb113-1"><a href="phpmyadmin.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> htpasswd /etc/phpmyadmin/.htpasswd otheruser</span></code></pre></div>
+<pre><code>http://&lt;虛擬主機的 ip 地址&gt;/sql/</code></pre>
+<p><img src="figures/phpmyadmin-main-page-successed.png" /></p>
+
+</div>
+</div>
+<!-- </div> -->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="php.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="附錄.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["twitter", "facebook"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/exkuretrol/MCU-ASIS/edit/main/03-LAMP.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/exkuretrol/MCU-ASIS/blob/main/03-LAMP.Rmd",
+"text": null
+},
+"download": ["MCU-ASIS.epub"],
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
