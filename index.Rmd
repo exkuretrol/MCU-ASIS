@@ -41,6 +41,7 @@ knitr::write_bib(c(
 -   附錄
 -   備份 & 還原
 -   找到方法 highlight code 區塊
+-   certbot (nslookup)
 
 ## Issues: {.unnumbered}
 
