@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-09-09" />
+<meta name="date" content="2021-09-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -235,6 +235,21 @@ div.csl-indent {
 <li class="chapter" data-level="3.5.2" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-2-使-phpmyadmin-更加安全"><i class="fa fa-check"></i><b>3.5.2</b> Step 2 — 使 phpmyadmin 更加安全</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path="rstudio-rshiny-server.html"><a href="rstudio-rshiny-server.html"><i class="fa fa-check"></i><b>4</b> RStudio &amp; RShiny Server</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="事前準備-3.html"><a href="事前準備-3.html"><i class="fa fa-check"></i><b>4.1</b> 事前準備</a></li>
+<li class="chapter" data-level="4.2" data-path="r-base.html"><a href="r-base.html"><i class="fa fa-check"></i><b>4.2</b> R base</a></li>
+<li class="chapter" data-level="4.3" data-path="rstudio-server.html"><a href="rstudio-server.html"><i class="fa fa-check"></i><b>4.3</b> RStudio Server</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="rstudio-server.html"><a href="rstudio-server.html#step-1-安裝-rstudio-server-伺服器"><i class="fa fa-check"></i><b>4.3.1</b> Step 1 — 安裝 RStudio Server 伺服器</a></li>
+<li class="chapter" data-level="4.3.2" data-path="rstudio-server.html"><a href="rstudio-server.html#step-2-設定-apache-的-proxy"><i class="fa fa-check"></i><b>4.3.2</b> Step 2 — 設定 Apache 的 Proxy</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="rshiny-server.html"><a href="rshiny-server.html"><i class="fa fa-check"></i><b>4.4</b> RShiny Server</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="rshiny-server.html"><a href="rshiny-server.html#step-1-安裝-rshiny-server"><i class="fa fa-check"></i><b>4.4.1</b> Step 1 — 安裝 RShiny Server</a></li>
+<li class="chapter" data-level="4.4.2" data-path="rshiny-server.html"><a href="rshiny-server.html#step-2-設定-apache-的-proxy-1"><i class="fa fa-check"></i><b>4.4.2</b> Step 2 — 設定 Apache 的 Proxy</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="附錄.html"><a href="附錄.html"><i class="fa fa-check"></i>附錄</a>
 <ul>
 <li class="chapter" data-level="" data-path="由-windows-10-系統進入-bios.html"><a href="由-windows-10-系統進入-bios.html"><i class="fa fa-check"></i>由 Windows 10 系統進入 BIOS</a></li>
@@ -363,10 +378,10 @@ Zend Engine v3.4.0, Copyright (c) Zend Technologies
 </div>
 <div id="step-2-建立虛擬網站virtualhost可選" class="section level3" number="3.4.2">
 <h3><span class="header-section-number">3.4.2</span> Step 2 — 建立虛擬網站（VirtualHost）（可選）</h3>
-<div class="sourceCode" id="cb79"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb79-1"><a href="php.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/sites-available/test.conf</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb79-1"><a href="php.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/sites-available/asis.conf</span></code></pre></div>
 <pre><code>&lt;VirtualHost *:80&gt;
     ServerAdmin webmaster@localhost
-    DocumentRoot /var/www/test
+    DocumentRoot /var/www/asis
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 &lt;/VirtualHost&gt;</code></pre>
@@ -375,8 +390,8 @@ Zend Engine v3.4.0, Copyright (c) Zend Technologies
 drwxr-xr-x  3 root root 4096 Sep  1 06:51 ./
 drwxr-xr-x 14 root root 4096 Sep  1 06:51 ../
 drwxr-xr-x  2 root root 4096 Sep  1 06:51 html/</code></pre>
-<div class="sourceCode" id="cb83"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb83-1"><a href="php.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir /var/www/test</span></code></pre></div>
-<div class="sourceCode" id="cb84"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb84-1"><a href="php.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /var/www/test/index.html</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb83-1"><a href="php.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir /var/www/asis</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb84-1"><a href="php.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /var/www/asis/index.html</span></code></pre></div>
 <div class="sourceCode" id="cb85"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb85-1"><a href="php.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></span>
 <span id="cb85-2"><a href="php.html#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html</span><span class="ot"> lang=</span><span class="st">&quot;zh-TW&quot;</span><span class="kw">&gt;</span></span>
 <span id="cb85-3"><a href="php.html#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;head&gt;</span></span>
@@ -394,7 +409,7 @@ drwxr-xr-x  2 root root 4096 Sep  1 06:51 html/</code></pre>
 <pre class="console_output"><code>Site 000-default disabled.
 To activate the new configuration, you need to run:
   systemctl reload apache2</code></pre>
-<div class="sourceCode" id="cb88"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb88-1"><a href="php.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> a2ensite test.conf</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb88-1"><a href="php.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> a2ensite asis.conf</span></code></pre></div>
 <div class="sourceCode" id="cb89"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb89-1"><a href="php.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl reload apache2</span></code></pre></div>
 <pre><code>http://&lt;虛擬主機的 ip 地址&gt;/</code></pre>
 <p><img src="figures/apache2-test-virtualhost-conf.png" /></p>

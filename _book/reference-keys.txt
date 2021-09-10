@@ -37,3 +37,12 @@ step-2-建立虛擬網站virtualhost可選
 phpmyadmin
 step-1-安裝-phpmyadmin
 step-2-使-phpmyadmin-更加安全
+rstudio-rshiny-server
+事前準備-3
+r-base
+rstudio-server
+step-1-安裝-rstudio-server-伺服器
+step-2-設定-apache-的-proxy
+rshiny-server
+step-1-安裝-rshiny-server
+step-2-設定-apache-的-proxy-1

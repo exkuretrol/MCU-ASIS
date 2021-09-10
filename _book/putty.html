@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-09-09" />
+<meta name="date" content="2021-09-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -235,6 +235,21 @@ div.csl-indent {
 <li class="chapter" data-level="3.5.2" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-2-使-phpmyadmin-更加安全"><i class="fa fa-check"></i><b>3.5.2</b> Step 2 — 使 phpmyadmin 更加安全</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path="rstudio-rshiny-server.html"><a href="rstudio-rshiny-server.html"><i class="fa fa-check"></i><b>4</b> RStudio &amp; RShiny Server</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="事前準備-3.html"><a href="事前準備-3.html"><i class="fa fa-check"></i><b>4.1</b> 事前準備</a></li>
+<li class="chapter" data-level="4.2" data-path="r-base.html"><a href="r-base.html"><i class="fa fa-check"></i><b>4.2</b> R base</a></li>
+<li class="chapter" data-level="4.3" data-path="rstudio-server.html"><a href="rstudio-server.html"><i class="fa fa-check"></i><b>4.3</b> RStudio Server</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="rstudio-server.html"><a href="rstudio-server.html#step-1-安裝-rstudio-server-伺服器"><i class="fa fa-check"></i><b>4.3.1</b> Step 1 — 安裝 RStudio Server 伺服器</a></li>
+<li class="chapter" data-level="4.3.2" data-path="rstudio-server.html"><a href="rstudio-server.html#step-2-設定-apache-的-proxy"><i class="fa fa-check"></i><b>4.3.2</b> Step 2 — 設定 Apache 的 Proxy</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="rshiny-server.html"><a href="rshiny-server.html"><i class="fa fa-check"></i><b>4.4</b> RShiny Server</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="rshiny-server.html"><a href="rshiny-server.html#step-1-安裝-rshiny-server"><i class="fa fa-check"></i><b>4.4.1</b> Step 1 — 安裝 RShiny Server</a></li>
+<li class="chapter" data-level="4.4.2" data-path="rshiny-server.html"><a href="rshiny-server.html#step-2-設定-apache-的-proxy-1"><i class="fa fa-check"></i><b>4.4.2</b> Step 2 — 設定 Apache 的 Proxy</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="附錄.html"><a href="附錄.html"><i class="fa fa-check"></i>附錄</a>
 <ul>
 <li class="chapter" data-level="" data-path="由-windows-10-系統進入-bios.html"><a href="由-windows-10-系統進入-bios.html"><i class="fa fa-check"></i>由 Windows 10 系統進入 BIOS</a></li>
@@ -315,7 +330,7 @@ div.csl-indent {
 <p>接著按「Load」把剛剛產生的 *.ppk 檔案讀取進來。會看到一行字「Public key for pasting into OpenSSH authorized_keys file」下面的可複製區域就是 public key，把它整段複製起來。</p>
 <p><img src="figures/puttygen-load-ppk.png" class="figure" /></p>
 <p>接著打開「PowerShell」或是「命令提示字元」，輸入:</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb115-1"><a href="putty.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">echo</span> <span class="st">&quot;&lt;YOUR_PUBLIC_KEY&gt;&quot;</span> | ssh asis@192.<span class="fu">168</span>.<span class="fu">0</span>.<span class="fu">13</span> <span class="st">&quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb146-1"><a href="putty.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">echo</span> <span class="st">&quot;&lt;YOUR_PUBLIC_KEY&gt;&quot;</span> | ssh asis@192.<span class="fu">168</span>.<span class="fu">0</span>.<span class="fu">13</span> <span class="st">&quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;</span></span></code></pre></div>
 <ul>
 <li><p>將 <code>&lt;YOUR_PUBLIC_KEY&gt;</code> 替換成自己的 public key</p></li>
 <li><p>這裡的 <code>asis</code> 為第一章的<a href="於虛擬機器安裝作業系統.html#使用者設定">使用者設定</a>的預設使用者</p></li>

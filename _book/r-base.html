@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>MCU ASIS Ubuntu 系統安裝指南</title>
+  <title>4.2 R base | MCU ASIS Ubuntu 系統安裝指南</title>
   <meta name="description" content="This is a book." />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="MCU ASIS Ubuntu 系統安裝指南" />
+  <meta property="og:title" content="4.2 R base | MCU ASIS Ubuntu 系統安裝指南" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="MCU ASIS Ubuntu 系統安裝指南" />
+  <meta name="twitter:title" content="4.2 R base | MCU ASIS Ubuntu 系統安裝指南" />
   
   <meta name="twitter:description" content="This is a book." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="todo-list.html"/>
+<link rel="prev" href="事前準備-3.html"/>
+<link rel="next" href="rstudio-server.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -293,23 +293,21 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">MCU ASIS Ubuntu 系統安裝指南</h1>
-<p class="author"><em>Chiawei Chen</em></p>
-<p class="date"><em>2021-09-10</em></p>
-</div>
-<div id="引言" class="section level1 unnumbered">
-<h1>引言</h1>
-<p>這是一本用 <strong>Markdown</strong> 寫的書。邊把我架設系上 Ubuntu 伺服器時的過程記錄下來，這是我第一次寫書，撰寫時考慮的沒有那麼多，所以可能會有閱讀困難的情形。</p>
-<p>本書會從虛擬環境的建立、安裝 Ubuntu、Ubuntu 環境設定、安裝 LAMP於 Ubuntu、安裝 Rstudio 與 RShiny 於Ubuntu…等，分章節介紹。</p>
+<div id="r-base" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> R base</h2>
+<div class="sourceCode" id="cb115"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb115-1"><a href="r-base.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb116-1"><a href="r-base.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install software-properties-common dirmngr <span class="at">--yes</span></span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb117-1"><a href="r-base.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-qO-</span> https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc <span class="kw">|</span> <span class="fu">sudo</span> tee <span class="at">-a</span> /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb118-1"><a href="r-base.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="ex">add-apt-repository</span> <span class="st">&quot;deb https://cloud.r-project.org/bin/linux/ubuntu </span><span class="va">$(</span><span class="ex">lsb_release</span> <span class="at">-cs</span><span class="va">)</span><span class="st">-cran40/&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb119-1"><a href="r-base.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install r-base <span class="at">--yes</span></span></code></pre></div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="todo-list.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="事前準備-3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="rstudio-server.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -341,7 +339,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/exkuretrol/MCU-ASIS/edit/main/index.Rmd",
+"link": "https://github.com/exkuretrol/MCU-ASIS/edit/main/04-RStudio-and-RShiny-Server.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -349,7 +347,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/exkuretrol/MCU-ASIS/blob/main/index.Rmd",
+"link": "https://github.com/exkuretrol/MCU-ASIS/blob/main/04-RStudio-and-RShiny-Server.Rmd",
 "text": null
 },
 "download": ["MCU-ASIS.epub"],

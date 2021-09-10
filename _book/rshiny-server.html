@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>MCU ASIS Ubuntu 系統安裝指南</title>
+  <title>4.4 RShiny Server | MCU ASIS Ubuntu 系統安裝指南</title>
   <meta name="description" content="This is a book." />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="MCU ASIS Ubuntu 系統安裝指南" />
+  <meta property="og:title" content="4.4 RShiny Server | MCU ASIS Ubuntu 系統安裝指南" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="MCU ASIS Ubuntu 系統安裝指南" />
+  <meta name="twitter:title" content="4.4 RShiny Server | MCU ASIS Ubuntu 系統安裝指南" />
   
   <meta name="twitter:description" content="This is a book." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="todo-list.html"/>
+<link rel="prev" href="rstudio-server.html"/>
+<link rel="next" href="附錄.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -293,23 +293,57 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">MCU ASIS Ubuntu 系統安裝指南</h1>
-<p class="author"><em>Chiawei Chen</em></p>
-<p class="date"><em>2021-09-10</em></p>
+<div id="rshiny-server" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> RShiny Server</h2>
+<div id="step-1-安裝-rshiny-server" class="section level3" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Step 1 — 安裝 RShiny Server</h3>
+<div class="sourceCode" id="cb139"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb139-1"><a href="rshiny-server.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span> <span class="dt">\</span></span>
+<span id="cb139-2"><a href="rshiny-server.html#cb139-2" aria-hidden="true" tabindex="-1"></a>-c <span class="st">&quot;R -e </span><span class="dt">\&quot;</span><span class="st">install.packages(&#39;shiny&#39;, repos=&#39;https://cran.rstudio.com/&#39;)</span><span class="dt">\&quot;</span><span class="st">&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb140-1"><a href="rshiny-server.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /tmp <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb140-2"><a href="rshiny-server.html#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="ex">wget</span> https://download3.rstudio.org/ubuntu-14.04/x86_64/shiny-server-1.5.16.958-amd64.deb</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb141-1"><a href="rshiny-server.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sha256sum</span> shiny-server-1.5.16.958-amd64.deb </span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb142-1"><a href="rshiny-server.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> gdebi shiny-server-1.5.16.958-amd64.deb</span></code></pre></div>
+<p>::: {#infobox info} 版本 :::</p>
+<p><img src="figures/apache2-shiny-server-main-page.png" /></p>
+<div class="infobox info">
+<p>右下角 blablabla 沒裝 rmarkdown package</p>
 </div>
-<div id="引言" class="section level1 unnumbered">
-<h1>引言</h1>
-<p>這是一本用 <strong>Markdown</strong> 寫的書。邊把我架設系上 Ubuntu 伺服器時的過程記錄下來，這是我第一次寫書，撰寫時考慮的沒有那麼多，所以可能會有閱讀困難的情形。</p>
-<p>本書會從虛擬環境的建立、安裝 Ubuntu、Ubuntu 環境設定、安裝 LAMP於 Ubuntu、安裝 Rstudio 與 RShiny 於Ubuntu…等，分章節介紹。</p>
 </div>
+<div id="step-2-設定-apache-的-proxy-1" class="section level3" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Step 2 — 設定 Apache 的 Proxy</h3>
+<div class="sourceCode" id="cb143"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb143-1"><a href="rshiny-server.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/sites-available/asis.conf</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb144-1"><a href="rshiny-server.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>VirtualHost <span class="ex">*:80</span><span class="op">&gt;</span></span>
+<span id="cb144-2"><a href="rshiny-server.html#cb144-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
+<span id="cb144-3"><a href="rshiny-server.html#cb144-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb144-4"><a href="rshiny-server.html#cb144-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
+<span id="cb144-5"><a href="rshiny-server.html#cb144-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># RStudio Proxy</span></span>
+<span id="cb144-6"><a href="rshiny-server.html#cb144-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
+<span id="cb144-7"><a href="rshiny-server.html#cb144-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
+<span id="cb144-8"><a href="rshiny-server.html#cb144-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb144-9"><a href="rshiny-server.html#cb144-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
+<span id="cb144-10"><a href="rshiny-server.html#cb144-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># RShiny Server Proxy</span></span>
+<span id="cb144-11"><a href="rshiny-server.html#cb144-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
+<span id="cb144-12"><a href="rshiny-server.html#cb144-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RedirectMatch</span> permanent ^/shiny$ /shiny/</span>
+<span id="cb144-13"><a href="rshiny-server.html#cb144-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb144-14"><a href="rshiny-server.html#cb144-14" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteCond</span> %{HTTP:Upgrade} =websocket</span>
+<span id="cb144-15"><a href="rshiny-server.html#cb144-15" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteRule</span> /shiny/<span class="er">(</span><span class="bu">.</span><span class="pp">*</span><span class="kw">)</span> <span class="ex">ws://localhost:3838/</span><span class="va">$1</span> [P,L]</span>
+<span id="cb144-16"><a href="rshiny-server.html#cb144-16" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteCond</span> %{HTTP:Upgrade} !=websocket</span>
+<span id="cb144-17"><a href="rshiny-server.html#cb144-17" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteRule</span> /shiny/<span class="er">(</span><span class="bu">.</span><span class="pp">*</span><span class="kw">)</span> <span class="ex">http://localhost:3838/</span><span class="va">$1</span> [P,L]</span>
+<span id="cb144-18"><a href="rshiny-server.html#cb144-18" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ProxyPass</span> /shiny/ http://localhost:3838/</span>
+<span id="cb144-19"><a href="rshiny-server.html#cb144-19" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ProxyPassReverse</span> /shiny/ http://localhost:3838/</span>
+<span id="cb144-20"><a href="rshiny-server.html#cb144-20" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>/VirtualHost<span class="op">&gt;</span></span></code></pre></div>
+<pre><code>http://&lt;虛擬主機的 ip 地址&gt;/shiny/</code></pre>
+
+</div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="todo-list.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="rstudio-server.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="附錄.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -341,7 +375,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/exkuretrol/MCU-ASIS/edit/main/index.Rmd",
+"link": "https://github.com/exkuretrol/MCU-ASIS/edit/main/04-RStudio-and-RShiny-Server.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -349,7 +383,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/exkuretrol/MCU-ASIS/blob/main/index.Rmd",
+"link": "https://github.com/exkuretrol/MCU-ASIS/blob/main/04-RStudio-and-RShiny-Server.Rmd",
 "text": null
 },
 "download": ["MCU-ASIS.epub"],
