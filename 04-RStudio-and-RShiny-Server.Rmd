@@ -311,7 +311,7 @@ sudo useradd --badnames -N -g asis -m 08170875
 
 -   `-m, --create-home`:
 
-``` {.bash prefixed}
+``` {.bash .prefixed}
 sudo useradd --badnames -N -g fin -m 08220000
 ```
 
