@@ -370,12 +370,12 @@ Zend Engine v3.4.0, Copyright (c) Zend Technologies
 ### Step 2 --- 建立虛擬網站（VirtualHost）（可選）
 
 ``` {.bash .prefixed}
-sudo vim /etc/apache2/sites-available/test.conf
+sudo vim /etc/apache2/sites-available/asis.conf
 ```
 
     <VirtualHost *:80>
         ServerAdmin webmaster@localhost
-        DocumentRoot /var/www/test
+        DocumentRoot /var/www/asis
         ErrorLog ${APACHE_LOG_DIR}/error.log
         CustomLog ${APACHE_LOG_DIR}/access.log combined
     </VirtualHost>
@@ -392,11 +392,11 @@ drwxr-xr-x  2 root root 4096 Sep  1 06:51 html/
 ```
 
 ``` {.bash .prefixed}
-sudo mkdir /var/www/test
+sudo mkdir /var/www/asis
 ```
 
 ``` {.bash .prefixed}
-sudo vim /var/www/test/index.html
+sudo vim /var/www/asis/index.html
 ```
 
 ``` {.html}
@@ -426,7 +426,7 @@ To activate the new configuration, you need to run:
 ```
 
 ``` {.bash .prefixed}
-sudo a2ensite test.conf
+sudo a2ensite asis.conf
 ```
 
 ``` {.bash .prefixed}
