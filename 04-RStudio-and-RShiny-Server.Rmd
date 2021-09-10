@@ -214,3 +214,107 @@ sudo vim /etc/apache2/sites-available/asis.conf
 ```
 
     http://<虛擬主機的 ip 地址>/shiny/
+
+### Step 3 --- Shiny Server 進階設定
+
+``` {.bash .prefixed}
+sudo vim /etc/shiny-server/shiny-server.conf
+```
+
+    run_as :HOME_USER: shiny; # 以個別使用者執行 shinyapp
+                              # shiny 為 fallback 使用者
+
+    # Define a server that listens on port 3838
+    server {
+      listen 3838;
+
+      # http://localhost/depts/
+      location /depts { 
+
+        # http://localhost/depts/asis/
+        location /asis { 
+          user_dirs;
+          
+          # 只允許使用者群組為 'asis' 的使用者連結 App
+          members_of asis;
+          directory_index on;
+        }
+
+        # http://localhost/depts/asis/
+        location /fin {
+          user_dirs;
+          
+          # 只允許使用者群組為 'fin' 的使用者連結 App
+          members_of fin;
+          directory_index on;
+        }
+
+      } 
+
+      # Define a location at the base URL
+      location /apps { # 將 shiny 位置 http://localhost/shiny/
+                       # 變更為 http://localhost/shiny/apps/
+
+        [...]
+
+      }
+      
+    }
+
+``` {.bash .prefixed}
+sudo systemctl restart shiny-server
+```
+
+### Step 4 --- 使用使用者測試設定是否有效
+
+``` {.bash .prefixed}
+sudo groupadd asis
+```
+
+``` {.bash .prefixed}
+sudo groupadd fin
+```
+
+``` {.bash .prefixed}
+sudo vim /etc/default/useradd
+```
+
+``` {.bash}
+# Default values for useradd(8)
+#
+# The SHELL variable specifies the default login shell on your
+# system.
+# Similar to DSHELL in adduser. However, we use "sh" here because
+# useradd is a low level utility and should be as general
+# as possible
+SHELL=/usr/bin/bash # 變更這裡
+```
+
+``` {.bash .prefixed}
+sudo mkdir /etc/skel/ShinyApps/
+```
+
+``` {.bash .prefixed}
+sudo ln -s /srv/shiny-server/sample-apps \
+/etc/skel/ShinyApps/example
+```
+
+``` {.bash .prefixed}
+sudo useradd --badnames -N -g asis -m 08170875
+```
+
+-   `--badnames`:
+
+-   `-N, --no-user-group`:
+
+-   `-g, --gid GROUP`:
+
+-   `-m, --create-home`:
+
+``` {.bash prefixed}
+sudo useradd --badnames -N -g fin -m 08220000
+```
+
+![](figures/shiny-server-group-test-successed.png)
+
+![](figures/shiny-server-group-test-failed.png)
