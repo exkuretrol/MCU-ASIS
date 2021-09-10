@@ -49,7 +49,7 @@ sudo apt install dpkg-sig --yes
 dpkg-sig --verify rstudio-server-1.4.1717-amd64.deb
 ```
 
-``` {.{.{.{..console_output}}}}
+``` {.console_output}
 Processing rstudio-server-1.4.1717-amd64.deb...
 GOODSIG _gpgbuilder FE8564CFF1AB93F1728645193F32EE77E331692F 1621900692
 ```
@@ -174,7 +174,9 @@ sha256sum shiny-server-1.5.16.958-amd64.deb
 sudo gdebi shiny-server-1.5.16.958-amd64.deb
 ```
 
-::: {\#infobox info} 版本 :::
+::: {.infobox .info}
+版本
+:::
 
 ![](figures/apache2-shiny-server-main-page.png)
 
