@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-09-10" />
+<meta name="date" content="2021-09-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -248,6 +248,8 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="4.4.1" data-path="rshiny-server.html"><a href="rshiny-server.html#step-1-安裝-rshiny-server"><i class="fa fa-check"></i><b>4.4.1</b> Step 1 — 安裝 RShiny Server</a></li>
 <li class="chapter" data-level="4.4.2" data-path="rshiny-server.html"><a href="rshiny-server.html#step-2-設定-apache-的-proxy-1"><i class="fa fa-check"></i><b>4.4.2</b> Step 2 — 設定 Apache 的 Proxy</a></li>
+<li class="chapter" data-level="4.4.3" data-path="rshiny-server.html"><a href="rshiny-server.html#step-3-shiny-server-進階設定"><i class="fa fa-check"></i><b>4.4.3</b> Step 3 — Shiny Server 進階設定</a></li>
+<li class="chapter" data-level="4.4.4" data-path="rshiny-server.html"><a href="rshiny-server.html#step-4-使用使用者測試設定是否有效"><i class="fa fa-check"></i><b>4.4.4</b> Step 4 — 使用使用者測試設定是否有效</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="附錄.html"><a href="附錄.html"><i class="fa fa-check"></i>附錄</a>
@@ -303,7 +305,7 @@ div.csl-indent {
 <div class="sourceCode" id="cb122"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb122-1"><a href="rstudio-server.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gpg</span> <span class="at">--keyserver</span> keyserver.ubuntu.com <span class="at">--recv-keys</span> 3F32EE77E331692F</span></code></pre></div>
 <div class="sourceCode" id="cb123"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb123-1"><a href="rstudio-server.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install dpkg-sig <span class="at">--yes</span></span></code></pre></div>
 <div class="sourceCode" id="cb124"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb124-1"><a href="rstudio-server.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dpkg-sig</span> <span class="at">--verify</span> rstudio-server-1.4.1717-amd64.deb</span></code></pre></div>
-<pre class="{.{.{.{..console_output}}}}"><code>Processing rstudio-server-1.4.1717-amd64.deb...
+<pre class="console_output"><code>Processing rstudio-server-1.4.1717-amd64.deb...
 GOODSIG _gpgbuilder FE8564CFF1AB93F1728645193F32EE77E331692F 1621900692</code></pre>
 <div class="sourceCode" id="cb126"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb126-1"><a href="rstudio-server.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> gdebi rstudio-server-1.4.1717-amd64.deb</span></code></pre></div>
 <div class="sourceCode" id="cb127"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb127-1"><a href="rstudio-server.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow 8787</span></code></pre></div>

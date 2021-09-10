@@ -46,3 +46,5 @@ step-2-設定-apache-的-proxy
 rshiny-server
 step-1-安裝-rshiny-server
 step-2-設定-apache-的-proxy-1
+step-3-shiny-server-進階設定
+step-4-使用使用者測試設定是否有效
