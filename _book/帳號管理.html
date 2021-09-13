@@ -316,185 +316,211 @@ div.csl-indent {
 <span id="cb163-10"><a href="帳號管理.html#cb163-10" aria-hidden="true" tabindex="-1"></a><span class="va">depts_dir=</span><span class="st">&#39;depts&#39;</span>       <span class="co"># 放置用來建置 linux 帳號的系資料夾</span></span>
 <span id="cb163-11"><a href="帳號管理.html#cb163-11" aria-hidden="true" tabindex="-1"></a><span class="va">pass_dir=</span><span class="st">&#39;passwd&#39;</span>       <span class="co"># 放置建置完成的 linux 帳號密碼的資料夾，建制完後</span></span>
 <span id="cb163-12"><a href="帳號管理.html#cb163-12" aria-hidden="true" tabindex="-1"></a>                <span class="co"># 可搭配建置 MySQL 帳號與資料庫腳本（generate-sql.sh）使用</span></span>
-<span id="cb163-13"><a href="帳號管理.html#cb163-13" aria-hidden="true" tabindex="-1"></a><span class="va">np=</span>true             <span class="co"># 不需要用隨機密碼建立帳號的旗標</span></span>
-<span id="cb163-14"><a href="帳號管理.html#cb163-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb163-15"><a href="帳號管理.html#cb163-15" aria-hidden="true" tabindex="-1"></a><span class="fu">check_permission()</span> <span class="kw">{</span></span>
-<span id="cb163-16"><a href="帳號管理.html#cb163-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">[</span> <span class="va">$(</span><span class="fu">id</span> <span class="at">-u</span><span class="va">)</span> <span class="ot">-ne</span> 0 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb163-17"><a href="帳號管理.html#cb163-17" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">&quot;必須以 root 權限執行此腳本！&quot;</span><span class="kw">;</span></span>
-<span id="cb163-18"><a href="帳號管理.html#cb163-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">exit</span> 1<span class="kw">;</span></span>
-<span id="cb163-19"><a href="帳號管理.html#cb163-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
-<span id="cb163-20"><a href="帳號管理.html#cb163-20" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
-<span id="cb163-21"><a href="帳號管理.html#cb163-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb163-22"><a href="帳號管理.html#cb163-22" aria-hidden="true" tabindex="-1"></a><span class="fu">check_depts_dir()</span> <span class="kw">{</span></span>
-<span id="cb163-23"><a href="帳號管理.html#cb163-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">[</span> <span class="ot">-d</span> <span class="va">${depts_dir}</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb163-24"><a href="帳號管理.html#cb163-24" aria-hidden="true" tabindex="-1"></a>        <span class="va">grps=</span><span class="st">&quot;</span><span class="va">$(</span><span class="fu">ls</span> ./<span class="va">${depts_dir}</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;.txt&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span> <span class="st">&quot;.&quot;</span> <span class="at">-f</span> 1<span class="va">)</span><span class="st">&quot;</span></span>
-<span id="cb163-25"><a href="帳號管理.html#cb163-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> grp <span class="kw">in</span> <span class="va">${grps}</span></span>
-<span id="cb163-26"><a href="帳號管理.html#cb163-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">do</span></span>
-<span id="cb163-27"><a href="帳號管理.html#cb163-27" aria-hidden="true" tabindex="-1"></a>            <span class="va">table=$(</span><span class="fu">wc</span> <span class="at">-l</span> ./<span class="va">${depts_dir}</span>/<span class="va">${grp}</span>.txt<span class="va">)</span></span>
-<span id="cb163-28"><a href="帳號管理.html#cb163-28" aria-hidden="true" tabindex="-1"></a>            <span class="va">file=$(</span><span class="bu">echo</span> <span class="va">$table</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span> <span class="st">&#39; &#39;</span> <span class="at">-f</span> 2<span class="va">)</span></span>
-<span id="cb163-29"><a href="帳號管理.html#cb163-29" aria-hidden="true" tabindex="-1"></a>            <span class="va">count=$(</span><span class="bu">echo</span> <span class="va">$table</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span> <span class="st">&#39; &#39;</span> <span class="at">-f</span> 1<span class="va">)</span></span>
-<span id="cb163-30"><a href="帳號管理.html#cb163-30" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">[</span> <span class="va">$count</span> <span class="ot">-lt</span> 1 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb163-31"><a href="帳號管理.html#cb163-31" aria-hidden="true" tabindex="-1"></a>                <span class="bu">echo</span> <span class="st">&quot;請在在檢查一次 ./</span><span class="va">${depts_dir}</span><span class="st">/ 內是否含有正確格式的學號檔案！&quot;</span></span>
-<span id="cb163-32"><a href="帳號管理.html#cb163-32" aria-hidden="true" tabindex="-1"></a>                <span class="bu">echo</span> <span class="st">&quot;有問題的檔案: </span><span class="va">$file</span><span class="st">&quot;</span></span>
-<span id="cb163-33"><a href="帳號管理.html#cb163-33" aria-hidden="true" tabindex="-1"></a>                <span class="bu">exit</span> 1</span>
-<span id="cb163-34"><a href="帳號管理.html#cb163-34" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span></span>
-<span id="cb163-35"><a href="帳號管理.html#cb163-35" aria-hidden="true" tabindex="-1"></a>                <span class="bu">echo</span> <span class="st">&quot;於 </span><span class="va">$file</span><span class="st"> 發現了 </span><span class="va">$count</span><span class="st"> 個學生&quot;</span></span>
-<span id="cb163-36"><a href="帳號管理.html#cb163-36" aria-hidden="true" tabindex="-1"></a>            <span class="cf">fi</span></span>
-<span id="cb163-37"><a href="帳號管理.html#cb163-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">done</span></span>
-<span id="cb163-38"><a href="帳號管理.html#cb163-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
-<span id="cb163-39"><a href="帳號管理.html#cb163-39" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">&quot;系資料夾 </span><span class="va">${depts_dir}</span><span class="st"> 不存在！請再確認一次。&quot;</span></span>
-<span id="cb163-40"><a href="帳號管理.html#cb163-40" aria-hidden="true" tabindex="-1"></a>        <span class="bu">exit</span> 1<span class="kw">;</span></span>
-<span id="cb163-41"><a href="帳號管理.html#cb163-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
-<span id="cb163-42"><a href="帳號管理.html#cb163-42" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
-<span id="cb163-43"><a href="帳號管理.html#cb163-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb163-44"><a href="帳號管理.html#cb163-44" aria-hidden="true" tabindex="-1"></a><span class="fu">make_pass_dir()</span> <span class="kw">{</span></span>
-<span id="cb163-45"><a href="帳號管理.html#cb163-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-d</span> <span class="va">${pass_dir}</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb163-46"><a href="帳號管理.html#cb163-46" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">&quot;存放密碼 </span><span class="va">${pass_dir}</span><span class="st"> 資料夾不存在，將建立 </span><span class="va">${pass_dir}</span><span class="st"> 資料夾&quot;</span></span>
-<span id="cb163-47"><a href="帳號管理.html#cb163-47" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mkdir</span> <span class="va">${pass_dir}</span></span>
-<span id="cb163-48"><a href="帳號管理.html#cb163-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
-<span id="cb163-49"><a href="帳號管理.html#cb163-49" aria-hidden="true" tabindex="-1"></a>        <span class="bu">read</span> <span class="at">-p</span> <span class="st">&quot;存放密碼 </span><span class="va">${pass_dir}</span><span class="st"> 資料夾已存在！是否要將其移除後繼續建立帳號? (yes/No)&quot;</span> <span class="va">yn</span></span>
-<span id="cb163-50"><a href="帳號管理.html#cb163-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="va">$yn</span> <span class="kw">in</span></span>
-<span id="cb163-51"><a href="帳號管理.html#cb163-51" aria-hidden="true" tabindex="-1"></a>            [Yy]<span class="pp">*</span> <span class="kw">)</span> </span>
-<span id="cb163-52"><a href="帳號管理.html#cb163-52" aria-hidden="true" tabindex="-1"></a>                <span class="fu">rm</span> <span class="at">-rf</span> <span class="va">${pass_dir}</span></span>
-<span id="cb163-53"><a href="帳號管理.html#cb163-53" aria-hidden="true" tabindex="-1"></a>                <span class="ex">make_pass_dir</span></span>
-<span id="cb163-54"><a href="帳號管理.html#cb163-54" aria-hidden="true" tabindex="-1"></a>            ;;</span>
-<span id="cb163-55"><a href="帳號管理.html#cb163-55" aria-hidden="true" tabindex="-1"></a>            [No]<span class="pp">*</span> <span class="kw">)</span> <span class="bu">exit</span> 1<span class="cf">;;</span></span>
-<span id="cb163-56"><a href="帳號管理.html#cb163-56" aria-hidden="true" tabindex="-1"></a>        <span class="cf">esac</span></span>
-<span id="cb163-57"><a href="帳號管理.html#cb163-57" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
-<span id="cb163-58"><a href="帳號管理.html#cb163-58" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
-<span id="cb163-59"><a href="帳號管理.html#cb163-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb163-60"><a href="帳號管理.html#cb163-60" aria-hidden="true" tabindex="-1"></a><span class="fu">create_users()</span> <span class="kw">{</span></span>
-<span id="cb163-61"><a href="帳號管理.html#cb163-61" aria-hidden="true" tabindex="-1"></a>    <span class="ex">make_pass_dir</span></span>
-<span id="cb163-62"><a href="帳號管理.html#cb163-62" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> grp <span class="kw">in</span> <span class="va">${grps}</span></span>
-<span id="cb163-63"><a href="帳號管理.html#cb163-63" aria-hidden="true" tabindex="-1"></a>    <span class="cf">do</span> </span>
-<span id="cb163-64"><a href="帳號管理.html#cb163-64" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">$(</span><span class="fu">grep</span> <span class="at">-q</span> <span class="st">&quot;^</span><span class="va">${grp}</span><span class="st">&quot;</span> /etc/group<span class="va">)</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb163-65"><a href="帳號管理.html#cb163-65" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">&quot;群組 &#39;</span><span class="va">${grp}</span><span class="st">&#39; 已存在，不需再建立。&quot;</span></span>
-<span id="cb163-66"><a href="帳號管理.html#cb163-66" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span></span>
-<span id="cb163-67"><a href="帳號管理.html#cb163-67" aria-hidden="true" tabindex="-1"></a>            <span class="ex">groupadd</span> <span class="va">${grp}</span></span>
-<span id="cb163-68"><a href="帳號管理.html#cb163-68" aria-hidden="true" tabindex="-1"></a>        <span class="cf">fi</span></span>
-<span id="cb163-69"><a href="帳號管理.html#cb163-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb163-70"><a href="帳號管理.html#cb163-70" aria-hidden="true" tabindex="-1"></a>        <span class="co"># create user</span></span>
-<span id="cb163-71"><a href="帳號管理.html#cb163-71" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="bu">read</span> <span class="va">stu</span><span class="kw">;</span></span>
-<span id="cb163-72"><a href="帳號管理.html#cb163-72" aria-hidden="true" tabindex="-1"></a>        <span class="cf">do</span></span>
-<span id="cb163-73"><a href="帳號管理.html#cb163-73" aria-hidden="true" tabindex="-1"></a>            <span class="va">cur_user=${stu}</span></span>
-<span id="cb163-74"><a href="帳號管理.html#cb163-74" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">$(</span><span class="fu">id</span> <span class="st">&quot;</span><span class="va">${cur_user}</span><span class="st">&quot;</span> <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span>1<span class="va">)</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb163-75"><a href="帳號管理.html#cb163-75" aria-hidden="true" tabindex="-1"></a>                <span class="bu">echo</span> <span class="st">&quot;使用者 &#39;</span><span class="va">${cur_user}</span><span class="st">&#39; 已存在。&quot;</span></span>
-<span id="cb163-76"><a href="帳號管理.html#cb163-76" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span></span>
-<span id="cb163-77"><a href="帳號管理.html#cb163-77" aria-hidden="true" tabindex="-1"></a>                <span class="ex">useradd</span> <span class="at">--badnames</span> <span class="at">-N</span> <span class="at">-g</span> <span class="va">${grp}</span> <span class="at">-m</span> <span class="va">${cur_user}</span></span>
-<span id="cb163-78"><a href="帳號管理.html#cb163-78" aria-hidden="true" tabindex="-1"></a>                </span>
-<span id="cb163-79"><a href="帳號管理.html#cb163-79" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="bu">[</span> <span class="va">${np}</span> <span class="ot">=</span> false <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb163-80"><a href="帳號管理.html#cb163-80" aria-hidden="true" tabindex="-1"></a>                    <span class="va">cur_user_password=${cur_user}</span></span>
-<span id="cb163-81"><a href="帳號管理.html#cb163-81" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span></span>
-<span id="cb163-82"><a href="帳號管理.html#cb163-82" aria-hidden="true" tabindex="-1"></a>                    <span class="va">cur_user_password=$(</span><span class="ex">openssl</span> rand <span class="at">-base64</span> 6<span class="va">)</span></span>
-<span id="cb163-83"><a href="帳號管理.html#cb163-83" aria-hidden="true" tabindex="-1"></a>                <span class="cf">fi</span></span>
+<span id="cb163-13"><a href="帳號管理.html#cb163-13" aria-hidden="true" tabindex="-1"></a><span class="va">gp=</span>false            <span class="co"># 不需要用隨機密碼建立帳號的旗標</span></span>
+<span id="cb163-14"><a href="帳號管理.html#cb163-14" aria-hidden="true" tabindex="-1"></a><span class="va">new=</span>false</span>
+<span id="cb163-15"><a href="帳號管理.html#cb163-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb163-16"><a href="帳號管理.html#cb163-16" aria-hidden="true" tabindex="-1"></a><span class="fu">check_permission()</span> <span class="kw">{</span></span>
+<span id="cb163-17"><a href="帳號管理.html#cb163-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">[</span> <span class="va">$(</span><span class="fu">id</span> <span class="at">-u</span><span class="va">)</span> <span class="ot">-ne</span> 0 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb163-18"><a href="帳號管理.html#cb163-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">&quot;必須以 root 權限執行此腳本！&quot;</span><span class="kw">;</span></span>
+<span id="cb163-19"><a href="帳號管理.html#cb163-19" aria-hidden="true" tabindex="-1"></a>        <span class="bu">exit</span> 1<span class="kw">;</span></span>
+<span id="cb163-20"><a href="帳號管理.html#cb163-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb163-21"><a href="帳號管理.html#cb163-21" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb163-22"><a href="帳號管理.html#cb163-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb163-23"><a href="帳號管理.html#cb163-23" aria-hidden="true" tabindex="-1"></a><span class="fu">check_depts_dir()</span> <span class="kw">{</span></span>
+<span id="cb163-24"><a href="帳號管理.html#cb163-24" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="bu">[</span> <span class="ot">-d</span> <span class="va">${depts_dir}</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb163-25"><a href="帳號管理.html#cb163-25" aria-hidden="true" tabindex="-1"></a>        <span class="va">grps=</span><span class="st">&quot;</span><span class="va">$(</span><span class="fu">ls</span> ./<span class="va">${depts_dir}</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;.txt&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span> <span class="st">&quot;.&quot;</span> <span class="at">-f</span> 1<span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb163-26"><a href="帳號管理.html#cb163-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> grp <span class="kw">in</span> <span class="va">${grps}</span></span>
+<span id="cb163-27"><a href="帳號管理.html#cb163-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">do</span></span>
+<span id="cb163-28"><a href="帳號管理.html#cb163-28" aria-hidden="true" tabindex="-1"></a>            <span class="va">table=$(</span><span class="fu">wc</span> <span class="at">-l</span> ./<span class="va">${depts_dir}</span>/<span class="va">${grp}</span>.txt<span class="va">)</span></span>
+<span id="cb163-29"><a href="帳號管理.html#cb163-29" aria-hidden="true" tabindex="-1"></a>            <span class="va">file=$(</span><span class="bu">echo</span> <span class="va">$table</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span> <span class="st">&#39; &#39;</span> <span class="at">-f</span> 2<span class="va">)</span></span>
+<span id="cb163-30"><a href="帳號管理.html#cb163-30" aria-hidden="true" tabindex="-1"></a>            <span class="va">count=$(</span><span class="bu">echo</span> <span class="va">$table</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span> <span class="st">&#39; &#39;</span> <span class="at">-f</span> 1<span class="va">)</span></span>
+<span id="cb163-31"><a href="帳號管理.html#cb163-31" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">[</span> <span class="va">$count</span> <span class="ot">-lt</span> 1 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb163-32"><a href="帳號管理.html#cb163-32" aria-hidden="true" tabindex="-1"></a>                <span class="bu">echo</span> <span class="st">&quot;再檢查一次 ./</span><span class="va">${depts_dir}</span><span class="st">/ 內是否含有正確格式的學號檔案！&quot;</span></span>
+<span id="cb163-33"><a href="帳號管理.html#cb163-33" aria-hidden="true" tabindex="-1"></a>                <span class="bu">echo</span> <span class="st">&quot;有問題的檔案: </span><span class="va">$file</span><span class="st">&quot;</span></span>
+<span id="cb163-34"><a href="帳號管理.html#cb163-34" aria-hidden="true" tabindex="-1"></a>                <span class="bu">exit</span> 1</span>
+<span id="cb163-35"><a href="帳號管理.html#cb163-35" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span></span>
+<span id="cb163-36"><a href="帳號管理.html#cb163-36" aria-hidden="true" tabindex="-1"></a>                <span class="bu">echo</span> <span class="st">&quot;於 </span><span class="va">$file</span><span class="st"> 發現了 </span><span class="va">$count</span><span class="st"> 個學生&quot;</span></span>
+<span id="cb163-37"><a href="帳號管理.html#cb163-37" aria-hidden="true" tabindex="-1"></a>            <span class="cf">fi</span></span>
+<span id="cb163-38"><a href="帳號管理.html#cb163-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">done</span></span>
+<span id="cb163-39"><a href="帳號管理.html#cb163-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
+<span id="cb163-40"><a href="帳號管理.html#cb163-40" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">&quot;系資料夾 </span><span class="va">${depts_dir}</span><span class="st"> 不存在！請再確認一次。&quot;</span></span>
+<span id="cb163-41"><a href="帳號管理.html#cb163-41" aria-hidden="true" tabindex="-1"></a>        <span class="bu">exit</span> 1<span class="kw">;</span></span>
+<span id="cb163-42"><a href="帳號管理.html#cb163-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb163-43"><a href="帳號管理.html#cb163-43" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb163-44"><a href="帳號管理.html#cb163-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb163-45"><a href="帳號管理.html#cb163-45" aria-hidden="true" tabindex="-1"></a><span class="fu">make_pass_dir()</span> <span class="kw">{</span></span>
+<span id="cb163-46"><a href="帳號管理.html#cb163-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-d</span> <span class="va">${pass_dir}</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb163-47"><a href="帳號管理.html#cb163-47" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">&quot;存放密碼的 </span><span class="va">${pass_dir}</span><span class="st"> 資料夾不存在，將建立 </span><span class="va">${pass_dir}</span><span class="st"> 資料夾&quot;</span></span>
+<span id="cb163-48"><a href="帳號管理.html#cb163-48" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mkdir</span> <span class="va">${pass_dir}</span></span>
+<span id="cb163-49"><a href="帳號管理.html#cb163-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
+<span id="cb163-50"><a href="帳號管理.html#cb163-50" aria-hidden="true" tabindex="-1"></a>        <span class="bu">read</span> <span class="at">-p</span> <span class="st">&quot;存放密碼的 </span><span class="va">${pass_dir}</span><span class="st"> 資料夾已存在！是否要將其移除後繼續建立帳號? (yes/No)&quot;</span> <span class="va">yn</span></span>
+<span id="cb163-51"><a href="帳號管理.html#cb163-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="va">$yn</span> <span class="kw">in</span></span>
+<span id="cb163-52"><a href="帳號管理.html#cb163-52" aria-hidden="true" tabindex="-1"></a>            [Yy]<span class="pp">*</span> <span class="kw">)</span> </span>
+<span id="cb163-53"><a href="帳號管理.html#cb163-53" aria-hidden="true" tabindex="-1"></a>                <span class="fu">rm</span> <span class="at">-rf</span> <span class="va">${pass_dir}</span></span>
+<span id="cb163-54"><a href="帳號管理.html#cb163-54" aria-hidden="true" tabindex="-1"></a>                <span class="ex">make_pass_dir</span></span>
+<span id="cb163-55"><a href="帳號管理.html#cb163-55" aria-hidden="true" tabindex="-1"></a>            ;;</span>
+<span id="cb163-56"><a href="帳號管理.html#cb163-56" aria-hidden="true" tabindex="-1"></a>            [No]<span class="pp">*</span> <span class="kw">)</span> <span class="bu">exit</span> 1<span class="cf">;;</span></span>
+<span id="cb163-57"><a href="帳號管理.html#cb163-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">esac</span></span>
+<span id="cb163-58"><a href="帳號管理.html#cb163-58" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb163-59"><a href="帳號管理.html#cb163-59" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb163-60"><a href="帳號管理.html#cb163-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb163-61"><a href="帳號管理.html#cb163-61" aria-hidden="true" tabindex="-1"></a><span class="fu">create_users()</span> <span class="kw">{</span></span>
+<span id="cb163-62"><a href="帳號管理.html#cb163-62" aria-hidden="true" tabindex="-1"></a>    <span class="ex">make_pass_dir</span></span>
+<span id="cb163-63"><a href="帳號管理.html#cb163-63" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> grp <span class="kw">in</span> <span class="va">${grps}</span></span>
+<span id="cb163-64"><a href="帳號管理.html#cb163-64" aria-hidden="true" tabindex="-1"></a>    <span class="cf">do</span> </span>
+<span id="cb163-65"><a href="帳號管理.html#cb163-65" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">$(</span><span class="fu">grep</span> <span class="at">-q</span> <span class="st">&quot;^</span><span class="va">${grp}</span><span class="st">&quot;</span> /etc/group<span class="va">)</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb163-66"><a href="帳號管理.html#cb163-66" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">&quot;群組 &#39;</span><span class="va">${grp}</span><span class="st">&#39; 已存在，不需再建立。&quot;</span></span>
+<span id="cb163-67"><a href="帳號管理.html#cb163-67" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span></span>
+<span id="cb163-68"><a href="帳號管理.html#cb163-68" aria-hidden="true" tabindex="-1"></a>            <span class="ex">groupadd</span> <span class="va">${grp}</span></span>
+<span id="cb163-69"><a href="帳號管理.html#cb163-69" aria-hidden="true" tabindex="-1"></a>        <span class="cf">fi</span></span>
+<span id="cb163-70"><a href="帳號管理.html#cb163-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb163-71"><a href="帳號管理.html#cb163-71" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">[</span> <span class="va">${new}</span> <span class="ot">=</span> false <span class="bu">]</span> <span class="kw">&amp;&amp;</span>  <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-d</span> /srv/shiny-server/<span class="va">${grp}</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb163-72"><a href="帳號管理.html#cb163-72" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">&quot;/srv/shiny-server/</span><span class="va">${grp}</span><span class="st"> 資料夾不存在，將建立群組資料夾&quot;</span></span>
+<span id="cb163-73"><a href="帳號管理.html#cb163-73" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mkdir</span> /srv/shiny-server/<span class="va">${grp}</span>      </span>
+<span id="cb163-74"><a href="帳號管理.html#cb163-74" aria-hidden="true" tabindex="-1"></a>        <span class="cf">fi</span></span>
+<span id="cb163-75"><a href="帳號管理.html#cb163-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb163-76"><a href="帳號管理.html#cb163-76" aria-hidden="true" tabindex="-1"></a>        <span class="co"># create user</span></span>
+<span id="cb163-77"><a href="帳號管理.html#cb163-77" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="bu">read</span> <span class="va">stu</span><span class="kw">;</span></span>
+<span id="cb163-78"><a href="帳號管理.html#cb163-78" aria-hidden="true" tabindex="-1"></a>        <span class="cf">do</span></span>
+<span id="cb163-79"><a href="帳號管理.html#cb163-79" aria-hidden="true" tabindex="-1"></a>            <span class="va">cur_user=${stu}</span></span>
+<span id="cb163-80"><a href="帳號管理.html#cb163-80" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">$(</span><span class="fu">id</span> <span class="st">&quot;</span><span class="va">${cur_user}</span><span class="st">&quot;</span> <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span>1<span class="va">)</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb163-81"><a href="帳號管理.html#cb163-81" aria-hidden="true" tabindex="-1"></a>                <span class="bu">echo</span> <span class="st">&quot;使用者 &#39;</span><span class="va">${cur_user}</span><span class="st">&#39; 已存在。&quot;</span></span>
+<span id="cb163-82"><a href="帳號管理.html#cb163-82" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span></span>
+<span id="cb163-83"><a href="帳號管理.html#cb163-83" aria-hidden="true" tabindex="-1"></a>                <span class="ex">useradd</span> <span class="at">--badnames</span> <span class="at">-N</span> <span class="at">-g</span> <span class="va">${grp}</span> <span class="at">-m</span> <span class="va">${cur_user}</span></span>
 <span id="cb163-84"><a href="帳號管理.html#cb163-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb163-85"><a href="帳號管理.html#cb163-85" aria-hidden="true" tabindex="-1"></a>                <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">${cur_user}</span><span class="st">:</span><span class="va">${cur_user_password}</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="ex">chpasswd</span></span>
-<span id="cb163-86"><a href="帳號管理.html#cb163-86" aria-hidden="true" tabindex="-1"></a>                <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">${cur_user}</span><span class="st">,</span><span class="va">${cur_user_password}</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> ./<span class="va">${pass_dir}</span>/<span class="va">${grp}</span>.csv <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
-<span id="cb163-87"><a href="帳號管理.html#cb163-87" aria-hidden="true" tabindex="-1"></a>            <span class="cf">fi</span></span>
-<span id="cb163-88"><a href="帳號管理.html#cb163-88" aria-hidden="true" tabindex="-1"></a>        <span class="cf">done</span> <span class="op">&lt;</span> ./<span class="va">${depts_dir}</span>/<span class="va">${grp}</span>.txt</span>
-<span id="cb163-89"><a href="帳號管理.html#cb163-89" aria-hidden="true" tabindex="-1"></a>    <span class="cf">done</span></span>
-<span id="cb163-90"><a href="帳號管理.html#cb163-90" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span>
-<span id="cb163-91"><a href="帳號管理.html#cb163-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb163-92"><a href="帳號管理.html#cb163-92" aria-hidden="true" tabindex="-1"></a><span class="fu">delete_users()</span> <span class="kw">{</span></span>
-<span id="cb163-93"><a href="帳號管理.html#cb163-93" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> grp <span class="kw">in</span> <span class="va">${grps}</span></span>
-<span id="cb163-94"><a href="帳號管理.html#cb163-94" aria-hidden="true" tabindex="-1"></a>    <span class="cf">do</span> </span>
-<span id="cb163-95"><a href="帳號管理.html#cb163-95" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="bu">read</span> <span class="va">stu</span><span class="kw">;</span></span>
-<span id="cb163-96"><a href="帳號管理.html#cb163-96" aria-hidden="true" tabindex="-1"></a>        <span class="cf">do</span></span>
-<span id="cb163-97"><a href="帳號管理.html#cb163-97" aria-hidden="true" tabindex="-1"></a>            <span class="ex">userdel</span> <span class="at">-r</span> <span class="va">${stu}</span>   </span>
+<span id="cb163-85"><a href="帳號管理.html#cb163-85" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="bu">[</span> <span class="va">${gp}</span> <span class="ot">=</span> false <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb163-86"><a href="帳號管理.html#cb163-86" aria-hidden="true" tabindex="-1"></a>                    <span class="va">cur_user_password=${cur_user}</span></span>
+<span id="cb163-87"><a href="帳號管理.html#cb163-87" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span></span>
+<span id="cb163-88"><a href="帳號管理.html#cb163-88" aria-hidden="true" tabindex="-1"></a>                    <span class="va">cur_user_password=$(</span><span class="ex">openssl</span> rand <span class="at">-base64</span> 6<span class="va">)</span></span>
+<span id="cb163-89"><a href="帳號管理.html#cb163-89" aria-hidden="true" tabindex="-1"></a>                <span class="cf">fi</span></span>
+<span id="cb163-90"><a href="帳號管理.html#cb163-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb163-91"><a href="帳號管理.html#cb163-91" aria-hidden="true" tabindex="-1"></a>                <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">${cur_user}</span><span class="st">:</span><span class="va">${cur_user_password}</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="ex">chpasswd</span></span>
+<span id="cb163-92"><a href="帳號管理.html#cb163-92" aria-hidden="true" tabindex="-1"></a>                <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">${cur_user}</span><span class="st">,</span><span class="va">${cur_user_password}</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> ./<span class="va">${pass_dir}</span>/<span class="va">${grp}</span>.csv <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
+<span id="cb163-93"><a href="帳號管理.html#cb163-93" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="bu">[</span> <span class="va">${new}</span> <span class="ot">=</span> false <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb163-94"><a href="帳號管理.html#cb163-94" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># 需要先在 /etc/skel/ 建立 ShinyApps 資料夾，才可成功連結</span></span>
+<span id="cb163-95"><a href="帳號管理.html#cb163-95" aria-hidden="true" tabindex="-1"></a>                <span class="fu">ln</span> <span class="at">-s</span> /home/<span class="va">${cur_user}</span>/ShinyApps /srv/shiny-server/<span class="va">${grp}</span>/<span class="va">${cur_user}</span></span>
+<span id="cb163-96"><a href="帳號管理.html#cb163-96" aria-hidden="true" tabindex="-1"></a>                <span class="cf">fi</span></span>
+<span id="cb163-97"><a href="帳號管理.html#cb163-97" aria-hidden="true" tabindex="-1"></a>            <span class="cf">fi</span></span>
 <span id="cb163-98"><a href="帳號管理.html#cb163-98" aria-hidden="true" tabindex="-1"></a>        <span class="cf">done</span> <span class="op">&lt;</span> ./<span class="va">${depts_dir}</span>/<span class="va">${grp}</span>.txt</span>
-<span id="cb163-99"><a href="帳號管理.html#cb163-99" aria-hidden="true" tabindex="-1"></a>    <span class="cf">done</span></span>
-<span id="cb163-100"><a href="帳號管理.html#cb163-100" aria-hidden="true" tabindex="-1"></a>    <span class="bu">read</span> <span class="at">-p</span> <span class="st">&quot;使用者已移除，是否要順便移除存放密碼的資料夾 </span><span class="va">${pass_dir}</span><span class="st">? (yes/No)&quot;</span> <span class="va">yn</span></span>
-<span id="cb163-101"><a href="帳號管理.html#cb163-101" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> <span class="va">$yn</span> <span class="kw">in</span></span>
-<span id="cb163-102"><a href="帳號管理.html#cb163-102" aria-hidden="true" tabindex="-1"></a>        [Yy]<span class="pp">*</span> <span class="kw">)</span> </span>
-<span id="cb163-103"><a href="帳號管理.html#cb163-103" aria-hidden="true" tabindex="-1"></a>            <span class="fu">rm</span> <span class="at">-rf</span> <span class="va">${pass_dir}</span></span>
-<span id="cb163-104"><a href="帳號管理.html#cb163-104" aria-hidden="true" tabindex="-1"></a>        <span class="cf">;;</span></span>
-<span id="cb163-105"><a href="帳號管理.html#cb163-105" aria-hidden="true" tabindex="-1"></a>        [No]<span class="pp">*</span> <span class="kw">)</span> <span class="bu">exit</span> 0<span class="cf">;;</span></span>
-<span id="cb163-106"><a href="帳號管理.html#cb163-106" aria-hidden="true" tabindex="-1"></a>    <span class="cf">esac</span></span>
-<span id="cb163-107"><a href="帳號管理.html#cb163-107" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span>
-<span id="cb163-108"><a href="帳號管理.html#cb163-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb163-109"><a href="帳號管理.html#cb163-109" aria-hidden="true" tabindex="-1"></a><span class="fu">create_prompt()</span> <span class="kw">{</span></span>
-<span id="cb163-110"><a href="帳號管理.html#cb163-110" aria-hidden="true" tabindex="-1"></a>    <span class="bu">read</span> <span class="at">-p</span> <span class="st">&quot;即將建立使用者帳戶，確認使用者資料是否無誤? (Yes/No)&quot;</span> <span class="va">yn</span></span>
-<span id="cb163-111"><a href="帳號管理.html#cb163-111" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> <span class="va">$yn</span> <span class="kw">in</span></span>
-<span id="cb163-112"><a href="帳號管理.html#cb163-112" aria-hidden="true" tabindex="-1"></a>        [Yy]<span class="pp">*</span> <span class="kw">)</span> <span class="ex">create_users</span><span class="kw">;;</span></span>
-<span id="cb163-113"><a href="帳號管理.html#cb163-113" aria-hidden="true" tabindex="-1"></a>        <span class="ex">[Nn]*</span> <span class="er">)</span> <span class="bu">exit</span><span class="cf">;;</span></span>
-<span id="cb163-114"><a href="帳號管理.html#cb163-114" aria-hidden="true" tabindex="-1"></a>    <span class="cf">esac</span></span>
-<span id="cb163-115"><a href="帳號管理.html#cb163-115" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
-<span id="cb163-116"><a href="帳號管理.html#cb163-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb163-117"><a href="帳號管理.html#cb163-117" aria-hidden="true" tabindex="-1"></a><span class="fu">delete_prompt()</span> <span class="kw">{</span></span>
-<span id="cb163-118"><a href="帳號管理.html#cb163-118" aria-hidden="true" tabindex="-1"></a>    <span class="bu">read</span> <span class="at">-p</span> <span class="st">&quot;即將 &#39;刪除&#39; 使用者帳戶，於 /home/&lt;使用者&gt; 的資料將會消失，是否執行? (Yes/No)&quot;</span> <span class="va">yn</span></span>
-<span id="cb163-119"><a href="帳號管理.html#cb163-119" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> <span class="va">$yn</span> <span class="kw">in</span></span>
-<span id="cb163-120"><a href="帳號管理.html#cb163-120" aria-hidden="true" tabindex="-1"></a>        [Yy]<span class="pp">*</span> <span class="kw">)</span> <span class="ex">delete_users</span><span class="kw">;;</span></span>
-<span id="cb163-121"><a href="帳號管理.html#cb163-121" aria-hidden="true" tabindex="-1"></a>        <span class="ex">[Nn]*</span> <span class="er">)</span> <span class="bu">exit</span><span class="cf">;;</span></span>
-<span id="cb163-122"><a href="帳號管理.html#cb163-122" aria-hidden="true" tabindex="-1"></a>    <span class="cf">esac</span></span>
-<span id="cb163-123"><a href="帳號管理.html#cb163-123" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
-<span id="cb163-124"><a href="帳號管理.html#cb163-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb163-125"><a href="帳號管理.html#cb163-125" aria-hidden="true" tabindex="-1"></a><span class="fu">display_help()</span> <span class="kw">{</span></span>
-<span id="cb163-126"><a href="帳號管理.html#cb163-126" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;使用方法: </span><span class="va">$0</span><span class="st"> [選項...] {create|delete}&quot;</span></span>
-<span id="cb163-127"><a href="帳號管理.html#cb163-127" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> </span>
-<span id="cb163-128"><a href="帳號管理.html#cb163-128" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;選項: &quot;</span></span>
-<span id="cb163-129"><a href="帳號管理.html#cb163-129" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  -np, --dont-generate-password   不產生隨機的使用者密碼，以學生學號取代&quot;</span></span>
-<span id="cb163-130"><a href="帳號管理.html#cb163-130" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span></span>
-<span id="cb163-131"><a href="帳號管理.html#cb163-131" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;此腳本被用來: &quot;</span></span>
-<span id="cb163-132"><a href="帳號管理.html#cb163-132" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;1. 根據 ./</span><span class="va">${depts_dir}</span><span class="st">/ 裡面的 &lt;系所名稱.txt&gt; 建立帳號，&quot;</span></span>
-<span id="cb163-133"><a href="帳號管理.html#cb163-133" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  系所名稱會被用來當作 linux 使用者的使用者主要群組（primary group），&quot;</span></span>
-<span id="cb163-134"><a href="帳號管理.html#cb163-134" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  &lt;系所名稱.txt&gt; 內的格式為一個學號佔用一行。&quot;</span></span>
-<span id="cb163-135"><a href="帳號管理.html#cb163-135" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span></span>
-<span id="cb163-136"><a href="帳號管理.html#cb163-136" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  檔案結構:&quot;</span></span>
-<span id="cb163-137"><a href="帳號管理.html#cb163-137" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  depts&quot;</span></span>
-<span id="cb163-138"><a href="帳號管理.html#cb163-138" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  ├── asis.txt&quot;</span></span>
-<span id="cb163-139"><a href="帳號管理.html#cb163-139" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  └── ecofin.txt&quot;</span></span>
-<span id="cb163-140"><a href="帳號管理.html#cb163-140" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  ───────┬──────────────────&quot;</span></span>
-<span id="cb163-141"><a href="帳號管理.html#cb163-141" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;         │ ./depts/asis.txt &quot;</span></span>
-<span id="cb163-142"><a href="帳號管理.html#cb163-142" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  ───────┼──────────────────&quot;</span></span>
-<span id="cb163-143"><a href="帳號管理.html#cb163-143" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;     1   │ 08170875&quot;</span></span>
-<span id="cb163-144"><a href="帳號管理.html#cb163-144" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;     2   │ 08170396&quot;</span></span>
-<span id="cb163-145"><a href="帳號管理.html#cb163-145" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;     3   │ ...&quot;</span></span>
-<span id="cb163-146"><a href="帳號管理.html#cb163-146" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  ───────┴──────────────────&quot;</span></span>
-<span id="cb163-147"><a href="帳號管理.html#cb163-147" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;2. 根據 ./</span><span class="va">${depts_dir}</span><span class="st">/ 裡面的 &lt;系所名稱.txt&gt; 刪除使用者的家資料夾與帳號相關資料&quot;</span></span>
-<span id="cb163-148"><a href="帳號管理.html#cb163-148" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
-<span id="cb163-149"><a href="帳號管理.html#cb163-149" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">:</span></span>
-<span id="cb163-150"><a href="帳號管理.html#cb163-150" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
-<span id="cb163-151"><a href="帳號管理.html#cb163-151" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span> <span class="kw">in</span></span>
-<span id="cb163-152"><a href="帳號管理.html#cb163-152" aria-hidden="true" tabindex="-1"></a>        -h <span class="kw">|</span> --help<span class="kw">)</span></span>
-<span id="cb163-153"><a href="帳號管理.html#cb163-153" aria-hidden="true" tabindex="-1"></a>            <span class="ex">display_help</span></span>
-<span id="cb163-154"><a href="帳號管理.html#cb163-154" aria-hidden="true" tabindex="-1"></a>            exit 0</span>
-<span id="cb163-155"><a href="帳號管理.html#cb163-155" aria-hidden="true" tabindex="-1"></a>            ;;</span>
-<span id="cb163-156"><a href="帳號管理.html#cb163-156" aria-hidden="true" tabindex="-1"></a>        -np <span class="kw">|</span> --dont-generate-password<span class="kw">)</span></span>
-<span id="cb163-157"><a href="帳號管理.html#cb163-157" aria-hidden="true" tabindex="-1"></a>            <span class="va">np=</span>false</span>
-<span id="cb163-158"><a href="帳號管理.html#cb163-158" aria-hidden="true" tabindex="-1"></a>            <span class="bu">shift</span> 1</span>
-<span id="cb163-159"><a href="帳號管理.html#cb163-159" aria-hidden="true" tabindex="-1"></a>            <span class="bu">break</span></span>
-<span id="cb163-160"><a href="帳號管理.html#cb163-160" aria-hidden="true" tabindex="-1"></a>        <span class="cf">;;</span></span>
-<span id="cb163-161"><a href="帳號管理.html#cb163-161" aria-hidden="true" tabindex="-1"></a>        --<span class="kw">)</span></span>
-<span id="cb163-162"><a href="帳號管理.html#cb163-162" aria-hidden="true" tabindex="-1"></a>            <span class="bu">shift</span></span>
-<span id="cb163-163"><a href="帳號管理.html#cb163-163" aria-hidden="true" tabindex="-1"></a>            <span class="bu">break</span></span>
-<span id="cb163-164"><a href="帳號管理.html#cb163-164" aria-hidden="true" tabindex="-1"></a>        <span class="cf">;;</span></span>
-<span id="cb163-165"><a href="帳號管理.html#cb163-165" aria-hidden="true" tabindex="-1"></a>        -<span class="pp">*</span><span class="kw">)</span></span>
-<span id="cb163-166"><a href="帳號管理.html#cb163-166" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">&quot;錯誤: 未知的選項: </span><span class="va">$1</span><span class="st">&quot;</span> <span class="op">&gt;&amp;</span><span class="dv">2</span></span>
-<span id="cb163-167"><a href="帳號管理.html#cb163-167" aria-hidden="true" tabindex="-1"></a>            <span class="ex">display_help</span></span>
-<span id="cb163-168"><a href="帳號管理.html#cb163-168" aria-hidden="true" tabindex="-1"></a>            exit 1</span>
-<span id="cb163-169"><a href="帳號管理.html#cb163-169" aria-hidden="true" tabindex="-1"></a>        ;;</span>
-<span id="cb163-170"><a href="帳號管理.html#cb163-170" aria-hidden="true" tabindex="-1"></a>        <span class="pp">*</span><span class="kw">)</span></span>
-<span id="cb163-171"><a href="帳號管理.html#cb163-171" aria-hidden="true" tabindex="-1"></a>            <span class="bu">break</span></span>
-<span id="cb163-172"><a href="帳號管理.html#cb163-172" aria-hidden="true" tabindex="-1"></a>        <span class="cf">;;</span></span>
-<span id="cb163-173"><a href="帳號管理.html#cb163-173" aria-hidden="true" tabindex="-1"></a>    <span class="cf">esac</span></span>
-<span id="cb163-174"><a href="帳號管理.html#cb163-174" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
-<span id="cb163-175"><a href="帳號管理.html#cb163-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb163-176"><a href="帳號管理.html#cb163-176" aria-hidden="true" tabindex="-1"></a><span class="cf">case</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span> <span class="kw">in</span></span>
-<span id="cb163-177"><a href="帳號管理.html#cb163-177" aria-hidden="true" tabindex="-1"></a>    create<span class="kw">)</span></span>
-<span id="cb163-178"><a href="帳號管理.html#cb163-178" aria-hidden="true" tabindex="-1"></a>        <span class="ex">check_permission</span></span>
-<span id="cb163-179"><a href="帳號管理.html#cb163-179" aria-hidden="true" tabindex="-1"></a>        check_depts_dir</span>
-<span id="cb163-180"><a href="帳號管理.html#cb163-180" aria-hidden="true" tabindex="-1"></a>        create_prompt</span>
-<span id="cb163-181"><a href="帳號管理.html#cb163-181" aria-hidden="true" tabindex="-1"></a>    ;;</span>
-<span id="cb163-182"><a href="帳號管理.html#cb163-182" aria-hidden="true" tabindex="-1"></a>    delete<span class="kw">)</span></span>
-<span id="cb163-183"><a href="帳號管理.html#cb163-183" aria-hidden="true" tabindex="-1"></a>        <span class="ex">check_permission</span></span>
-<span id="cb163-184"><a href="帳號管理.html#cb163-184" aria-hidden="true" tabindex="-1"></a>        check_depts_dir</span>
-<span id="cb163-185"><a href="帳號管理.html#cb163-185" aria-hidden="true" tabindex="-1"></a>        delete_prompt</span>
-<span id="cb163-186"><a href="帳號管理.html#cb163-186" aria-hidden="true" tabindex="-1"></a>    ;;</span>
-<span id="cb163-187"><a href="帳號管理.html#cb163-187" aria-hidden="true" tabindex="-1"></a>    <span class="pp">*</span><span class="kw">)</span></span>
-<span id="cb163-188"><a href="帳號管理.html#cb163-188" aria-hidden="true" tabindex="-1"></a>        <span class="ex">display_help</span></span>
-<span id="cb163-189"><a href="帳號管理.html#cb163-189" aria-hidden="true" tabindex="-1"></a>        exit 1</span>
-<span id="cb163-190"><a href="帳號管理.html#cb163-190" aria-hidden="true" tabindex="-1"></a>    ;;</span>
-<span id="cb163-191"><a href="帳號管理.html#cb163-191" aria-hidden="true" tabindex="-1"></a><span class="cf">esac</span></span></code></pre></div>
+<span id="cb163-99"><a href="帳號管理.html#cb163-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb163-100"><a href="帳號管理.html#cb163-100" aria-hidden="true" tabindex="-1"></a>    <span class="cf">done</span></span>
+<span id="cb163-101"><a href="帳號管理.html#cb163-101" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span>
+<span id="cb163-102"><a href="帳號管理.html#cb163-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb163-103"><a href="帳號管理.html#cb163-103" aria-hidden="true" tabindex="-1"></a><span class="fu">delete_users()</span> <span class="kw">{</span></span>
+<span id="cb163-104"><a href="帳號管理.html#cb163-104" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> grp <span class="kw">in</span> <span class="va">${grps}</span></span>
+<span id="cb163-105"><a href="帳號管理.html#cb163-105" aria-hidden="true" tabindex="-1"></a>    <span class="cf">do</span> </span>
+<span id="cb163-106"><a href="帳號管理.html#cb163-106" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="bu">read</span> <span class="va">stu</span><span class="kw">;</span></span>
+<span id="cb163-107"><a href="帳號管理.html#cb163-107" aria-hidden="true" tabindex="-1"></a>        <span class="cf">do</span></span>
+<span id="cb163-108"><a href="帳號管理.html#cb163-108" aria-hidden="true" tabindex="-1"></a>            <span class="ex">userdel</span> <span class="at">-r</span> <span class="va">${stu}</span> <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span>  </span>
+<span id="cb163-109"><a href="帳號管理.html#cb163-109" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">[</span> <span class="va">${new}</span> <span class="ot">=</span> false <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb163-110"><a href="帳號管理.html#cb163-110" aria-hidden="true" tabindex="-1"></a>                <span class="fu">rm</span> <span class="at">-rf</span> /srv/shiny-server/<span class="va">${grp}</span>/<span class="va">${stu}</span></span>
+<span id="cb163-111"><a href="帳號管理.html#cb163-111" aria-hidden="true" tabindex="-1"></a>            <span class="cf">fi</span></span>
+<span id="cb163-112"><a href="帳號管理.html#cb163-112" aria-hidden="true" tabindex="-1"></a>        <span class="cf">done</span> <span class="op">&lt;</span> ./<span class="va">${depts_dir}</span>/<span class="va">${grp}</span>.txt</span>
+<span id="cb163-113"><a href="帳號管理.html#cb163-113" aria-hidden="true" tabindex="-1"></a>    <span class="cf">done</span></span>
+<span id="cb163-114"><a href="帳號管理.html#cb163-114" aria-hidden="true" tabindex="-1"></a>    <span class="bu">read</span> <span class="at">-p</span> <span class="st">&quot;使用者已移除，是否要順便移除存放密碼的資料夾 </span><span class="va">${pass_dir}</span><span class="st">? (yes/No)&quot;</span> <span class="va">yn</span></span>
+<span id="cb163-115"><a href="帳號管理.html#cb163-115" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> <span class="va">$yn</span> <span class="kw">in</span></span>
+<span id="cb163-116"><a href="帳號管理.html#cb163-116" aria-hidden="true" tabindex="-1"></a>        [Yy]<span class="pp">*</span> <span class="kw">)</span> </span>
+<span id="cb163-117"><a href="帳號管理.html#cb163-117" aria-hidden="true" tabindex="-1"></a>            <span class="fu">rm</span> <span class="at">-rf</span> <span class="va">${pass_dir}</span></span>
+<span id="cb163-118"><a href="帳號管理.html#cb163-118" aria-hidden="true" tabindex="-1"></a>        <span class="cf">;;</span></span>
+<span id="cb163-119"><a href="帳號管理.html#cb163-119" aria-hidden="true" tabindex="-1"></a>        [No]<span class="pp">*</span> <span class="kw">)</span> <span class="bu">exit</span> 0<span class="cf">;;</span></span>
+<span id="cb163-120"><a href="帳號管理.html#cb163-120" aria-hidden="true" tabindex="-1"></a>    <span class="cf">esac</span></span>
+<span id="cb163-121"><a href="帳號管理.html#cb163-121" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span>
+<span id="cb163-122"><a href="帳號管理.html#cb163-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb163-123"><a href="帳號管理.html#cb163-123" aria-hidden="true" tabindex="-1"></a><span class="fu">create_prompt()</span> <span class="kw">{</span></span>
+<span id="cb163-124"><a href="帳號管理.html#cb163-124" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">[</span> <span class="va">${new}</span> <span class="ot">=</span> false <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb163-125"><a href="帳號管理.html#cb163-125" aria-hidden="true" tabindex="-1"></a>        <span class="bu">read</span> <span class="at">-p</span> <span class="st">&quot;即將建立使用者帳戶，確認使用者資料是否無誤? (Yes/No)&quot;</span> <span class="va">yn</span></span>
+<span id="cb163-126"><a href="帳號管理.html#cb163-126" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
+<span id="cb163-127"><a href="帳號管理.html#cb163-127" aria-hidden="true" tabindex="-1"></a>        <span class="bu">read</span> <span class="at">-p</span> <span class="st">&quot;即將以新的 shiny-server 模式建立使用者帳戶，確認使用者資料是否無誤? (Yes/No)&quot;</span> <span class="va">yn</span></span>
+<span id="cb163-128"><a href="帳號管理.html#cb163-128" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb163-129"><a href="帳號管理.html#cb163-129" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> <span class="va">$yn</span> <span class="kw">in</span></span>
+<span id="cb163-130"><a href="帳號管理.html#cb163-130" aria-hidden="true" tabindex="-1"></a>        [Yy]<span class="pp">*</span> <span class="kw">)</span> <span class="ex">create_users</span><span class="kw">;;</span></span>
+<span id="cb163-131"><a href="帳號管理.html#cb163-131" aria-hidden="true" tabindex="-1"></a>        <span class="ex">[Nn]*</span> <span class="er">)</span> <span class="bu">exit</span><span class="cf">;;</span></span>
+<span id="cb163-132"><a href="帳號管理.html#cb163-132" aria-hidden="true" tabindex="-1"></a>    <span class="cf">esac</span></span>
+<span id="cb163-133"><a href="帳號管理.html#cb163-133" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb163-134"><a href="帳號管理.html#cb163-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb163-135"><a href="帳號管理.html#cb163-135" aria-hidden="true" tabindex="-1"></a><span class="fu">delete_prompt()</span> <span class="kw">{</span></span>
+<span id="cb163-136"><a href="帳號管理.html#cb163-136" aria-hidden="true" tabindex="-1"></a>    <span class="bu">read</span> <span class="at">-p</span> <span class="st">&quot;即將 &#39;刪除&#39; 使用者帳戶，於 /home/&lt;使用者&gt; 的資料將會消失，是否執行? (Yes/No)&quot;</span> <span class="va">yn</span></span>
+<span id="cb163-137"><a href="帳號管理.html#cb163-137" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> <span class="va">$yn</span> <span class="kw">in</span></span>
+<span id="cb163-138"><a href="帳號管理.html#cb163-138" aria-hidden="true" tabindex="-1"></a>        [Yy]<span class="pp">*</span> <span class="kw">)</span> <span class="ex">delete_users</span><span class="kw">;;</span></span>
+<span id="cb163-139"><a href="帳號管理.html#cb163-139" aria-hidden="true" tabindex="-1"></a>        <span class="ex">[Nn]*</span> <span class="er">)</span> <span class="bu">exit</span><span class="cf">;;</span></span>
+<span id="cb163-140"><a href="帳號管理.html#cb163-140" aria-hidden="true" tabindex="-1"></a>    <span class="cf">esac</span></span>
+<span id="cb163-141"><a href="帳號管理.html#cb163-141" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb163-142"><a href="帳號管理.html#cb163-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb163-143"><a href="帳號管理.html#cb163-143" aria-hidden="true" tabindex="-1"></a><span class="fu">display_help()</span> <span class="kw">{</span></span>
+<span id="cb163-144"><a href="帳號管理.html#cb163-144" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;使用方法: </span><span class="va">$0</span><span class="st"> [選項...] {create|delete}&quot;</span></span>
+<span id="cb163-145"><a href="帳號管理.html#cb163-145" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> </span>
+<span id="cb163-146"><a href="帳號管理.html#cb163-146" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;選項: &quot;</span></span>
+<span id="cb163-147"><a href="帳號管理.html#cb163-147" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  -gp, --generate-password    以 openssl 產生隨機的使用者密碼&quot;</span></span>
+<span id="cb163-148"><a href="帳號管理.html#cb163-148" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  -n, --new-shiny-server      只建立使用者，不軟連結至 /srv/shiny-server/ 資料夾；新的 shiny-server 不使用軟連結&quot;</span></span>
+<span id="cb163-149"><a href="帳號管理.html#cb163-149" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span></span>
+<span id="cb163-150"><a href="帳號管理.html#cb163-150" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;此腳本被用來: &quot;</span></span>
+<span id="cb163-151"><a href="帳號管理.html#cb163-151" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;1. 根據 ./</span><span class="va">${depts_dir}</span><span class="st">/ 裡面的 &lt;系所名稱.txt&gt; 建立帳號，&quot;</span></span>
+<span id="cb163-152"><a href="帳號管理.html#cb163-152" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  系所名稱會被用來當作 linux 使用者的使用者主要群組（primary group），&quot;</span></span>
+<span id="cb163-153"><a href="帳號管理.html#cb163-153" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  &lt;系所名稱.txt&gt; 內的格式為一個學號佔用一行。&quot;</span></span>
+<span id="cb163-154"><a href="帳號管理.html#cb163-154" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span></span>
+<span id="cb163-155"><a href="帳號管理.html#cb163-155" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  樹狀結構:&quot;</span></span>
+<span id="cb163-156"><a href="帳號管理.html#cb163-156" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  ./depts/&quot;</span></span>
+<span id="cb163-157"><a href="帳號管理.html#cb163-157" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  ├── asis.txt&quot;</span></span>
+<span id="cb163-158"><a href="帳號管理.html#cb163-158" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  └── ecofin.txt&quot;</span></span>
+<span id="cb163-159"><a href="帳號管理.html#cb163-159" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span></span>
+<span id="cb163-160"><a href="帳號管理.html#cb163-160" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  asis.txt 檔案結構&quot;</span></span>
+<span id="cb163-161"><a href="帳號管理.html#cb163-161" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  ───────┬──────────────────&quot;</span></span>
+<span id="cb163-162"><a href="帳號管理.html#cb163-162" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;         │ ./depts/asis.txt &quot;</span></span>
+<span id="cb163-163"><a href="帳號管理.html#cb163-163" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  ───────┼──────────────────&quot;</span></span>
+<span id="cb163-164"><a href="帳號管理.html#cb163-164" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;     1   │ 08170875&quot;</span></span>
+<span id="cb163-165"><a href="帳號管理.html#cb163-165" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;     2   │ 08170396&quot;</span></span>
+<span id="cb163-166"><a href="帳號管理.html#cb163-166" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;     3   │ ...&quot;</span></span>
+<span id="cb163-167"><a href="帳號管理.html#cb163-167" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  ───────┴──────────────────&quot;</span></span>
+<span id="cb163-168"><a href="帳號管理.html#cb163-168" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;2. 根據 ./</span><span class="va">${depts_dir}</span><span class="st">/ 裡面的 &lt;系所名稱.txt&gt; 刪除使用者的家資料夾與帳號相關資料&quot;</span></span>
+<span id="cb163-169"><a href="帳號管理.html#cb163-169" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb163-170"><a href="帳號管理.html#cb163-170" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">:</span></span>
+<span id="cb163-171"><a href="帳號管理.html#cb163-171" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
+<span id="cb163-172"><a href="帳號管理.html#cb163-172" aria-hidden="true" tabindex="-1"></a>  <span class="cf">case</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span> <span class="kw">in</span></span>
+<span id="cb163-173"><a href="帳號管理.html#cb163-173" aria-hidden="true" tabindex="-1"></a>        -h <span class="kw">|</span> --help<span class="kw">)</span></span>
+<span id="cb163-174"><a href="帳號管理.html#cb163-174" aria-hidden="true" tabindex="-1"></a>            <span class="ex">display_help</span></span>
+<span id="cb163-175"><a href="帳號管理.html#cb163-175" aria-hidden="true" tabindex="-1"></a>            exit 0</span>
+<span id="cb163-176"><a href="帳號管理.html#cb163-176" aria-hidden="true" tabindex="-1"></a>        ;;</span>
+<span id="cb163-177"><a href="帳號管理.html#cb163-177" aria-hidden="true" tabindex="-1"></a>        -gp <span class="kw">|</span> --generate-password<span class="kw">)</span></span>
+<span id="cb163-178"><a href="帳號管理.html#cb163-178" aria-hidden="true" tabindex="-1"></a>            <span class="va">gp=</span>true</span>
+<span id="cb163-179"><a href="帳號管理.html#cb163-179" aria-hidden="true" tabindex="-1"></a>            <span class="bu">shift</span> 1</span>
+<span id="cb163-180"><a href="帳號管理.html#cb163-180" aria-hidden="true" tabindex="-1"></a>            <span class="bu">break</span></span>
+<span id="cb163-181"><a href="帳號管理.html#cb163-181" aria-hidden="true" tabindex="-1"></a>        <span class="cf">;;</span></span>
+<span id="cb163-182"><a href="帳號管理.html#cb163-182" aria-hidden="true" tabindex="-1"></a>        -n <span class="kw">|</span> --new-shiny-server<span class="kw">)</span></span>
+<span id="cb163-183"><a href="帳號管理.html#cb163-183" aria-hidden="true" tabindex="-1"></a>            <span class="va">new=</span>true</span>
+<span id="cb163-184"><a href="帳號管理.html#cb163-184" aria-hidden="true" tabindex="-1"></a>            <span class="bu">shift</span> 1</span>
+<span id="cb163-185"><a href="帳號管理.html#cb163-185" aria-hidden="true" tabindex="-1"></a>            <span class="bu">break</span></span>
+<span id="cb163-186"><a href="帳號管理.html#cb163-186" aria-hidden="true" tabindex="-1"></a>        <span class="cf">;;</span></span>
+<span id="cb163-187"><a href="帳號管理.html#cb163-187" aria-hidden="true" tabindex="-1"></a>        --<span class="kw">)</span></span>
+<span id="cb163-188"><a href="帳號管理.html#cb163-188" aria-hidden="true" tabindex="-1"></a>            <span class="bu">shift</span></span>
+<span id="cb163-189"><a href="帳號管理.html#cb163-189" aria-hidden="true" tabindex="-1"></a>            <span class="bu">break</span></span>
+<span id="cb163-190"><a href="帳號管理.html#cb163-190" aria-hidden="true" tabindex="-1"></a>        <span class="cf">;;</span></span>
+<span id="cb163-191"><a href="帳號管理.html#cb163-191" aria-hidden="true" tabindex="-1"></a>        -<span class="pp">*</span><span class="kw">)</span></span>
+<span id="cb163-192"><a href="帳號管理.html#cb163-192" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">&quot;錯誤: 未知的選項: </span><span class="va">$1</span><span class="st">&quot;</span> <span class="op">&gt;&amp;</span><span class="dv">2</span></span>
+<span id="cb163-193"><a href="帳號管理.html#cb163-193" aria-hidden="true" tabindex="-1"></a>            <span class="ex">display_help</span></span>
+<span id="cb163-194"><a href="帳號管理.html#cb163-194" aria-hidden="true" tabindex="-1"></a>            exit 1</span>
+<span id="cb163-195"><a href="帳號管理.html#cb163-195" aria-hidden="true" tabindex="-1"></a>        ;;</span>
+<span id="cb163-196"><a href="帳號管理.html#cb163-196" aria-hidden="true" tabindex="-1"></a>        <span class="pp">*</span><span class="kw">)</span></span>
+<span id="cb163-197"><a href="帳號管理.html#cb163-197" aria-hidden="true" tabindex="-1"></a>            <span class="bu">break</span></span>
+<span id="cb163-198"><a href="帳號管理.html#cb163-198" aria-hidden="true" tabindex="-1"></a>        <span class="cf">;;</span></span>
+<span id="cb163-199"><a href="帳號管理.html#cb163-199" aria-hidden="true" tabindex="-1"></a>    <span class="cf">esac</span></span>
+<span id="cb163-200"><a href="帳號管理.html#cb163-200" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb163-201"><a href="帳號管理.html#cb163-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb163-202"><a href="帳號管理.html#cb163-202" aria-hidden="true" tabindex="-1"></a><span class="cf">case</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span> <span class="kw">in</span></span>
+<span id="cb163-203"><a href="帳號管理.html#cb163-203" aria-hidden="true" tabindex="-1"></a>  create<span class="kw">)</span></span>
+<span id="cb163-204"><a href="帳號管理.html#cb163-204" aria-hidden="true" tabindex="-1"></a>        <span class="ex">check_permission</span></span>
+<span id="cb163-205"><a href="帳號管理.html#cb163-205" aria-hidden="true" tabindex="-1"></a>        check_depts_dir</span>
+<span id="cb163-206"><a href="帳號管理.html#cb163-206" aria-hidden="true" tabindex="-1"></a>        create_prompt</span>
+<span id="cb163-207"><a href="帳號管理.html#cb163-207" aria-hidden="true" tabindex="-1"></a>    ;;</span>
+<span id="cb163-208"><a href="帳號管理.html#cb163-208" aria-hidden="true" tabindex="-1"></a>    delete<span class="kw">)</span></span>
+<span id="cb163-209"><a href="帳號管理.html#cb163-209" aria-hidden="true" tabindex="-1"></a>        <span class="ex">check_permission</span></span>
+<span id="cb163-210"><a href="帳號管理.html#cb163-210" aria-hidden="true" tabindex="-1"></a>        check_depts_dir</span>
+<span id="cb163-211"><a href="帳號管理.html#cb163-211" aria-hidden="true" tabindex="-1"></a>        delete_prompt</span>
+<span id="cb163-212"><a href="帳號管理.html#cb163-212" aria-hidden="true" tabindex="-1"></a>    ;;</span>
+<span id="cb163-213"><a href="帳號管理.html#cb163-213" aria-hidden="true" tabindex="-1"></a>    <span class="pp">*</span><span class="kw">)</span></span>
+<span id="cb163-214"><a href="帳號管理.html#cb163-214" aria-hidden="true" tabindex="-1"></a>        <span class="ex">display_help</span></span>
+<span id="cb163-215"><a href="帳號管理.html#cb163-215" aria-hidden="true" tabindex="-1"></a>        exit 1</span>
+<span id="cb163-216"><a href="帳號管理.html#cb163-216" aria-hidden="true" tabindex="-1"></a>    ;;</span>
+<span id="cb163-217"><a href="帳號管理.html#cb163-217" aria-hidden="true" tabindex="-1"></a><span class="cf">esac</span></span></code></pre></div>
 </div>
 <div id="generate-sql.sh" class="section level3 unnumbered">
 <h3>generate-sql.sh</h3>
@@ -512,31 +538,31 @@ div.csl-indent {
 <span id="cb164-12"><a href="帳號管理.html#cb164-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb164-13"><a href="帳號管理.html#cb164-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 環境變數</span></span>
 <span id="cb164-14"><a href="帳號管理.html#cb164-14" aria-hidden="true" tabindex="-1"></a><span class="va">pass_dir=</span><span class="st">&#39;passwd&#39;</span>       <span class="co"># 放置密碼的資料夾，由另一個腳本 ./create-users.sh 產生</span></span>
-<span id="cb164-15"><a href="帳號管理.html#cb164-15" aria-hidden="true" tabindex="-1"></a><span class="va">filename=</span><span class="st">&#39;-accounts.sql&#39;</span>    <span class="co"># create/drop-accounts.sql 檔案前綴會根據選項變化</span></span>
+<span id="cb164-15"><a href="帳號管理.html#cb164-15" aria-hidden="true" tabindex="-1"></a><span class="va">filename=</span><span class="st">&#39;-accounts.sql&#39;</span>  <span class="co"># create/drop-accounts.sql 檔案前綴會根據選項變化</span></span>
 <span id="cb164-16"><a href="帳號管理.html#cb164-16" aria-hidden="true" tabindex="-1"></a><span class="va">run=</span>false           <span class="co"># 預設產生腳本後不會執行</span></span>
 <span id="cb164-17"><a href="帳號管理.html#cb164-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb164-18"><a href="帳號管理.html#cb164-18" aria-hidden="true" tabindex="-1"></a><span class="fu">check_pass_dir()</span> <span class="kw">{</span></span>
-<span id="cb164-19"><a href="帳號管理.html#cb164-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">[</span> <span class="ot">-d</span> <span class="va">${pass_dir}</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb164-19"><a href="帳號管理.html#cb164-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="bu">[</span> <span class="ot">-d</span> <span class="va">${pass_dir}</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
 <span id="cb164-20"><a href="帳號管理.html#cb164-20" aria-hidden="true" tabindex="-1"></a>        <span class="va">grps=</span><span class="st">&quot;</span><span class="va">$(</span><span class="fu">ls</span> <span class="va">${pass_dir}</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;.csv&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span> <span class="st">&quot;.&quot;</span> <span class="at">-f</span> 1<span class="va">)</span><span class="st">&quot;</span></span>
-<span id="cb164-21"><a href="帳號管理.html#cb164-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
+<span id="cb164-21"><a href="帳號管理.html#cb164-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
 <span id="cb164-22"><a href="帳號管理.html#cb164-22" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">&quot;密碼資料夾 </span><span class="va">${pass_dir}</span><span class="st"> 不存在！請先執行過建立帳號腳本（create-users.sh）後，再執行一次此腳本。&quot;</span></span>
 <span id="cb164-23"><a href="帳號管理.html#cb164-23" aria-hidden="true" tabindex="-1"></a>        <span class="bu">exit</span> 1<span class="kw">;</span></span>
-<span id="cb164-24"><a href="帳號管理.html#cb164-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb164-24"><a href="帳號管理.html#cb164-24" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span></span>
 <span id="cb164-25"><a href="帳號管理.html#cb164-25" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
 <span id="cb164-26"><a href="帳號管理.html#cb164-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb164-27"><a href="帳號管理.html#cb164-27" aria-hidden="true" tabindex="-1"></a><span class="fu">write_to_mysql_db()</span> <span class="kw">{</span></span>
-<span id="cb164-28"><a href="帳號管理.html#cb164-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">[</span> <span class="va">${run}</span> <span class="ot">=</span> true <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb164-28"><a href="帳號管理.html#cb164-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="bu">[</span> <span class="va">${run}</span> <span class="ot">=</span> true <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
 <span id="cb164-29"><a href="帳號管理.html#cb164-29" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">&quot;請輸入 MySQL 帳戶 root 的密碼: 👇&quot;</span></span>
 <span id="cb164-30"><a href="帳號管理.html#cb164-30" aria-hidden="true" tabindex="-1"></a>        <span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span> <span class="op">&lt;</span> <span class="va">${filename}</span></span>
 <span id="cb164-31"><a href="帳號管理.html#cb164-31" aria-hidden="true" tabindex="-1"></a>        <span class="ex">clean_sql_script</span></span>
-<span id="cb164-32"><a href="帳號管理.html#cb164-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
+<span id="cb164-32"><a href="帳號管理.html#cb164-32" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
 <span id="cb164-33"><a href="帳號管理.html#cb164-33" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">&quot;已於 </span><span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span><span class="st"> 產生 </span><span class="va">${filename}</span><span class="st"> 🎉&quot;</span></span>
-<span id="cb164-34"><a href="帳號管理.html#cb164-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb164-34"><a href="帳號管理.html#cb164-34" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span></span>
 <span id="cb164-35"><a href="帳號管理.html#cb164-35" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span>
 <span id="cb164-36"><a href="帳號管理.html#cb164-36" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb164-37"><a href="帳號管理.html#cb164-37" aria-hidden="true" tabindex="-1"></a><span class="fu">create_users_and_databases()</span> <span class="kw">{</span></span>
-<span id="cb164-38"><a href="帳號管理.html#cb164-38" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;set global validate_password.policy=LOW;&quot;</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">${filename}</span> <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span><span class="kw">;</span></span>
-<span id="cb164-39"><a href="帳號管理.html#cb164-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> grp <span class="kw">in</span> <span class="va">${grps}</span></span>
+<span id="cb164-38"><a href="帳號管理.html#cb164-38" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;set global validate_password.policy=LOW;&quot;</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">${filename}</span> <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span><span class="kw">;</span></span>
+<span id="cb164-39"><a href="帳號管理.html#cb164-39" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> grp <span class="kw">in</span> <span class="va">${grps}</span></span>
 <span id="cb164-40"><a href="帳號管理.html#cb164-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">do</span> </span>
 <span id="cb164-41"><a href="帳號管理.html#cb164-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="bu">read</span> <span class="va">line</span><span class="kw">;</span></span>
 <span id="cb164-42"><a href="帳號管理.html#cb164-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">do</span></span>
@@ -549,13 +575,13 @@ div.csl-indent {
 <span id="cb164-49"><a href="帳號管理.html#cb164-49" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">&quot;grant all privileges on </span><span class="dt">\`</span><span class="va">${stu}</span><span class="dt">\`</span><span class="st">.* to &#39;</span><span class="va">${stu}</span><span class="st">&#39;@&#39;localhost&#39;;&quot;</span> <span class="dt">\</span></span>
 <span id="cb164-50"><a href="帳號管理.html#cb164-50" aria-hidden="true" tabindex="-1"></a>                <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">${filename}</span> <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
 <span id="cb164-51"><a href="帳號管理.html#cb164-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">done</span> <span class="op">&lt;</span> <span class="va">${pass_dir}</span>/<span class="va">${grp}</span>.csv</span>
-<span id="cb164-52"><a href="帳號管理.html#cb164-52" aria-hidden="true" tabindex="-1"></a>    <span class="cf">done</span></span>
-<span id="cb164-53"><a href="帳號管理.html#cb164-53" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;flush privileges;&quot;</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">${filename}</span> <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span><span class="kw">;</span></span>
-<span id="cb164-54"><a href="帳號管理.html#cb164-54" aria-hidden="true" tabindex="-1"></a>    <span class="ex">write_to_mysql_db</span></span>
+<span id="cb164-52"><a href="帳號管理.html#cb164-52" aria-hidden="true" tabindex="-1"></a>  <span class="cf">done</span></span>
+<span id="cb164-53"><a href="帳號管理.html#cb164-53" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;flush privileges;&quot;</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">${filename}</span> <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span><span class="kw">;</span></span>
+<span id="cb164-54"><a href="帳號管理.html#cb164-54" aria-hidden="true" tabindex="-1"></a>  <span class="ex">write_to_mysql_db</span></span>
 <span id="cb164-55"><a href="帳號管理.html#cb164-55" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span>
 <span id="cb164-56"><a href="帳號管理.html#cb164-56" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb164-57"><a href="帳號管理.html#cb164-57" aria-hidden="true" tabindex="-1"></a><span class="fu">drop_users_and_databases()</span> <span class="kw">{</span></span>
-<span id="cb164-58"><a href="帳號管理.html#cb164-58" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> grp <span class="kw">in</span> <span class="va">${grps}</span></span>
+<span id="cb164-58"><a href="帳號管理.html#cb164-58" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> grp <span class="kw">in</span> <span class="va">${grps}</span></span>
 <span id="cb164-59"><a href="帳號管理.html#cb164-59" aria-hidden="true" tabindex="-1"></a>    <span class="cf">do</span> </span>
 <span id="cb164-60"><a href="帳號管理.html#cb164-60" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="bu">read</span> <span class="va">line</span><span class="kw">;</span></span>
 <span id="cb164-61"><a href="帳號管理.html#cb164-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">do</span></span>
@@ -565,40 +591,40 @@ div.csl-indent {
 <span id="cb164-65"><a href="帳號管理.html#cb164-65" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">&quot;drop database </span><span class="dt">\`</span><span class="va">${stu}</span><span class="dt">\`</span><span class="st">;&quot;</span> <span class="dt">\</span></span>
 <span id="cb164-66"><a href="帳號管理.html#cb164-66" aria-hidden="true" tabindex="-1"></a>                <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">${filename}</span> <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
 <span id="cb164-67"><a href="帳號管理.html#cb164-67" aria-hidden="true" tabindex="-1"></a>        <span class="cf">done</span> <span class="op">&lt;</span> <span class="va">${pass_dir}</span>/<span class="va">${grp}</span>.csv</span>
-<span id="cb164-68"><a href="帳號管理.html#cb164-68" aria-hidden="true" tabindex="-1"></a>    <span class="cf">done</span></span>
-<span id="cb164-69"><a href="帳號管理.html#cb164-69" aria-hidden="true" tabindex="-1"></a>    <span class="ex">write_to_mysql_db</span></span>
+<span id="cb164-68"><a href="帳號管理.html#cb164-68" aria-hidden="true" tabindex="-1"></a>  <span class="cf">done</span></span>
+<span id="cb164-69"><a href="帳號管理.html#cb164-69" aria-hidden="true" tabindex="-1"></a>  <span class="ex">write_to_mysql_db</span></span>
 <span id="cb164-70"><a href="帳號管理.html#cb164-70" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span>
 <span id="cb164-71"><a href="帳號管理.html#cb164-71" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb164-72"><a href="帳號管理.html#cb164-72" aria-hidden="true" tabindex="-1"></a><span class="fu">display_help()</span> <span class="kw">{</span></span>
-<span id="cb164-73"><a href="帳號管理.html#cb164-73" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;這個腳本被用來:&quot;</span></span>
-<span id="cb164-74"><a href="帳號管理.html#cb164-74" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;1. 根據已知的帳號密碼建立 MySQL 帳戶&quot;</span></span>
-<span id="cb164-75"><a href="帳號管理.html#cb164-75" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;2. 根據帳號建立資料庫，編碼為 &#39;utf8mb4&#39;&quot;</span></span>
-<span id="cb164-76"><a href="帳號管理.html#cb164-76" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;3. 以上指令會儲存在當前資料夾的 create-account.sql 裡面&quot;</span></span>
-<span id="cb164-77"><a href="帳號管理.html#cb164-77" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;4. 根據已知的帳號刪除該 MySQL 帳戶與資料庫&quot;</span></span>
-<span id="cb164-78"><a href="帳號管理.html#cb164-78" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;5. 若加上 -r, --run 即可順便執行該腳本&quot;</span></span>
-<span id="cb164-79"><a href="帳號管理.html#cb164-79" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span></span>
-<span id="cb164-80"><a href="帳號管理.html#cb164-80" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;使用方法: </span><span class="va">$0</span><span class="st"> [option...] {create|drop}&quot;</span></span>
-<span id="cb164-81"><a href="帳號管理.html#cb164-81" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span></span>
-<span id="cb164-82"><a href="帳號管理.html#cb164-82" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;options: &quot;</span></span>
-<span id="cb164-83"><a href="帳號管理.html#cb164-83" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  -r, --run   執行腳本&quot;</span></span>
-<span id="cb164-84"><a href="帳號管理.html#cb164-84" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  -h, --help  顯示說明&quot;</span></span>
-<span id="cb164-85"><a href="帳號管理.html#cb164-85" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;  沒有加任何選項: 僅產生 .sql 腳本&quot;</span></span>
-<span id="cb164-86"><a href="帳號管理.html#cb164-86" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span></span>
-<span id="cb164-87"><a href="帳號管理.html#cb164-87" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 0</span>
+<span id="cb164-73"><a href="帳號管理.html#cb164-73" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;這個腳本被用來:&quot;</span></span>
+<span id="cb164-74"><a href="帳號管理.html#cb164-74" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;1. 根據已知的帳號密碼建立 MySQL 帳戶&quot;</span></span>
+<span id="cb164-75"><a href="帳號管理.html#cb164-75" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;2. 根據帳號建立資料庫，編碼為 &#39;utf8mb4&#39;&quot;</span></span>
+<span id="cb164-76"><a href="帳號管理.html#cb164-76" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;3. 以上指令會儲存在當前資料夾的 create-account.sql 裡面&quot;</span></span>
+<span id="cb164-77"><a href="帳號管理.html#cb164-77" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;4. 根據已知的帳號刪除該 MySQL 帳戶與資料庫&quot;</span></span>
+<span id="cb164-78"><a href="帳號管理.html#cb164-78" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;5. 若加上 -r, --run 即可順便執行該腳本&quot;</span></span>
+<span id="cb164-79"><a href="帳號管理.html#cb164-79" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span></span>
+<span id="cb164-80"><a href="帳號管理.html#cb164-80" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;使用方法: </span><span class="va">$0</span><span class="st"> [option...] {create|drop}&quot;</span></span>
+<span id="cb164-81"><a href="帳號管理.html#cb164-81" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span></span>
+<span id="cb164-82"><a href="帳號管理.html#cb164-82" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;options: &quot;</span></span>
+<span id="cb164-83"><a href="帳號管理.html#cb164-83" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;  -r, --run  執行腳本&quot;</span></span>
+<span id="cb164-84"><a href="帳號管理.html#cb164-84" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;  -h, --help  顯示說明&quot;</span></span>
+<span id="cb164-85"><a href="帳號管理.html#cb164-85" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;  沒有加任何選項: 僅產生 .sql 腳本&quot;</span></span>
+<span id="cb164-86"><a href="帳號管理.html#cb164-86" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span></span>
+<span id="cb164-87"><a href="帳號管理.html#cb164-87" aria-hidden="true" tabindex="-1"></a>  <span class="bu">exit</span> 0</span>
 <span id="cb164-88"><a href="帳號管理.html#cb164-88" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
 <span id="cb164-89"><a href="帳號管理.html#cb164-89" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb164-90"><a href="帳號管理.html#cb164-90" aria-hidden="true" tabindex="-1"></a><span class="fu">clean_sql_script()</span> <span class="kw">{</span></span>
-<span id="cb164-91"><a href="帳號管理.html#cb164-91" aria-hidden="true" tabindex="-1"></a>    <span class="bu">read</span> <span class="at">-p</span> <span class="st">&quot;是否要清除 </span><span class="va">${filename}</span><span class="st">? (Yes/No)&quot;</span> <span class="va">yn</span></span>
-<span id="cb164-92"><a href="帳號管理.html#cb164-92" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> <span class="va">$yn</span> <span class="kw">in</span></span>
+<span id="cb164-91"><a href="帳號管理.html#cb164-91" aria-hidden="true" tabindex="-1"></a>  <span class="bu">read</span> <span class="at">-p</span> <span class="st">&quot;是否要清除 </span><span class="va">${filename}</span><span class="st">? (Yes/No)&quot;</span> <span class="va">yn</span></span>
+<span id="cb164-92"><a href="帳號管理.html#cb164-92" aria-hidden="true" tabindex="-1"></a>  <span class="cf">case</span> <span class="va">$yn</span> <span class="kw">in</span></span>
 <span id="cb164-93"><a href="帳號管理.html#cb164-93" aria-hidden="true" tabindex="-1"></a>        [Yy]<span class="pp">*</span> <span class="kw">)</span> <span class="fu">rm</span> <span class="va">${filename}</span> <span class="cf">;;</span></span>
 <span id="cb164-94"><a href="帳號管理.html#cb164-94" aria-hidden="true" tabindex="-1"></a>        [Nn]<span class="pp">*</span> <span class="kw">)</span> <span class="bu">exit</span> 0<span class="cf">;;</span></span>
-<span id="cb164-95"><a href="帳號管理.html#cb164-95" aria-hidden="true" tabindex="-1"></a>    <span class="cf">esac</span></span>
-<span id="cb164-96"><a href="帳號管理.html#cb164-96" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;DONE 🎉&quot;</span></span>
+<span id="cb164-95"><a href="帳號管理.html#cb164-95" aria-hidden="true" tabindex="-1"></a>  <span class="cf">esac</span></span>
+<span id="cb164-96"><a href="帳號管理.html#cb164-96" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;DONE 🎉&quot;</span></span>
 <span id="cb164-97"><a href="帳號管理.html#cb164-97" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
 <span id="cb164-98"><a href="帳號管理.html#cb164-98" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb164-99"><a href="帳號管理.html#cb164-99" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">:</span></span>
 <span id="cb164-100"><a href="帳號管理.html#cb164-100" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
-<span id="cb164-101"><a href="帳號管理.html#cb164-101" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span> <span class="kw">in</span></span>
+<span id="cb164-101"><a href="帳號管理.html#cb164-101" aria-hidden="true" tabindex="-1"></a>  <span class="cf">case</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span> <span class="kw">in</span></span>
 <span id="cb164-102"><a href="帳號管理.html#cb164-102" aria-hidden="true" tabindex="-1"></a>        -r <span class="kw">|</span> --run<span class="kw">)</span></span>
 <span id="cb164-103"><a href="帳號管理.html#cb164-103" aria-hidden="true" tabindex="-1"></a>            <span class="va">run=</span>true</span>
 <span id="cb164-104"><a href="帳號管理.html#cb164-104" aria-hidden="true" tabindex="-1"></a>            <span class="bu">shift</span> 1</span>
@@ -622,7 +648,7 @@ div.csl-indent {
 <span id="cb164-122"><a href="帳號管理.html#cb164-122" aria-hidden="true" tabindex="-1"></a>    <span class="cf">esac</span></span>
 <span id="cb164-123"><a href="帳號管理.html#cb164-123" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
 <span id="cb164-124"><a href="帳號管理.html#cb164-124" aria-hidden="true" tabindex="-1"></a><span class="cf">case</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span> <span class="kw">in</span></span>
-<span id="cb164-125"><a href="帳號管理.html#cb164-125" aria-hidden="true" tabindex="-1"></a>    create<span class="kw">)</span></span>
+<span id="cb164-125"><a href="帳號管理.html#cb164-125" aria-hidden="true" tabindex="-1"></a>  create<span class="kw">)</span></span>
 <span id="cb164-126"><a href="帳號管理.html#cb164-126" aria-hidden="true" tabindex="-1"></a>        <span class="ex">check_pass_dir</span></span>
 <span id="cb164-127"><a href="帳號管理.html#cb164-127" aria-hidden="true" tabindex="-1"></a>        if [ <span class="va">$?</span> -ne 1 ]; then</span>
 <span id="cb164-128"><a href="帳號管理.html#cb164-128" aria-hidden="true" tabindex="-1"></a>            filename=<span class="st">&quot;</span><span class="va">$1$filename</span><span class="st">&quot;</span></span>
