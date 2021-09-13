@@ -149,6 +149,7 @@ pass_dir='passwd'		# 放置建置完成的 linux 帳號密碼的資料夾，建�
 				# 可搭配建置 MySQL 帳號與資料庫腳本（generate-sql.sh）使用
 gp=false			# 不需要用隨機密碼建立帳號的旗標
 new=false
+ubuntu_version=$(lsb_release -d | cut -d ' ' -f 2 | cut -d '.' -f 1)
 
 check_permission() {
 	if [ $(id -u) -ne 0 ]; then
@@ -218,8 +219,7 @@ create_users() {
 				echo "使用者 '${cur_user}' 已存在。"
 			else
 				# 在 Ubuntu 16.04 版本的 useradd 沒有 --badnames 選項
-				useradd --badnames -N -g ${grp} -m ${cur_user}
-				if [ ${new} = false]; then
+				if [ ${ubuntu_version} == "16" ]; then
 					useradd -N -g ${grp} -m ${cur_user}
 				else
 					useradd --badnames -N -g ${grp} -m ${cur_user}
