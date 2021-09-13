@@ -222,38 +222,40 @@ sudo vim /etc/shiny-server/shiny-server.conf
 ```
 
     run_as :HOME_USER: shiny; # 以個別使用者執行 shinyapp
-                              # shiny 為 fallback 使用者
+                              # shiny 為備取（fallback）使用者
 
     # Define a server that listens on port 3838
     server {
       listen 3838;
-
-      # http://localhost/depts/
-      location /depts { 
-
-        # http://localhost/depts/asis/
-        location /asis { 
-          user_dirs;
-          
-          # 只允許使用者群組為 'asis' 的使用者連結 App
-          members_of asis;
-          directory_index on;
-        }
-
-        # http://localhost/depts/asis/
-        location /fin {
-          user_dirs;
-          
-          # 只允許使用者群組為 'fin' 的使用者連結 App
-          members_of fin;
-          directory_index on;
-        }
-
+      
+      location /asis {
+        user_dirs;
+        members_of asis;
+        directory_index on;
+      }
+      
+      location /ecofin {
+        user_dirs;
+        members_of ecofin;
+        directory_index on;
       } 
 
+      location /fta {
+        user_dirs;
+        members_of fta;
+        directory_index on;
+      }
+
+      location /teacher {
+        user_dirs;
+        members_of teacher;
+        
+        # 此設定會把老師頁面的資料夾顯示關閉
+        directory_index off; 
+      }
+
       # Define a location at the base URL
-      location /apps { # 將 shiny 位置 http://localhost/shiny/
-                       # 變更為 http://localhost/shiny/apps/
+      location / { 
 
         [...]
 
@@ -272,7 +274,15 @@ sudo groupadd asis
 ```
 
 ``` {.bash .prefixed}
-sudo groupadd fin
+sudo groupadd ecofin
+```
+
+``` {.bash .prefixed}
+sudo groupadd fta
+```
+
+``` {.bash .prefixed}
+sudo groupadd teacher
 ```
 
 ``` {.bash .prefixed}
@@ -312,7 +322,7 @@ sudo useradd --badnames -N -g asis -m 08170875
 -   `-m, --create-home`:
 
 ``` {.bash .prefixed}
-sudo useradd --badnames -N -g fin -m 08220000
+sudo useradd --badnames -N -g ecofin -m 08220000
 ```
 
 ![](figures/shiny-server-group-test-successed.png)

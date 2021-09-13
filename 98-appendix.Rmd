@@ -130,9 +130,9 @@ There are 4 choices for the alternative editor (providing /usr/bin/editor).
 Press <enter> to keep the current choice[*], or type selection number: 3
 ```
 
-## 帳號管理
+## 帳號管理 {.unnumbered}
 
-### users.sh
+### users.sh {.unnumbered}
 
 ``` {.bash}
 #!/bin/bash
@@ -144,191 +144,191 @@ Press <enter> to keep the current choice[*], or type selection number: 3
 # 2. Remove Accounts via ./depts/${dept}.txt
 
 # 環境變數
-depts_dir='depts'		# 放置用來建置 linux 帳號的系資料夾
-pass_dir='passwd'		# 放置建置完成的 linux 帳號密碼的資料夾，建制完後
-				# 可搭配建置 MySQL 帳號與資料庫腳本（generate-sql.sh）使用
-np=true				# 不需要用隨機密碼建立帳號的旗標
+depts_dir='depts'       # 放置用來建置 linux 帳號的系資料夾
+pass_dir='passwd'       # 放置建置完成的 linux 帳號密碼的資料夾，建制完後
+                # 可搭配建置 MySQL 帳號與資料庫腳本（generate-sql.sh）使用
+np=true             # 不需要用隨機密碼建立帳號的旗標
 
 check_permission() {
-	if [ $(id -u) -ne 0 ]; then
-		echo "必須以 root 權限執行此腳本！";
-		exit 1;
-	fi
+    if [ $(id -u) -ne 0 ]; then
+        echo "必須以 root 權限執行此腳本！";
+        exit 1;
+    fi
 }
 
 check_depts_dir() {
-	if [ -d ${depts_dir} ]; then
-		grps="$(ls ./${depts_dir} | grep ".txt" | cut -d "." -f 1)"
-		for grp in ${grps}
-		do
-			table=$(wc -l ./${depts_dir}/${grp}.txt)
-			file=$(echo $table | cut -d ' ' -f 2)
-			count=$(echo $table | cut -d ' ' -f 1)
-			if [ $count -lt 1 ]; then
-				echo "請在在檢查一次 ./${depts_dir}/ 內是否含有正確格式的學號檔案！"
-				echo "有問題的檔案: $file"
-				exit 1
-			else
-				echo "於 $file 發現了 $count 個學生"
-			fi
-		done
-	else
-		echo "系資料夾 ${depts_dir} 不存在！請再確認一次。"
-		exit 1;
-	fi
+    if [ -d ${depts_dir} ]; then
+        grps="$(ls ./${depts_dir} | grep ".txt" | cut -d "." -f 1)"
+        for grp in ${grps}
+        do
+            table=$(wc -l ./${depts_dir}/${grp}.txt)
+            file=$(echo $table | cut -d ' ' -f 2)
+            count=$(echo $table | cut -d ' ' -f 1)
+            if [ $count -lt 1 ]; then
+                echo "請在在檢查一次 ./${depts_dir}/ 內是否含有正確格式的學號檔案！"
+                echo "有問題的檔案: $file"
+                exit 1
+            else
+                echo "於 $file 發現了 $count 個學生"
+            fi
+        done
+    else
+        echo "系資料夾 ${depts_dir} 不存在！請再確認一次。"
+        exit 1;
+    fi
 }
 
 make_pass_dir() {
-	if [ ! -d ${pass_dir} ]; then
-		echo "存放密碼 ${pass_dir} 資料夾不存在，將建立 ${pass_dir} 資料夾"
-		mkdir ${pass_dir}
-	else
-		read -p "存放密碼 ${pass_dir} 資料夾已存在！是否要將其移除後繼續建立帳號? (yes/No)" yn
-		case $yn in
-			[Yy]* ) 
-				rm -rf ${pass_dir}
-				make_pass_dir
-			;;
-			[No]* ) exit 1;;
-		esac
-	fi
+    if [ ! -d ${pass_dir} ]; then
+        echo "存放密碼 ${pass_dir} 資料夾不存在，將建立 ${pass_dir} 資料夾"
+        mkdir ${pass_dir}
+    else
+        read -p "存放密碼 ${pass_dir} 資料夾已存在！是否要將其移除後繼續建立帳號? (yes/No)" yn
+        case $yn in
+            [Yy]* ) 
+                rm -rf ${pass_dir}
+                make_pass_dir
+            ;;
+            [No]* ) exit 1;;
+        esac
+    fi
 }
 
 create_users() {
-	make_pass_dir
-	for grp in ${grps}
-	do 
-		if $(grep -q "^${grp}" /etc/group); then
-			echo "群組 '${grp}' 已存在，不需再建立。"
-		else
-			groupadd ${grp}
-		fi
+    make_pass_dir
+    for grp in ${grps}
+    do 
+        if $(grep -q "^${grp}" /etc/group); then
+            echo "群組 '${grp}' 已存在，不需再建立。"
+        else
+            groupadd ${grp}
+        fi
 
-		# create user
-		while read stu;
-		do
-			cur_user=${stu}
-			if $(id "${cur_user}" > /dev/null 2>&1); then
-				echo "使用者 '${cur_user}' 已存在。"
-			else
-				useradd --badnames -N -g ${grp} -m ${cur_user}
-				
-				if [ ${np} = false ]; then
-					cur_user_password=${cur_user}
-				else
-					cur_user_password=$(openssl rand -base64 6)
-				fi
+        # create user
+        while read stu;
+        do
+            cur_user=${stu}
+            if $(id "${cur_user}" > /dev/null 2>&1); then
+                echo "使用者 '${cur_user}' 已存在。"
+            else
+                useradd --badnames -N -g ${grp} -m ${cur_user}
+                
+                if [ ${np} = false ]; then
+                    cur_user_password=${cur_user}
+                else
+                    cur_user_password=$(openssl rand -base64 6)
+                fi
 
-				echo "${cur_user}:${cur_user_password}" | chpasswd
-				echo "${cur_user},${cur_user_password}" | tee -a ./${pass_dir}/${grp}.csv > /dev/null 2>&1
-			fi
-		done < ./${depts_dir}/${grp}.txt
-	done
+                echo "${cur_user}:${cur_user_password}" | chpasswd
+                echo "${cur_user},${cur_user_password}" | tee -a ./${pass_dir}/${grp}.csv > /dev/null 2>&1
+            fi
+        done < ./${depts_dir}/${grp}.txt
+    done
 }
 
 delete_users() {
-	for grp in ${grps}
-	do 
-		while read stu;
-		do
-			userdel -r ${stu}	
-		done < ./${depts_dir}/${grp}.txt
-	done
-	read -p "使用者已移除，是否要順便移除存放密碼的資料夾 ${pass_dir}? (yes/No)" yn
-	case $yn in
-		[Yy]* ) 
-			rm -rf ${pass_dir}
-		;;
-		[No]* ) exit 0;;
-	esac
+    for grp in ${grps}
+    do 
+        while read stu;
+        do
+            userdel -r ${stu}   
+        done < ./${depts_dir}/${grp}.txt
+    done
+    read -p "使用者已移除，是否要順便移除存放密碼的資料夾 ${pass_dir}? (yes/No)" yn
+    case $yn in
+        [Yy]* ) 
+            rm -rf ${pass_dir}
+        ;;
+        [No]* ) exit 0;;
+    esac
 }
 
 create_prompt() {
-	read -p "即將建立使用者帳戶，確認使用者資料是否無誤? (Yes/No)" yn
-	case $yn in
-		[Yy]* ) create_users;;
-		[Nn]* ) exit;;
-	esac
+    read -p "即將建立使用者帳戶，確認使用者資料是否無誤? (Yes/No)" yn
+    case $yn in
+        [Yy]* ) create_users;;
+        [Nn]* ) exit;;
+    esac
 }
 
 delete_prompt() {
-	read -p "即將 '刪除' 使用者帳戶，於 /home/<使用者> 的資料將會消失，是否執行? (Yes/No)" yn
-	case $yn in
-		[Yy]* ) delete_users;;
-		[Nn]* ) exit;;
-	esac
+    read -p "即將 '刪除' 使用者帳戶，於 /home/<使用者> 的資料將會消失，是否執行? (Yes/No)" yn
+    case $yn in
+        [Yy]* ) delete_users;;
+        [Nn]* ) exit;;
+    esac
 }
 
 display_help() {
-	echo "使用方法: $0 [選項...] {create|delete}"
-	echo 
-	echo "選項: "
-	echo "	-np, --dont-generate-password	不產生隨機的使用者密碼，以學生學號取代"
-	echo
-	echo "此腳本被用來: "
-	echo "1. 根據 ./${depts_dir}/ 裡面的 <系所名稱.txt> 建立帳號，"
-	echo "	系所名稱會被用來當作 linux 使用者的使用者主要群組（primary group），"
-	echo "	<系所名稱.txt> 內的格式為一個學號佔用一行。"
-	echo
-	echo "	檔案結構:"
-	echo "	depts"
-	echo "	├── asis.txt"
-	echo "	└── ecofin.txt"
-	echo "	───────┬──────────────────"
-	echo "	       │ ./depts/asis.txt "
-	echo "	───────┼──────────────────"
-	echo "	   1   │ 08170875"
-	echo "	   2   │ 08170396"
-	echo "	   3   │ ..."
-	echo "	───────┴──────────────────"
-	echo "2. 根據 ./${depts_dir}/ 裡面的 <系所名稱.txt> 刪除使用者的家資料夾與帳號相關資料"
+    echo "使用方法: $0 [選項...] {create|delete}"
+    echo 
+    echo "選項: "
+    echo "  -np, --dont-generate-password   不產生隨機的使用者密碼，以學生學號取代"
+    echo
+    echo "此腳本被用來: "
+    echo "1. 根據 ./${depts_dir}/ 裡面的 <系所名稱.txt> 建立帳號，"
+    echo "  系所名稱會被用來當作 linux 使用者的使用者主要群組（primary group），"
+    echo "  <系所名稱.txt> 內的格式為一個學號佔用一行。"
+    echo
+    echo "  檔案結構:"
+    echo "  depts"
+    echo "  ├── asis.txt"
+    echo "  └── ecofin.txt"
+    echo "  ───────┬──────────────────"
+    echo "         │ ./depts/asis.txt "
+    echo "  ───────┼──────────────────"
+    echo "     1   │ 08170875"
+    echo "     2   │ 08170396"
+    echo "     3   │ ..."
+    echo "  ───────┴──────────────────"
+    echo "2. 根據 ./${depts_dir}/ 裡面的 <系所名稱.txt> 刪除使用者的家資料夾與帳號相關資料"
 }
 while :
 do
-	case "$1" in
-		-h | --help)
-			display_help
-			exit 0
-			;;
-		-np | --dont-generate-password)
-			np=false
-			shift 1
-			break
-		;;
-		--)
-			shift
-			break
-		;;
-		-*)
-			echo "錯誤: 未知的選項: $1" >&2
-			display_help
-			exit 1
-		;;
-		*)
-			break
-		;;
-	esac
+    case "$1" in
+        -h | --help)
+            display_help
+            exit 0
+            ;;
+        -np | --dont-generate-password)
+            np=false
+            shift 1
+            break
+        ;;
+        --)
+            shift
+            break
+        ;;
+        -*)
+            echo "錯誤: 未知的選項: $1" >&2
+            display_help
+            exit 1
+        ;;
+        *)
+            break
+        ;;
+    esac
 done
 
 case "$1" in
-	create)
-		check_permission
-		check_depts_dir
-		create_prompt
-	;;
-	delete)
-		check_permission
-		check_depts_dir
-		delete_prompt
-	;;
-	*)
-		display_help
-		exit 1
-	;;
+    create)
+        check_permission
+        check_depts_dir
+        create_prompt
+    ;;
+    delete)
+        check_permission
+        check_depts_dir
+        delete_prompt
+    ;;
+    *)
+        display_help
+        exit 1
+    ;;
 esac
 ```
 
-### generate-sql.sh
+### generate-sql.sh {.unnumbered}
 
 ``` {.bash}
 #!/bin/bash
@@ -344,134 +344,134 @@ esac
 
 
 # 環境變數
-pass_dir='passwd'		# 放置密碼的資料夾，由另一個腳本 ./create-users.sh 產生
-filename='-accounts.sql'	# create/drop-accounts.sql 檔案前綴會根據選項變化
-run=false			# 預設產生腳本後不會執行
+pass_dir='passwd'       # 放置密碼的資料夾，由另一個腳本 ./create-users.sh 產生
+filename='-accounts.sql'    # create/drop-accounts.sql 檔案前綴會根據選項變化
+run=false           # 預設產生腳本後不會執行
 
 check_pass_dir() {
-	if [ -d ${pass_dir} ]; then
-		grps="$(ls ${pass_dir} | grep ".csv" | cut -d "." -f 1)"
-	else
-		echo "密碼資料夾 ${pass_dir} 不存在！請先執行過建立帳號腳本（create-users.sh）後，再執行一次此腳本。"
-		exit 1;
-	fi
+    if [ -d ${pass_dir} ]; then
+        grps="$(ls ${pass_dir} | grep ".csv" | cut -d "." -f 1)"
+    else
+        echo "密碼資料夾 ${pass_dir} 不存在！請先執行過建立帳號腳本（create-users.sh）後，再執行一次此腳本。"
+        exit 1;
+    fi
 }
 
 write_to_mysql_db() {
-	if [ ${run} = true ]; then
-		echo "請輸入 MySQL 帳戶 root 的密碼: 👇"
-		mysql -u root -p < ${filename}
-		clean_sql_script
-	else
-		echo "已於 $(pwd) 產生 ${filename} 🎉"
-	fi
+    if [ ${run} = true ]; then
+        echo "請輸入 MySQL 帳戶 root 的密碼: 👇"
+        mysql -u root -p < ${filename}
+        clean_sql_script
+    else
+        echo "已於 $(pwd) 產生 ${filename} 🎉"
+    fi
 }
 
 create_users_and_databases() {
-	echo "set global validate_password.policy=LOW;" | tee -a ${filename} > /dev/null 2>&1;
-	for grp in ${grps}
-	do 
-		while read line;
-		do
-			stu="$(echo ${line} | cut -d ',' -f 1)"
-			pass="$(echo ${line} | cut -d ',' -f 2)"
-			echo "create user '${stu}'@'localhost' identified by '${pass}';" \
-				| tee -a ${filename} > /dev/null 2>&1
-			echo "create database \`${stu}\` character set utf8mb4 collate utf8mb4_unicode_ci;" \
-				| tee -a ${filename} > /dev/null 2>&1
-			echo "grant all privileges on \`${stu}\`.* to '${stu}'@'localhost';" \
-				| tee -a ${filename} > /dev/null 2>&1
-		done < ${pass_dir}/${grp}.csv
-	done
-	echo "flush privileges;" | tee -a ${filename} > /dev/null 2>&1;
-	write_to_mysql_db
+    echo "set global validate_password.policy=LOW;" | tee -a ${filename} > /dev/null 2>&1;
+    for grp in ${grps}
+    do 
+        while read line;
+        do
+            stu="$(echo ${line} | cut -d ',' -f 1)"
+            pass="$(echo ${line} | cut -d ',' -f 2)"
+            echo "create user '${stu}'@'localhost' identified by '${pass}';" \
+                | tee -a ${filename} > /dev/null 2>&1
+            echo "create database \`${stu}\` character set utf8mb4 collate utf8mb4_unicode_ci;" \
+                | tee -a ${filename} > /dev/null 2>&1
+            echo "grant all privileges on \`${stu}\`.* to '${stu}'@'localhost';" \
+                | tee -a ${filename} > /dev/null 2>&1
+        done < ${pass_dir}/${grp}.csv
+    done
+    echo "flush privileges;" | tee -a ${filename} > /dev/null 2>&1;
+    write_to_mysql_db
 }
 
 drop_users_and_databases() {
-	for grp in ${grps}
-	do 
-		while read line;
-		do
-			stu="$(echo ${line} | cut -d ',' -f 1)"
-			echo "drop user '${stu}'@'localhost';" \
-				| tee -a ${filename} > /dev/null 2>&1
-			echo "drop database \`${stu}\`;" \
-				| tee -a ${filename} > /dev/null 2>&1
-		done < ${pass_dir}/${grp}.csv
-	done
-	write_to_mysql_db
+    for grp in ${grps}
+    do 
+        while read line;
+        do
+            stu="$(echo ${line} | cut -d ',' -f 1)"
+            echo "drop user '${stu}'@'localhost';" \
+                | tee -a ${filename} > /dev/null 2>&1
+            echo "drop database \`${stu}\`;" \
+                | tee -a ${filename} > /dev/null 2>&1
+        done < ${pass_dir}/${grp}.csv
+    done
+    write_to_mysql_db
 }
 
 display_help() {
-	echo "這個腳本被用來:"
-	echo "1. 根據已知的帳號密碼建立 MySQL 帳戶"
-	echo "2. 根據帳號建立資料庫，編碼為 'utf8mb4'"
-	echo "3. 以上指令會儲存在當前資料夾的 create-account.sql 裡面"
-	echo "4. 根據已知的帳號刪除該 MySQL 帳戶與資料庫"
-	echo "5. 若加上 -r, --run 即可順便執行該腳本"
-	echo
-	echo "使用方法: $0 [option...] {create|drop}"
-	echo
-	echo "options: "
-	echo "	-r, --run	執行腳本"
-	echo "	-h, --help	顯示說明"
-	echo "	沒有加任何選項: 僅產生 .sql 腳本"
-	echo
-	exit 0
+    echo "這個腳本被用來:"
+    echo "1. 根據已知的帳號密碼建立 MySQL 帳戶"
+    echo "2. 根據帳號建立資料庫，編碼為 'utf8mb4'"
+    echo "3. 以上指令會儲存在當前資料夾的 create-account.sql 裡面"
+    echo "4. 根據已知的帳號刪除該 MySQL 帳戶與資料庫"
+    echo "5. 若加上 -r, --run 即可順便執行該腳本"
+    echo
+    echo "使用方法: $0 [option...] {create|drop}"
+    echo
+    echo "options: "
+    echo "  -r, --run   執行腳本"
+    echo "  -h, --help  顯示說明"
+    echo "  沒有加任何選項: 僅產生 .sql 腳本"
+    echo
+    exit 0
 }
 
 clean_sql_script() {
-	read -p "是否要清除 ${filename}? (Yes/No)" yn
-	case $yn in
-		[Yy]* ) rm ${filename} ;;
-		[Nn]* ) exit 0;;
-	esac
-	echo "DONE 🎉"
+    read -p "是否要清除 ${filename}? (Yes/No)" yn
+    case $yn in
+        [Yy]* ) rm ${filename} ;;
+        [Nn]* ) exit 0;;
+    esac
+    echo "DONE 🎉"
 }
 
 while :
 do
-	case "$1" in
-		-r | --run)
-			run=true
-			shift 1
-			;;
-		-h | --help)
-			display_help
-			exit 0
-			;;
-		--)
-			shift
-			break
-			;;
-		-*)
-			echo "錯誤: 未知的選項: $1" >&2
-			display_help
-			exit 1
-			;;
-		*)
-			break
-			;;
-	esac
+    case "$1" in
+        -r | --run)
+            run=true
+            shift 1
+            ;;
+        -h | --help)
+            display_help
+            exit 0
+            ;;
+        --)
+            shift
+            break
+            ;;
+        -*)
+            echo "錯誤: 未知的選項: $1" >&2
+            display_help
+            exit 1
+            ;;
+        *)
+            break
+            ;;
+    esac
 done
 case "$1" in
-	create)
-		check_pass_dir
-		if [ $? -ne 1 ]; then
-			filename="$1$filename"
-			create_users_and_databases
-		fi
-		;;
-	drop)
-		check_pass_dir
-		if [ $? -ne 1 ]; then
-			filename="$1$filename"
-			drop_users_and_databases
-		fi
-		;;
-	*)
-		display_help
-		exit 0
-		;;
+    create)
+        check_pass_dir
+        if [ $? -ne 1 ]; then
+            filename="$1$filename"
+            create_users_and_databases
+        fi
+        ;;
+    drop)
+        check_pass_dir
+        if [ $? -ne 1 ]; then
+            filename="$1$filename"
+            drop_users_and_databases
+        fi
+        ;;
+    *)
+        display_help
+        exit 0
+        ;;
 esac
 ```

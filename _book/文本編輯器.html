@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-09-11" />
+<meta name="date" content="2021-09-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="putty.html"/>
-<link rel="next" href="參考資料.html"/>
+<link rel="next" href="帳號管理.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -273,6 +273,11 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="文本編輯器.html"><a href="文本編輯器.html#nano"><i class="fa fa-check"></i>nano</a></li>
 <li class="chapter" data-level="" data-path="文本編輯器.html"><a href="文本編輯器.html#更改預設的文本編輯器"><i class="fa fa-check"></i>更改預設的文本編輯器</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html"><i class="fa fa-check"></i>帳號管理</a>
+<ul>
+<li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html#users.sh"><i class="fa fa-check"></i>users.sh</a></li>
+<li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html#generate-sql.sh"><i class="fa fa-check"></i>generate-sql.sh</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="參考資料.html"><a href="參考資料.html"><i class="fa fa-check"></i>參考資料</a></li>
 <li class="divider"></li>
@@ -306,7 +311,7 @@ div.csl-indent {
 <div id="更改預設的文本編輯器" class="section level3 unnumbered">
 <h3>更改預設的文本編輯器</h3>
 <p>這個指令可以變更系統編輯文件所用的程式</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb159-1"><a href="文本編輯器.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> update-alternatives <span class="at">--config</span> editor</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb161-1"><a href="文本編輯器.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> update-alternatives <span class="at">--config</span> editor</span></code></pre></div>
 <p>按了 Enter↩︎ 之後，會出現現在可用的編輯器，輸入對應的編號即可變更。有標 <code>*</code> 號的編輯器為目前設定的預設編輯器。</p>
 <pre class="console_output"><code>There are 4 choices for the alternative editor (providing /usr/bin/editor).
 
@@ -319,17 +324,15 @@ div.csl-indent {
   4            /usr/bin/vim.tiny    15        manual mode
 
 Press &lt;enter&gt; to keep the current choice[*], or type selection number: 3</code></pre>
-
 </div>
 </div>
-<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
 <a href="putty.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="參考資料.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="帳號管理.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

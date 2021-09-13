@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-09-11" />
+<meta name="date" content="2021-09-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -273,6 +273,11 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="文本編輯器.html"><a href="文本編輯器.html#nano"><i class="fa fa-check"></i>nano</a></li>
 <li class="chapter" data-level="" data-path="文本編輯器.html"><a href="文本編輯器.html#更改預設的文本編輯器"><i class="fa fa-check"></i>更改預設的文本編輯器</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html"><i class="fa fa-check"></i>帳號管理</a>
+<ul>
+<li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html#users.sh"><i class="fa fa-check"></i>users.sh</a></li>
+<li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html#generate-sql.sh"><i class="fa fa-check"></i>generate-sql.sh</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="參考資料.html"><a href="參考資料.html"><i class="fa fa-check"></i>參考資料</a></li>
 <li class="divider"></li>
@@ -332,7 +337,7 @@ div.csl-indent {
 <p>接著按「Load」把剛剛產生的 *.ppk 檔案讀取進來。會看到一行字「Public key for pasting into OpenSSH authorized_keys file」下面的可複製區域就是 public key，把它整段複製起來。</p>
 <p><img src="figures/puttygen-load-ppk.png" class="figure" /></p>
 <p>接著打開「PowerShell」或是「命令提示字元」，輸入:</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb157-1"><a href="putty.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">echo</span> <span class="st">&quot;&lt;YOUR_PUBLIC_KEY&gt;&quot;</span> | ssh asis@192.<span class="fu">168</span>.<span class="fu">0</span>.<span class="fu">13</span> <span class="st">&quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb159-1"><a href="putty.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">echo</span> <span class="st">&quot;&lt;YOUR_PUBLIC_KEY&gt;&quot;</span> | ssh asis@192.<span class="fu">168</span>.<span class="fu">0</span>.<span class="fu">13</span> <span class="st">&quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;</span></span></code></pre></div>
 <ul>
 <li><p>將 <code>&lt;YOUR_PUBLIC_KEY&gt;</code> 替換成自己的 public key</p></li>
 <li><p>這裡的 <code>asis</code> 為第一章的<a href="於虛擬機器安裝作業系統.html#使用者設定">使用者設定</a>的預設使用者</p></li>

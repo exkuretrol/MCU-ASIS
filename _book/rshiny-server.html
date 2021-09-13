@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-09-11" />
+<meta name="date" content="2021-09-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -273,6 +273,11 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="文本編輯器.html"><a href="文本編輯器.html#nano"><i class="fa fa-check"></i>nano</a></li>
 <li class="chapter" data-level="" data-path="文本編輯器.html"><a href="文本編輯器.html#更改預設的文本編輯器"><i class="fa fa-check"></i>更改預設的文本編輯器</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html"><i class="fa fa-check"></i>帳號管理</a>
+<ul>
+<li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html#users.sh"><i class="fa fa-check"></i>users.sh</a></li>
+<li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html#generate-sql.sh"><i class="fa fa-check"></i>generate-sql.sh</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="參考資料.html"><a href="參考資料.html"><i class="fa fa-check"></i>參考資料</a></li>
 <li class="divider"></li>
@@ -342,38 +347,40 @@ div.csl-indent {
 <h3><span class="header-section-number">4.4.3</span> Step 3 — Shiny Server 進階設定</h3>
 <div class="sourceCode" id="cb146"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb146-1"><a href="rshiny-server.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/shiny-server/shiny-server.conf</span></code></pre></div>
 <pre><code>run_as :HOME_USER: shiny; # 以個別使用者執行 shinyapp
-                          # shiny 為 fallback 使用者
+                          # shiny 為備取（fallback）使用者
 
 # Define a server that listens on port 3838
 server {
   listen 3838;
-
-  # http://localhost/depts/
-  location /depts { 
-
-    # http://localhost/depts/asis/
-    location /asis { 
-      user_dirs;
-      
-      # 只允許使用者群組為 &#39;asis&#39; 的使用者連結 App
-      members_of asis;
-      directory_index on;
-    }
-
-    # http://localhost/depts/asis/
-    location /fin {
-      user_dirs;
-      
-      # 只允許使用者群組為 &#39;fin&#39; 的使用者連結 App
-      members_of fin;
-      directory_index on;
-    }
-
+  
+  location /asis {
+    user_dirs;
+    members_of asis;
+    directory_index on;
+  }
+  
+  location /ecofin {
+    user_dirs;
+    members_of ecofin;
+    directory_index on;
   } 
 
+  location /fta {
+    user_dirs;
+    members_of fta;
+    directory_index on;
+  }
+
+  location /teacher {
+    user_dirs;
+    members_of teacher;
+    
+    # 此設定會把老師頁面的資料夾顯示關閉
+    directory_index off; 
+  }
+
   # Define a location at the base URL
-  location /apps { # 將 shiny 位置 http://localhost/shiny/
-                   # 變更為 http://localhost/shiny/apps/
+  location / { 
 
     [...]
 
@@ -385,27 +392,29 @@ server {
 <div id="step-4-使用使用者測試設定是否有效" class="section level3" number="4.4.4">
 <h3><span class="header-section-number">4.4.4</span> Step 4 — 使用使用者測試設定是否有效</h3>
 <div class="sourceCode" id="cb149"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb149-1"><a href="rshiny-server.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> groupadd asis</span></code></pre></div>
-<div class="sourceCode" id="cb150"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb150-1"><a href="rshiny-server.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> groupadd fin</span></code></pre></div>
-<div class="sourceCode" id="cb151"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb151-1"><a href="rshiny-server.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/default/useradd</span></code></pre></div>
-<div class="sourceCode" id="cb152"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb152-1"><a href="rshiny-server.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Default values for useradd(8)</span></span>
-<span id="cb152-2"><a href="rshiny-server.html#cb152-2" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb152-3"><a href="rshiny-server.html#cb152-3" aria-hidden="true" tabindex="-1"></a><span class="co"># The SHELL variable specifies the default login shell on your</span></span>
-<span id="cb152-4"><a href="rshiny-server.html#cb152-4" aria-hidden="true" tabindex="-1"></a><span class="co"># system.</span></span>
-<span id="cb152-5"><a href="rshiny-server.html#cb152-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Similar to DSHELL in adduser. However, we use &quot;sh&quot; here because</span></span>
-<span id="cb152-6"><a href="rshiny-server.html#cb152-6" aria-hidden="true" tabindex="-1"></a><span class="co"># useradd is a low level utility and should be as general</span></span>
-<span id="cb152-7"><a href="rshiny-server.html#cb152-7" aria-hidden="true" tabindex="-1"></a><span class="co"># as possible</span></span>
-<span id="cb152-8"><a href="rshiny-server.html#cb152-8" aria-hidden="true" tabindex="-1"></a><span class="va">SHELL=</span>/usr/bin/bash <span class="co"># 變更這裡</span></span></code></pre></div>
-<div class="sourceCode" id="cb153"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb153-1"><a href="rshiny-server.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir /etc/skel/ShinyApps/</span></code></pre></div>
-<div class="sourceCode" id="cb154"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb154-1"><a href="rshiny-server.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /srv/shiny-server/sample-apps <span class="dt">\</span></span>
-<span id="cb154-2"><a href="rshiny-server.html#cb154-2" aria-hidden="true" tabindex="-1"></a>/etc/skel/ShinyApps/example</span></code></pre></div>
-<div class="sourceCode" id="cb155"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb155-1"><a href="rshiny-server.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> useradd <span class="at">--badnames</span> <span class="at">-N</span> <span class="at">-g</span> asis <span class="at">-m</span> 08170875</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb150-1"><a href="rshiny-server.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> groupadd ecofin</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb151-1"><a href="rshiny-server.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> groupadd fta</span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb152-1"><a href="rshiny-server.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> groupadd teacher</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb153-1"><a href="rshiny-server.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/default/useradd</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb154-1"><a href="rshiny-server.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Default values for useradd(8)</span></span>
+<span id="cb154-2"><a href="rshiny-server.html#cb154-2" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb154-3"><a href="rshiny-server.html#cb154-3" aria-hidden="true" tabindex="-1"></a><span class="co"># The SHELL variable specifies the default login shell on your</span></span>
+<span id="cb154-4"><a href="rshiny-server.html#cb154-4" aria-hidden="true" tabindex="-1"></a><span class="co"># system.</span></span>
+<span id="cb154-5"><a href="rshiny-server.html#cb154-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Similar to DSHELL in adduser. However, we use &quot;sh&quot; here because</span></span>
+<span id="cb154-6"><a href="rshiny-server.html#cb154-6" aria-hidden="true" tabindex="-1"></a><span class="co"># useradd is a low level utility and should be as general</span></span>
+<span id="cb154-7"><a href="rshiny-server.html#cb154-7" aria-hidden="true" tabindex="-1"></a><span class="co"># as possible</span></span>
+<span id="cb154-8"><a href="rshiny-server.html#cb154-8" aria-hidden="true" tabindex="-1"></a><span class="va">SHELL=</span>/usr/bin/bash <span class="co"># 變更這裡</span></span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb155-1"><a href="rshiny-server.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir /etc/skel/ShinyApps/</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb156-1"><a href="rshiny-server.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /srv/shiny-server/sample-apps <span class="dt">\</span></span>
+<span id="cb156-2"><a href="rshiny-server.html#cb156-2" aria-hidden="true" tabindex="-1"></a>/etc/skel/ShinyApps/example</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb157-1"><a href="rshiny-server.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> useradd <span class="at">--badnames</span> <span class="at">-N</span> <span class="at">-g</span> asis <span class="at">-m</span> 08170875</span></code></pre></div>
 <ul>
 <li><p><code>--badnames</code>:</p></li>
 <li><p><code>-N, --no-user-group</code>:</p></li>
 <li><p><code>-g, --gid GROUP</code>:</p></li>
 <li><p><code>-m, --create-home</code>:</p></li>
 </ul>
-<div class="sourceCode" id="cb156"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb156-1"><a href="rshiny-server.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> useradd <span class="at">--badnames</span> <span class="at">-N</span> <span class="at">-g</span> fin <span class="at">-m</span> 08220000</span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb158-1"><a href="rshiny-server.html#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> useradd <span class="at">--badnames</span> <span class="at">-N</span> <span class="at">-g</span> ecofin <span class="at">-m</span> 08220000</span></code></pre></div>
 <p><img src="figures/shiny-server-group-test-successed.png" /></p>
 <p><img src="figures/shiny-server-group-test-failed.png" /></p>
 
