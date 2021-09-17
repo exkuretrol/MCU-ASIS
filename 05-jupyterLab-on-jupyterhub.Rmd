@@ -1,0 +1,358 @@
+本篇教學完全照著[@mangecoeur_elena_vuong_luria_rk_2021]所寫的教學操作。
+
+## 事前準備
+
+## 設置 Python 3 環境
+
+``` {.bash .prefixed}
+sudo apt update && sudo apt install python3-dev --yes
+```
+
+``` {.bash .prefixed}
+sudo -H python3 -m pip install --upgrade pip
+```
+
+``` {.bash .prefixed}
+sudo apt install python3-venv
+```
+
+因為 python 通常都是指 python2，所以我們還要再多裝一個叫做 `python-is-python3` 的套件，將 `python` 設為 `python3` 的另一個名字。
+
+``` {.bash .prefixed .sudo .apt .install .python-is-python3}
+sudo apt install python-is-python3 --yes
+```
+
+## JupyterLab 與 JupyterHub
+
+### 於虛擬環境中設置 JupyterLab 與 JupyterHub
+
+``` {.bash .prefixed}
+sudo python3 -m venv /opt/jupyterhub
+```
+
+``` {.bash .prefixed}
+sudo /opt/jupyterhub/bin/python -m pip install wheel
+```
+
+``` {.bash .prefixed}
+sudo /opt/jupyterhub/bin/python -m pip install jupyterlab jupyterhub
+```
+
+``` {.bash .prefixed}
+sudo /opt/jupyterhub/bin/python -m pip install ipywidgets
+```
+
+``` {.bash .prefixed}
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt-get install -y nodejs
+```
+
+``` {.bash .prefixed}
+sudo npm install -g configurable-http-proxy
+```
+
+### 設定 JupyterHub
+
+``` {.bash .prefixed}
+sudo mkdir -p /opt/jupyterhub/etc/jupyterhub/
+```
+
+``` {.bash .prefixed}
+cd /opt/jupyterhub/etc/jupyterhub/
+```
+
+``` {.bash .prefixed}
+sudo /opt/jupyterhub/bin/jupyterhub --generate-config
+```
+
+``` {.bash .prefixed}
+sudo vim jupyterhub_config.py
+```
+
+``` {.python}
+c.JupyterHub.bind_url = 'http://:8000/jhub'
+c.Spawner.default_url = '/lab'
+c.Authenticator.admin_users = {'asis'}
+```
+
+### 新增開機自動啟動 JupyterHub 的服務
+
+``` {.bash .prefixed}
+sudo mkdir -p /opt/jupyterhub/etc/systemd
+```
+
+``` {.bash .prefixed}
+sudo vim /opt/jupyterhub/etc/systemd/jupyterhub.service
+```
+
+``` {.bash .prefixed}
+sudo ln -s /opt/jupyterhub/etc/systemd/jupyterhub.service /etc/systemd/system/jupyterhub.service
+```
+
+``` {.bash .prefixed}
+sudo systemctl daemon-reload
+```
+
+``` {.bash .prefixed}
+sudo systemctl enable jupyterhub.service
+```
+
+``` {.bash .prefixed}
+sudo systemctl start jupyterhub.service
+```
+
+``` {.bash .prefixed}
+sudo systemctl status jupyterhub.service
+```
+
+## JupyterHub 中的運算核心
+
+### Conda 的 Python🐍 環境
+
+``` {.bash .prefixed}
+cd ~
+```
+
+``` {.bash .prefixed}
+curl https://repo.anaconda.com/pkgs/misc/gpgkeys/anaconda.asc | gpg --dearmor > conda.gpg
+```
+
+``` {.bash .prefixed}
+sudo install -o root -g root -m 644 conda.gpg /etc/apt/trusted.gpg.d/
+```
+
+``` {.bash .prefixed}
+rm conda.gpg
+```
+
+``` {.bash .prefixed}
+echo "deb [arch=amd64] https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main" | sudo tee /etc/apt/sources.list.d/conda.list
+```
+
+``` {.bash .prefixed}
+sudo apt update && sudo apt install conda --yes
+```
+
+``` {.bash .prefixed}
+sudo mkdir /opt/conda/envs
+```
+
+``` {.bash .prefixed}
+cd /opt/conda/envs/ && sudo vim environment.yml
+```
+
+``` {.yaml .yml}
+name: python
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+  - ipykernel
+  - pip:
+    - ipython-sql
+    - PyMySQL
+    - matplotlib
+    - plotly
+    - dash
+    - pandas
+prefix: /opt/conda/envs/python
+```
+
+``` {.bash .prefixed}
+sudo /opt/conda/bin/conda create -f environment.yml
+```
+
+``` {.bash .prefixed}
+sudo /opt/conda/envs/python/bin/python -m ipykernel install --prefix=/opt/jupyterhub/ --name 'python3' --display-name "Python (default)"
+```
+
+![](figures/jupyterhub-main-page-kernel-python.png)
+
+### R 環境
+
+``` {.bash .prefixed}
+sudo su - -c "R -e \"install.packages("IRkernel")\""
+```
+
+``` {.bash .prefixed}
+sudo su - -c "R -e \"
+    IRkernel::installspec(
+        name='ir41', 
+        displayname='R 4.1',
+        user=FALSE,
+        prefix='/opt/jupyterhub'
+    )
+\""
+```
+
+    Error in IRkernel::installspec(name = "ir41", displayname = "R 4.1") : 
+      jupyter-client has to be installed but “jupyter kernelspec --version” exited with code 127.
+    In addition: Warning message:
+    In system2("jupyter", c("kernelspec", "--version"), FALSE, FALSE) :
+      error in running command
+    Execution halted
+
+主要原因是因為，系統找不到 `jupyter` 指令。可以自己在終端機重現一次：
+
+``` {.bash .prefixed}
+jupyter kernelspec --version
+```
+
+``` {.console_output}
+Command 'jupyter' not found, but can be installed with:
+
+sudo snap install jupyter       # version 1.0.0, or
+sudo apt  install jupyter-core  # version 4.6.3-3
+
+See 'snap info jupyter' for additional versions.
+```
+
+找不到指令，出現了推薦安裝方式，不過這不是我們要的。
+
+這裡會用一個技巧讓系統找得到位於 `/opt/jupyter/bin/jupyter` 的指令。 藉由軟連結到系統的 `path` 變數中讓 R 找得到。\
+首先先印出 `PATH` 變數：
+
+``` {.bash .prefixed}
+echo $PATH
+```
+
+``` {.console_output}
+/home/asis/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+```
+
+放置於其中一個位置就行，注意不要放置在 /home 底下，執行 R 時事使用 root 權限，用 root 權限執行時，並不會翻 `/home/asis/` 底下的資料夾。 這裡我們選用 `/usr/local/bin` 作為軟連結放置 jupyter 執行檔。
+
+``` {.bash .prefixed}
+sudo ln -s /opt/jupyterhub/bin/jupyter /usr/local/bin
+```
+
+接著用 `which` 指令查詢指令是否存在：
+
+``` {.bash .prefixed}
+which jupyter
+```
+
+列出二進制執行檔存在位置：
+
+``` {.bash .prefixed}
+ls -al $(which jupyter)
+```
+
+``` {.console_output}
+lrwxrwxrwx 1 root root 27 Sep 17 16:23 /usr/local/bin/jupyter -> /opt/jupyterhub/bin/jupyter*
+```
+
+可以看到指令 `jupyter` 之所以會存在是因為軟連結至 `/opt/jupyterhub/bin/jupyter` 後，因為 `/usr/local/bin` 在變數 `path` 內，讓系統找得到，才可以使用這個指令。
+
+再執行一次剛開始的指令：
+
+``` {.bash .prefixed}
+sudo su - -c "R -e \"
+    IRkernel::installspec(
+        name='ir41', 
+        displayname='R 4.1',
+        user=FALSE,
+        prefix='/opt/jupyterhub'
+    )
+\""
+```
+
+``` {.bash .prefixed}
+jupyter kernelspec list
+```
+
+``` {.console_output}
+Available kernels:
+  ir41       /opt/jupyterhub/share/jupyter/kernels/ir41
+  python3    /opt/jupyterhub/share/jupyter/kernels/python3
+```
+
+![](figures/jupyterhub-main-page-kernel-R.png)
+
+## 設置 Apache 的 Reverse Proxy
+
+``` {.bash .prefixed}
+sudo vim /etc/apache2/sites-available/asis.conf
+```
+
+``` {.bash}
+<VirtualHost *:80>
+    [...]
+
+    ###
+    # JupyterHub Reverse Proxy
+    ###
+    # add trailing slash
+    RedirectMatch ^/jhub$ /jhub/
+    RewriteCond %{HTTP:Connection} Upgrade [NC]
+    RewriteCond %{HTTP:Upgrade} websocket [NC]
+    RewriteRule /jhub/(.*) ws://127.0.0.1:8000/jhub/$1 [P,L]
+    RewriteRule /jhub/(.*) http://127.0.0.1:8000/jhub/$1 [P,L]
+    
+    <Location /jhub/>
+        # preserve Host header to avoid cross-origin problems
+  # this setting screws up Rstudio, use for JupyterHub only
+        ProxyPreserveHost On
+        # proxy to JupyterHub, omit location parameter from ProxyPass etc
+        ProxyPass http://127.0.0.1:8000/jhub/
+        ProxyPassReverse http://127.0.0.1:8000/jhub/
+    </Location>
+    
+</VirtualHost>
+```
+
+    http://<虛擬主機的ip位址>/jhub/
+
+## JupyterHub 擴充套件
+
+-   [jupyterlab-drawio](https://github.com/QuantStack/jupyterlab-drawio)
+
+    ``` {.bash .prefixed}
+    sudo /opt/jupyterhub/bin/pip install jupyterlab-drawio
+    ```
+
+-   [jupyterlab-git](https://github.com/jupyterlab/jupyterlab-git)
+
+    ``` {.bash .prefixed}
+    sudo /opt/jupyterhub/bin/pip \
+        install --upgrade jupyterlab jupyterlab-git
+    ```
+
+-   [jupyterlab-variable-inspector](https://github.com/lckr/jupyterlab-variableInspector)
+
+    ``` {.bash .prefixed}
+    sudo /opt/jupyterhub/bin/pip \
+        install lckr_jupyterlab_variableinspector
+    ```
+
+    ``` {.bash .prefixed}
+    sudo su - -c "R -e \"install.packages('repr')\""
+    ```
+
+-   [jupyterext-text-shortcuts](https://github.com/techrah/jupyterext-text-shortcuts)
+
+    ``` {.bash .prefixed}
+    sudo jupyter labextension install @techrah/text-shortcuts
+    ```
+
+-   [jupyterlab-spreadsheet](https://github.com/quigleyj97/jupyterlab-spreadsheet)
+
+    ``` {.bash .prefixed}
+    sudo jupyter labextension install jupyterlab-spreadsheet
+    ```
+
+-   [ipympl](https://github.com/matplotlib/ipympl)
+
+    ``` {.bash .prefixed}
+    sudo /opt/jupyterhub/bin/pip install ipympl
+    ```
+
+-   [jupyter-dash](https://github.com/plotly/jupyter-dash) (待更新，目前不能用 2021.09.18)
+
+    ``` {.bash .prefixed}
+    sudo /opt/jupyterhub/bin/pip install jupyter-dash
+    ```
+
+``` {.bash .prefixed}
+sudo systemctl restart jupyterhub.service
+```
