@@ -26,7 +26,7 @@ sudo apt install r-base --yes
 
 ## RStudio Server
 
-### Step 1 --- 安裝 RStudio Server 伺服器
+### Step 1 --- 安裝 RStudio Server 伺服器 {.unnumbered}
 
 ``` {.bash .prefixed}
 sudo apt install gdebi-core
@@ -66,7 +66,7 @@ sudo ufw allow 8787
 http://<虛擬主機的 ip 地址>:8787
 ```
 
-### Step 2 --- 設定 Apache 的 Proxy
+### Step 2 --- 設定 Apache 的 Proxy {.unnumbered}
 
 ``` {.bash .prefixed}
 sudo a2enmod proxy
@@ -154,7 +154,7 @@ sudo ufw delete 9
 
 ## RShiny Server
 
-### Step 1 --- 安裝 RShiny Server
+### Step 1 --- 安裝 RShiny Server {.unnumbered}
 
 ``` {.bash .prefixed}
 sudo su - \
@@ -184,7 +184,7 @@ sudo gdebi shiny-server-1.5.16.958-amd64.deb
 右下角 blablabla 沒裝 rmarkdown package
 :::
 
-### Step 2 --- 設定 Apache 的 Proxy
+### Step 2 --- 設定 Apache 的 Proxy {.unnumbered}
 
 ``` {.bash .prefixed}
 sudo vim /etc/apache2/sites-available/asis.conf
@@ -215,31 +215,36 @@ sudo vim /etc/apache2/sites-available/asis.conf
 
     http://<虛擬主機的 ip 地址>/shiny/
 
-### Step 3 --- Shiny Server 進階設定
+### Step 3 --- Shiny Server 進階設定 {.unnumbered}
 
 ``` {.bash .prefixed}
 sudo vim /etc/shiny-server/shiny-server.conf
 ```
 
-    run_as :HOME_USER: shiny; # 以個別使用者執行 shinyapp
-                              # shiny 為備取（fallback）使用者
-
-    # Define a server that listens on port 3838
+    # 主要執行 App 為的使用者為該 App 的擁有者，沒有擁有者的 App 將由備取使用者 shiny 執行。
+    run_as :HOME_USER: shiny;
+    access_log /var/log/shiny-server/access.log tiny;
+      
     server {
       listen 3838;
-      
+
+      # 重新導向舊群組 /asisstuc 至新群組 /asis
+      location /asisstuc {
+        redirect "https://123-195-14-80.dynamic.kbronet.com.tw/shiny/asis/" 302 true;
+      }
+
       location /asis {
         user_dirs;
         members_of asis;
         directory_index on;
       }
-      
+
       location /ecofin {
         user_dirs;
         members_of ecofin;
         directory_index on;
-      } 
-
+      }
+      
       location /fta {
         user_dirs;
         members_of fta;
@@ -249,25 +254,26 @@ sudo vim /etc/shiny-server/shiny-server.conf
       location /teacher {
         user_dirs;
         members_of teacher;
-        
-        # 此設定會把老師頁面的資料夾顯示關閉
-        directory_index off; 
+        directory_index off;
       }
 
-      # Define a location at the base URL
-      location / { 
-
-        [...]
-
+      # Shiny 首頁
+      location / {
+        site_dir /srv/shiny-server;
+        log_dir /var/log/shiny-server;
+        directory_index on;
       }
-      
     }
 
 ``` {.bash .prefixed}
 sudo systemctl restart shiny-server
 ```
 
-### Step 4 --- 使用使用者測試設定是否有效
+::: {.infobox .info}
+這裏要先跳至第四步先建立使用者群組後再重新啟動 Shiny-server。因為設定檔中設有使用者群組（asis、ecofin、fta、teacher），如果 Shiny Server 在啟動中找不到時會跳出錯誤。
+:::
+
+### Step 4 --- 使用使用者測試設定是否有效 {.unnumbered}
 
 ``` {.bash .prefixed}
 sudo groupadd asis
