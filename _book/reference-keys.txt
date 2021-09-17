@@ -42,6 +42,7 @@ rstudio-rshiny-server
 r-base
 rstudio-server
 rshiny-server
+jupyterlab-on-jupyterhub
 事前準備-4
 設置-python-3-環境
 jupyterlab-與-jupyterhub
