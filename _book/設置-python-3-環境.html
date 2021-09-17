@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>由 Windows 10 系統進入 BIOS | MCU ASIS Ubuntu 系統安裝指南</title>
+  <title>4.6 設置 Python 3 環境 | MCU ASIS Ubuntu 系統安裝指南</title>
   <meta name="description" content="This is a book." />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="由 Windows 10 系統進入 BIOS | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta property="og:title" content="4.6 設置 Python 3 環境 | MCU ASIS Ubuntu 系統安裝指南" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="由 Windows 10 系統進入 BIOS | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta name="twitter:title" content="4.6 設置 Python 3 環境 | MCU ASIS Ubuntu 系統安裝指南" />
   
   <meta name="twitter:description" content="This is a book." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="附錄.html"/>
-<link rel="next" href="windows-terminal.html"/>
+<link rel="prev" href="事前準備-4.html"/>
+<link rel="next" href="jupyterlab-與-jupyterhub.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -315,16 +315,21 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="由-windows-10-系統進入-bios" class="section level2 unnumbered">
-<h2>由 Windows 10 系統進入 BIOS</h2>
+<div id="設置-python-3-環境" class="section level2" number="4.6">
+<h2><span class="header-section-number">4.6</span> 設置 Python 3 環境</h2>
+<div class="sourceCode" id="cb159"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb159-1"><a href="設置-python-3-環境.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt install python3-dev <span class="at">--yes</span></span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb160-1"><a href="設置-python-3-環境.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-H</span> python3 <span class="at">-m</span> pip install <span class="at">--upgrade</span> pip</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb161-1"><a href="設置-python-3-環境.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install python3-venv</span></code></pre></div>
+<p>因為 python 通常都是指 python2，所以我們還要再多裝一個叫做 <code>python-is-python3</code> 的套件，將 <code>python</code> 設為 <code>python3</code> 的另一個名字。</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode bash prefixed sudo apt install python-is-python3"><code class="sourceCode bash"><span id="cb162-1"><a href="設置-python-3-環境.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install python-is-python3 <span class="at">--yes</span></span></code></pre></div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="附錄.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="windows-terminal.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="事前準備-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="jupyterlab-與-jupyterhub.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -356,7 +361,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/exkuretrol/MCU-ASIS/edit/main/98-appendix.Rmd",
+"link": "https://github.com/exkuretrol/MCU-ASIS/edit/main/05-jupyterLab-on-jupyterhub.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -364,7 +369,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/exkuretrol/MCU-ASIS/blob/main/98-appendix.Rmd",
+"link": "https://github.com/exkuretrol/MCU-ASIS/blob/main/05-jupyterLab-on-jupyterhub.Rmd",
 "text": null
 },
 "download": ["MCU-ASIS.epub"],

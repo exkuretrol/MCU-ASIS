@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>由 Windows 10 系統進入 BIOS | MCU ASIS Ubuntu 系統安裝指南</title>
+  <title>4.10 JupyterHub 擴充套件 | MCU ASIS Ubuntu 系統安裝指南</title>
   <meta name="description" content="This is a book." />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="由 Windows 10 系統進入 BIOS | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta property="og:title" content="4.10 JupyterHub 擴充套件 | MCU ASIS Ubuntu 系統安裝指南" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="由 Windows 10 系統進入 BIOS | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta name="twitter:title" content="4.10 JupyterHub 擴充套件 | MCU ASIS Ubuntu 系統安裝指南" />
   
   <meta name="twitter:description" content="This is a book." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="附錄.html"/>
-<link rel="next" href="windows-terminal.html"/>
+<link rel="prev" href="設置-apache-的-reverse-proxy.html"/>
+<link rel="next" href="附錄.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -315,16 +315,38 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="由-windows-10-系統進入-bios" class="section level2 unnumbered">
-<h2>由 Windows 10 系統進入 BIOS</h2>
+<div id="jupyterhub-擴充套件" class="section level2" number="4.10">
+<h2><span class="header-section-number">4.10</span> JupyterHub 擴充套件</h2>
+<ul>
+<li><p><a href="https://github.com/QuantStack/jupyterlab-drawio">jupyterlab-drawio</a></p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb209-1"><a href="jupyterhub-擴充套件.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install jupyterlab-drawio</span></code></pre></div></li>
+<li><p><a href="https://github.com/jupyterlab/jupyterlab-git">jupyterlab-git</a></p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb210-1"><a href="jupyterhub-擴充套件.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip <span class="dt">\</span></span>
+<span id="cb210-2"><a href="jupyterhub-擴充套件.html#cb210-2" aria-hidden="true" tabindex="-1"></a>    install <span class="at">--upgrade</span> jupyterlab jupyterlab-git</span></code></pre></div></li>
+<li><p><a href="https://github.com/lckr/jupyterlab-variableInspector">jupyterlab-variable-inspector</a></p>
+<div class="sourceCode" id="cb211"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb211-1"><a href="jupyterhub-擴充套件.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip <span class="dt">\</span></span>
+<span id="cb211-2"><a href="jupyterhub-擴充套件.html#cb211-2" aria-hidden="true" tabindex="-1"></a>    install lckr_jupyterlab_variableinspector</span></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb212-1"><a href="jupyterhub-擴充套件.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span> <span class="at">-c</span> <span class="st">&quot;R -e </span><span class="dt">\&quot;</span><span class="st">install.packages(&#39;repr&#39;)</span><span class="dt">\&quot;</span><span class="st">&quot;</span></span></code></pre></div></li>
+<li><p><a href="https://github.com/techrah/jupyterext-text-shortcuts">jupyterext-text-shortcuts</a></p>
+<div class="sourceCode" id="cb213"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb213-1"><a href="jupyterhub-擴充套件.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> jupyter labextension install @techrah/text-shortcuts</span></code></pre></div></li>
+<li><p><a href="https://github.com/quigleyj97/jupyterlab-spreadsheet">jupyterlab-spreadsheet</a></p>
+<div class="sourceCode" id="cb214"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb214-1"><a href="jupyterhub-擴充套件.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> jupyter labextension install jupyterlab-spreadsheet</span></code></pre></div></li>
+<li><p><a href="https://github.com/matplotlib/ipympl">ipympl</a></p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb215-1"><a href="jupyterhub-擴充套件.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install ipympl</span></code></pre></div></li>
+<li><p><a href="https://github.com/plotly/jupyter-dash">jupyter-dash</a> (待更新，目前不能用 2021.09.18)</p>
+<div class="sourceCode" id="cb216"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb216-1"><a href="jupyterhub-擴充套件.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install jupyter-dash</span></code></pre></div></li>
+</ul>
+<div class="sourceCode" id="cb217"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb217-1"><a href="jupyterhub-擴充套件.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart jupyterhub.service</span></code></pre></div>
+
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="附錄.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="windows-terminal.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="設置-apache-的-reverse-proxy.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="附錄.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -356,7 +378,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/exkuretrol/MCU-ASIS/edit/main/98-appendix.Rmd",
+"link": "https://github.com/exkuretrol/MCU-ASIS/edit/main/05-jupyterLab-on-jupyterhub.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -364,7 +386,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/exkuretrol/MCU-ASIS/blob/main/98-appendix.Rmd",
+"link": "https://github.com/exkuretrol/MCU-ASIS/blob/main/05-jupyterLab-on-jupyterhub.Rmd",
 "text": null
 },
 "download": ["MCU-ASIS.epub"],

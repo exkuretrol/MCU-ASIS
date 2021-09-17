@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>由 Windows 10 系統進入 BIOS | MCU ASIS Ubuntu 系統安裝指南</title>
+  <title>4.9 設置 Apache 的 Reverse Proxy | MCU ASIS Ubuntu 系統安裝指南</title>
   <meta name="description" content="This is a book." />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="由 Windows 10 系統進入 BIOS | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta property="og:title" content="4.9 設置 Apache 的 Reverse Proxy | MCU ASIS Ubuntu 系統安裝指南" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="由 Windows 10 系統進入 BIOS | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta name="twitter:title" content="4.9 設置 Apache 的 Reverse Proxy | MCU ASIS Ubuntu 系統安裝指南" />
   
   <meta name="twitter:description" content="This is a book." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="附錄.html"/>
-<link rel="next" href="windows-terminal.html"/>
+<link rel="prev" href="jupyterhub-中的運算核心.html"/>
+<link rel="next" href="jupyterhub-擴充套件.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -315,16 +315,41 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="由-windows-10-系統進入-bios" class="section level2 unnumbered">
-<h2>由 Windows 10 系統進入 BIOS</h2>
+<div id="設置-apache-的-reverse-proxy" class="section level2" number="4.9">
+<h2><span class="header-section-number">4.9</span> 設置 Apache 的 Reverse Proxy</h2>
+<div class="sourceCode" id="cb206"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb206-1"><a href="設置-apache-的-reverse-proxy.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/sites-available/asis.conf</span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb207-1"><a href="設置-apache-的-reverse-proxy.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>VirtualHost <span class="ex">*:80</span><span class="op">&gt;</span></span>
+<span id="cb207-2"><a href="設置-apache-的-reverse-proxy.html#cb207-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
+<span id="cb207-3"><a href="設置-apache-的-reverse-proxy.html#cb207-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb207-4"><a href="設置-apache-的-reverse-proxy.html#cb207-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
+<span id="cb207-5"><a href="設置-apache-的-reverse-proxy.html#cb207-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># JupyterHub Reverse Proxy</span></span>
+<span id="cb207-6"><a href="設置-apache-的-reverse-proxy.html#cb207-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
+<span id="cb207-7"><a href="設置-apache-的-reverse-proxy.html#cb207-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># add trailing slash</span></span>
+<span id="cb207-8"><a href="設置-apache-的-reverse-proxy.html#cb207-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RedirectMatch</span> ^/jhub$ /jhub/</span>
+<span id="cb207-9"><a href="設置-apache-的-reverse-proxy.html#cb207-9" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteCond</span> %{HTTP:Connection} Upgrade [NC]</span>
+<span id="cb207-10"><a href="設置-apache-的-reverse-proxy.html#cb207-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteCond</span> %{HTTP:Upgrade} websocket [NC]</span>
+<span id="cb207-11"><a href="設置-apache-的-reverse-proxy.html#cb207-11" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteRule</span> /jhub/<span class="er">(</span><span class="bu">.</span><span class="pp">*</span><span class="kw">)</span> <span class="ex">ws://127.0.0.1:8000/jhub/</span><span class="va">$1</span> [P,L]</span>
+<span id="cb207-12"><a href="設置-apache-的-reverse-proxy.html#cb207-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteRule</span> /jhub/<span class="er">(</span><span class="bu">.</span><span class="pp">*</span><span class="kw">)</span> <span class="ex">http://127.0.0.1:8000/jhub/</span><span class="va">$1</span> [P,L]</span>
+<span id="cb207-13"><a href="設置-apache-的-reverse-proxy.html#cb207-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb207-14"><a href="設置-apache-的-reverse-proxy.html#cb207-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>Location <span class="ex">/jhub/</span><span class="op">&gt;</span></span>
+<span id="cb207-15"><a href="設置-apache-的-reverse-proxy.html#cb207-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># preserve Host header to avoid cross-origin problems</span></span>
+<span id="cb207-16"><a href="設置-apache-的-reverse-proxy.html#cb207-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># this setting screws up Rstudio, use for JupyterHub only</span></span>
+<span id="cb207-17"><a href="設置-apache-的-reverse-proxy.html#cb207-17" aria-hidden="true" tabindex="-1"></a>        <span class="ex">ProxyPreserveHost</span> On</span>
+<span id="cb207-18"><a href="設置-apache-的-reverse-proxy.html#cb207-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># proxy to JupyterHub, omit location parameter from ProxyPass etc</span></span>
+<span id="cb207-19"><a href="設置-apache-的-reverse-proxy.html#cb207-19" aria-hidden="true" tabindex="-1"></a>        <span class="ex">ProxyPass</span> http://127.0.0.1:8000/jhub/</span>
+<span id="cb207-20"><a href="設置-apache-的-reverse-proxy.html#cb207-20" aria-hidden="true" tabindex="-1"></a>        <span class="ex">ProxyPassReverse</span> http://127.0.0.1:8000/jhub/</span>
+<span id="cb207-21"><a href="設置-apache-的-reverse-proxy.html#cb207-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>/Location<span class="op">&gt;</span></span>
+<span id="cb207-22"><a href="設置-apache-的-reverse-proxy.html#cb207-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb207-23"><a href="設置-apache-的-reverse-proxy.html#cb207-23" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>/VirtualHost<span class="op">&gt;</span></span></code></pre></div>
+<pre><code>http://&lt;虛擬主機的ip位址&gt;/jhub/</code></pre>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="附錄.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="windows-terminal.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="jupyterhub-中的運算核心.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="jupyterhub-擴充套件.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -356,7 +381,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/exkuretrol/MCU-ASIS/edit/main/98-appendix.Rmd",
+"link": "https://github.com/exkuretrol/MCU-ASIS/edit/main/05-jupyterLab-on-jupyterhub.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -364,7 +389,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/exkuretrol/MCU-ASIS/blob/main/98-appendix.Rmd",
+"link": "https://github.com/exkuretrol/MCU-ASIS/blob/main/05-jupyterLab-on-jupyterhub.Rmd",
 "text": null
 },
 "download": ["MCU-ASIS.epub"],
