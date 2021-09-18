@@ -355,6 +355,44 @@ sudo vim /etc/apache2/sites-available/asis.conf
     sudo /opt/jupyterhub/bin/pip install jupyter-dash
     ```
 
+-   [jupyterlab-link-share](https://github.com/jupyterlab-contrib/jupyterlab-link-share)
+
+    ``` {.bash .prefixed}
+    sudo /opt/jupyterhub/bin/pip install jupyterlab-link-share
+    ```
+
+-   [language-packs](https://github.com/jupyterlab/language-packs/tree/master/language-packs/)
+
+    ``` {.bash .prefixed}
+    sudo /opt/jupyterhub/bin/pip install jupyterlab-language-pack-zh-TW
+    ```
+
+    ``` {.bash .prefixed}
+    sudo /opt/jupyterhub/bin/pip install jupyterlab-language-pack-zh-CN
+    ```
+
+-   [jupyterlab-lsp](https://github.com/krassowski/jupyterlab-lsp)
+
+    ``` {.bash .prefixed}
+    sudo /opt/jupyterhub/bin/pip install 'jupyterlab>=3.0.0,<4.0.0a0' jupyterlab-lsp
+    ```
+
+    ``` {.bash .prefixed}
+    sudo apt install libcurl4-openssl-dev libxml2-dev --yes
+    ```
+
+    ``` {.bash .prefixed}
+    sudo su - -c "R -e \"install.packages('languageserver')\"""
+    ```
+
+    `{.bash ..prefixed} sudo /opt/jupyterhub/bin/pip install -U jedi-language-server`
+
+-   [nbgitpuller](https://github.com/jupyterhub/nbgitpuller)
+
+    ``` {.bash .prefixed}
+    sudo /opt/jupyterhub/bin/pip install nbgitpuller
+    ```
+
 ``` {.bash .prefixed}
 sudo systemctl restart jupyterhub.service
 ```
