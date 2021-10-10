@@ -173,7 +173,7 @@ sudo /opt/conda/envs/python/bin/python -m ipykernel install --prefix=/opt/jupyte
 ### R 環境
 
 ``` {.bash .prefixed}
-sudo su - -c "R -e \"install.packages("IRkernel")\""
+sudo su - -c "R -e \"install.packages('IRkernel')\""
 ```
 
 ``` {.bash .prefixed}
@@ -385,7 +385,9 @@ sudo vim /etc/apache2/sites-available/asis.conf
     sudo su - -c "R -e \"install.packages('languageserver')\"""
     ```
 
-    `{.bash ..prefixed} sudo /opt/jupyterhub/bin/pip install -U jedi-language-server`
+    ``` {.bash .prefixed}
+    sudo /opt/jupyterhub/bin/pip install -U jedi-language-server
+    ```
 
 -   [nbgitpuller](https://github.com/jupyterhub/nbgitpuller)
 
