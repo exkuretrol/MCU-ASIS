@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5.2 設置 Python 3 環境 | MCU ASIS Ubuntu 系統安裝指南</title>
   <meta name="description" content="This is a book." />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5.2 設置 Python 3 環境 | MCU ASIS Ubuntu 系統安裝指南" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-09-19" />
+<meta name="date" content="2021-10-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="事前準備-4.html"/>
 <link rel="next" href="jupyterlab-與-jupyterhub.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -42,7 +43,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -320,7 +320,7 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="設置-python-3-環境" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> 設置 Python 3 環境</h2>
-<div class="sourceCode" id="cb159"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb159-1"><a href="設置-python-3-環境.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt install python3-dev <span class="at">--yes</span></span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb159-1"><a href="設置-python-3-環境.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt install python3-dev python3-pip <span class="at">--yes</span></span></code></pre></div>
 <div class="sourceCode" id="cb160"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb160-1"><a href="設置-python-3-環境.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-H</span> python3 <span class="at">-m</span> pip install <span class="at">--upgrade</span> pip</span></code></pre></div>
 <div class="sourceCode" id="cb161"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb161-1"><a href="設置-python-3-環境.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install python3-venv</span></code></pre></div>
 <p>因為 python 通常都是指 python2，所以我們還要再多裝一個叫做 <code>python-is-python3</code> 的套件，將 <code>python</code> 設為 <code>python3</code> 的另一個名字。</p>
@@ -336,7 +336,6 @@ div.csl-indent {
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -377,7 +376,7 @@ gitbook.start({
 },
 "download": ["MCU-ASIS.epub"],
 "search": {
-"engine": "lunr",
+"engine": "fuse",
 "options": null
 },
 "toc": {
