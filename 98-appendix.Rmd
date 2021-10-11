@@ -144,219 +144,219 @@ Press <enter> to keep the current choice[*], or type selection number: 3
 # 2. Remove Accounts via ./depts/${dept}.txt
 
 # 環境變數
-depts_dir='depts'		# 放置用來建置 linux 帳號的系資料夾
-pass_dir='passwd'		# 放置建置完成的 linux 帳號密碼的資料夾，建制完後
-				# 可搭配建置 MySQL 帳號與資料庫腳本（generate-sql.sh）使用
-gp=false			# 不需要用隨機密碼建立帳號的旗標
+depts_dir='depts'       # 放置用來建置 linux 帳號的系資料夾
+pass_dir='passwd'       # 放置建置完成的 linux 帳號密碼的資料夾，建制完後
+                # 可搭配建置 MySQL 帳號與資料庫腳本（generate-sql.sh）使用
+gp=false            # 不需要用隨機密碼建立帳號的旗標
 new=false
 ubuntu_version=$(lsb_release -d | cut -d ' ' -f 2 | cut -d '.' -f 1)
 
 check_permission() {
-	if [ $(id -u) -ne 0 ]; then
-		echo "必須以 root 權限執行此腳本！";
-		exit 1;
-	fi
+    if [ $(id -u) -ne 0 ]; then
+        echo "必須以 root 權限執行此腳本！";
+        exit 1;
+    fi
 }
 
 check_depts_dir() {
-	if [ -d ${depts_dir} ]; then
-		grps="$(ls ./${depts_dir} | grep ".txt" | cut -d "." -f 1)"
-		for grp in ${grps}
-		do
-			table=$(wc -l ./${depts_dir}/${grp}.txt)
-			file=$(echo $table | cut -d ' ' -f 2)
-			count=$(echo $table | cut -d ' ' -f 1)
-			if [ $count -lt 1 ]; then
-				echo "請再檢查一次 ./${depts_dir}/ 內是否含有正確格式的學號檔案！"
-				echo "有問題的檔案: $file"
-				exit 1
-			else
-				echo "於 $file 發現了 $count 個學生"
-			fi
-		done
-	else
-		echo "系資料夾 ${depts_dir} 不存在！請再確認一次。"
-		exit 1;
-	fi
+    if [ -d ${depts_dir} ]; then
+        grps="$(ls ./${depts_dir} | grep ".txt" | cut -d "." -f 1)"
+        for grp in ${grps}
+        do
+            table=$(wc -l ./${depts_dir}/${grp}.txt)
+            file=$(echo $table | cut -d ' ' -f 2)
+            count=$(echo $table | cut -d ' ' -f 1)
+            if [ $count -lt 1 ]; then
+                echo "請再檢查一次 ./${depts_dir}/ 內是否含有正確格式的學號檔案！"
+                echo "有問題的檔案: $file"
+                exit 1
+            else
+                echo "於 $file 發現了 $count 個學生"
+            fi
+        done
+    else
+        echo "系資料夾 ${depts_dir} 不存在！請再確認一次。"
+        exit 1;
+    fi
 }
 
 make_pass_dir() {
-	if [ ! -d ${pass_dir} ]; then
-		echo "存放密碼的 ${pass_dir} 資料夾不存在，將建立 ${pass_dir} 資料夾"
-		mkdir ${pass_dir}
-	else
-		read -p "存放密碼的 ${pass_dir} 資料夾已存在！是否要將其移除後繼續建立帳號? (yes/No)" yn
-		case $yn in
-			[Yy]* ) 
-				rm -rf ${pass_dir}
-				make_pass_dir
-			;;
-			[No]* ) exit 1;;
-		esac
-	fi
+    if [ ! -d ${pass_dir} ]; then
+        echo "存放密碼的 ${pass_dir} 資料夾不存在，將建立 ${pass_dir} 資料夾"
+        mkdir ${pass_dir}
+    else
+        read -p "存放密碼的 ${pass_dir} 資料夾已存在！是否要將其移除後繼續建立帳號? (yes/No)" yn
+        case $yn in
+            [Yy]* ) 
+                rm -rf ${pass_dir}
+                make_pass_dir
+            ;;
+            [No]* ) exit 1;;
+        esac
+    fi
 }
 
 create_users() {
-	make_pass_dir
-	for grp in ${grps}
-	do 
-		if $(grep -q "^${grp}" /etc/group); then
-			echo "群組 '${grp}' 已存在，不需再建立。"
-		else
-			groupadd ${grp}
-		fi
+    make_pass_dir
+    for grp in ${grps}
+    do 
+        if $(grep -q "^${grp}" /etc/group); then
+            echo "群組 '${grp}' 已存在，不需再建立。"
+        else
+            groupadd ${grp}
+        fi
 
-		if [ ${new} = false ] &&  [ ! -d /srv/shiny-server/${grp} ]; then
-			echo "/srv/shiny-server/${grp} 資料夾不存在，將建立群組資料夾"
-			mkdir /srv/shiny-server/${grp}		
-		fi
+        if [ ${new} = false ] &&  [ ! -d /srv/shiny-server/${grp} ]; then
+            echo "/srv/shiny-server/${grp} 資料夾不存在，將建立群組資料夾"
+            mkdir /srv/shiny-server/${grp}      
+        fi
 
-		# create user
-		while read stu;
-		do
-			cur_user=${stu}
-			if $(id "${cur_user}" > /dev/null 2>&1); then
-				echo "使用者 '${cur_user}' 已存在。"
-			else
-				# 在 Ubuntu 16.04 版本的 useradd 沒有 --badnames 選項
-				if [ ${ubuntu_version} == "16" ]; then
-					useradd -N -g ${grp} -m ${cur_user}
-				else
-					useradd --badnames -N -g ${grp} -m ${cur_user}
-				fi
+        # create user
+        while read stu;
+        do
+            cur_user=${stu}
+            if $(id "${cur_user}" > /dev/null 2>&1); then
+                echo "使用者 '${cur_user}' 已存在。"
+            else
+                # 在 Ubuntu 16.04 版本的 useradd 沒有 --badnames 選項
+                if [ ${ubuntu_version} == "16" ]; then
+                    useradd -N -g ${grp} -m ${cur_user}
+                else
+                    useradd --badnames -N -g ${grp} -m ${cur_user}
+                fi
 
-				if [ ${gp} = false ]; then
-					cur_user_password=${cur_user}
-				else
-					cur_user_password=$(openssl rand -base64 6)
-				fi
+                if [ ${gp} = false ]; then
+                    cur_user_password=${cur_user}
+                else
+                    cur_user_password=$(openssl rand -base64 6)
+                fi
 
-				echo "${cur_user}:${cur_user_password}" | chpasswd
-				echo "${cur_user},${cur_user_password}" | tee -a ./${pass_dir}/${grp}.csv > /dev/null 2>&1
-				if [ ${new} = false ]; then
-					# 需要先在 /etc/skel/ 建立 ShinyApps 資料夾，才可成功連結
-					ln -s /home/${cur_user}/ShinyApps /srv/shiny-server/${grp}/${cur_user}
-				fi
-			fi
-		done < ./${depts_dir}/${grp}.txt
+                echo "${cur_user}:${cur_user_password}" | chpasswd
+                echo "${cur_user},${cur_user_password}" | tee -a ./${pass_dir}/${grp}.csv > /dev/null 2>&1
+                if [ ${new} = false ]; then
+                    # 需要先在 /etc/skel/ 建立 ShinyApps 資料夾，才可成功連結
+                    ln -s /home/${cur_user}/ShinyApps /srv/shiny-server/${grp}/${cur_user}
+                fi
+            fi
+        done < ./${depts_dir}/${grp}.txt
 
-	done
+    done
 }
 
 delete_users() {
-	for grp in ${grps}
-	do 
-		while read stu;
-		do
-			userdel -r ${stu} > /dev/null 2>&1	
-			if [ ${new} = false ]; then
-				rm -rf /srv/shiny-server/${grp}/${stu}
-			fi
-		done < ./${depts_dir}/${grp}.txt
-	done
-	read -p "使用者已移除，是否要順便移除存放密碼的資料夾 ${pass_dir}? (yes/No)" yn
-	case $yn in
-		[Yy]* ) 
-			rm -rf ${pass_dir}
-		;;
-		[No]* ) exit 0;;
-	esac
+    for grp in ${grps}
+    do 
+        while read stu;
+        do
+            userdel -r ${stu} > /dev/null 2>&1  
+            if [ ${new} = false ]; then
+                rm -rf /srv/shiny-server/${grp}/${stu}
+            fi
+        done < ./${depts_dir}/${grp}.txt
+    done
+    read -p "使用者已移除，是否要順便移除存放密碼的資料夾 ${pass_dir}? (yes/No)" yn
+    case $yn in
+        [Yy]* ) 
+            rm -rf ${pass_dir}
+        ;;
+        [No]* ) exit 0;;
+    esac
 }
 
 create_prompt() {
-	if [ ${new} = false ]; then
-		read -p "即將建立使用者帳戶，確認使用者資料是否無誤? (Yes/No)" yn
-	else
-		read -p "即將以新的 shiny-server 模式建立使用者帳戶，確認使用者資料是否無誤? (Yes/No)" yn
-	fi
-	case $yn in
-		[Yy]* ) create_users;;
-		[Nn]* ) exit;;
-	esac
+    if [ ${new} = false ]; then
+        read -p "即將建立使用者帳戶，確認使用者資料是否無誤? (Yes/No)" yn
+    else
+        read -p "即將以新的 shiny-server 模式建立使用者帳戶，確認使用者資料是否無誤? (Yes/No)" yn
+    fi
+    case $yn in
+        [Yy]* ) create_users;;
+        [Nn]* ) exit;;
+    esac
 }
 
 delete_prompt() {
-	read -p "即將 '刪除' 使用者帳戶，於 /home/<使用者> 的資料將會消失，是否執行? (Yes/No)" yn
-	case $yn in
-		[Yy]* ) delete_users;;
-		[Nn]* ) exit;;
-	esac
+    read -p "即將 '刪除' 使用者帳戶，於 /home/<使用者> 的資料將會消失，是否執行? (Yes/No)" yn
+    case $yn in
+        [Yy]* ) delete_users;;
+        [Nn]* ) exit;;
+    esac
 }
 
 display_help() {
-	echo "使用方法: $0 [選項...] {create|delete}"
-	echo 
-	echo "選項: "
-	echo "	-gp, --generate-password	以 openssl 產生隨機的使用者密碼"
-	echo "	-n, --new-shiny-server		只建立使用者，不軟連結至 /srv/shiny-server/ 資料夾；新的 shiny-server 不使用軟連結"
-	echo
-	echo "此腳本被用來: "
-	echo "1. 根據 ./${depts_dir}/ 裡面的 <系所名稱.txt> 建立帳號，"
-	echo "	系所名稱會被用來當作 linux 使用者的使用者主要群組（primary group），"
-	echo "	<系所名稱.txt> 內的格式為一個學號佔用一行。"
-	echo
-	echo "	樹狀結構:"
-	echo "	./depts/"
-	echo "	├── asis.txt"
-	echo "	└── ecofin.txt"
-	echo
-	echo "	asis.txt 檔案結構"
-	echo "	───────┬──────────────────"
-	echo "	       │ ./depts/asis.txt "
-	echo "	───────┼──────────────────"
-	echo "	   1   │ 08170875"
-	echo "	   2   │ 08170396"
-	echo "	   3   │ ..."
-	echo "	───────┴──────────────────"
-	echo "2. 根據 ./${depts_dir}/ 裡面的 <系所名稱.txt> 刪除使用者的家資料夾與帳號相關資料"
+    echo "使用方法: $0 [選項...] {create|delete}"
+    echo 
+    echo "選項: "
+    echo "  -gp, --generate-password    以 openssl 產生隨機的使用者密碼"
+    echo "  -n, --new-shiny-server      只建立使用者，不軟連結至 /srv/shiny-server/ 資料夾；新的 shiny-server 不使用軟連結"
+    echo
+    echo "此腳本被用來: "
+    echo "1. 根據 ./${depts_dir}/ 裡面的 <系所名稱.txt> 建立帳號，"
+    echo "  系所名稱會被用來當作 linux 使用者的使用者主要群組（primary group），"
+    echo "  <系所名稱.txt> 內的格式為一個學號佔用一行。"
+    echo
+    echo "  樹狀結構:"
+    echo "  ./depts/"
+    echo "  ├── asis.txt"
+    echo "  └── ecofin.txt"
+    echo
+    echo "  asis.txt 檔案結構"
+    echo "  ───────┬──────────────────"
+    echo "         │ ./depts/asis.txt "
+    echo "  ───────┼──────────────────"
+    echo "     1   │ 08170875"
+    echo "     2   │ 08170396"
+    echo "     3   │ ..."
+    echo "  ───────┴──────────────────"
+    echo "2. 根據 ./${depts_dir}/ 裡面的 <系所名稱.txt> 刪除使用者的家資料夾與帳號相關資料"
 }
 while :
 do
-	case "$1" in
-		-h | --help)
-			display_help
-			exit 0
-		;;
-		-gp | --generate-password)
-			gp=true
-			shift 1
-			break
-		;;
-		-n | --new-shiny-server)
-			new=true
-			shift 1
-			break
-		;;
-		--)
-			shift
-			break
-		;;
-		-*)
-			echo "錯誤: 未知的選項: $1" >&2
-			display_help
-			exit 1
-		;;
-		*)
-			break
-		;;
-	esac
+    case "$1" in
+        -h | --help)
+            display_help
+            exit 0
+        ;;
+        -gp | --generate-password)
+            gp=true
+            shift 1
+            break
+        ;;
+        -n | --new-shiny-server)
+            new=true
+            shift 1
+            break
+        ;;
+        --)
+            shift
+            break
+        ;;
+        -*)
+            echo "錯誤: 未知的選項: $1" >&2
+            display_help
+            exit 1
+        ;;
+        *)
+            break
+        ;;
+    esac
 done
 
 case "$1" in
-	create)
-		check_permission
-		check_depts_dir
-		create_prompt
-	;;
-	delete)
-		check_permission
-		check_depts_dir
-		delete_prompt
-	;;
-	*)
-		display_help
-		exit 1
-	;;
+    create)
+        check_permission
+        check_depts_dir
+        create_prompt
+    ;;
+    delete)
+        check_permission
+        check_depts_dir
+        delete_prompt
+    ;;
+    *)
+        display_help
+        exit 1
+    ;;
 esac
 ```
 
@@ -506,4 +506,102 @@ case "$1" in
         exit 0
         ;;
 esac
+```
+
+## Mysql 8.0 root 密碼重設 {.unnumbered}
+
+先建立一個含有改變 root 密碼的 sql 語法文字檔案
+
+``` {.bash .prefixed}
+vim mysql-init
+```
+
+``` {.sqlmysql}
+ALTER USER 'root'@'localhost' IDENTIFIED with caching_sha2_password by '<新的 root 密碼>';
+```
+
+如存好後將擁有者與使用者群組改成 `mysql` 後，移至 `/tmp` 資料夾，使 mysql 使用者可以存取。
+
+``` {.bash .prefixed}
+chown mysql.mysql mysql-init && mv mysql-init /tmp
+```
+
+切換至 root 使用者進行後續操作
+
+``` {.bash .prefixed}
+sudo su -
+```
+
+將目前的 mysql 關閉
+
+``` {.bash .prefixed_root}
+killall -9 mysqld
+```
+
+或是使用 `systemctl` 指令關閉 mysql 服務
+
+`{.bash prefixed} systemctl stop mysql.service`
+
+接著使用 mysqld 指令啟動 mysql 並指定 `--user`、`--defaults-file` 與 `--init-file` 參數。
+
+``` {.bash .prefixed_root}
+mysqld --defaults-file=/etc/mysql/mysql.conf.d/mysqld.cnf \ 
+--user=mysql \ 
+--init-file=/tmp/mysql-init &
+```
+
+-   `--defaults-file`: MySQL 預設啟動的設定檔案
+
+-   `--user`: 以使用者 `mysql` 執行
+
+-   `--init-file`: 初始化時，執行 `/tmp/mysql-init` 指令，變更密碼
+
+-   `&`: 將 mysql deamon 放至背景執行。
+
+此時，應該可以正常登入了。
+
+::: {.infobox .caution}
+如果不行的話，請檢查位於 `/var/log/mysql/error.log` 的錯誤紀錄，如果有看到類似 `/var/run/mysqld` 的錯誤，需要手動建立資料夾，並把權限變更為 `mysql` 用戶的權限。 操作完之後再從關閉 mysql 服務開始，再嘗試一次。
+
+參考指令如下：
+
+``` {.bash .prefixed_root}
+mkdir /var/run/mysqld && chown mysql.mysql /var/run/mysqld
+```
+:::
+
+最後以正常的服務啟動 mysql：
+
+``` {.bash .prefixed_root}
+systemctl restart mysql.service
+```
+
+退出 root 帳號
+
+``` {.bash .prefixed_root}
+exit
+```
+
+試以新密碼登入 mysql root 帳號：
+
+``` {.bash .prefixed}
+mysql -u root -p
+```
+
+成功 🎊
+
+``` {.console_output}
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 17
+Server version: 8.0.26-0ubuntu0.20.04.3 (Ubuntu)
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> 
 ```

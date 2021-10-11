@@ -55,6 +55,10 @@ pre.prefixed::before {
    content: "$ ";
 }
 
+pre.prefixed_root::before {
+   content: "# ";
+}
+
 pre.prefixed_powershell::before {
    content: "PS ";
 }
