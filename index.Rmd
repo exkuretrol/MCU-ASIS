@@ -34,25 +34,27 @@ knitr::write_bib(c(
 ## TODOs: {.unnumbered}
 
 -   需要將過程記錄下來(技術手冊?) + 讓人看得懂
+
 -   ✓ Ubuntu 安裝
+
 -   ✓ Ubuntu 基本設定
+
 -   LAMP + phpMyAdmin
--   RStudio + jupyter
+
+-   RStudio + RShiny
+
+-   jupyterLab + jupyterhub
+
+-   SSL certbot
+
+    -   nslookup
+
 -   附錄
+
 -   備份 & 還原
+
 -   找到方法 highlight code 區塊
--   certbot (nslookup)
 
 ## Issues: {.unnumbered}
-
--   ~~\_\_\_\_\_\_ 不能出現~~
-
--   2.2 OpenSSH 太過複雜
-
-    -   ✓ `PS`: PowerShell
-
-    -   ✓ `$`: shell
-
-    -   `OUTPUT`: shell output
 
 -   
