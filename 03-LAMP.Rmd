@@ -12,9 +12,13 @@ LAMP 是由 4 個單字開頭的字組成的詞。 LAMP 讓你可以在一台系
 
 ### Step 1 --- 安裝 Apache
 
+從來源更新套件資料：
+
 ``` {.bash .prefixed}
 sudo apt update
 ```
+
+確認是否是我們要安裝的 Apache2
 
 ``` {.bash .prefixed}
 sudo apt info apache2
@@ -51,6 +55,8 @@ Description: Apache HTTP Server
  configuration files, init scripts and support scripts.
 ```
 
+安裝 Apache2
+
 ``` {.bash .prefixed}
 sudo apt install apache2
 ```
@@ -73,15 +79,21 @@ After this operation, 8,083 kB of additional disk space will be used.
 Do you want to continue? [Y/n] 
 ```
 
+也可以在安裝時加上 `--yes` 略過確認安裝提示。
+
 ``` {.bash .console_output}
 sudo apt install apache2 --yes
 ```
 
 ### Step 2 --- 調整防火牆 ufw 設定
 
+有些程式會自動把設定檔加入 ufw 中，這樣就可以透過設定檔啟用/關閉設定防火牆允許的埠號，不用再特別記下該軟體的設定。 可以透過指令顯示有什麼可用的應用程式設定檔。
+
 ``` {.bash .prefixed}
 sudo ufw app list
 ```
+
+下列是目前可用的設定檔：
 
 ``` {.console_output}
 Available applications:
@@ -91,11 +103,13 @@ Available applications:
   OpenSSH
 ```
 
--   **Apache**：會在防火牆新增一個埠號 `80` 的規則。
+-   **Apache**：會在防火牆新增一個允許從任何地方連線至埠號 `80` 的規則。
 
--   **Apache Full**：會在防火牆新增一個埠號 `80` 與埠號 `443` 的規則。
+-   **Apache Full**：會在防火牆新增一個允許從任何地方連線至埠號 `80` 與埠號 `443` 的規則。
 
--   **Apache Secure**：在防火牆新增一個埠號 `443` 的規則。
+-   **Apache Secure**：在防火牆新增一個允許從任何地方連線至埠號 `443` 的規則。\
+
+使用方式很簡單，跟允許埠號時的指令一樣，把埠號改成設定檔名稱即可。
 
 ``` {.bash .prefixed}
 sudo ufw allow "Apache"
@@ -105,6 +119,8 @@ sudo ufw allow "Apache"
 Rule added
 Rule added (v6)
 ```
+
+確認剛才有沒有新增成功：
 
 ``` {.bash .prefixed}
 sudo ufw status
@@ -121,13 +137,18 @@ Apache                     ALLOW       Anywhere
 Apache (v6)                ALLOW       Anywhere (v6) 
 ```
 
+接著可以透過瀏覽器連線到下列網址：
+
     http://<虛擬主機的 ip 地址>/
 
-``` {.bash .prefixed}
-ip show addr
-```
+![](figures/apache-main-page.png)
 
-``` {.console_output}
+::: {.infobox .info}
+忘記怎麼找 ip 可以用下列三種方法找到：
+
+1.  `ip show addr`
+
+``` {.console_output .numberLines}
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
@@ -144,27 +165,48 @@ ip show addr
        valid_lft forever preferred_lft forever
 ```
 
-``` {.bash .prefixed}
-hostname-I
-```
+2.  `hostname -I`
 
 ``` {.console_output}
 192.168.0.14 fd00:1cab:c0bb:acc2:a00:27ff:fe59:13f9
 ```
 
-![](figures/apache-main-page.png)
+3.  `curl ifconfig.me`
+
+``` {.console_output}
+XXX.XXX.XXX.XXX
+```
+
+注意：這是對從你的區域網路連線到對外的網路 ip，如果你不知道是什麼，用方法 1 跟 2 代替。
+:::
 
 ## MySQL
+
+### Step 1 --- 安裝 MySQL
+
+透過 Apt 安裝 MySQL：
 
 ``` {.bash .prefixed}
 sudo apt install mysql-server -y
 ```
 
-<!--# https://dev.mysql.com/doc/refman/8.0/en/mysql-secure-installation.html -->
+### Step 2 --- 設定 MySQL
+
+指令 `mysql_secure_installation` 會做以下幾件事（詳細的說明可以在[這裡](https://dev.mysql.com/doc/refman/8.0/en/mysql-secure-installation.html)找到）：
+
+-   你可以設定 `root` 帳號的密碼。
+
+-   你可以移除 `root` 帳號預設可以從任何地方連線至本機的設定。
+
+-   你可以移除沒有名稱的匿名帳號（anonymous-user）詳細說明可以從[這裡](https://dev.mysql.com/doc/refman/5.6/en/default-privileges.html)找到。
+
+-   你可以移除預設的 `test` 資料庫（這個資料庫任何人都可以存取，甚至是匿名帳號），和任何使用者名稱是 `test_` 開頭的使用者帳號可以存取任何資料庫的權限。
 
 ``` {.bash .orefixed}
 sudo mysql_secure_installation
 ```
+
+建議這裡選 `No`。如果這裡選了 `Yes`，那之後只要是創建使用者都會要求你使用密碼強度很高的密碼。
 
 ``` {.console_output}
 Securing the MySQL server deployment.
@@ -176,27 +218,18 @@ and improve security. It checks the strength of password
 and allows the users to set only those passwords which are
 secure enough. Would you like to setup VALIDATE PASSWORD component?
 
-Press y|Y for Yes, any other key for No: 
+Press y|Y for Yes, any other key for No: No
 ```
+
+設定 root 密碼，這裡選 `Yes`
 
 ``` {.console_output}
-Securing the MySQL server deployment.
-
-Connecting to MySQL using a blank password.
-The 'validate_password' component is installed on the server.
-The subsequent steps will run with the existing configuration
-of the component.
-Please set the password for root here.
-
-New password: 
+Change the password for root ? ((Press y|Y for Yes, any other key for No) : Yes
 ```
 
-``` {.console_output}
-Re-enter new password: 
+如果這裡選了 `Yes`，那 MySQL 接下來會要求你輸入密碼強度較高的密碼。
 
-Estimated strength of the password: 100 
-Do you wish to continue with the password provided?(Press y|Y for Yes, any other key for No) : Y
-```
+這個階段是問你要不要刪除匿名帳號，這裏選擇 `Yes`
 
 ``` {.console_output}
 By default, a MySQL installation has an anonymous user,
@@ -208,6 +241,8 @@ environment.
 
 Remove anonymous users? (Press y|Y for Yes, any other key for No) : Y
 ```
+
+這裏是問你要不要讓 `root` 帳號可以從任何地方連入，這裡當然是選 `No`
 
 ``` {.console_output}
 Normally, root should only be allowed to connect from
@@ -233,33 +268,21 @@ Success.
 All done! 
 ```
 
-``` {.bash .prefixed}
-sudo mysql
-```
+測試 MySQL 連線：
 
-``` {.sqlmysql .mysql}
-show variables like 'validate_password%';
-```
-
-``` {.sqlmysql}
-alter user 'root'@'localhost' identified with caching_sha2_password by '<你的密碼>';
-```
-
-``` {.sqlmysql}
-flush privileges;
-```
+`{.bash prefixed} mysql -u root -p`
 
 ## PHP
 
-### Step 1 --- 安裝 php & php-mysql
+### Step 1 --- 安裝 php & php-mysql 插件
 
-``` {.bash .prefixed}
-sudo apt update
-```
+先確認 `php` 是不是我們要安裝的版本
 
 ``` {.bash .prefixed}
 sudo apt info php
 ```
+
+可以看到，目前 `php` 的依賴套件是 `php7.4`，代表將安裝的版本為 `php7.4`
 
 ``` {.console_output}
 Package: php
@@ -284,9 +307,13 @@ Description: server-side, HTML-embedded scripting language (default)
  PHP version (currently 7.4).
 ```
 
+接著，我們再查詢一次 `php7.4` 會安裝什麼東西
+
 ``` {.bash .prefixed}
 sudo apt info php7.4
 ```
+
+這裡可以看到 `php7.4` 安裝了會安裝一些使 php7.4 順利運作的依賴套件，像是 `libapache2-mod-php7.4`、`php7.4-fpm`、`php7.4-cgi` 與 `php7.4-common`
 
 ``` {.console_output}
 Package: php7.4
@@ -314,9 +341,13 @@ Description: server-side, HTML-embedded scripting language (metapackage)
  for web development and can be embedded into HTML.
 ```
 
+一樣地，這裡也用相同的指令查詢 `php-mysql` 套件
+
 ``` {.console_output}
 sudo apt info php-mysql
 ```
+
+因為 `php` 已經有 `php-common` 依賴的，所以待會兩個套件一起安裝時，只會安裝一個 `php-common`
 
 ``` {.console_output}
 Package: php-mysql
@@ -344,17 +375,27 @@ Description: MySQL module for PHP [default]
  PHP version (currently 7.4).
 ```
 
+確認完我們要安裝的版本是否正確後，用套件管理程式 `apt` 安裝套件。
+
 ``` {.bash .prefixed}
 sudo apt install php php-mysql --yes
 ```
+
+確認 `php` 是否安裝完成，可以用 `which` 指令確認：
 
 ``` {.bash .prefixed}
 which php
 ```
 
+當系統中有安裝複數個版本的 php 時，安裝的位置可能會有所不同，這在第 5 章，安裝 python 時會遇到。
+
+<!--# TODO: 連結至第五章 python 說明 which -A 指令 -->
+
 ``` {.console_output}
 /usr/bin/php
 ```
+
+確認 `php` 安裝版本：
 
 ``` {.bash .bash}
 php --version
@@ -367,11 +408,15 @@ Zend Engine v3.4.0, Copyright (c) Zend Technologies
     with Zend OPcache v7.4.3, Copyright (c), by Zend Technologies
 ```
 
-### Step 2 --- 建立虛擬網站（VirtualHost）（可選）
+### Step 2 --- 建立虛擬網站（VirtualHost）
+
+於 apache2 的設定資料夾中，新建一個叫做 asis.conf 的設定檔：
 
 ``` {.bash .prefixed}
 sudo vim /etc/apache2/sites-available/asis.conf
 ```
+
+寫入測試用的設定
 
     <VirtualHost *:80>
         ServerAdmin webmaster@localhost
@@ -379,6 +424,8 @@ sudo vim /etc/apache2/sites-available/asis.conf
         ErrorLog ${APACHE_LOG_DIR}/error.log
         CustomLog ${APACHE_LOG_DIR}/access.log combined
     </VirtualHost>
+
+透過 list 指令可以看到，資料夾的擁有者是 root。 我們在安裝 Apache2 的部分從 `http://<虛擬主機的 ip 地址>/` 看到的就是位於 `/var/www/html/` 中的首頁，接下來我們要刪除 Apache2 預設的設定，並測試自己建立的虛擬網站（VirtualHost）。
 
 ``` {.bash .prefixed}
 ls -al /var/www/
@@ -391,9 +438,13 @@ drwxr-xr-x 14 root root 4096 Sep  1 06:51 ../
 drwxr-xr-x  2 root root 4096 Sep  1 06:51 html/
 ```
 
+一樣地，以同樣地方法建立 `asis` 資料夾
+
 ``` {.bash .prefixed}
 sudo mkdir /var/www/asis
 ```
+
+產生一個測試用的首頁
 
 ``` {.bash .prefixed}
 sudo vim /var/www/asis/index.html
@@ -415,6 +466,8 @@ sudo vim /var/www/asis/index.html
 </html>
 ```
 
+使用 `a2dissite` 指令關閉預設的設定檔（有興趣可以看一下預設的設定檔 000-default.conf，有助於了解設定檔案怎麼編寫）
+
 ``` {.bash .prefixed}
 sudo a2dissite 000-default.conf
 ```
@@ -425,21 +478,51 @@ To activate the new configuration, you need to run:
   systemctl reload apache2
 ```
 
+接著，啟用剛才創立的設定檔 `asis.conf`
+
 ``` {.bash .prefixed}
 sudo a2ensite asis.conf
 ```
+
+重新讀取剛才變更的設定，使新的設定生效
 
 ``` {.bash .prefixed}
 sudo systemctl reload apache2
 ```
 
+接著至瀏覽器打上虛擬主機的 ip 位址
+
     http://<虛擬主機的 ip 地址>/
 
 ![](figures/apache2-test-virtualhost-conf.png)
 
+或是直接在終端機中使用指令 `curl` 測試 `asis.conf` 設定檔：
+
+``` {.bash .prefixed}
+curl http://192.168.0.14
+```
+
+``` {.console_output}
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apache VirtualHost config test</title>
+</head>
+<body>
+  <h1>成功!</h1>
+  <p>您的 Apache2 虛擬網站的設定順利運作中。</p>
+</body>
+</html>
+```
+
 ## phpMyAdmin
 
 ### Step 1 --- 安裝 phpmyadmin
+
+一樣地，確認 `phpmyadmin` 的版本
 
 ``` {.bash .prefixed}
 sudo apt info phpmyadmin
@@ -472,22 +555,36 @@ Download-Size: 4,426 kB
 [...]
 ```
 
+確認完畢後安裝
+
 ``` {.bash .prefixed}
 sudo apt install phpmyadmin --yes
 ```
 
+這裏用空白鍵勾選 `apache2` 使中括號中變成星號 `*`
+
 ![](figures/phpmyadmin-installation_0.png)
+
+這裏選擇 `Yes` 即可除非你想對 `phpmyadmin` 做更詳細的設定
 
 ![](figures/phpmyadmin-installation_1.png)
 
+留空會自動產生供 `phpmyadmin` 連線至 MySQL 用的密碼，所以這裡直接按 `Ok`
+
 ![](figures/phpmyadmin-installation_2.png)
+
+::: {.infobox .warning}
+當出現此錯誤時不用太慌張，是因為安裝 MySQL 時，有開啟 `Validate Password` 插件導致的，只需要透過下列指令暫時關閉即可。
 
 ![](figures/phpmyadmin-installation-error.png)
 
-::: {.infobox .warning}
+以 root 登入資料庫
+
 ``` {.bash .prefixed}
 mysql -u root -p
 ```
+
+解除安裝插件 valid password
 
 ``` {.sqlmysql .prefixed_mysql}
 uninstall component 'file://component_valid_password';
@@ -497,6 +594,8 @@ uninstall component 'file://component_valid_password';
 exit;
 ```
 
+在安裝一次 `phpmyadmin`
+
 ``` {.bash .prefixed .infobox .warning}
 sudo apt install phpmyadmin --yes
 ```
@@ -504,6 +603,8 @@ sudo apt install phpmyadmin --yes
 ``` {.bash .prefixed}
 mysql -u root -p
 ```
+
+將 valid password 裝回去
 
 ``` {.sqlmysql .prefixed_mysql .infobox .warning}
 install component 'file://component_valid_password'
@@ -514,41 +615,63 @@ exit;
 ```
 :::
 
+啟動 phpMyAdmin 的依賴插件
+
 ``` {.bash .prefixed}
 sudo phpenmod mbstring
 ```
+
+重新啟動 Apache2
 
 ``` {.bash .prefixed}
 sudo systemctl restart apache2
 ```
 
+從網站進入 phpMyAdmin 操作介面
+
     http://<虛擬主機的 ip 地址>/phpmyadmin/
+
+如果找不到是正常的，在 Ubuntu 20.04 安裝 phpMyAdmin 時，沒有正確的設定到 phpMyAdmin。 可以參考[這裡](https://askubuntu.com/questions/387062/how-to-solve-the-phpmyadmin-not-found-issue-after-upgrading-php-and-apache)三樓的解法：
 
 ![](figures/phpmyadmin-main-page-failed.png)
 
-<!--# https://askubuntu.com/questions/387062/how-to-solve-the-phpmyadmin-not-found-issue-after-upgrading-php-and-apache -->
+手動軟連結到 Apache2 的設定資料夾
 
 ``` {.bash .prefixed}
 sudo ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
 ```
 
+接著啟動 phpMyAdmin 的設定檔
+
 ``` {.bash .prefixed}
 sudo a2enconf phpmyadmin
 ```
+
+重新啟動 Apache2
 
 ``` {.bash .prefixed}
 sudo systemctl restart apache2
 ```
 
+再從瀏覽器嘗試一次連線
+
     http://<虛擬主機的 ip 地址>/phpmyadmin/
+
+成功～ 🎊
 
 ![](figures/phpmyadmin-main-page-successed.png)
 
 ### Step 2 --- 使 phpmyadmin 更加安全
 
+預設的 <http://host.ip/phpmyadmin> 位址實在是太危險了，如果有人有意破壞，又被猜到管理員的密碼，那將會一發不可收拾，所以接下來要改的是 phpMyAdmin 在 Apache2 中的設定，將預設的位置改掉至少會安全一點。
+
 ``` {.bash .prefixed}
 sudo vim /etc/phpmyadmin/apache.conf
 ```
+
+::: {.infobox .info}
+因為 `/etc/phpmyadmin/apache.conf` 已軟連結至 `/etc/apache2/conf-available/phpmyadmin.conf` 所以變更`apache.conf` 時，位於 Apache2 中的設定檔也會跟著變更。
+:::
 
 ``` {.bash}
 # phpMyAdmin default Apache configuration
@@ -567,23 +690,47 @@ Alias /sql /usr/share/phpmyadmin # 變更這裡
 [...]
 ```
 
-``` {.bash .prefixed}
-sudo vim /usr/share/phpmyadmin/.htaccess
-```
-
-    AuthType Basic
-    AuthName "限制存取的檔案"
-    AuthUserFile /etc/phpmyadmin/.htpasswd
-    Require valid-user
+重新啟動 Apache2
 
 ``` {.bash .prefixed}
-sudo htpasswd -c /etc/phpmyadmin/.htpasswd asis
-```
-
-``` {.bash .prefixed}
-sudo htpasswd /etc/phpmyadmin/.htpasswd otheruser
+sudo systemctl restart apache2
 ```
 
     http://<虛擬主機的 ip 地址>/sql/
 
 ![](figures/phpmyadmin-main-page-successed.png)
+
+### Step 3 --- 再多一層存取的密碼保護（可選）
+
+新增一個叫做 `.htaccess` 的檔案
+
+``` {.bash .prefixed}
+sudo vim /usr/share/phpmyadmin/.htaccess
+```
+
+放入設定
+
+``` {.bash}
+AuthType Basic
+AuthName "限制存取的檔案"
+AuthUserFile /etc/phpmyadmin/.htpasswd
+Require valid-user
+```
+
+用 `htpasswd` 指令以 `.htpasswd` 生成帳號，這個帳號叫做 asis，此時會提示你輸入密碼。
+
+``` {.bash .prefixed}
+sudo htpasswd -c /etc/phpmyadmin/.htpasswd asis
+```
+
+如果要新增其他使用者，不需要加上 `-c` 的參數
+
+``` {.bash .prefixed}
+sudo htpasswd /etc/phpmyadmin/.htpasswd otheruser
+```
+
+再進入一次 phpMyAdmin 的位址嘗試：
+
+![](figures/htaccess-prompt-login-panel.png)
+
+此時會跳出一個登入介面，需要輸入密碼才能進入 phpMyAdmin 的頁面。 如果不需要此設定，直接刪除位於 `/etc/phpmyadmin/.htpasswd` 的檔案即可。
