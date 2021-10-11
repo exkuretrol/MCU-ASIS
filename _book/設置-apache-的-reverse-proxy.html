@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-10-10" />
+<meta name="date" content="2021-10-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -223,16 +223,21 @@ div.csl-indent {
 <li class="chapter" data-level="3.2.1" data-path="apache.html"><a href="apache.html#step-1-安裝-apache"><i class="fa fa-check"></i><b>3.2.1</b> Step 1 — 安裝 Apache</a></li>
 <li class="chapter" data-level="3.2.2" data-path="apache.html"><a href="apache.html#step-2-調整防火牆-ufw-設定"><i class="fa fa-check"></i><b>3.2.2</b> Step 2 — 調整防火牆 ufw 設定</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="mysql.html"><a href="mysql.html"><i class="fa fa-check"></i><b>3.3</b> MySQL</a></li>
+<li class="chapter" data-level="3.3" data-path="mysql.html"><a href="mysql.html"><i class="fa fa-check"></i><b>3.3</b> MySQL</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="mysql.html"><a href="mysql.html#step-1-安裝-mysql"><i class="fa fa-check"></i><b>3.3.1</b> Step 1 — 安裝 MySQL</a></li>
+<li class="chapter" data-level="3.3.2" data-path="mysql.html"><a href="mysql.html#step-2-設定-mysql"><i class="fa fa-check"></i><b>3.3.2</b> Step 2 — 設定 MySQL</a></li>
+</ul></li>
 <li class="chapter" data-level="3.4" data-path="php.html"><a href="php.html"><i class="fa fa-check"></i><b>3.4</b> PHP</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="php.html"><a href="php.html#step-1-安裝-php-php-mysql"><i class="fa fa-check"></i><b>3.4.1</b> Step 1 — 安裝 php &amp; php-mysql</a></li>
-<li class="chapter" data-level="3.4.2" data-path="php.html"><a href="php.html#step-2-建立虛擬網站virtualhost可選"><i class="fa fa-check"></i><b>3.4.2</b> Step 2 — 建立虛擬網站（VirtualHost）（可選）</a></li>
+<li class="chapter" data-level="3.4.1" data-path="php.html"><a href="php.html#step-1-安裝-php-php-mysql-插件"><i class="fa fa-check"></i><b>3.4.1</b> Step 1 — 安裝 php &amp; php-mysql 插件</a></li>
+<li class="chapter" data-level="3.4.2" data-path="php.html"><a href="php.html#step-2-建立虛擬網站virtualhost"><i class="fa fa-check"></i><b>3.4.2</b> Step 2 — 建立虛擬網站（VirtualHost）</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="phpmyadmin.html"><a href="phpmyadmin.html"><i class="fa fa-check"></i><b>3.5</b> phpMyAdmin</a>
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-1-安裝-phpmyadmin"><i class="fa fa-check"></i><b>3.5.1</b> Step 1 — 安裝 phpmyadmin</a></li>
 <li class="chapter" data-level="3.5.2" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-2-使-phpmyadmin-更加安全"><i class="fa fa-check"></i><b>3.5.2</b> Step 2 — 使 phpmyadmin 更加安全</a></li>
+<li class="chapter" data-level="3.5.3" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-3-再多一層存取的密碼保護可選"><i class="fa fa-check"></i><b>3.5.3</b> Step 3 — 再多一層存取的密碼保護（可選）</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="rstudio-rshiny-server.html"><a href="rstudio-rshiny-server.html"><i class="fa fa-check"></i><b>4</b> RStudio &amp; RShiny Server</a>
@@ -296,6 +301,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html#users.sh"><i class="fa fa-check"></i>users.sh</a></li>
 <li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html#generate-sql.sh"><i class="fa fa-check"></i>generate-sql.sh</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="mysql-8.0-root-密碼重設.html"><a href="mysql-8.0-root-密碼重設.html"><i class="fa fa-check"></i>Mysql 8.0 root 密碼重設</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="參考資料.html"><a href="參考資料.html"><i class="fa fa-check"></i>參考資料</a></li>
 <li class="divider"></li>
@@ -320,30 +326,30 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="設置-apache-的-reverse-proxy" class="section level2" number="5.5">
 <h2><span class="header-section-number">5.5</span> 設置 Apache 的 Reverse Proxy</h2>
-<div class="sourceCode" id="cb206"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb206-1"><a href="設置-apache-的-reverse-proxy.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/sites-available/asis.conf</span></code></pre></div>
-<div class="sourceCode" id="cb207"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb207-1"><a href="設置-apache-的-reverse-proxy.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>VirtualHost <span class="ex">*:80</span><span class="op">&gt;</span></span>
-<span id="cb207-2"><a href="設置-apache-的-reverse-proxy.html#cb207-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
-<span id="cb207-3"><a href="設置-apache-的-reverse-proxy.html#cb207-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb207-4"><a href="設置-apache-的-reverse-proxy.html#cb207-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
-<span id="cb207-5"><a href="設置-apache-的-reverse-proxy.html#cb207-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># JupyterHub Reverse Proxy</span></span>
-<span id="cb207-6"><a href="設置-apache-的-reverse-proxy.html#cb207-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
-<span id="cb207-7"><a href="設置-apache-的-reverse-proxy.html#cb207-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># add trailing slash</span></span>
-<span id="cb207-8"><a href="設置-apache-的-reverse-proxy.html#cb207-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RedirectMatch</span> ^/jhub$ /jhub/</span>
-<span id="cb207-9"><a href="設置-apache-的-reverse-proxy.html#cb207-9" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteCond</span> %{HTTP:Connection} Upgrade [NC]</span>
-<span id="cb207-10"><a href="設置-apache-的-reverse-proxy.html#cb207-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteCond</span> %{HTTP:Upgrade} websocket [NC]</span>
-<span id="cb207-11"><a href="設置-apache-的-reverse-proxy.html#cb207-11" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteRule</span> /jhub/<span class="er">(</span><span class="bu">.</span><span class="pp">*</span><span class="kw">)</span> <span class="ex">ws://127.0.0.1:8000/jhub/</span><span class="va">$1</span> [P,L]</span>
-<span id="cb207-12"><a href="設置-apache-的-reverse-proxy.html#cb207-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteRule</span> /jhub/<span class="er">(</span><span class="bu">.</span><span class="pp">*</span><span class="kw">)</span> <span class="ex">http://127.0.0.1:8000/jhub/</span><span class="va">$1</span> [P,L]</span>
-<span id="cb207-13"><a href="設置-apache-的-reverse-proxy.html#cb207-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb207-14"><a href="設置-apache-的-reverse-proxy.html#cb207-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>Location <span class="ex">/jhub/</span><span class="op">&gt;</span></span>
-<span id="cb207-15"><a href="設置-apache-的-reverse-proxy.html#cb207-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># preserve Host header to avoid cross-origin problems</span></span>
-<span id="cb207-16"><a href="設置-apache-的-reverse-proxy.html#cb207-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># this setting screws up Rstudio, use for JupyterHub only</span></span>
-<span id="cb207-17"><a href="設置-apache-的-reverse-proxy.html#cb207-17" aria-hidden="true" tabindex="-1"></a>        <span class="ex">ProxyPreserveHost</span> On</span>
-<span id="cb207-18"><a href="設置-apache-的-reverse-proxy.html#cb207-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># proxy to JupyterHub, omit location parameter from ProxyPass etc</span></span>
-<span id="cb207-19"><a href="設置-apache-的-reverse-proxy.html#cb207-19" aria-hidden="true" tabindex="-1"></a>        <span class="ex">ProxyPass</span> http://127.0.0.1:8000/jhub/</span>
-<span id="cb207-20"><a href="設置-apache-的-reverse-proxy.html#cb207-20" aria-hidden="true" tabindex="-1"></a>        <span class="ex">ProxyPassReverse</span> http://127.0.0.1:8000/jhub/</span>
-<span id="cb207-21"><a href="設置-apache-的-reverse-proxy.html#cb207-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>/Location<span class="op">&gt;</span></span>
-<span id="cb207-22"><a href="設置-apache-的-reverse-proxy.html#cb207-22" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb207-23"><a href="設置-apache-的-reverse-proxy.html#cb207-23" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>/VirtualHost<span class="op">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb205-1"><a href="設置-apache-的-reverse-proxy.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/sites-available/asis.conf</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb206-1"><a href="設置-apache-的-reverse-proxy.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>VirtualHost <span class="ex">*:80</span><span class="op">&gt;</span></span>
+<span id="cb206-2"><a href="設置-apache-的-reverse-proxy.html#cb206-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
+<span id="cb206-3"><a href="設置-apache-的-reverse-proxy.html#cb206-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb206-4"><a href="設置-apache-的-reverse-proxy.html#cb206-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
+<span id="cb206-5"><a href="設置-apache-的-reverse-proxy.html#cb206-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># JupyterHub Reverse Proxy</span></span>
+<span id="cb206-6"><a href="設置-apache-的-reverse-proxy.html#cb206-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
+<span id="cb206-7"><a href="設置-apache-的-reverse-proxy.html#cb206-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># add trailing slash</span></span>
+<span id="cb206-8"><a href="設置-apache-的-reverse-proxy.html#cb206-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RedirectMatch</span> ^/jhub$ /jhub/</span>
+<span id="cb206-9"><a href="設置-apache-的-reverse-proxy.html#cb206-9" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteCond</span> %{HTTP:Connection} Upgrade [NC]</span>
+<span id="cb206-10"><a href="設置-apache-的-reverse-proxy.html#cb206-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteCond</span> %{HTTP:Upgrade} websocket [NC]</span>
+<span id="cb206-11"><a href="設置-apache-的-reverse-proxy.html#cb206-11" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteRule</span> /jhub/<span class="er">(</span><span class="bu">.</span><span class="pp">*</span><span class="kw">)</span> <span class="ex">ws://127.0.0.1:8000/jhub/</span><span class="va">$1</span> [P,L]</span>
+<span id="cb206-12"><a href="設置-apache-的-reverse-proxy.html#cb206-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteRule</span> /jhub/<span class="er">(</span><span class="bu">.</span><span class="pp">*</span><span class="kw">)</span> <span class="ex">http://127.0.0.1:8000/jhub/</span><span class="va">$1</span> [P,L]</span>
+<span id="cb206-13"><a href="設置-apache-的-reverse-proxy.html#cb206-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb206-14"><a href="設置-apache-的-reverse-proxy.html#cb206-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>Location <span class="ex">/jhub/</span><span class="op">&gt;</span></span>
+<span id="cb206-15"><a href="設置-apache-的-reverse-proxy.html#cb206-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># preserve Host header to avoid cross-origin problems</span></span>
+<span id="cb206-16"><a href="設置-apache-的-reverse-proxy.html#cb206-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># this setting screws up Rstudio, use for JupyterHub only</span></span>
+<span id="cb206-17"><a href="設置-apache-的-reverse-proxy.html#cb206-17" aria-hidden="true" tabindex="-1"></a>        <span class="ex">ProxyPreserveHost</span> On</span>
+<span id="cb206-18"><a href="設置-apache-的-reverse-proxy.html#cb206-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># proxy to JupyterHub, omit location parameter from ProxyPass etc</span></span>
+<span id="cb206-19"><a href="設置-apache-的-reverse-proxy.html#cb206-19" aria-hidden="true" tabindex="-1"></a>        <span class="ex">ProxyPass</span> http://127.0.0.1:8000/jhub/</span>
+<span id="cb206-20"><a href="設置-apache-的-reverse-proxy.html#cb206-20" aria-hidden="true" tabindex="-1"></a>        <span class="ex">ProxyPassReverse</span> http://127.0.0.1:8000/jhub/</span>
+<span id="cb206-21"><a href="設置-apache-的-reverse-proxy.html#cb206-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>/Location<span class="op">&gt;</span></span>
+<span id="cb206-22"><a href="設置-apache-的-reverse-proxy.html#cb206-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb206-23"><a href="設置-apache-的-reverse-proxy.html#cb206-23" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>/VirtualHost<span class="op">&gt;</span></span></code></pre></div>
 <pre><code>http://&lt;虛擬主機的ip位址&gt;/jhub/</code></pre>
 </div>
             </section>

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>TODO List | MCU ASIS Ubuntu 系統安裝指南</title>
+  <title>Mysql 8.0 root 密碼重設 | MCU ASIS Ubuntu 系統安裝指南</title>
   <meta name="description" content="This is a book." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="TODO List | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta property="og:title" content="Mysql 8.0 root 密碼重設 | MCU ASIS Ubuntu 系統安裝指南" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="TODO List | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta name="twitter:title" content="Mysql 8.0 root 密碼重設 | MCU ASIS Ubuntu 系統安裝指南" />
   
   <meta name="twitter:description" content="This is a book." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="todos.html"/>
+<link rel="prev" href="帳號管理.html"/>
+<link rel="next" href="參考資料.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -324,16 +324,65 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="todo-list" class="section level1 unnumbered">
-<h1>TODO List</h1>
+<div id="mysql-8.0-root-密碼重設" class="section level2 unnumbered">
+<h2>Mysql 8.0 root 密碼重設</h2>
+<p>先建立一個含有改變 root 密碼的 sql 語法文字檔案</p>
+<div class="sourceCode" id="cb231"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb231-1"><a href="mysql-8.0-root-密碼重設.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> mysql-init</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode sqlmysql"><code class="sourceCode sqlmysql"><span id="cb232-1"><a href="mysql-8.0-root-密碼重設.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="fu">USER</span> <span class="st">&#39;root&#39;</span>@<span class="st">&#39;localhost&#39;</span> IDENTIFIED <span class="kw">with</span> caching_sha2_password <span class="kw">by</span> <span class="st">&#39;&lt;新的 root 密碼&gt;&#39;</span>;</span></code></pre></div>
+<p>如存好後將擁有者與使用者群組改成 <code>mysql</code> 後，移至 <code>/tmp</code> 資料夾，使 mysql 使用者可以存取。</p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb233-1"><a href="mysql-8.0-root-密碼重設.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> mysql.mysql mysql-init <span class="kw">&amp;&amp;</span> <span class="fu">mv</span> mysql-init /tmp</span></code></pre></div>
+<p>切換至 root 使用者進行後續操作</p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb234-1"><a href="mysql-8.0-root-密碼重設.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span></span></code></pre></div>
+<p>將目前的 mysql 關閉</p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb235-1"><a href="mysql-8.0-root-密碼重設.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="fu">killall</span> <span class="at">-9</span> mysqld</span></code></pre></div>
+<p>或是使用 <code>systemctl</code> 指令關閉 mysql 服務</p>
+<p><code>{.bash prefixed} systemctl stop mysql.service</code></p>
+<p>接著使用 mysqld 指令啟動 mysql 並指定 <code>--user</code>、<code>--defaults-file</code> 與 <code>--init-file</code> 參數。</p>
+<div class="sourceCode" id="cb236"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb236-1"><a href="mysql-8.0-root-密碼重設.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysqld</span> <span class="at">--defaults-file</span><span class="op">=</span>/etc/mysql/mysql.conf.d/mysqld.cnf <span class="dt">\ </span></span>
+<span id="cb236-2"><a href="mysql-8.0-root-密碼重設.html#cb236-2" aria-hidden="true" tabindex="-1"></a><span class="ex">--user=mysql</span> <span class="dt">\ </span></span>
+<span id="cb236-3"><a href="mysql-8.0-root-密碼重設.html#cb236-3" aria-hidden="true" tabindex="-1"></a><span class="ex">--init-file=/tmp/mysql-init</span> <span class="kw">&amp;</span></span></code></pre></div>
+<ul>
+<li><p><code>--defaults-file</code>: MySQL 預設啟動的設定檔案</p></li>
+<li><p><code>--user</code>: 以使用者 <code>mysql</code> 執行</p></li>
+<li><p><code>--init-file</code>: 初始化時，執行 <code>/tmp/mysql-init</code> 指令，變更密碼</p></li>
+<li><p><code>&amp;</code>: 將 mysql deamon 放至背景執行。</p></li>
+</ul>
+<p>此時，應該可以正常登入了。</p>
+<div class="infobox caution">
+<p>如果不行的話，請檢查位於 <code>/var/log/mysql/error.log</code> 的錯誤紀錄，如果有看到類似 <code>/var/run/mysqld</code> 的錯誤，需要手動建立資料夾，並把權限變更為 <code>mysql</code> 用戶的權限。 操作完之後再從關閉 mysql 服務開始，再嘗試一次。</p>
+<p>參考指令如下：</p>
+<div class="sourceCode" id="cb237"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb237-1"><a href="mysql-8.0-root-密碼重設.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> /var/run/mysqld <span class="kw">&amp;&amp;</span> <span class="fu">chown</span> mysql.mysql /var/run/mysqld</span></code></pre></div>
 </div>
+<p>最後以正常的服務啟動 mysql：</p>
+<div class="sourceCode" id="cb238"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb238-1"><a href="mysql-8.0-root-密碼重設.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> restart mysql.service</span></code></pre></div>
+<p>退出 root 帳號</p>
+<div class="sourceCode" id="cb239"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb239-1"><a href="mysql-8.0-root-密碼重設.html#cb239-1" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span></span></code></pre></div>
+<p>試以新密碼登入 mysql root 帳號：</p>
+<div class="sourceCode" id="cb240"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb240-1"><a href="mysql-8.0-root-密碼重設.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
+<p>成功 🎊</p>
+<pre class="console_output"><code>Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 17
+Server version: 8.0.26-0ubuntu0.20.04.3 (Ubuntu)
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type &#39;help;&#39; or &#39;\h&#39; for help. Type &#39;\c&#39; to clear the current input statement.
+
+mysql&gt; </code></pre>
+
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="todos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="帳號管理.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="參考資料.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -364,7 +413,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/exkuretrol/MCU-ASIS/edit/main/index.Rmd",
+"link": "https://github.com/exkuretrol/MCU-ASIS/edit/main/98-appendix.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -372,7 +421,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/exkuretrol/MCU-ASIS/blob/main/index.Rmd",
+"link": "https://github.com/exkuretrol/MCU-ASIS/blob/main/98-appendix.Rmd",
 "text": null
 },
 "download": ["MCU-ASIS.epub"],

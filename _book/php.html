@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-10-10" />
+<meta name="date" content="2021-10-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -223,16 +223,21 @@ div.csl-indent {
 <li class="chapter" data-level="3.2.1" data-path="apache.html"><a href="apache.html#step-1-安裝-apache"><i class="fa fa-check"></i><b>3.2.1</b> Step 1 — 安裝 Apache</a></li>
 <li class="chapter" data-level="3.2.2" data-path="apache.html"><a href="apache.html#step-2-調整防火牆-ufw-設定"><i class="fa fa-check"></i><b>3.2.2</b> Step 2 — 調整防火牆 ufw 設定</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="mysql.html"><a href="mysql.html"><i class="fa fa-check"></i><b>3.3</b> MySQL</a></li>
+<li class="chapter" data-level="3.3" data-path="mysql.html"><a href="mysql.html"><i class="fa fa-check"></i><b>3.3</b> MySQL</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="mysql.html"><a href="mysql.html#step-1-安裝-mysql"><i class="fa fa-check"></i><b>3.3.1</b> Step 1 — 安裝 MySQL</a></li>
+<li class="chapter" data-level="3.3.2" data-path="mysql.html"><a href="mysql.html#step-2-設定-mysql"><i class="fa fa-check"></i><b>3.3.2</b> Step 2 — 設定 MySQL</a></li>
+</ul></li>
 <li class="chapter" data-level="3.4" data-path="php.html"><a href="php.html"><i class="fa fa-check"></i><b>3.4</b> PHP</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="php.html"><a href="php.html#step-1-安裝-php-php-mysql"><i class="fa fa-check"></i><b>3.4.1</b> Step 1 — 安裝 php &amp; php-mysql</a></li>
-<li class="chapter" data-level="3.4.2" data-path="php.html"><a href="php.html#step-2-建立虛擬網站virtualhost可選"><i class="fa fa-check"></i><b>3.4.2</b> Step 2 — 建立虛擬網站（VirtualHost）（可選）</a></li>
+<li class="chapter" data-level="3.4.1" data-path="php.html"><a href="php.html#step-1-安裝-php-php-mysql-插件"><i class="fa fa-check"></i><b>3.4.1</b> Step 1 — 安裝 php &amp; php-mysql 插件</a></li>
+<li class="chapter" data-level="3.4.2" data-path="php.html"><a href="php.html#step-2-建立虛擬網站virtualhost"><i class="fa fa-check"></i><b>3.4.2</b> Step 2 — 建立虛擬網站（VirtualHost）</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="phpmyadmin.html"><a href="phpmyadmin.html"><i class="fa fa-check"></i><b>3.5</b> phpMyAdmin</a>
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-1-安裝-phpmyadmin"><i class="fa fa-check"></i><b>3.5.1</b> Step 1 — 安裝 phpmyadmin</a></li>
 <li class="chapter" data-level="3.5.2" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-2-使-phpmyadmin-更加安全"><i class="fa fa-check"></i><b>3.5.2</b> Step 2 — 使 phpmyadmin 更加安全</a></li>
+<li class="chapter" data-level="3.5.3" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-3-再多一層存取的密碼保護可選"><i class="fa fa-check"></i><b>3.5.3</b> Step 3 — 再多一層存取的密碼保護（可選）</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="rstudio-rshiny-server.html"><a href="rstudio-rshiny-server.html"><i class="fa fa-check"></i><b>4</b> RStudio &amp; RShiny Server</a>
@@ -296,6 +301,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html#users.sh"><i class="fa fa-check"></i>users.sh</a></li>
 <li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html#generate-sql.sh"><i class="fa fa-check"></i>generate-sql.sh</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="mysql-8.0-root-密碼重設.html"><a href="mysql-8.0-root-密碼重設.html"><i class="fa fa-check"></i>Mysql 8.0 root 密碼重設</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="參考資料.html"><a href="參考資料.html"><i class="fa fa-check"></i>參考資料</a></li>
 <li class="divider"></li>
@@ -320,10 +326,11 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="php" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> PHP</h2>
-<div id="step-1-安裝-php-php-mysql" class="section level3" number="3.4.1">
-<h3><span class="header-section-number">3.4.1</span> Step 1 — 安裝 php &amp; php-mysql</h3>
-<div class="sourceCode" id="cb67"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb67-1"><a href="php.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span></code></pre></div>
-<div class="sourceCode" id="cb68"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb68-1"><a href="php.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info php</span></code></pre></div>
+<div id="step-1-安裝-php-php-mysql-插件" class="section level3" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Step 1 — 安裝 php &amp; php-mysql 插件</h3>
+<p>先確認 <code>php</code> 是不是我們要安裝的版本</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb64-1"><a href="php.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info php</span></code></pre></div>
+<p>可以看到，目前 <code>php</code> 的依賴套件是 <code>php7.4</code>，代表將安裝的版本為 <code>php7.4</code></p>
 <pre class="console_output"><code>Package: php
 Version: 2:7.4+75
 Priority: optional
@@ -344,7 +351,9 @@ Description: server-side, HTML-embedded scripting language (default)
  .
  This package is a dependency package, which depends on latest stable
  PHP version (currently 7.4).</code></pre>
-<div class="sourceCode" id="cb70"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb70-1"><a href="php.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info php7.4</span></code></pre></div>
+<p>接著，我們再查詢一次 <code>php7.4</code> 會安裝什麼東西</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb66-1"><a href="php.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info php7.4</span></code></pre></div>
+<p>這裡可以看到 <code>php7.4</code> 安裝了會安裝一些使 php7.4 順利運作的依賴套件，像是 <code>libapache2-mod-php7.4</code>、<code>php7.4-fpm</code>、<code>php7.4-cgi</code> 與 <code>php7.4-common</code></p>
 <pre class="console_output"><code>Package: php7.4
 Version: 7.4.3-4ubuntu2.5
 Priority: optional
@@ -368,7 +377,9 @@ Description: server-side, HTML-embedded scripting language (metapackage)
  PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
  open source general-purpose scripting language that is especially suited
  for web development and can be embedded into HTML.</code></pre>
+<p>一樣地，這裡也用相同的指令查詢 <code>php-mysql</code> 套件</p>
 <pre class="console_output"><code>sudo apt info php-mysql</code></pre>
+<p>因為 <code>php</code> 已經有 <code>php-common</code> 依賴的，所以待會兩個套件一起安裝時，只會安裝一個 <code>php-common</code></p>
 <pre class="console_output"><code>Package: php-mysql
 Version: 2:7.4+75
 Priority: optional
@@ -392,52 +403,81 @@ Description: MySQL module for PHP [default]
  .
  This package is a dependency package, which depends on Debian&#39;s default
  PHP version (currently 7.4).</code></pre>
-<div class="sourceCode" id="cb74"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb74-1"><a href="php.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install php php-mysql <span class="at">--yes</span></span></code></pre></div>
-<div class="sourceCode" id="cb75"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb75-1"><a href="php.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> php</span></code></pre></div>
+<p>確認完我們要安裝的版本是否正確後，用套件管理程式 <code>apt</code> 安裝套件。</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb70-1"><a href="php.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install php php-mysql <span class="at">--yes</span></span></code></pre></div>
+<p>確認 <code>php</code> 是否安裝完成，可以用 <code>which</code> 指令確認：</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb71-1"><a href="php.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> php</span></code></pre></div>
+<p>當系統中有安裝複數個版本的 php 時，安裝的位置可能會有所不同，這在第 5 章，安裝 python 時會遇到。</p>
+<!--# TODO: 連結至第五章 python 說明 which -A 指令 -->
 <pre class="console_output"><code>/usr/bin/php</code></pre>
-<div class="sourceCode" id="cb77"><pre class="sourceCode bash bash"><code class="sourceCode bash"><span id="cb77-1"><a href="php.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="ex">php</span> <span class="at">--version</span></span></code></pre></div>
+<p>確認 <code>php</code> 安裝版本：</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode bash bash"><code class="sourceCode bash"><span id="cb73-1"><a href="php.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="ex">php</span> <span class="at">--version</span></span></code></pre></div>
 <pre class="console_output"><code>PHP 7.4.3 (cli) (built: Jul  5 2021 15:13:35) ( NTS )
 Copyright (c) The PHP Group
 Zend Engine v3.4.0, Copyright (c) Zend Technologies
     with Zend OPcache v7.4.3, Copyright (c), by Zend Technologies</code></pre>
 </div>
-<div id="step-2-建立虛擬網站virtualhost可選" class="section level3" number="3.4.2">
-<h3><span class="header-section-number">3.4.2</span> Step 2 — 建立虛擬網站（VirtualHost）（可選）</h3>
-<div class="sourceCode" id="cb79"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb79-1"><a href="php.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/sites-available/asis.conf</span></code></pre></div>
+<div id="step-2-建立虛擬網站virtualhost" class="section level3" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Step 2 — 建立虛擬網站（VirtualHost）</h3>
+<p>於 apache2 的設定資料夾中，新建一個叫做 asis.conf 的設定檔：</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb75-1"><a href="php.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/sites-available/asis.conf</span></code></pre></div>
+<p>寫入測試用的設定</p>
 <pre><code>&lt;VirtualHost *:80&gt;
     ServerAdmin webmaster@localhost
     DocumentRoot /var/www/asis
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 &lt;/VirtualHost&gt;</code></pre>
-<div class="sourceCode" id="cb81"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb81-1"><a href="php.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-al</span> /var/www/</span></code></pre></div>
+<p>透過 list 指令可以看到，資料夾的擁有者是 root。 我們在安裝 Apache2 的部分從 <code>http://&lt;虛擬主機的 ip 地址&gt;/</code> 看到的就是位於 <code>/var/www/html/</code> 中的首頁，接下來我們要刪除 Apache2 預設的設定，並測試自己建立的虛擬網站（VirtualHost）。</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb77-1"><a href="php.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-al</span> /var/www/</span></code></pre></div>
 <pre class="console_output"><code>total 12
 drwxr-xr-x  3 root root 4096 Sep  1 06:51 ./
 drwxr-xr-x 14 root root 4096 Sep  1 06:51 ../
 drwxr-xr-x  2 root root 4096 Sep  1 06:51 html/</code></pre>
-<div class="sourceCode" id="cb83"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb83-1"><a href="php.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir /var/www/asis</span></code></pre></div>
-<div class="sourceCode" id="cb84"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb84-1"><a href="php.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /var/www/asis/index.html</span></code></pre></div>
-<div class="sourceCode" id="cb85"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb85-1"><a href="php.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></span>
-<span id="cb85-2"><a href="php.html#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html</span><span class="ot"> lang=</span><span class="st">&quot;zh-TW&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb85-3"><a href="php.html#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;head&gt;</span></span>
-<span id="cb85-4"><a href="php.html#cb85-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;UTF-8&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb85-5"><a href="php.html#cb85-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;X-UA-Compatible&quot;</span><span class="ot"> content=</span><span class="st">&quot;IE=edge&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb85-6"><a href="php.html#cb85-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;viewport&quot;</span><span class="ot"> content=</span><span class="st">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb85-7"><a href="php.html#cb85-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;title&gt;</span>Apache VirtualHost config test<span class="kw">&lt;/title&gt;</span></span>
-<span id="cb85-8"><a href="php.html#cb85-8" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/head&gt;</span></span>
-<span id="cb85-9"><a href="php.html#cb85-9" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;body&gt;</span></span>
-<span id="cb85-10"><a href="php.html#cb85-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;h1&gt;</span>成功!<span class="kw">&lt;/h1&gt;</span></span>
-<span id="cb85-11"><a href="php.html#cb85-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;p&gt;</span>您的 Apache2 虛擬網站的設定順利運作中。<span class="kw">&lt;/p&gt;</span></span>
-<span id="cb85-12"><a href="php.html#cb85-12" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/body&gt;</span></span>
-<span id="cb85-13"><a href="php.html#cb85-13" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb86"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb86-1"><a href="php.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> a2dissite 000-default.conf</span></code></pre></div>
+<p>一樣地，以同樣地方法建立 <code>asis</code> 資料夾</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb79-1"><a href="php.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir /var/www/asis</span></code></pre></div>
+<p>產生一個測試用的首頁</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb80-1"><a href="php.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /var/www/asis/index.html</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb81-1"><a href="php.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></span>
+<span id="cb81-2"><a href="php.html#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html</span><span class="ot"> lang=</span><span class="st">&quot;zh-TW&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb81-3"><a href="php.html#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;head&gt;</span></span>
+<span id="cb81-4"><a href="php.html#cb81-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;UTF-8&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb81-5"><a href="php.html#cb81-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;X-UA-Compatible&quot;</span><span class="ot"> content=</span><span class="st">&quot;IE=edge&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb81-6"><a href="php.html#cb81-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;viewport&quot;</span><span class="ot"> content=</span><span class="st">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb81-7"><a href="php.html#cb81-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;title&gt;</span>Apache VirtualHost config test<span class="kw">&lt;/title&gt;</span></span>
+<span id="cb81-8"><a href="php.html#cb81-8" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/head&gt;</span></span>
+<span id="cb81-9"><a href="php.html#cb81-9" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;body&gt;</span></span>
+<span id="cb81-10"><a href="php.html#cb81-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;h1&gt;</span>成功!<span class="kw">&lt;/h1&gt;</span></span>
+<span id="cb81-11"><a href="php.html#cb81-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;p&gt;</span>您的 Apache2 虛擬網站的設定順利運作中。<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb81-12"><a href="php.html#cb81-12" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/body&gt;</span></span>
+<span id="cb81-13"><a href="php.html#cb81-13" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
+<p>使用 <code>a2dissite</code> 指令關閉預設的設定檔（有興趣可以看一下預設的設定檔 000-default.conf，有助於了解設定檔案怎麼編寫）</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb82-1"><a href="php.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> a2dissite 000-default.conf</span></code></pre></div>
 <pre class="console_output"><code>Site 000-default disabled.
 To activate the new configuration, you need to run:
   systemctl reload apache2</code></pre>
-<div class="sourceCode" id="cb88"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb88-1"><a href="php.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> a2ensite asis.conf</span></code></pre></div>
-<div class="sourceCode" id="cb89"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb89-1"><a href="php.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl reload apache2</span></code></pre></div>
+<p>接著，啟用剛才創立的設定檔 <code>asis.conf</code></p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb84-1"><a href="php.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> a2ensite asis.conf</span></code></pre></div>
+<p>重新讀取剛才變更的設定，使新的設定生效</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb85-1"><a href="php.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl reload apache2</span></code></pre></div>
+<p>接著至瀏覽器打上虛擬主機的 ip 位址</p>
 <pre><code>http://&lt;虛擬主機的 ip 地址&gt;/</code></pre>
 <p><img src="figures/apache2-test-virtualhost-conf.png" /></p>
+<p>或是直接在終端機中使用指令 <code>curl</code> 測試 <code>asis.conf</code> 設定檔：</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb87-1"><a href="php.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://192.168.0.14</span></code></pre></div>
+<pre class="console_output"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;zh-TW&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;Apache VirtualHost config test&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;成功!&lt;/h1&gt;
+  &lt;p&gt;您的 Apache2 虛擬網站的設定順利運作中。&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
 </div>
 </div>
             </section>

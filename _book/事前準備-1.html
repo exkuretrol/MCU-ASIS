@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-10-10" />
+<meta name="date" content="2021-10-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -223,16 +223,21 @@ div.csl-indent {
 <li class="chapter" data-level="3.2.1" data-path="apache.html"><a href="apache.html#step-1-安裝-apache"><i class="fa fa-check"></i><b>3.2.1</b> Step 1 — 安裝 Apache</a></li>
 <li class="chapter" data-level="3.2.2" data-path="apache.html"><a href="apache.html#step-2-調整防火牆-ufw-設定"><i class="fa fa-check"></i><b>3.2.2</b> Step 2 — 調整防火牆 ufw 設定</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="mysql.html"><a href="mysql.html"><i class="fa fa-check"></i><b>3.3</b> MySQL</a></li>
+<li class="chapter" data-level="3.3" data-path="mysql.html"><a href="mysql.html"><i class="fa fa-check"></i><b>3.3</b> MySQL</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="mysql.html"><a href="mysql.html#step-1-安裝-mysql"><i class="fa fa-check"></i><b>3.3.1</b> Step 1 — 安裝 MySQL</a></li>
+<li class="chapter" data-level="3.3.2" data-path="mysql.html"><a href="mysql.html#step-2-設定-mysql"><i class="fa fa-check"></i><b>3.3.2</b> Step 2 — 設定 MySQL</a></li>
+</ul></li>
 <li class="chapter" data-level="3.4" data-path="php.html"><a href="php.html"><i class="fa fa-check"></i><b>3.4</b> PHP</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="php.html"><a href="php.html#step-1-安裝-php-php-mysql"><i class="fa fa-check"></i><b>3.4.1</b> Step 1 — 安裝 php &amp; php-mysql</a></li>
-<li class="chapter" data-level="3.4.2" data-path="php.html"><a href="php.html#step-2-建立虛擬網站virtualhost可選"><i class="fa fa-check"></i><b>3.4.2</b> Step 2 — 建立虛擬網站（VirtualHost）（可選）</a></li>
+<li class="chapter" data-level="3.4.1" data-path="php.html"><a href="php.html#step-1-安裝-php-php-mysql-插件"><i class="fa fa-check"></i><b>3.4.1</b> Step 1 — 安裝 php &amp; php-mysql 插件</a></li>
+<li class="chapter" data-level="3.4.2" data-path="php.html"><a href="php.html#step-2-建立虛擬網站virtualhost"><i class="fa fa-check"></i><b>3.4.2</b> Step 2 — 建立虛擬網站（VirtualHost）</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="phpmyadmin.html"><a href="phpmyadmin.html"><i class="fa fa-check"></i><b>3.5</b> phpMyAdmin</a>
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-1-安裝-phpmyadmin"><i class="fa fa-check"></i><b>3.5.1</b> Step 1 — 安裝 phpmyadmin</a></li>
 <li class="chapter" data-level="3.5.2" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-2-使-phpmyadmin-更加安全"><i class="fa fa-check"></i><b>3.5.2</b> Step 2 — 使 phpmyadmin 更加安全</a></li>
+<li class="chapter" data-level="3.5.3" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-3-再多一層存取的密碼保護可選"><i class="fa fa-check"></i><b>3.5.3</b> Step 3 — 再多一層存取的密碼保護（可選）</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="rstudio-rshiny-server.html"><a href="rstudio-rshiny-server.html"><i class="fa fa-check"></i><b>4</b> RStudio &amp; RShiny Server</a>
@@ -296,6 +301,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html#users.sh"><i class="fa fa-check"></i>users.sh</a></li>
 <li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html#generate-sql.sh"><i class="fa fa-check"></i>generate-sql.sh</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="mysql-8.0-root-密碼重設.html"><a href="mysql-8.0-root-密碼重設.html"><i class="fa fa-check"></i>Mysql 8.0 root 密碼重設</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="參考資料.html"><a href="參考資料.html"><i class="fa fa-check"></i>參考資料</a></li>
 <li class="divider"></li>
@@ -321,9 +327,15 @@ div.csl-indent {
 <div id="事前準備-1" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> 事前準備</h2>
 <ul>
-<li><p><code>PS</code>: powershell 指令前綴</p></li>
-<li><p><code>$</code>: linux 指令前綴</p></li>
-<li><p><code>OUTPUT</code>: 標準輸出或標準錯誤輸出</p></li>
+<li><p><code>PS</code>: powershell 指令前綴</p>
+<pre class="prefixed_powershell"><code>dir</code></pre></li>
+<li><p><code>$</code>: linux 指令前綴</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb5-1"><a href="事前準備-1.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-al</span></span></code></pre></div></li>
+<li><p><code>OUTPUT</code>: 標準輸出或標準錯誤輸出</p>
+<pre class="console_output"><code>total 12
+drwxrwxr-x  3 kuaz kuaz 4096 Sep 22 02:11 ./
+drwxr-x--- 15 kuaz kuaz 4096 Oct 10 22:30 ../
+drwxrwxr-x  6 kuaz kuaz 4096 Oct  6 14:06 School/</code></pre></li>
 </ul>
 </div>
             </section>

@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-10-10" />
+<meta name="date" content="2021-10-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -223,16 +223,21 @@ div.csl-indent {
 <li class="chapter" data-level="3.2.1" data-path="apache.html"><a href="apache.html#step-1-安裝-apache"><i class="fa fa-check"></i><b>3.2.1</b> Step 1 — 安裝 Apache</a></li>
 <li class="chapter" data-level="3.2.2" data-path="apache.html"><a href="apache.html#step-2-調整防火牆-ufw-設定"><i class="fa fa-check"></i><b>3.2.2</b> Step 2 — 調整防火牆 ufw 設定</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="mysql.html"><a href="mysql.html"><i class="fa fa-check"></i><b>3.3</b> MySQL</a></li>
+<li class="chapter" data-level="3.3" data-path="mysql.html"><a href="mysql.html"><i class="fa fa-check"></i><b>3.3</b> MySQL</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="mysql.html"><a href="mysql.html#step-1-安裝-mysql"><i class="fa fa-check"></i><b>3.3.1</b> Step 1 — 安裝 MySQL</a></li>
+<li class="chapter" data-level="3.3.2" data-path="mysql.html"><a href="mysql.html#step-2-設定-mysql"><i class="fa fa-check"></i><b>3.3.2</b> Step 2 — 設定 MySQL</a></li>
+</ul></li>
 <li class="chapter" data-level="3.4" data-path="php.html"><a href="php.html"><i class="fa fa-check"></i><b>3.4</b> PHP</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="php.html"><a href="php.html#step-1-安裝-php-php-mysql"><i class="fa fa-check"></i><b>3.4.1</b> Step 1 — 安裝 php &amp; php-mysql</a></li>
-<li class="chapter" data-level="3.4.2" data-path="php.html"><a href="php.html#step-2-建立虛擬網站virtualhost可選"><i class="fa fa-check"></i><b>3.4.2</b> Step 2 — 建立虛擬網站（VirtualHost）（可選）</a></li>
+<li class="chapter" data-level="3.4.1" data-path="php.html"><a href="php.html#step-1-安裝-php-php-mysql-插件"><i class="fa fa-check"></i><b>3.4.1</b> Step 1 — 安裝 php &amp; php-mysql 插件</a></li>
+<li class="chapter" data-level="3.4.2" data-path="php.html"><a href="php.html#step-2-建立虛擬網站virtualhost"><i class="fa fa-check"></i><b>3.4.2</b> Step 2 — 建立虛擬網站（VirtualHost）</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="phpmyadmin.html"><a href="phpmyadmin.html"><i class="fa fa-check"></i><b>3.5</b> phpMyAdmin</a>
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-1-安裝-phpmyadmin"><i class="fa fa-check"></i><b>3.5.1</b> Step 1 — 安裝 phpmyadmin</a></li>
 <li class="chapter" data-level="3.5.2" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-2-使-phpmyadmin-更加安全"><i class="fa fa-check"></i><b>3.5.2</b> Step 2 — 使 phpmyadmin 更加安全</a></li>
+<li class="chapter" data-level="3.5.3" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-3-再多一層存取的密碼保護可選"><i class="fa fa-check"></i><b>3.5.3</b> Step 3 — 再多一層存取的密碼保護（可選）</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="rstudio-rshiny-server.html"><a href="rstudio-rshiny-server.html"><i class="fa fa-check"></i><b>4</b> RStudio &amp; RShiny Server</a>
@@ -296,6 +301,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html#users.sh"><i class="fa fa-check"></i>users.sh</a></li>
 <li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html#generate-sql.sh"><i class="fa fa-check"></i>generate-sql.sh</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="mysql-8.0-root-密碼重設.html"><a href="mysql-8.0-root-密碼重設.html"><i class="fa fa-check"></i>Mysql 8.0 root 密碼重設</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="參考資料.html"><a href="參考資料.html"><i class="fa fa-check"></i>參考資料</a></li>
 <li class="divider"></li>
@@ -363,7 +369,7 @@ div.csl-indent {
 <p>在 Windows 要產生 ssh key pairs 有兩種辦法，第一種是經由內建的 OpenSSH Client 產生，另一種是經由 PuTTY 所附的工具產生 (可以參考附錄的<a href="putty.html#putty">使用 PuTTY 連線至 OpenSSH 伺服器</a>)。</p>
 <div class="infobox info">
 <p>Linux 的使用者可以使用套件管理程式安裝 <code>openssh-server</code>，如果系統是則指令為：</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb4-1"><a href="openssh.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install openssh-server</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb7-1"><a href="openssh.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install openssh-server</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -380,7 +386,7 @@ div.csl-indent {
 </ul></li>
 </ul>
 <p>安裝完成後，你可以打開「命令提示字元」或是「PowerShell」輸入 ssh 來確認是否安裝完成。</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb5-1"><a href="openssh.html#cb5-1" aria-hidden="true" tabindex="-1"></a>ssh</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb8-1"><a href="openssh.html#cb8-1" aria-hidden="true" tabindex="-1"></a>ssh</span></code></pre></div>
 <pre class="console_output"><code>usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]
            [-b bind_address] [-c cipher_spec] [-D [bind_address:]port]
            [-E log_file] [-e escape_char] [-F configfile] [-I pkcs11]
@@ -392,7 +398,7 @@ div.csl-indent {
 <div id="step-2-產生-ssh-key-pairs" class="section level3 unnumbered">
 <h3>Step 2 — 產生 ssh key pairs</h3>
 <p>接著，可以使用 <code>ssh-keygen</code> 指令產生 key pairs，加密方式有 rsa、dsa、ed25519 與 ecdsa ，預設的加密方式是 rsa ，詳細指令用法可以透過 <code>ssh-keygen --help</code> 指令查詢，這裡我們用最簡單的 <code>ssh-keygen</code> 指令就行。</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb7-1"><a href="openssh.html#cb7-1" aria-hidden="true" tabindex="-1"></a>ssh-keygen</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb10-1"><a href="openssh.html#cb10-1" aria-hidden="true" tabindex="-1"></a>ssh-keygen</span></code></pre></div>
 <p>Windows 的用戶預設會把 key pair 儲存在 <code>C:\Users\&lt;USERNAME&gt;\.ssh\</code> 的位置，而 Linux 的用戶會儲存在 <code>~/.ssh/</code> 的位置。</p>
 <pre class="console_output"><code>Generating public/private rsa key pair.
 Enter file in which to save the key (C:\Users\&lt;USERNAME&gt;/.ssh/id_rsa):</code></pre>
@@ -426,7 +432,7 @@ The key&#39;s randomart image is:
 <h3>Step 3 — 將新增的 key pairs 上傳至目的地主機</h3>
 <p>當你擁有了 <a href="openssh.html#step-2-產生-ssh-key-pairs">前一步產生的 key pairs</a>，接下來要把 public key 上傳至虛擬機器。另外 public key 給別人看到是沒問題的，前面第一章的 <a href="於虛擬機器安裝作業系統.html#從-github-匯入已經儲存的-public-key">OpenSSH設定</a> 就已經有出現過我的 public key 了，public key 並不能用來產生 private key，它是用來認證這個 key 是否跟你所持有的 private key 相呼應。</p>
 <p>如果你是的系統是 Linux 那指令會稍微短一些，上傳至遠端電腦的指令如下:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb11-1"><a href="openssh.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ssh-copy-id</span> <span class="at">-i</span> ~/.ssh/id_ed25519.pub <span class="at">-p</span> 22 asis@192.168.0.13</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb14-1"><a href="openssh.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ssh-copy-id</span> <span class="at">-i</span> ~/.ssh/id_ed25519.pub <span class="at">-p</span> 22 asis@192.168.0.13</span></code></pre></div>
 <ul>
 <li><p><code>-i</code>: i flag 代表的是你要上傳的 public key 檔案路徑</p></li>
 <li><p><code>-p</code>: p flag 則是目的地主機的 OpenSSH 伺服器的埠號</p></li>
@@ -444,7 +450,7 @@ Number of key(s) added: 1
 Now try logging into the machine, with:   &quot;ssh -p &#39;22&#39; &#39;asis@192.168.0.13&#39;&quot;
 and check to make sure that only the key(s) you wanted were added.</code></pre>
 <p>如果你是 Windows 的使用者也不用擔心多複雜，一樣一行指令就能搞定，這裡我是參考<span class="citation">(<a href="#ref-christopher_2020" role="doc-biblioref">Christopher 2020</a>)</span>的教學，指令如下:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb13-1"><a href="openssh.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">$env</span>:USERPROFILE\.<span class="fu">ssh</span>\id_rsa.<span class="fu">pub</span> | ssh asis@192.<span class="fu">168</span>.<span class="fu">0</span>.<span class="fu">13</span> <span class="st">&quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb16-1"><a href="openssh.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">$env</span>:USERPROFILE\.<span class="fu">ssh</span>\id_rsa.<span class="fu">pub</span> | ssh asis@192.<span class="fu">168</span>.<span class="fu">0</span>.<span class="fu">13</span> <span class="st">&quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;</span></span></code></pre></div>
 <ul>
 <li><p>這裡的 <code>$env:USERPROFILE</code> 為 Windows 內建環境變數，會根據現在的使用者變更，如果我的使用者名稱為 <code>qaz855175b</code> 那 <code>$env:USERPROFILE</code> 對應的路徑就為 <code>C:\Users\qaz855175b\</code>，當然你可以直接把指令的 public key 路徑替換為 <code>C:\Users\qaz855175b\.ssh\id_rsa.pub</code></p></li>
 <li><p><code>id_rsa.pub</code> 為產生的 public key 預設名稱</p></li>
@@ -470,10 +476,10 @@ and check to make sure that only the key(s) you wanted were added.</code></pre>
 <div class="infobox info">
 <p>flag 通常會在指令後面隨後出現，flag前面會插入 <code>-</code>，而 flag 後面有時會需要加入詳細的設定，有時不用。flag 與 flag 之間用空格隔開，詳細指令的使用方法可以在 Linux 系統用 <code>man &lt;指令名稱&gt;</code> 查詢</p>
 <p>假如我們要看連線的詳細訊息，且指定伺服器 port 為 60000與指定 private key 檔案位址等等，組合起來就是:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="openssh.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-v</span> <span class="at">-p</span> 60000 <span class="at">-i</span> ~/.ssh/id_rsa asis@192.168.0.13</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="openssh.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-v</span> <span class="at">-p</span> 60000 <span class="at">-i</span> ~/.ssh/id_rsa asis@192.168.0.13</span></code></pre></div>
 </div>
 <p>目前不需要加上任何 flag，連線指令為:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash prefixed_powershell"><code class="sourceCode bash"><span id="cb16-1"><a href="openssh.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> asis@192.168.0.13</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash prefixed_powershell"><code class="sourceCode bash"><span id="cb19-1"><a href="openssh.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> asis@192.168.0.13</span></code></pre></div>
 <p>一樣地，<code>asis</code> 是使用者名稱，而<code>192.168.0.13</code> 是 OpenSSH 伺服器的 ip 位置，輸入完後按 Enter↩︎</p>
 <p>這邊打 <code>yes</code> 即可，確認連接目的地沒有錯之後，會把 fingerprint 寫入 <code>~/.ssh/known_hosts</code> 中，以後不再詢問。</p>
 <pre class="console_output"><code>The authenticity of host &#39;192.168.0.13 (192.168.0.13)&#39; can&#39;t be established.
@@ -491,49 +497,49 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre
 <h3>Step 5 — 使遠端的 OpenSSH 伺服器更加安全</h3>
 <div id="變更-ssh-伺服器預設的埠號" class="section level4 unnumbered">
 <h4>變更 SSH 伺服器預設的埠號</h4>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb18-1"><a href="openssh.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vi /etc/ssh/sshd_config</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb21-1"><a href="openssh.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vi /etc/ssh/sshd_config</span></code></pre></div>
 <p>將 <code>#Port 22</code> 取消註解，並把 <code>22</code> 改成其他介於 1-65535 之間的數字。</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="openssh.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#       $OpenBSD: sshd_config,v 1.103 2018/04/09 20:41:22 tj Exp $</span></span>
-<span id="cb19-2"><a href="openssh.html#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="openssh.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># This is the sshd server system-wide configuration file.  See </span></span>
-<span id="cb19-4"><a href="openssh.html#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># sshd_config(5) for more information.</span></span>
-<span id="cb19-5"><a href="openssh.html#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="openssh.html#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># This sshd was compiled with PATH=/usr/bin:/bin:/usr/sbin:/sbin</span></span>
-<span id="cb19-7"><a href="openssh.html#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-8"><a href="openssh.html#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># The strategy used for options in the default sshd_config shipped with</span></span>
-<span id="cb19-9"><a href="openssh.html#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co"># OpenSSH is to specify options with their default value where</span></span>
-<span id="cb19-10"><a href="openssh.html#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co"># possible, but leave them commented.  Uncommented options override the</span></span>
-<span id="cb19-11"><a href="openssh.html#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co"># default value.</span></span>
-<span id="cb19-12"><a href="openssh.html#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-13"><a href="openssh.html#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Include</span> /etc/ssh/sshd_config.d/<span class="pp">*</span>.conf</span>
-<span id="cb19-14"><a href="openssh.html#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-15"><a href="openssh.html#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Port</span> 60000</span>
-<span id="cb19-16"><a href="openssh.html#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="co">#AddressFamily any</span></span>
-<span id="cb19-17"><a href="openssh.html#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="co">#ListenAddress 0.0.0.0</span></span>
-<span id="cb19-18"><a href="openssh.html#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co">#ListenAddress ::</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="openssh.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#       $OpenBSD: sshd_config,v 1.103 2018/04/09 20:41:22 tj Exp $</span></span>
+<span id="cb22-2"><a href="openssh.html#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="openssh.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># This is the sshd server system-wide configuration file.  See </span></span>
+<span id="cb22-4"><a href="openssh.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># sshd_config(5) for more information.</span></span>
+<span id="cb22-5"><a href="openssh.html#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="openssh.html#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># This sshd was compiled with PATH=/usr/bin:/bin:/usr/sbin:/sbin</span></span>
+<span id="cb22-7"><a href="openssh.html#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="openssh.html#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co"># The strategy used for options in the default sshd_config shipped with</span></span>
+<span id="cb22-9"><a href="openssh.html#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># OpenSSH is to specify options with their default value where</span></span>
+<span id="cb22-10"><a href="openssh.html#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co"># possible, but leave them commented.  Uncommented options override the</span></span>
+<span id="cb22-11"><a href="openssh.html#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co"># default value.</span></span>
+<span id="cb22-12"><a href="openssh.html#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="openssh.html#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Include</span> /etc/ssh/sshd_config.d/<span class="pp">*</span>.conf</span>
+<span id="cb22-14"><a href="openssh.html#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-15"><a href="openssh.html#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Port</span> 60000</span>
+<span id="cb22-16"><a href="openssh.html#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="co">#AddressFamily any</span></span>
+<span id="cb22-17"><a href="openssh.html#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="co">#ListenAddress 0.0.0.0</span></span>
+<span id="cb22-18"><a href="openssh.html#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="co">#ListenAddress ::</span></span></code></pre></div>
 </div>
 <div id="關閉密碼驗證" class="section level4 unnumbered">
 <h4>關閉密碼驗證</h4>
 <p>將 PasswordAuthentication (以密碼驗證) 設為 no。使用 SSH 連線時，如果沒有指定 SSH key pair，如果 OpenSSH 伺服器的設定沒有關閉，接著會要求你輸入使用者密碼以密碼驗證。通常這個設定會開啟是因為要<a href="openssh.html#step-3-將新增的-key-pairs-上傳至目的地主機">複製 ssh 的 public key</a>。</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="openssh.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PasswordAuthentication</span> no</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="openssh.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PasswordAuthentication</span> no</span></code></pre></div>
 <p>當然如果密碼驗證為 no，且同時遺失 SSH 的 pair key 時，你就無法以 SSH 連線至遠端主機。</p>
 </div>
 <div id="關閉遠端-root-登入" class="section level4 unnumbered">
 <h4>關閉遠端 root 登入</h4>
-<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="openssh.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PermitRootLogin</span> no</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="openssh.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PermitRootLogin</span> no</span></code></pre></div>
 </div>
 <div id="限制能使用-ssh-連線的使用者" class="section level4 unnumbered">
 <h4>限制能使用 SSH 連線的使用者</h4>
-<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="openssh.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">AllowUsers</span> asis</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="openssh.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">AllowUsers</span> asis</span></code></pre></div>
 </div>
 <div id="關閉無密碼的使用者使用-ssh" class="section level4 unnumbered">
 <h4>關閉無密碼的使用者使用 SSH</h4>
-<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="openssh.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PermitEmptyPasswords</span> no</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="openssh.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PermitEmptyPasswords</span> no</span></code></pre></div>
 </div>
 <div id="測試-sshd_config-是否有效" class="section level4 unnumbered">
 <h4>測試 <code>sshd_config</code> 是否有效</h4>
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb24-1"><a href="openssh.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> sshd <span class="at">-t</span></span></code></pre></div>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb25-1"><a href="openssh.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart sshd</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb27-1"><a href="openssh.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> sshd <span class="at">-t</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb28-1"><a href="openssh.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart sshd</span></code></pre></div>
 <pre class="console_output"><code>● ssh.service - OpenBSD Secure Shell server
      Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)
      Active: active (running) since Sun 2021-08-15 16:08:55 UTC; 19h ago
@@ -551,7 +557,7 @@ Aug 15 16:08:55 asis01 sshd[893]: Server listening on 0.0.0.0 port 60000.
 Aug 15 16:08:55 asis01 sshd[893]: Server listening on :: port 60000.
 Aug 15 16:08:55 asis01 systemd[1]: Started OpenBSD Secure Shell server.</code></pre>
 <p>用指令 <code>exit</code> 斷開連線，再重新測試 ssh 遠端連線至伺服器，</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash prefixed_powershell"><code class="sourceCode bash"><span id="cb27-1"><a href="openssh.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-p</span> 60000 asis@192.168.0.13</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash prefixed_powershell"><code class="sourceCode bash"><span id="cb30-1"><a href="openssh.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-p</span> 60000 asis@192.168.0.13</span></code></pre></div>
 <pre class="console_output"><code>Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-81-generic x86_64)
 
  * Documentation:  https://help.ubuntu.com

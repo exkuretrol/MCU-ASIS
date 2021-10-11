@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-10-10" />
+<meta name="date" content="2021-10-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -223,16 +223,21 @@ div.csl-indent {
 <li class="chapter" data-level="3.2.1" data-path="apache.html"><a href="apache.html#step-1-安裝-apache"><i class="fa fa-check"></i><b>3.2.1</b> Step 1 — 安裝 Apache</a></li>
 <li class="chapter" data-level="3.2.2" data-path="apache.html"><a href="apache.html#step-2-調整防火牆-ufw-設定"><i class="fa fa-check"></i><b>3.2.2</b> Step 2 — 調整防火牆 ufw 設定</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="mysql.html"><a href="mysql.html"><i class="fa fa-check"></i><b>3.3</b> MySQL</a></li>
+<li class="chapter" data-level="3.3" data-path="mysql.html"><a href="mysql.html"><i class="fa fa-check"></i><b>3.3</b> MySQL</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="mysql.html"><a href="mysql.html#step-1-安裝-mysql"><i class="fa fa-check"></i><b>3.3.1</b> Step 1 — 安裝 MySQL</a></li>
+<li class="chapter" data-level="3.3.2" data-path="mysql.html"><a href="mysql.html#step-2-設定-mysql"><i class="fa fa-check"></i><b>3.3.2</b> Step 2 — 設定 MySQL</a></li>
+</ul></li>
 <li class="chapter" data-level="3.4" data-path="php.html"><a href="php.html"><i class="fa fa-check"></i><b>3.4</b> PHP</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="php.html"><a href="php.html#step-1-安裝-php-php-mysql"><i class="fa fa-check"></i><b>3.4.1</b> Step 1 — 安裝 php &amp; php-mysql</a></li>
-<li class="chapter" data-level="3.4.2" data-path="php.html"><a href="php.html#step-2-建立虛擬網站virtualhost可選"><i class="fa fa-check"></i><b>3.4.2</b> Step 2 — 建立虛擬網站（VirtualHost）（可選）</a></li>
+<li class="chapter" data-level="3.4.1" data-path="php.html"><a href="php.html#step-1-安裝-php-php-mysql-插件"><i class="fa fa-check"></i><b>3.4.1</b> Step 1 — 安裝 php &amp; php-mysql 插件</a></li>
+<li class="chapter" data-level="3.4.2" data-path="php.html"><a href="php.html#step-2-建立虛擬網站virtualhost"><i class="fa fa-check"></i><b>3.4.2</b> Step 2 — 建立虛擬網站（VirtualHost）</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="phpmyadmin.html"><a href="phpmyadmin.html"><i class="fa fa-check"></i><b>3.5</b> phpMyAdmin</a>
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-1-安裝-phpmyadmin"><i class="fa fa-check"></i><b>3.5.1</b> Step 1 — 安裝 phpmyadmin</a></li>
 <li class="chapter" data-level="3.5.2" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-2-使-phpmyadmin-更加安全"><i class="fa fa-check"></i><b>3.5.2</b> Step 2 — 使 phpmyadmin 更加安全</a></li>
+<li class="chapter" data-level="3.5.3" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-3-再多一層存取的密碼保護可選"><i class="fa fa-check"></i><b>3.5.3</b> Step 3 — 再多一層存取的密碼保護（可選）</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="rstudio-rshiny-server.html"><a href="rstudio-rshiny-server.html"><i class="fa fa-check"></i><b>4</b> RStudio &amp; RShiny Server</a>
@@ -296,6 +301,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html#users.sh"><i class="fa fa-check"></i>users.sh</a></li>
 <li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html#generate-sql.sh"><i class="fa fa-check"></i>generate-sql.sh</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="mysql-8.0-root-密碼重設.html"><a href="mysql-8.0-root-密碼重設.html"><i class="fa fa-check"></i>Mysql 8.0 root 密碼重設</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="參考資料.html"><a href="參考資料.html"><i class="fa fa-check"></i>參考資料</a></li>
 <li class="divider"></li>
@@ -322,36 +328,36 @@ div.csl-indent {
 <h2><span class="header-section-number">5.6</span> JupyterHub 擴充套件</h2>
 <ul>
 <li><p><a href="https://github.com/QuantStack/jupyterlab-drawio">jupyterlab-drawio</a></p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb209-1"><a href="jupyterhub-擴充套件.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install jupyterlab-drawio</span></code></pre></div></li>
+<div class="sourceCode" id="cb208"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb208-1"><a href="jupyterhub-擴充套件.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install jupyterlab-drawio</span></code></pre></div></li>
 <li><p><a href="https://github.com/jupyterlab/jupyterlab-git">jupyterlab-git</a></p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb210-1"><a href="jupyterhub-擴充套件.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip <span class="dt">\</span></span>
-<span id="cb210-2"><a href="jupyterhub-擴充套件.html#cb210-2" aria-hidden="true" tabindex="-1"></a>    install <span class="at">--upgrade</span> jupyterlab jupyterlab-git</span></code></pre></div></li>
+<div class="sourceCode" id="cb209"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb209-1"><a href="jupyterhub-擴充套件.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip <span class="dt">\</span></span>
+<span id="cb209-2"><a href="jupyterhub-擴充套件.html#cb209-2" aria-hidden="true" tabindex="-1"></a>    install <span class="at">--upgrade</span> jupyterlab jupyterlab-git</span></code></pre></div></li>
 <li><p><a href="https://github.com/lckr/jupyterlab-variableInspector">jupyterlab-variable-inspector</a></p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb211-1"><a href="jupyterhub-擴充套件.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip <span class="dt">\</span></span>
-<span id="cb211-2"><a href="jupyterhub-擴充套件.html#cb211-2" aria-hidden="true" tabindex="-1"></a>    install lckr_jupyterlab_variableinspector</span></code></pre></div>
-<div class="sourceCode" id="cb212"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb212-1"><a href="jupyterhub-擴充套件.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span> <span class="at">-c</span> <span class="st">&quot;R -e </span><span class="dt">\&quot;</span><span class="st">install.packages(&#39;repr&#39;)</span><span class="dt">\&quot;</span><span class="st">&quot;</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb210"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb210-1"><a href="jupyterhub-擴充套件.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip <span class="dt">\</span></span>
+<span id="cb210-2"><a href="jupyterhub-擴充套件.html#cb210-2" aria-hidden="true" tabindex="-1"></a>    install lckr_jupyterlab_variableinspector</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb211-1"><a href="jupyterhub-擴充套件.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span> <span class="at">-c</span> <span class="st">&quot;R -e </span><span class="dt">\&quot;</span><span class="st">install.packages(&#39;repr&#39;)</span><span class="dt">\&quot;</span><span class="st">&quot;</span></span></code></pre></div></li>
 <li><p><a href="https://github.com/techrah/jupyterext-text-shortcuts">jupyterext-text-shortcuts</a></p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb213-1"><a href="jupyterhub-擴充套件.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> jupyter labextension install @techrah/text-shortcuts</span></code></pre></div></li>
+<div class="sourceCode" id="cb212"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb212-1"><a href="jupyterhub-擴充套件.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> jupyter labextension install @techrah/text-shortcuts</span></code></pre></div></li>
 <li><p><a href="https://github.com/quigleyj97/jupyterlab-spreadsheet">jupyterlab-spreadsheet</a></p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb214-1"><a href="jupyterhub-擴充套件.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> jupyter labextension install jupyterlab-spreadsheet</span></code></pre></div></li>
+<div class="sourceCode" id="cb213"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb213-1"><a href="jupyterhub-擴充套件.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> jupyter labextension install jupyterlab-spreadsheet</span></code></pre></div></li>
 <li><p><a href="https://github.com/matplotlib/ipympl">ipympl</a></p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb215-1"><a href="jupyterhub-擴充套件.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install ipympl</span></code></pre></div></li>
+<div class="sourceCode" id="cb214"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb214-1"><a href="jupyterhub-擴充套件.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install ipympl</span></code></pre></div></li>
 <li><p><a href="https://github.com/plotly/jupyter-dash">jupyter-dash</a> (待更新，目前不能用 2021.09.18)</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb216-1"><a href="jupyterhub-擴充套件.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install jupyter-dash</span></code></pre></div></li>
+<div class="sourceCode" id="cb215"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb215-1"><a href="jupyterhub-擴充套件.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install jupyter-dash</span></code></pre></div></li>
 <li><p><a href="https://github.com/jupyterlab-contrib/jupyterlab-link-share">jupyterlab-link-share</a></p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb217-1"><a href="jupyterhub-擴充套件.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install jupyterlab-link-share</span></code></pre></div></li>
+<div class="sourceCode" id="cb216"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb216-1"><a href="jupyterhub-擴充套件.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install jupyterlab-link-share</span></code></pre></div></li>
 <li><p><a href="https://github.com/jupyterlab/language-packs/tree/master/language-packs/">language-packs</a></p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb218-1"><a href="jupyterhub-擴充套件.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install jupyterlab-language-pack-zh-TW</span></code></pre></div>
-<div class="sourceCode" id="cb219"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb219-1"><a href="jupyterhub-擴充套件.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install jupyterlab-language-pack-zh-CN</span></code></pre></div></li>
+<div class="sourceCode" id="cb217"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb217-1"><a href="jupyterhub-擴充套件.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install jupyterlab-language-pack-zh-TW</span></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb218-1"><a href="jupyterhub-擴充套件.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install jupyterlab-language-pack-zh-CN</span></code></pre></div></li>
 <li><p><a href="https://github.com/krassowski/jupyterlab-lsp">jupyterlab-lsp</a></p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb220-1"><a href="jupyterhub-擴充套件.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install <span class="st">&#39;jupyterlab&gt;=3.0.0,&lt;4.0.0a0&#39;</span> jupyterlab-lsp</span></code></pre></div>
-<div class="sourceCode" id="cb221"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb221-1"><a href="jupyterhub-擴充套件.html#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install libcurl4-openssl-dev libxml2-dev <span class="at">--yes</span></span></code></pre></div>
-<div class="sourceCode" id="cb222"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb222-1"><a href="jupyterhub-擴充套件.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span> <span class="at">-c</span> <span class="st">&quot;R -e </span><span class="dt">\&quot;</span><span class="st">install.packages(&#39;languageserver&#39;)</span><span class="dt">\&quot;</span><span class="st">&quot;&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb223"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb223-1"><a href="jupyterhub-擴充套件.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install <span class="at">-U</span> jedi-language-server</span></code></pre></div></li>
+<div class="sourceCode" id="cb219"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb219-1"><a href="jupyterhub-擴充套件.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install <span class="st">&#39;jupyterlab&gt;=3.0.0,&lt;4.0.0a0&#39;</span> jupyterlab-lsp</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb220-1"><a href="jupyterhub-擴充套件.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install libcurl4-openssl-dev libxml2-dev <span class="at">--yes</span></span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb221-1"><a href="jupyterhub-擴充套件.html#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span> <span class="at">-c</span> <span class="st">&quot;R -e </span><span class="dt">\&quot;</span><span class="st">install.packages(&#39;languageserver&#39;)</span><span class="dt">\&quot;</span><span class="st">&quot;&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb222-1"><a href="jupyterhub-擴充套件.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install <span class="at">-U</span> jedi-language-server</span></code></pre></div></li>
 <li><p><a href="https://github.com/jupyterhub/nbgitpuller">nbgitpuller</a></p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb224-1"><a href="jupyterhub-擴充套件.html#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install nbgitpuller</span></code></pre></div></li>
+<div class="sourceCode" id="cb223"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb223-1"><a href="jupyterhub-擴充套件.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install nbgitpuller</span></code></pre></div></li>
 </ul>
-<div class="sourceCode" id="cb225"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb225-1"><a href="jupyterhub-擴充套件.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart jupyterhub.service</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb224-1"><a href="jupyterhub-擴充套件.html#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart jupyterhub.service</span></code></pre></div>
 
 </div>
 <!-- </div> -->

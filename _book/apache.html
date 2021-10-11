@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-10-10" />
+<meta name="date" content="2021-10-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -223,16 +223,21 @@ div.csl-indent {
 <li class="chapter" data-level="3.2.1" data-path="apache.html"><a href="apache.html#step-1-安裝-apache"><i class="fa fa-check"></i><b>3.2.1</b> Step 1 — 安裝 Apache</a></li>
 <li class="chapter" data-level="3.2.2" data-path="apache.html"><a href="apache.html#step-2-調整防火牆-ufw-設定"><i class="fa fa-check"></i><b>3.2.2</b> Step 2 — 調整防火牆 ufw 設定</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="mysql.html"><a href="mysql.html"><i class="fa fa-check"></i><b>3.3</b> MySQL</a></li>
+<li class="chapter" data-level="3.3" data-path="mysql.html"><a href="mysql.html"><i class="fa fa-check"></i><b>3.3</b> MySQL</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="mysql.html"><a href="mysql.html#step-1-安裝-mysql"><i class="fa fa-check"></i><b>3.3.1</b> Step 1 — 安裝 MySQL</a></li>
+<li class="chapter" data-level="3.3.2" data-path="mysql.html"><a href="mysql.html#step-2-設定-mysql"><i class="fa fa-check"></i><b>3.3.2</b> Step 2 — 設定 MySQL</a></li>
+</ul></li>
 <li class="chapter" data-level="3.4" data-path="php.html"><a href="php.html"><i class="fa fa-check"></i><b>3.4</b> PHP</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="php.html"><a href="php.html#step-1-安裝-php-php-mysql"><i class="fa fa-check"></i><b>3.4.1</b> Step 1 — 安裝 php &amp; php-mysql</a></li>
-<li class="chapter" data-level="3.4.2" data-path="php.html"><a href="php.html#step-2-建立虛擬網站virtualhost可選"><i class="fa fa-check"></i><b>3.4.2</b> Step 2 — 建立虛擬網站（VirtualHost）（可選）</a></li>
+<li class="chapter" data-level="3.4.1" data-path="php.html"><a href="php.html#step-1-安裝-php-php-mysql-插件"><i class="fa fa-check"></i><b>3.4.1</b> Step 1 — 安裝 php &amp; php-mysql 插件</a></li>
+<li class="chapter" data-level="3.4.2" data-path="php.html"><a href="php.html#step-2-建立虛擬網站virtualhost"><i class="fa fa-check"></i><b>3.4.2</b> Step 2 — 建立虛擬網站（VirtualHost）</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="phpmyadmin.html"><a href="phpmyadmin.html"><i class="fa fa-check"></i><b>3.5</b> phpMyAdmin</a>
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-1-安裝-phpmyadmin"><i class="fa fa-check"></i><b>3.5.1</b> Step 1 — 安裝 phpmyadmin</a></li>
 <li class="chapter" data-level="3.5.2" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-2-使-phpmyadmin-更加安全"><i class="fa fa-check"></i><b>3.5.2</b> Step 2 — 使 phpmyadmin 更加安全</a></li>
+<li class="chapter" data-level="3.5.3" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-3-再多一層存取的密碼保護可選"><i class="fa fa-check"></i><b>3.5.3</b> Step 3 — 再多一層存取的密碼保護（可選）</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="rstudio-rshiny-server.html"><a href="rstudio-rshiny-server.html"><i class="fa fa-check"></i><b>4</b> RStudio &amp; RShiny Server</a>
@@ -296,6 +301,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html#users.sh"><i class="fa fa-check"></i>users.sh</a></li>
 <li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html#generate-sql.sh"><i class="fa fa-check"></i>generate-sql.sh</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="mysql-8.0-root-密碼重設.html"><a href="mysql-8.0-root-密碼重設.html"><i class="fa fa-check"></i>Mysql 8.0 root 密碼重設</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="參考資料.html"><a href="參考資料.html"><i class="fa fa-check"></i>參考資料</a></li>
 <li class="divider"></li>
@@ -322,8 +328,10 @@ div.csl-indent {
 <h2><span class="header-section-number">3.2</span> Apache</h2>
 <div id="step-1-安裝-apache" class="section level3" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Step 1 — 安裝 Apache</h3>
-<div class="sourceCode" id="cb38"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb38-1"><a href="apache.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span></code></pre></div>
-<div class="sourceCode" id="cb39"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb39-1"><a href="apache.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info apache2</span></code></pre></div>
+<p>從來源更新套件資料：</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb41-1"><a href="apache.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span></code></pre></div>
+<p>確認是否是我們要安裝的 Apache2</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb42-1"><a href="apache.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info apache2</span></code></pre></div>
 <pre class="console_output"><code>Package: apache2
 Version: 2.4.41-4ubuntu3.4
 Priority: optional
@@ -352,7 +360,8 @@ Description: Apache HTTP Server
  .
  Installing this package results in a full installation, including the
  configuration files, init scripts and support scripts.</code></pre>
-<div class="sourceCode" id="cb41"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb41-1"><a href="apache.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install apache2</span></code></pre></div>
+<p>安裝 Apache2</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb44-1"><a href="apache.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install apache2</span></code></pre></div>
 <pre class="console_output"><code>Reading package lists... Done
 Building dependency tree       
 Reading state information... Done
@@ -368,25 +377,31 @@ The following NEW packages will be installed:
 Need to get 1,865 kB of archives.
 After this operation, 8,083 kB of additional disk space will be used.
 Do you want to continue? [Y/n] </code></pre>
-<div class="sourceCode" id="cb43"><pre class="sourceCode bash console_output"><code class="sourceCode bash"><span id="cb43-1"><a href="apache.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install apache2 <span class="at">--yes</span></span></code></pre></div>
+<p>也可以在安裝時加上 <code>--yes</code> 略過確認安裝提示。</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode bash console_output"><code class="sourceCode bash"><span id="cb46-1"><a href="apache.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install apache2 <span class="at">--yes</span></span></code></pre></div>
 </div>
 <div id="step-2-調整防火牆-ufw-設定" class="section level3" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Step 2 — 調整防火牆 ufw 設定</h3>
-<div class="sourceCode" id="cb44"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb44-1"><a href="apache.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw app list</span></code></pre></div>
+<p>有些程式會自動把設定檔加入 ufw 中，這樣就可以透過設定檔啟用/關閉設定防火牆允許的埠號，不用再特別記下該軟體的設定。 可以透過指令顯示有什麼可用的應用程式設定檔。</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb47-1"><a href="apache.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw app list</span></code></pre></div>
+<p>下列是目前可用的設定檔：</p>
 <pre class="console_output"><code>Available applications:
   Apache
   Apache Full
   Apache Secure
   OpenSSH</code></pre>
 <ul>
-<li><p><strong>Apache</strong>：會在防火牆新增一個埠號 <code>80</code> 的規則。</p></li>
-<li><p><strong>Apache Full</strong>：會在防火牆新增一個埠號 <code>80</code> 與埠號 <code>443</code> 的規則。</p></li>
-<li><p><strong>Apache Secure</strong>：在防火牆新增一個埠號 <code>443</code> 的規則。</p></li>
+<li><p><strong>Apache</strong>：會在防火牆新增一個允許從任何地方連線至埠號 <code>80</code> 的規則。</p></li>
+<li><p><strong>Apache Full</strong>：會在防火牆新增一個允許從任何地方連線至埠號 <code>80</code> 與埠號 <code>443</code> 的規則。</p></li>
+<li><p><strong>Apache Secure</strong>：在防火牆新增一個允許從任何地方連線至埠號 <code>443</code> 的規則。<br />
+</p></li>
 </ul>
-<div class="sourceCode" id="cb46"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb46-1"><a href="apache.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow <span class="st">&quot;Apache&quot;</span></span></code></pre></div>
+<p>使用方式很簡單，跟允許埠號時的指令一樣，把埠號改成設定檔名稱即可。</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb49-1"><a href="apache.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow <span class="st">&quot;Apache&quot;</span></span></code></pre></div>
 <pre class="console_output"><code>Rule added
 Rule added (v6)</code></pre>
-<div class="sourceCode" id="cb48"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb48-1"><a href="apache.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
+<p>確認剛才有沒有新增成功：</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb51-1"><a href="apache.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
 <pre class="console_output"><code>Status: active
 
 To                         Action      From
@@ -395,25 +410,38 @@ To                         Action      From
 Apache                     ALLOW       Anywhere                  
 60000 (v6)                 ALLOW       Anywhere (v6)             
 Apache (v6)                ALLOW       Anywhere (v6) </code></pre>
+<p>接著可以透過瀏覽器連線到下列網址：</p>
 <pre><code>http://&lt;虛擬主機的 ip 地址&gt;/</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb51-1"><a href="apache.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ip</span> show addr</span></code></pre></div>
-<pre class="console_output"><code>1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
-    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-    inet 127.0.0.1/8 scope host lo
-       valid_lft forever preferred_lft forever
-    inet6 ::1/128 scope host 
-       valid_lft forever preferred_lft forever
-2: enp0s3: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
-    link/ether 08:00:27:59:13:f9 brd ff:ff:ff:ff:ff:ff
-    inet 192.168.0.14/24 brd 192.168.0.255 scope global dynamic enp0s3
-       valid_lft 315329303sec preferred_lft 315329303sec
-    inet6 fd00:1cab:c0bb:acc2:a00:27ff:fe59:13f9/64 scope global dynamic mngtmpaddr noprefixroute 
-       valid_lft 535427sec preferred_lft 401570sec
-    inet6 fe80::a00:27ff:fe59:13f9/64 scope link 
-       valid_lft forever preferred_lft forever</code></pre>
-<div class="sourceCode" id="cb53"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb53-1"><a href="apache.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="ex">hostname-I</span></span></code></pre></div>
-<pre class="console_output"><code>192.168.0.14 fd00:1cab:c0bb:acc2:a00:27ff:fe59:13f9</code></pre>
 <p><img src="figures/apache-main-page.png" /></p>
+<div class="infobox info">
+<p>忘記怎麼找 ip 可以用下列三種方法找到：</p>
+<ol style="list-style-type: decimal">
+<li><code>ip show addr</code></li>
+</ol>
+<div class="sourceCode" id="cb54"><pre class="sourceCode numberSource console_output numberLines"><code class="sourceCode"><span id="cb54-1"><a href="apache.html#cb54-1"></a>1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span>
+<span id="cb54-2"><a href="apache.html#cb54-2"></a>    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span>
+<span id="cb54-3"><a href="apache.html#cb54-3"></a>    inet 127.0.0.1/8 scope host lo</span>
+<span id="cb54-4"><a href="apache.html#cb54-4"></a>       valid_lft forever preferred_lft forever</span>
+<span id="cb54-5"><a href="apache.html#cb54-5"></a>    inet6 ::1/128 scope host </span>
+<span id="cb54-6"><a href="apache.html#cb54-6"></a>       valid_lft forever preferred_lft forever</span>
+<span id="cb54-7"><a href="apache.html#cb54-7"></a>2: enp0s3: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000</span>
+<span id="cb54-8"><a href="apache.html#cb54-8"></a>    link/ether 08:00:27:59:13:f9 brd ff:ff:ff:ff:ff:ff</span>
+<span id="cb54-9"><a href="apache.html#cb54-9"></a>    inet 192.168.0.14/24 brd 192.168.0.255 scope global dynamic enp0s3</span>
+<span id="cb54-10"><a href="apache.html#cb54-10"></a>       valid_lft 315329303sec preferred_lft 315329303sec</span>
+<span id="cb54-11"><a href="apache.html#cb54-11"></a>    inet6 fd00:1cab:c0bb:acc2:a00:27ff:fe59:13f9/64 scope global dynamic mngtmpaddr noprefixroute </span>
+<span id="cb54-12"><a href="apache.html#cb54-12"></a>       valid_lft 535427sec preferred_lft 401570sec</span>
+<span id="cb54-13"><a href="apache.html#cb54-13"></a>    inet6 fe80::a00:27ff:fe59:13f9/64 scope link </span>
+<span id="cb54-14"><a href="apache.html#cb54-14"></a>       valid_lft forever preferred_lft forever</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li><code>hostname -I</code></li>
+</ol>
+<pre class="console_output"><code>192.168.0.14 fd00:1cab:c0bb:acc2:a00:27ff:fe59:13f9</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li><code>curl ifconfig.me</code></li>
+</ol>
+<pre class="console_output"><code>XXX.XXX.XXX.XXX</code></pre>
+<p>注意：這是對從你的區域網路連線到對外的網路 ip，如果你不知道是什麼，用方法 1 跟 2 代替。</p>
+</div>
 </div>
 </div>
             </section>

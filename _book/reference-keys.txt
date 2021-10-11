@@ -31,12 +31,15 @@ apache
 step-1-安裝-apache
 step-2-調整防火牆-ufw-設定
 mysql
+step-1-安裝-mysql
+step-2-設定-mysql
 php
-step-1-安裝-php-php-mysql
-step-2-建立虛擬網站virtualhost可選
+step-1-安裝-php-php-mysql-插件
+step-2-建立虛擬網站virtualhost
 phpmyadmin
 step-1-安裝-phpmyadmin
 step-2-使-phpmyadmin-更加安全
+step-3-再多一層存取的密碼保護可選
 rstudio-rshiny-server
 事前準備-3
 r-base
