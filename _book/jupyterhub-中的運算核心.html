@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-10-11" />
+<meta name="date" content="2021-10-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -271,6 +271,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="5.4.1" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html#conda-的-python-環境"><i class="fa fa-check"></i><b>5.4.1</b> Conda 的 Python🐍 環境</a></li>
 <li class="chapter" data-level="5.4.2" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html#r-環境"><i class="fa fa-check"></i><b>5.4.2</b> R 環境</a></li>
+<li class="chapter" data-level="5.4.3" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html#c-與-c-環境"><i class="fa fa-check"></i><b>5.4.3</b> C 與 C++ 環境</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="設置-apache-的-reverse-proxy.html"><a href="設置-apache-的-reverse-proxy.html"><i class="fa fa-check"></i><b>5.5</b> 設置 Apache 的 Reverse Proxy</a></li>
 <li class="chapter" data-level="5.6" data-path="jupyterhub-擴充套件.html"><a href="jupyterhub-擴充套件.html"><i class="fa fa-check"></i><b>5.6</b> JupyterHub 擴充套件</a></li>
@@ -406,6 +407,49 @@ See &#39;snap info jupyter&#39; for additional versions.</code></pre>
   ir41       /opt/jupyterhub/share/jupyter/kernels/ir41
   python3    /opt/jupyterhub/share/jupyter/kernels/python3</code></pre>
 <p><img src="figures/jupyterhub-main-page-kernel-R.png" /></p>
+</div>
+<div id="c-與-c-環境" class="section level3" number="5.4.3">
+<h3><span class="header-section-number">5.4.3</span> C 與 C++ 環境</h3>
+<div class="sourceCode" id="cb205"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb205-1"><a href="jupyterhub-中的運算核心.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /opt/conda/envs/c_cpp.yml</span></code></pre></div>
+<pre><code>name: c-cpp
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - xeus-cling
+  - python=3.*
+  - pip
+  - ipykernel
+prefix: /opt/conda/envs/c-cpp</code></pre>
+<div class="sourceCode" id="cb207"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb207-1"><a href="jupyterhub-中的運算核心.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> conda env create <span class="at">-f</span> c_cpp.yml</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb208-1"><a href="jupyterhub-中的運算核心.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> jupyter kernelspec install /opt/conda/envs/c-cpp/share/jupyter/xcpp11 <span class="at">--sys-prefix</span></span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb209-1"><a href="jupyterhub-中的運算核心.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> jupyter kernelspec install /opt/conda/envs/c-cpp/share/jupyter/xcpp14 <span class="at">--sys-prefix</span></span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb210-1"><a href="jupyterhub-中的運算核心.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> jupyter kernelspec install /opt/conda/envs/c-cpp/share/jupyter/xcpp17 <span class="at">--sys-prefix</span></span></code></pre></div>
+<!--# Scanf() problem https://github.com/brendan-rius/jupyter-c-kernel/issues/3 -->
+<div class="sourceCode" id="cb211"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb211-1"><a href="jupyterhub-中的運算核心.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/conda/envs/c-cpp/bin/python3.9 <span class="at">-m</span> pip install git+https://github.com/XaverKlemenschits/jupyter-c-kernel.git</span></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb212-1"><a href="jupyterhub-中的運算核心.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /opt/conda/envs/c-cpp/share/jupyter/kernels/c/kernel.json</span></code></pre></div>
+<pre class="console_output"><code>{
+  &quot;display_name&quot;: &quot;C&quot;,
+  &quot;argv&quot;: [
+      &quot;/opt/conda/envs/c-cpp/bin/python3&quot;,
+      &quot;-m&quot;,
+      &quot;jupyter_c_kernel&quot;,
+      &quot;-f&quot;,
+      &quot;{connection_file}&quot;
+  ],
+  &quot;language&quot;: &quot;C&quot;
+}</code></pre>
+<div class="sourceCode" id="cb214"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb214-1"><a href="jupyterhub-中的運算核心.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mv ~/Downloads/logo<span class="pp">**</span> /opt/conda/envs/c-cpp/share/jupyter/c/</span></code></pre></div>
+<p><img src="figures/icons/logo-32x32.png" /></p>
+<p><img src="figures/icons/logo-64x64.png" /></p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb215-1"><a href="jupyterhub-中的運算核心.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-al</span> /opt/conda/envs/c-cpp/share/jupyter/c</span></code></pre></div>
+<pre class="console_output"><code>drwxrwxr-x 2 root root 4096 Oct 23 17:20 ./
+drwxrwxr-x 7 root root 4096 Oct 23 15:31 ../
+-rw-rw-r-- 1 root root  181 Oct 23 15:26 kernel.json
+-rw-r--r-- 1 root root 1536 Oct 23 17:02 logo-32x32.png
+-rw-r--r-- 1 root root 4079 Oct 23 17:02 logo-64x64.png</code></pre>
+<div class="sourceCode" id="cb217"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb217-1"><a href="jupyterhub-中的運算核心.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> jupyter kernelspec install /opt/conda/envs/c-cpp/share/jupyter/c <span class="at">--sys-prefix</span></span></code></pre></div>
+<p><img src="figures/jupyterlab_c_cpp_kernel.png" /></p>
 </div>
 </div>
             </section>

@@ -271,6 +271,89 @@ Available kernels:
 
 ![](figures/jupyterhub-main-page-kernel-R.png)
 
+### C 與 C++ 環境
+
+``` {.bash .prefixed}
+sudo vim /opt/conda/envs/c_cpp.yml
+```
+
+    name: c-cpp
+    channels:
+      - defaults
+      - conda-forge
+    dependencies:
+      - xeus-cling
+      - python=3.*
+      - pip
+      - ipykernel
+    prefix: /opt/conda/envs/c-cpp
+
+``` {.bash .prefixed}
+sudo conda env create -f c_cpp.yml
+```
+
+``` {.bash .prefixed}
+sudo jupyter kernelspec install /opt/conda/envs/c-cpp/share/jupyter/xcpp11 --sys-prefix
+```
+
+``` {.bash .prefixed}
+sudo jupyter kernelspec install /opt/conda/envs/c-cpp/share/jupyter/xcpp14 --sys-prefix
+```
+
+``` {.bash .prefixed}
+sudo jupyter kernelspec install /opt/conda/envs/c-cpp/share/jupyter/xcpp17 --sys-prefix
+```
+
+<!--# Scanf() problem https://github.com/brendan-rius/jupyter-c-kernel/issues/3 -->
+
+``` {.bash .prefixed}
+sudo /opt/conda/envs/c-cpp/bin/python3.9 -m pip install git+https://github.com/XaverKlemenschits/jupyter-c-kernel.git
+```
+
+``` {.bash .prefixed}
+sudo vim /opt/conda/envs/c-cpp/share/jupyter/kernels/c/kernel.json
+```
+
+``` {.console_output}
+{
+  "display_name": "C",
+  "argv": [
+      "/opt/conda/envs/c-cpp/bin/python3",
+      "-m",
+      "jupyter_c_kernel",
+      "-f",
+      "{connection_file}"
+  ],
+  "language": "C"
+}
+```
+
+``` {.bash .prefixed}
+sudo mv ~/Downloads/logo** /opt/conda/envs/c-cpp/share/jupyter/c/
+```
+
+![](figures/icons/logo-32x32.png)
+
+![](figures/icons/logo-64x64.png)
+
+``` {.bash .prefixed}
+ls -al /opt/conda/envs/c-cpp/share/jupyter/c
+```
+
+``` {.console_output}
+drwxrwxr-x 2 root root 4096 Oct 23 17:20 ./
+drwxrwxr-x 7 root root 4096 Oct 23 15:31 ../
+-rw-rw-r-- 1 root root  181 Oct 23 15:26 kernel.json
+-rw-r--r-- 1 root root 1536 Oct 23 17:02 logo-32x32.png
+-rw-r--r-- 1 root root 4079 Oct 23 17:02 logo-64x64.png
+```
+
+``` {.bash .prefixed}
+sudo jupyter kernelspec install /opt/conda/envs/c-cpp/share/jupyter/c --sys-prefix
+```
+
+![](figures/jupyterlab_c_cpp_kernel.png)
+
 ## 設置 Apache 的 Reverse Proxy
 
 ``` {.bash .prefixed}

@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-10-11" />
+<meta name="date" content="2021-10-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -271,6 +271,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="5.4.1" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html#conda-的-python-環境"><i class="fa fa-check"></i><b>5.4.1</b> Conda 的 Python🐍 環境</a></li>
 <li class="chapter" data-level="5.4.2" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html#r-環境"><i class="fa fa-check"></i><b>5.4.2</b> R 環境</a></li>
+<li class="chapter" data-level="5.4.3" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html#c-與-c-環境"><i class="fa fa-check"></i><b>5.4.3</b> C 與 C++ 環境</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="設置-apache-的-reverse-proxy.html"><a href="設置-apache-的-reverse-proxy.html"><i class="fa fa-check"></i><b>5.5</b> 設置 Apache 的 Reverse Proxy</a></li>
 <li class="chapter" data-level="5.6" data-path="jupyterhub-擴充套件.html"><a href="jupyterhub-擴充套件.html"><i class="fa fa-check"></i><b>5.6</b> JupyterHub 擴充套件</a></li>
@@ -361,7 +362,7 @@ div.csl-indent {
 <p>接著按「Load」把剛剛產生的 *.ppk 檔案讀取進來。會看到一行字「Public key for pasting into OpenSSH authorized_keys file」下面的可複製區域就是 public key，把它整段複製起來。</p>
 <p><img src="figures/puttygen-load-ppk.png" class="figure" /></p>
 <p>接著打開「PowerShell」或是「命令提示字元」，輸入:</p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb225-1"><a href="putty.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="fu">echo</span> <span class="st">&quot;&lt;YOUR_PUBLIC_KEY&gt;&quot;</span> | ssh asis@192.<span class="fu">168</span>.<span class="fu">0</span>.<span class="fu">13</span> <span class="st">&quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb238-1"><a href="putty.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="fu">echo</span> <span class="st">&quot;&lt;YOUR_PUBLIC_KEY&gt;&quot;</span> | ssh asis@192.<span class="fu">168</span>.<span class="fu">0</span>.<span class="fu">13</span> <span class="st">&quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;</span></span></code></pre></div>
 <ul>
 <li><p>將 <code>&lt;YOUR_PUBLIC_KEY&gt;</code> 替換成自己的 public key</p></li>
 <li><p>這裡的 <code>asis</code> 為第一章的<a href="於虛擬機器安裝作業系統.html#使用者設定">使用者設定</a>的預設使用者</p></li>

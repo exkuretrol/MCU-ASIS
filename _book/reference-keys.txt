@@ -55,5 +55,6 @@ jupyterlab-與-jupyterhub
 jupyterhub-中的運算核心
 conda-的-python-環境
 r-環境
+c-與-c-環境
 設置-apache-的-reverse-proxy
 jupyterhub-擴充套件
