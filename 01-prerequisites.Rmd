@@ -18,7 +18,9 @@
 
 ## 於虛擬機器安裝作業系統
 
-再安裝完 VirtualBox 後，打開並不會有預先安裝好的作業系統，需要在 VirtualBox 內自行安裝作業系統。首先介紹 VirtualBox 的使用者介面:
+再安裝完 VirtualBox 後，打開並不會有預先安裝好的作業系統，需要在 VirtualBox 內自行新增虛擬主機，或是匯入已經擁有的虛擬主機。
+
+首先介紹 VirtualBox 的使用者介面:
 
 ```{r virtualbox-menu, fig.align='center', fig.cap='VirtualBox 的操作介面', echo=FALSE}
 knitr::include_graphics("./figures/virtualbox-menu.png", dpi = NA)

@@ -9,7 +9,7 @@ bibliography:
 - packages.bib
 biblio-style: apalike
 link-citations: yes
-description: This is a book.
+description: 
 output:
   html_document:
     css: "style.css"
@@ -26,33 +26,3 @@ knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown'
 ), 'packages.bib')
 ```
-
-# TODO List {.unnumbered}
-
-## TODOs: {.unnumbered}
-
--   需要將過程記錄下來(技術手冊?) + 讓人看得懂
-
--   ✓ Ubuntu 安裝
-
--   ✓ Ubuntu 基本設定
-
--   LAMP + phpMyAdmin
-
--   RStudio + RShiny
-
--   jupyterLab + jupyterhub
-
--   SSL certbot
-
-    -   nslookup
-
--   附錄
-
--   備份 & 還原
-
--   找到方法 highlight code 區塊
-
-## Issues: {.unnumbered}
-
--   

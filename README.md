@@ -1,1 +1,21 @@
-This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). Please see the page "Get Started" at https://bookdown.org/home/about/ for how to compile this example.
+### TODOs:
+
+-   ✓ Ubuntu 安裝
+
+-   ✓ Ubuntu 基本設定
+
+-   LAMP + phpMyAdmin
+
+-   RStudio + RShiny
+
+-   jupyterLab + jupyterhub
+
+-   SSL certbot
+
+    -   nslookup
+
+-   附錄
+
+-   備份 & 還原
+
+-   找到方法 highlight code 區塊
