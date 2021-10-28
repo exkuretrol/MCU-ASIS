@@ -2,9 +2,9 @@
 
 因為內容太多，書本篇收錄的會變得太混雜，所以我把一些內容放到這裡。
 
-## 由 Windows 10 系統進入 BIOS {.unnumbered}
+<!-- ## 由 Windows 10 系統進入 BIOS {.unnumbered .hidden} -->
 
-## Windows Terminal {.unnumbered}
+<!-- ## Windows Terminal {.unnumbered} -->
 
 ## PuTTY {.unnumbered}
 
@@ -100,11 +100,11 @@ SSH 連線方式大同小異:
 
 ![](figures/putty-connection-success.png){.figure}
 
-## 文本編輯器 {.unnumbered}
+<!-- ## 文本編輯器 {.unnumbered} -->
 
-### vim {.unnumbered}
+<!-- ### vim {.unnumbered} -->
 
-### nano {.unnumbered}
+<!-- ### nano {.unnumbered} -->
 
 ### 更改預設的文本編輯器 {.unnumbered}
 
@@ -131,6 +131,8 @@ Press <enter> to keep the current choice[*], or type selection number: 3
 ```
 
 ## 帳號管理 {.unnumbered}
+
+Work in Process 並不是最新版本
 
 ### users.sh {.unnumbered}
 

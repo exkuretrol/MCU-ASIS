@@ -4,7 +4,7 @@
 
 -   ✓ Ubuntu 基本設定
 
--   LAMP + phpMyAdmin
+-   ✓ LAMP + phpMyAdmin
 
 -   RStudio + RShiny
 
@@ -19,3 +19,5 @@
 -   備份 & 還原
 
 -   找到方法 highlight code 區塊
+
+-   英文括號 -> 中文括號
