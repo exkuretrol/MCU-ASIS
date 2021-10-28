@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="windows-terminal.html"/>
-<link rel="next" href="文本編輯器.html"/>
+<link rel="prev" href="附錄.html"/>
+<link rel="next" href="帳號管理.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -273,8 +273,6 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="" data-path="附錄.html"><a href="附錄.html"><i class="fa fa-check"></i>附錄</a>
 <ul>
-<li class="chapter" data-level="" data-path="由-windows-10-系統進入-bios.html"><a href="由-windows-10-系統進入-bios.html"><i class="fa fa-check"></i>由 Windows 10 系統進入 BIOS</a></li>
-<li class="chapter" data-level="" data-path="windows-terminal.html"><a href="windows-terminal.html"><i class="fa fa-check"></i>Windows Terminal</a></li>
 <li class="chapter" data-level="" data-path="putty.html"><a href="putty.html"><i class="fa fa-check"></i>PuTTY</a>
 <ul>
 <li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#以-putty-產生-key"><i class="fa fa-check"></i>以 PuTTY 產生 key</a>
@@ -285,12 +283,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#上傳以-putty-產生的-ssh-key-pairs"><i class="fa fa-check"></i>上傳以 PuTTY 產生的 ssh key pairs</a></li>
 <li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#puttygen-產生的-key-pairs-的連線方式"><i class="fa fa-check"></i>PuTTYgen 產生的 key pairs 的連線方式:</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="文本編輯器.html"><a href="文本編輯器.html"><i class="fa fa-check"></i>文本編輯器</a>
-<ul>
-<li class="chapter" data-level="" data-path="文本編輯器.html"><a href="文本編輯器.html#vim"><i class="fa fa-check"></i>vim</a></li>
-<li class="chapter" data-level="" data-path="文本編輯器.html"><a href="文本編輯器.html#nano"><i class="fa fa-check"></i>nano</a></li>
-<li class="chapter" data-level="" data-path="文本編輯器.html"><a href="文本編輯器.html#更改預設的文本編輯器"><i class="fa fa-check"></i>更改預設的文本編輯器</a></li>
+<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#更改預設的文本編輯器"><i class="fa fa-check"></i>更改預設的文本編輯器</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html"><i class="fa fa-check"></i>帳號管理</a>
 <ul>
@@ -384,6 +377,26 @@ div.csl-indent {
 <p><img src="figures/putty-security-alert.png" class="figure" /></p>
 <p>連接成功!</p>
 <p><img src="figures/putty-connection-success.png" class="figure" /></p>
+<!-- ## 文本編輯器 {.unnumbered} -->
+<!-- ### vim {.unnumbered} -->
+<!-- ### nano {.unnumbered} -->
+</div>
+<div id="更改預設的文本編輯器" class="section level3 unnumbered">
+<h3>更改預設的文本編輯器</h3>
+<p>這個指令可以變更系統編輯文件所用的程式</p>
+<div class="sourceCode" id="cb240"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb240-1"><a href="putty.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> update-alternatives <span class="at">--config</span> editor</span></code></pre></div>
+<p>按了 Enter↩︎ 之後，會出現現在可用的編輯器，輸入對應的編號即可變更。有標 <code>*</code> 號的編輯器為目前設定的預設編輯器。</p>
+<pre class="console_output"><code>There are 4 choices for the alternative editor (providing /usr/bin/editor).
+
+  Selection    Path                Priority   Status
+------------------------------------------------------------
+  0            /bin/nano            40        auto mode
+  1            /bin/ed             -100       manual mode
+  2            /bin/nano            40        manual mode
+* 3            /usr/bin/vim.basic   30        manual mode
+  4            /usr/bin/vim.tiny    15        manual mode
+
+Press &lt;enter&gt; to keep the current choice[*], or type selection number: 3</code></pre>
 </div>
 </div>
             </section>
@@ -391,8 +404,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="windows-terminal.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="文本編輯器.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="附錄.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="帳號管理.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
