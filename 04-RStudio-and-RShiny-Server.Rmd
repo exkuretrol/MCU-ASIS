@@ -2,25 +2,38 @@
 
 ## 事前準備
 
+先確認目前的使用者 asis 擁有 sudo 的權限。
+
 ## R base
+
+安裝軟體之前，先更新套件管理程式的來源
 
 ``` {.bash .prefixed}
 sudo apt update
 ```
 
+再來安裝安裝 r-base 所需要的程式 software-properties-common 與 dirmngr。
+
 ``` {.bash .prefixed}
 sudo apt install software-properties-common dirmngr --yes
 ```
 
+切換到暫存資料夾後，將 GPG 簽名下載下來，添加至目的地
+
 ``` {.bash .prefixed}
-wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc \
+cd /tmp && \
+    wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc \
     | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
 ```
+
+添加 apt 來源
 
 ``` {.bash .prefixed}
 sudo add-apt-repository \ 
     "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
 ```
+
+安裝 r-base
 
 ``` {.bash .prefixed}
 sudo apt install r-base --yes
@@ -28,47 +41,71 @@ sudo apt install r-base --yes
 
 ## RStudio Server
 
-### Step 1 --- 安裝 RStudio Server 伺服器 {.unnumbered}
+### Step 1 --- 安裝 RStudio Server 伺服器 {#step-1-----安裝-rstudio-server-伺服器 .unnumbered}
 
 ``` {.bash .prefixed}
 sudo apt install gdebi-core
 ```
+
+切到暫存資料夾後，自官網下載 rstudio 伺服器的安裝程式。
 
 ``` {.bash .prefixed}
 cd /tmp && \
 wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.4.1717-amd64.deb
 ```
 
+透過 ubuntu 的密鑰伺服器取回對應的簽名
+
 ``` {.bash .prefixed}
 gpg --keyserver keyserver.ubuntu.com --recv-keys 3F32EE77E331692F
 ```
+
+安裝確認檔案簽名所需要的程式
 
 ``` {.bash .prefixed}
 sudo apt install dpkg-sig --yes
 ```
 
+檢查檔案簽名，加上 `--verify` 選項驗證檔案簽名
+
 ``` {.bash .prefixed}
 dpkg-sig --verify rstudio-server-1.4.1717-amd64.deb
 ```
+
+出現 `GOODSIG` 字樣代表該檔案沒有問題，可以繼續安裝
 
 ``` {.console_output}
 Processing rstudio-server-1.4.1717-amd64.deb...
 GOODSIG _gpgbuilder FE8564CFF1AB93F1728645193F32EE77E331692F 1621900692
 ```
 
+最後再使用 `gdebi` 指令安裝 .deb 格式軟體
+
 ``` {.bash .prefixed}
 sudo gdebi rstudio-server-1.4.1717-amd64.deb
 ```
+
+將防火牆的 8787 埠號打開
 
 ``` {.bash .prefixed}
 sudo ufw allow 8787
 ```
 
+接著用瀏覽器進入下列網址
+
 ``` {.bash .prefixed}
 http://<虛擬主機的 ip 地址>:8787
 ```
 
-### Step 2 --- 設定 Apache 的 Proxy {.unnumbered}
+或是在shell中直接使用 `curl` 指令查看
+
+``` {.bash}
+curl <虛擬主機的 ip 地址>:8787
+```
+
+### Step 2 --- 設定 Apache 的反向代理（Reverse Proxy） {.unnumbered}
+
+用指令 `a2enmod` 將 Apache 內建的插件啟用
 
 ``` {.bash .prefixed}
 sudo a2enmod proxy
@@ -76,9 +113,13 @@ sudo a2enmod proxy_http
 sudo a2enmod proxy_wstunnel
 ```
 
+繼續編輯[3.4.2 節][Step 2 --- 建立虛擬網站（VirtualHost）]所建立的 asis.conf
+
 ``` {.bash .prefixed}
 sudo vim /etc/apache2/sites-available/asis.conf
 ```
+
+在 VirtualHost 節點下面新增 RStudio Proxy 的區塊
 
 ``` {.bash}
 <VirtualHost *:80>
@@ -106,53 +147,69 @@ sudo vim /etc/apache2/sites-available/asis.conf
 </VirtualHost>
 ```
 
+完成後需要重新啟動 Apache
+
 ``` {.bash .prefixed}
 sudo systemctl restart apache2
 ```
+
+最後以瀏覽器打開下面的連結會發現，可以直接使用具有名字的路徑，透過反向代理，連結到目的地 8787 埠號。
 
     http://<虛擬主機的 ip 地址>/rstudio/
 
 ![](figures/apache2-rstudio-server-login-page.png)
 
+在 [Step 1](#step-1-----安裝-rstudio-server-伺服器) 開的 8787 埠號可以關掉了。在 status 的後面加上 numbered 可以將設定的編號也一起列出來，再藉由編號編輯該設定。
+
 ``` {.bash .prefixed}
 sudo ufw status numbered
 ```
 
-    Status: active
+``` {.console_output}
+Status: active
 
-         To                         Action      From
-         --                         ------      ----
-    [ 1] 60000                      ALLOW IN    Anywhere                  
-    [ 2] mosh                       ALLOW IN    Anywhere                  
-    [ 3] Apache                     ALLOW IN    Anywhere                  
-    [ 4] Apache Secure              ALLOW IN    Anywhere                  
-    [ 5] 8787                       ALLOW IN    Anywhere                  
-    [ 6] 60000 (v6)                 ALLOW IN    Anywhere (v6)             
-    [ 7] mosh (v6)                  ALLOW IN    Anywhere (v6)             
-    [ 8] Apache (v6)                ALLOW IN    Anywhere (v6)             
-    [ 9] Apache Secure (v6)         ALLOW IN    Anywhere (v6)             
-    [10] 8787 (v6)                  ALLOW IN    Anywhere (v6)
+     To                         Action      From
+     --                         ------      ----
+[ 1] 60000                      ALLOW IN    Anywhere                  
+[ 2] mosh                       ALLOW IN    Anywhere                  
+[ 3] Apache                     ALLOW IN    Anywhere                  
+[ 4] Apache Secure              ALLOW IN    Anywhere                  
+[ 5] 8787                       ALLOW IN    Anywhere                  
+[ 6] 60000 (v6)                 ALLOW IN    Anywhere (v6)             
+[ 7] mosh (v6)                  ALLOW IN    Anywhere (v6)             
+[ 8] Apache (v6)                ALLOW IN    Anywhere (v6)             
+[ 9] Apache Secure (v6)         ALLOW IN    Anywhere (v6)             
+[10] 8787 (v6)                  ALLOW IN    Anywhere (v6)
+```
+
+刪除第 5 個設定（8787）
 
 ``` {.bash .prefixed}
 sudo ufw delete 5
 ```
 
+刪除第 9 個設定（8787 (v6)），因為第 5 個設定刪除之後，第 10 順位的設定就會往前移，重新編號。
+
 ``` {.bash .prefixed}
 sudo ufw delete 9
 ```
 
-    Status: active
+更動後的設定。
 
-    To                         Action      From
-    --                         ------      ----
-    60000                      ALLOW       Anywhere                  
-    mosh                       ALLOW       Anywhere                  
-    Apache                     ALLOW       Anywhere                  
-    Apache Secure              ALLOW       Anywhere                  
-    60000 (v6)                 ALLOW       Anywhere (v6)             
-    mosh (v6)                  ALLOW       Anywhere (v6)             
-    Apache (v6)                ALLOW       Anywhere (v6)             
-    Apache Secure (v6)         ALLOW       Anywhere (v6)
+``` {.console_output}
+Status: active
+
+To                         Action      From
+--                         ------      ----
+60000                      ALLOW       Anywhere                  
+mosh                       ALLOW       Anywhere                  
+Apache                     ALLOW       Anywhere                  
+Apache Secure              ALLOW       Anywhere                  
+60000 (v6)                 ALLOW       Anywhere (v6)             
+mosh (v6)                  ALLOW       Anywhere (v6)             
+Apache (v6)                ALLOW       Anywhere (v6)             
+Apache Secure (v6)         ALLOW       Anywhere (v6)
+```
 
 ## RShiny Server
 
