@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-10-28" />
+<meta name="date" content="2022-01-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -241,13 +241,13 @@ div.csl-indent {
 <li class="chapter" data-level="4.2" data-path="r-base.html"><a href="r-base.html"><i class="fa fa-check"></i><b>4.2</b> R base</a></li>
 <li class="chapter" data-level="4.3" data-path="rstudio-server.html"><a href="rstudio-server.html"><i class="fa fa-check"></i><b>4.3</b> RStudio Server</a>
 <ul>
-<li class="chapter" data-level="" data-path="rstudio-server.html"><a href="rstudio-server.html#step-1-安裝-rstudio-server-伺服器"><i class="fa fa-check"></i>Step 1 — 安裝 RStudio Server 伺服器</a></li>
-<li class="chapter" data-level="" data-path="rstudio-server.html"><a href="rstudio-server.html#step-2-設定-apache-的-proxy"><i class="fa fa-check"></i>Step 2 — 設定 Apache 的 Proxy</a></li>
+<li class="chapter" data-level="" data-path="rstudio-server.html"><a href="rstudio-server.html#step-1-----安裝-rstudio-server-伺服器"><i class="fa fa-check"></i>Step 1 — 安裝 RStudio Server 伺服器</a></li>
+<li class="chapter" data-level="" data-path="rstudio-server.html"><a href="rstudio-server.html#step-2-設定-apache-的反向代理reverse-proxy"><i class="fa fa-check"></i>Step 2 — 設定 Apache 的反向代理（Reverse Proxy）</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="rshiny-server.html"><a href="rshiny-server.html"><i class="fa fa-check"></i><b>4.4</b> RShiny Server</a>
 <ul>
 <li class="chapter" data-level="" data-path="rshiny-server.html"><a href="rshiny-server.html#step-1-安裝-rshiny-server"><i class="fa fa-check"></i>Step 1 — 安裝 RShiny Server</a></li>
-<li class="chapter" data-level="" data-path="rshiny-server.html"><a href="rshiny-server.html#step-2-設定-apache-的-proxy-1"><i class="fa fa-check"></i>Step 2 — 設定 Apache 的 Proxy</a></li>
+<li class="chapter" data-level="" data-path="rshiny-server.html"><a href="rshiny-server.html#step-2-設定-apache-的-proxy"><i class="fa fa-check"></i>Step 2 — 設定 Apache 的 Proxy</a></li>
 <li class="chapter" data-level="" data-path="rshiny-server.html"><a href="rshiny-server.html#step-3-shiny-server-進階設定"><i class="fa fa-check"></i>Step 3 — Shiny Server 進階設定</a></li>
 <li class="chapter" data-level="" data-path="rshiny-server.html"><a href="rshiny-server.html#step-4-使用使用者測試設定是否有效"><i class="fa fa-check"></i>Step 4 — 使用使用者測試設定是否有效</a></li>
 </ul></li>
@@ -316,20 +316,20 @@ div.csl-indent {
 <div id="mysql-8.0-root-密碼重設" class="section level2 unnumbered">
 <h2>Mysql 8.0 root 密碼重設</h2>
 <p>先建立一個含有改變 root 密碼的 sql 語法文字檔案</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb244-1"><a href="mysql-8.0-root-密碼重設.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> mysql-init</span></code></pre></div>
-<div class="sourceCode" id="cb245"><pre class="sourceCode sqlmysql"><code class="sourceCode sqlmysql"><span id="cb245-1"><a href="mysql-8.0-root-密碼重設.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="fu">USER</span> <span class="st">&#39;root&#39;</span>@<span class="st">&#39;localhost&#39;</span> IDENTIFIED <span class="kw">with</span> caching_sha2_password <span class="kw">by</span> <span class="st">&#39;&lt;新的 root 密碼&gt;&#39;</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb245-1"><a href="mysql-8.0-root-密碼重設.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> mysql-init</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode sqlmysql"><code class="sourceCode sqlmysql"><span id="cb246-1"><a href="mysql-8.0-root-密碼重設.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="fu">USER</span> <span class="st">&#39;root&#39;</span>@<span class="st">&#39;localhost&#39;</span> IDENTIFIED <span class="kw">with</span> caching_sha2_password <span class="kw">by</span> <span class="st">&#39;&lt;新的 root 密碼&gt;&#39;</span>;</span></code></pre></div>
 <p>如存好後將擁有者與使用者群組改成 <code>mysql</code> 後，移至 <code>/tmp</code> 資料夾，使 mysql 使用者可以存取。</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb246-1"><a href="mysql-8.0-root-密碼重設.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> mysql.mysql mysql-init <span class="kw">&amp;&amp;</span> <span class="fu">mv</span> mysql-init /tmp</span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb247-1"><a href="mysql-8.0-root-密碼重設.html#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> mysql.mysql mysql-init <span class="kw">&amp;&amp;</span> <span class="fu">mv</span> mysql-init /tmp</span></code></pre></div>
 <p>切換至 root 使用者進行後續操作</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb247-1"><a href="mysql-8.0-root-密碼重設.html#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span></span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb248-1"><a href="mysql-8.0-root-密碼重設.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span></span></code></pre></div>
 <p>將目前的 mysql 關閉</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb248-1"><a href="mysql-8.0-root-密碼重設.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">killall</span> <span class="at">-9</span> mysqld</span></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb249-1"><a href="mysql-8.0-root-密碼重設.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="fu">killall</span> <span class="at">-9</span> mysqld</span></code></pre></div>
 <p>或是使用 <code>systemctl</code> 指令關閉 mysql 服務</p>
 <p><code>{.bash prefixed} systemctl stop mysql.service</code></p>
 <p>接著使用 mysqld 指令啟動 mysql 並指定 <code>--user</code>、<code>--defaults-file</code> 與 <code>--init-file</code> 參數。</p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb249-1"><a href="mysql-8.0-root-密碼重設.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysqld</span> <span class="at">--defaults-file</span><span class="op">=</span>/etc/mysql/mysql.conf.d/mysqld.cnf <span class="dt">\ </span></span>
-<span id="cb249-2"><a href="mysql-8.0-root-密碼重設.html#cb249-2" aria-hidden="true" tabindex="-1"></a><span class="ex">--user=mysql</span> <span class="dt">\ </span></span>
-<span id="cb249-3"><a href="mysql-8.0-root-密碼重設.html#cb249-3" aria-hidden="true" tabindex="-1"></a><span class="ex">--init-file=/tmp/mysql-init</span> <span class="kw">&amp;</span></span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb250-1"><a href="mysql-8.0-root-密碼重設.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysqld</span> <span class="at">--defaults-file</span><span class="op">=</span>/etc/mysql/mysql.conf.d/mysqld.cnf <span class="dt">\ </span></span>
+<span id="cb250-2"><a href="mysql-8.0-root-密碼重設.html#cb250-2" aria-hidden="true" tabindex="-1"></a><span class="ex">--user=mysql</span> <span class="dt">\ </span></span>
+<span id="cb250-3"><a href="mysql-8.0-root-密碼重設.html#cb250-3" aria-hidden="true" tabindex="-1"></a><span class="ex">--init-file=/tmp/mysql-init</span> <span class="kw">&amp;</span></span></code></pre></div>
 <ul>
 <li><p><code>--defaults-file</code>: MySQL 預設啟動的設定檔案</p></li>
 <li><p><code>--user</code>: 以使用者 <code>mysql</code> 執行</p></li>
@@ -340,14 +340,14 @@ div.csl-indent {
 <div class="infobox caution">
 <p>如果不行的話，請檢查位於 <code>/var/log/mysql/error.log</code> 的錯誤紀錄，如果有看到類似 <code>/var/run/mysqld</code> 的錯誤，需要手動建立資料夾，並把權限變更為 <code>mysql</code> 用戶的權限。 操作完之後再從關閉 mysql 服務開始，再嘗試一次。</p>
 <p>參考指令如下：</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb250-1"><a href="mysql-8.0-root-密碼重設.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> /var/run/mysqld <span class="kw">&amp;&amp;</span> <span class="fu">chown</span> mysql.mysql /var/run/mysqld</span></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb251-1"><a href="mysql-8.0-root-密碼重設.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> /var/run/mysqld <span class="kw">&amp;&amp;</span> <span class="fu">chown</span> mysql.mysql /var/run/mysqld</span></code></pre></div>
 </div>
 <p>最後以正常的服務啟動 mysql：</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb251-1"><a href="mysql-8.0-root-密碼重設.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> restart mysql.service</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb252-1"><a href="mysql-8.0-root-密碼重設.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> restart mysql.service</span></code></pre></div>
 <p>退出 root 帳號</p>
-<div class="sourceCode" id="cb252"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb252-1"><a href="mysql-8.0-root-密碼重設.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span></span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb253-1"><a href="mysql-8.0-root-密碼重設.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span></span></code></pre></div>
 <p>試以新密碼登入 mysql root 帳號：</p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb253-1"><a href="mysql-8.0-root-密碼重設.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb254-1"><a href="mysql-8.0-root-密碼重設.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
 <p>成功 🎊</p>
 <pre class="console_output"><code>Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 17

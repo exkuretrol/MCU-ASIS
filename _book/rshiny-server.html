@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-10-28" />
+<meta name="date" content="2022-01-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -241,13 +241,13 @@ div.csl-indent {
 <li class="chapter" data-level="4.2" data-path="r-base.html"><a href="r-base.html"><i class="fa fa-check"></i><b>4.2</b> R base</a></li>
 <li class="chapter" data-level="4.3" data-path="rstudio-server.html"><a href="rstudio-server.html"><i class="fa fa-check"></i><b>4.3</b> RStudio Server</a>
 <ul>
-<li class="chapter" data-level="" data-path="rstudio-server.html"><a href="rstudio-server.html#step-1-安裝-rstudio-server-伺服器"><i class="fa fa-check"></i>Step 1 — 安裝 RStudio Server 伺服器</a></li>
-<li class="chapter" data-level="" data-path="rstudio-server.html"><a href="rstudio-server.html#step-2-設定-apache-的-proxy"><i class="fa fa-check"></i>Step 2 — 設定 Apache 的 Proxy</a></li>
+<li class="chapter" data-level="" data-path="rstudio-server.html"><a href="rstudio-server.html#step-1-----安裝-rstudio-server-伺服器"><i class="fa fa-check"></i>Step 1 — 安裝 RStudio Server 伺服器</a></li>
+<li class="chapter" data-level="" data-path="rstudio-server.html"><a href="rstudio-server.html#step-2-設定-apache-的反向代理reverse-proxy"><i class="fa fa-check"></i>Step 2 — 設定 Apache 的反向代理（Reverse Proxy）</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="rshiny-server.html"><a href="rshiny-server.html"><i class="fa fa-check"></i><b>4.4</b> RShiny Server</a>
 <ul>
 <li class="chapter" data-level="" data-path="rshiny-server.html"><a href="rshiny-server.html#step-1-安裝-rshiny-server"><i class="fa fa-check"></i>Step 1 — 安裝 RShiny Server</a></li>
-<li class="chapter" data-level="" data-path="rshiny-server.html"><a href="rshiny-server.html#step-2-設定-apache-的-proxy-1"><i class="fa fa-check"></i>Step 2 — 設定 Apache 的 Proxy</a></li>
+<li class="chapter" data-level="" data-path="rshiny-server.html"><a href="rshiny-server.html#step-2-設定-apache-的-proxy"><i class="fa fa-check"></i>Step 2 — 設定 Apache 的 Proxy</a></li>
 <li class="chapter" data-level="" data-path="rshiny-server.html"><a href="rshiny-server.html#step-3-shiny-server-進階設定"><i class="fa fa-check"></i>Step 3 — Shiny Server 進階設定</a></li>
 <li class="chapter" data-level="" data-path="rshiny-server.html"><a href="rshiny-server.html#step-4-使用使用者測試設定是否有效"><i class="fa fa-check"></i>Step 4 — 使用使用者測試設定是否有效</a></li>
 </ul></li>
@@ -317,12 +317,12 @@ div.csl-indent {
 <h2><span class="header-section-number">4.4</span> RShiny Server</h2>
 <div id="step-1-安裝-rshiny-server" class="section level3 unnumbered">
 <h3>Step 1 — 安裝 RShiny Server</h3>
-<div class="sourceCode" id="cb138"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb138-1"><a href="rshiny-server.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span> <span class="dt">\</span></span>
-<span id="cb138-2"><a href="rshiny-server.html#cb138-2" aria-hidden="true" tabindex="-1"></a>-c <span class="st">&quot;R -e </span><span class="dt">\&quot;</span><span class="st">install.packages(&#39;shiny&#39;, repos=&#39;https://cran.rstudio.com/&#39;)</span><span class="dt">\&quot;</span><span class="st">&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb139"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb139-1"><a href="rshiny-server.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /tmp <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
-<span id="cb139-2"><a href="rshiny-server.html#cb139-2" aria-hidden="true" tabindex="-1"></a>    wget https://download3.rstudio.org/ubuntu-14.04/x86_64/shiny-server-1.5.16.958-amd64.deb</span></code></pre></div>
-<div class="sourceCode" id="cb140"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb140-1"><a href="rshiny-server.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sha256sum</span> shiny-server-1.5.16.958-amd64.deb </span></code></pre></div>
-<div class="sourceCode" id="cb141"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb141-1"><a href="rshiny-server.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> gdebi shiny-server-1.5.16.958-amd64.deb</span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb139-1"><a href="rshiny-server.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span> <span class="dt">\</span></span>
+<span id="cb139-2"><a href="rshiny-server.html#cb139-2" aria-hidden="true" tabindex="-1"></a>-c <span class="st">&quot;R -e </span><span class="dt">\&quot;</span><span class="st">install.packages(&#39;shiny&#39;, repos=&#39;https://cran.rstudio.com/&#39;)</span><span class="dt">\&quot;</span><span class="st">&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb140-1"><a href="rshiny-server.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /tmp <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb140-2"><a href="rshiny-server.html#cb140-2" aria-hidden="true" tabindex="-1"></a>    wget https://download3.rstudio.org/ubuntu-14.04/x86_64/shiny-server-1.5.16.958-amd64.deb</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb141-1"><a href="rshiny-server.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sha256sum</span> shiny-server-1.5.16.958-amd64.deb </span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb142-1"><a href="rshiny-server.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> gdebi shiny-server-1.5.16.958-amd64.deb</span></code></pre></div>
 <div class="infobox info">
 <p>版本</p>
 </div>
@@ -331,129 +331,129 @@ div.csl-indent {
 <p>右下角 blablabla 沒裝 rmarkdown package</p>
 </div>
 </div>
-<div id="step-2-設定-apache-的-proxy-1" class="section level3 unnumbered">
+<div id="step-2-設定-apache-的-proxy" class="section level3 unnumbered">
 <h3>Step 2 — 設定 Apache 的 Proxy</h3>
-<div class="sourceCode" id="cb142"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb142-1"><a href="rshiny-server.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/sites-available/asis.conf</span></code></pre></div>
-<div class="sourceCode" id="cb143"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb143-1"><a href="rshiny-server.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>VirtualHost <span class="ex">*:80</span><span class="op">&gt;</span></span>
-<span id="cb143-2"><a href="rshiny-server.html#cb143-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
-<span id="cb143-3"><a href="rshiny-server.html#cb143-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb143-4"><a href="rshiny-server.html#cb143-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
-<span id="cb143-5"><a href="rshiny-server.html#cb143-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># RStudio Proxy</span></span>
-<span id="cb143-6"><a href="rshiny-server.html#cb143-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
-<span id="cb143-7"><a href="rshiny-server.html#cb143-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
-<span id="cb143-8"><a href="rshiny-server.html#cb143-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb143-9"><a href="rshiny-server.html#cb143-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
-<span id="cb143-10"><a href="rshiny-server.html#cb143-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># RShiny Server Proxy</span></span>
-<span id="cb143-11"><a href="rshiny-server.html#cb143-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
-<span id="cb143-12"><a href="rshiny-server.html#cb143-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RedirectMatch</span> permanent ^/shiny$ /shiny/</span>
-<span id="cb143-13"><a href="rshiny-server.html#cb143-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb143-14"><a href="rshiny-server.html#cb143-14" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteCond</span> %{HTTP:Upgrade} =websocket</span>
-<span id="cb143-15"><a href="rshiny-server.html#cb143-15" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteRule</span> /shiny/<span class="er">(</span><span class="bu">.</span><span class="pp">*</span><span class="kw">)</span> <span class="ex">ws://localhost:3838/</span><span class="va">$1</span> [P,L]</span>
-<span id="cb143-16"><a href="rshiny-server.html#cb143-16" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteCond</span> %{HTTP:Upgrade} !=websocket</span>
-<span id="cb143-17"><a href="rshiny-server.html#cb143-17" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteRule</span> /shiny/<span class="er">(</span><span class="bu">.</span><span class="pp">*</span><span class="kw">)</span> <span class="ex">http://localhost:3838/</span><span class="va">$1</span> [P,L]</span>
-<span id="cb143-18"><a href="rshiny-server.html#cb143-18" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ProxyPass</span> /shiny/ http://localhost:3838/</span>
-<span id="cb143-19"><a href="rshiny-server.html#cb143-19" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ProxyPassReverse</span> /shiny/ http://localhost:3838/</span>
-<span id="cb143-20"><a href="rshiny-server.html#cb143-20" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>/VirtualHost<span class="op">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb143-1"><a href="rshiny-server.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/sites-available/asis.conf</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb144-1"><a href="rshiny-server.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>VirtualHost <span class="ex">*:80</span><span class="op">&gt;</span></span>
+<span id="cb144-2"><a href="rshiny-server.html#cb144-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
+<span id="cb144-3"><a href="rshiny-server.html#cb144-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb144-4"><a href="rshiny-server.html#cb144-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
+<span id="cb144-5"><a href="rshiny-server.html#cb144-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># RStudio Proxy</span></span>
+<span id="cb144-6"><a href="rshiny-server.html#cb144-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
+<span id="cb144-7"><a href="rshiny-server.html#cb144-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
+<span id="cb144-8"><a href="rshiny-server.html#cb144-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb144-9"><a href="rshiny-server.html#cb144-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
+<span id="cb144-10"><a href="rshiny-server.html#cb144-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># RShiny Server Proxy</span></span>
+<span id="cb144-11"><a href="rshiny-server.html#cb144-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
+<span id="cb144-12"><a href="rshiny-server.html#cb144-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RedirectMatch</span> permanent ^/shiny$ /shiny/</span>
+<span id="cb144-13"><a href="rshiny-server.html#cb144-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb144-14"><a href="rshiny-server.html#cb144-14" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteCond</span> %{HTTP:Upgrade} =websocket</span>
+<span id="cb144-15"><a href="rshiny-server.html#cb144-15" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteRule</span> /shiny/<span class="er">(</span><span class="bu">.</span><span class="pp">*</span><span class="kw">)</span> <span class="ex">ws://localhost:3838/</span><span class="va">$1</span> [P,L]</span>
+<span id="cb144-16"><a href="rshiny-server.html#cb144-16" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteCond</span> %{HTTP:Upgrade} !=websocket</span>
+<span id="cb144-17"><a href="rshiny-server.html#cb144-17" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteRule</span> /shiny/<span class="er">(</span><span class="bu">.</span><span class="pp">*</span><span class="kw">)</span> <span class="ex">http://localhost:3838/</span><span class="va">$1</span> [P,L]</span>
+<span id="cb144-18"><a href="rshiny-server.html#cb144-18" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ProxyPass</span> /shiny/ http://localhost:3838/</span>
+<span id="cb144-19"><a href="rshiny-server.html#cb144-19" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ProxyPassReverse</span> /shiny/ http://localhost:3838/</span>
+<span id="cb144-20"><a href="rshiny-server.html#cb144-20" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>/VirtualHost<span class="op">&gt;</span></span></code></pre></div>
 <pre><code>http://&lt;虛擬主機的 ip 地址&gt;/shiny/</code></pre>
 </div>
 <div id="step-3-shiny-server-進階設定" class="section level3 unnumbered">
 <h3>Step 3 — Shiny Server 進階設定</h3>
-<div class="sourceCode" id="cb145"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb145-1"><a href="rshiny-server.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/shiny-server/shiny-server.conf</span></code></pre></div>
-<div class="sourceCode" id="cb146"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb146-1"><a href="rshiny-server.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 主要執行 App 為的使用者為該 App 的擁有者，沒有擁有者的 App 將由備取使用者 shiny 執行。</span></span>
-<span id="cb146-2"><a href="rshiny-server.html#cb146-2" aria-hidden="true" tabindex="-1"></a><span class="ex">run_as</span> :HOME_USER: shiny<span class="kw">;</span></span>
-<span id="cb146-3"><a href="rshiny-server.html#cb146-3" aria-hidden="true" tabindex="-1"></a><span class="ex">access_log</span> /var/log/shiny-server/access.log tiny<span class="kw">;</span></span>
-<span id="cb146-4"><a href="rshiny-server.html#cb146-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb146-5"><a href="rshiny-server.html#cb146-5" aria-hidden="true" tabindex="-1"></a><span class="ex">server</span> {</span>
-<span id="cb146-6"><a href="rshiny-server.html#cb146-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">listen</span> 3838<span class="kw">;</span></span>
-<span id="cb146-7"><a href="rshiny-server.html#cb146-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb146-8"><a href="rshiny-server.html#cb146-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 110.09.21 跟明輝老師的結果是只留下 &#39;老師&#39; 與 &#39;學生群組&#39;</span></span>
-<span id="cb146-9"><a href="rshiny-server.html#cb146-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span></span>
-<span id="cb146-10"><a href="rshiny-server.html#cb146-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># # 重新導向舊群組 /asisstuc 至新群組 /asis</span></span>
-<span id="cb146-11"><a href="rshiny-server.html#cb146-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># location /asisstuc {</span></span>
-<span id="cb146-12"><a href="rshiny-server.html#cb146-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   redirect &quot;https://&lt;虛擬主機 ip 位址&gt;/shiny/asis/&quot; 302 true;</span></span>
-<span id="cb146-13"><a href="rshiny-server.html#cb146-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># }</span></span>
-<span id="cb146-14"><a href="rshiny-server.html#cb146-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span></span>
-<span id="cb146-15"><a href="rshiny-server.html#cb146-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># location /asis {</span></span>
-<span id="cb146-16"><a href="rshiny-server.html#cb146-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   user_dirs;</span></span>
-<span id="cb146-17"><a href="rshiny-server.html#cb146-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   members_of asis;</span></span>
-<span id="cb146-18"><a href="rshiny-server.html#cb146-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   directory_index on;</span></span>
-<span id="cb146-19"><a href="rshiny-server.html#cb146-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># }</span></span>
-<span id="cb146-20"><a href="rshiny-server.html#cb146-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span></span>
-<span id="cb146-21"><a href="rshiny-server.html#cb146-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># location /ecofin {</span></span>
-<span id="cb146-22"><a href="rshiny-server.html#cb146-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   user_dirs;</span></span>
-<span id="cb146-23"><a href="rshiny-server.html#cb146-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   members_of ecofin;</span></span>
-<span id="cb146-24"><a href="rshiny-server.html#cb146-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   directory_index on;</span></span>
-<span id="cb146-25"><a href="rshiny-server.html#cb146-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># }</span></span>
-<span id="cb146-26"><a href="rshiny-server.html#cb146-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span></span>
-<span id="cb146-27"><a href="rshiny-server.html#cb146-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># location /fta {</span></span>
-<span id="cb146-28"><a href="rshiny-server.html#cb146-28" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   user_dirs;</span></span>
-<span id="cb146-29"><a href="rshiny-server.html#cb146-29" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   members_of fta;</span></span>
-<span id="cb146-30"><a href="rshiny-server.html#cb146-30" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   directory_index on;</span></span>
-<span id="cb146-31"><a href="rshiny-server.html#cb146-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># }</span></span>
-<span id="cb146-32"><a href="rshiny-server.html#cb146-32" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb146-33"><a href="rshiny-server.html#cb146-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 重新導向舊群組 /asisstuc 至學生群組 /stu</span></span>
-<span id="cb146-34"><a href="rshiny-server.html#cb146-34" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> /asisstuc {</span>
-<span id="cb146-35"><a href="rshiny-server.html#cb146-35" aria-hidden="true" tabindex="-1"></a>      <span class="ex">redirect</span> <span class="st">&quot;https://&lt;虛擬主機 ip 位址&gt;/shiny/stu/&quot;</span> 302 true<span class="kw">;</span></span>
-<span id="cb146-36"><a href="rshiny-server.html#cb146-36" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
-<span id="cb146-37"><a href="rshiny-server.html#cb146-37" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb146-38"><a href="rshiny-server.html#cb146-38" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> /defstu {</span>
-<span id="cb146-39"><a href="rshiny-server.html#cb146-39" aria-hidden="true" tabindex="-1"></a>      <span class="ex">redirect</span> <span class="st">&quot;https://&lt;虛擬主機 ip 位址&gt;/shiny/stu/&quot;</span> 302 true<span class="kw">;</span></span>
-<span id="cb146-40"><a href="rshiny-server.html#cb146-40" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
-<span id="cb146-41"><a href="rshiny-server.html#cb146-41" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb146-42"><a href="rshiny-server.html#cb146-42" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> /asisstuc {</span>
-<span id="cb146-43"><a href="rshiny-server.html#cb146-43" aria-hidden="true" tabindex="-1"></a>      <span class="ex">redirect</span> <span class="st">&quot;https://&lt;虛擬主機 ip 位址&gt;/shiny/stu/&quot;</span> 302 true<span class="kw">;</span></span>
-<span id="cb146-44"><a href="rshiny-server.html#cb146-44" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
-<span id="cb146-45"><a href="rshiny-server.html#cb146-45" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb146-46"><a href="rshiny-server.html#cb146-46" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> /stu {</span>
-<span id="cb146-47"><a href="rshiny-server.html#cb146-47" aria-hidden="true" tabindex="-1"></a>        <span class="ex">user_dirs</span><span class="kw">;</span></span>
-<span id="cb146-48"><a href="rshiny-server.html#cb146-48" aria-hidden="true" tabindex="-1"></a>        <span class="ex">members_of</span> stu<span class="kw">;</span></span>
-<span id="cb146-49"><a href="rshiny-server.html#cb146-49" aria-hidden="true" tabindex="-1"></a>        <span class="ex">directory_index</span> on<span class="kw">;</span></span>
-<span id="cb146-50"><a href="rshiny-server.html#cb146-50" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
-<span id="cb146-51"><a href="rshiny-server.html#cb146-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb146-52"><a href="rshiny-server.html#cb146-52" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> /teacher {</span>
-<span id="cb146-53"><a href="rshiny-server.html#cb146-53" aria-hidden="true" tabindex="-1"></a>        <span class="ex">user_dirs</span><span class="kw">;</span></span>
-<span id="cb146-54"><a href="rshiny-server.html#cb146-54" aria-hidden="true" tabindex="-1"></a>        <span class="ex">members_of</span> teacher<span class="kw">;</span></span>
-<span id="cb146-55"><a href="rshiny-server.html#cb146-55" aria-hidden="true" tabindex="-1"></a>        <span class="ex">directory_index</span> off<span class="kw">;</span></span>
-<span id="cb146-56"><a href="rshiny-server.html#cb146-56" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
-<span id="cb146-57"><a href="rshiny-server.html#cb146-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb146-58"><a href="rshiny-server.html#cb146-58" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Shiny 首頁</span></span>
-<span id="cb146-59"><a href="rshiny-server.html#cb146-59" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> / {</span>
-<span id="cb146-60"><a href="rshiny-server.html#cb146-60" aria-hidden="true" tabindex="-1"></a>        <span class="ex">site_dir</span> /srv/shiny-server<span class="kw">;</span></span>
-<span id="cb146-61"><a href="rshiny-server.html#cb146-61" aria-hidden="true" tabindex="-1"></a>        <span class="ex">log_dir</span> /var/log/shiny-server<span class="kw">;</span></span>
-<span id="cb146-62"><a href="rshiny-server.html#cb146-62" aria-hidden="true" tabindex="-1"></a>        <span class="ex">directory_index</span> on<span class="kw">;</span></span>
-<span id="cb146-63"><a href="rshiny-server.html#cb146-63" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
-<span id="cb146-64"><a href="rshiny-server.html#cb146-64" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb147"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb147-1"><a href="rshiny-server.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart shiny-server</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb146-1"><a href="rshiny-server.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/shiny-server/shiny-server.conf</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb147-1"><a href="rshiny-server.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 主要執行 App 為的使用者為該 App 的擁有者，沒有擁有者的 App 將由備取使用者 shiny 執行。</span></span>
+<span id="cb147-2"><a href="rshiny-server.html#cb147-2" aria-hidden="true" tabindex="-1"></a><span class="ex">run_as</span> :HOME_USER: shiny<span class="kw">;</span></span>
+<span id="cb147-3"><a href="rshiny-server.html#cb147-3" aria-hidden="true" tabindex="-1"></a><span class="ex">access_log</span> /var/log/shiny-server/access.log tiny<span class="kw">;</span></span>
+<span id="cb147-4"><a href="rshiny-server.html#cb147-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb147-5"><a href="rshiny-server.html#cb147-5" aria-hidden="true" tabindex="-1"></a><span class="ex">server</span> {</span>
+<span id="cb147-6"><a href="rshiny-server.html#cb147-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">listen</span> 3838<span class="kw">;</span></span>
+<span id="cb147-7"><a href="rshiny-server.html#cb147-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb147-8"><a href="rshiny-server.html#cb147-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 110.09.21 跟明輝老師的結果是只留下 &#39;老師&#39; 與 &#39;學生群組&#39;</span></span>
+<span id="cb147-9"><a href="rshiny-server.html#cb147-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span></span>
+<span id="cb147-10"><a href="rshiny-server.html#cb147-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># # 重新導向舊群組 /asisstuc 至新群組 /asis</span></span>
+<span id="cb147-11"><a href="rshiny-server.html#cb147-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># location /asisstuc {</span></span>
+<span id="cb147-12"><a href="rshiny-server.html#cb147-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   redirect &quot;https://&lt;虛擬主機 ip 位址&gt;/shiny/asis/&quot; 302 true;</span></span>
+<span id="cb147-13"><a href="rshiny-server.html#cb147-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># }</span></span>
+<span id="cb147-14"><a href="rshiny-server.html#cb147-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span></span>
+<span id="cb147-15"><a href="rshiny-server.html#cb147-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># location /asis {</span></span>
+<span id="cb147-16"><a href="rshiny-server.html#cb147-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   user_dirs;</span></span>
+<span id="cb147-17"><a href="rshiny-server.html#cb147-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   members_of asis;</span></span>
+<span id="cb147-18"><a href="rshiny-server.html#cb147-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   directory_index on;</span></span>
+<span id="cb147-19"><a href="rshiny-server.html#cb147-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># }</span></span>
+<span id="cb147-20"><a href="rshiny-server.html#cb147-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span></span>
+<span id="cb147-21"><a href="rshiny-server.html#cb147-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># location /ecofin {</span></span>
+<span id="cb147-22"><a href="rshiny-server.html#cb147-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   user_dirs;</span></span>
+<span id="cb147-23"><a href="rshiny-server.html#cb147-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   members_of ecofin;</span></span>
+<span id="cb147-24"><a href="rshiny-server.html#cb147-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   directory_index on;</span></span>
+<span id="cb147-25"><a href="rshiny-server.html#cb147-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># }</span></span>
+<span id="cb147-26"><a href="rshiny-server.html#cb147-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span></span>
+<span id="cb147-27"><a href="rshiny-server.html#cb147-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># location /fta {</span></span>
+<span id="cb147-28"><a href="rshiny-server.html#cb147-28" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   user_dirs;</span></span>
+<span id="cb147-29"><a href="rshiny-server.html#cb147-29" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   members_of fta;</span></span>
+<span id="cb147-30"><a href="rshiny-server.html#cb147-30" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   directory_index on;</span></span>
+<span id="cb147-31"><a href="rshiny-server.html#cb147-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># }</span></span>
+<span id="cb147-32"><a href="rshiny-server.html#cb147-32" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb147-33"><a href="rshiny-server.html#cb147-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 重新導向舊群組 /asisstuc 至學生群組 /stu</span></span>
+<span id="cb147-34"><a href="rshiny-server.html#cb147-34" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> /asisstuc {</span>
+<span id="cb147-35"><a href="rshiny-server.html#cb147-35" aria-hidden="true" tabindex="-1"></a>      <span class="ex">redirect</span> <span class="st">&quot;https://&lt;虛擬主機 ip 位址&gt;/shiny/stu/&quot;</span> 302 true<span class="kw">;</span></span>
+<span id="cb147-36"><a href="rshiny-server.html#cb147-36" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
+<span id="cb147-37"><a href="rshiny-server.html#cb147-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb147-38"><a href="rshiny-server.html#cb147-38" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> /defstu {</span>
+<span id="cb147-39"><a href="rshiny-server.html#cb147-39" aria-hidden="true" tabindex="-1"></a>      <span class="ex">redirect</span> <span class="st">&quot;https://&lt;虛擬主機 ip 位址&gt;/shiny/stu/&quot;</span> 302 true<span class="kw">;</span></span>
+<span id="cb147-40"><a href="rshiny-server.html#cb147-40" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
+<span id="cb147-41"><a href="rshiny-server.html#cb147-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb147-42"><a href="rshiny-server.html#cb147-42" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> /asisstuc {</span>
+<span id="cb147-43"><a href="rshiny-server.html#cb147-43" aria-hidden="true" tabindex="-1"></a>      <span class="ex">redirect</span> <span class="st">&quot;https://&lt;虛擬主機 ip 位址&gt;/shiny/stu/&quot;</span> 302 true<span class="kw">;</span></span>
+<span id="cb147-44"><a href="rshiny-server.html#cb147-44" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
+<span id="cb147-45"><a href="rshiny-server.html#cb147-45" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb147-46"><a href="rshiny-server.html#cb147-46" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> /stu {</span>
+<span id="cb147-47"><a href="rshiny-server.html#cb147-47" aria-hidden="true" tabindex="-1"></a>        <span class="ex">user_dirs</span><span class="kw">;</span></span>
+<span id="cb147-48"><a href="rshiny-server.html#cb147-48" aria-hidden="true" tabindex="-1"></a>        <span class="ex">members_of</span> stu<span class="kw">;</span></span>
+<span id="cb147-49"><a href="rshiny-server.html#cb147-49" aria-hidden="true" tabindex="-1"></a>        <span class="ex">directory_index</span> on<span class="kw">;</span></span>
+<span id="cb147-50"><a href="rshiny-server.html#cb147-50" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
+<span id="cb147-51"><a href="rshiny-server.html#cb147-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb147-52"><a href="rshiny-server.html#cb147-52" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> /teacher {</span>
+<span id="cb147-53"><a href="rshiny-server.html#cb147-53" aria-hidden="true" tabindex="-1"></a>        <span class="ex">user_dirs</span><span class="kw">;</span></span>
+<span id="cb147-54"><a href="rshiny-server.html#cb147-54" aria-hidden="true" tabindex="-1"></a>        <span class="ex">members_of</span> teacher<span class="kw">;</span></span>
+<span id="cb147-55"><a href="rshiny-server.html#cb147-55" aria-hidden="true" tabindex="-1"></a>        <span class="ex">directory_index</span> off<span class="kw">;</span></span>
+<span id="cb147-56"><a href="rshiny-server.html#cb147-56" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
+<span id="cb147-57"><a href="rshiny-server.html#cb147-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb147-58"><a href="rshiny-server.html#cb147-58" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Shiny 首頁</span></span>
+<span id="cb147-59"><a href="rshiny-server.html#cb147-59" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> / {</span>
+<span id="cb147-60"><a href="rshiny-server.html#cb147-60" aria-hidden="true" tabindex="-1"></a>        <span class="ex">site_dir</span> /srv/shiny-server<span class="kw">;</span></span>
+<span id="cb147-61"><a href="rshiny-server.html#cb147-61" aria-hidden="true" tabindex="-1"></a>        <span class="ex">log_dir</span> /var/log/shiny-server<span class="kw">;</span></span>
+<span id="cb147-62"><a href="rshiny-server.html#cb147-62" aria-hidden="true" tabindex="-1"></a>        <span class="ex">directory_index</span> on<span class="kw">;</span></span>
+<span id="cb147-63"><a href="rshiny-server.html#cb147-63" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
+<span id="cb147-64"><a href="rshiny-server.html#cb147-64" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb148-1"><a href="rshiny-server.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart shiny-server</span></code></pre></div>
 <div class="infobox info">
 <p>這裏要先跳至第四步先建立使用者群組後再重新啟動 Shiny-server。因為設定檔中設有使用者群組（asis、ecofin、fta、teacher），如果 Shiny Server 在啟動中找不到時會跳出錯誤。</p>
 </div>
 </div>
 <div id="step-4-使用使用者測試設定是否有效" class="section level3 unnumbered">
 <h3>Step 4 — 使用使用者測試設定是否有效</h3>
-<div class="sourceCode" id="cb148"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb148-1"><a href="rshiny-server.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> groupadd asis</span></code></pre></div>
-<div class="sourceCode" id="cb149"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb149-1"><a href="rshiny-server.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> groupadd ecofin</span></code></pre></div>
-<div class="sourceCode" id="cb150"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb150-1"><a href="rshiny-server.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> groupadd fta</span></code></pre></div>
-<div class="sourceCode" id="cb151"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb151-1"><a href="rshiny-server.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> groupadd teacher</span></code></pre></div>
-<div class="sourceCode" id="cb152"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb152-1"><a href="rshiny-server.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/default/useradd</span></code></pre></div>
-<div class="sourceCode" id="cb153"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb153-1"><a href="rshiny-server.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Default values for useradd(8)</span></span>
-<span id="cb153-2"><a href="rshiny-server.html#cb153-2" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb153-3"><a href="rshiny-server.html#cb153-3" aria-hidden="true" tabindex="-1"></a><span class="co"># The SHELL variable specifies the default login shell on your</span></span>
-<span id="cb153-4"><a href="rshiny-server.html#cb153-4" aria-hidden="true" tabindex="-1"></a><span class="co"># system.</span></span>
-<span id="cb153-5"><a href="rshiny-server.html#cb153-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Similar to DSHELL in adduser. However, we use &quot;sh&quot; here because</span></span>
-<span id="cb153-6"><a href="rshiny-server.html#cb153-6" aria-hidden="true" tabindex="-1"></a><span class="co"># useradd is a low level utility and should be as general</span></span>
-<span id="cb153-7"><a href="rshiny-server.html#cb153-7" aria-hidden="true" tabindex="-1"></a><span class="co"># as possible</span></span>
-<span id="cb153-8"><a href="rshiny-server.html#cb153-8" aria-hidden="true" tabindex="-1"></a><span class="va">SHELL=</span>/usr/bin/bash <span class="co"># 變更這裡</span></span></code></pre></div>
-<div class="sourceCode" id="cb154"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb154-1"><a href="rshiny-server.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir /etc/skel/ShinyApps/</span></code></pre></div>
-<div class="sourceCode" id="cb155"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb155-1"><a href="rshiny-server.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /srv/shiny-server/sample-apps <span class="dt">\</span></span>
-<span id="cb155-2"><a href="rshiny-server.html#cb155-2" aria-hidden="true" tabindex="-1"></a>/etc/skel/ShinyApps/example</span></code></pre></div>
-<div class="sourceCode" id="cb156"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb156-1"><a href="rshiny-server.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> useradd <span class="at">--badnames</span> <span class="at">-N</span> <span class="at">-g</span> asis <span class="at">-m</span> 08170875</span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb149-1"><a href="rshiny-server.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> groupadd asis</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb150-1"><a href="rshiny-server.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> groupadd ecofin</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb151-1"><a href="rshiny-server.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> groupadd fta</span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb152-1"><a href="rshiny-server.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> groupadd teacher</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb153-1"><a href="rshiny-server.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/default/useradd</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb154-1"><a href="rshiny-server.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Default values for useradd(8)</span></span>
+<span id="cb154-2"><a href="rshiny-server.html#cb154-2" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb154-3"><a href="rshiny-server.html#cb154-3" aria-hidden="true" tabindex="-1"></a><span class="co"># The SHELL variable specifies the default login shell on your</span></span>
+<span id="cb154-4"><a href="rshiny-server.html#cb154-4" aria-hidden="true" tabindex="-1"></a><span class="co"># system.</span></span>
+<span id="cb154-5"><a href="rshiny-server.html#cb154-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Similar to DSHELL in adduser. However, we use &quot;sh&quot; here because</span></span>
+<span id="cb154-6"><a href="rshiny-server.html#cb154-6" aria-hidden="true" tabindex="-1"></a><span class="co"># useradd is a low level utility and should be as general</span></span>
+<span id="cb154-7"><a href="rshiny-server.html#cb154-7" aria-hidden="true" tabindex="-1"></a><span class="co"># as possible</span></span>
+<span id="cb154-8"><a href="rshiny-server.html#cb154-8" aria-hidden="true" tabindex="-1"></a><span class="va">SHELL=</span>/usr/bin/bash <span class="co"># 變更這裡</span></span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb155-1"><a href="rshiny-server.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir /etc/skel/ShinyApps/</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb156-1"><a href="rshiny-server.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /srv/shiny-server/sample-apps <span class="dt">\</span></span>
+<span id="cb156-2"><a href="rshiny-server.html#cb156-2" aria-hidden="true" tabindex="-1"></a>/etc/skel/ShinyApps/example</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb157-1"><a href="rshiny-server.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> useradd <span class="at">--badnames</span> <span class="at">-N</span> <span class="at">-g</span> asis <span class="at">-m</span> 08170875</span></code></pre></div>
 <ul>
 <li><p><code>--badnames</code>:</p></li>
 <li><p><code>-N, --no-user-group</code>:</p></li>
 <li><p><code>-g, --gid GROUP</code>:</p></li>
 <li><p><code>-m, --create-home</code>:</p></li>
 </ul>
-<div class="sourceCode" id="cb157"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb157-1"><a href="rshiny-server.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> useradd <span class="at">--badnames</span> <span class="at">-N</span> <span class="at">-g</span> ecofin <span class="at">-m</span> 08220000</span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb158-1"><a href="rshiny-server.html#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> useradd <span class="at">--badnames</span> <span class="at">-N</span> <span class="at">-g</span> ecofin <span class="at">-m</span> 08220000</span></code></pre></div>
 <p><img src="figures/shiny-server-group-test-successed.png" /></p>
 <p><img src="figures/shiny-server-group-test-failed.png" /></p>
 

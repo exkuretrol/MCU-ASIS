@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2021-10-28" />
+<meta name="date" content="2022-01-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -241,13 +241,13 @@ div.csl-indent {
 <li class="chapter" data-level="4.2" data-path="r-base.html"><a href="r-base.html"><i class="fa fa-check"></i><b>4.2</b> R base</a></li>
 <li class="chapter" data-level="4.3" data-path="rstudio-server.html"><a href="rstudio-server.html"><i class="fa fa-check"></i><b>4.3</b> RStudio Server</a>
 <ul>
-<li class="chapter" data-level="" data-path="rstudio-server.html"><a href="rstudio-server.html#step-1-安裝-rstudio-server-伺服器"><i class="fa fa-check"></i>Step 1 — 安裝 RStudio Server 伺服器</a></li>
-<li class="chapter" data-level="" data-path="rstudio-server.html"><a href="rstudio-server.html#step-2-設定-apache-的-proxy"><i class="fa fa-check"></i>Step 2 — 設定 Apache 的 Proxy</a></li>
+<li class="chapter" data-level="" data-path="rstudio-server.html"><a href="rstudio-server.html#step-1-----安裝-rstudio-server-伺服器"><i class="fa fa-check"></i>Step 1 — 安裝 RStudio Server 伺服器</a></li>
+<li class="chapter" data-level="" data-path="rstudio-server.html"><a href="rstudio-server.html#step-2-設定-apache-的反向代理reverse-proxy"><i class="fa fa-check"></i>Step 2 — 設定 Apache 的反向代理（Reverse Proxy）</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="rshiny-server.html"><a href="rshiny-server.html"><i class="fa fa-check"></i><b>4.4</b> RShiny Server</a>
 <ul>
 <li class="chapter" data-level="" data-path="rshiny-server.html"><a href="rshiny-server.html#step-1-安裝-rshiny-server"><i class="fa fa-check"></i>Step 1 — 安裝 RShiny Server</a></li>
-<li class="chapter" data-level="" data-path="rshiny-server.html"><a href="rshiny-server.html#step-2-設定-apache-的-proxy-1"><i class="fa fa-check"></i>Step 2 — 設定 Apache 的 Proxy</a></li>
+<li class="chapter" data-level="" data-path="rshiny-server.html"><a href="rshiny-server.html#step-2-設定-apache-的-proxy"><i class="fa fa-check"></i>Step 2 — 設定 Apache 的 Proxy</a></li>
 <li class="chapter" data-level="" data-path="rshiny-server.html"><a href="rshiny-server.html#step-3-shiny-server-進階設定"><i class="fa fa-check"></i>Step 3 — Shiny Server 進階設定</a></li>
 <li class="chapter" data-level="" data-path="rshiny-server.html"><a href="rshiny-server.html#step-4-使用使用者測試設定是否有效"><i class="fa fa-check"></i>Step 4 — 使用使用者測試設定是否有效</a></li>
 </ul></li>
@@ -482,7 +482,11 @@ sda                          8:0    0 931.5G  0 disk
 <li><p>選擇 <code>md0 (new)</code> ➜ format ➜ Format: 選擇 <code>ext4</code> 格式 ➜ Mount: 掛載於 <code>/boot</code> ➜ 完成後選擇 Done</p></li>
 <li><p>選擇 <code>md1 (new)</code> ➜ format ➜ Format: 選擇 <code>swap</code> 格式 ➜ 完成後選擇 Done</p></li>
 <li><p>選擇 <code>md2 (new)</code> ➜ format ➜ Format: 選擇 <code>ext4</code> 格式 ➜ Mount: 掛載於 <code>/</code> ➜ 完成後選擇 Done</p></li>
-<li><p>設定完成🎉，整體設定截圖:</p></li>
+<li><p>設定完成🎉，整體設定截圖:<br />
+<img src="figures/installer-storage_8.png" /></p></li>
+</ul>
+<!-- -->
+<ul>
 <li><p>截圖（續）</p>
 <p><img src="figures/installer-storage_9.png" /></p></li>
 <li><p>在最下面選擇「Done」，至下一步。</p></li>
