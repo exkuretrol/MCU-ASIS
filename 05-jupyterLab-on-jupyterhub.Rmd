@@ -75,6 +75,8 @@ sudo vim jupyterhub_config.py
 c.JupyterHub.bind_url = 'http://:8000/jhub'
 c.Spawner.default_url = '/lab'
 c.Authenticator.admin_users = {'asis'}
+c.Spawner.cmd = ['jupyter-labhub']
+c.Spawner.args = ['--collaborative']
 ```
 
 ### 新增開機自動啟動 JupyterHub 的服務
@@ -161,7 +163,7 @@ prefix: /opt/conda/envs/python
 ```
 
 ``` {.bash .prefixed}
-sudo /opt/conda/bin/conda create -f environment.yml
+sudo /opt/conda/bin/conda env create -f environment.yml
 ```
 
 ``` {.bash .prefixed}
