@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2022-01-26" />
+<meta name="date" content="2022-02-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -320,7 +320,7 @@ div.csl-indent {
 <div class="sourceCode" id="cb119"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb119-1"><a href="rstudio-server.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install gdebi-core</span></code></pre></div>
 <p>切到暫存資料夾後，自官網下載 rstudio 伺服器的安裝程式。</p>
 <div class="sourceCode" id="cb120"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb120-1"><a href="rstudio-server.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /tmp <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
-<span id="cb120-2"><a href="rstudio-server.html#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="ex">wget</span> https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.4.1717-amd64.deb</span></code></pre></div>
+<span id="cb120-2"><a href="rstudio-server.html#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.4.1717-amd64.deb</span></code></pre></div>
 <p>透過 ubuntu 的密鑰伺服器取回對應的簽名</p>
 <div class="sourceCode" id="cb121"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb121-1"><a href="rstudio-server.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gpg</span> <span class="at">--keyserver</span> keyserver.ubuntu.com <span class="at">--recv-keys</span> 3F32EE77E331692F</span></code></pre></div>
 <p>安裝確認檔案簽名所需要的程式</p>

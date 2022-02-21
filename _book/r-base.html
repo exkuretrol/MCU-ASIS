@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2022-01-26" />
+<meta name="date" content="2022-02-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -321,7 +321,7 @@ div.csl-indent {
 <div class="sourceCode" id="cb115"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb115-1"><a href="r-base.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install software-properties-common dirmngr <span class="at">--yes</span></span></code></pre></div>
 <p>切換到暫存資料夾後，將 GPG 簽名下載下來，添加至目的地</p>
 <div class="sourceCode" id="cb116"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb116-1"><a href="r-base.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /tmp <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
-<span id="cb116-2"><a href="r-base.html#cb116-2" aria-hidden="true" tabindex="-1"></a>    wget <span class="at">-qO-</span> https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc <span class="dt">\</span></span>
+<span id="cb116-2"><a href="r-base.html#cb116-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">wget</span> <span class="at">-qO-</span> https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc <span class="dt">\</span></span>
 <span id="cb116-3"><a href="r-base.html#cb116-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">|</span> <span class="fu">sudo</span> tee <span class="at">-a</span> /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc</span></code></pre></div>
 <p>添加 apt 來源</p>
 <div class="sourceCode" id="cb117"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb117-1"><a href="r-base.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> add-apt-repository <span class="dt">\ </span></span>

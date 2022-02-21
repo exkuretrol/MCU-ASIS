@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2022-01-26" />
+<meta name="date" content="2022-02-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -320,7 +320,7 @@ div.csl-indent {
 <div class="sourceCode" id="cb139"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb139-1"><a href="rshiny-server.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span> <span class="dt">\</span></span>
 <span id="cb139-2"><a href="rshiny-server.html#cb139-2" aria-hidden="true" tabindex="-1"></a>-c <span class="st">&quot;R -e </span><span class="dt">\&quot;</span><span class="st">install.packages(&#39;shiny&#39;, repos=&#39;https://cran.rstudio.com/&#39;)</span><span class="dt">\&quot;</span><span class="st">&quot;</span></span></code></pre></div>
 <div class="sourceCode" id="cb140"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb140-1"><a href="rshiny-server.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /tmp <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
-<span id="cb140-2"><a href="rshiny-server.html#cb140-2" aria-hidden="true" tabindex="-1"></a>    wget https://download3.rstudio.org/ubuntu-14.04/x86_64/shiny-server-1.5.16.958-amd64.deb</span></code></pre></div>
+<span id="cb140-2"><a href="rshiny-server.html#cb140-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">wget</span> https://download3.rstudio.org/ubuntu-14.04/x86_64/shiny-server-1.5.16.958-amd64.deb</span></code></pre></div>
 <div class="sourceCode" id="cb141"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb141-1"><a href="rshiny-server.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sha256sum</span> shiny-server-1.5.16.958-amd64.deb </span></code></pre></div>
 <div class="sourceCode" id="cb142"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb142-1"><a href="rshiny-server.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> gdebi shiny-server-1.5.16.958-amd64.deb</span></code></pre></div>
 <div class="infobox info">
@@ -442,7 +442,7 @@ div.csl-indent {
 <span id="cb154-5"><a href="rshiny-server.html#cb154-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Similar to DSHELL in adduser. However, we use &quot;sh&quot; here because</span></span>
 <span id="cb154-6"><a href="rshiny-server.html#cb154-6" aria-hidden="true" tabindex="-1"></a><span class="co"># useradd is a low level utility and should be as general</span></span>
 <span id="cb154-7"><a href="rshiny-server.html#cb154-7" aria-hidden="true" tabindex="-1"></a><span class="co"># as possible</span></span>
-<span id="cb154-8"><a href="rshiny-server.html#cb154-8" aria-hidden="true" tabindex="-1"></a><span class="va">SHELL=</span>/usr/bin/bash <span class="co"># 變更這裡</span></span></code></pre></div>
+<span id="cb154-8"><a href="rshiny-server.html#cb154-8" aria-hidden="true" tabindex="-1"></a><span class="va">SHELL</span><span class="op">=</span>/usr/bin/bash <span class="co"># 變更這裡</span></span></code></pre></div>
 <div class="sourceCode" id="cb155"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb155-1"><a href="rshiny-server.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir /etc/skel/ShinyApps/</span></code></pre></div>
 <div class="sourceCode" id="cb156"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb156-1"><a href="rshiny-server.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /srv/shiny-server/sample-apps <span class="dt">\</span></span>
 <span id="cb156-2"><a href="rshiny-server.html#cb156-2" aria-hidden="true" tabindex="-1"></a>/etc/skel/ShinyApps/example</span></code></pre></div>

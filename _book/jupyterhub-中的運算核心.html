@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2022-01-26" />
+<meta name="date" content="2022-02-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -339,7 +339,7 @@ div.csl-indent {
 <span id="cb189-12"><a href="jupyterhub-中的運算核心.html#cb189-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> dash</span></span>
 <span id="cb189-13"><a href="jupyterhub-中的運算核心.html#cb189-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> pandas</span></span>
 <span id="cb189-14"><a href="jupyterhub-中的運算核心.html#cb189-14" aria-hidden="true" tabindex="-1"></a><span class="fu">prefix</span><span class="kw">:</span><span class="at"> /opt/conda/envs/python</span></span></code></pre></div>
-<div class="sourceCode" id="cb190"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb190-1"><a href="jupyterhub-中的運算核心.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/conda/bin/conda create <span class="at">-f</span> environment.yml</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb190-1"><a href="jupyterhub-中的運算核心.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/conda/bin/conda env create <span class="at">-f</span> environment.yml</span></code></pre></div>
 <div class="sourceCode" id="cb191"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb191-1"><a href="jupyterhub-中的運算核心.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/conda/envs/python/bin/python <span class="at">-m</span> ipykernel install <span class="at">--prefix</span><span class="op">=</span>/opt/jupyterhub/ <span class="at">--name</span> <span class="st">&#39;python3&#39;</span> <span class="at">--display-name</span> <span class="st">&quot;Python (default)&quot;</span></span></code></pre></div>
 <p><img src="figures/jupyterhub-main-page-kernel-python.png" /></p>
 </div>
@@ -410,9 +410,9 @@ dependencies:
   - ipykernel
 prefix: /opt/conda/envs/c-cpp</code></pre>
 <div class="sourceCode" id="cb208"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb208-1"><a href="jupyterhub-中的運算核心.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> conda env create <span class="at">-f</span> c_cpp.yml</span></code></pre></div>
-<div class="sourceCode" id="cb209"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb209-1"><a href="jupyterhub-中的運算核心.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> jupyter kernelspec install /opt/conda/envs/c-cpp/share/jupyter/xcpp11 <span class="at">--sys-prefix</span></span></code></pre></div>
-<div class="sourceCode" id="cb210"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb210-1"><a href="jupyterhub-中的運算核心.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> jupyter kernelspec install /opt/conda/envs/c-cpp/share/jupyter/xcpp14 <span class="at">--sys-prefix</span></span></code></pre></div>
-<div class="sourceCode" id="cb211"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb211-1"><a href="jupyterhub-中的運算核心.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> jupyter kernelspec install /opt/conda/envs/c-cpp/share/jupyter/xcpp17 <span class="at">--sys-prefix</span></span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb209-1"><a href="jupyterhub-中的運算核心.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> jupyter kernelspec install /opt/conda/envs/c-cpp/share/jupyter/kernels/xcpp11 <span class="at">--sys-prefix</span></span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb210-1"><a href="jupyterhub-中的運算核心.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> jupyter kernelspec install /opt/conda/envs/c-cpp/share/jupyter/kernels/xcpp14 <span class="at">--sys-prefix</span></span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb211-1"><a href="jupyterhub-中的運算核心.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> jupyter kernelspec install /opt/conda/envs/c-cpp/share/jupyter/kernels/xcpp17 <span class="at">--sys-prefix</span></span></code></pre></div>
 <!--# Scanf() problem https://github.com/brendan-rius/jupyter-c-kernel/issues/3 -->
 <div class="sourceCode" id="cb212"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb212-1"><a href="jupyterhub-中的運算核心.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/conda/envs/c-cpp/bin/python3.9 <span class="at">-m</span> pip install git+https://github.com/XaverKlemenschits/jupyter-c-kernel.git</span></code></pre></div>
 <div class="sourceCode" id="cb213"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb213-1"><a href="jupyterhub-中的運算核心.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /opt/conda/envs/c-cpp/share/jupyter/kernels/c/kernel.json</span></code></pre></div>
@@ -430,7 +430,7 @@ prefix: /opt/conda/envs/c-cpp</code></pre>
 <div class="sourceCode" id="cb215"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb215-1"><a href="jupyterhub-中的運算核心.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mv ~/Downloads/logo<span class="pp">**</span> /opt/conda/envs/c-cpp/share/jupyter/c/</span></code></pre></div>
 <p><img src="figures/icons/logo-32x32.png" /></p>
 <p><img src="figures/icons/logo-64x64.png" /></p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb216-1"><a href="jupyterhub-中的運算核心.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-al</span> /opt/conda/envs/c-cpp/share/jupyter/c</span></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb216-1"><a href="jupyterhub-中的運算核心.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-al</span> /opt/conda/envs/c-cpp/share/jupyter/kernels/c</span></code></pre></div>
 <pre class="console_output"><code>drwxrwxr-x 2 root root 4096 Oct 23 17:20 ./
 drwxrwxr-x 7 root root 4096 Oct 23 15:31 ../
 -rw-rw-r-- 1 root root  181 Oct 23 15:26 kernel.json

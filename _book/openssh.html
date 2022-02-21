@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2022-01-26" />
+<meta name="date" content="2022-02-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -387,7 +387,7 @@ div.csl-indent {
 <div id="step-2-產生-ssh-key-pairs" class="section level3 unnumbered">
 <h3>Step 2 — 產生 ssh key pairs</h3>
 <p>接著，可以使用 <code>ssh-keygen</code> 指令產生 key pairs，加密方式有 rsa、dsa、ed25519 與 ecdsa ，預設的加密方式是 rsa ，詳細指令用法可以透過 <code>ssh-keygen --help</code> 指令查詢，這裡我們用最簡單的 <code>ssh-keygen</code> 指令就行。</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb10-1"><a href="openssh.html#cb10-1" aria-hidden="true" tabindex="-1"></a>ssh-keygen</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb10-1"><a href="openssh.html#cb10-1" aria-hidden="true" tabindex="-1"></a>ssh<span class="op">-</span>keygen</span></code></pre></div>
 <p>Windows 的用戶預設會把 key pair 儲存在 <code>C:\Users\&lt;USERNAME&gt;\.ssh\</code> 的位置，而 Linux 的用戶會儲存在 <code>~/.ssh/</code> 的位置。</p>
 <pre class="console_output"><code>Generating public/private rsa key pair.
 Enter file in which to save the key (C:\Users\&lt;USERNAME&gt;/.ssh/id_rsa):</code></pre>
@@ -439,7 +439,7 @@ Number of key(s) added: 1
 Now try logging into the machine, with:   &quot;ssh -p &#39;22&#39; &#39;asis@192.168.0.13&#39;&quot;
 and check to make sure that only the key(s) you wanted were added.</code></pre>
 <p>如果你是 Windows 的使用者也不用擔心多複雜，一樣一行指令就能搞定，這裡我是參考<span class="citation">(<a href="#ref-christopher_2020" role="doc-biblioref">Christopher 2020</a>)</span>的教學，指令如下:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb16-1"><a href="openssh.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">$env</span>:USERPROFILE\.<span class="fu">ssh</span>\id_rsa.<span class="fu">pub</span> | ssh asis@192.<span class="fu">168</span>.<span class="fu">0</span>.<span class="fu">13</span> <span class="st">&quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb16-1"><a href="openssh.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">$env</span><span class="op">:</span>USERPROFILE\<span class="op">.</span><span class="fu">ssh</span>\id_rsa<span class="op">.</span><span class="fu">pub</span> <span class="op">|</span> ssh asis@192<span class="op">.</span><span class="fu">168</span><span class="op">.</span><span class="fu">0</span><span class="op">.</span><span class="fu">13</span> <span class="st">&quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;</span></span></code></pre></div>
 <ul>
 <li><p>這裡的 <code>$env:USERPROFILE</code> 為 Windows 內建環境變數，會根據現在的使用者變更，如果我的使用者名稱為 <code>qaz855175b</code> 那 <code>$env:USERPROFILE</code> 對應的路徑就為 <code>C:\Users\qaz855175b\</code>，當然你可以直接把指令的 public key 路徑替換為 <code>C:\Users\qaz855175b\.ssh\id_rsa.pub</code></p></li>
 <li><p><code>id_rsa.pub</code> 為產生的 public key 預設名稱</p></li>

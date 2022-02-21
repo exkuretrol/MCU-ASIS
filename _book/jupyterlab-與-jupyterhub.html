@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2022-01-26" />
+<meta name="date" content="2022-02-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -333,7 +333,9 @@ div.csl-indent {
 <div class="sourceCode" id="cb172"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb172-1"><a href="jupyterlab-與-jupyterhub.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim jupyterhub_config.py</span></code></pre></div>
 <div class="sourceCode" id="cb173"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb173-1"><a href="jupyterlab-與-jupyterhub.html#cb173-1" aria-hidden="true" tabindex="-1"></a>c.JupyterHub.bind_url <span class="op">=</span> <span class="st">&#39;http://:8000/jhub&#39;</span></span>
 <span id="cb173-2"><a href="jupyterlab-與-jupyterhub.html#cb173-2" aria-hidden="true" tabindex="-1"></a>c.Spawner.default_url <span class="op">=</span> <span class="st">&#39;/lab&#39;</span></span>
-<span id="cb173-3"><a href="jupyterlab-與-jupyterhub.html#cb173-3" aria-hidden="true" tabindex="-1"></a>c.Authenticator.admin_users <span class="op">=</span> {<span class="st">&#39;asis&#39;</span>}</span></code></pre></div>
+<span id="cb173-3"><a href="jupyterlab-與-jupyterhub.html#cb173-3" aria-hidden="true" tabindex="-1"></a>c.Authenticator.admin_users <span class="op">=</span> {<span class="st">&#39;asis&#39;</span>}</span>
+<span id="cb173-4"><a href="jupyterlab-與-jupyterhub.html#cb173-4" aria-hidden="true" tabindex="-1"></a>c.Spawner.cmd <span class="op">=</span> [<span class="st">&#39;jupyter-labhub&#39;</span>]</span>
+<span id="cb173-5"><a href="jupyterlab-與-jupyterhub.html#cb173-5" aria-hidden="true" tabindex="-1"></a>c.Spawner.args <span class="op">=</span> [<span class="st">&#39;--collaborative&#39;</span>]</span></code></pre></div>
 </div>
 <div id="新增開機自動啟動-jupyterhub-的服務" class="section level3" number="5.3.3">
 <h3><span class="header-section-number">5.3.3</span> 新增開機自動啟動 JupyterHub 的服務</h3>
