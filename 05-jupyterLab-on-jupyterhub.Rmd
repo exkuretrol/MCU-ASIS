@@ -18,9 +18,9 @@ sudo -H python3 -m pip install --upgrade pip
 sudo apt install python3-venv
 ```
 
-因為 python 通常都是指 python2，所以我們還要再多裝一個叫做 `python-is-python3` 的套件，將 `python` 設為 `python3` 的另一個名字。
+因為 python 通常都是指 python2，所以我們還要再多裝一個叫做 `python-is-python3` 的套件，將 `python` 設為 `python3` 的別名，使 `python` 指令與 `python3` 指令通用。
 
-``` {.bash .prefixed .sudo .apt .install .python-is-python3}
+``` {.bash .prefixed}
 sudo apt install python-is-python3 --yes
 ```
 
@@ -71,7 +71,7 @@ sudo /opt/jupyterhub/bin/jupyterhub --generate-config
 sudo vim jupyterhub_config.py
 ```
 
-``` {.python}
+``` python
 c.JupyterHub.bind_url = 'http://:8000/jhub'
 c.Spawner.default_url = '/lab'
 c.Authenticator.admin_users = {'asis'}
@@ -202,7 +202,7 @@ sudo su - -c "R -e \"
 jupyter kernelspec --version
 ```
 
-``` {.console_output}
+``` console_output
 Command 'jupyter' not found, but can be installed with:
 
 sudo snap install jupyter       # version 1.0.0, or
@@ -220,7 +220,7 @@ See 'snap info jupyter' for additional versions.
 echo $PATH
 ```
 
-``` {.console_output}
+``` console_output
 /home/asis/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 ```
 
@@ -242,7 +242,7 @@ which jupyter
 ls -al $(which jupyter)
 ```
 
-``` {.console_output}
+``` console_output
 lrwxrwxrwx 1 root root 27 Sep 17 16:23 /usr/local/bin/jupyter -> /opt/jupyterhub/bin/jupyter*
 ```
 
@@ -265,7 +265,7 @@ sudo su - -c "R -e \"
 jupyter kernelspec list
 ```
 
-``` {.console_output}
+``` console_output
 Available kernels:
   ir41       /opt/jupyterhub/share/jupyter/kernels/ir41
   python3    /opt/jupyterhub/share/jupyter/kernels/python3
@@ -316,7 +316,7 @@ sudo /opt/conda/envs/c-cpp/bin/python3.9 -m pip install git+https://github.com/X
 sudo vim /opt/conda/envs/c-cpp/share/jupyter/kernels/c/kernel.json
 ```
 
-``` {.console_output}
+``` console_output
 {
   "display_name": "C",
   "argv": [
@@ -342,7 +342,7 @@ sudo mv ~/Downloads/logo** /opt/conda/envs/c-cpp/share/jupyter/c/
 ls -al /opt/conda/envs/c-cpp/share/jupyter/kernels/c
 ```
 
-``` {.console_output}
+``` console_output
 drwxrwxr-x 2 root root 4096 Oct 23 17:20 ./
 drwxrwxr-x 7 root root 4096 Oct 23 15:31 ../
 -rw-rw-r-- 1 root root  181 Oct 23 15:26 kernel.json
@@ -362,7 +362,7 @@ sudo jupyter kernelspec install /opt/conda/envs/c-cpp/share/jupyter/c --sys-pref
 sudo vim /etc/apache2/sites-available/asis.conf
 ```
 
-``` {.bash}
+``` bash
 <VirtualHost *:80>
     [...]
 
