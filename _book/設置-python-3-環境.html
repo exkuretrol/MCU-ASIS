@@ -24,7 +24,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2022-02-21" />
+<meta name="date" content="2022-02-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -318,8 +318,8 @@ div.csl-indent {
 <div class="sourceCode" id="cb159"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb159-1"><a href="設置-python-3-環境.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt install python3-dev python3-pip <span class="at">--yes</span></span></code></pre></div>
 <div class="sourceCode" id="cb160"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb160-1"><a href="設置-python-3-環境.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> <span class="at">-H</span> python3 <span class="at">-m</span> pip install <span class="at">--upgrade</span> pip</span></code></pre></div>
 <div class="sourceCode" id="cb161"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb161-1"><a href="設置-python-3-環境.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install python3-venv</span></code></pre></div>
-<p>因為 python 通常都是指 python2，所以我們還要再多裝一個叫做 <code>python-is-python3</code> 的套件，將 <code>python</code> 設為 <code>python3</code> 的另一個名字。</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode bash prefixed sudo apt install python-is-python3"><code class="sourceCode bash"><span id="cb162-1"><a href="設置-python-3-環境.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install python-is-python3 <span class="at">--yes</span></span></code></pre></div>
+<p>因為 python 通常都是指 python2，所以我們還要再多裝一個叫做 <code>python-is-python3</code> 的套件，將 <code>python</code> 設為 <code>python3</code> 的別名，使 <code>python</code> 指令與 <code>python3</code> 指令通用。</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb162-1"><a href="設置-python-3-環境.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install python-is-python3 <span class="at">--yes</span></span></code></pre></div>
 </div>
             </section>
 
