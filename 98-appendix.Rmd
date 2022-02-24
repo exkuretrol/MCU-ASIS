@@ -139,19 +139,21 @@ Work in Process 並不是最新版本
 ``` {.bash}
 #!/bin/bash
 # author: kuaz
-# last modified: 2021.09.13
+# last modified: 2022.02.24
 # 
-# This is script is used to:
+# This script is used to:
 # 1. Create Accounts via ./depts/${dept}.txt (one student ID per line).
 # 2. Remove Accounts via ./depts/${dept}.txt
+# Issue: https://stackoverflow.com/questions/12916352/shell-script-read-missing-last-line
 
 # 環境變數
 depts_dir='depts'       # 放置用來建置 linux 帳號的系資料夾
 pass_dir='passwd'       # 放置建置完成的 linux 帳號密碼的資料夾，建制完後
-                # 可搭配建置 MySQL 帳號與資料庫腳本（generate-sql.sh）使用
-gp=false            # 不需要用隨機密碼建立帳號的旗標
-new=false
-ubuntu_version=$(lsb_release -d | cut -d ' ' -f 2 | cut -d '.' -f 1)
+                        # 可搭配建置 MySQL 帳號與資料庫腳本（generate-sql.sh）使用
+gp=false                # 不需要用隨機密碼建立帳號的旗標
+new=false               # 是否是新版的 shiny app 連結方式，如果為 new，將不會使用 systemetic link 的方式連結
+dryrun=false
+# ubuntu_version=$(lsb_release -rs | cut -d '.' -f 1)
 
 check_permission() {
     if [ $(id -u) -ne 0 ]; then
@@ -165,9 +167,9 @@ check_depts_dir() {
         grps="$(ls ./${depts_dir} | grep ".txt" | cut -d "." -f 1)"
         for grp in ${grps}
         do
-            table=$(wc -l ./${depts_dir}/${grp}.txt)
-            file=$(echo $table | cut -d ' ' -f 2)
-            count=$(echo $table | cut -d ' ' -f 1)
+            # https://stackoverflow.com/questions/28038633/wc-l-is-not-counting-last-of-the-file-if-it-does-not-have-end-of-line-character
+            count=$(awk 'END{print NR}' ./${depts_dir}/${grp}.txt)
+            file=$(realpath ./${depts_dir}/${grp}.txt)
             if [ $count -lt 1 ]; then
                 echo "請再檢查一次 ./${depts_dir}/ 內是否含有正確格式的學號檔案！"
                 echo "有問題的檔案: $file"
@@ -177,12 +179,12 @@ check_depts_dir() {
             fi
         done
     else
-        echo "系資料夾 ${depts_dir} 不存在！請再確認一次。"
+        echo "系資料夾 ${depts_dir} 不存在！請先手動創建或是由選項 --generate-configuration 建立。"
         exit 1;
     fi
 }
 
-make_pass_dir() {
+create_pass_dir() {
     if [ ! -d ${pass_dir} ]; then
         echo "存放密碼的 ${pass_dir} 資料夾不存在，將建立 ${pass_dir} 資料夾"
         mkdir ${pass_dir}
@@ -193,64 +195,85 @@ make_pass_dir() {
                 rm -rf ${pass_dir}
                 make_pass_dir
             ;;
-            [No]* ) exit 1;;
+            [Nn]* ) exit 1;;
         esac
     fi
 }
 
 create_users() {
-    make_pass_dir
+    # 如果有產生密碼的需求
+    if [ ${gp} = true ]; then
+        create_pass_dir
+    fi
+
     for grp in ${grps}
     do 
+        # 確認使用者群組是否存在，如果不存在將自動建立
         if $(grep -q "^${grp}" /etc/group); then
-            echo "群組 '${grp}' 已存在，不需再建立。"
+            echo "使用者群組 '${grp}' 已存在，不需再建立。"
         else
-            groupadd ${grp}
+            # 如果不正式建立帳號
+            if [ ${dryrun} = false ]; then
+                groupadd ${grp}
+            fi
+            echo "已建立 ${grp} 使用者群組"
         fi
 
-        if [ ${new} = false ] &&  [ ! -d /srv/shiny-server/${grp} ]; then
+        # 使用舊方法連結 ShinyApps
+        if [ ${new} = false ] && [ ! -d /srv/shiny-server/${grp} ]; then
             echo "/srv/shiny-server/${grp} 資料夾不存在，將建立群組資料夾"
-            mkdir /srv/shiny-server/${grp}      
+            if [ ${dryrun} = false ]; then
+                mkdir /srv/shiny-server/${grp}
+            fi
         fi
 
-        # create user
-        while read stu;
+        # 逐行讀取學號
+        while IFS= read -r stu || [ -n "$stu" ];
         do
             cur_user=${stu}
             if $(id "${cur_user}" > /dev/null 2>&1); then
-                echo "使用者 '${cur_user}' 已存在。"
-            else
+                echo "使用者 '${cur_user}' 已存在，略過此使用者。"
+            elif [ ${dryrun} = false ]; then
+                # TODO: 更好的方法？ 例如檢查 useradd 版本，不過不知道 badnames 是哪版加的
                 # 在 Ubuntu 16.04 版本的 useradd 沒有 --badnames 選項
-                if [ ${ubuntu_version} == "16" ]; then
-                    useradd -N -g ${grp} -m ${cur_user}
-                else
-                    useradd --badnames -N -g ${grp} -m ${cur_user}
-                fi
+                # if [ ${ubuntu_version} == "16" ]; then
+                #     su - -c "useradd -N -g ${grp} -m ${cur_user}"
+                # else
+                #     su - -c "useradd --badnames -N -g ${grp} -m ${cur_user}"
+                # fi
+	    	useradd --badnames -N -g ${grp} -m ${cur_user}
 
+                # 產生隨機密碼
                 if [ ${gp} = false ]; then
                     cur_user_password=${cur_user}
                 else
                     cur_user_password=$(openssl rand -base64 6)
                 fi
-
+                
+                # 以 root 權限創立使用者帳號，並設定密碼
                 echo "${cur_user}:${cur_user_password}" | chpasswd
+
+                # 將設定的帳號密碼儲存一份到資料夾中
                 echo "${cur_user},${cur_user_password}" | tee -a ./${pass_dir}/${grp}.csv > /dev/null 2>&1
+                # 將 ShinyApp 軟連結至使用者資料夾
                 if [ ${new} = false ]; then
                     # 需要先在 /etc/skel/ 建立 ShinyApps 資料夾，才可成功連結
                     ln -s /home/${cur_user}/ShinyApps /srv/shiny-server/${grp}/${cur_user}
                 fi
+            else
+                # 如果僅執行
+                echo "建立了 ${cur_user} 的使用者帳戶" 
             fi
         done < ./${depts_dir}/${grp}.txt
-
     done
 }
 
 delete_users() {
     for grp in ${grps}
     do 
-        while read stu;
+        while IFS= read -r stu || [ -n "$stu" ];
         do
-            userdel -r ${stu} > /dev/null 2>&1  
+            userdel -r ${stu} > /dev/null 2>&1
             if [ ${new} = false ]; then
                 rm -rf /srv/shiny-server/${grp}/${stu}
             fi
@@ -273,7 +296,7 @@ create_prompt() {
     fi
     case $yn in
         [Yy]* ) create_users;;
-        [Nn]* ) exit;;
+        [Nn]* ) exit 0;;
     esac
 }
 
@@ -281,8 +304,22 @@ delete_prompt() {
     read -p "即將 '刪除' 使用者帳戶，於 /home/<使用者> 的資料將會消失，是否執行? (Yes/No)" yn
     case $yn in
         [Yy]* ) delete_users;;
-        [Nn]* ) exit;;
+        [Nn]* ) exit 0;;
     esac
+}
+
+generate_configuration() {
+    if [ -d ${depts_dir} ]; then
+        echo "資料夾已存在！"
+    else
+        mkdir ${depts_dir}
+        touch ${depts_dir}/asisstuc.txt
+        touch ${depts_dir}/defstu.txt
+        echo 08170875 > ${depts_dir}/asisstuc.txt
+        echo 08220000 > ${depts_dir}/defstu.txt
+        echo "設定檔案建立完成"
+    fi
+    exit 0;
 }
 
 display_help() {
@@ -319,18 +356,23 @@ do
             display_help
             exit 0
         ;;
-        -gp | --generate-password)
+        -d | --dry-run)
+            dryrun=true
+            shift 1
+            break
+        ;;
+        -p | --generate-password)
             gp=true
             shift 1
             break
         ;;
+        -c | --generate-configuration)
+            generate_configuration
+            exit 0
+        ;;
         -n | --new-shiny-server)
             new=true
             shift 1
-            break
-        ;;
-        --)
-            shift
             break
         ;;
         -*)
@@ -346,17 +388,17 @@ done
 
 case "$1" in
     create)
-        check_permission
+	check_permission
         check_depts_dir
         create_prompt
     ;;
     delete)
-        check_permission
+	check_permission
         check_depts_dir
         delete_prompt
     ;;
     *)
-        display_help
+	echo "使用附加選項 -h 或是 --help 查詢指令的使用方法。" 
         exit 1
     ;;
 esac
