@@ -356,6 +356,54 @@ sudo jupyter kernelspec install /opt/conda/envs/c-cpp/share/jupyter/c --sys-pref
 
 ![](figures/jupyterlab_c_cpp_kernel.png)
 
+### SAS 環境
+
+``` {.bash .prefixed}
+sudo vim /opt/conda/envs/sas.yml
+```
+
+``` {.console_output}
+name: sas
+channels:
+  - defaults
+  - conda-forge
+  - anaconda
+dependencies:
+  - sas_kernel
+  - python=3.*
+  - pip
+  - ipykernel
+prefix: /opt/conda/envs/sas
+```
+
+``` {.bash .prefixed}
+sudo conda env create -f sas.yml
+```
+
+``` {.bash .prefixed}
+/opt/conda/envs/sas/share/jupyter/kernels/sas/kernel.json
+```
+
+``` {.json}
+{
+    "argv": [
+        "/opt/conda/envs/sas/bin/python",
+        "-m",
+        "sas_kernel",
+        "-f",
+        "{connection_file}"
+    ],
+    "display_name": "SAS",
+    "codemirror_mode": "sas",
+    "language": "sas",
+    "name": "sas"
+}
+```
+
+``` {.bash .prefixed}
+sudo cp /opt/conda/envs/sas/lib/python3.9/site-packages/sas_kernel/data/logo-64x64.png /opt/conda/envs/sas/share/jupyterkernels/sas
+```
+
 ## 設置 Apache 的 Reverse Proxy
 
 ``` {.bash .prefixed}
