@@ -1,20 +1,24 @@
-# 附錄 {.unnumbered}
+\cleardoublepage
 
-因為內容太多，書本篇收錄的會變得太混雜，所以我把一些內容放到這裡。
+# (APPENDIX) 附錄 {-}
+
+# 相關軟體
+
+<!-- 因為內容太多，書本篇收錄的會變得太混雜，所以我把一些內容放到這裡。 -->
 
 <!-- ## 由 Windows 10 系統進入 BIOS {.unnumbered .hidden} -->
 
-<!-- ## Windows Terminal {.unnumbered} -->
+<!-- ## Windows Terminal -->
 
-## PuTTY {.unnumbered}
+## PuTTY
 
 使用 PuTTY 連線至 OpenSSH 伺服器
 
-### 以 PuTTY 產生 key {.unnumbered}
+### 以 PuTTY 產生 key
 
 另一個方法不會需要你手動安裝 OpenSSH Client，不過、一樣地，要安裝PuTTY 程式。
 
-#### Step 1 --- 安裝 PuTTY {.unnumbered}
+#### Step 1 --- 安裝 PuTTY
 
 到開發者的網站，然後下載適合你 Windows 的版本 (副檔名為 \*.msi 的安裝程式)
 
