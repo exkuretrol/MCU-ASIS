@@ -34,7 +34,7 @@
 
 安裝完成後，點選「開始」，找到 PuTTYgen開啟，或是點選「開始」，鍵入 `puttygen` 後按 Enter↩
 
-#### Step 2 --- 經由 PuTTYgen 產生 ssh key pairs {.unnumbered}
+#### Step 2 --- 經由 PuTTYgen 產生 ssh key pairs
 
 跟 OpenSSH Client 一樣地，你可以在下方的 Types 選擇你偏好的加密方式。點選「Generate」開始產生 key，此時不要傻傻地在那邊等，要在程式進度條下方空白處隨意移動你的滑鼠鼠標。
 
@@ -44,11 +44,11 @@
 
 ![](figures/puttygen-genkey-finish.png){.figure}
 
-#### Step 3 --- 妥善保存好產生的 Key {.unnumbered}
+#### Step 3 --- 妥善保存好產生的 Key
 
 分別按下「Save public key」與「Save private key」找到適合的地方儲存它。
 
-### 上傳以 PuTTY 產生的 ssh key pairs {.unnumbered}
+### 上傳以 PuTTY 產生的 ssh key pairs
 
 PuTTY 產生的 public key 與 private key 格式比較特別，並不能直接把 public key 裡面的文字直接貼到遠端電腦的 `~/.ssh/authorized_keys` 檔案裡面，需要經由 PuTTYgen.exe 讀取 \*.ppk 才能得到正確格式的 public key。首先把 PuTTYgen 程式打開。
 
@@ -72,13 +72,13 @@ echo "<YOUR_PUBLIC_KEY>" | ssh asis@192.168.0.13 "cat >> ~/.ssh/authorized_keys"
 
 接著按 Enter↩，跳出輸入密碼提示，這裡輸入預設的使用者密碼 `asis`
 
-``` {.console_output}
+``` console_output
 asis@192.168.0.13's password:
 ```
 
 輸入完成不會出現任何訊息是正常的，代表操作沒有問題且已經可以使用 PuTTY 連線了。
 
-### PuTTYgen 產生的 key pairs 的連線方式: {.unnumbered}
+### PuTTYgen 產生的 key pairs 的連線方式:
 
 SSH 連線方式大同小異:
 
@@ -104,43 +104,19 @@ SSH 連線方式大同小異:
 
 ![](figures/putty-connection-success.png){.figure}
 
-<!-- ## 文本編輯器 {.unnumbered} -->
+<!-- ## 文本編輯器 -->
 
-<!-- ### vim {.unnumbered} -->
+<!-- ### vim -->
 
-<!-- ### nano {.unnumbered} -->
+<!-- ### nano -->
 
-### 更改預設的文本編輯器 {.unnumbered}
-
-這個指令可以變更系統編輯文件所用的程式
-
-``` {.bash}
-sudo update-alternatives --config editor
-```
-
-按了 Enter↩ 之後，會出現現在可用的編輯器，輸入對應的編號即可變更。有標 `*` 號的編輯器為目前設定的預設編輯器。
-
-``` {.console_output}
-There are 4 choices for the alternative editor (providing /usr/bin/editor).
-
-  Selection    Path                Priority   Status
-------------------------------------------------------------
-  0            /bin/nano            40        auto mode
-  1            /bin/ed             -100       manual mode
-  2            /bin/nano            40        manual mode
-* 3            /usr/bin/vim.basic   30        manual mode
-  4            /usr/bin/vim.tiny    15        manual mode
-
-Press <enter> to keep the current choice[*], or type selection number: 3
-```
-
-## 帳號管理 {.unnumbered}
+# 帳號管理
 
 Work in Process 並不是最新版本
 
-### users.sh {.unnumbered}
+## users.sh
 
-``` {.bash}
+``` bash
 #!/bin/bash
 # author: kuaz
 # last modified: 2022.02.24
@@ -245,7 +221,7 @@ create_users() {
                 # else
                 #     su - -c "useradd --badnames -N -g ${grp} -m ${cur_user}"
                 # fi
-	    	useradd --badnames -N -g ${grp} -m ${cur_user}
+            useradd --badnames -N -g ${grp} -m ${cur_user}
 
                 # 產生隨機密碼
                 if [ ${gp} = false ]; then
@@ -392,25 +368,25 @@ done
 
 case "$1" in
     create)
-	check_permission
+    check_permission
         check_depts_dir
         create_prompt
     ;;
     delete)
-	check_permission
+    check_permission
         check_depts_dir
         delete_prompt
     ;;
     *)
-	echo "使用附加選項 -h 或是 --help 查詢指令的使用方法。" 
+    echo "使用附加選項 -h 或是 --help 查詢指令的使用方法。" 
         exit 1
     ;;
 esac
 ```
 
-### generate-sql.sh {.unnumbered}
+## generate-sql.sh
 
-``` {.bash}
+``` bash
 #!/bin/bash
 # author: kuaz
 # last modified: 2021.09.13
@@ -556,7 +532,34 @@ case "$1" in
 esac
 ```
 
-## Mysql 8.0 root 密碼重設 {.unnumbered}
+# 其他
+
+## 更改預設的文本編輯器
+
+這個指令可以變更系統編輯文件所用的程式
+
+``` bash
+sudo update-alternatives --config editor
+```
+
+按了 Enter↩ 之後，會出現現在可用的編輯器，輸入對應的編號即可變更。有標 `*` 號的編輯器為目前設定的預設編輯器。
+
+``` console_output
+There are 4 choices for the alternative editor (providing /usr/bin/editor).
+
+  Selection    Path                Priority   Status
+------------------------------------------------------------
+  0            /bin/nano            40        auto mode
+  1            /bin/ed             -100       manual mode
+  2            /bin/nano            40        manual mode
+* 3            /usr/bin/vim.basic   30        manual mode
+  4            /usr/bin/vim.tiny    15        manual mode
+
+Press <enter> to keep the current choice[*], or type selection number: 3
+```
+
+
+## Mysql 8.0 root 密碼重設
 
 先建立一個含有改變 root 密碼的 sql 語法文字檔案
 
@@ -564,7 +567,7 @@ esac
 vim mysql-init
 ```
 
-``` {.sqlmysql}
+``` sqlmysql
 ALTER USER 'root'@'localhost' IDENTIFIED with caching_sha2_password by '<新的 root 密碼>';
 ```
 
@@ -638,7 +641,7 @@ mysql -u root -p
 
 成功 🎊
 
-``` {.console_output}
+``` console_output
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 17
 Server version: 8.0.26-0ubuntu0.20.04.3 (Ubuntu)
