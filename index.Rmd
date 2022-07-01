@@ -22,7 +22,20 @@ output:
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
+
+knitr::opts_chunk$set(
+    echo = FALSE,
+    out.width = '80%',
+    fig.align = 'center'
+)
+
+knitr::write_bib(
+    c(
+        .packages(), "bookdown", "knitr", "rmarkdown"
+    ), "packages.bib"
+)
 ```
+
+## 大綱 {.unnumbered}
+
+## 關於我 {.unnumbered}
