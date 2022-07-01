@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.2 OpenSSH | MCU ASIS Ubuntu 系統安裝指南</title>
   <meta name="description" content="2.2 OpenSSH | MCU ASIS Ubuntu 系統安裝指南" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.2 OpenSSH | MCU ASIS Ubuntu 系統安裝指南" />
   <meta property="og:type" content="book" />
-  
   
   
   
@@ -24,7 +23,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2022-02-24" />
+<meta name="date" content="2022-07-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="事前準備-1.html"/>
 <link rel="next" href="apt.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -159,7 +158,12 @@ div.csl-indent {
 <li><a href="./">MCU ASIS Ubuntu 系統安裝指南</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>引言</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>引言</a>
+<ul>
+<li class="chapter" data-level="" data-path="大綱.html"><a href="大綱.html"><i class="fa fa-check"></i>大綱</a></li>
+<li class="chapter" data-level="" data-path="關於我.html"><a href="關於我.html"><i class="fa fa-check"></i>關於我</a></li>
+</ul></li>
+<li class="part"><span><b>I 虛擬主機</b></span></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> 基礎建設</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="事前準備.html"><a href="事前準備.html"><i class="fa fa-check"></i><b>1.1</b> 事前準備</a></li>
@@ -174,10 +178,11 @@ div.csl-indent {
 <li class="chapter" data-level="1.3.2.3" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#網路連線"><i class="fa fa-check"></i><b>1.3.2.3</b> 網路連線</a></li>
 <li class="chapter" data-level="1.3.2.4" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#proxy"><i class="fa fa-check"></i><b>1.3.2.4</b> Proxy</a></li>
 <li class="chapter" data-level="1.3.2.5" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#鏡像-mirror"><i class="fa fa-check"></i><b>1.3.2.5</b> 鏡像 (Mirror)</a></li>
-<li class="chapter" data-level="1.3.2.6" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#安裝程式更新-可能不會出現"><i class="fa fa-check"></i><b>1.3.2.6</b> 安裝程式更新 (可能不會出現)</a></li>
-<li class="chapter" data-level="1.3.2.7" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#系統空間配置-raid-1"><i class="fa fa-check"></i><b>1.3.2.7</b> 系統空間配置 (Raid-1)</a></li>
+<li class="chapter" data-level="1.3.2.6" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#安裝程式更新"><i class="fa fa-check"></i><b>1.3.2.6</b> 安裝程式更新</a></li>
+<li class="chapter" data-level="1.3.2.7" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#系統空間配置"><i class="fa fa-check"></i><b>1.3.2.7</b> 系統空間配置</a></li>
 <li class="chapter" data-level="1.3.2.8" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#使用者設定"><i class="fa fa-check"></i><b>1.3.2.8</b> 使用者設定</a></li>
-<li class="chapter" data-level="1.3.2.9" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#openssh-設定"><i class="fa fa-check"></i><b>1.3.2.9</b> OpenSSH 設定</a></li>
+<li class="chapter" data-level="1.3.2.9" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#openssh-設定-可跳過"><i class="fa fa-check"></i><b>1.3.2.9</b> OpenSSH 設定 [可跳過]</a></li>
+<li class="chapter" data-level="1.3.2.10" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#完成安裝"><i class="fa fa-check"></i><b>1.3.2.10</b> 完成安裝</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -202,7 +207,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#關閉遠端-root-登入"><i class="fa fa-check"></i>關閉遠端 root 登入</a></li>
 <li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#限制能使用-ssh-連線的使用者"><i class="fa fa-check"></i>限制能使用 SSH 連線的使用者</a></li>
 <li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#關閉無密碼的使用者使用-ssh"><i class="fa fa-check"></i>關閉無密碼的使用者使用 SSH</a></li>
-<li><a href="openssh.html#測試-sshd_config-是否有效">測試 <code>sshd_config</code> 是否有效</a></li>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#測試-sshd_config-是否有效"><i class="fa fa-check"></i>測試 <code>sshd_config</code> 是否有效</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="apt.html"><a href="apt.html"><i class="fa fa-check"></i><b>2.3</b> APT</a></li>
@@ -210,6 +215,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.5" data-path="bat-可選.html"><a href="bat-可選.html"><i class="fa fa-check"></i><b>2.5</b> Bat （可選）</a></li>
 <li class="chapter" data-level="2.6" data-path="exa-可選.html"><a href="exa-可選.html"><i class="fa fa-check"></i><b>2.6</b> exa （可選）</a></li>
 </ul></li>
+<li class="part"><span><b>II 軟體安裝</b></span></li>
 <li class="chapter" data-level="3" data-path="lamp.html"><a href="lamp.html"><i class="fa fa-check"></i><b>3</b> LAMP</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="事前準備-2.html"><a href="事前準備-2.html"><i class="fa fa-check"></i><b>3.1</b> 事前準備</a></li>
@@ -267,30 +273,35 @@ div.csl-indent {
 <li class="chapter" data-level="5.4.1" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html#conda-的-python-環境"><i class="fa fa-check"></i><b>5.4.1</b> Conda 的 Python🐍 環境</a></li>
 <li class="chapter" data-level="5.4.2" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html#r-環境"><i class="fa fa-check"></i><b>5.4.2</b> R 環境</a></li>
 <li class="chapter" data-level="5.4.3" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html#c-與-c-環境"><i class="fa fa-check"></i><b>5.4.3</b> C 與 C++ 環境</a></li>
+<li class="chapter" data-level="5.4.4" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html#sas-環境"><i class="fa fa-check"></i><b>5.4.4</b> SAS 環境</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="設置-apache-的-reverse-proxy.html"><a href="設置-apache-的-reverse-proxy.html"><i class="fa fa-check"></i><b>5.5</b> 設置 Apache 的 Reverse Proxy</a></li>
 <li class="chapter" data-level="5.6" data-path="jupyterhub-擴充套件.html"><a href="jupyterhub-擴充套件.html"><i class="fa fa-check"></i><b>5.6</b> JupyterHub 擴充套件</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="附錄.html"><a href="附錄.html"><i class="fa fa-check"></i>附錄</a>
+<li class="appendix"><span><b>附錄</b></span></li>
+<li class="chapter" data-level="A" data-path="相關軟體.html"><a href="相關軟體.html"><i class="fa fa-check"></i><b>A</b> 相關軟體</a>
 <ul>
-<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html"><i class="fa fa-check"></i>PuTTY</a>
+<li class="chapter" data-level="A.1" data-path="putty.html"><a href="putty.html"><i class="fa fa-check"></i><b>A.1</b> PuTTY</a>
 <ul>
-<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#以-putty-產生-key"><i class="fa fa-check"></i>以 PuTTY 產生 key</a>
+<li class="chapter" data-level="A.1.1" data-path="putty.html"><a href="putty.html#以-putty-產生-key"><i class="fa fa-check"></i><b>A.1.1</b> 以 PuTTY 產生 key</a>
 <ul>
-<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#step-1-安裝-putty"><i class="fa fa-check"></i>Step 1 — 安裝 PuTTY</a></li>
-<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#step-2-經由-puttygen-產生-ssh-key-pairs"><i class="fa fa-check"></i>Step 2 — 經由 PuTTYgen 產生 ssh key pairs</a></li>
-<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#step-3-妥善保存好產生的-key"><i class="fa fa-check"></i>Step 3 — 妥善保存好產生的 Key</a></li>
+<li class="chapter" data-level="A.1.1.1" data-path="putty.html"><a href="putty.html#step-1-安裝-putty"><i class="fa fa-check"></i><b>A.1.1.1</b> Step 1 — 安裝 PuTTY</a></li>
+<li class="chapter" data-level="A.1.1.2" data-path="putty.html"><a href="putty.html#step-2-經由-puttygen-產生-ssh-key-pairs"><i class="fa fa-check"></i><b>A.1.1.2</b> Step 2 — 經由 PuTTYgen 產生 ssh key pairs</a></li>
+<li class="chapter" data-level="A.1.1.3" data-path="putty.html"><a href="putty.html#step-3-妥善保存好產生的-key"><i class="fa fa-check"></i><b>A.1.1.3</b> Step 3 — 妥善保存好產生的 Key</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#上傳以-putty-產生的-ssh-key-pairs"><i class="fa fa-check"></i>上傳以 PuTTY 產生的 ssh key pairs</a></li>
-<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#puttygen-產生的-key-pairs-的連線方式"><i class="fa fa-check"></i>PuTTYgen 產生的 key pairs 的連線方式:</a></li>
-<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#更改預設的文本編輯器"><i class="fa fa-check"></i>更改預設的文本編輯器</a></li>
+<li class="chapter" data-level="A.1.2" data-path="putty.html"><a href="putty.html#上傳以-putty-產生的-ssh-key-pairs"><i class="fa fa-check"></i><b>A.1.2</b> 上傳以 PuTTY 產生的 ssh key pairs</a></li>
+<li class="chapter" data-level="A.1.3" data-path="putty.html"><a href="putty.html#puttygen-產生的-key-pairs-的連線方式"><i class="fa fa-check"></i><b>A.1.3</b> PuTTYgen 產生的 key pairs 的連線方式:</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html"><i class="fa fa-check"></i>帳號管理</a>
+</ul></li>
+<li class="chapter" data-level="B" data-path="帳號管理.html"><a href="帳號管理.html"><i class="fa fa-check"></i><b>B</b> 帳號管理</a>
 <ul>
-<li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html#users.sh"><i class="fa fa-check"></i>users.sh</a></li>
-<li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html#generate-sql.sh"><i class="fa fa-check"></i>generate-sql.sh</a></li>
+<li class="chapter" data-level="B.1" data-path="users.html"><a href="users.html"><i class="fa fa-check"></i><b>B.1</b> users.sh</a></li>
+<li class="chapter" data-level="B.2" data-path="generate-sql.html"><a href="generate-sql.html"><i class="fa fa-check"></i><b>B.2</b> generate-sql.sh</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="mysql-8.0-root-密碼重設.html"><a href="mysql-8.0-root-密碼重設.html"><i class="fa fa-check"></i>Mysql 8.0 root 密碼重設</a></li>
+<li class="chapter" data-level="C" data-path="其他.html"><a href="其他.html"><i class="fa fa-check"></i><b>C</b> 其他</a>
+<ul>
+<li class="chapter" data-level="C.1" data-path="更改預設的文本編輯器.html"><a href="更改預設的文本編輯器.html"><i class="fa fa-check"></i><b>C.1</b> 更改預設的文本編輯器</a></li>
+<li class="chapter" data-level="C.2" data-path="mysql-8.0-root-密碼重設.html"><a href="mysql-8.0-root-密碼重設.html"><i class="fa fa-check"></i><b>C.2</b> Mysql 8.0 root 密碼重設</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="參考資料.html"><a href="參考資料.html"><i class="fa fa-check"></i>參考資料</a></li>
 <li class="divider"></li>
@@ -313,18 +324,18 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="openssh" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> OpenSSH</h2>
+<div id="openssh" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> OpenSSH<a href="openssh.html#openssh" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>前面第一章在安裝時，也有碰到 OpenSSH 伺服器設定的環節，不過那並不完整，是給已經擁有透過 <code>ssh-keygen</code> 產生的 ssh key pairs 的人看的。在這個小節會逐步解釋，從 OpenSSH client 安裝、產生 ssh key pairs 最後到連線。</p>
-<div id="適合各個系統的連線流程" class="section level3" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> 適合各個系統的連線流程</h3>
+<div id="適合各個系統的連線流程" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> 適合各個系統的連線流程<a href="openssh.html#適合各個系統的連線流程" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>要連接到虛擬機器的 OpenSSH 伺服器之前，你需要有一個可以讓你連接的 OpenSSH 客戶端。</p>
-<div id="macos-或-其他-unix-like-系統" class="section level4" number="2.2.1.1">
-<h4><span class="header-section-number">2.2.1.1</span> MacOS 或 其他 Unix-like 系統</h4>
+<div id="macos-或-其他-unix-like-系統" class="section level4 hasAnchor" number="2.2.1.1">
+<h4><span class="header-section-number">2.2.1.1</span> MacOS 或 其他 Unix-like 系統<a href="openssh.html#macos-或-其他-unix-like-系統" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>如果你是 Linux 或是 MacOS 系統，通常都有內建 OpenSSH 客戶端，可以直接跳至 以 <a href="openssh.html#step-2-產生-ssh-key-pairs">Step 2 — 產生 ssh key pairs</a> 的章節，Windows 與 Linux 使用 OpenSSH Utility 產生 ssh key pairs 的流程是一樣的。</p>
 </div>
-<div id="windows-系統" class="section level4" number="2.2.1.2">
-<h4><span class="header-section-number">2.2.1.2</span> Windows 系統</h4>
+<div id="windows-系統" class="section level4 hasAnchor" number="2.2.1.2">
+<h4><span class="header-section-number">2.2.1.2</span> Windows 系統<a href="openssh.html#windows-系統" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>而 Windows 用戶不用擔心，Windows 用戶連線至 OpenSSH 伺服器的方法有很多種，就我已知的方法如下:</p>
 <ol style="list-style-type: decimal">
 <li><p>已經擁有 SSH key pairs 的前提下，可以使用 SSH 通訊協定連線的軟體，如:</p>
@@ -362,8 +373,8 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<div id="step-1-安裝-openssh-client" class="section level3 unnumbered">
-<h3>Step 1 — 安裝 OpenSSH Client</h3>
+<div id="step-1-安裝-openssh-client" class="section level3 unnumbered hasAnchor">
+<h3>Step 1 — 安裝 OpenSSH Client<a href="openssh.html#step-1-安裝-openssh-client" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Windows 10 已經有內建在 Windows 的「應用程式與功能」內，預設是沒有安裝的。啟動流程如下:</p>
 <ul>
 <li><p>點擊「開始」</p></li>
@@ -384,8 +395,8 @@ div.csl-indent {
            [-Q query_option] [-R address] [-S ctl_path] [-W host:port]
            [-w local_tun[:remote_tun]] destination [command]</code></pre>
 </div>
-<div id="step-2-產生-ssh-key-pairs" class="section level3 unnumbered">
-<h3>Step 2 — 產生 ssh key pairs</h3>
+<div id="step-2-產生-ssh-key-pairs" class="section level3 unnumbered hasAnchor">
+<h3>Step 2 — 產生 ssh key pairs<a href="openssh.html#step-2-產生-ssh-key-pairs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>接著，可以使用 <code>ssh-keygen</code> 指令產生 key pairs，加密方式有 rsa、dsa、ed25519 與 ecdsa ，預設的加密方式是 rsa ，詳細指令用法可以透過 <code>ssh-keygen --help</code> 指令查詢，這裡我們用最簡單的 <code>ssh-keygen</code> 指令就行。</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb10-1"><a href="openssh.html#cb10-1" aria-hidden="true" tabindex="-1"></a>ssh<span class="op">-</span>keygen</span></code></pre></div>
 <p>Windows 的用戶預設會把 key pair 儲存在 <code>C:\Users\&lt;USERNAME&gt;\.ssh\</code> 的位置，而 Linux 的用戶會儲存在 <code>~/.ssh/</code> 的位置。</p>
@@ -417,8 +428,8 @@ The key&#39;s randomart image is:
 <p>當你遺失了遠端主機的 key pairs，你再也不能透過遠端存取有使用過該 key pairs 的主機，只能透過直接接觸那台主機來更新的 key pairs。</p>
 </div>
 </div>
-<div id="step-3-將新增的-key-pairs-上傳至目的地主機" class="section level3 unnumbered">
-<h3>Step 3 — 將新增的 key pairs 上傳至目的地主機</h3>
+<div id="step-3-將新增的-key-pairs-上傳至目的地主機" class="section level3 unnumbered hasAnchor">
+<h3>Step 3 — 將新增的 key pairs 上傳至目的地主機<a href="openssh.html#step-3-將新增的-key-pairs-上傳至目的地主機" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>當你擁有了 <a href="openssh.html#step-2-產生-ssh-key-pairs">前一步產生的 key pairs</a>，接下來要把 public key 上傳至虛擬機器。另外 public key 給別人看到是沒問題的，前面第一章的 <a href="於虛擬機器安裝作業系統.html#從-github-匯入已經儲存的-public-key">OpenSSH設定</a> 就已經有出現過我的 public key 了，public key 並不能用來產生 private key，它是用來認證這個 key 是否跟你所持有的 private key 相呼應。</p>
 <p>如果你是的系統是 Linux 那指令會稍微短一些，上傳至遠端電腦的指令如下:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb14-1"><a href="openssh.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ssh-copy-id</span> <span class="at">-i</span> ~/.ssh/id_ed25519.pub <span class="at">-p</span> 22 asis@192.168.0.13</span></code></pre></div>
@@ -453,8 +464,8 @@ and check to make sure that only the key(s) you wanted were added.</code></pre>
 <pre class="console_output"><code>asis@192.168.0.13&#39;s password:</code></pre>
 <p>輸入完後雖然沒有任何提示訊息，但其實已經可以使用 ssh 連線至遠端主機啦~</p>
 </div>
-<div id="step-4-測試-ssh-連線使用-ssh-連線至遠端主機" class="section level3 unnumbered">
-<h3>Step 4 — 測試 SSH 連線，使用 SSH 連線至遠端主機</h3>
+<div id="step-4-測試-ssh-連線使用-ssh-連線至遠端主機" class="section level3 unnumbered hasAnchor">
+<h3>Step 4 — 測試 SSH 連線，使用 SSH 連線至遠端主機<a href="openssh.html#step-4-測試-ssh-連線使用-ssh-連線至遠端主機" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>最後，使用 ssh 指令連接至遠端主機。</p>
 <p>使用 OpenSSH Client 產生的 pair keys 可以直接使用這個方法連線。這裡介紹幾個常常與 ssh 一起出現的 flag :</p>
 <ul>
@@ -482,10 +493,10 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre
 <p>測試完確認沒問題就可以把虛擬機晾在一旁了~</p>
 <p><img src="figures/virtualbox-ubuntu-login.png" class="figure" /></p>
 </div>
-<div id="step-5-使遠端的-openssh-伺服器更加安全" class="section level3 unnumbered">
-<h3>Step 5 — 使遠端的 OpenSSH 伺服器更加安全</h3>
-<div id="變更-ssh-伺服器預設的埠號" class="section level4 unnumbered">
-<h4>變更 SSH 伺服器預設的埠號</h4>
+<div id="step-5-使遠端的-openssh-伺服器更加安全" class="section level3 unnumbered hasAnchor">
+<h3>Step 5 — 使遠端的 OpenSSH 伺服器更加安全<a href="openssh.html#step-5-使遠端的-openssh-伺服器更加安全" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="變更-ssh-伺服器預設的埠號" class="section level4 unnumbered hasAnchor">
+<h4>變更 SSH 伺服器預設的埠號<a href="openssh.html#變更-ssh-伺服器預設的埠號" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="sourceCode" id="cb21"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb21-1"><a href="openssh.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vi /etc/ssh/sshd_config</span></code></pre></div>
 <p>將 <code>#Port 22</code> 取消註解，並把 <code>22</code> 改成其他介於 1-65535 之間的數字。</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="openssh.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#       $OpenBSD: sshd_config,v 1.103 2018/04/09 20:41:22 tj Exp $</span></span>
@@ -507,26 +518,26 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre
 <span id="cb22-17"><a href="openssh.html#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="co">#ListenAddress 0.0.0.0</span></span>
 <span id="cb22-18"><a href="openssh.html#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="co">#ListenAddress ::</span></span></code></pre></div>
 </div>
-<div id="關閉密碼驗證" class="section level4 unnumbered">
-<h4>關閉密碼驗證</h4>
+<div id="關閉密碼驗證" class="section level4 unnumbered hasAnchor">
+<h4>關閉密碼驗證<a href="openssh.html#關閉密碼驗證" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>將 PasswordAuthentication (以密碼驗證) 設為 no。使用 SSH 連線時，如果沒有指定 SSH key pair，如果 OpenSSH 伺服器的設定沒有關閉，接著會要求你輸入使用者密碼以密碼驗證。通常這個設定會開啟是因為要<a href="openssh.html#step-3-將新增的-key-pairs-上傳至目的地主機">複製 ssh 的 public key</a>。</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="openssh.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PasswordAuthentication</span> no</span></code></pre></div>
 <p>當然如果密碼驗證為 no，且同時遺失 SSH 的 pair key 時，你就無法以 SSH 連線至遠端主機。</p>
 </div>
-<div id="關閉遠端-root-登入" class="section level4 unnumbered">
-<h4>關閉遠端 root 登入</h4>
+<div id="關閉遠端-root-登入" class="section level4 unnumbered hasAnchor">
+<h4>關閉遠端 root 登入<a href="openssh.html#關閉遠端-root-登入" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="openssh.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PermitRootLogin</span> no</span></code></pre></div>
 </div>
-<div id="限制能使用-ssh-連線的使用者" class="section level4 unnumbered">
-<h4>限制能使用 SSH 連線的使用者</h4>
+<div id="限制能使用-ssh-連線的使用者" class="section level4 unnumbered hasAnchor">
+<h4>限制能使用 SSH 連線的使用者<a href="openssh.html#限制能使用-ssh-連線的使用者" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="openssh.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">AllowUsers</span> asis</span></code></pre></div>
 </div>
-<div id="關閉無密碼的使用者使用-ssh" class="section level4 unnumbered">
-<h4>關閉無密碼的使用者使用 SSH</h4>
+<div id="關閉無密碼的使用者使用-ssh" class="section level4 unnumbered hasAnchor">
+<h4>關閉無密碼的使用者使用 SSH<a href="openssh.html#關閉無密碼的使用者使用-ssh" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="openssh.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PermitEmptyPasswords</span> no</span></code></pre></div>
 </div>
-<div id="測試-sshd_config-是否有效" class="section level4 unnumbered">
-<h4>測試 <code>sshd_config</code> 是否有效</h4>
+<div id="測試-sshd_config-是否有效" class="section level4 unnumbered hasAnchor">
+<h4>測試 <code>sshd_config</code> 是否有效<a href="openssh.html#測試-sshd_config-是否有效" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="sourceCode" id="cb27"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb27-1"><a href="openssh.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> sshd <span class="at">-t</span></span></code></pre></div>
 <div class="sourceCode" id="cb28"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb28-1"><a href="openssh.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart sshd</span></code></pre></div>
 <pre class="console_output"><code>● ssh.service - OpenBSD Secure Shell server
@@ -577,7 +588,7 @@ Last login: Mon Aug 16 12:31:35 2021 from 192.168.0.11</code></pre>
 </div>
 </div>
 </div>
-<h3>參考資料</h3>
+<h3>參考資料<a href="參考資料.html#參考資料" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-christopher_2020" class="csl-entry">
 Christopher, Hart. 2020. <span>“Windows 10 OpenSSH Equivalent of "Ssh-Copy-Id".”</span> <em>Windows 10 OpenSSH Equivalent of "Ssh-Copy-Id" – Christopher Hart - IT Adventures – Documenting My Discoveries in the IT World</em>. <a href="https://www.chrisjhart.com/Windows-10-ssh-copy-id/">https://www.chrisjhart.com/Windows-10-ssh-copy-id/</a>.

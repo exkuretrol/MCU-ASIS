@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1.3 於虛擬機器安裝作業系統 | MCU ASIS Ubuntu 系統安裝指南</title>
   <meta name="description" content="1.3 於虛擬機器安裝作業系統 | MCU ASIS Ubuntu 系統安裝指南" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1.3 於虛擬機器安裝作業系統 | MCU ASIS Ubuntu 系統安裝指南" />
   <meta property="og:type" content="book" />
-  
   
   
   
@@ -24,7 +23,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2022-02-24" />
+<meta name="date" content="2022-07-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="安裝-virtualbox.html"/>
 <link rel="next" href="ubuntu-的基本設定.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -159,7 +158,12 @@ div.csl-indent {
 <li><a href="./">MCU ASIS Ubuntu 系統安裝指南</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>引言</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>引言</a>
+<ul>
+<li class="chapter" data-level="" data-path="大綱.html"><a href="大綱.html"><i class="fa fa-check"></i>大綱</a></li>
+<li class="chapter" data-level="" data-path="關於我.html"><a href="關於我.html"><i class="fa fa-check"></i>關於我</a></li>
+</ul></li>
+<li class="part"><span><b>I 虛擬主機</b></span></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> 基礎建設</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="事前準備.html"><a href="事前準備.html"><i class="fa fa-check"></i><b>1.1</b> 事前準備</a></li>
@@ -174,10 +178,11 @@ div.csl-indent {
 <li class="chapter" data-level="1.3.2.3" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#網路連線"><i class="fa fa-check"></i><b>1.3.2.3</b> 網路連線</a></li>
 <li class="chapter" data-level="1.3.2.4" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#proxy"><i class="fa fa-check"></i><b>1.3.2.4</b> Proxy</a></li>
 <li class="chapter" data-level="1.3.2.5" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#鏡像-mirror"><i class="fa fa-check"></i><b>1.3.2.5</b> 鏡像 (Mirror)</a></li>
-<li class="chapter" data-level="1.3.2.6" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#安裝程式更新-可能不會出現"><i class="fa fa-check"></i><b>1.3.2.6</b> 安裝程式更新 (可能不會出現)</a></li>
-<li class="chapter" data-level="1.3.2.7" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#系統空間配置-raid-1"><i class="fa fa-check"></i><b>1.3.2.7</b> 系統空間配置 (Raid-1)</a></li>
+<li class="chapter" data-level="1.3.2.6" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#安裝程式更新"><i class="fa fa-check"></i><b>1.3.2.6</b> 安裝程式更新</a></li>
+<li class="chapter" data-level="1.3.2.7" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#系統空間配置"><i class="fa fa-check"></i><b>1.3.2.7</b> 系統空間配置</a></li>
 <li class="chapter" data-level="1.3.2.8" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#使用者設定"><i class="fa fa-check"></i><b>1.3.2.8</b> 使用者設定</a></li>
-<li class="chapter" data-level="1.3.2.9" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#openssh-設定"><i class="fa fa-check"></i><b>1.3.2.9</b> OpenSSH 設定</a></li>
+<li class="chapter" data-level="1.3.2.9" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#openssh-設定-可跳過"><i class="fa fa-check"></i><b>1.3.2.9</b> OpenSSH 設定 [可跳過]</a></li>
+<li class="chapter" data-level="1.3.2.10" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#完成安裝"><i class="fa fa-check"></i><b>1.3.2.10</b> 完成安裝</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -202,7 +207,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#關閉遠端-root-登入"><i class="fa fa-check"></i>關閉遠端 root 登入</a></li>
 <li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#限制能使用-ssh-連線的使用者"><i class="fa fa-check"></i>限制能使用 SSH 連線的使用者</a></li>
 <li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#關閉無密碼的使用者使用-ssh"><i class="fa fa-check"></i>關閉無密碼的使用者使用 SSH</a></li>
-<li><a href="openssh.html#測試-sshd_config-是否有效">測試 <code>sshd_config</code> 是否有效</a></li>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#測試-sshd_config-是否有效"><i class="fa fa-check"></i>測試 <code>sshd_config</code> 是否有效</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="apt.html"><a href="apt.html"><i class="fa fa-check"></i><b>2.3</b> APT</a></li>
@@ -210,6 +215,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.5" data-path="bat-可選.html"><a href="bat-可選.html"><i class="fa fa-check"></i><b>2.5</b> Bat （可選）</a></li>
 <li class="chapter" data-level="2.6" data-path="exa-可選.html"><a href="exa-可選.html"><i class="fa fa-check"></i><b>2.6</b> exa （可選）</a></li>
 </ul></li>
+<li class="part"><span><b>II 軟體安裝</b></span></li>
 <li class="chapter" data-level="3" data-path="lamp.html"><a href="lamp.html"><i class="fa fa-check"></i><b>3</b> LAMP</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="事前準備-2.html"><a href="事前準備-2.html"><i class="fa fa-check"></i><b>3.1</b> 事前準備</a></li>
@@ -267,30 +273,35 @@ div.csl-indent {
 <li class="chapter" data-level="5.4.1" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html#conda-的-python-環境"><i class="fa fa-check"></i><b>5.4.1</b> Conda 的 Python🐍 環境</a></li>
 <li class="chapter" data-level="5.4.2" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html#r-環境"><i class="fa fa-check"></i><b>5.4.2</b> R 環境</a></li>
 <li class="chapter" data-level="5.4.3" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html#c-與-c-環境"><i class="fa fa-check"></i><b>5.4.3</b> C 與 C++ 環境</a></li>
+<li class="chapter" data-level="5.4.4" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html#sas-環境"><i class="fa fa-check"></i><b>5.4.4</b> SAS 環境</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="設置-apache-的-reverse-proxy.html"><a href="設置-apache-的-reverse-proxy.html"><i class="fa fa-check"></i><b>5.5</b> 設置 Apache 的 Reverse Proxy</a></li>
 <li class="chapter" data-level="5.6" data-path="jupyterhub-擴充套件.html"><a href="jupyterhub-擴充套件.html"><i class="fa fa-check"></i><b>5.6</b> JupyterHub 擴充套件</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="附錄.html"><a href="附錄.html"><i class="fa fa-check"></i>附錄</a>
+<li class="appendix"><span><b>附錄</b></span></li>
+<li class="chapter" data-level="A" data-path="相關軟體.html"><a href="相關軟體.html"><i class="fa fa-check"></i><b>A</b> 相關軟體</a>
 <ul>
-<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html"><i class="fa fa-check"></i>PuTTY</a>
+<li class="chapter" data-level="A.1" data-path="putty.html"><a href="putty.html"><i class="fa fa-check"></i><b>A.1</b> PuTTY</a>
 <ul>
-<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#以-putty-產生-key"><i class="fa fa-check"></i>以 PuTTY 產生 key</a>
+<li class="chapter" data-level="A.1.1" data-path="putty.html"><a href="putty.html#以-putty-產生-key"><i class="fa fa-check"></i><b>A.1.1</b> 以 PuTTY 產生 key</a>
 <ul>
-<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#step-1-安裝-putty"><i class="fa fa-check"></i>Step 1 — 安裝 PuTTY</a></li>
-<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#step-2-經由-puttygen-產生-ssh-key-pairs"><i class="fa fa-check"></i>Step 2 — 經由 PuTTYgen 產生 ssh key pairs</a></li>
-<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#step-3-妥善保存好產生的-key"><i class="fa fa-check"></i>Step 3 — 妥善保存好產生的 Key</a></li>
+<li class="chapter" data-level="A.1.1.1" data-path="putty.html"><a href="putty.html#step-1-安裝-putty"><i class="fa fa-check"></i><b>A.1.1.1</b> Step 1 — 安裝 PuTTY</a></li>
+<li class="chapter" data-level="A.1.1.2" data-path="putty.html"><a href="putty.html#step-2-經由-puttygen-產生-ssh-key-pairs"><i class="fa fa-check"></i><b>A.1.1.2</b> Step 2 — 經由 PuTTYgen 產生 ssh key pairs</a></li>
+<li class="chapter" data-level="A.1.1.3" data-path="putty.html"><a href="putty.html#step-3-妥善保存好產生的-key"><i class="fa fa-check"></i><b>A.1.1.3</b> Step 3 — 妥善保存好產生的 Key</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#上傳以-putty-產生的-ssh-key-pairs"><i class="fa fa-check"></i>上傳以 PuTTY 產生的 ssh key pairs</a></li>
-<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#puttygen-產生的-key-pairs-的連線方式"><i class="fa fa-check"></i>PuTTYgen 產生的 key pairs 的連線方式:</a></li>
-<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#更改預設的文本編輯器"><i class="fa fa-check"></i>更改預設的文本編輯器</a></li>
+<li class="chapter" data-level="A.1.2" data-path="putty.html"><a href="putty.html#上傳以-putty-產生的-ssh-key-pairs"><i class="fa fa-check"></i><b>A.1.2</b> 上傳以 PuTTY 產生的 ssh key pairs</a></li>
+<li class="chapter" data-level="A.1.3" data-path="putty.html"><a href="putty.html#puttygen-產生的-key-pairs-的連線方式"><i class="fa fa-check"></i><b>A.1.3</b> PuTTYgen 產生的 key pairs 的連線方式:</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html"><i class="fa fa-check"></i>帳號管理</a>
+</ul></li>
+<li class="chapter" data-level="B" data-path="帳號管理.html"><a href="帳號管理.html"><i class="fa fa-check"></i><b>B</b> 帳號管理</a>
 <ul>
-<li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html#users.sh"><i class="fa fa-check"></i>users.sh</a></li>
-<li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html#generate-sql.sh"><i class="fa fa-check"></i>generate-sql.sh</a></li>
+<li class="chapter" data-level="B.1" data-path="users.html"><a href="users.html"><i class="fa fa-check"></i><b>B.1</b> users.sh</a></li>
+<li class="chapter" data-level="B.2" data-path="generate-sql.html"><a href="generate-sql.html"><i class="fa fa-check"></i><b>B.2</b> generate-sql.sh</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="mysql-8.0-root-密碼重設.html"><a href="mysql-8.0-root-密碼重設.html"><i class="fa fa-check"></i>Mysql 8.0 root 密碼重設</a></li>
+<li class="chapter" data-level="C" data-path="其他.html"><a href="其他.html"><i class="fa fa-check"></i><b>C</b> 其他</a>
+<ul>
+<li class="chapter" data-level="C.1" data-path="更改預設的文本編輯器.html"><a href="更改預設的文本編輯器.html"><i class="fa fa-check"></i><b>C.1</b> 更改預設的文本編輯器</a></li>
+<li class="chapter" data-level="C.2" data-path="mysql-8.0-root-密碼重設.html"><a href="mysql-8.0-root-密碼重設.html"><i class="fa fa-check"></i><b>C.2</b> Mysql 8.0 root 密碼重設</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="參考資料.html"><a href="參考資料.html"><i class="fa fa-check"></i>參考資料</a></li>
 <li class="divider"></li>
@@ -313,17 +324,17 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="於虛擬機器安裝作業系統" class="section level2" number="1.3">
-<h2><span class="header-section-number">1.3</span> 於虛擬機器安裝作業系統</h2>
+<div id="於虛擬機器安裝作業系統" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> 於虛擬機器安裝作業系統<a href="於虛擬機器安裝作業系統.html#於虛擬機器安裝作業系統" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>在安裝完 VirtualBox 後，打開並不會有預先安裝好的作業系統，需要在 VirtualBox 內自行新增虛擬機器後，再將作業系統安裝至虛擬機器內；又或是匯入已經含有作業系統的虛擬機器（*.ova、*.ovf 格式）。</p>
 <p>首先介紹 VirtualBox 的使用者介面:</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:virtualbox-menu"></span>
-<img src="figures/virtualbox-menu.png" alt="VirtualBox 的操作介面"  />
+<img src="figures/virtualbox-menu.png" alt="VirtualBox 的操作介面" width="80%" />
 <p class="caption">
-Figure 1.1: VirtualBox 的操作介面
+圖 1.3: VirtualBox 的操作介面
 </p>
 </div>
-<p>如 <a href="於虛擬機器安裝作業系統.html#fig:virtualbox-menu">1.1</a> 所示，右邊主要功能圖示由左而右的功能分別是:</p>
+<p>如圖 <a href="於虛擬機器安裝作業系統.html#fig:virtualbox-menu">1.3</a> 所示，右邊主要功能圖示由左而右的功能分別是:</p>
 <ol style="list-style-type: decimal">
 <li><code>喜好設定</code>: 設定 VirtualBox 的整體設定，像是軟體語言、虛擬機器預設存放位置…等等</li>
 <li><code>匯入</code>: 匯入虛擬機器檔案 (.ovf)</li>
@@ -331,16 +342,26 @@ Figure 1.1: VirtualBox 的操作介面
 <li><code>新增</code>: 新增<em>新的</em>虛擬機器</li>
 <li><code>加入</code>: 加入<em>已經存在的</em>虛擬機器</li>
 </ol>
-<div id="新增-ubuntu-作業系統設定" class="section level3" number="1.3.1">
-<h3><span class="header-section-number">1.3.1</span> 新增 Ubuntu 作業系統設定</h3>
+<div id="新增-ubuntu-作業系統設定" class="section level3 hasAnchor" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> 新增 Ubuntu 作業系統設定<a href="於虛擬機器安裝作業系統.html#新增-ubuntu-作業系統設定" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>所以要新增新的虛擬機器是按「新增」。</p>
 <p>這裡先點選「專家模式」，專家模式可以一併設定虛擬機器的所有設定。</p>
-<p><img src="figures/new-virtual-machine_0.png" title="new virtual machine" class="figure" /></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
+<img src="figures/new-virtual-machine_0.png" alt="建立虛擬機器，設定虛擬名稱與存放位置" width="80%" />
+<p class="caption">
+圖 1.4: 建立虛擬機器，設定虛擬名稱與存放位置
+</p>
+</div>
 <p>記憶體大小根據每個人電腦的性能做調整，虛擬機器沒用來做什麼事最多4Gb (4 * 1024Mb) 就很夠用了。這裡要注意的一點是，虛擬機器的存放位置，當你要轉移虛擬機器時才不會找不到。</p>
-<p><img src="figures/new-virtual-machine.png" title="new virtual machine" class="figure" /></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-5"></span>
+<img src="figures/new-virtual-machine_1.png" alt="建立虛擬機器，設定記憶體大小與選擇系統" width="80%" />
+<p class="caption">
+圖 1.5: 建立虛擬機器，設定記憶體大小與選擇系統
+</p>
+</div>
 <p>預設的虛擬機器存放位置位於使用者資料夾中的<code>Virtual VMs</code>資料夾，像我的使用者是qaz85，那虛擬機器就位於:</p>
 <pre><code>C:\Users\qaz85\VirtualBox VMs</code></pre>
-<p>從這張圖可以看到伺服器的磁碟配置是由兩個 1Tb 的硬碟組成，且用<a href="http://linux.vbird.org/linux_basic/0420quota.php#raid1">Raid-1</a> (映射模式) 將伺服器同時映射備份至另一個硬碟。</p>
+<p>從列程式碼輸出的硬碟配置，可以看到伺服器的磁碟配置是由兩個 1Tb 的硬碟組成，且用<a href="http://linux.vbird.org/linux_basic/0420quota.php#raid1">Raid-1</a> (映射模式) 將伺服器同時映射備份至另一個硬碟。</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb2-1"><a href="於虛擬機器安裝作業系統.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lsblk</span></span></code></pre></div>
 <pre class="console_output"><code>NAME                       MAJ:MIN RM   SIZE RO TYPE   MOUNTPOINT
 sdb                          8:16   0 931.5G  0 disk
@@ -361,31 +382,71 @@ sda                          8:0    0 931.5G  0 disk
   ├─isw_ecbbadhihd_Raid1p2 253:2    0 852.5G  0 part   /
   └─isw_ecbbadhihd_Raid1p3 253:3    0    32G  0 part   [SWAP]</code></pre>
 <p>所以這裡也選擇跟伺服器一樣的1000Gb做為系統硬碟，類型與版本記得設定為 Linux 與 Ubuntu 64位元 版本。完成之後點擊「建立」。</p>
-<p><img src="figures/new-virtual-machine_1.png" title="new virtual machine" class="figure" /></p>
-<p>這裡我會選 VMDK 格式的原因是因為，如果要轉移虛擬機器檔案時，單一個檔案會輕易地超過 4Gb，而超過此上限得檔案在複製時，如果目的地的裝置格式不是 ntfs 的話，會沒有辦法複製。為了預防這個問題，我在這邊先選擇 VMDK 作為我虛擬機器的檔案格式。</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-6"></span>
+<img src="figures/new-virtual-machine_1.png" alt="建立虛擬機器，完成建立" width="80%" />
+<p class="caption">
+圖 1.6: 建立虛擬機器，完成建立
+</p>
+</div>
+<p>這裡我會選 VMDK 格式的原因是因為，如果要轉移虛擬機器檔案時，單一個檔案會輕易地超過 4Gb，而超過此上限得檔案在複製時，如果目的地的裝置格式不是 ntfs 的話，會沒有辦法複製。為了免去到時候分割虛擬機器的麻煩，我在這邊先選擇 VMDK 作為我虛擬機器的檔案格式。</p>
 <div class="infobox info">
 <p>這裡如果選擇「固定大小」會新增一個跟你設定的檔案大小一樣大的虛擬機器檔案，除非你的硬碟很大，否則不建議這麼做。</p>
 </div>
 <!--# TODO: 這邊可以再加如果虛擬機器已經是 VDI 格式怎麼轉換成 VMDK 格式的教學 -->
 <p>完成後，會在 Virtual Machine 的選單左邊看見剛剛新建的虛擬機器，不過此時的虛擬機器內還沒有作業系統。</p>
 <p>為了要使用跟伺服器一樣的設定，需要再新增另一顆跟原本硬碟一樣大小的硬碟做鏡像備份。點選右邊橘色的齒輪「設定⚙」。</p>
-<p><img src="figures/virtual-machine-created.png" title="virtual machine created" class="figure" /></p>
-<p>在儲存裝置的「控制器：SATA」部分，點選硬碟圖案（有綠色加符號的）新增新的硬碟。</p>
-<p><img src="figures/virtual-machine-setting-storage.png" /></p>
-<p>點選「建立」建立與第一顆硬碟條件一樣的硬碟。</p>
-<p><img src="figures/virtual-machine-setting-storage-new.png" /></p>
-<p>這次我把硬碟取名為 <code>MCU-ASIS_1</code>。</p>
-<p><img src="figures/virtual-machine-setting-storage-new_1.png" /></p>
-<p>完成後，點擊「確定」儲存。</p>
-<p><img src="figures/virtual-machine-setting-storage-new_2.png" /></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-7"></span>
+<img src="figures/virtual-machine-created.png" alt="完成建立虛擬機器" width="80%" />
+<p class="caption">
+圖 1.7: 完成建立虛擬機器
+</p>
 </div>
-<div id="於-virtualbox-安裝作業系統" class="section level3" number="1.3.2">
-<h3><span class="header-section-number">1.3.2</span> 於 VirtualBox 安裝作業系統</h3>
-<p>在安裝作業系統之前，要先下載作業系統，因為目前的院伺服器系統是 Ubuntu 、我自己的 VPS 也是 Ubuntu ，而且我摸得比較熟的也是 Ubuntu 那有什麼理由換掉呢？所以這裡我也以 Ubuntu 作為我們院伺服器主要的系統。</p>
-<p>進到 Ubuntu 官方網站的下載介面，這次我們選擇伺服器版本 (Ubuntu Server) 代替以往的桌面版本 (Ubuntu Desktop)。因為如果是伺服器，不需要圖形介面就可以管理了，相對於桌面版本也較節省資源。</p>
-<p><img src="figures/ubuntu.com-download-page.png" class="figure" /></p>
+<p>在儲存裝置的「控制器：SATA」部分，點選硬碟圖案（有綠色加符號的）新增新的硬碟。</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-8"></span>
+<img src="figures/virtual-machine-setting-storage.png" alt="虛擬機器存放裝置設定" width="80%" />
+<p class="caption">
+圖 1.8: 虛擬機器存放裝置設定
+</p>
+</div>
+<p>點選「建立」建立與第一顆硬碟條件一樣的硬碟。</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-9"></span>
+<img src="figures/virtual-machine-setting-storage-new.png" alt="虛擬機器，管理存放裝置" width="80%" />
+<p class="caption">
+圖 1.9: 虛擬機器，管理存放裝置
+</p>
+</div>
+<p>這次把硬碟取名為 <code>MCU-ASIS_1</code> 作為區分原本的硬碟與新增的硬碟。</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-10"></span>
+<img src="figures/virtual-machine-setting-storage-new_1.png" alt="虛擬機器新增硬碟" width="80%" />
+<p class="caption">
+圖 1.10: 虛擬機器新增硬碟
+</p>
+</div>
+<p>完成後，點擊「確定」儲存。</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-11"></span>
+<img src="figures/virtual-machine-setting-storage-new_2.png" alt="虛擬機器完成存放裝置設定" width="80%" />
+<p class="caption">
+圖 1.11: 虛擬機器完成存放裝置設定
+</p>
+</div>
+</div>
+<div id="於-virtualbox-安裝作業系統" class="section level3 hasAnchor" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> 於 VirtualBox 安裝作業系統<a href="於虛擬機器安裝作業系統.html#於-virtualbox-安裝作業系統" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>在安裝作業系統之前，要先下載作業系統，因為目前的院伺服器系統是 Ubuntu、我自己的 VPS 也是 Ubuntu，而且我摸得比較熟的也是 Ubuntu，所以這裡我也以 Ubuntu作為我們伺服器主要的系統。</p>
+<p>進到 Ubuntu 官方網站的下載介面，這次我們選擇伺服器版本（Ubuntu Server）代替以往的桌面版本（Ubuntu Desktop）。因為如果是伺服器，不需要圖形介面就可以管理了，相對於桌面版本也較節省伺服器資源。</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-12"></span>
+<img src="figures/ubuntu.com-download-page.png" alt="ubuntu.com 官方下載頁面" width="80%" />
+<p class="caption">
+圖 1.12: ubuntu.com 官方下載頁面
+</p>
+</div>
 <p>選擇「Option 2 - Manual server Installation」選項之後，按上面的綠色按鈕「Download Ubuntu Server 20.04.2 LTS」會跳轉到下載頁面，開始下載 Ubuntu 系統映像檔案 (*.iso)。</p>
-<p><img src="figures/ubuntu.com-download-server-page.png" class="figure" /></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-13"></span>
+<img src="figures/ubuntu.com-download-server-page.png" alt="ubuntu.com Ubuntu 伺服器版本下載" width="80%" />
+<p class="caption">
+圖 1.13: ubuntu.com Ubuntu 伺服器版本下載
+</p>
+</div>
 <p>其他選項的簡易說明:</p>
 <ul>
 <li><p><code>Option 1 - Instant Ubuntu VMs</code>: Multipass 是快速部屬虛擬機器的軟體，詳細說明可以看<a href="https://github.com/canonical/multipass">這裡</a>，而這裡我們已經選用 VirtualBox 了所以不會用到</p></li>
@@ -393,55 +454,115 @@ sda                          8:0    0 931.5G  0 disk
 <li><p><code>Option 3 - Automated server provisioning</code>: 利用 <a href="https://maas.io/">MaaS</a> (Metal-as-a-Service) 安裝虛擬機。MaaS是管理數台虛擬機器用的服務，並不局限於 Ubuntu，Windows、CentOS 與 ESXi都可以在上面部屬。</p></li>
 </ul>
 <p>待下載完成後，點擊兩下開啟剛剛創建的「MCU-ASIS」虛擬機器，會跳出一個選擇啟動磁碟的訊息提示視窗，這裡我們點擊右下角的資料夾📁。</p>
-<p><img src="figures/ubuntu-install-select-iso.png" class="figure" /></p>
-<p>按「加入」並選擇剛剛下載下來的映像檔案 (ubuntu-20.04.2-live-server-amd64.iso)。加入完成後按「選擇」，接著按「開始」掛載映像檔案至虛擬機器中開始安裝。</p>
-<p><img src="figures/select-iso.png" class="figure" /></p>
-<div id="語言" class="section level4" number="1.3.2.1">
-<h4><span class="header-section-number">1.3.2.1</span> 語言</h4>
-<p>稍待 Ubuntu 作業系統映像檔載入後，安裝程式會跳出選擇語言的畫面，在這裡選擇適合你的語言。</p>
-<p><img src="figures/ubuntu-configuration-select-lang.png" class="figure" /></p>
-<p>在安裝過程中使用方向鍵⬆️⬇️⬅️➡️ (選擇)、Enter↪️ (確認) 與 Esc (返回) 操控安裝程式介面。</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-14"></span>
+<img src="figures/ubuntu-install-select-iso.png" alt="虛擬主機，選擇開機位置" width="80%" />
+<p class="caption">
+圖 1.14: 虛擬主機，選擇開機位置
+</p>
 </div>
-<div id="鍵盤配置" class="section level4" number="1.3.2.2">
-<h4><span class="header-section-number">1.3.2.2</span> 鍵盤配置</h4>
+<p>按「加入」並選擇剛剛下載下來的映像檔案 (ubuntu-20.04.2-live-server-amd64.iso)。加入完成後按「選擇」，接著按「開始」掛載映像檔案至虛擬機器中開始安裝。</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-15"></span>
+<img src="figures/select-iso.png" alt="選擇映像檔案載入" width="80%" />
+<p class="caption">
+圖 1.15: 選擇映像檔案載入
+</p>
+</div>
+<div id="語言" class="section level4 hasAnchor" number="1.3.2.1">
+<h4><span class="header-section-number">1.3.2.1</span> 語言<a href="於虛擬機器安裝作業系統.html#語言" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>稍待 Ubuntu 作業系統映像檔載入後，安裝程式會跳出選擇語言的畫面，在這裡選擇適合你的語言。</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-16"></span>
+<img src="figures/ubuntu-configuration-select-lang.png" alt="Ubuntu 安裝畫面，選擇系統語言" width="80%" />
+<p class="caption">
+圖 1.16: Ubuntu 安裝畫面，選擇系統語言
+</p>
+</div>
+<p>在安裝過程中使用方向鍵⬆️⬇️⬅️➡️（選擇）、Enter↪️（確認）與 Esc（返回）操控安裝程式介面。</p>
+</div>
+<div id="鍵盤配置" class="section level4 hasAnchor" number="1.3.2.2">
+<h4><span class="header-section-number">1.3.2.2</span> 鍵盤配置<a href="於虛擬機器安裝作業系統.html#鍵盤配置" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>這裡可以設定鍵盤的:</p>
 <ul>
 <li><p><code>Layout</code> (布局): 鍵盤的語言</p></li>
 <li><p><code>Variant</code> (鍵位): 一般在台灣都是用 QWERTY 配置，詳細說明可以在<a href="https://zh.wikipedia.org/wiki/%E9%94%AE%E7%9B%98%E5%B8%83%E5%B1%80">這</a>找到</p></li>
 </ul>
-<p><img src="figures/installer-keyboard.png" /></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-17"></span>
+<img src="figures/installer-keyboard.png" alt="Ubuntu 安裝畫面，選擇鍵盤配置" width="80%" />
+<p class="caption">
+圖 1.17: Ubuntu 安裝畫面，選擇鍵盤配置
+</p>
 </div>
-<div id="網路連線" class="section level4" number="1.3.2.3">
-<h4><span class="header-section-number">1.3.2.3</span> 網路連線</h4>
+</div>
+<div id="網路連線" class="section level4 hasAnchor" number="1.3.2.3">
+<h4><span class="header-section-number">1.3.2.3</span> 網路連線<a href="於虛擬機器安裝作業系統.html#網路連線" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>這裡可以設定 Ubuntu 的網路連線，預設是由 DHCP 設定，通常不用變更，如果這裡連線失敗，也可以等開機後再做設定。</p>
-<p><img src="figures/installer-network.png" /></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-18"></span>
+<img src="figures/installer-network.png" alt="Ubuntu 安裝畫面，網路連線設定" width="80%" />
+<p class="caption">
+圖 1.18: Ubuntu 安裝畫面，網路連線設定
+</p>
 </div>
-<div id="proxy" class="section level4" number="1.3.2.4">
-<h4><span class="header-section-number">1.3.2.4</span> Proxy</h4>
-<p>除非網路需要設定 proxy (代理伺服器)，否則不需要設定。</p>
-<p><img src="figures/installer-proxy.png" /></p>
 </div>
-<div id="鏡像-mirror" class="section level4" number="1.3.2.5">
-<h4><span class="header-section-number">1.3.2.5</span> 鏡像 (Mirror)</h4>
+<div id="proxy" class="section level4 hasAnchor" number="1.3.2.4">
+<h4><span class="header-section-number">1.3.2.4</span> Proxy<a href="於虛擬機器安裝作業系統.html#proxy" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>除非網路需要設定 proxy（代理伺服器），否則不需要設定。</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-19"></span>
+<img src="figures/installer-proxy.png" alt="Ubuntu 安裝畫面，proxy 設定" width="80%" />
+<p class="caption">
+圖 1.19: Ubuntu 安裝畫面，proxy 設定
+</p>
+</div>
+</div>
+<div id="鏡像-mirror" class="section level4 hasAnchor" number="1.3.2.5">
+<h4><span class="header-section-number">1.3.2.5</span> 鏡像 (Mirror)<a href="於虛擬機器安裝作業系統.html#鏡像-mirror" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>同上，不需要特別設定 mirror (鏡像)，安裝程式會自動判斷選擇哪個地方的鏡像網址更新。</p>
-<p><img src="figures/installer-mirror.png" /></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-20"></span>
+<img src="figures/installer-mirror.png" alt="Ubuntu 安裝畫面，套件鏡像位置設定" width="80%" />
+<p class="caption">
+圖 1.20: Ubuntu 安裝畫面，套件鏡像位置設定
+</p>
 </div>
-<div id="安裝程式更新-可能不會出現" class="section level4" number="1.3.2.6">
-<h4><span class="header-section-number">1.3.2.6</span> 安裝程式更新 (可能不會出現)</h4>
-<p>如果出現了這個畫面代表安裝程式有新的版本，可以在安裝時順便更新，當然，也可以在系統安裝完後更新。</p>
-<p><img src="figures/installer-update.png" /></p>
 </div>
-<div id="系統空間配置-raid-1" class="section level4" number="1.3.2.7">
-<h4><span class="header-section-number">1.3.2.7</span> 系統空間配置 (Raid-1)</h4>
-<!--# TODO: 補充前言 -->
-<p>這裡選擇下面的「Custom storage layout」。以下 Raid-1 相關的設定是參考 <span class="citation">(<a href="#ref-evangelou_2020" role="doc-biblioref">Evangelou 2020</a>)</span> 的 Gist 翻譯成中文寫的。</p>
-<p><img src="figures/installer-storage.png" /></p>
+<div id="安裝程式更新" class="section level4 hasAnchor" number="1.3.2.6">
+<h4><span class="header-section-number">1.3.2.6</span> 安裝程式更新<a href="於虛擬機器安裝作業系統.html#安裝程式更新" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>當 Ubuntu 在安裝過程中，如果有連上網路，安裝程式會偵測當前的安裝程式是否需要更新，如果出現了這個畫面代表安裝程式有新的版本，可以在安裝時順便更新，當然，也可以在系統安裝完後更新。</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-21"></span>
+<img src="figures/installer-update.png" alt="Ubuntu 安裝畫面" width="80%" />
+<p class="caption">
+圖 1.21: Ubuntu 安裝畫面
+</p>
+</div>
+</div>
+<div id="系統空間配置" class="section level4 hasAnchor" number="1.3.2.7">
+<h4><span class="header-section-number">1.3.2.7</span> 系統空間配置<a href="於虛擬機器安裝作業系統.html#系統空間配置" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<!-- TODO: 本頁面書要更新，現在 2022 搞不好修好了 -->
+<!-- TODO: 補充 raid 說明 -->
+<p>這裡選擇下面的「Custom storage layout」，因為伺服器硬碟不是使用尋常的設定。以下 Raid-1 相關的設定是參考 <span class="citation">(<a href="#ref-evangelou_2020" role="doc-biblioref">Evangelou 2020</a>)</span> 的 Gist 翻譯成中文寫的。</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-22"></span>
+<img src="figures/installer-storage.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%" />
+<p class="caption">
+圖 1.22: Ubuntu 安裝程式，磁碟配置導覽
+</p>
+</div>
 <ul>
-<li><p>如果選錯了、或是硬碟中有已經分割好的磁區也沒關係，從 AVAILABLE DEVICES 下面選擇硬碟 ➜ 「Reformat」 ➜ 「Reformat」，這會把硬碟格式化。</p>
-<p><img src="figures/installer-storage_1.png" /></p></li>
-<li><p>選擇第一個磁碟 ➜ 「Use As Boot Device」 當作開機磁碟</p>
-<p><img src="figures/installer-storage_2.png" /></p></li>
-<li><p>對第二個磁碟「VBOX_HARDDISK_VBdc8cc122-e9b43569」也做同樣的事情。</p></li>
+<li>如果選錯了、或是硬碟中有已經分割好的磁區也沒關係，從 AVAILABLE DEVICES 下面選擇硬碟 ➜ 「Reformat」 ➜ 「Reformat」，這會把硬碟格式化。</li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-23"></span>
+<img src="figures/installer-storage_1.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%" />
+<p class="caption">
+圖 1.23: Ubuntu 安裝程式，磁碟配置導覽
+</p>
+</div>
+<ul>
+<li>選擇第一個磁碟 ➜ 「Use As Boot Device」 當作開機磁碟</li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-24"></span>
+<img src="figures/installer-storage_2.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%" />
+<p class="caption">
+圖 1.24: Ubuntu 安裝程式，磁碟配置導覽
+</p>
+</div>
+<ul>
+<li>對第二個磁碟「VBOX_HARDDISK_VBdc8cc122-e9b43569」也做同樣的事情。</li>
 </ul>
 <div class="infobox caution">
 <p>目前版本 20.04.2 live server 有個 bug，當你要新增為開機硬碟 (Boot Device) 時，要在建立其他三個分區 (<code>/</code> 、 <code>/boot</code> 和 <code>[SWAP]</code>)之前，先設定好，不然 1Mb 的 grub 分區會消失。(我只有從現過錯誤一次 2021.07.21)</p>
@@ -458,44 +579,97 @@ sda                          8:0    0 931.5G  0 disk
 <li><p>Size: <code>1G</code></p></li>
 <li><p>Format: <code>[ Leave unformatted ▾ ]</code></p></li>
 </ul></li>
-<li><p>對第二顆硬碟做同樣的事。</p>
-<p><img src="figures/installer-storage_3.png" /></p></li>
+<li><p>對第二顆硬碟做同樣的事。</p></li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-25"></span>
+<img src="figures/installer-storage_3.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%" />
+<p class="caption">
+圖 1.25: Ubuntu 安裝程式，磁碟配置導覽
+</p>
+</div>
+<ul>
 <li><p>再來是 <code>[SWAP]</code> 磁區，一般來說會用實體記憶體容量 ⨉ 2 作為 <code>[SWAP]</code> 磁區的容量，這裡我怕空間太少先用 32Gb。選擇第一個磁碟 ➜ 「Add GPT Partitation」，照下面的設定設定後，按「Create」。</p>
 <ul>
 <li><p>Size: <code>32G</code></p></li>
 <li><p>Format: <code>[ Leave unformatted ▾ ]</code></p></li>
 </ul></li>
-<li><p>對第二顆硬碟做同樣的事。</p>
-<p><img src="figures/installer-storage_4.png" /></p></li>
+<li><p>對第二顆硬碟做同樣的事。</p></li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-26"></span>
+<img src="figures/installer-storage_4.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%" />
+<p class="caption">
+圖 1.26: Ubuntu 安裝程式，磁碟配置導覽
+</p>
+</div>
+<ul>
 <li><p>最後才是系統硬碟 <code>/</code> ，系統硬碟使用 <code>/boot</code> 、<code>[SWAP]</code> 與 <code>grub</code> 剩下來的空間。選擇第一個磁碟 ➜ 「Add GPT Partitation」，照下面的設定設定後，按「Create」。</p>
 <ul>
 <li><p>Size: <code>留空</code> 預設為剩下硬碟的容量，正是我們所要的</p></li>
 <li><p>Format: <code>[ Leave unformatted ▾ ]</code></p></li>
 </ul></li>
-<li><p>對第二顆硬碟做同樣的事。</p>
-<p><img src="figures/installer-storage_5.png" /></p></li>
-<li><p>接著設定 Raid-1。選取「[ Create software RAID (md) ▸ ]」，選取兩個「partition 2」建立 <code>md0</code> softRaid 磁區</p>
-<p><img src="figures/installer-storage_6.png" /></p></li>
+<li><p>對第二顆硬碟做同樣的事。</p></li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-27"></span>
+<img src="figures/installer-storage_5.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%" />
+<p class="caption">
+圖 1.27: Ubuntu 安裝程式，磁碟配置導覽
+</p>
+</div>
+<ul>
+<li>接著設定 Raid-1。選取「[ Create software RAID (md) ▸ ]」，選取兩個「partition 2」建立 <code>md0</code> softRaid 磁區</li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-28"></span>
+<img src="figures/installer-storage_6.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%" />
+<p class="caption">
+圖 1.28: Ubuntu 安裝程式，磁碟配置導覽
+</p>
+</div>
+<ul>
 <li><p>同上，選取「[ Create software RAID (md) ▸ ]」，選取兩個「partition 3」建立 <code>md1</code> softRaid 磁區</p></li>
-<li><p>同上，選取「[ Create software RAID (md) ▸ ]」，選取兩個「partition 4」建立 <code>md2</code> softRaid 磁區</p>
-<p><img src="figures/installer-storage_7.png" /></p></li>
+<li><p>同上，選取「[ Create software RAID (md) ▸ ]」，選取兩個「partition 4」建立 <code>md2</code> softRaid 磁區</p></li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-29"></span>
+<img src="figures/installer-storage_7.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%" />
+<p class="caption">
+圖 1.29: Ubuntu 安裝程式，磁碟配置導覽
+</p>
+</div>
+<ul>
 <li><p>選擇 <code>md0 (new)</code> ➜ format ➜ Format: 選擇 <code>ext4</code> 格式 ➜ Mount: 掛載於 <code>/boot</code> ➜ 完成後選擇 Done</p></li>
 <li><p>選擇 <code>md1 (new)</code> ➜ format ➜ Format: 選擇 <code>swap</code> 格式 ➜ 完成後選擇 Done</p></li>
 <li><p>選擇 <code>md2 (new)</code> ➜ format ➜ Format: 選擇 <code>ext4</code> 格式 ➜ Mount: 掛載於 <code>/</code> ➜ 完成後選擇 Done</p></li>
 <li><p>設定完成🎉，整體設定截圖:<br />
-<img src="figures/installer-storage_8.png" /></p></li>
+</p></li>
 </ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-30"></span>
+<img src="figures/installer-storage_8.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%" />
+<p class="caption">
+圖 1.30: Ubuntu 安裝程式，磁碟配置導覽
+</p>
+</div>
 <!-- -->
 <ul>
-<li><p>截圖（續）</p>
-<p><img src="figures/installer-storage_9.png" /></p></li>
-<li><p>在最下面選擇「Done」，至下一步。</p></li>
+<li>截圖（續）</li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-31"></span>
+<img src="figures/installer-storage_9.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%" />
+<p class="caption">
+圖 1.31: Ubuntu 安裝程式，磁碟配置導覽
+</p>
+</div>
+<ul>
+<li>在最下面選擇「Done」，至下一步。</li>
 </ul>
 </div>
-<div id="使用者設定" class="section level4" number="1.3.2.8">
-<h4><span class="header-section-number">1.3.2.8</span> 使用者設定</h4>
+<div id="使用者設定" class="section level4 hasAnchor" number="1.3.2.8">
+<h4><span class="header-section-number">1.3.2.8</span> 使用者設定<a href="於虛擬機器安裝作業系統.html#使用者設定" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>在這邊設定自己的使用者名稱與電腦名稱。</p>
-<p><img src="figures/installer-profile-configuration.png" /></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-32"></span>
+<img src="figures/installer-profile-configuration.png" alt="Ubuntu 安裝程式，使用者設定" width="80%" />
+<p class="caption">
+圖 1.32: Ubuntu 安裝程式，使用者設定
+</p>
+</div>
 <ul>
 <li><p>Your name: <code>asis</code></p></li>
 <li><p>Your server’s name: <code>asis01</code></p></li>
@@ -504,33 +678,57 @@ sda                          8:0    0 931.5G  0 disk
 <li><p>Confirm your password: <code>asis</code></p></li>
 </ul>
 </div>
-<div id="openssh-設定" class="section level4" number="1.3.2.9">
-<h4><span class="header-section-number">1.3.2.9</span> OpenSSH 設定</h4>
+<div id="openssh-設定-可跳過" class="section level4 hasAnchor" number="1.3.2.9">
+<h4><span class="header-section-number">1.3.2.9</span> OpenSSH 設定 [可跳過]<a href="於虛擬機器安裝作業系統.html#openssh-設定-可跳過" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>OpenSSH 是使用 SSH 通訊協定來遠端連線電腦的工具。防止連線中被竊聽、劫持或是其他攻擊。如果沒有擁有 Github 帳號這裡可以先跳過，於第二章會重新介紹怎麼設定 OpenSSH 伺服器。</p>
-<div id="從-github-匯入已經儲存的-public-key" class="section level5" number="1.3.2.9.1">
-<h5><span class="header-section-number">1.3.2.9.1</span> 從 Github 匯入已經儲存的 public key</h5>
+<div id="從-github-匯入已經儲存的-public-key" class="section level5 hasAnchor" number="1.3.2.9.1">
+<h5><span class="header-section-number">1.3.2.9.1</span> 從 Github 匯入已經儲存的 public key<a href="於虛擬機器安裝作業系統.html#從-github-匯入已經儲存的-public-key" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>這裡將 Allow password authentication over SSH 取消打勾，經由 SSH 連線至虛擬機器時，關閉使用者密碼認證，改由 SSH key pairs 登入。</p>
 <div class="infobox info">
 <p>如果沒有持有 Github 帳號儲存的 public key，請把 Allow password authentication over SSH 打勾，待上傳完 public key 再把使用密碼登入關閉。</p>
 </div>
 <p>另外，我已經透過 Github 儲存過我的 public key 副本，所以這邊可以直接從 Github 匯入 public key。</p>
-<p><img src="figures/installer-SSH.png" /></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-33"></span>
+<img src="figures/installer-SSH.png" alt="Ubuntu 安裝程式，導入 SSH 公鑰" width="80%" />
+<p class="caption">
+圖 1.33: Ubuntu 安裝程式，導入 SSH 公鑰
+</p>
+</div>
 <div class="infobox info">
 <p>如果這邊不匯入的話，也可以待稍後開機後再用指令 <code>ssh-import-id-gh &lt;username&gt;</code> 匯入。</p>
 </div>
 <p>點選「Yes」後開始匯入程序。</p>
-<p><img src="figures/installer-SSH_1.png" /></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-34"></span>
+<img src="figures/installer-SSH_1.png" alt="Ubuntu 安裝程式，導入 SSH 公鑰" width="80%" />
+<p class="caption">
+圖 1.34: Ubuntu 安裝程式，導入 SSH 公鑰
+</p>
+</div>
 <p>匯入成功後就能經由含有 Github 副本的 SSH key pairs 主機連線至虛擬機器</p>
-<p><img src="figures/installer-installing-system.png" /></p>
+</div>
+</div>
+<div id="完成安裝" class="section level4 hasAnchor" number="1.3.2.10">
+<h4><span class="header-section-number">1.3.2.10</span> 完成安裝<a href="於虛擬機器安裝作業系統.html#完成安裝" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>這個頁面是預覽 Ubuntu 安裝程式做過了什麼，都會記錄在這裡，通常不會有什麼問題所以可以不用理他，待安裝完成即可。</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-35"></span>
+<img src="figures/installer-installing-system.png" alt="Ubuntu 安裝程式，安裝紀錄" width="80%" />
+<p class="caption">
+圖 1.35: Ubuntu 安裝程式，安裝紀錄
+</p>
+</div>
 <p>安裝完成後選擇「Reboot Now」重新啟動</p>
-<p><img src="figures/installer-install-complete.png" /></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-36"></span>
+<img src="figures/installer-install-complete.png" alt="Ubuntu安裝程式，完成安裝" width="80%" />
+<p class="caption">
+圖 1.36: Ubuntu安裝程式，完成安裝
+</p>
+</div>
 
 </div>
 </div>
 </div>
-</div>
 <!-- </div> -->
-<h3>參考資料</h3>
+<h3>參考資料<a href="參考資料.html#參考資料" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-evangelou_2020" class="csl-entry">
 Evangelou, Fotis. 2020. <span>“Looking to Create a Software RAID 1 Setup for Your 2-Disk Server on Ubuntu Server 20.04?”</span> <em>Gist.io</em>. <a href="https://gist.io/@fevangelou/2f7aa0d9b5cb42d783302727665bf80a">https://gist.io/@fevangelou/2f7aa0d9b5cb42d783302727665bf80a</a>.

@@ -4,19 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Mysql 8.0 root 密碼重設 | MCU ASIS Ubuntu 系統安裝指南</title>
-  <meta name="description" content="Mysql 8.0 root 密碼重設 | MCU ASIS Ubuntu 系統安裝指南" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <title>C.2 Mysql 8.0 root 密碼重設 | MCU ASIS Ubuntu 系統安裝指南</title>
+  <meta name="description" content="C.2 Mysql 8.0 root 密碼重設 | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Mysql 8.0 root 密碼重設 | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta property="og:title" content="C.2 Mysql 8.0 root 密碼重設 | MCU ASIS Ubuntu 系統安裝指南" />
   <meta property="og:type" content="book" />
-  
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Mysql 8.0 root 密碼重設 | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta name="twitter:title" content="C.2 Mysql 8.0 root 密碼重設 | MCU ASIS Ubuntu 系統安裝指南" />
   
   
   
@@ -24,16 +23,15 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2022-02-24" />
+<meta name="date" content="2022-07-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="帳號管理.html"/>
+<link rel="prev" href="更改預設的文本編輯器.html"/>
 <link rel="next" href="參考資料.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -159,7 +158,12 @@ div.csl-indent {
 <li><a href="./">MCU ASIS Ubuntu 系統安裝指南</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>引言</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>引言</a>
+<ul>
+<li class="chapter" data-level="" data-path="大綱.html"><a href="大綱.html"><i class="fa fa-check"></i>大綱</a></li>
+<li class="chapter" data-level="" data-path="關於我.html"><a href="關於我.html"><i class="fa fa-check"></i>關於我</a></li>
+</ul></li>
+<li class="part"><span><b>I 虛擬主機</b></span></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> 基礎建設</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="事前準備.html"><a href="事前準備.html"><i class="fa fa-check"></i><b>1.1</b> 事前準備</a></li>
@@ -174,10 +178,11 @@ div.csl-indent {
 <li class="chapter" data-level="1.3.2.3" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#網路連線"><i class="fa fa-check"></i><b>1.3.2.3</b> 網路連線</a></li>
 <li class="chapter" data-level="1.3.2.4" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#proxy"><i class="fa fa-check"></i><b>1.3.2.4</b> Proxy</a></li>
 <li class="chapter" data-level="1.3.2.5" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#鏡像-mirror"><i class="fa fa-check"></i><b>1.3.2.5</b> 鏡像 (Mirror)</a></li>
-<li class="chapter" data-level="1.3.2.6" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#安裝程式更新-可能不會出現"><i class="fa fa-check"></i><b>1.3.2.6</b> 安裝程式更新 (可能不會出現)</a></li>
-<li class="chapter" data-level="1.3.2.7" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#系統空間配置-raid-1"><i class="fa fa-check"></i><b>1.3.2.7</b> 系統空間配置 (Raid-1)</a></li>
+<li class="chapter" data-level="1.3.2.6" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#安裝程式更新"><i class="fa fa-check"></i><b>1.3.2.6</b> 安裝程式更新</a></li>
+<li class="chapter" data-level="1.3.2.7" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#系統空間配置"><i class="fa fa-check"></i><b>1.3.2.7</b> 系統空間配置</a></li>
 <li class="chapter" data-level="1.3.2.8" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#使用者設定"><i class="fa fa-check"></i><b>1.3.2.8</b> 使用者設定</a></li>
-<li class="chapter" data-level="1.3.2.9" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#openssh-設定"><i class="fa fa-check"></i><b>1.3.2.9</b> OpenSSH 設定</a></li>
+<li class="chapter" data-level="1.3.2.9" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#openssh-設定-可跳過"><i class="fa fa-check"></i><b>1.3.2.9</b> OpenSSH 設定 [可跳過]</a></li>
+<li class="chapter" data-level="1.3.2.10" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#完成安裝"><i class="fa fa-check"></i><b>1.3.2.10</b> 完成安裝</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -202,7 +207,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#關閉遠端-root-登入"><i class="fa fa-check"></i>關閉遠端 root 登入</a></li>
 <li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#限制能使用-ssh-連線的使用者"><i class="fa fa-check"></i>限制能使用 SSH 連線的使用者</a></li>
 <li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#關閉無密碼的使用者使用-ssh"><i class="fa fa-check"></i>關閉無密碼的使用者使用 SSH</a></li>
-<li><a href="openssh.html#測試-sshd_config-是否有效">測試 <code>sshd_config</code> 是否有效</a></li>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#測試-sshd_config-是否有效"><i class="fa fa-check"></i>測試 <code>sshd_config</code> 是否有效</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="apt.html"><a href="apt.html"><i class="fa fa-check"></i><b>2.3</b> APT</a></li>
@@ -210,6 +215,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.5" data-path="bat-可選.html"><a href="bat-可選.html"><i class="fa fa-check"></i><b>2.5</b> Bat （可選）</a></li>
 <li class="chapter" data-level="2.6" data-path="exa-可選.html"><a href="exa-可選.html"><i class="fa fa-check"></i><b>2.6</b> exa （可選）</a></li>
 </ul></li>
+<li class="part"><span><b>II 軟體安裝</b></span></li>
 <li class="chapter" data-level="3" data-path="lamp.html"><a href="lamp.html"><i class="fa fa-check"></i><b>3</b> LAMP</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="事前準備-2.html"><a href="事前準備-2.html"><i class="fa fa-check"></i><b>3.1</b> 事前準備</a></li>
@@ -267,30 +273,35 @@ div.csl-indent {
 <li class="chapter" data-level="5.4.1" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html#conda-的-python-環境"><i class="fa fa-check"></i><b>5.4.1</b> Conda 的 Python🐍 環境</a></li>
 <li class="chapter" data-level="5.4.2" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html#r-環境"><i class="fa fa-check"></i><b>5.4.2</b> R 環境</a></li>
 <li class="chapter" data-level="5.4.3" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html#c-與-c-環境"><i class="fa fa-check"></i><b>5.4.3</b> C 與 C++ 環境</a></li>
+<li class="chapter" data-level="5.4.4" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html#sas-環境"><i class="fa fa-check"></i><b>5.4.4</b> SAS 環境</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="設置-apache-的-reverse-proxy.html"><a href="設置-apache-的-reverse-proxy.html"><i class="fa fa-check"></i><b>5.5</b> 設置 Apache 的 Reverse Proxy</a></li>
 <li class="chapter" data-level="5.6" data-path="jupyterhub-擴充套件.html"><a href="jupyterhub-擴充套件.html"><i class="fa fa-check"></i><b>5.6</b> JupyterHub 擴充套件</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="附錄.html"><a href="附錄.html"><i class="fa fa-check"></i>附錄</a>
+<li class="appendix"><span><b>附錄</b></span></li>
+<li class="chapter" data-level="A" data-path="相關軟體.html"><a href="相關軟體.html"><i class="fa fa-check"></i><b>A</b> 相關軟體</a>
 <ul>
-<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html"><i class="fa fa-check"></i>PuTTY</a>
+<li class="chapter" data-level="A.1" data-path="putty.html"><a href="putty.html"><i class="fa fa-check"></i><b>A.1</b> PuTTY</a>
 <ul>
-<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#以-putty-產生-key"><i class="fa fa-check"></i>以 PuTTY 產生 key</a>
+<li class="chapter" data-level="A.1.1" data-path="putty.html"><a href="putty.html#以-putty-產生-key"><i class="fa fa-check"></i><b>A.1.1</b> 以 PuTTY 產生 key</a>
 <ul>
-<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#step-1-安裝-putty"><i class="fa fa-check"></i>Step 1 — 安裝 PuTTY</a></li>
-<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#step-2-經由-puttygen-產生-ssh-key-pairs"><i class="fa fa-check"></i>Step 2 — 經由 PuTTYgen 產生 ssh key pairs</a></li>
-<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#step-3-妥善保存好產生的-key"><i class="fa fa-check"></i>Step 3 — 妥善保存好產生的 Key</a></li>
+<li class="chapter" data-level="A.1.1.1" data-path="putty.html"><a href="putty.html#step-1-安裝-putty"><i class="fa fa-check"></i><b>A.1.1.1</b> Step 1 — 安裝 PuTTY</a></li>
+<li class="chapter" data-level="A.1.1.2" data-path="putty.html"><a href="putty.html#step-2-經由-puttygen-產生-ssh-key-pairs"><i class="fa fa-check"></i><b>A.1.1.2</b> Step 2 — 經由 PuTTYgen 產生 ssh key pairs</a></li>
+<li class="chapter" data-level="A.1.1.3" data-path="putty.html"><a href="putty.html#step-3-妥善保存好產生的-key"><i class="fa fa-check"></i><b>A.1.1.3</b> Step 3 — 妥善保存好產生的 Key</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#上傳以-putty-產生的-ssh-key-pairs"><i class="fa fa-check"></i>上傳以 PuTTY 產生的 ssh key pairs</a></li>
-<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#puttygen-產生的-key-pairs-的連線方式"><i class="fa fa-check"></i>PuTTYgen 產生的 key pairs 的連線方式:</a></li>
-<li class="chapter" data-level="" data-path="putty.html"><a href="putty.html#更改預設的文本編輯器"><i class="fa fa-check"></i>更改預設的文本編輯器</a></li>
+<li class="chapter" data-level="A.1.2" data-path="putty.html"><a href="putty.html#上傳以-putty-產生的-ssh-key-pairs"><i class="fa fa-check"></i><b>A.1.2</b> 上傳以 PuTTY 產生的 ssh key pairs</a></li>
+<li class="chapter" data-level="A.1.3" data-path="putty.html"><a href="putty.html#puttygen-產生的-key-pairs-的連線方式"><i class="fa fa-check"></i><b>A.1.3</b> PuTTYgen 產生的 key pairs 的連線方式:</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html"><i class="fa fa-check"></i>帳號管理</a>
+</ul></li>
+<li class="chapter" data-level="B" data-path="帳號管理.html"><a href="帳號管理.html"><i class="fa fa-check"></i><b>B</b> 帳號管理</a>
 <ul>
-<li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html#users.sh"><i class="fa fa-check"></i>users.sh</a></li>
-<li class="chapter" data-level="" data-path="帳號管理.html"><a href="帳號管理.html#generate-sql.sh"><i class="fa fa-check"></i>generate-sql.sh</a></li>
+<li class="chapter" data-level="B.1" data-path="users.html"><a href="users.html"><i class="fa fa-check"></i><b>B.1</b> users.sh</a></li>
+<li class="chapter" data-level="B.2" data-path="generate-sql.html"><a href="generate-sql.html"><i class="fa fa-check"></i><b>B.2</b> generate-sql.sh</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="mysql-8.0-root-密碼重設.html"><a href="mysql-8.0-root-密碼重設.html"><i class="fa fa-check"></i>Mysql 8.0 root 密碼重設</a></li>
+<li class="chapter" data-level="C" data-path="其他.html"><a href="其他.html"><i class="fa fa-check"></i><b>C</b> 其他</a>
+<ul>
+<li class="chapter" data-level="C.1" data-path="更改預設的文本編輯器.html"><a href="更改預設的文本編輯器.html"><i class="fa fa-check"></i><b>C.1</b> 更改預設的文本編輯器</a></li>
+<li class="chapter" data-level="C.2" data-path="mysql-8.0-root-密碼重設.html"><a href="mysql-8.0-root-密碼重設.html"><i class="fa fa-check"></i><b>C.2</b> Mysql 8.0 root 密碼重設</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="參考資料.html"><a href="參考資料.html"><i class="fa fa-check"></i>參考資料</a></li>
 <li class="divider"></li>
@@ -313,23 +324,23 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="mysql-8.0-root-密碼重設" class="section level2 unnumbered">
-<h2>Mysql 8.0 root 密碼重設</h2>
+<div id="mysql-8.0-root-密碼重設" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">C.2</span> Mysql 8.0 root 密碼重設<a href="mysql-8.0-root-密碼重設.html#mysql-8.0-root-密碼重設" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>先建立一個含有改變 root 密碼的 sql 語法文字檔案</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb245-1"><a href="mysql-8.0-root-密碼重設.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> mysql-init</span></code></pre></div>
-<div class="sourceCode" id="cb246"><pre class="sourceCode sqlmysql"><code class="sourceCode sqlmysql"><span id="cb246-1"><a href="mysql-8.0-root-密碼重設.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="fu">USER</span> <span class="st">&#39;root&#39;</span>@<span class="st">&#39;localhost&#39;</span> IDENTIFIED <span class="kw">with</span> caching_sha2_password <span class="kw">by</span> <span class="st">&#39;&lt;新的 root 密碼&gt;&#39;</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb251-1"><a href="mysql-8.0-root-密碼重設.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> mysql-init</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode sqlmysql"><code class="sourceCode sqlmysql"><span id="cb252-1"><a href="mysql-8.0-root-密碼重設.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="fu">USER</span> <span class="st">&#39;root&#39;</span>@<span class="st">&#39;localhost&#39;</span> IDENTIFIED <span class="kw">with</span> caching_sha2_password <span class="kw">by</span> <span class="st">&#39;&lt;新的 root 密碼&gt;&#39;</span>;</span></code></pre></div>
 <p>如存好後將擁有者與使用者群組改成 <code>mysql</code> 後，移至 <code>/tmp</code> 資料夾，使 mysql 使用者可以存取。</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb247-1"><a href="mysql-8.0-root-密碼重設.html#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> mysql.mysql mysql-init <span class="kw">&amp;&amp;</span> <span class="fu">mv</span> mysql-init /tmp</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb253-1"><a href="mysql-8.0-root-密碼重設.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> mysql.mysql mysql-init <span class="kw">&amp;&amp;</span> <span class="fu">mv</span> mysql-init /tmp</span></code></pre></div>
 <p>切換至 root 使用者進行後續操作</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb248-1"><a href="mysql-8.0-root-密碼重設.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span></span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb254-1"><a href="mysql-8.0-root-密碼重設.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span></span></code></pre></div>
 <p>將目前的 mysql 關閉</p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb249-1"><a href="mysql-8.0-root-密碼重設.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="fu">killall</span> <span class="at">-9</span> mysqld</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb255-1"><a href="mysql-8.0-root-密碼重設.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="fu">killall</span> <span class="at">-9</span> mysqld</span></code></pre></div>
 <p>或是使用 <code>systemctl</code> 指令關閉 mysql 服務</p>
 <p><code>{.bash prefixed} systemctl stop mysql.service</code></p>
 <p>接著使用 mysqld 指令啟動 mysql 並指定 <code>--user</code>、<code>--defaults-file</code> 與 <code>--init-file</code> 參數。</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb250-1"><a href="mysql-8.0-root-密碼重設.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysqld</span> <span class="at">--defaults-file</span><span class="op">=</span>/etc/mysql/mysql.conf.d/mysqld.cnf <span class="dt">\ </span></span>
-<span id="cb250-2"><a href="mysql-8.0-root-密碼重設.html#cb250-2" aria-hidden="true" tabindex="-1"></a><span class="ex">--user=mysql</span> <span class="dt">\ </span></span>
-<span id="cb250-3"><a href="mysql-8.0-root-密碼重設.html#cb250-3" aria-hidden="true" tabindex="-1"></a><span class="ex">--init-file=/tmp/mysql-init</span> <span class="kw">&amp;</span></span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb256-1"><a href="mysql-8.0-root-密碼重設.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysqld</span> <span class="at">--defaults-file</span><span class="op">=</span>/etc/mysql/mysql.conf.d/mysqld.cnf <span class="dt">\ </span></span>
+<span id="cb256-2"><a href="mysql-8.0-root-密碼重設.html#cb256-2" aria-hidden="true" tabindex="-1"></a><span class="ex">--user=mysql</span> <span class="dt">\ </span></span>
+<span id="cb256-3"><a href="mysql-8.0-root-密碼重設.html#cb256-3" aria-hidden="true" tabindex="-1"></a><span class="ex">--init-file=/tmp/mysql-init</span> <span class="kw">&amp;</span></span></code></pre></div>
 <ul>
 <li><p><code>--defaults-file</code>: MySQL 預設啟動的設定檔案</p></li>
 <li><p><code>--user</code>: 以使用者 <code>mysql</code> 執行</p></li>
@@ -340,14 +351,14 @@ div.csl-indent {
 <div class="infobox caution">
 <p>如果不行的話，請檢查位於 <code>/var/log/mysql/error.log</code> 的錯誤紀錄，如果有看到類似 <code>/var/run/mysqld</code> 的錯誤，需要手動建立資料夾，並把權限變更為 <code>mysql</code> 用戶的權限。 操作完之後再從關閉 mysql 服務開始，再嘗試一次。</p>
 <p>參考指令如下：</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb251-1"><a href="mysql-8.0-root-密碼重設.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> /var/run/mysqld <span class="kw">&amp;&amp;</span> <span class="fu">chown</span> mysql.mysql /var/run/mysqld</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb257-1"><a href="mysql-8.0-root-密碼重設.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> /var/run/mysqld <span class="kw">&amp;&amp;</span> <span class="fu">chown</span> mysql.mysql /var/run/mysqld</span></code></pre></div>
 </div>
 <p>最後以正常的服務啟動 mysql：</p>
-<div class="sourceCode" id="cb252"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb252-1"><a href="mysql-8.0-root-密碼重設.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> restart mysql.service</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb258-1"><a href="mysql-8.0-root-密碼重設.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> restart mysql.service</span></code></pre></div>
 <p>退出 root 帳號</p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb253-1"><a href="mysql-8.0-root-密碼重設.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span></span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb259-1"><a href="mysql-8.0-root-密碼重設.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span></span></code></pre></div>
 <p>試以新密碼登入 mysql root 帳號：</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb254-1"><a href="mysql-8.0-root-密碼重設.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb260-1"><a href="mysql-8.0-root-密碼重設.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
 <p>成功 🎊</p>
 <pre class="console_output"><code>Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 17
@@ -370,7 +381,7 @@ mysql&gt; </code></pre>
           </div>
         </div>
       </div>
-<a href="帳號管理.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="更改預設的文本編輯器.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="參考資料.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
