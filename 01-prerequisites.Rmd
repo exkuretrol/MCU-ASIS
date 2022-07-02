@@ -191,7 +191,6 @@ knitr::include_graphics(path = './figures/ubuntu-configuration-select-lang.png')
 knitr::include_graphics(path = './figures/installer-keyboard.png')
 ```
 
-
 #### 網路連線
 
 這裡可以設定 Ubuntu 的網路連線，預設是由 DHCP 設定，通常不用變更，如果這裡連線失敗，也可以等開機後再做設定。
@@ -203,7 +202,6 @@ knitr::include_graphics(path = './figures/installer-network.png')
 #### Proxy
 
 除非網路需要設定 proxy（代理伺服器），否則不需要設定。
-
 
 ```{r, fig.cap='Ubuntu 安裝畫面，proxy 設定'}
 knitr::include_graphics(path = 'figures/installer-proxy.png')
@@ -228,6 +226,7 @@ knitr::include_graphics(path = './figures/installer-update.png')
 #### 系統空間配置
 
 <!-- TODO: 本頁面書要更新，現在 2022 搞不好修好了 -->
+
 <!-- TODO: 補充 raid 說明 -->
 
 這裡選擇下面的「Custom storage layout」，因為伺服器硬碟不是使用尋常的設定。以下 Raid-1 相關的設定是參考 [@evangelou_2020] 的 Gist 翻譯成中文寫的。
