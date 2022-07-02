@@ -1,6 +1,6 @@
 \cleardoublepage
 
-# (APPENDIX) 附錄 {-}
+# (APPENDIX) 附錄 {.unnumbered}
 
 # 相關軟體
 
@@ -48,7 +48,7 @@
 
 分別按下「Save public key」與「Save private key」找到適合的地方儲存它。
 
-### 上傳以 PuTTY 產生的 ssh key pairs
+### 上傳 ssh key pairs
 
 PuTTY 產生的 public key 與 private key 格式比較特別，並不能直接把 public key 裡面的文字直接貼到遠端電腦的 `~/.ssh/authorized_keys` 檔案裡面，需要經由 PuTTYgen.exe 讀取 \*.ppk 才能得到正確格式的 public key。首先把 PuTTYgen 程式打開。
 
@@ -557,7 +557,6 @@ There are 4 choices for the alternative editor (providing /usr/bin/editor).
 
 Press <enter> to keep the current choice[*], or type selection number: 3
 ```
-
 
 ## Mysql 8.0 root 密碼重設
 
