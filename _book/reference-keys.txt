@@ -34,6 +34,7 @@ fig:unnamed-chunk-33
 fig:unnamed-chunk-34
 fig:unnamed-chunk-35
 fig:unnamed-chunk-36
+fig:unnamed-chunk-37
 intro
 事前準備
 安裝-virtualbox
@@ -54,13 +55,14 @@ openssh-設定-可跳過
 ubuntu-的基本設定
 事前準備-1
 openssh
+概述
 適合各個系統的連線流程
 macos-或-其他-unix-like-系統
 windows-系統
+linux-系統
+step-6-測試-sshd_config-是否有效
 apt
 ufw
-bat-可選
-exa-可選
 lamp
 事前準備-2
 apache
@@ -101,7 +103,7 @@ putty
 step-1-安裝-putty
 step-2-經由-puttygen-產生-ssh-key-pairs
 step-3-妥善保存好產生的-key
-上傳以-putty-產生的-ssh-key-pairs
+上傳-ssh-key-pairs
 puttygen-產生的-key-pairs-的連線方式
 帳號管理
 users.sh

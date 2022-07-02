@@ -23,7 +23,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2022-07-01" />
+<meta name="date" content="2022-07-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="apt.html"/>
-<link rel="next" href="bat-可選.html"/>
+<link rel="next" href="lamp.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -191,29 +191,31 @@ div.csl-indent {
 <li class="chapter" data-level="2.1" data-path="事前準備-1.html"><a href="事前準備-1.html"><i class="fa fa-check"></i><b>2.1</b> 事前準備</a></li>
 <li class="chapter" data-level="2.2" data-path="openssh.html"><a href="openssh.html"><i class="fa fa-check"></i><b>2.2</b> OpenSSH</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="openssh.html"><a href="openssh.html#適合各個系統的連線流程"><i class="fa fa-check"></i><b>2.2.1</b> 適合各個系統的連線流程</a>
+<li class="chapter" data-level="2.2.1" data-path="openssh.html"><a href="openssh.html#概述"><i class="fa fa-check"></i><b>2.2.1</b> 概述</a></li>
+<li class="chapter" data-level="2.2.2" data-path="openssh.html"><a href="openssh.html#適合各個系統的連線流程"><i class="fa fa-check"></i><b>2.2.2</b> 適合各個系統的連線流程</a>
 <ul>
-<li class="chapter" data-level="2.2.1.1" data-path="openssh.html"><a href="openssh.html#macos-或-其他-unix-like-系統"><i class="fa fa-check"></i><b>2.2.1.1</b> MacOS 或 其他 Unix-like 系統</a></li>
-<li class="chapter" data-level="2.2.1.2" data-path="openssh.html"><a href="openssh.html#windows-系統"><i class="fa fa-check"></i><b>2.2.1.2</b> Windows 系統</a></li>
+<li class="chapter" data-level="2.2.2.1" data-path="openssh.html"><a href="openssh.html#macos-或-其他-unix-like-系統"><i class="fa fa-check"></i><b>2.2.2.1</b> MacOS 或 其他 Unix-like 系統</a></li>
+<li class="chapter" data-level="2.2.2.2" data-path="openssh.html"><a href="openssh.html#windows-系統"><i class="fa fa-check"></i><b>2.2.2.2</b> Windows 系統</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#step-1-安裝-openssh-client"><i class="fa fa-check"></i>Step 1 — 安裝 OpenSSH Client</a></li>
 <li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#step-2-產生-ssh-key-pairs"><i class="fa fa-check"></i>Step 2 — 產生 ssh key pairs</a></li>
-<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#step-3-將新增的-key-pairs-上傳至目的地主機"><i class="fa fa-check"></i>Step 3 — 將新增的 key pairs 上傳至目的地主機</a></li>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#step-3-將新增的-key-pairs-上傳至目的地主機"><i class="fa fa-check"></i>Step 3 — 將新增的 key pairs 上傳至目的地主機</a>
+<ul>
+<li class="chapter" data-level="2.2.2.3" data-path="openssh.html"><a href="openssh.html#linux-系統"><i class="fa fa-check"></i><b>2.2.2.3</b> Linux 系統</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#step-4-測試-ssh-連線使用-ssh-連線至遠端主機"><i class="fa fa-check"></i>Step 4 — 測試 SSH 連線，使用 SSH 連線至遠端主機</a></li>
-<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#step-5-使遠端的-openssh-伺服器更加安全"><i class="fa fa-check"></i>Step 5 — 使遠端的 OpenSSH 伺服器更加安全</a>
+<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#step-5-使遠端的-openssh-伺服器更加安全-可跳過"><i class="fa fa-check"></i>Step 5 — 使遠端的 OpenSSH 伺服器更加安全 [可跳過]</a>
 <ul>
 <li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#變更-ssh-伺服器預設的埠號"><i class="fa fa-check"></i>變更 SSH 伺服器預設的埠號</a></li>
 <li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#關閉密碼驗證"><i class="fa fa-check"></i>關閉密碼驗證</a></li>
 <li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#關閉遠端-root-登入"><i class="fa fa-check"></i>關閉遠端 root 登入</a></li>
 <li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#限制能使用-ssh-連線的使用者"><i class="fa fa-check"></i>限制能使用 SSH 連線的使用者</a></li>
 <li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#關閉無密碼的使用者使用-ssh"><i class="fa fa-check"></i>關閉無密碼的使用者使用 SSH</a></li>
-<li class="chapter" data-level="" data-path="openssh.html"><a href="openssh.html#測試-sshd_config-是否有效"><i class="fa fa-check"></i>測試 <code>sshd_config</code> 是否有效</a></li>
 </ul></li>
+<li class="chapter" data-level="2.2.3" data-path="openssh.html"><a href="openssh.html#step-6-測試-sshd_config-是否有效"><i class="fa fa-check"></i><b>2.2.3</b> Step 6 — 測試 <code>sshd_config</code> 是否有效</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="apt.html"><a href="apt.html"><i class="fa fa-check"></i><b>2.3</b> APT</a></li>
 <li class="chapter" data-level="2.4" data-path="ufw.html"><a href="ufw.html"><i class="fa fa-check"></i><b>2.4</b> UFW</a></li>
-<li class="chapter" data-level="2.5" data-path="bat-可選.html"><a href="bat-可選.html"><i class="fa fa-check"></i><b>2.5</b> Bat （可選）</a></li>
-<li class="chapter" data-level="2.6" data-path="exa-可選.html"><a href="exa-可選.html"><i class="fa fa-check"></i><b>2.6</b> exa （可選）</a></li>
 </ul></li>
 <li class="part"><span><b>II 軟體安裝</b></span></li>
 <li class="chapter" data-level="3" data-path="lamp.html"><a href="lamp.html"><i class="fa fa-check"></i><b>3</b> LAMP</a>
@@ -289,7 +291,7 @@ div.csl-indent {
 <li class="chapter" data-level="A.1.1.2" data-path="putty.html"><a href="putty.html#step-2-經由-puttygen-產生-ssh-key-pairs"><i class="fa fa-check"></i><b>A.1.1.2</b> Step 2 — 經由 PuTTYgen 產生 ssh key pairs</a></li>
 <li class="chapter" data-level="A.1.1.3" data-path="putty.html"><a href="putty.html#step-3-妥善保存好產生的-key"><i class="fa fa-check"></i><b>A.1.1.3</b> Step 3 — 妥善保存好產生的 Key</a></li>
 </ul></li>
-<li class="chapter" data-level="A.1.2" data-path="putty.html"><a href="putty.html#上傳以-putty-產生的-ssh-key-pairs"><i class="fa fa-check"></i><b>A.1.2</b> 上傳以 PuTTY 產生的 ssh key pairs</a></li>
+<li class="chapter" data-level="A.1.2" data-path="putty.html"><a href="putty.html#上傳-ssh-key-pairs"><i class="fa fa-check"></i><b>A.1.2</b> 上傳 ssh key pairs</a></li>
 <li class="chapter" data-level="A.1.3" data-path="putty.html"><a href="putty.html#puttygen-產生的-key-pairs-的連線方式"><i class="fa fa-check"></i><b>A.1.3</b> PuTTYgen 產生的 key pairs 的連線方式:</a></li>
 </ul></li>
 </ul></li>
@@ -326,20 +328,20 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="ufw" class="section level2 hasAnchor" number="2.4">
 <h2><span class="header-section-number">2.4</span> UFW<a href="ufw.html#ufw" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>UFW (Uncomplicated Firewall) 是預設在 Ubuntu 系統上的防火牆，這裡先為了 OpenSSH 伺服器而打開埠號 <code>60000</code>。</p>
+<p>UFW（Uncomplicated Firewall）是預設在 Ubuntu 系統上的防火牆，這裡先為了 OpenSSH 伺服器而打開埠號 <code>60000</code>。</p>
 <p>首先用 status 查詢 UFW 的狀態，這裡需要輸入超級使用者 (sudo) 的密碼。</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb33-1"><a href="ufw.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb35-1"><a href="ufw.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
 <p>看來預設的 UFW 是關閉的</p>
 <pre class="console_output"><code>Status: inactive</code></pre>
 <p>接著用 <code>systemctl</code> 打開防火牆</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb35-1"><a href="ufw.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable ufw</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb37-1"><a href="ufw.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable ufw</span></code></pre></div>
 <p>查詢防火牆狀態</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb36-1"><a href="ufw.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb38-1"><a href="ufw.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
 <pre class="console_output"><code>Status: active</code></pre>
 <p>允許埠號 <code>60000</code> 從任何地方連入</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb38-1"><a href="ufw.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow 60000</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb40-1"><a href="ufw.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow 60000</span></code></pre></div>
 <p>查詢防火牆狀態</p>
-<div class="sourceCode" id="cb39" data-prefix="&#39;$&#39;"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb39-1"><a href="ufw.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb41-1"><a href="ufw.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
 <p>目前只有兩條規則，分別是 從任何地方連入埠號 60000 與 ipv6 從任何地方連入埠號 60000</p>
 <pre class="console_output"><code>Status: active
 
@@ -347,14 +349,19 @@ To                         Action      From
 --                         ------      ----
 60000                      ALLOW       Anywhere
 60000 (v6)                 ALLOW       Anywhere (v6)</code></pre>
+
 </div>
+<!-- </div> -->
+
+
+
             </section>
 
           </div>
         </div>
       </div>
 <a href="apt.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="bat-可選.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="lamp.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
