@@ -72,3 +72,11 @@ pre.console_output::before {
 	color: lightgray;
 	font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
 }
+
+img ~ p.caption {
+    color: rgba(0, 0, 0, .45);
+}
+
+img ~ p.caption > a {
+    color: rgba(0, 0, 0, .45) !important;
+}
