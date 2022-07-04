@@ -1,30 +1,34 @@
 # JupyterLab on JupyterHub
 
-本篇教學完全照著[@mangecoeur_elena_vuong_luria_rk_2021]所寫的教學操作。
+本篇教學完全照著[@mangecoeur_elena_vuong_luria_rk_2021]所寫的教學操作。旨在建立 Jupyterhub 環境。
 
 ## 事前準備
 
+先確認目前的使用者 asis 擁有 sudo 的權限。
+
 ## 設置 Python 3 環境
+
+首先，一樣地，只要安裝套件都需要先更新套件來源。這裡我們用 `&&` 連接兩個指令，讓更新與安裝依序執行。
 
 ``` {.bash .prefixed}
 sudo apt update && sudo apt install python3-dev python3-pip --yes
 ```
 
-``` {.bash .prefixed}
-sudo -H python3 -m pip install --upgrade pip
-```
+安裝 `python3-venv` ，後續建立 python 虛擬環境時會用到
 
 ``` {.bash .prefixed}
 sudo apt install python3-venv
 ```
 
-因為 python 通常都是指 python2，所以我們還要再多裝一個叫做 `python-is-python3` 的套件，將 `python` 設為 `python3` 的別名，使 `python` 指令與 `python3` 指令通用。
+因為目前 Ubuntu 內建的 python 版本通常都是 python 2.X，所以我們還要再多裝一個叫做 `python-is-python3` 的套件，將 `python` 設為 `python3` 的別名，這個會使你以後呼叫 `python` 指令確保 python 的版本是 python 3。
 
 ``` {.bash .prefixed}
 sudo apt install python-is-python3 --yes
 ```
 
 ## JupyterLab 與 JupyterHub
+
+### 概述
 
 ### 於虛擬環境中設置 JupyterLab 與 JupyterHub
 
@@ -145,12 +149,16 @@ sudo mkdir /opt/conda/envs
 cd /opt/conda/envs/ && sudo vim environment.yml
 ```
 
+::: code-label
+/opt/conda/envs/environment.yml
+:::
+
 ``` {.yaml .yml}
 name: python
 channels:
   - defaults
 dependencies:
-  - python=3.9
+  - python=3.10
   - ipykernel
   - pip:
     - ipython-sql
@@ -170,7 +178,9 @@ sudo /opt/conda/bin/conda env create -f environment.yml
 sudo /opt/conda/envs/python/bin/python -m ipykernel install --prefix=/opt/jupyterhub/ --name 'python3' --display-name "Python (default)"
 ```
 
-![](figures/jupyterhub-main-page-kernel-python.png)
+```{r, fig.cap='jupyterhub 登入後的頁面'}
+knitr::include_graphics(path = 'figures/jupyterhub-main-page-kernel-python.png')
+```
 
 ### R 環境
 
@@ -181,8 +191,8 @@ sudo su - -c "R -e \"install.packages('IRkernel')\""
 ``` {.bash .prefixed}
 sudo su - -c "R -e \"
     IRkernel::installspec(
-        name='ir41', 
-        displayname='R 4.1',
+        name='ir42', 
+        displayname='R 4.2',
         user=FALSE,
         prefix='/opt/jupyterhub'
     )
@@ -271,7 +281,9 @@ Available kernels:
   python3    /opt/jupyterhub/share/jupyter/kernels/python3
 ```
 
-![](figures/jupyterhub-main-page-kernel-R.png)
+```{r, fig.cap='jupyterhub 安裝完 R 核心與預設 Python 的頁面'}
+knitr::include_graphics(path = 'figures/jupyterhub-main-page-kernel-R.png')
+```
 
 ### C 與 C++ 環境
 
@@ -334,9 +346,15 @@ sudo vim /opt/conda/envs/c-cpp/share/jupyter/kernels/c/kernel.json
 sudo mv ~/Downloads/logo** /opt/conda/envs/c-cpp/share/jupyter/c/
 ```
 
-![](figures/icons/logo-32x32.png)
+::: {style="display: flex; flex-direction: row; align-items: flex-end;"}
+```{r, fig.cap='C 語言核心圖標，32x32', out.width="", echo=FALSE}
+knitr::include_graphics(path = "figures/icons/logo-32x32.png")
+```
 
-![](figures/icons/logo-64x64.png)
+```{r, fig.cap='C 語言核心圖標，64x64', out.width="", echo=FALSE}
+knitr::include_graphics(path = "figures/icons/logo-64x64.png")
+```
+:::
 
 ``` {.bash .prefixed}
 ls -al /opt/conda/envs/c-cpp/share/jupyter/kernels/c
@@ -354,7 +372,9 @@ drwxrwxr-x 7 root root 4096 Oct 23 15:31 ../
 sudo jupyter kernelspec install /opt/conda/envs/c-cpp/share/jupyter/c --sys-prefix
 ```
 
-![](figures/jupyterlab_c_cpp_kernel.png)
+```{r, fig.cap='jupyterhub 加上了 C 與 CPP 核心的頁面'}
+knitr::include_graphics(path = 'figures/jupyterlab_c_cpp_kernel.png')
+```
 
 ### SAS 環境
 
