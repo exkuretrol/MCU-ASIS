@@ -164,7 +164,7 @@ knitr::include_graphics(path = 'figures/apache-main-page.png')
 
 1.  `ip show addr`
 
-``` {.console_output .numberLines}
+``` console_output
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
@@ -460,12 +460,18 @@ sudo vim /etc/apache2/sites-available/asis.conf
 
 寫入測試用的設定
 
-    <VirtualHost *:80>
-        ServerAdmin webmaster@localhost
-        DocumentRoot /var/www/asis
-        ErrorLog ${APACHE_LOG_DIR}/error.log
-        CustomLog ${APACHE_LOG_DIR}/access.log combined
-    </VirtualHost>
+::: code-label
+/etc/apache2/sites-available/asis.conf
+:::
+
+``` apache
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/asis
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
 
 -   `ServerAdmin`：現在這個變數已經被棄用了，在 Apache 先前的版本當伺服器出錯時會顯示聯絡管理員的方式。而現階段版本還是有點用的，你可以在 PHP 中呼叫 `$_SERVER['SERVER_ADMIN']` 變數會顯示 `ServerAdmin` 所設定的 Email。
 
@@ -555,7 +561,7 @@ knitr::include_graphics(path = 'figures/apache2-test-virtualhost-conf.png')
 或是直接在終端機中使用指令 `curl` 測試 `asis.conf` 設定檔：
 
 ``` {.bash .prefixed}
-curl http://192.168.0.14
+curl http://<虛擬主機的 ip 地址>/
 ```
 
 ``` console_output
