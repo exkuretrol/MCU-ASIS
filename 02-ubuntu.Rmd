@@ -97,7 +97,7 @@ sudo apt install openssh-server
 ```
 :::
 
-### Step 1 --- 安裝 OpenSSH Client {.unnumbered}
+### Step 1 --- 安裝 OpenSSH Client
 
 Windows 10 已經有內建在 Windows 的「應用程式與功能」內，預設是沒有安裝的。啟動流程如下:
 
@@ -127,7 +127,7 @@ usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]
            [-w local_tun[:remote_tun]] destination [command]
 ```
 
-### Step 2 --- 產生 ssh key pairs {.unnumbered}
+### Step 2 --- 產生 ssh key pairs
 
 接著，可以使用 `ssh-keygen` 指令產生 key pairs，加密方式有 dsa、ecdsa、ecdsa-sk、ed25519、ed25519-sk 與 rsa，預設的加密方式是 rsa ，詳細指令用法可以透過 `ssh-keygen --help` 指令查詢，這裡我們用最簡單的 `ssh-keygen` 指令。
 
@@ -179,7 +179,7 @@ The key's randomart image is:
 當你遺失了遠端主機的 key pairs，你再也不能透過遠端存取有使用過該 key pairs 的主機，只能透過直接接觸那台主機來更新的 key pairs，所以要妥善保存。
 :::
 
-### Step 3 --- 將新增的 key pairs 上傳至目的地主機 {.unnumbered}
+### Step 3 --- 將新增的 key pairs 上傳至目的地主機
 
 當你擁有了 [Step 2 --- 產生 ssh key pairs]，接下來要把 public key 上傳至虛擬機器。另外公鑰給別人看到是沒問題的，前面第一章的 [OpenSSH 設定 [可跳過]] 就已經有出現過我的公鑰了，公鑰並不能用來產生私鑰，它是用來認證這個 key 是否跟你所持有的私鑰相呼應。
 
@@ -240,7 +240,7 @@ asis@192.168.0.13's password:
 
 輸入完後雖然沒有任何提示訊息，但其實已經可以使用 ssh 連線至遠端主機啦～
 
-### Step 4 --- 測試 SSH 連線，使用 SSH 連線至遠端主機 {.unnumbered}
+### Step 4 --- 測試 SSH 連線，使用 SSH 連線至遠端主機
 
 最後，使用 ssh 指令連接至遠端主機。
 
@@ -294,9 +294,9 @@ knitr::include_graphics(path = 'figures/ssh-connection-success.png')
 knitr::include_graphics(path = 'figures/virtualbox-ubuntu-login.png')
 ```
 
-### Step 5 --- 使遠端的 OpenSSH 伺服器更加安全 [可跳過] {.unnumbered}
+### Step 5 --- 使遠端的 OpenSSH 伺服器更加安全 [可跳過]
 
-#### 變更 SSH 伺服器預設的埠號 {.unnumbered}
+#### 變更 SSH 伺服器預設的埠號
 
 ``` {.bash .prefixed}
 sudo vim /etc/ssh/sshd_config
@@ -325,7 +325,7 @@ Port 60000
 #ListenAddress ::
 ```
 
-#### 關閉密碼驗證 {.unnumbered}
+#### 關閉密碼驗證
 
 將 PasswordAuthentication（以密碼驗證）設為 no。使用 SSH 連線時，如果沒有指定 SSH key pair，如果 OpenSSH 伺服器的設定沒有關閉，接著會要求你輸入使用者密碼以密碼驗證。通常這個設定會開啟是因為要[Step 3 --- 將新增的 key pairs 上傳至目的地主機]。
 
@@ -335,7 +335,7 @@ PasswordAuthentication no
 
 當然如果密碼驗證為 no，且同時遺失 SSH 的 pair key 時，你就無法以 SSH 連線至遠端主機，需要實際的使用圖形介面操作虛擬機器。
 
-#### 關閉遠端 root 登入 {.unnumbered}
+#### 關閉遠端 root 登入
 
 避免 root 登入可以使系統避免過大的權限暴露。
 
@@ -343,7 +343,7 @@ PasswordAuthentication no
 PermitRootLogin no
 ```
 
-#### 限制能使用 SSH 連線的使用者 {.unnumbered}
+#### 限制能使用 SSH 連線的使用者
 
 只允許特定的使用者使用 SSH 連線可大大降低風險。
 
@@ -351,7 +351,7 @@ PermitRootLogin no
 AllowUsers asis
 ```
 
-#### 關閉無密碼的使用者使用 SSH {.unnumbered}
+#### 關閉無密碼的使用者使用 SSH
 
 將沒有密碼就可以登入的使用者撤銷 SSH 連線的權限。
 
