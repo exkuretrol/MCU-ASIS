@@ -75,6 +75,10 @@ sudo /opt/jupyterhub/bin/jupyterhub --generate-config
 sudo vim jupyterhub_config.py
 ```
 
+::: code-label
+/opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py
+:::
+
 ``` python
 c.JupyterHub.bind_url = 'http://:8000/jhub'
 c.Spawner.default_url = '/lab'
@@ -94,7 +98,8 @@ sudo vim /opt/jupyterhub/etc/systemd/jupyterhub.service
 ```
 
 ``` {.bash .prefixed}
-sudo ln -s /opt/jupyterhub/etc/systemd/jupyterhub.service /etc/systemd/system/jupyterhub.service
+sudo ln -s /opt/jupyterhub/etc/systemd/jupyterhub.service \
+    /etc/systemd/system/jupyterhub.service
 ```
 
 ``` {.bash .prefixed}
@@ -122,7 +127,8 @@ cd ~
 ```
 
 ``` {.bash .prefixed}
-curl https://repo.anaconda.com/pkgs/misc/gpgkeys/anaconda.asc | gpg --dearmor > conda.gpg
+curl https://repo.anaconda.com/pkgs/misc/gpgkeys/anaconda.asc \
+    | gpg --dearmor > conda.gpg
 ```
 
 ``` {.bash .prefixed}
@@ -134,7 +140,9 @@ rm conda.gpg
 ```
 
 ``` {.bash .prefixed}
-echo "deb [arch=amd64] https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main" | sudo tee /etc/apt/sources.list.d/conda.list
+echo \
+    "deb [arch=amd64] https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main" \
+    | sudo tee /etc/apt/sources.list.d/conda.list
 ```
 
 ``` {.bash .prefixed}
@@ -153,12 +161,12 @@ cd /opt/conda/envs/ && sudo vim environment.yml
 /opt/conda/envs/environment.yml
 :::
 
-``` {.yaml .yml}
+``` yaml
 name: python
 channels:
   - defaults
 dependencies:
-  - python=3.10
+  - python=3.9
   - ipykernel
   - pip:
     - ipython-sql
@@ -175,7 +183,11 @@ sudo /opt/conda/bin/conda env create -f environment.yml
 ```
 
 ``` {.bash .prefixed}
-sudo /opt/conda/envs/python/bin/python -m ipykernel install --prefix=/opt/jupyterhub/ --name 'python3' --display-name "Python (default)"
+sudo /opt/conda/envs/python/bin/python -m \
+    ipykernel install \
+    --prefix=/opt/jupyterhub/ \
+    --name 'python3' \
+    --display-name "Python (default)"
 ```
 
 ```{r, fig.cap='jupyterhub 登入後的頁面'}
@@ -191,20 +203,22 @@ sudo su - -c "R -e \"install.packages('IRkernel')\""
 ``` {.bash .prefixed}
 sudo su - -c "R -e \"
     IRkernel::installspec(
-        name='ir42', 
-        displayname='R 4.2',
+        name='ir41', 
+        displayname='R 4.1',
         user=FALSE,
         prefix='/opt/jupyterhub'
     )
 \""
 ```
 
-    Error in IRkernel::installspec(name = "ir41", displayname = "R 4.1") : 
-      jupyter-client has to be installed but “jupyter kernelspec --version” exited with code 127.
-    In addition: Warning message:
-    In system2("jupyter", c("kernelspec", "--version"), FALSE, FALSE) :
-      error in running command
-    Execution halted
+``` console_output
+Error in IRkernel::installspec(name = "ir41", displayname = "R 4.1") : 
+  jupyter-client has to be installed but “jupyter kernelspec --version” exited with code 127.
+In addition: Warning message:
+In system2("jupyter", c("kernelspec", "--version"), FALSE, FALSE) :
+  error in running command
+Execution halted
+```
 
 主要原因是因為，系統找不到 `jupyter` 指令。可以自己在終端機重現一次：
 
@@ -291,44 +305,58 @@ knitr::include_graphics(path = 'figures/jupyterhub-main-page-kernel-R.png')
 sudo vim /opt/conda/envs/c_cpp.yml
 ```
 
-    name: c-cpp
-    channels:
-      - defaults
-      - conda-forge
-    dependencies:
-      - xeus-cling
-      - python=3.*
-      - pip
-      - ipykernel
-    prefix: /opt/conda/envs/c-cpp
+::: code-label
+/opt/conda/envs/c_cpp.yml
+:::
+
+``` yaml
+name: c-cpp
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - xeus-cling
+  - python=3.*
+  - pip
+  - ipykernel
+prefix: /opt/conda/envs/c-cpp
+```
 
 ``` {.bash .prefixed}
 sudo conda env create -f c_cpp.yml
 ```
 
 ``` {.bash .prefixed}
-sudo jupyter kernelspec install /opt/conda/envs/c-cpp/share/jupyter/kernels/xcpp11 --sys-prefix
+sudo jupyter kernelspec install \
+    /opt/conda/envs/c-cpp/share/jupyter/kernels/xcpp11 --sys-prefix
 ```
 
 ``` {.bash .prefixed}
-sudo jupyter kernelspec install /opt/conda/envs/c-cpp/share/jupyter/kernels/xcpp14 --sys-prefix
+sudo jupyter kernelspec install \
+    /opt/conda/envs/c-cpp/share/jupyter/kernels/xcpp14 --sys-prefix
 ```
 
 ``` {.bash .prefixed}
-sudo jupyter kernelspec install /opt/conda/envs/c-cpp/share/jupyter/kernels/xcpp17 --sys-prefix
+sudo jupyter kernelspec install \
+    /opt/conda/envs/c-cpp/share/jupyter/kernels/xcpp17 --sys-prefix
 ```
 
 <!--# Scanf() problem https://github.com/brendan-rius/jupyter-c-kernel/issues/3 -->
 
 ``` {.bash .prefixed}
-sudo /opt/conda/envs/c-cpp/bin/python3.9 -m pip install git+https://github.com/XaverKlemenschits/jupyter-c-kernel.git
+sudo /opt/conda/envs/c-cpp/bin/python3.9 -m \
+    pip install git+https://github.com/XaverKlemenschits/jupyter-c-kernel.git
 ```
 
 ``` {.bash .prefixed}
 sudo vim /opt/conda/envs/c-cpp/share/jupyter/kernels/c/kernel.json
 ```
 
-``` console_output
+::: code-label
+/opt/conda/envs/c-cpp/share/jupyter/kernels/c/kernel.json
+:::
+
+``` json
 {
   "display_name": "C",
   "argv": [
@@ -346,7 +374,7 @@ sudo vim /opt/conda/envs/c-cpp/share/jupyter/kernels/c/kernel.json
 sudo mv ~/Downloads/logo** /opt/conda/envs/c-cpp/share/jupyter/c/
 ```
 
-::: {style="display: flex; flex-direction: row; align-items: flex-end;"}
+::: flex-columns
 ```{r, fig.cap='C 語言核心圖標，32x32', out.width="", echo=FALSE}
 knitr::include_graphics(path = "figures/icons/logo-32x32.png")
 ```
@@ -382,7 +410,11 @@ knitr::include_graphics(path = 'figures/jupyterlab_c_cpp_kernel.png')
 sudo vim /opt/conda/envs/sas.yml
 ```
 
-``` console_output
+::: code-label
+/opt/conda/envs/sas.yml
+:::
+
+``` yaml
 name: sas
 channels:
   - defaults
@@ -401,8 +433,12 @@ sudo conda env create -f sas.yml
 ```
 
 ``` {.bash .prefixed}
-/opt/conda/envs/sas/share/jupyter/kernels/sas/kernel.json
+sudo vim /opt/conda/envs/sas/share/jupyter/kernels/sas/kernel.json
 ```
+
+::: code-label
+/opt/conda/envs/sas/share/jupyter/kernels/sas/kernel.json
+:::
 
 ``` json
 {
@@ -421,16 +457,22 @@ sudo conda env create -f sas.yml
 ```
 
 ``` {.bash .prefixed}
-sudo cp /opt/conda/envs/sas/lib/python3.9/site-packages/sas_kernel/data/logo-64x64.png /opt/conda/envs/sas/share/jupyterkernels/sas
+sudo cp \
+    /opt/conda/envs/sas/lib/python3.9/site-packages/sas_kernel/data/logo-64x64.png \
+    /opt/conda/envs/sas/share/jupyter/kernels/sas
 ```
 
-## 設置 Apache 的 Reverse Proxy
+## 設置 Apache 的反向代理
 
 ``` {.bash .prefixed}
 sudo vim /etc/apache2/sites-available/asis.conf
 ```
 
-``` bash
+::: code-label
+/etc/apache2/sites-available/asis.conf
+:::
+
+``` apache
 <VirtualHost *:80>
     [...]
 
@@ -456,7 +498,7 @@ sudo vim /etc/apache2/sites-available/asis.conf
 </VirtualHost>
 ```
 
-    http://<虛擬主機的ip位址>/jhub/
+    http://<虛擬主機的 ip 位址>/jhub
 
 ## JupyterHub 擴充套件
 
