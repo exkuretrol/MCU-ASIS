@@ -6,7 +6,7 @@
 
 -   ✓ LAMP + phpMyAdmin
 
--   RStudio + RShiny
+-   ✓ RStudio + RShiny
 
 -   jupyterLab + jupyterhub
 
