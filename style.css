@@ -60,7 +60,7 @@ pre.prefixed_root::before {
 }
 
 pre.prefixed_powershell::before {
-   content: "PS ";
+   content: "PS > ";
 }
 
 pre.prefixed_mysql::before {
@@ -99,4 +99,10 @@ img ~ p.caption {
 
 img ~ p.caption > a {
     color: rgba(0, 0, 0, .45) !important;
+}
+
+.flex-columns {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
 }
