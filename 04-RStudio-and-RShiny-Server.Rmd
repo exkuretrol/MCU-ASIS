@@ -1,10 +1,20 @@
 # RStudio & RShiny Server
 
+本章節會說明怎麼安裝 RStudio 與 RShiny Server 到系統上。
+
 ## 事前準備
 
 先確認目前的使用者 asis 擁有 sudo 的權限。
 
 ## R base
+
+R 是一個跨平台的統計繪圖開放原始碼軟體。除了 R 基本的功能之外，還有龐大的社群一起合作創造新的功能，使 R 的功能更為豐富。
+
+### 概述
+
+本小節會介紹怎麼安裝 R Base。
+
+### Step 1 --- 安裝 R Base
 
 安裝軟體之前，先更新套件管理程式的來源
 
@@ -39,9 +49,57 @@ sudo add-apt-repository \
 sudo apt install r-base --yes
 ```
 
+### Step 2 --- 確認 R Base 是否成功安裝
+
+在命令列介面下要確認 R 有無正常安裝很簡單，輸入一個大寫 R 就可以進到 R 的 Console。
+
+``` {.bash .prefixed}
+R
+```
+
+輸入下列指令查看 R 的相關訊息。
+
+``` {.r .prefixed_r}
+sessionInfo()
+```
+
+``` console_output
+R version 4.2.0 (2022-04-22)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 21.10
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8   LC_NUMERIC=C           LC_TIME=C.UTF-8
+ [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8
+ [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C
+[10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base
+
+loaded via a namespace (and not attached):
+[1] compiler_4.2.0 pbdZMQ_0.3-7
+```
+
+確認沒問題後使用指令 `q` 退出。
+
+``` {.r .prefixed_r}
+q(save='no')
+```
+
 ## RStudio Server
 
-### Step 1 --- 安裝 RStudio Server 伺服器 {#step-1-----安裝-rstudio-server-伺服器 .unnumbered}
+RStudio Server 是 RStudio 的網頁版本，使用者可以透過網頁存取一個位於網路上的 RStudio。
+
+### 概述
+
+本小節會介紹怎麼安裝 RStudio Server 與設定 Apache 的反向代理。
+
+### Step 1 --- 安裝 RStudio Server 伺服器
 
 ``` {.bash .prefixed}
 sudo apt install gdebi-core
@@ -53,6 +111,8 @@ sudo apt install gdebi-core
 cd /tmp && \
 wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.4.1717-amd64.deb
 ```
+
+這個指令會下載當前撰寫這個頁面的最新版本 RStudio Server。如果你想要下載最新版本請到[官方的下載頁面](https://www.rstudio.com/products/rstudio/download-server/)確認。
 
 透過 ubuntu 的密鑰伺服器取回對應的簽名
 
@@ -72,14 +132,14 @@ sudo apt install dpkg-sig --yes
 dpkg-sig --verify rstudio-server-1.4.1717-amd64.deb
 ```
 
-出現 `GOODSIG` 字樣代表該檔案沒有問題，可以繼續安裝
+出現 `GOODSIG` 字樣代表該檔案沒有問題，檔案於下載圖中沒有被修改過，可以繼續安裝
 
-``` {.console_output}
+``` console_output
 Processing rstudio-server-1.4.1717-amd64.deb...
 GOODSIG _gpgbuilder FE8564CFF1AB93F1728645193F32EE77E331692F 1621900692
 ```
 
-最後再使用 `gdebi` 指令安裝 .deb 格式軟體
+最後再使用 `gdebi` 指令安裝 .deb 格式安裝程式
 
 ``` {.bash .prefixed}
 sudo gdebi rstudio-server-1.4.1717-amd64.deb
@@ -94,26 +154,30 @@ sudo ufw allow 8787
 接著用瀏覽器進入下列網址
 
 ``` {.bash .prefixed}
-http://<虛擬主機的 ip 地址>:8787
+http://<虛擬主機的 ip 位址>:8787
+```
+
+```{r, fig.cap='RStudio 登入頁面'}
+knitr::include_graphics(path = 'figures/apache2-rstudio-server-login-page.png')
 ```
 
 或是在shell中直接使用 `curl` 指令查看
 
-``` {.bash}
-curl <虛擬主機的 ip 地址>:8787
+``` bash
+curl <虛擬主機的 ip 位址>:8787
 ```
 
-### Step 2 --- 設定 Apache 的反向代理（Reverse Proxy） {.unnumbered}
+### Step 2 --- 設定 Apache 的反向代理（Reverse Proxy）
+
+<!--# TODO: 說明何謂反向代理？ -->
 
 用指令 `a2enmod` 將 Apache 內建的插件啟用
 
 ``` {.bash .prefixed}
-sudo a2enmod proxy
-sudo a2enmod proxy_http
-sudo a2enmod proxy_wstunnel
+sudo a2enmod proxy && sudo a2enmod proxy_http && sudo a2enmod proxy_wstunnel
 ```
 
-繼續編輯[3.4.2 節][Step 2 --- 建立虛擬網站（VirtualHost）]所建立的 asis.conf
+繼續編輯[Step 2 --- 建立虛擬網站]所建立的 `asis.conf`
 
 ``` {.bash .prefixed}
 sudo vim /etc/apache2/sites-available/asis.conf
@@ -121,7 +185,11 @@ sudo vim /etc/apache2/sites-available/asis.conf
 
 在 VirtualHost 節點下面新增 RStudio Proxy 的區塊
 
-``` {.bash}
+::: code-label
+/etc/apache2/sites-available/asis.conf
+:::
+
+``` apache
 <VirtualHost *:80>
     ServerAdmin webmaster@localhost
     DocumentRoot /var/www/asis
@@ -147,6 +215,8 @@ sudo vim /etc/apache2/sites-available/asis.conf
 </VirtualHost>
 ```
 
+<!--# TODO: 說明 Apache 設定上面的選項 -->
+
 完成後需要重新啟動 Apache
 
 ``` {.bash .prefixed}
@@ -155,17 +225,19 @@ sudo systemctl restart apache2
 
 最後以瀏覽器打開下面的連結會發現，可以直接使用具有名字的路徑，透過反向代理，連結到目的地 8787 埠號。
 
-    http://<虛擬主機的 ip 地址>/rstudio/
+    http://<虛擬主機的 ip 位址>/rstudio/
 
-![](figures/apache2-rstudio-server-login-page.png)
+```{r, fig.cap='透過剛才更新的路由，所看到的 RStudio 登入頁面'}
+knitr::include_graphics(path = 'figures/apache2-rstudio-server-login-page.png')
+```
 
-在 [Step 1](#step-1-----安裝-rstudio-server-伺服器) 開的 8787 埠號可以關掉了。在 status 的後面加上 numbered 可以將設定的編號也一起列出來，再藉由編號編輯該設定。
+在[Step 1 --- 安裝 RStudio Server 伺服器]開的 8787 埠號可以關掉了。在 status 的後面加上 numbered 可以將設定的編號也一起列出來，再藉由編號編輯該設定。
 
 ``` {.bash .prefixed}
 sudo ufw status numbered
 ```
 
-``` {.console_output}
+``` console_output
 Status: active
 
      To                         Action      From
@@ -196,7 +268,7 @@ sudo ufw delete 9
 
 更動後的設定。
 
-``` {.console_output}
+``` console_output
 Status: active
 
 To                         Action      From
@@ -211,45 +283,86 @@ Apache (v6)                ALLOW       Anywhere (v6)
 Apache Secure (v6)         ALLOW       Anywhere (v6)
 ```
 
-## RShiny Server
+## R Shiny Server
 
-### Step 1 --- 安裝 RShiny Server {.unnumbered}
+RShiny Server 是一個可以讓 Shiny App 部署在伺服器上，透過特定的網址啟動特定的 Shiny App。
+
+### 概述
+
+本小節會說明怎麼安裝 R Shiny Server 在 Ubuntu 上、設定 Apache 的反向代理、再來對 R Shiny Server 做更進階的設定，最後驗證剛才的設定是否有效。
+
+### Step 1 --- 安裝 R Shiny Server
+
+首先透過一行指令用 root 權限安裝 `shiny` 套件。
 
 ``` {.bash .prefixed}
 sudo su - \
 -c "R -e \"install.packages('shiny', repos='https://cran.rstudio.com/')\""
 ```
 
+`su` 指令可以用來切換使用者，不過我們這裡的用法是切換到 root 並執行指令的指令。
+
+-   `- [使用者]`：如果不指定使用者，將會以 `root` 代替
+
+-   `--command, -c`：需要目標使用者執行的指令
+
+`R` 除了可以開啟互動式的 R Console 之外，也可以使用 `-e` 參數讓 R 僅執行 R 指令，完成後即退出。
+
+接下來切換目錄到 `/tmp` 資料夾並下載 R Shiny Server 安裝程式。
+
 ``` {.bash .prefixed}
 cd /tmp && \
     wget https://download3.rstudio.org/ubuntu-14.04/x86_64/shiny-server-1.5.16.958-amd64.deb
 ```
 
+這個指令會下載當前撰寫這個頁面的最新版本 R Shiny Server。如果你想要下載最新版本請到[官方的下載頁面](https://www.rstudio.com/products/shiny/download-server/ubuntu/)確認。
+
+使用 `sha256sum` 計算安裝程式的 sha256，並在網站上確認有沒有相同。
+
 ``` {.bash .prefixed}
 sha256sum shiny-server-1.5.16.958-amd64.deb 
 ```
+
+```{r, fig.cap='R Shiny Server 官方下載頁面的 sha256'}
+knitr::include_graphics(path = './figures/shiny-server-sha-256-match.png')
+```
+
+依樣地，使用 `gdebi` 指令安裝 .deb 格式安裝程式
 
 ``` {.bash .prefixed}
 sudo gdebi shiny-server-1.5.16.958-amd64.deb
 ```
 
+最後從 `http://<虛擬機器的 ip 位址>:3838` 進入 R Shiny Server 首頁
+
+```{r, fig.cap='R Shiny Server 首頁'}
+knitr::include_graphics(path = 'figures/apache2-shiny-server-main-page.png')
+```
+
 ::: {.infobox .info}
-版本
+如果右下角顯示的是錯誤訊息，代表伺服器沒有安裝 r`markdown` 套件，下列指令安裝即可：
+
+``` {.bash .prefixed}
+sudo su - \
+    -c "R -e \"install.packages('rmarkdown')\""
+```
 :::
 
-![](figures/apache2-shiny-server-main-page.png)
+### Step 2 --- 設定 Apache 的反向代理
 
-::: {.infobox .info}
-右下角 blablabla 沒裝 rmarkdown package
-:::
-
-### Step 2 --- 設定 Apache 的 Proxy {.unnumbered}
+繼續編輯 Apache 的網頁設定文件 `asis.conf`
 
 ``` {.bash .prefixed}
 sudo vim /etc/apache2/sites-available/asis.conf
 ```
 
-``` {.bash}
+一樣地，將 R Shiny Server 的設定也一同放入設定檔案中。
+
+::: code-label
+/etc/apache2/sites-available/asis.conf
+:::
+
+``` bash
 <VirtualHost *:80>
     [...]
 
@@ -272,15 +385,35 @@ sudo vim /etc/apache2/sites-available/asis.conf
 </VirtualHost>
 ```
 
-    http://<虛擬主機的 ip 地址>/shiny/
+編輯完成後，須重新啟動 Apache2
 
-### Step 3 --- Shiny Server 進階設定 {.unnumbered}
+``` {.bash .prefixed}
+sudo systemctl restart apache2
+```
+
+最後使用已命名的網址進入 R Shiny Server 首頁
+
+    http://<虛擬機器的 ip 地址>/shiny/
+
+```{r shiny-main-page, fig.cap='透過 Apache 反向代理進入的R Shiny Server 首頁'}
+knitr::include_graphics(path = 'figures/apache2-shiny-server-main-page.png')
+```
+
+### Step 3 --- R Shiny Server 進階設定
+
+這個步驟會編輯 R Shiny Server 的設定，可以根據需求去區分 Shiny App，例如我想要使用者群組為學生的放在一起，為教師的使用者群組放在一起，都是做得到的。更詳盡的設定可以看 R Shiny Server [官方的說明文件](https://docs.rstudio.com/shiny-server/)設定。
+
+首先我們先編輯 Shiny Server 的設定檔案：
 
 ``` {.bash .prefixed}
 sudo vim /etc/shiny-server/shiny-server.conf
 ```
 
-``` {.bash}
+::: code-label
+/etc/shiny-server/shiny-server.conf
+:::
+
+``` bash
 # 主要執行 App 為的使用者為該 App 的擁有者，沒有擁有者的 App 將由備取使用者 shiny 執行。
 run_as :HOME_USER: shiny;
 access_log /var/log/shiny-server/access.log tiny;
@@ -289,30 +422,6 @@ server {
     listen 3838;
 
     # 110.09.21 跟明輝老師的結果是只留下 '老師' 與 '學生群組'
-    # 
-    # # 重新導向舊群組 /asisstuc 至新群組 /asis
-    # location /asisstuc {
-    #   redirect "https://<虛擬主機 ip 位址>/shiny/asis/" 302 true;
-    # }
-    # 
-    # location /asis {
-    #   user_dirs;
-    #   members_of asis;
-    #   directory_index on;
-    # }
-    # 
-    # location /ecofin {
-    #   user_dirs;
-    #   members_of ecofin;
-    #   directory_index on;
-    # }
-    # 
-    # location /fta {
-    #   user_dirs;
-    #   members_of fta;
-    #   directory_index on;
-    # }
-    
     # 重新導向舊群組 /asisstuc 至學生群組 /stu
     location /asisstuc {
       redirect "https://<虛擬主機 ip 位址>/shiny/stu/" 302 true;
@@ -347,37 +456,131 @@ server {
 }
 ```
 
-``` {.bash .prefixed}
-sudo systemctl restart shiny-server
+這裡的 `run_as` 設定的 `:HOME_USER:` 會將符合 `members_of` 所指定的群組的使用者家目錄底下的資料夾（`~/ShinyApps`）有效，會以該使用者所安裝的 R 套件為第一優先執行 Shiny Apps，如果使用者家目錄沒有安裝該套件才會落到 R 的系統套件。這個方法能讓系統不用常常以管理員的權限安裝套件，讓使用者可以自己安裝所需的套件，達到減少管理員工作的目的。而緊接在 `:HOME_USER:` 後面的使用者是 shiny 預設執行 Shiny Apps 的使用者。
+
+`access_log` 是存放任何人透過網址執行 Shiny Apps 的所有訊息的位置，而後面的 `tiny` 字樣是設定紀錄的詳細程度，詳細的說明可以參考[官方的說明文件](https://docs.rstudio.com/shiny-server/)。
+
+在開始設定之前要知道一件事，所有的路由設定都是放在 `server { }` 之中，不會跑到大括號外面。`listen` 後面設定的數字是 R Shiny Server 佈置 Apps 的埠號，不要重複即可。
+
+#### 佈置單一個 App
+
+單一個 App 可以看預設首頁（如圖\@ref(fig:shiny-main-page)所示）的設置，首頁的設定如下：
+
+``` bash
+[...]
+
+server {
+    [...]
+    
+    # Shiny 首頁
+    location / {
+        site_dir /srv/shiny-server;
+        log_dir /var/log/shiny-server;
+        directory_index on;
+    }
+}
 ```
 
-::: {.infobox .info}
-這裏要先跳至第四步先建立使用者群組後再重新啟動 Shiny-server。因為設定檔中設有使用者群組（asis、ecofin、fta、teacher），如果 Shiny Server 在啟動中找不到時會跳出錯誤。
+`location /` 設定的是這個頁面的位置，`/` 代表的是根頁面，跟網址加在一起就變成 `http://<虛擬機器的 ip 位置>/shiny/` 。而 `site_dir` 指的是這個頁面的網頁檔案位置，`/srv/shiny-server/` 的目錄結構如下：
+
+``` console_output
+total 8
+drwxr-xr-x 2 root root 4096 Jul  4 19:44 ./
+drwxr-xr-x 3 root root 4096 May 29 10:02 ../
+lrwxrwxrwx 1 root root   38 Feb  1 03:43 index.html -> /opt/shiny-server/samples/welcome.html
+lrwxrwxrwx 1 root root   37 Feb  1 03:43 sample-apps -> /opt/shiny-server/samples/sample-apps/
+```
+
+它會將 `index.html` 作為 `/` 路由（也就是首頁）的頁面。如果底下有資料夾，透過網頁的相對路徑也是進得去的。
+
+R Shiny Server 會將資料夾底下的 Shiny Apps 或是 R Markdown 佈置到對應的路由上。例如這裡有一個 `sample-apps` 資料夾，裏面分別有一個 Shiny App，與一個 R Markdown 檔案，路徑如下：
+
+``` console_output
+/srv/shiny-server/sample-apps/
+├── hello
+│   ├── server.R
+│   └── ui.R
+└── rmd
+    └── index.Rmd
+```
+
+hello 資料夾底下是一個 Shiny App，而 rmd 資料夾底下是一個 R Markdown 檔案。兩者皆可以透過首頁下的 `sample-apps/` 路由存取。以 hello 的 Shiny App 為例，App 的路由為：`http://<虛擬機器的 ip 位置>/shiny/sample-apps/hello`。
+
+```{r, fig.cap='透過 http://<虛擬機器的 ip 位置>/shiny/sample-apps/hello 訪問的 Shiny App'}
+knitr::include_graphics(path = './figures/shiny_sample-apps_hello.png')
+```
+
+而 `directory_index` 設定為 `on` ，且該路由沒有首頁檔案（index.html）、Shiny Apps 或是 R Markdown 時，會將資料夾與檔案顯示出來。這裡同樣的以 `/srv/shiny-server` 底下的 `/sample-apps` 為例，如下圖所示：
+
+```{r, fig.cap='/shiny/sample-apps 的頁面'}
+knitr::include_graphics(path = './figures/shiny_sample-apps.png')
+```
+
+#### 根據使用者群組佈置 App
+
+R Shiny Server 可以根據使用者群組創建對應的路由，像是規定學生只能從 `/stu` 存取他們自己的 Shiny App。具體設定如下：
+
+``` bash
+[...]
+
+server{
+    [...]
+    
+    # 學生頁面
+    location /stu {
+        user_dirs;
+        members_of stu;
+        directory_index on;
+    }
+}
+```
+
+這個設定會限制使用者群組為 `stu` 的使用者從 `http://<虛擬機器的 ip 位置>/shiny/<使用者名稱>` 存取他們存放位於家目錄底下名為`ShinyApps`（`~/ShinyApps`）資料夾內的 Shiny Apps。
+
+#### 重新導向頁面
+
+重新導向頁面可以將舊的網址導向至新的網址，一般的設定如下：
+
+``` bash
+[...]
+
+server {
+    [...]
+    
+    # 將網址為 /asisstuc 的路由重新導向至新的網址
+    location /asisstuc {
+      redirect "https://<虛擬主機 ip 位址>/shiny/stu/" 302 true;
+    }
+}
+```
+
+`redirect` 後面第一個參數是目的地網址，第二個參數是網頁重新導向的種類（`301` 為永久，`302` 為暫時），最後一個參數是否要套用完全一樣的路由，如果設為 `true`，路由為 `/asisstuc` 才會重新導向。如果設為 `false` ，則它的路由只要包含 `/asisstuc`，不管它底下才有沒有其他路由（例如：`/asisstuc/08170875/example`），都會重新導向至指定的網頁。
+
+::: {.infobox .caution}
+這裏要先跳至[Step 4 --- 使用使用者測試設定是否有效]先建立使用者群組後再重新啟動 R Shiny Server。因為設定檔中設有使用者群組（`MCU`、`teacher`）而沒有創建的話，重新啟動 R Shiny Server 會因為找不到該使用者群組而出現錯誤。
 :::
 
-### Step 4 --- 使用使用者測試設定是否有效 {.unnumbered}
+### Step 4 --- 使用使用者測試設定是否有效
+
+這裡會大概講一下怎麼創建使用者群組、使用者帳戶，以及在創建使用者帳戶的同時，也一起於家目錄創建 `ShinyApps` 資料夾。詳細的說明會於附錄的[帳號管理]說明。
+
+首先用下面的指令創建兩個使用者群組，分別是 `stu` 與 `teacher`。
 
 ``` {.bash .prefixed}
-sudo groupadd asis
+sudo groupadd MCU && sudo groupadd teacher
 ```
 
-``` {.bash .prefixed}
-sudo groupadd ecofin
-```
-
-``` {.bash .prefixed}
-sudo groupadd fta
-```
-
-``` {.bash .prefixed}
-sudo groupadd teacher
-```
+接著編輯使用指令 `useradd` 創建使用者時，預設的使用者設定，後續建立使用者才不會多打很多指令。
 
 ``` {.bash .prefixed}
 sudo vim /etc/default/useradd
 ```
 
-``` {.bash}
+::: code-label
+/etc/default/useradd
+:::
+
+``` bash
 # Default values for useradd(8)
 #
 # The SHELL variable specifies the default login shell on your
@@ -385,34 +588,70 @@ sudo vim /etc/default/useradd
 # Similar to DSHELL in adduser. However, we use "sh" here because
 # useradd is a low level utility and should be as general
 # as possible
-SHELL=/usr/bin/bash # 變更這裡
+SHELL=/usr/bin/bash
 ```
+
+將 SHELL 的部分取消註解，並把 bash 的程式路徑填上去。只要變更這一行就好，如果不清楚路徑可以參考下面的說明。
+
+這裡的 SHELL 就是指 linux 與使用者之間的溝通方式，指定 `bash` 為我們使用者預設的 SHELL。
+
+::: {.infobox .info}
+如果不知道 bash 程式的位置，可以使用 `which` 指令查詢後，再來做這一步，例如：
+
+``` {.bash .prefixed}
+which bash
+```
+
+``` console_output
+/usr/bin/bash
+```
+:::
+
+接著於 `/etc/skel` 的路徑創建一個叫做 `ShinyApps` 的資料夾。位於此路徑的**所有檔案**都會在創建使用者時複製一份到使用者的家目錄。
 
 ``` {.bash .prefixed}
 sudo mkdir /etc/skel/ShinyApps/
 ```
+
+創建完後，再將範例的 `sample-apps` 連結到模板資料夾 `/etc/skel` 的 `ShinyApps` 資料夾中。讓新創立的使用者有測試用的 Shiny App。
 
 ``` {.bash .prefixed}
 sudo ln -s /srv/shiny-server/sample-apps \
 /etc/skel/ShinyApps/example
 ```
 
-``` {.bash .prefixed}
-sudo useradd --badnames -N -g asis -m 08170875
-```
-
--   `--badnames`:
-
--   `-N, --no-user-group`:
-
--   `-g, --gid GROUP`:
-
--   `-m, --create-home`:
+最後再用 `useradd` 指令隨意創建兩個帳戶
 
 ``` {.bash .prefixed}
-sudo useradd --badnames -N -g ecofin -m 08220000
+sudo useradd --badnames -N -g stu -m 08170875
 ```
 
-![](figures/shiny-server-group-test-successed.png)
+-   `--badnames`：新版的 `useradd` 指令新增的參數，讓不安全的使用者（例如全部都是數字的使用者）可以創建。
 
-![](figures/shiny-server-group-test-failed.png)
+-   `-N, --no-user-group`：預設 `useradd` 在創建使用者帳戶時，會根據使用者名稱再創立一個主要的使用者群組。
+
+-   `-g, --gid GROUP`：直接指定使用者的主要的使用者群組。
+
+-   `-m, --create-home`：建立使用者時，順帶建立家目錄。
+
+``` {.bash .prefixed}
+sudo useradd --badnames -N -g teacher -m ms00000000
+```
+
+新增完成後，為了使剛才 R Shiny Server 的設定生效，重新啟動 R Shiny Server。
+
+``` {.bash .prefixed}
+sudo systemctl restart shiny-server
+```
+
+最後再從剛才設定的路由進入使用者的 Shiny Apps 目錄，網址為：`http://<虛擬機器 ip 位址>/shiny/stu/08170875/`
+
+```{r, fig.cap='Shiny Server 使用者 08170875 的 Shiny Apps'}
+knitr::include_graphics(path = 'figures/shiny-server-group-test-successed.png')
+```
+
+如果輸入了 `http://<虛擬機器 ip 位址>/shiny/stu` 是不會出現所有使用者的，這點要注意。不過我們也可以根據這個路由，利用 `site_dir` 參數設計一個專屬於使用者群組 `stu` 的網頁。
+
+```{r, fig.cap='路由 /stu 的網頁（找不到網頁）'}
+knitr::include_graphics(path = 'figures/shiny-server-group-test-failed.png')
+```
