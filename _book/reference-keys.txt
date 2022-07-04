@@ -150,7 +150,7 @@ conda-的-python-環境
 r-環境
 c-與-c-環境
 sas-環境
-設置-apache-的-reverse-proxy
+設置-apache-的反向代理
 jupyterhub-擴充套件
 相關軟體
 putty

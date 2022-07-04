@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5.5 設置 Apache 的 Reverse Proxy | MCU ASIS Ubuntu 系統安裝指南</title>
-  <meta name="description" content="5.5 設置 Apache 的 Reverse Proxy | MCU ASIS Ubuntu 系統安裝指南" />
+  <title>5.5 設置 Apache 的反向代理 | MCU ASIS Ubuntu 系統安裝指南</title>
+  <meta name="description" content="5.5 設置 Apache 的反向代理 | MCU ASIS Ubuntu 系統安裝指南" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5.5 設置 Apache 的 Reverse Proxy | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta property="og:title" content="5.5 設置 Apache 的反向代理 | MCU ASIS Ubuntu 系統安裝指南" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5.5 設置 Apache 的 Reverse Proxy | MCU ASIS Ubuntu 系統安裝指南" />
+  <meta name="twitter:title" content="5.5 設置 Apache 的反向代理 | MCU ASIS Ubuntu 系統安裝指南" />
   
   
   
@@ -294,7 +294,7 @@ div.csl-indent {
 <li class="chapter" data-level="5.4.3" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html#c-與-c-環境"><i class="fa fa-check"></i><b>5.4.3</b> C 與 C++ 環境</a></li>
 <li class="chapter" data-level="5.4.4" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html#sas-環境"><i class="fa fa-check"></i><b>5.4.4</b> SAS 環境</a></li>
 </ul></li>
-<li class="chapter" data-level="5.5" data-path="設置-apache-的-reverse-proxy.html"><a href="設置-apache-的-reverse-proxy.html"><i class="fa fa-check"></i><b>5.5</b> 設置 Apache 的 Reverse Proxy</a></li>
+<li class="chapter" data-level="5.5" data-path="設置-apache-的反向代理.html"><a href="設置-apache-的反向代理.html"><i class="fa fa-check"></i><b>5.5</b> 設置 Apache 的反向代理</a></li>
 <li class="chapter" data-level="5.6" data-path="jupyterhub-擴充套件.html"><a href="jupyterhub-擴充套件.html"><i class="fa fa-check"></i><b>5.6</b> JupyterHub 擴充套件</a></li>
 </ul></li>
 <li class="appendix"><span><b>附錄</b></span></li>
@@ -343,33 +343,36 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="設置-apache-的-reverse-proxy" class="section level2 hasAnchor" number="5.5">
-<h2><span class="header-section-number">5.5</span> 設置 Apache 的 Reverse Proxy<a href="設置-apache-的-reverse-proxy.html#設置-apache-的-reverse-proxy" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb237"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb237-1"><a href="設置-apache-的-reverse-proxy.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/sites-available/asis.conf</span></code></pre></div>
-<div class="sourceCode" id="cb238"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb238-1"><a href="設置-apache-的-reverse-proxy.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>VirtualHost <span class="ex">*:80</span><span class="op">&gt;</span></span>
-<span id="cb238-2"><a href="設置-apache-的-reverse-proxy.html#cb238-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
-<span id="cb238-3"><a href="設置-apache-的-reverse-proxy.html#cb238-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb238-4"><a href="設置-apache-的-reverse-proxy.html#cb238-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
-<span id="cb238-5"><a href="設置-apache-的-reverse-proxy.html#cb238-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># JupyterHub Reverse Proxy</span></span>
-<span id="cb238-6"><a href="設置-apache-的-reverse-proxy.html#cb238-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
-<span id="cb238-7"><a href="設置-apache-的-reverse-proxy.html#cb238-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># add trailing slash</span></span>
-<span id="cb238-8"><a href="設置-apache-的-reverse-proxy.html#cb238-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RedirectMatch</span> ^/jhub$ /jhub/</span>
-<span id="cb238-9"><a href="設置-apache-的-reverse-proxy.html#cb238-9" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteCond</span> %{HTTP:Connection} Upgrade [NC]</span>
-<span id="cb238-10"><a href="設置-apache-的-reverse-proxy.html#cb238-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteCond</span> %{HTTP:Upgrade} websocket [NC]</span>
-<span id="cb238-11"><a href="設置-apache-的-reverse-proxy.html#cb238-11" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteRule</span> /jhub/<span class="er">(</span><span class="bu">.</span><span class="pp">*</span><span class="kw">)</span> <span class="ex">ws://127.0.0.1:8000/jhub/</span><span class="va">$1</span> [P,L]</span>
-<span id="cb238-12"><a href="設置-apache-的-reverse-proxy.html#cb238-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteRule</span> /jhub/<span class="er">(</span><span class="bu">.</span><span class="pp">*</span><span class="kw">)</span> <span class="ex">http://127.0.0.1:8000/jhub/</span><span class="va">$1</span> [P,L]</span>
-<span id="cb238-13"><a href="設置-apache-的-reverse-proxy.html#cb238-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb238-14"><a href="設置-apache-的-reverse-proxy.html#cb238-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>Location <span class="ex">/jhub/</span><span class="op">&gt;</span></span>
-<span id="cb238-15"><a href="設置-apache-的-reverse-proxy.html#cb238-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># preserve Host header to avoid cross-origin problems</span></span>
-<span id="cb238-16"><a href="設置-apache-的-reverse-proxy.html#cb238-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># this setting screws up Rstudio, use for JupyterHub only</span></span>
-<span id="cb238-17"><a href="設置-apache-的-reverse-proxy.html#cb238-17" aria-hidden="true" tabindex="-1"></a>        <span class="ex">ProxyPreserveHost</span> On</span>
-<span id="cb238-18"><a href="設置-apache-的-reverse-proxy.html#cb238-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># proxy to JupyterHub, omit location parameter from ProxyPass etc</span></span>
-<span id="cb238-19"><a href="設置-apache-的-reverse-proxy.html#cb238-19" aria-hidden="true" tabindex="-1"></a>        <span class="ex">ProxyPass</span> http://127.0.0.1:8000/jhub/</span>
-<span id="cb238-20"><a href="設置-apache-的-reverse-proxy.html#cb238-20" aria-hidden="true" tabindex="-1"></a>        <span class="ex">ProxyPassReverse</span> http://127.0.0.1:8000/jhub/</span>
-<span id="cb238-21"><a href="設置-apache-的-reverse-proxy.html#cb238-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>/Location<span class="op">&gt;</span></span>
-<span id="cb238-22"><a href="設置-apache-的-reverse-proxy.html#cb238-22" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb238-23"><a href="設置-apache-的-reverse-proxy.html#cb238-23" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>/VirtualHost<span class="op">&gt;</span></span></code></pre></div>
-<pre><code>http://&lt;虛擬主機的ip位址&gt;/jhub/</code></pre>
+<div id="設置-apache-的反向代理" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> 設置 Apache 的反向代理<a href="設置-apache-的反向代理.html#設置-apache-的反向代理" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb237"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb237-1"><a href="設置-apache-的反向代理.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/sites-available/asis.conf</span></code></pre></div>
+<div class="code-label">
+<p>/etc/apache2/sites-available/asis.conf</p>
+</div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode apache"><code class="sourceCode apache"><span id="cb238-1"><a href="設置-apache-的反向代理.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;VirtualHost</span><span class="at"> *:80</span><span class="fu">&gt;</span></span>
+<span id="cb238-2"><a href="設置-apache-的反向代理.html#cb238-2" aria-hidden="true" tabindex="-1"></a>    [...]</span>
+<span id="cb238-3"><a href="設置-apache-的反向代理.html#cb238-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb238-4"><a href="設置-apache-的反向代理.html#cb238-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
+<span id="cb238-5"><a href="設置-apache-的反向代理.html#cb238-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># JupyterHub Reverse Proxy</span></span>
+<span id="cb238-6"><a href="設置-apache-的反向代理.html#cb238-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
+<span id="cb238-7"><a href="設置-apache-的反向代理.html#cb238-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># add trailing slash</span></span>
+<span id="cb238-8"><a href="設置-apache-的反向代理.html#cb238-8" aria-hidden="true" tabindex="-1"></a>    RedirectMatch<span class="st"> ^/jhub$ /jhub/</span></span>
+<span id="cb238-9"><a href="設置-apache-的反向代理.html#cb238-9" aria-hidden="true" tabindex="-1"></a>    RewriteCond<span class="st"> %{HTTP:Connection} Upgrade [NC]</span></span>
+<span id="cb238-10"><a href="設置-apache-的反向代理.html#cb238-10" aria-hidden="true" tabindex="-1"></a>    RewriteCond<span class="st"> %{HTTP:Upgrade} websocket [NC]</span></span>
+<span id="cb238-11"><a href="設置-apache-的反向代理.html#cb238-11" aria-hidden="true" tabindex="-1"></a>    RewriteRule<span class="st"> /jhub/(.*) ws://127.0.0.1:8000/jhub/$1 [P,L]</span></span>
+<span id="cb238-12"><a href="設置-apache-的反向代理.html#cb238-12" aria-hidden="true" tabindex="-1"></a>    RewriteRule<span class="st"> /jhub/(.*) http://127.0.0.1:8000/jhub/$1 [P,L]</span></span>
+<span id="cb238-13"><a href="設置-apache-的反向代理.html#cb238-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb238-14"><a href="設置-apache-的反向代理.html#cb238-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">&lt;Location</span><span class="at"> /jhub/</span><span class="fu">&gt;</span></span>
+<span id="cb238-15"><a href="設置-apache-的反向代理.html#cb238-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># preserve Host header to avoid cross-origin problems</span></span>
+<span id="cb238-16"><a href="設置-apache-的反向代理.html#cb238-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># this setting screws up Rstudio, use for JupyterHub only</span></span>
+<span id="cb238-17"><a href="設置-apache-的反向代理.html#cb238-17" aria-hidden="true" tabindex="-1"></a>        <span class="ex">ProxyPreserveHost</span><span class="ch"> </span><span class="kw">On</span></span>
+<span id="cb238-18"><a href="設置-apache-的反向代理.html#cb238-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># proxy to JupyterHub, omit location parameter from ProxyPass etc</span></span>
+<span id="cb238-19"><a href="設置-apache-的反向代理.html#cb238-19" aria-hidden="true" tabindex="-1"></a>        ProxyPass<span class="st"> http://127.0.0.1:8000/jhub/</span></span>
+<span id="cb238-20"><a href="設置-apache-的反向代理.html#cb238-20" aria-hidden="true" tabindex="-1"></a>        ProxyPassReverse<span class="st"> http://127.0.0.1:8000/jhub/</span></span>
+<span id="cb238-21"><a href="設置-apache-的反向代理.html#cb238-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">&lt;/Location&gt;</span></span>
+<span id="cb238-22"><a href="設置-apache-的反向代理.html#cb238-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb238-23"><a href="設置-apache-的反向代理.html#cb238-23" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;/VirtualHost&gt;</span></span></code></pre></div>
+<pre><code>http://&lt;虛擬主機的 ip 位址&gt;/jhub</code></pre>
 </div>
             </section>
 
