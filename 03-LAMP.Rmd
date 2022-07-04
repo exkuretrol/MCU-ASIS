@@ -641,7 +641,7 @@ knitr::include_graphics(path = 'figures/phpmyadmin-installation_1.png')
 knitr::include_graphics(path = 'figures/phpmyadmin-installation_2.png')
 ```
 
-::: {.infobox .warning}
+::: {.infobox .caution}
 當出現此錯誤時不用太慌張，是因為安裝 MySQL 時，有開啟 `Validate Password` 插件導致的，只需要透過下列指令暫時關閉即可。
 
 ```{r, fig.cap='phpMyAdmin 安裝導覽，錯誤訊息'}
