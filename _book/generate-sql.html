@@ -345,149 +345,149 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="generate-sql.sh" class="section level2 hasAnchor" number="7.2">
 <h2><span class="header-section-number">B.2</span> generate-sql.sh<a href="generate-sql.html#generate-sql.sh" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb260"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb260-1"><a href="generate-sql.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb260-2"><a href="generate-sql.html#cb260-2" aria-hidden="true" tabindex="-1"></a><span class="co"># author: kuaz</span></span>
-<span id="cb260-3"><a href="generate-sql.html#cb260-3" aria-hidden="true" tabindex="-1"></a><span class="co"># last modified: 2021.09.13</span></span>
-<span id="cb260-4"><a href="generate-sql.html#cb260-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb260-5"><a href="generate-sql.html#cb260-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 這個腳本被用來:</span></span>
-<span id="cb260-6"><a href="generate-sql.html#cb260-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. 根據已知的帳號密碼建立 MySQL 帳戶</span></span>
-<span id="cb260-7"><a href="generate-sql.html#cb260-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. 根據帳號建立資料庫，編碼為 &#39;utf8mb4&#39;</span></span>
-<span id="cb260-8"><a href="generate-sql.html#cb260-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. 以上指令會儲存在當前資料夾的 create-account.sql 裡面</span></span>
-<span id="cb260-9"><a href="generate-sql.html#cb260-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. 根據已知的帳號刪除該 MySQL 帳戶與資料庫</span></span>
-<span id="cb260-10"><a href="generate-sql.html#cb260-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. 若加上 -r, --run 即可順便執行該腳本</span></span>
-<span id="cb260-11"><a href="generate-sql.html#cb260-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb260-12"><a href="generate-sql.html#cb260-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb260-13"><a href="generate-sql.html#cb260-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 環境變數</span></span>
-<span id="cb260-14"><a href="generate-sql.html#cb260-14" aria-hidden="true" tabindex="-1"></a><span class="va">pass_dir</span><span class="op">=</span><span class="st">&#39;passwd&#39;</span>       <span class="co"># 放置密碼的資料夾，由另一個腳本 ./create-users.sh 產生</span></span>
-<span id="cb260-15"><a href="generate-sql.html#cb260-15" aria-hidden="true" tabindex="-1"></a><span class="va">filename</span><span class="op">=</span><span class="st">&#39;-accounts.sql&#39;</span>  <span class="co"># create/drop-accounts.sql 檔案前綴會根據選項變化</span></span>
-<span id="cb260-16"><a href="generate-sql.html#cb260-16" aria-hidden="true" tabindex="-1"></a><span class="va">run</span><span class="op">=</span>false           <span class="co"># 預設產生腳本後不會執行</span></span>
-<span id="cb260-17"><a href="generate-sql.html#cb260-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb260-18"><a href="generate-sql.html#cb260-18" aria-hidden="true" tabindex="-1"></a><span class="fu">check_pass_dir()</span> <span class="kw">{</span></span>
-<span id="cb260-19"><a href="generate-sql.html#cb260-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="bu">[</span> <span class="ot">-d</span> <span class="va">${pass_dir}</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb260-20"><a href="generate-sql.html#cb260-20" aria-hidden="true" tabindex="-1"></a>        <span class="va">grps</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$(</span><span class="fu">ls</span> <span class="va">${pass_dir}</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;.csv&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span> <span class="st">&quot;.&quot;</span> <span class="at">-f</span> 1<span class="va">)</span><span class="st">&quot;</span></span>
-<span id="cb260-21"><a href="generate-sql.html#cb260-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
-<span id="cb260-22"><a href="generate-sql.html#cb260-22" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">&quot;密碼資料夾 </span><span class="va">${pass_dir}</span><span class="st"> 不存在！請先執行過建立帳號腳本（create-users.sh）後，再執行一次此腳本。&quot;</span></span>
-<span id="cb260-23"><a href="generate-sql.html#cb260-23" aria-hidden="true" tabindex="-1"></a>        <span class="bu">exit</span> 1<span class="kw">;</span></span>
-<span id="cb260-24"><a href="generate-sql.html#cb260-24" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span></span>
-<span id="cb260-25"><a href="generate-sql.html#cb260-25" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
-<span id="cb260-26"><a href="generate-sql.html#cb260-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb260-27"><a href="generate-sql.html#cb260-27" aria-hidden="true" tabindex="-1"></a><span class="fu">write_to_mysql_db()</span> <span class="kw">{</span></span>
-<span id="cb260-28"><a href="generate-sql.html#cb260-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="bu">[</span> <span class="va">${run}</span> <span class="ot">=</span> true <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb260-29"><a href="generate-sql.html#cb260-29" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">&quot;請輸入 MySQL 帳戶 root 的密碼: 👇&quot;</span></span>
-<span id="cb260-30"><a href="generate-sql.html#cb260-30" aria-hidden="true" tabindex="-1"></a>        <span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span> <span class="op">&lt;</span> <span class="va">${filename}</span></span>
-<span id="cb260-31"><a href="generate-sql.html#cb260-31" aria-hidden="true" tabindex="-1"></a>        <span class="ex">clean_sql_script</span></span>
-<span id="cb260-32"><a href="generate-sql.html#cb260-32" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
-<span id="cb260-33"><a href="generate-sql.html#cb260-33" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">&quot;已於 </span><span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span><span class="st"> 產生 </span><span class="va">${filename}</span><span class="st"> 🎉&quot;</span></span>
-<span id="cb260-34"><a href="generate-sql.html#cb260-34" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span></span>
-<span id="cb260-35"><a href="generate-sql.html#cb260-35" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
-<span id="cb260-36"><a href="generate-sql.html#cb260-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb260-37"><a href="generate-sql.html#cb260-37" aria-hidden="true" tabindex="-1"></a><span class="fu">create_users_and_databases()</span> <span class="kw">{</span></span>
-<span id="cb260-38"><a href="generate-sql.html#cb260-38" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;set global validate_password.policy=LOW;&quot;</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">${filename}</span> <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span><span class="kw">;</span></span>
-<span id="cb260-39"><a href="generate-sql.html#cb260-39" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> grp <span class="kw">in</span> <span class="va">${grps}</span></span>
-<span id="cb260-40"><a href="generate-sql.html#cb260-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">do</span> </span>
-<span id="cb260-41"><a href="generate-sql.html#cb260-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="bu">read</span> <span class="va">line</span><span class="kw">;</span></span>
-<span id="cb260-42"><a href="generate-sql.html#cb260-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">do</span></span>
-<span id="cb260-43"><a href="generate-sql.html#cb260-43" aria-hidden="true" tabindex="-1"></a>            <span class="va">stu</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">${line}</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span> <span class="st">&#39;,&#39;</span> <span class="at">-f</span> 1<span class="va">)</span><span class="st">&quot;</span></span>
-<span id="cb260-44"><a href="generate-sql.html#cb260-44" aria-hidden="true" tabindex="-1"></a>            <span class="va">pass</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">${line}</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span> <span class="st">&#39;,&#39;</span> <span class="at">-f</span> 2<span class="va">)</span><span class="st">&quot;</span></span>
-<span id="cb260-45"><a href="generate-sql.html#cb260-45" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">&quot;create user &#39;</span><span class="va">${stu}</span><span class="st">&#39;@&#39;localhost&#39; identified by &#39;</span><span class="va">${pass}</span><span class="st">&#39;;&quot;</span> <span class="dt">\</span></span>
-<span id="cb260-46"><a href="generate-sql.html#cb260-46" aria-hidden="true" tabindex="-1"></a>                <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">${filename}</span> <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
-<span id="cb260-47"><a href="generate-sql.html#cb260-47" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">&quot;create database </span><span class="dt">\`</span><span class="va">${stu}</span><span class="dt">\`</span><span class="st"> character set utf8mb4 collate utf8mb4_unicode_ci;&quot;</span> <span class="dt">\</span></span>
-<span id="cb260-48"><a href="generate-sql.html#cb260-48" aria-hidden="true" tabindex="-1"></a>                <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">${filename}</span> <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
-<span id="cb260-49"><a href="generate-sql.html#cb260-49" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">&quot;grant all privileges on </span><span class="dt">\`</span><span class="va">${stu}</span><span class="dt">\`</span><span class="st">.* to &#39;</span><span class="va">${stu}</span><span class="st">&#39;@&#39;localhost&#39;;&quot;</span> <span class="dt">\</span></span>
-<span id="cb260-50"><a href="generate-sql.html#cb260-50" aria-hidden="true" tabindex="-1"></a>                <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">${filename}</span> <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
-<span id="cb260-51"><a href="generate-sql.html#cb260-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">done</span> <span class="op">&lt;</span> <span class="va">${pass_dir}</span>/<span class="va">${grp}</span>.csv</span>
-<span id="cb260-52"><a href="generate-sql.html#cb260-52" aria-hidden="true" tabindex="-1"></a>  <span class="cf">done</span></span>
-<span id="cb260-53"><a href="generate-sql.html#cb260-53" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;flush privileges;&quot;</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">${filename}</span> <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span><span class="kw">;</span></span>
-<span id="cb260-54"><a href="generate-sql.html#cb260-54" aria-hidden="true" tabindex="-1"></a>  <span class="ex">write_to_mysql_db</span></span>
-<span id="cb260-55"><a href="generate-sql.html#cb260-55" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
-<span id="cb260-56"><a href="generate-sql.html#cb260-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb260-57"><a href="generate-sql.html#cb260-57" aria-hidden="true" tabindex="-1"></a><span class="fu">drop_users_and_databases()</span> <span class="kw">{</span></span>
-<span id="cb260-58"><a href="generate-sql.html#cb260-58" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> grp <span class="kw">in</span> <span class="va">${grps}</span></span>
-<span id="cb260-59"><a href="generate-sql.html#cb260-59" aria-hidden="true" tabindex="-1"></a>    <span class="cf">do</span> </span>
-<span id="cb260-60"><a href="generate-sql.html#cb260-60" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="bu">read</span> <span class="va">line</span><span class="kw">;</span></span>
-<span id="cb260-61"><a href="generate-sql.html#cb260-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">do</span></span>
-<span id="cb260-62"><a href="generate-sql.html#cb260-62" aria-hidden="true" tabindex="-1"></a>            <span class="va">stu</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">${line}</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span> <span class="st">&#39;,&#39;</span> <span class="at">-f</span> 1<span class="va">)</span><span class="st">&quot;</span></span>
-<span id="cb260-63"><a href="generate-sql.html#cb260-63" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">&quot;drop user &#39;</span><span class="va">${stu}</span><span class="st">&#39;@&#39;localhost&#39;;&quot;</span> <span class="dt">\</span></span>
-<span id="cb260-64"><a href="generate-sql.html#cb260-64" aria-hidden="true" tabindex="-1"></a>                <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">${filename}</span> <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
-<span id="cb260-65"><a href="generate-sql.html#cb260-65" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">&quot;drop database </span><span class="dt">\`</span><span class="va">${stu}</span><span class="dt">\`</span><span class="st">;&quot;</span> <span class="dt">\</span></span>
-<span id="cb260-66"><a href="generate-sql.html#cb260-66" aria-hidden="true" tabindex="-1"></a>                <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">${filename}</span> <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
-<span id="cb260-67"><a href="generate-sql.html#cb260-67" aria-hidden="true" tabindex="-1"></a>        <span class="cf">done</span> <span class="op">&lt;</span> <span class="va">${pass_dir}</span>/<span class="va">${grp}</span>.csv</span>
-<span id="cb260-68"><a href="generate-sql.html#cb260-68" aria-hidden="true" tabindex="-1"></a>  <span class="cf">done</span></span>
-<span id="cb260-69"><a href="generate-sql.html#cb260-69" aria-hidden="true" tabindex="-1"></a>  <span class="ex">write_to_mysql_db</span></span>
-<span id="cb260-70"><a href="generate-sql.html#cb260-70" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
-<span id="cb260-71"><a href="generate-sql.html#cb260-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb260-72"><a href="generate-sql.html#cb260-72" aria-hidden="true" tabindex="-1"></a><span class="fu">display_help()</span> <span class="kw">{</span></span>
-<span id="cb260-73"><a href="generate-sql.html#cb260-73" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;這個腳本被用來:&quot;</span></span>
-<span id="cb260-74"><a href="generate-sql.html#cb260-74" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;1. 根據已知的帳號密碼建立 MySQL 帳戶&quot;</span></span>
-<span id="cb260-75"><a href="generate-sql.html#cb260-75" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;2. 根據帳號建立資料庫，編碼為 &#39;utf8mb4&#39;&quot;</span></span>
-<span id="cb260-76"><a href="generate-sql.html#cb260-76" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;3. 以上指令會儲存在當前資料夾的 create-account.sql 裡面&quot;</span></span>
-<span id="cb260-77"><a href="generate-sql.html#cb260-77" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;4. 根據已知的帳號刪除該 MySQL 帳戶與資料庫&quot;</span></span>
-<span id="cb260-78"><a href="generate-sql.html#cb260-78" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;5. 若加上 -r, --run 即可順便執行該腳本&quot;</span></span>
-<span id="cb260-79"><a href="generate-sql.html#cb260-79" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span></span>
-<span id="cb260-80"><a href="generate-sql.html#cb260-80" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;使用方法: </span><span class="va">$0</span><span class="st"> [option...] {create|drop}&quot;</span></span>
-<span id="cb260-81"><a href="generate-sql.html#cb260-81" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span></span>
-<span id="cb260-82"><a href="generate-sql.html#cb260-82" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;options: &quot;</span></span>
-<span id="cb260-83"><a href="generate-sql.html#cb260-83" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;  -r, --run  執行腳本&quot;</span></span>
-<span id="cb260-84"><a href="generate-sql.html#cb260-84" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;  -h, --help  顯示說明&quot;</span></span>
-<span id="cb260-85"><a href="generate-sql.html#cb260-85" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;  沒有加任何選項: 僅產生 .sql 腳本&quot;</span></span>
-<span id="cb260-86"><a href="generate-sql.html#cb260-86" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span></span>
-<span id="cb260-87"><a href="generate-sql.html#cb260-87" aria-hidden="true" tabindex="-1"></a>  <span class="bu">exit</span> 0</span>
-<span id="cb260-88"><a href="generate-sql.html#cb260-88" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
-<span id="cb260-89"><a href="generate-sql.html#cb260-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb260-90"><a href="generate-sql.html#cb260-90" aria-hidden="true" tabindex="-1"></a><span class="fu">clean_sql_script()</span> <span class="kw">{</span></span>
-<span id="cb260-91"><a href="generate-sql.html#cb260-91" aria-hidden="true" tabindex="-1"></a>  <span class="bu">read</span> <span class="at">-p</span> <span class="st">&quot;是否要清除 </span><span class="va">${filename}</span><span class="st">? (Yes/No)&quot;</span> <span class="va">yn</span></span>
-<span id="cb260-92"><a href="generate-sql.html#cb260-92" aria-hidden="true" tabindex="-1"></a>  <span class="cf">case</span> <span class="va">$yn</span> <span class="kw">in</span></span>
-<span id="cb260-93"><a href="generate-sql.html#cb260-93" aria-hidden="true" tabindex="-1"></a>        <span class="ss">[Yy]</span><span class="pp">*</span> <span class="kw">)</span> <span class="fu">rm</span> <span class="va">${filename}</span> <span class="cf">;;</span></span>
-<span id="cb260-94"><a href="generate-sql.html#cb260-94" aria-hidden="true" tabindex="-1"></a>        <span class="ss">[Nn]</span><span class="pp">*</span> <span class="kw">)</span> <span class="bu">exit</span> 0<span class="cf">;;</span></span>
-<span id="cb260-95"><a href="generate-sql.html#cb260-95" aria-hidden="true" tabindex="-1"></a>  <span class="cf">esac</span></span>
-<span id="cb260-96"><a href="generate-sql.html#cb260-96" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;DONE 🎉&quot;</span></span>
-<span id="cb260-97"><a href="generate-sql.html#cb260-97" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
-<span id="cb260-98"><a href="generate-sql.html#cb260-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb260-99"><a href="generate-sql.html#cb260-99" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">:</span></span>
-<span id="cb260-100"><a href="generate-sql.html#cb260-100" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
-<span id="cb260-101"><a href="generate-sql.html#cb260-101" aria-hidden="true" tabindex="-1"></a>  <span class="cf">case</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span> <span class="kw">in</span></span>
-<span id="cb260-102"><a href="generate-sql.html#cb260-102" aria-hidden="true" tabindex="-1"></a>        <span class="ss">-r</span> <span class="kw">|</span> <span class="ss">--run</span><span class="kw">)</span></span>
-<span id="cb260-103"><a href="generate-sql.html#cb260-103" aria-hidden="true" tabindex="-1"></a>            <span class="va">run</span><span class="op">=</span>true</span>
-<span id="cb260-104"><a href="generate-sql.html#cb260-104" aria-hidden="true" tabindex="-1"></a>            <span class="bu">shift</span> 1</span>
-<span id="cb260-105"><a href="generate-sql.html#cb260-105" aria-hidden="true" tabindex="-1"></a>            <span class="cf">;;</span></span>
-<span id="cb260-106"><a href="generate-sql.html#cb260-106" aria-hidden="true" tabindex="-1"></a>        <span class="ss">-h</span> <span class="kw">|</span> <span class="ss">--help</span><span class="kw">)</span></span>
-<span id="cb260-107"><a href="generate-sql.html#cb260-107" aria-hidden="true" tabindex="-1"></a>            <span class="ex">display_help</span></span>
-<span id="cb260-108"><a href="generate-sql.html#cb260-108" aria-hidden="true" tabindex="-1"></a>            <span class="bu">exit</span> 0</span>
-<span id="cb260-109"><a href="generate-sql.html#cb260-109" aria-hidden="true" tabindex="-1"></a>            <span class="cf">;;</span></span>
-<span id="cb260-110"><a href="generate-sql.html#cb260-110" aria-hidden="true" tabindex="-1"></a>        <span class="ss">--</span><span class="kw">)</span></span>
-<span id="cb260-111"><a href="generate-sql.html#cb260-111" aria-hidden="true" tabindex="-1"></a>            <span class="bu">shift</span></span>
-<span id="cb260-112"><a href="generate-sql.html#cb260-112" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
-<span id="cb260-113"><a href="generate-sql.html#cb260-113" aria-hidden="true" tabindex="-1"></a>            <span class="cf">;;</span></span>
-<span id="cb260-114"><a href="generate-sql.html#cb260-114" aria-hidden="true" tabindex="-1"></a>        <span class="ss">-</span><span class="pp">*</span><span class="kw">)</span></span>
-<span id="cb260-115"><a href="generate-sql.html#cb260-115" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">&quot;錯誤: 未知的選項: </span><span class="va">$1</span><span class="st">&quot;</span> <span class="op">&gt;&amp;</span><span class="dv">2</span></span>
-<span id="cb260-116"><a href="generate-sql.html#cb260-116" aria-hidden="true" tabindex="-1"></a>            <span class="ex">display_help</span></span>
-<span id="cb260-117"><a href="generate-sql.html#cb260-117" aria-hidden="true" tabindex="-1"></a>            <span class="bu">exit</span> 1</span>
-<span id="cb260-118"><a href="generate-sql.html#cb260-118" aria-hidden="true" tabindex="-1"></a>            <span class="cf">;;</span></span>
-<span id="cb260-119"><a href="generate-sql.html#cb260-119" aria-hidden="true" tabindex="-1"></a>        <span class="pp">*</span><span class="kw">)</span></span>
-<span id="cb260-120"><a href="generate-sql.html#cb260-120" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
-<span id="cb260-121"><a href="generate-sql.html#cb260-121" aria-hidden="true" tabindex="-1"></a>            <span class="cf">;;</span></span>
-<span id="cb260-122"><a href="generate-sql.html#cb260-122" aria-hidden="true" tabindex="-1"></a>    <span class="cf">esac</span></span>
-<span id="cb260-123"><a href="generate-sql.html#cb260-123" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
-<span id="cb260-124"><a href="generate-sql.html#cb260-124" aria-hidden="true" tabindex="-1"></a><span class="cf">case</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span> <span class="kw">in</span></span>
-<span id="cb260-125"><a href="generate-sql.html#cb260-125" aria-hidden="true" tabindex="-1"></a>  <span class="ss">create</span><span class="kw">)</span></span>
-<span id="cb260-126"><a href="generate-sql.html#cb260-126" aria-hidden="true" tabindex="-1"></a>        <span class="ex">check_pass_dir</span></span>
-<span id="cb260-127"><a href="generate-sql.html#cb260-127" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">[</span> <span class="va">$?</span> <span class="ot">-ne</span> 1 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb260-128"><a href="generate-sql.html#cb260-128" aria-hidden="true" tabindex="-1"></a>            <span class="va">filename</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$1$filename</span><span class="st">&quot;</span></span>
-<span id="cb260-129"><a href="generate-sql.html#cb260-129" aria-hidden="true" tabindex="-1"></a>            <span class="ex">create_users_and_databases</span></span>
-<span id="cb260-130"><a href="generate-sql.html#cb260-130" aria-hidden="true" tabindex="-1"></a>        <span class="cf">fi</span></span>
-<span id="cb260-131"><a href="generate-sql.html#cb260-131" aria-hidden="true" tabindex="-1"></a>        <span class="cf">;;</span></span>
-<span id="cb260-132"><a href="generate-sql.html#cb260-132" aria-hidden="true" tabindex="-1"></a>    <span class="ss">drop</span><span class="kw">)</span></span>
-<span id="cb260-133"><a href="generate-sql.html#cb260-133" aria-hidden="true" tabindex="-1"></a>        <span class="ex">check_pass_dir</span></span>
-<span id="cb260-134"><a href="generate-sql.html#cb260-134" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">[</span> <span class="va">$?</span> <span class="ot">-ne</span> 1 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb260-135"><a href="generate-sql.html#cb260-135" aria-hidden="true" tabindex="-1"></a>            <span class="va">filename</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$1$filename</span><span class="st">&quot;</span></span>
-<span id="cb260-136"><a href="generate-sql.html#cb260-136" aria-hidden="true" tabindex="-1"></a>            <span class="ex">drop_users_and_databases</span></span>
-<span id="cb260-137"><a href="generate-sql.html#cb260-137" aria-hidden="true" tabindex="-1"></a>        <span class="cf">fi</span></span>
-<span id="cb260-138"><a href="generate-sql.html#cb260-138" aria-hidden="true" tabindex="-1"></a>        <span class="cf">;;</span></span>
-<span id="cb260-139"><a href="generate-sql.html#cb260-139" aria-hidden="true" tabindex="-1"></a>    <span class="pp">*</span><span class="kw">)</span></span>
-<span id="cb260-140"><a href="generate-sql.html#cb260-140" aria-hidden="true" tabindex="-1"></a>        <span class="ex">display_help</span></span>
-<span id="cb260-141"><a href="generate-sql.html#cb260-141" aria-hidden="true" tabindex="-1"></a>        <span class="bu">exit</span> 0</span>
-<span id="cb260-142"><a href="generate-sql.html#cb260-142" aria-hidden="true" tabindex="-1"></a>        <span class="cf">;;</span></span>
-<span id="cb260-143"><a href="generate-sql.html#cb260-143" aria-hidden="true" tabindex="-1"></a><span class="cf">esac</span></span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb261-1"><a href="generate-sql.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb261-2"><a href="generate-sql.html#cb261-2" aria-hidden="true" tabindex="-1"></a><span class="co"># author: kuaz</span></span>
+<span id="cb261-3"><a href="generate-sql.html#cb261-3" aria-hidden="true" tabindex="-1"></a><span class="co"># last modified: 2021.09.13</span></span>
+<span id="cb261-4"><a href="generate-sql.html#cb261-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb261-5"><a href="generate-sql.html#cb261-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 這個腳本被用來:</span></span>
+<span id="cb261-6"><a href="generate-sql.html#cb261-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. 根據已知的帳號密碼建立 MySQL 帳戶</span></span>
+<span id="cb261-7"><a href="generate-sql.html#cb261-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. 根據帳號建立資料庫，編碼為 &#39;utf8mb4&#39;</span></span>
+<span id="cb261-8"><a href="generate-sql.html#cb261-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. 以上指令會儲存在當前資料夾的 create-account.sql 裡面</span></span>
+<span id="cb261-9"><a href="generate-sql.html#cb261-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. 根據已知的帳號刪除該 MySQL 帳戶與資料庫</span></span>
+<span id="cb261-10"><a href="generate-sql.html#cb261-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. 若加上 -r, --run 即可順便執行該腳本</span></span>
+<span id="cb261-11"><a href="generate-sql.html#cb261-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-12"><a href="generate-sql.html#cb261-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-13"><a href="generate-sql.html#cb261-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 環境變數</span></span>
+<span id="cb261-14"><a href="generate-sql.html#cb261-14" aria-hidden="true" tabindex="-1"></a><span class="va">pass_dir</span><span class="op">=</span><span class="st">&#39;passwd&#39;</span>       <span class="co"># 放置密碼的資料夾，由另一個腳本 ./create-users.sh 產生</span></span>
+<span id="cb261-15"><a href="generate-sql.html#cb261-15" aria-hidden="true" tabindex="-1"></a><span class="va">filename</span><span class="op">=</span><span class="st">&#39;-accounts.sql&#39;</span>  <span class="co"># create/drop-accounts.sql 檔案前綴會根據選項變化</span></span>
+<span id="cb261-16"><a href="generate-sql.html#cb261-16" aria-hidden="true" tabindex="-1"></a><span class="va">run</span><span class="op">=</span>false           <span class="co"># 預設產生腳本後不會執行</span></span>
+<span id="cb261-17"><a href="generate-sql.html#cb261-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-18"><a href="generate-sql.html#cb261-18" aria-hidden="true" tabindex="-1"></a><span class="fu">check_pass_dir()</span> <span class="kw">{</span></span>
+<span id="cb261-19"><a href="generate-sql.html#cb261-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="bu">[</span> <span class="ot">-d</span> <span class="va">${pass_dir}</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb261-20"><a href="generate-sql.html#cb261-20" aria-hidden="true" tabindex="-1"></a>        <span class="va">grps</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$(</span><span class="fu">ls</span> <span class="va">${pass_dir}</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;.csv&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span> <span class="st">&quot;.&quot;</span> <span class="at">-f</span> 1<span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb261-21"><a href="generate-sql.html#cb261-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
+<span id="cb261-22"><a href="generate-sql.html#cb261-22" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">&quot;密碼資料夾 </span><span class="va">${pass_dir}</span><span class="st"> 不存在！請先執行過建立帳號腳本（create-users.sh）後，再執行一次此腳本。&quot;</span></span>
+<span id="cb261-23"><a href="generate-sql.html#cb261-23" aria-hidden="true" tabindex="-1"></a>        <span class="bu">exit</span> 1<span class="kw">;</span></span>
+<span id="cb261-24"><a href="generate-sql.html#cb261-24" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span></span>
+<span id="cb261-25"><a href="generate-sql.html#cb261-25" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb261-26"><a href="generate-sql.html#cb261-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-27"><a href="generate-sql.html#cb261-27" aria-hidden="true" tabindex="-1"></a><span class="fu">write_to_mysql_db()</span> <span class="kw">{</span></span>
+<span id="cb261-28"><a href="generate-sql.html#cb261-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="bu">[</span> <span class="va">${run}</span> <span class="ot">=</span> true <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb261-29"><a href="generate-sql.html#cb261-29" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">&quot;請輸入 MySQL 帳戶 root 的密碼: 👇&quot;</span></span>
+<span id="cb261-30"><a href="generate-sql.html#cb261-30" aria-hidden="true" tabindex="-1"></a>        <span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span> <span class="op">&lt;</span> <span class="va">${filename}</span></span>
+<span id="cb261-31"><a href="generate-sql.html#cb261-31" aria-hidden="true" tabindex="-1"></a>        <span class="ex">clean_sql_script</span></span>
+<span id="cb261-32"><a href="generate-sql.html#cb261-32" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
+<span id="cb261-33"><a href="generate-sql.html#cb261-33" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">&quot;已於 </span><span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span><span class="st"> 產生 </span><span class="va">${filename}</span><span class="st"> 🎉&quot;</span></span>
+<span id="cb261-34"><a href="generate-sql.html#cb261-34" aria-hidden="true" tabindex="-1"></a>  <span class="cf">fi</span></span>
+<span id="cb261-35"><a href="generate-sql.html#cb261-35" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb261-36"><a href="generate-sql.html#cb261-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-37"><a href="generate-sql.html#cb261-37" aria-hidden="true" tabindex="-1"></a><span class="fu">create_users_and_databases()</span> <span class="kw">{</span></span>
+<span id="cb261-38"><a href="generate-sql.html#cb261-38" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;set global validate_password.policy=LOW;&quot;</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">${filename}</span> <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span><span class="kw">;</span></span>
+<span id="cb261-39"><a href="generate-sql.html#cb261-39" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> grp <span class="kw">in</span> <span class="va">${grps}</span></span>
+<span id="cb261-40"><a href="generate-sql.html#cb261-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">do</span> </span>
+<span id="cb261-41"><a href="generate-sql.html#cb261-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="bu">read</span> <span class="va">line</span><span class="kw">;</span></span>
+<span id="cb261-42"><a href="generate-sql.html#cb261-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">do</span></span>
+<span id="cb261-43"><a href="generate-sql.html#cb261-43" aria-hidden="true" tabindex="-1"></a>            <span class="va">stu</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">${line}</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span> <span class="st">&#39;,&#39;</span> <span class="at">-f</span> 1<span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb261-44"><a href="generate-sql.html#cb261-44" aria-hidden="true" tabindex="-1"></a>            <span class="va">pass</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">${line}</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span> <span class="st">&#39;,&#39;</span> <span class="at">-f</span> 2<span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb261-45"><a href="generate-sql.html#cb261-45" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">&quot;create user &#39;</span><span class="va">${stu}</span><span class="st">&#39;@&#39;localhost&#39; identified by &#39;</span><span class="va">${pass}</span><span class="st">&#39;;&quot;</span> <span class="dt">\</span></span>
+<span id="cb261-46"><a href="generate-sql.html#cb261-46" aria-hidden="true" tabindex="-1"></a>                <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">${filename}</span> <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
+<span id="cb261-47"><a href="generate-sql.html#cb261-47" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">&quot;create database </span><span class="dt">\`</span><span class="va">${stu}</span><span class="dt">\`</span><span class="st"> character set utf8mb4 collate utf8mb4_unicode_ci;&quot;</span> <span class="dt">\</span></span>
+<span id="cb261-48"><a href="generate-sql.html#cb261-48" aria-hidden="true" tabindex="-1"></a>                <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">${filename}</span> <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
+<span id="cb261-49"><a href="generate-sql.html#cb261-49" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">&quot;grant all privileges on </span><span class="dt">\`</span><span class="va">${stu}</span><span class="dt">\`</span><span class="st">.* to &#39;</span><span class="va">${stu}</span><span class="st">&#39;@&#39;localhost&#39;;&quot;</span> <span class="dt">\</span></span>
+<span id="cb261-50"><a href="generate-sql.html#cb261-50" aria-hidden="true" tabindex="-1"></a>                <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">${filename}</span> <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
+<span id="cb261-51"><a href="generate-sql.html#cb261-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">done</span> <span class="op">&lt;</span> <span class="va">${pass_dir}</span>/<span class="va">${grp}</span>.csv</span>
+<span id="cb261-52"><a href="generate-sql.html#cb261-52" aria-hidden="true" tabindex="-1"></a>  <span class="cf">done</span></span>
+<span id="cb261-53"><a href="generate-sql.html#cb261-53" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;flush privileges;&quot;</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">${filename}</span> <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span><span class="kw">;</span></span>
+<span id="cb261-54"><a href="generate-sql.html#cb261-54" aria-hidden="true" tabindex="-1"></a>  <span class="ex">write_to_mysql_db</span></span>
+<span id="cb261-55"><a href="generate-sql.html#cb261-55" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb261-56"><a href="generate-sql.html#cb261-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-57"><a href="generate-sql.html#cb261-57" aria-hidden="true" tabindex="-1"></a><span class="fu">drop_users_and_databases()</span> <span class="kw">{</span></span>
+<span id="cb261-58"><a href="generate-sql.html#cb261-58" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> grp <span class="kw">in</span> <span class="va">${grps}</span></span>
+<span id="cb261-59"><a href="generate-sql.html#cb261-59" aria-hidden="true" tabindex="-1"></a>    <span class="cf">do</span> </span>
+<span id="cb261-60"><a href="generate-sql.html#cb261-60" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="bu">read</span> <span class="va">line</span><span class="kw">;</span></span>
+<span id="cb261-61"><a href="generate-sql.html#cb261-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">do</span></span>
+<span id="cb261-62"><a href="generate-sql.html#cb261-62" aria-hidden="true" tabindex="-1"></a>            <span class="va">stu</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">${line}</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span> <span class="st">&#39;,&#39;</span> <span class="at">-f</span> 1<span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb261-63"><a href="generate-sql.html#cb261-63" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">&quot;drop user &#39;</span><span class="va">${stu}</span><span class="st">&#39;@&#39;localhost&#39;;&quot;</span> <span class="dt">\</span></span>
+<span id="cb261-64"><a href="generate-sql.html#cb261-64" aria-hidden="true" tabindex="-1"></a>                <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">${filename}</span> <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
+<span id="cb261-65"><a href="generate-sql.html#cb261-65" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">&quot;drop database </span><span class="dt">\`</span><span class="va">${stu}</span><span class="dt">\`</span><span class="st">;&quot;</span> <span class="dt">\</span></span>
+<span id="cb261-66"><a href="generate-sql.html#cb261-66" aria-hidden="true" tabindex="-1"></a>                <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">${filename}</span> <span class="op">&gt;</span> /dev/null <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
+<span id="cb261-67"><a href="generate-sql.html#cb261-67" aria-hidden="true" tabindex="-1"></a>        <span class="cf">done</span> <span class="op">&lt;</span> <span class="va">${pass_dir}</span>/<span class="va">${grp}</span>.csv</span>
+<span id="cb261-68"><a href="generate-sql.html#cb261-68" aria-hidden="true" tabindex="-1"></a>  <span class="cf">done</span></span>
+<span id="cb261-69"><a href="generate-sql.html#cb261-69" aria-hidden="true" tabindex="-1"></a>  <span class="ex">write_to_mysql_db</span></span>
+<span id="cb261-70"><a href="generate-sql.html#cb261-70" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb261-71"><a href="generate-sql.html#cb261-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-72"><a href="generate-sql.html#cb261-72" aria-hidden="true" tabindex="-1"></a><span class="fu">display_help()</span> <span class="kw">{</span></span>
+<span id="cb261-73"><a href="generate-sql.html#cb261-73" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;這個腳本被用來:&quot;</span></span>
+<span id="cb261-74"><a href="generate-sql.html#cb261-74" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;1. 根據已知的帳號密碼建立 MySQL 帳戶&quot;</span></span>
+<span id="cb261-75"><a href="generate-sql.html#cb261-75" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;2. 根據帳號建立資料庫，編碼為 &#39;utf8mb4&#39;&quot;</span></span>
+<span id="cb261-76"><a href="generate-sql.html#cb261-76" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;3. 以上指令會儲存在當前資料夾的 create-account.sql 裡面&quot;</span></span>
+<span id="cb261-77"><a href="generate-sql.html#cb261-77" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;4. 根據已知的帳號刪除該 MySQL 帳戶與資料庫&quot;</span></span>
+<span id="cb261-78"><a href="generate-sql.html#cb261-78" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;5. 若加上 -r, --run 即可順便執行該腳本&quot;</span></span>
+<span id="cb261-79"><a href="generate-sql.html#cb261-79" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span></span>
+<span id="cb261-80"><a href="generate-sql.html#cb261-80" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;使用方法: </span><span class="va">$0</span><span class="st"> [option...] {create|drop}&quot;</span></span>
+<span id="cb261-81"><a href="generate-sql.html#cb261-81" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span></span>
+<span id="cb261-82"><a href="generate-sql.html#cb261-82" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;options: &quot;</span></span>
+<span id="cb261-83"><a href="generate-sql.html#cb261-83" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;  -r, --run  執行腳本&quot;</span></span>
+<span id="cb261-84"><a href="generate-sql.html#cb261-84" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;  -h, --help  顯示說明&quot;</span></span>
+<span id="cb261-85"><a href="generate-sql.html#cb261-85" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;  沒有加任何選項: 僅產生 .sql 腳本&quot;</span></span>
+<span id="cb261-86"><a href="generate-sql.html#cb261-86" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span></span>
+<span id="cb261-87"><a href="generate-sql.html#cb261-87" aria-hidden="true" tabindex="-1"></a>  <span class="bu">exit</span> 0</span>
+<span id="cb261-88"><a href="generate-sql.html#cb261-88" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb261-89"><a href="generate-sql.html#cb261-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-90"><a href="generate-sql.html#cb261-90" aria-hidden="true" tabindex="-1"></a><span class="fu">clean_sql_script()</span> <span class="kw">{</span></span>
+<span id="cb261-91"><a href="generate-sql.html#cb261-91" aria-hidden="true" tabindex="-1"></a>  <span class="bu">read</span> <span class="at">-p</span> <span class="st">&quot;是否要清除 </span><span class="va">${filename}</span><span class="st">? (Yes/No)&quot;</span> <span class="va">yn</span></span>
+<span id="cb261-92"><a href="generate-sql.html#cb261-92" aria-hidden="true" tabindex="-1"></a>  <span class="cf">case</span> <span class="va">$yn</span> <span class="kw">in</span></span>
+<span id="cb261-93"><a href="generate-sql.html#cb261-93" aria-hidden="true" tabindex="-1"></a>        <span class="ss">[Yy]</span><span class="pp">*</span> <span class="kw">)</span> <span class="fu">rm</span> <span class="va">${filename}</span> <span class="cf">;;</span></span>
+<span id="cb261-94"><a href="generate-sql.html#cb261-94" aria-hidden="true" tabindex="-1"></a>        <span class="ss">[Nn]</span><span class="pp">*</span> <span class="kw">)</span> <span class="bu">exit</span> 0<span class="cf">;;</span></span>
+<span id="cb261-95"><a href="generate-sql.html#cb261-95" aria-hidden="true" tabindex="-1"></a>  <span class="cf">esac</span></span>
+<span id="cb261-96"><a href="generate-sql.html#cb261-96" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">&quot;DONE 🎉&quot;</span></span>
+<span id="cb261-97"><a href="generate-sql.html#cb261-97" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb261-98"><a href="generate-sql.html#cb261-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-99"><a href="generate-sql.html#cb261-99" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">:</span></span>
+<span id="cb261-100"><a href="generate-sql.html#cb261-100" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
+<span id="cb261-101"><a href="generate-sql.html#cb261-101" aria-hidden="true" tabindex="-1"></a>  <span class="cf">case</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span> <span class="kw">in</span></span>
+<span id="cb261-102"><a href="generate-sql.html#cb261-102" aria-hidden="true" tabindex="-1"></a>        <span class="ss">-r</span> <span class="kw">|</span> <span class="ss">--run</span><span class="kw">)</span></span>
+<span id="cb261-103"><a href="generate-sql.html#cb261-103" aria-hidden="true" tabindex="-1"></a>            <span class="va">run</span><span class="op">=</span>true</span>
+<span id="cb261-104"><a href="generate-sql.html#cb261-104" aria-hidden="true" tabindex="-1"></a>            <span class="bu">shift</span> 1</span>
+<span id="cb261-105"><a href="generate-sql.html#cb261-105" aria-hidden="true" tabindex="-1"></a>            <span class="cf">;;</span></span>
+<span id="cb261-106"><a href="generate-sql.html#cb261-106" aria-hidden="true" tabindex="-1"></a>        <span class="ss">-h</span> <span class="kw">|</span> <span class="ss">--help</span><span class="kw">)</span></span>
+<span id="cb261-107"><a href="generate-sql.html#cb261-107" aria-hidden="true" tabindex="-1"></a>            <span class="ex">display_help</span></span>
+<span id="cb261-108"><a href="generate-sql.html#cb261-108" aria-hidden="true" tabindex="-1"></a>            <span class="bu">exit</span> 0</span>
+<span id="cb261-109"><a href="generate-sql.html#cb261-109" aria-hidden="true" tabindex="-1"></a>            <span class="cf">;;</span></span>
+<span id="cb261-110"><a href="generate-sql.html#cb261-110" aria-hidden="true" tabindex="-1"></a>        <span class="ss">--</span><span class="kw">)</span></span>
+<span id="cb261-111"><a href="generate-sql.html#cb261-111" aria-hidden="true" tabindex="-1"></a>            <span class="bu">shift</span></span>
+<span id="cb261-112"><a href="generate-sql.html#cb261-112" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb261-113"><a href="generate-sql.html#cb261-113" aria-hidden="true" tabindex="-1"></a>            <span class="cf">;;</span></span>
+<span id="cb261-114"><a href="generate-sql.html#cb261-114" aria-hidden="true" tabindex="-1"></a>        <span class="ss">-</span><span class="pp">*</span><span class="kw">)</span></span>
+<span id="cb261-115"><a href="generate-sql.html#cb261-115" aria-hidden="true" tabindex="-1"></a>            <span class="bu">echo</span> <span class="st">&quot;錯誤: 未知的選項: </span><span class="va">$1</span><span class="st">&quot;</span> <span class="op">&gt;&amp;</span><span class="dv">2</span></span>
+<span id="cb261-116"><a href="generate-sql.html#cb261-116" aria-hidden="true" tabindex="-1"></a>            <span class="ex">display_help</span></span>
+<span id="cb261-117"><a href="generate-sql.html#cb261-117" aria-hidden="true" tabindex="-1"></a>            <span class="bu">exit</span> 1</span>
+<span id="cb261-118"><a href="generate-sql.html#cb261-118" aria-hidden="true" tabindex="-1"></a>            <span class="cf">;;</span></span>
+<span id="cb261-119"><a href="generate-sql.html#cb261-119" aria-hidden="true" tabindex="-1"></a>        <span class="pp">*</span><span class="kw">)</span></span>
+<span id="cb261-120"><a href="generate-sql.html#cb261-120" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb261-121"><a href="generate-sql.html#cb261-121" aria-hidden="true" tabindex="-1"></a>            <span class="cf">;;</span></span>
+<span id="cb261-122"><a href="generate-sql.html#cb261-122" aria-hidden="true" tabindex="-1"></a>    <span class="cf">esac</span></span>
+<span id="cb261-123"><a href="generate-sql.html#cb261-123" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb261-124"><a href="generate-sql.html#cb261-124" aria-hidden="true" tabindex="-1"></a><span class="cf">case</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span> <span class="kw">in</span></span>
+<span id="cb261-125"><a href="generate-sql.html#cb261-125" aria-hidden="true" tabindex="-1"></a>  <span class="ss">create</span><span class="kw">)</span></span>
+<span id="cb261-126"><a href="generate-sql.html#cb261-126" aria-hidden="true" tabindex="-1"></a>        <span class="ex">check_pass_dir</span></span>
+<span id="cb261-127"><a href="generate-sql.html#cb261-127" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">[</span> <span class="va">$?</span> <span class="ot">-ne</span> 1 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb261-128"><a href="generate-sql.html#cb261-128" aria-hidden="true" tabindex="-1"></a>            <span class="va">filename</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$1$filename</span><span class="st">&quot;</span></span>
+<span id="cb261-129"><a href="generate-sql.html#cb261-129" aria-hidden="true" tabindex="-1"></a>            <span class="ex">create_users_and_databases</span></span>
+<span id="cb261-130"><a href="generate-sql.html#cb261-130" aria-hidden="true" tabindex="-1"></a>        <span class="cf">fi</span></span>
+<span id="cb261-131"><a href="generate-sql.html#cb261-131" aria-hidden="true" tabindex="-1"></a>        <span class="cf">;;</span></span>
+<span id="cb261-132"><a href="generate-sql.html#cb261-132" aria-hidden="true" tabindex="-1"></a>    <span class="ss">drop</span><span class="kw">)</span></span>
+<span id="cb261-133"><a href="generate-sql.html#cb261-133" aria-hidden="true" tabindex="-1"></a>        <span class="ex">check_pass_dir</span></span>
+<span id="cb261-134"><a href="generate-sql.html#cb261-134" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">[</span> <span class="va">$?</span> <span class="ot">-ne</span> 1 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb261-135"><a href="generate-sql.html#cb261-135" aria-hidden="true" tabindex="-1"></a>            <span class="va">filename</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$1$filename</span><span class="st">&quot;</span></span>
+<span id="cb261-136"><a href="generate-sql.html#cb261-136" aria-hidden="true" tabindex="-1"></a>            <span class="ex">drop_users_and_databases</span></span>
+<span id="cb261-137"><a href="generate-sql.html#cb261-137" aria-hidden="true" tabindex="-1"></a>        <span class="cf">fi</span></span>
+<span id="cb261-138"><a href="generate-sql.html#cb261-138" aria-hidden="true" tabindex="-1"></a>        <span class="cf">;;</span></span>
+<span id="cb261-139"><a href="generate-sql.html#cb261-139" aria-hidden="true" tabindex="-1"></a>    <span class="pp">*</span><span class="kw">)</span></span>
+<span id="cb261-140"><a href="generate-sql.html#cb261-140" aria-hidden="true" tabindex="-1"></a>        <span class="ex">display_help</span></span>
+<span id="cb261-141"><a href="generate-sql.html#cb261-141" aria-hidden="true" tabindex="-1"></a>        <span class="bu">exit</span> 0</span>
+<span id="cb261-142"><a href="generate-sql.html#cb261-142" aria-hidden="true" tabindex="-1"></a>        <span class="cf">;;</span></span>
+<span id="cb261-143"><a href="generate-sql.html#cb261-143" aria-hidden="true" tabindex="-1"></a><span class="cf">esac</span></span></code></pre></div>
 </div>
 <!-- </div> -->
             </section>

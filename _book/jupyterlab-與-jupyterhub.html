@@ -377,12 +377,26 @@ div.csl-indent {
 <h3><span class="header-section-number">5.3.4</span> 新增開機自動啟動 JupyterHub 的服務<a href="jupyterlab-與-jupyterhub.html#新增開機自動啟動-jupyterhub-的服務" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb186"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb186-1"><a href="jupyterlab-與-jupyterhub.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /opt/jupyterhub/etc/systemd</span></code></pre></div>
 <div class="sourceCode" id="cb187"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb187-1"><a href="jupyterlab-與-jupyterhub.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /opt/jupyterhub/etc/systemd/jupyterhub.service</span></code></pre></div>
-<div class="sourceCode" id="cb188"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb188-1"><a href="jupyterlab-與-jupyterhub.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /opt/jupyterhub/etc/systemd/jupyterhub.service <span class="dt">\</span></span>
-<span id="cb188-2"><a href="jupyterlab-與-jupyterhub.html#cb188-2" aria-hidden="true" tabindex="-1"></a>    /etc/systemd/system/jupyterhub.service</span></code></pre></div>
-<div class="sourceCode" id="cb189"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb189-1"><a href="jupyterlab-與-jupyterhub.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl daemon-reload</span></code></pre></div>
-<div class="sourceCode" id="cb190"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb190-1"><a href="jupyterlab-與-jupyterhub.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable jupyterhub.service</span></code></pre></div>
-<div class="sourceCode" id="cb191"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb191-1"><a href="jupyterlab-與-jupyterhub.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl start jupyterhub.service</span></code></pre></div>
-<div class="sourceCode" id="cb192"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb192-1"><a href="jupyterlab-與-jupyterhub.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status jupyterhub.service</span></code></pre></div>
+<div class="code-label">
+<p>/opt/jupyterhub/etc/systemd/jupyterhub.service</p>
+</div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb188-1"><a href="jupyterlab-與-jupyterhub.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[Unit]</span></span>
+<span id="cb188-2"><a href="jupyterlab-與-jupyterhub.html#cb188-2" aria-hidden="true" tabindex="-1"></a><span class="va">Description</span><span class="op">=</span>JupyterHub</span>
+<span id="cb188-3"><a href="jupyterlab-與-jupyterhub.html#cb188-3" aria-hidden="true" tabindex="-1"></a><span class="va">After</span><span class="op">=</span>syslog.target <span class="ex">network.target</span></span>
+<span id="cb188-4"><a href="jupyterlab-與-jupyterhub.html#cb188-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb188-5"><a href="jupyterlab-與-jupyterhub.html#cb188-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[Service]</span></span>
+<span id="cb188-6"><a href="jupyterlab-與-jupyterhub.html#cb188-6" aria-hidden="true" tabindex="-1"></a><span class="va">User</span><span class="op">=</span>root</span>
+<span id="cb188-7"><a href="jupyterlab-與-jupyterhub.html#cb188-7" aria-hidden="true" tabindex="-1"></a><span class="va">Environment</span><span class="op">=</span><span class="st">&quot;PATH=/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/opt/jupyterhub/bin&quot;</span></span>
+<span id="cb188-8"><a href="jupyterlab-與-jupyterhub.html#cb188-8" aria-hidden="true" tabindex="-1"></a><span class="va">ExecStart</span><span class="op">=</span>/opt/jupyterhub/bin/jupyterhub <span class="ex">-f</span> /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py</span>
+<span id="cb188-9"><a href="jupyterlab-與-jupyterhub.html#cb188-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb188-10"><a href="jupyterlab-與-jupyterhub.html#cb188-10" aria-hidden="true" tabindex="-1"></a><span class="ex">[Install]</span></span>
+<span id="cb188-11"><a href="jupyterlab-與-jupyterhub.html#cb188-11" aria-hidden="true" tabindex="-1"></a><span class="va">WantedBy</span><span class="op">=</span>multi-user.target</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb189-1"><a href="jupyterlab-與-jupyterhub.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /opt/jupyterhub/etc/systemd/jupyterhub.service <span class="dt">\</span></span>
+<span id="cb189-2"><a href="jupyterlab-與-jupyterhub.html#cb189-2" aria-hidden="true" tabindex="-1"></a>    /etc/systemd/system/jupyterhub.service</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb190-1"><a href="jupyterlab-與-jupyterhub.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl daemon-reload</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb191-1"><a href="jupyterlab-與-jupyterhub.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable jupyterhub.service</span></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb192-1"><a href="jupyterlab-與-jupyterhub.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl start jupyterhub.service</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb193-1"><a href="jupyterlab-與-jupyterhub.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status jupyterhub.service</span></code></pre></div>
 </div>
 </div>
             </section>
