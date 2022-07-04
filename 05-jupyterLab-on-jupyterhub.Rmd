@@ -362,7 +362,7 @@ sudo jupyter kernelspec install /opt/conda/envs/c-cpp/share/jupyter/c --sys-pref
 sudo vim /opt/conda/envs/sas.yml
 ```
 
-``` {.console_output}
+``` console_output
 name: sas
 channels:
   - defaults
@@ -384,7 +384,7 @@ sudo conda env create -f sas.yml
 /opt/conda/envs/sas/share/jupyter/kernels/sas/kernel.json
 ```
 
-``` {.json}
+``` json
 {
     "argv": [
         "/opt/conda/envs/sas/bin/python",
