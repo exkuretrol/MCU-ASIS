@@ -12,7 +12,7 @@
   margin-bottom: 10px;
   border: 2px solid orange;
   border-radius: 10px;
-  background: #f5f5f5 5px center/3em no-repeat;
+  background: #ffffff 5px center/3em no-repeat;
 }
 
 .info {
@@ -71,6 +71,22 @@ pre.console_output::before {
 	content: "OUTPUT\A";
 	color: lightgray;
 	font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+.code-label {
+    background-color: rgba(215 , 220, 223, .75);
+    color: #24335a;
+    display: block;
+    font-size: 14px;
+    margin: 1em 0 0;
+    padding: .5em 1em;
+    position: relative;
+    text-align: center;
+    z-index: 2;
+}
+
+.code-label  > p {
+    margin-bottom: 0 !important;
 }
 
 img ~ p.caption {
