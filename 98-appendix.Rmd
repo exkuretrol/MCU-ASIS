@@ -558,6 +558,8 @@ There are 4 choices for the alternative editor (providing /usr/bin/editor).
 Press <enter> to keep the current choice[*], or type selection number: 3
 ```
 
+<!--# TODO: 利用 SSH  傳輸檔案 -->
+
 ## Mysql 8.0 root 密碼重設
 
 先建立一個含有改變 root 密碼的 sql 語法文字檔案
