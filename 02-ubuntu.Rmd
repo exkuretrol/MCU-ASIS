@@ -284,11 +284,15 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])?
 
 連接成功!
 
-![](figures/ssh-connection-success.png){.figure}
+```{r, fig.cap='Windows Terminal 下的 SSH 連接成功畫面'}
+knitr::include_graphics(path = 'figures/ssh-connection-success.png')
+```
 
 測試完確認沒問題就可以把虛擬機晾在一旁了～
 
-![](figures/virtualbox-ubuntu-login.png){.figure}
+```{r, fig.cap='VirtualBox 的虛擬主機終端機畫面'}
+knitr::include_graphics(path = 'figures/virtualbox-ubuntu-login.png')
+```
 
 ### Step 5 --- 使遠端的 OpenSSH 伺服器更加安全 [可跳過] {.unnumbered}
 
