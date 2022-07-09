@@ -112,34 +112,42 @@ SSH 連線方式大同小異:
 
 # 帳號管理
 
-Work in Process 並不是最新版本
+## 概述
 
-## users.sh
+## manage-users.sh
 
 ``` bash
 #!/bin/bash
 # author: kuaz
-# last modified: 2022.02.24
+# created date: 2022.02.24
+# last modified: 2022.07.10
 # 
 # This script is used to:
-# 1. Create Accounts via ./depts/${dept}.txt (one student ID per line).
-# 2. Remove Accounts via ./depts/${dept}.txt
-# Issue: https://stackoverflow.com/questions/12916352/shell-script-read-missing-last-line
+# 1. Create user accounts from /depts/dept.txt files (one student ID per line).
 
 # 環境變數
 depts_dir='depts'       # 放置用來建置 linux 帳號的系資料夾
-pass_dir='passwd'       # 放置建置完成的 linux 帳號密碼的資料夾，建制完後
-                        # 可搭配建置 MySQL 帳號與資料庫腳本（generate-sql.sh）使用
-gp=false                # 不需要用隨機密碼建立帳號的旗標
-new=false               # 是否是新版的 shiny app 連結方式，如果為 new，將不會使用 systemetic link 的方式連結
-dryrun=false
-# ubuntu_version=$(lsb_release -rs | cut -d '.' -f 1)
+# pass_dir='passwd'       # 放置建置完成的 linux 帳號密碼的資料夾
+gp=false                # 是否產生新密碼
+new=true                # 是否是新版的 shiny app 連結方式；如果設為 true，
+                        # 將不會使用 systemetic link 的方式連結
+dryrun=false            # 試運行；如果設為 true，將不會創立帳號
+                        # useradd 是否支援 badname
+badname_supported=$(useradd 2>&1 | grep -q "badname"; echo $?)    
 
 check_permission() {
-    if [ $(id -u) -ne 0 ]; then
-        echo "必須以 root 權限執行此腳本！";
-        exit 1;
+    if [ ${dryrun} == true ]; then
+        :
+    else
+        if [ $(id -u) -ne 0 ]; then
+            echo "必須以 root 權限執行此腳本！";
+            exit 1;
+        fi
     fi
+}
+
+user_exists() { 
+    id "$1" &> /dev/null 
 }
 
 check_depts_dir() {
@@ -151,7 +159,7 @@ check_depts_dir() {
             count=$(awk 'END{print NR}' ./${depts_dir}/${grp}.txt)
             file=$(realpath ./${depts_dir}/${grp}.txt)
             if [ $count -lt 1 ]; then
-                echo "請再檢查一次 ./${depts_dir}/ 內是否含有正確格式的學號檔案！"
+                echo "請再檢查一次 ${depts_dir} 內是否含有正確格式的學號檔案！"
                 echo "有問題的檔案: $file"
                 exit 1
             else
@@ -159,69 +167,76 @@ check_depts_dir() {
             fi
         done
     else
-        echo "系資料夾 ${depts_dir} 不存在！請先手動創建或是由選項 --generate-configuration 建立。"
+        echo "系資料夾 ${depts_dir} 不存在！請先手動創建或是由選項 -c, --generate-configuration 建立。"
         exit 1;
     fi
 }
 
-create_pass_dir() {
-    if [ ! -d ${pass_dir} ]; then
-        echo "存放密碼的 ${pass_dir} 資料夾不存在，將建立 ${pass_dir} 資料夾"
-        mkdir ${pass_dir}
-    else
-        read -p "存放密碼的 ${pass_dir} 資料夾已存在！是否要將其移除後繼續建立帳號? (yes/No)" yn
-        case $yn in
-            [Yy]* ) 
-                rm -rf ${pass_dir}
-                make_pass_dir
-            ;;
-            [Nn]* ) exit 1;;
-        esac
-    fi
-}
+# create_pass_dir() {
+#     if [ ! -d ${pass_dir} ]; then
+#         echo "存放密碼的 ${pass_dir} 資料夾不存在，將建立 ${pass_dir} 資料夾"
+#         mkdir ${pass_dir}
+#     else
+#         read -p "存放密碼的 ${pass_dir} 資料夾已存在！是否要將其移除後繼續建立帳號? (yes/No)" yn
+#         case $yn in
+#             [Yy]* ) 
+#                 rm -rf ${pass_dir}
+#                 make_pass_dir
+#             ;;
+#             [Nn]* ) exit 1;;
+#         esac
+#     fi
+# }
 
 create_users() {
     # 如果有產生密碼的需求
-    if [ ${gp} = true ]; then
-        create_pass_dir
-    fi
+    # if [ ${gp} = true ]; then
+    #     create_pass_dir
+    # fi
 
     for grp in ${grps}
-    do 
+    do
         # 確認使用者群組是否存在，如果不存在將自動建立
-        if $(grep -q "^${grp}" /etc/group); then
-            echo "使用者群組 '${grp}' 已存在，不需再建立。"
+        if $(grep -q "^${grp}:" /etc/group); then
+            :
         else
-            # 如果不正式建立帳號
+            # 非試運行
             if [ ${dryrun} = false ]; then
                 groupadd ${grp}
             fi
             echo "已建立 ${grp} 使用者群組"
         fi
+    done
 
+    for grp in ${grps}
+    do 
         # 使用舊方法連結 ShinyApps
         if [ ${new} = false ] && [ ! -d /srv/shiny-server/${grp} ]; then
             echo "/srv/shiny-server/${grp} 資料夾不存在，將建立群組資料夾"
+            # 非試運行
             if [ ${dryrun} = false ]; then
                 mkdir /srv/shiny-server/${grp}
             fi
         fi
 
+        created=0
+        skip=0
+
         # 逐行讀取學號
         while IFS= read -r stu || [ -n "$stu" ];
         do
             cur_user=${stu}
-            if $(id "${cur_user}" > /dev/null 2>&1); then
-                echo "使用者 '${cur_user}' 已存在，略過此使用者。"
+
+            if user_exists "${cur_user}"; then
+                (( skip += 1 ))
+            
             elif [ ${dryrun} = false ]; then
-                # TODO: 更好的方法？ 例如檢查 useradd 版本，不過不知道 badnames 是哪版加的
-                # 在 Ubuntu 16.04 版本的 useradd 沒有 --badnames 選項
-                # if [ ${ubuntu_version} == "16" ]; then
-                #     su - -c "useradd -N -g ${grp} -m ${cur_user}"
-                # else
-                #     su - -c "useradd --badnames -N -g ${grp} -m ${cur_user}"
-                # fi
-            useradd --badnames -N -g ${grp} -m ${cur_user}
+                # 如果不支援 badname
+                if [ ${badname_supported} == false ]; then
+                    useradd -N -g stu -G ${grp} -m ${cur_user}
+                else
+                    useradd --badnames -N -g stu -G ${grp} -m ${cur_user}
+                fi
 
                 # 產生隨機密碼
                 if [ ${gp} = false ]; then
@@ -234,46 +249,60 @@ create_users() {
                 echo "${cur_user}:${cur_user_password}" | chpasswd
 
                 # 將設定的帳號密碼儲存一份到資料夾中
-                echo "${cur_user},${cur_user_password}" | tee -a ./${pass_dir}/${grp}.csv > /dev/null 2>&1
+                # echo "${cur_user},${cur_user_password}"| tee -a ./${pass_dir}/${grp}.csv > /dev/null 2>&1
+
                 # 將 ShinyApp 軟連結至使用者資料夾
                 if [ ${new} = false ]; then
                     # 需要先在 /etc/skel/ 建立 ShinyApps 資料夾，才可成功連結
                     ln -s /home/${cur_user}/ShinyApps /srv/shiny-server/${grp}/${cur_user}
                 fi
+
+                (( created += 1 ))
             else
-                # 如果僅執行
-                echo "建立了 ${cur_user} 的使用者帳戶" 
+                # 如果為試運行模式
+                (( created += 1 ))
             fi
+
         done < ./${depts_dir}/${grp}.txt
+
+        echo "成功從群組 ${grp} 建立了 ${created} 個帳號，忽略了 ${skip} 個已存在帳號。"
     done
 }
 
 delete_users() {
     for grp in ${grps}
     do 
+        skip=0
+        deleted=0
         while IFS= read -r stu || [ -n "$stu" ];
         do
-            userdel -r ${stu} > /dev/null 2>&1
-            if [ ${new} = false ]; then
-                rm -rf /srv/shiny-server/${grp}/${stu}
+            cur_user=${stu}
+            if user_exists "${cur_user}"; then
+                userdel -r ${cur_user} > /dev/null 2>&1
+                if [ ${new} = false ]; then
+                    rm -rf /srv/shiny-server/${grp}/${stu}
+                fi
+                (( deleted += 1 ))
+            else
+                (( skip += 1 ))
             fi
         done < ./${depts_dir}/${grp}.txt
+        echo "成功從群組 ${grp} 移除了 ${deleted} 個帳號，其中共有 ${skip} 個帳號不存在。"
     done
-    read -p "使用者已移除，是否要順便移除存放密碼的資料夾 ${pass_dir}? (yes/No)" yn
-    case $yn in
-        [Yy]* ) 
-            rm -rf ${pass_dir}
-        ;;
-        [No]* ) exit 0;;
-    esac
+    # read -p "使用者已移除，是否要順便移除存放密碼的資料夾 ${pass_dir}? (yes/No)" yn
+
+    # case $yn in
+    #     [Yy]* ) 
+    #         rm -rf ${pass_dir}
+    #     ;;
+    #     [No]* ) exit 0;;
+    # esac
 }
 
 create_prompt() {
-    if [ ${new} = false ]; then
-        read -p "即將建立使用者帳戶，確認使用者資料是否無誤? (Yes/No)" yn
-    else
-        read -p "即將以新的 shiny-server 模式建立使用者帳戶，確認使用者資料是否無誤? (Yes/No)" yn
-    fi
+    read -p "即將建立使用者帳戶，確認使用者資料是否無誤?（Yes/No）" yn
+    echo 
+
     case $yn in
         [Yy]* ) create_users;;
         [Nn]* ) exit 0;;
@@ -281,7 +310,7 @@ create_prompt() {
 }
 
 delete_prompt() {
-    read -p "即將 '刪除' 使用者帳戶，於 /home/<使用者> 的資料將會消失，是否執行? (Yes/No)" yn
+    read -p "即將 '刪除' 使用者帳戶，於 /home/<使用者> 的資料將會消失，是否執行?（Yes/No）" yn
     case $yn in
         [Yy]* ) delete_users;;
         [Nn]* ) exit 0;;
@@ -290,45 +319,30 @@ delete_prompt() {
 
 generate_configuration() {
     if [ -d ${depts_dir} ]; then
-        echo "資料夾已存在！"
+        echo "資料夾已存在！請先刪除 ${depts_dir} 資料夾"
     else
         mkdir ${depts_dir}
-        touch ${depts_dir}/asisstuc.txt
-        touch ${depts_dir}/defstu.txt
-        echo 08170875 > ${depts_dir}/asisstuc.txt
-        echo 08220000 > ${depts_dir}/defstu.txt
+        touch ${depts_dir}/asis.txt
+        touch ${depts_dir}/eco.txt
+        echo 08170875 > ${depts_dir}/asis.txt
+        echo 08220855 > ${depts_dir}/eco.txt
         echo "設定檔案建立完成"
     fi
     exit 0;
 }
 
 display_help() {
-    echo "使用方法: $0 [選項...] {create|delete}"
-    echo 
-    echo "選項: "
-    echo "  -gp, --generate-password    以 openssl 產生隨機的使用者密碼"
-    echo "  -n, --new-shiny-server      只建立使用者，不軟連結至 /srv/shiny-server/ 資料夾；新的 shiny-server 不使用軟連結"
-    echo
-    echo "此腳本被用來: "
-    echo "1. 根據 ./${depts_dir}/ 裡面的 <系所名稱.txt> 建立帳號，"
-    echo "  系所名稱會被用來當作 linux 使用者的使用者主要群組（primary group），"
-    echo "  <系所名稱.txt> 內的格式為一個學號佔用一行。"
-    echo
-    echo "  樹狀結構:"
-    echo "  ./depts/"
-    echo "  ├── asis.txt"
-    echo "  └── ecofin.txt"
-    echo
-    echo "  asis.txt 檔案結構"
-    echo "  ───────┬──────────────────"
-    echo "         │ ./depts/asis.txt "
-    echo "  ───────┼──────────────────"
-    echo "     1   │ 08170875"
-    echo "     2   │ 08170396"
-    echo "     3   │ ..."
-    echo "  ───────┴──────────────────"
-    echo "2. 根據 ./${depts_dir}/ 裡面的 <系所名稱.txt> 刪除使用者的家資料夾與帳號相關資料"
+    cat << EOF
+使用方法: $0 [選項...] <create>
+
+選項: 
+    -h, --help                      產生此說明文字
+    -d, --dry-run                   試運行腳本，不實際執行
+    -c, --generate-configuration    產生範例設定
+    -o, --old-shiny-server          ShinyApps 將使用軟連結的方式連結（不推薦）
+EOF
 }
+
 while :
 do
     case "$1" in
@@ -341,22 +355,22 @@ do
             shift 1
             break
         ;;
-        -p | --generate-password)
-            gp=true
-            shift 1
-            break
-        ;;
+        # -p | --generate-password)
+        #     gp=true
+        #     shift 1
+        #     break
+        # ;;
         -c | --generate-configuration)
             generate_configuration
             exit 0
         ;;
-        -n | --new-shiny-server)
-            new=true
+        -o | --old-shiny-server)
+            new=false
             shift 1
             break
         ;;
         -*)
-            echo "錯誤: 未知的選項: $1" >&2
+            echo "錯誤：未知的選項：$1"
             display_help
             exit 1
         ;;
@@ -368,17 +382,19 @@ done
 
 case "$1" in
     create)
-    check_permission
+        check_permission
         check_depts_dir
         create_prompt
     ;;
     delete)
-    check_permission
+        check_permission
         check_depts_dir
         delete_prompt
     ;;
     *)
-    echo "使用附加選項 -h 或是 --help 查詢指令的使用方法。" 
+        echo "錯誤，請參考下列指令說明："
+        echo 
+        display_help
         exit 1
     ;;
 esac
