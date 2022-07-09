@@ -161,7 +161,8 @@ step-3-妥善保存好產生的-key
 上傳-ssh-key-pairs
 puttygen-產生的-key-pairs-的連線方式
 帳號管理
-users.sh
+概述-9
+manage-users.sh
 generate-sql.sh
 其他
 更改預設的文本編輯器
