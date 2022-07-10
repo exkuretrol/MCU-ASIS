@@ -114,7 +114,15 @@ SSH 連線方式大同小異:
 
 ## 概述
 
+```{r, fig.cap='manage-users.sh'}
+knitr::include_graphics(path = './figures/manage-users.sh.svg')
+```
+
 ## manage-users.sh
+
+```{r, fig.cap='建立使用者'}
+knitr::include_graphics(path = './figures/create-users.svg')
+```
 
 ``` bash
 #!/bin/bash
