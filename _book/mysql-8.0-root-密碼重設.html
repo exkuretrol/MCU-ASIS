@@ -23,7 +23,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2022-07-10" />
+<meta name="date" content="2022-07-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -314,9 +314,17 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="B" data-path="帳號管理.html"><a href="帳號管理.html"><i class="fa fa-check"></i><b>B</b> 帳號管理</a>
 <ul>
-<li class="chapter" data-level="B.1" data-path="概述-9.html"><a href="概述-9.html"><i class="fa fa-check"></i><b>B.1</b> 概述</a></li>
-<li class="chapter" data-level="B.2" data-path="manage-users.html"><a href="manage-users.html"><i class="fa fa-check"></i><b>B.2</b> manage-users.sh</a></li>
-<li class="chapter" data-level="B.3" data-path="generate-sql.html"><a href="generate-sql.html"><i class="fa fa-check"></i><b>B.3</b> generate-sql.sh</a></li>
+<li class="chapter" data-level="B.1" data-path="系統帳號.html"><a href="系統帳號.html"><i class="fa fa-check"></i><b>B.1</b> 系統帳號</a>
+<ul>
+<li class="chapter" data-level="B.1.1" data-path="系統帳號.html"><a href="系統帳號.html#概述-9"><i class="fa fa-check"></i><b>B.1.1</b> 概述</a></li>
+<li class="chapter" data-level="B.1.2" data-path="系統帳號.html"><a href="系統帳號.html#腳本運行"><i class="fa fa-check"></i><b>B.1.2</b> 腳本運行</a></li>
+<li class="chapter" data-level="B.1.3" data-path="系統帳號.html"><a href="系統帳號.html#指令說明"><i class="fa fa-check"></i><b>B.1.3</b> 指令說明</a>
+<ul>
+<li class="chapter" data-level="B.1.3.1" data-path="系統帳號.html"><a href="系統帳號.html#讀取選項的迴圈"><i class="fa fa-check"></i><b>B.1.3.1</b> 讀取選項的迴圈</a></li>
+<li class="chapter" data-level="B.1.3.2" data-path="系統帳號.html"><a href="系統帳號.html#讀取方法的-switch-case"><i class="fa fa-check"></i><b>B.1.3.2</b> 讀取方法的 Switch Case</a></li>
+<li class="chapter" data-level="B.1.3.3" data-path="系統帳號.html"><a href="系統帳號.html#建立使用者"><i class="fa fa-check"></i><b>B.1.3.3</b> 建立使用者</a></li>
+</ul></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="C" data-path="其他.html"><a href="其他.html"><i class="fa fa-check"></i><b>C</b> 其他</a>
 <ul>
@@ -347,20 +355,20 @@ div.csl-indent {
 <div id="mysql-8.0-root-密碼重設" class="section level2 hasAnchor" number="8.2">
 <h2><span class="header-section-number">C.2</span> Mysql 8.0 root 密碼重設<a href="mysql-8.0-root-密碼重設.html#mysql-8.0-root-密碼重設" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>先建立一個含有改變 root 密碼的 sql 語法文字檔案</p>
-<div class="sourceCode" id="cb264"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb264-1"><a href="mysql-8.0-root-密碼重設.html#cb264-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> mysql-init</span></code></pre></div>
-<div class="sourceCode" id="cb265"><pre class="sourceCode sqlmysql"><code class="sourceCode sqlmysql"><span id="cb265-1"><a href="mysql-8.0-root-密碼重設.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="fu">USER</span> <span class="st">&#39;root&#39;</span>@<span class="st">&#39;localhost&#39;</span> IDENTIFIED <span class="kw">with</span> caching_sha2_password <span class="kw">by</span> <span class="st">&#39;&lt;新的 root 密碼&gt;&#39;</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb288-1"><a href="mysql-8.0-root-密碼重設.html#cb288-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> mysql-init</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode sqlmysql"><code class="sourceCode sqlmysql"><span id="cb289-1"><a href="mysql-8.0-root-密碼重設.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="fu">USER</span> <span class="st">&#39;root&#39;</span>@<span class="st">&#39;localhost&#39;</span> IDENTIFIED <span class="kw">with</span> caching_sha2_password <span class="kw">by</span> <span class="st">&#39;&lt;新的 root 密碼&gt;&#39;</span>;</span></code></pre></div>
 <p>如存好後將擁有者與使用者群組改成 <code>mysql</code> 後，移至 <code>/tmp</code> 資料夾，使 mysql 使用者可以存取。</p>
-<div class="sourceCode" id="cb266"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb266-1"><a href="mysql-8.0-root-密碼重設.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> mysql.mysql mysql-init <span class="kw">&amp;&amp;</span> <span class="fu">mv</span> mysql-init /tmp</span></code></pre></div>
+<div class="sourceCode" id="cb290"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb290-1"><a href="mysql-8.0-root-密碼重設.html#cb290-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> mysql.mysql mysql-init <span class="kw">&amp;&amp;</span> <span class="fu">mv</span> mysql-init /tmp</span></code></pre></div>
 <p>切換至 root 使用者進行後續操作</p>
-<div class="sourceCode" id="cb267"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb267-1"><a href="mysql-8.0-root-密碼重設.html#cb267-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span></span></code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb291-1"><a href="mysql-8.0-root-密碼重設.html#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span></span></code></pre></div>
 <p>將目前的 mysql 關閉</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb268-1"><a href="mysql-8.0-root-密碼重設.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="fu">killall</span> <span class="at">-9</span> mysqld</span></code></pre></div>
+<div class="sourceCode" id="cb292"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb292-1"><a href="mysql-8.0-root-密碼重設.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="fu">killall</span> <span class="at">-9</span> mysqld</span></code></pre></div>
 <p>或是使用 <code>systemctl</code> 指令關閉 mysql 服務</p>
 <p><code>{.bash prefixed} systemctl stop mysql.service</code></p>
 <p>接著使用 mysqld 指令啟動 mysql 並指定 <code>--user</code>、<code>--defaults-file</code> 與 <code>--init-file</code> 參數。</p>
-<div class="sourceCode" id="cb269"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb269-1"><a href="mysql-8.0-root-密碼重設.html#cb269-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysqld</span> <span class="at">--defaults-file</span><span class="op">=</span>/etc/mysql/mysql.conf.d/mysqld.cnf <span class="dt">\ </span></span>
-<span id="cb269-2"><a href="mysql-8.0-root-密碼重設.html#cb269-2" aria-hidden="true" tabindex="-1"></a><span class="ex">--user=mysql</span> <span class="dt">\ </span></span>
-<span id="cb269-3"><a href="mysql-8.0-root-密碼重設.html#cb269-3" aria-hidden="true" tabindex="-1"></a><span class="ex">--init-file=/tmp/mysql-init</span> <span class="kw">&amp;</span></span></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb293-1"><a href="mysql-8.0-root-密碼重設.html#cb293-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysqld</span> <span class="at">--defaults-file</span><span class="op">=</span>/etc/mysql/mysql.conf.d/mysqld.cnf <span class="dt">\ </span></span>
+<span id="cb293-2"><a href="mysql-8.0-root-密碼重設.html#cb293-2" aria-hidden="true" tabindex="-1"></a><span class="ex">--user=mysql</span> <span class="dt">\ </span></span>
+<span id="cb293-3"><a href="mysql-8.0-root-密碼重設.html#cb293-3" aria-hidden="true" tabindex="-1"></a><span class="ex">--init-file=/tmp/mysql-init</span> <span class="kw">&amp;</span></span></code></pre></div>
 <ul>
 <li><p><code>--defaults-file</code>: MySQL 預設啟動的設定檔案</p></li>
 <li><p><code>--user</code>: 以使用者 <code>mysql</code> 執行</p></li>
@@ -371,14 +379,14 @@ div.csl-indent {
 <div class="infobox caution">
 <p>如果不行的話，請檢查位於 <code>/var/log/mysql/error.log</code> 的錯誤紀錄，如果有看到類似 <code>/var/run/mysqld</code> 的錯誤，需要手動建立資料夾，並把權限變更為 <code>mysql</code> 用戶的權限。 操作完之後再從關閉 mysql 服務開始，再嘗試一次。</p>
 <p>參考指令如下：</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb270-1"><a href="mysql-8.0-root-密碼重設.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> /var/run/mysqld <span class="kw">&amp;&amp;</span> <span class="fu">chown</span> mysql.mysql /var/run/mysqld</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb294-1"><a href="mysql-8.0-root-密碼重設.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> /var/run/mysqld <span class="kw">&amp;&amp;</span> <span class="fu">chown</span> mysql.mysql /var/run/mysqld</span></code></pre></div>
 </div>
 <p>最後以正常的服務啟動 mysql：</p>
-<div class="sourceCode" id="cb271"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb271-1"><a href="mysql-8.0-root-密碼重設.html#cb271-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> restart mysql.service</span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb295-1"><a href="mysql-8.0-root-密碼重設.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> restart mysql.service</span></code></pre></div>
 <p>退出 root 帳號</p>
-<div class="sourceCode" id="cb272"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb272-1"><a href="mysql-8.0-root-密碼重設.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span></span></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb296-1"><a href="mysql-8.0-root-密碼重設.html#cb296-1" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span></span></code></pre></div>
 <p>試以新密碼登入 mysql root 帳號：</p>
-<div class="sourceCode" id="cb273"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb273-1"><a href="mysql-8.0-root-密碼重設.html#cb273-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb297-1"><a href="mysql-8.0-root-密碼重設.html#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
 <p>成功 🎊</p>
 <pre class="console_output"><code>Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 17

@@ -23,7 +23,7 @@
 <meta name="author" content="Chiawei Chen" />
 
 
-<meta name="date" content="2022-07-10" />
+<meta name="date" content="2022-07-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -314,9 +314,17 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="B" data-path="帳號管理.html"><a href="帳號管理.html"><i class="fa fa-check"></i><b>B</b> 帳號管理</a>
 <ul>
-<li class="chapter" data-level="B.1" data-path="概述-9.html"><a href="概述-9.html"><i class="fa fa-check"></i><b>B.1</b> 概述</a></li>
-<li class="chapter" data-level="B.2" data-path="manage-users.html"><a href="manage-users.html"><i class="fa fa-check"></i><b>B.2</b> manage-users.sh</a></li>
-<li class="chapter" data-level="B.3" data-path="generate-sql.html"><a href="generate-sql.html"><i class="fa fa-check"></i><b>B.3</b> generate-sql.sh</a></li>
+<li class="chapter" data-level="B.1" data-path="系統帳號.html"><a href="系統帳號.html"><i class="fa fa-check"></i><b>B.1</b> 系統帳號</a>
+<ul>
+<li class="chapter" data-level="B.1.1" data-path="系統帳號.html"><a href="系統帳號.html#概述-9"><i class="fa fa-check"></i><b>B.1.1</b> 概述</a></li>
+<li class="chapter" data-level="B.1.2" data-path="系統帳號.html"><a href="系統帳號.html#腳本運行"><i class="fa fa-check"></i><b>B.1.2</b> 腳本運行</a></li>
+<li class="chapter" data-level="B.1.3" data-path="系統帳號.html"><a href="系統帳號.html#指令說明"><i class="fa fa-check"></i><b>B.1.3</b> 指令說明</a>
+<ul>
+<li class="chapter" data-level="B.1.3.1" data-path="系統帳號.html"><a href="系統帳號.html#讀取選項的迴圈"><i class="fa fa-check"></i><b>B.1.3.1</b> 讀取選項的迴圈</a></li>
+<li class="chapter" data-level="B.1.3.2" data-path="系統帳號.html"><a href="系統帳號.html#讀取方法的-switch-case"><i class="fa fa-check"></i><b>B.1.3.2</b> 讀取方法的 Switch Case</a></li>
+<li class="chapter" data-level="B.1.3.3" data-path="系統帳號.html"><a href="系統帳號.html#建立使用者"><i class="fa fa-check"></i><b>B.1.3.3</b> 建立使用者</a></li>
+</ul></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="C" data-path="其他.html"><a href="其他.html"><i class="fa fa-check"></i><b>C</b> 其他</a>
 <ul>
@@ -347,7 +355,7 @@ div.csl-indent {
 <div id="更改預設的文本編輯器" class="section level2 hasAnchor" number="8.1">
 <h2><span class="header-section-number">C.1</span> 更改預設的文本編輯器<a href="更改預設的文本編輯器.html#更改預設的文本編輯器" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>這個指令可以變更系統編輯文件所用的程式</p>
-<div class="sourceCode" id="cb262"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb262-1"><a href="更改預設的文本編輯器.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> update-alternatives <span class="at">--config</span> editor</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb286-1"><a href="更改預設的文本編輯器.html#cb286-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> update-alternatives <span class="at">--config</span> editor</span></code></pre></div>
 <p>按了 Enter↩︎ 之後，會出現現在可用的編輯器，輸入對應的編號即可變更。有標 <code>*</code> 號的編輯器為目前設定的預設編輯器。</p>
 <pre class="console_output"><code>There are 4 choices for the alternative editor (providing /usr/bin/editor).
 
