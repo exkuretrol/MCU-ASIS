@@ -497,20 +497,17 @@ sudo vim /etc/apache2/sites-available/asis.conf
     ###
     # JupyterHub Reverse Proxy
     ###
-    # add trailing slash
-    RedirectMatch ^/jhub$ /jhub/
     RewriteCond %{HTTP:Connection} Upgrade [NC]
     RewriteCond %{HTTP:Upgrade} websocket [NC]
-    RewriteRule /jhub/(.*) ws://127.0.0.1:8000/jhub/$1 [P,L]
-    RewriteRule /jhub/(.*) http://127.0.0.1:8000/jhub/$1 [P,L]
-    
-    <Location /jhub/>
-        # preserve Host header to avoid cross-origin problems
-  # this setting screws up Rstudio, use for JupyterHub only
-        ProxyPreserveHost On
-        # proxy to JupyterHub, omit location parameter from ProxyPass etc
-        ProxyPass http://127.0.0.1:8000/jhub/
-        ProxyPassReverse http://127.0.0.1:8000/jhub/
+    RewriteRule /jhub/(.*) ws://127.0.0.1:8000/jhub/$1 [NE,P,L]
+    RewriteRule /jhub/(.*) http://127.0.0.1:8000/jhub/$1 [NE,P,L]
+
+    <Location "/jhub/">
+      # preserve Host header to avoid cross-origin problems
+      ProxyPreserveHost on
+      # proxy to JupyterHub
+      ProxyPass         http://127.0.0.1:8000/
+      ProxyPassReverse  http://127.0.0.1:8000/
     </Location>
     
 </VirtualHost>
