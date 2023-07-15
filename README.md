@@ -1,23 +1,5 @@
-### TODOs:
+# 介紹
 
--   ✓ Ubuntu 安裝
+這本書是紀錄我在維護銘傳大學應用統計與資料科學學系的經驗，裡面包含了維護這台伺服器（大部分）所需要的流程。
 
--   ✓ Ubuntu 基本設定
-
--   ✓ LAMP + phpMyAdmin
-
--   ✓ RStudio + RShiny
-
--   jupyterLab + jupyterhub
-
--   SSL certbot
-
-    -   nslookup
-
--   附錄
-
--   備份 & 還原
-
--   找到方法 highlight code 區塊
-
--   英文括號 -> 中文括號
+線上閱覽[]()。
