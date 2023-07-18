@@ -4,7 +4,7 @@ view: https://github.com/exkuretrol/MCU-ASIS/blob/main/%s
 delete_merged_file: true
 language:
   ui:
-    chapter_name: "Chapter "
+    chapter_name: "章節 "
   label:
     fig: "圖 "
     tab: "表 "

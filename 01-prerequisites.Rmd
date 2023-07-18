@@ -1,16 +1,26 @@
-# (PART) 虛擬主機 {.unnumbered}
+# (PART) 基礎建設 {-}
 
-# 基礎建設 {#intro}
+# 虛擬主機 {#intro}
 
-因為使用者的經驗、能力會有所差異與解決問題的能力，在接觸新的系統之前，最好還是先在虛擬機器上先運行過一次，確認沒問題之後再把操作搬到實體電腦上去，才不會遇到預料之外的問題。 本書所使用運行虛擬機器的軟體為 VirtualBox。
+因為使用者的經驗、能力與解決問題的能力會有所差異，在接觸新的系統之前，最好還是先在虛擬機器上先運行過一次，確認沒問題之後再把操作搬到實體電腦上去，才不會遇到預料之外的問題。本書所使用運行虛擬機器的軟體為 VirtualBox。
 
 ## 事前準備
 
-在開始教學之前，確定你的環境要能上網存取網路上的資源。 再來是檢查自己的電腦可不可以運行 VirtualBox（或是其他可以運行虛擬機器的軟體），要運行虛擬機器通常都要去 BIOS 打開一個叫做 Virtualization Technology 的功能。 於附錄有講解怎麼從[開機狀態的 Windows 10 系統進入 BIOS](#由-windows-10-系統進入-bios)，進入之後把 VT 相關的設定都打開後重新啟動。
+在開始教學之前，確定你的環境要能上網存取網路上的資源。 再來是檢查自己的電腦可不可以運行 VirtualBox（或是其他可以運行虛擬機器的軟體），要運行虛擬機器通常都要去 BIOS 打開一個叫做擬化功能（Virtualization Technology）的功能。
+
+下列是我所整理各廠牌虛擬化功能的開啟方式：
+
+| 品牌   | 連結                                                                                                                                                                                                                                                                   |
+|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Acer   | [How to Enable Virtualization Technology on Acer Products - Acer Community](https://community.acer.com/kb/articles/14750)                                                                                                                                              |
+| Asus   | [[Motherboard]How to set VT(Virtualization Technology) in BIOS and install Virtual Machine in Windows \| Official Support \| ASUS Global](https://www.asus.com/support/FAQ/1045141/){.uri}                                                                             |
+| Dell   | [如何在 Dell 系統上啟用或停用硬體虛擬化 \| Dell 台灣](https://www.dell.com/support/kbdoc/zh-tw/000195978/%E5%A6%82%E4%BD%95-%E5%9C%A8-dell-%E7%B3%BB%E7%B5%B1%E4%B8%8A-%E5%95%9F%E7%94%A8-%E6%88%96-%E5%81%9C%E7%94%A8-%E7%A1%AC%E9%AB%94-%E8%99%9B%E6%93%AC%E5%8C%96) |
+| HP     | [HP PCs - Enable Virtualization Technology in the BIOS \| HP® Customer Support](https://support.hp.com/us-en/document/ish_5637142-5637191-16)                                                                                                                          |
+| Lenovo | [How to enable Virtualization Technology on Lenovo PC computers - Lenovo Support TW](https://support.lenovo.com/tw/en/solutions/ht500006)                                                                                                                              |
 
 ## 安裝 VirtualBox
 
-首先到 [VirtualBox 官方網站](https://www.virtualbox.org/wiki/Downloads)的下載頁面，下載適合你電腦系統的安裝執行檔，假如是 Windows 系統就點擊 「Windows hosts」的下載連結，如果是其他作業系統就根據你的作業系統下載對應的檔案。
+首先到 [VirtualBox 官方網站](https://www.virtualbox.org/wiki/Downloads)的下載頁面，下載適合你電腦系統的安裝執行檔，假如是 Windows 系統就點擊 「Windows hosts」的下載連結，如果是其他作業系統就根據你的作業系統下載對應的安裝程式。
 
 ```{r , fig.cap='www.virtualbox.org 的下載頁面'}
 knitr::include_graphics(path = "./figures/www.virtualbox.org-downloads-page.png")
@@ -95,7 +105,7 @@ knitr::include_graphics(path = "./figures/new-virtual-machine_1.png")
 
 這裡我會選 VMDK 格式的原因是因為，如果要轉移虛擬機器檔案時，單一個檔案會輕易地超過 4Gb，而超過此上限得檔案在複製時，如果目的地的裝置格式不是 ntfs 的話，會沒有辦法複製。為了免去到時候分割虛擬機器的麻煩，我在這邊先選擇 VMDK 作為我虛擬機器的檔案格式。
 
-::: {.infobox .info}
+::: {.rmdtip .infobox}
 這裡如果選擇「固定大小」會新增一個跟你設定的檔案大小一樣大的虛擬機器檔案，除非你的硬碟很大，否則不建議這麼做。
 :::
 
@@ -249,7 +259,7 @@ knitr::include_graphics(path = 'figures/installer-storage_2.png')
 
 -   對第二個磁碟「VBOX_HARDDISK_VBdc8cc122-e9b43569」也做同樣的事情。
 
-::: {.infobox .caution}
+::: {.infobox .rmdcaution}
 目前版本 20.04.2 live server 有個 bug，當你要新增為開機硬碟 (Boot Device) 時，要在建立其他三個分區 (`/` 、 `/boot` 和 `[SWAP]`)之前，先設定好，不然 1Mb 的 grub 分區會消失。(我只有從現過錯誤一次 2021.07.21)
 :::
 
@@ -323,8 +333,6 @@ knitr::include_graphics(path = 'figures/installer-storage_7.png')
 knitr::include_graphics(path = 'figures/installer-storage_8.png')
 ```
 
-<!-- -->
-
 -   截圖（續）
 
 ```{r, fig.cap='Ubuntu 安裝程式，磁碟配置導覽'}
@@ -359,7 +367,7 @@ OpenSSH 是使用 SSH 通訊協定來遠端連線電腦的工具。防止連線�
 
 這裡將 Allow password authentication over SSH 取消打勾，經由 SSH 連線至虛擬機器時，關閉使用者密碼認證，改由 SSH key pairs 登入。
 
-::: {.infobox .info}
+::: {.infobox .rmdtip}
 如果沒有持有 Github 帳號儲存的 public key，請把 Allow password authentication over SSH 打勾，待上傳完 public key 再把使用密碼登入關閉。
 :::
 
@@ -369,7 +377,7 @@ OpenSSH 是使用 SSH 通訊協定來遠端連線電腦的工具。防止連線�
 knitr::include_graphics(path = 'figures/installer-SSH.png')
 ```
 
-::: {.infobox .info}
+::: {.infobox .rmdtip}
 如果這邊不匯入的話，也可以待稍後開機後再用指令 `ssh-import-id-gh <username>` 匯入。
 :::
 

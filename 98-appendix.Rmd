@@ -1,6 +1,6 @@
 \cleardoublepage
 
-# (APPENDIX) 附錄 {.unnumbered}
+# (APPENDIX) 附錄 {-}
 
 # 相關軟體
 

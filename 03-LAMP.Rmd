@@ -1,4 +1,4 @@
-# (PART) 軟體安裝 {.unnumbered}
+# (PART) 軟體安裝 {-}
 
 # LAMP 程式集
 

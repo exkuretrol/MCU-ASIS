@@ -9,16 +9,12 @@ bibliography:
 - packages.bib
 biblio-style: apalike
 link-citations: yes
-description: 
-output:
-  html_document:
-    css: "style.css"
-    highlight: tango
+output: bookdown::bs4_book
 ---
 
-# 引言 {.unnumbered}
+# 引言 {-}
 
-本書會從虛擬環境的建立、安裝 Ubuntu、Ubuntu 環境設定、安裝 LAMP於 Ubuntu、安裝 Rstudio 與 RShiny 於Ubuntu...等，分章節介紹。
+本書會從虛擬環境的建立、安裝 Ubuntu、Ubuntu 環境設定、安裝 LAMP 於 Ubuntu、安裝 Rstudio 與 RShiny 於Ubuntu...等，分章節介紹。
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
@@ -36,6 +32,4 @@ knitr::write_bib(
 )
 ```
 
-## 大綱 {.unnumbered}
-
-## 關於我 {.unnumbered}
+## 關於我 {-}

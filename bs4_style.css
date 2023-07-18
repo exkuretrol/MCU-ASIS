@@ -1,0 +1,51 @@
+/* information box */
+
+.infobox {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  background: #ffffff 5px center/3em no-repeat;
+}
+
+/* information */
+.rmdtip {
+  background-image: url("figures/icons/post-it.png");
+}
+
+/* caution */
+.rmdcaution {
+  background-image: url("figures/icons/caution.png");
+}
+
+
+/* code block */
+
+pre {
+  line-height: 1.4 !important;
+}
+
+pre.prefixed::before {
+   content: "$ ";
+}
+
+pre.prefixed_root::before {
+   content: "# ";
+}
+
+pre.prefixed_powershell::before {
+   content: "PS > ";
+}
+
+pre.prefixed_mysql::before {
+   content: "mysql> ";
+}
+
+pre.prefixed_r::before {
+   content: "> ";
+}
+
+pre.console_output::before {
+	content: "OUTPUT\A";
+	color: lightgray;
+	font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
