@@ -1,421 +1,639 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 基礎建設 | MCU ASIS Ubuntu 系統安裝指南</title>
-  <meta name="description" content="Chapter 1 基礎建設 | MCU ASIS Ubuntu 系統安裝指南" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Chapter 1 基礎建設 | MCU ASIS Ubuntu 系統安裝指南" />
-  <meta property="og:type" content="book" />
-  
-  
-  
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 基礎建設 | MCU ASIS Ubuntu 系統安裝指南" />
-  
-  
-  
-
-<meta name="author" content="Chiawei Chen" />
-
-
-<meta name="date" content="2022-07-11" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="關於我.html"/>
-<link rel="next" href="事前準備.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>章節 1 虛擬主機 | MCU ASIS Ubuntu 系統安裝指南</title>
+<meta name="author" content="Chiawei Chen">
+<meta name="generator" content="bookdown 0.28 with bs4_book()">
+<meta property="og:title" content="章節 1 虛擬主機 | MCU ASIS Ubuntu 系統安裝指南">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="章節 1 虛擬主機 | MCU ASIS Ubuntu 系統安裝指南">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Noto_Sans_TC-0.4.2/font.css" rel="stylesheet">
+<link href="libs/Source_Code_Pro-0.4.2/font.css" rel="stylesheet">
+<link href="libs/Noto_Serif_TC-0.4.2/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
-
-<link rel="stylesheet" href="style.css" type="text/css" />
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="bs4_style.css">
+<meta name="description" content="因為使用者的經驗、能力與解決問題的能力會有所差異，在接觸新的系統之前，最好還是先在虛擬機器上先運行過一次，確認沒問題之後再把操作搬到實體電腦上去，才不會遇到預料之外的問題。本書所使用運行虛擬機器的軟體為 VirtualBox。  1.1 事前準備 在開始教學之前，確定你的環境要能上網存取網路上的資源。 再來是檢查自己的電腦可不可以運行...">
+<meta property="og:description" content="因為使用者的經驗、能力與解決問題的能力會有所差異，在接觸新的系統之前，最好還是先在虛擬機器上先運行過一次，確認沒問題之後再把操作搬到實體電腦上去，才不會遇到預料之外的問題。本書所使用運行虛擬機器的軟體為 VirtualBox。  1.1 事前準備 在開始教學之前，確定你的環境要能上網存取網路上的資源。 再來是檢查自己的電腦可不可以運行...">
+<meta name="twitter:description" content="因為使用者的經驗、能力與解決問題的能力會有所差異，在接觸新的系統之前，最好還是先在虛擬機器上先運行過一次，確認沒問題之後再把操作搬到實體電腦上去，才不會遇到預料之外的問題。本書所使用運行虛擬機器的軟體為 VirtualBox。  1.1 事前準備 在開始教學之前，確定你的環境要能上網存取網路上的資源。 再來是檢查自己的電腦可不可以運行...">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">MCU ASIS Ubuntu 系統安裝指南</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
 
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
 
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">MCU ASIS Ubuntu 系統安裝指南</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>引言</a>
-<ul>
-<li class="chapter" data-level="" data-path="大綱.html"><a href="大綱.html"><i class="fa fa-check"></i>大綱</a></li>
-<li class="chapter" data-level="" data-path="關於我.html"><a href="關於我.html"><i class="fa fa-check"></i>關於我</a></li>
-</ul></li>
-<li class="part"><span><b>I 虛擬主機</b></span></li>
-<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> 基礎建設</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="事前準備.html"><a href="事前準備.html"><i class="fa fa-check"></i><b>1.1</b> 事前準備</a></li>
-<li class="chapter" data-level="1.2" data-path="安裝-virtualbox.html"><a href="安裝-virtualbox.html"><i class="fa fa-check"></i><b>1.2</b> 安裝 VirtualBox</a></li>
-<li class="chapter" data-level="1.3" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html"><i class="fa fa-check"></i><b>1.3</b> 於虛擬機器安裝作業系統</a>
-<ul>
-<li class="chapter" data-level="1.3.1" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#新增-ubuntu-作業系統設定"><i class="fa fa-check"></i><b>1.3.1</b> 新增 Ubuntu 作業系統設定</a></li>
-<li class="chapter" data-level="1.3.2" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#於-virtualbox-安裝作業系統"><i class="fa fa-check"></i><b>1.3.2</b> 於 VirtualBox 安裝作業系統</a>
-<ul>
-<li class="chapter" data-level="1.3.2.1" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#語言"><i class="fa fa-check"></i><b>1.3.2.1</b> 語言</a></li>
-<li class="chapter" data-level="1.3.2.2" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#鍵盤配置"><i class="fa fa-check"></i><b>1.3.2.2</b> 鍵盤配置</a></li>
-<li class="chapter" data-level="1.3.2.3" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#網路連線"><i class="fa fa-check"></i><b>1.3.2.3</b> 網路連線</a></li>
-<li class="chapter" data-level="1.3.2.4" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#proxy"><i class="fa fa-check"></i><b>1.3.2.4</b> Proxy</a></li>
-<li class="chapter" data-level="1.3.2.5" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#鏡像-mirror"><i class="fa fa-check"></i><b>1.3.2.5</b> 鏡像 (Mirror)</a></li>
-<li class="chapter" data-level="1.3.2.6" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#安裝程式更新"><i class="fa fa-check"></i><b>1.3.2.6</b> 安裝程式更新</a></li>
-<li class="chapter" data-level="1.3.2.7" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#系統空間配置"><i class="fa fa-check"></i><b>1.3.2.7</b> 系統空間配置</a></li>
-<li class="chapter" data-level="1.3.2.8" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#使用者設定"><i class="fa fa-check"></i><b>1.3.2.8</b> 使用者設定</a></li>
-<li class="chapter" data-level="1.3.2.9" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#openssh-設定-可跳過"><i class="fa fa-check"></i><b>1.3.2.9</b> OpenSSH 設定 [可跳過]</a></li>
-<li class="chapter" data-level="1.3.2.10" data-path="於虛擬機器安裝作業系統.html"><a href="於虛擬機器安裝作業系統.html#完成安裝"><i class="fa fa-check"></i><b>1.3.2.10</b> 完成安裝</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="ubuntu-的基本設定.html"><a href="ubuntu-的基本設定.html"><i class="fa fa-check"></i><b>2</b> Ubuntu 的基本設定</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="事前準備-1.html"><a href="事前準備-1.html"><i class="fa fa-check"></i><b>2.1</b> 事前準備</a></li>
-<li class="chapter" data-level="2.2" data-path="openssh.html"><a href="openssh.html"><i class="fa fa-check"></i><b>2.2</b> OpenSSH</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="openssh.html"><a href="openssh.html#概述"><i class="fa fa-check"></i><b>2.2.1</b> 概述</a></li>
-<li class="chapter" data-level="2.2.2" data-path="openssh.html"><a href="openssh.html#適合各個系統的連線流程"><i class="fa fa-check"></i><b>2.2.2</b> 適合各個系統的連線流程</a>
-<ul>
-<li class="chapter" data-level="2.2.2.1" data-path="openssh.html"><a href="openssh.html#macos-或-其他-unix-like-系統"><i class="fa fa-check"></i><b>2.2.2.1</b> MacOS 或 其他 Unix-like 系統</a></li>
-<li class="chapter" data-level="2.2.2.2" data-path="openssh.html"><a href="openssh.html#windows-系統"><i class="fa fa-check"></i><b>2.2.2.2</b> Windows 系統</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2.3" data-path="openssh.html"><a href="openssh.html#step-1-安裝-openssh-client"><i class="fa fa-check"></i><b>2.2.3</b> Step 1 — 安裝 OpenSSH Client</a></li>
-<li class="chapter" data-level="2.2.4" data-path="openssh.html"><a href="openssh.html#step-2-產生-ssh-key-pairs"><i class="fa fa-check"></i><b>2.2.4</b> Step 2 — 產生 ssh key pairs</a></li>
-<li class="chapter" data-level="2.2.5" data-path="openssh.html"><a href="openssh.html#step-3-將新增的-key-pairs-上傳至目的地主機"><i class="fa fa-check"></i><b>2.2.5</b> Step 3 — 將新增的 key pairs 上傳至目的地主機</a>
-<ul>
-<li class="chapter" data-level="2.2.5.1" data-path="openssh.html"><a href="openssh.html#linux-系統"><i class="fa fa-check"></i><b>2.2.5.1</b> Linux 系統</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2.6" data-path="openssh.html"><a href="openssh.html#step-4-測試-ssh-連線使用-ssh-連線至遠端主機"><i class="fa fa-check"></i><b>2.2.6</b> Step 4 — 測試 SSH 連線，使用 SSH 連線至遠端主機</a></li>
-<li class="chapter" data-level="2.2.7" data-path="openssh.html"><a href="openssh.html#step-5-使遠端的-openssh-伺服器更加安全-可跳過"><i class="fa fa-check"></i><b>2.2.7</b> Step 5 — 使遠端的 OpenSSH 伺服器更加安全 [可跳過]</a>
-<ul>
-<li class="chapter" data-level="2.2.7.1" data-path="openssh.html"><a href="openssh.html#變更-ssh-伺服器預設的埠號"><i class="fa fa-check"></i><b>2.2.7.1</b> 變更 SSH 伺服器預設的埠號</a></li>
-<li class="chapter" data-level="2.2.7.2" data-path="openssh.html"><a href="openssh.html#關閉密碼驗證"><i class="fa fa-check"></i><b>2.2.7.2</b> 關閉密碼驗證</a></li>
-<li class="chapter" data-level="2.2.7.3" data-path="openssh.html"><a href="openssh.html#關閉遠端-root-登入"><i class="fa fa-check"></i><b>2.2.7.3</b> 關閉遠端 root 登入</a></li>
-<li class="chapter" data-level="2.2.7.4" data-path="openssh.html"><a href="openssh.html#限制能使用-ssh-連線的使用者"><i class="fa fa-check"></i><b>2.2.7.4</b> 限制能使用 SSH 連線的使用者</a></li>
-<li class="chapter" data-level="2.2.7.5" data-path="openssh.html"><a href="openssh.html#關閉無密碼的使用者使用-ssh"><i class="fa fa-check"></i><b>2.2.7.5</b> 關閉無密碼的使用者使用 SSH</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2.8" data-path="openssh.html"><a href="openssh.html#step-6-測試-sshd_config-是否有效"><i class="fa fa-check"></i><b>2.2.8</b> Step 6 — 測試 <code>sshd_config</code> 是否有效</a></li>
-</ul></li>
-<li class="chapter" data-level="2.3" data-path="apt.html"><a href="apt.html"><i class="fa fa-check"></i><b>2.3</b> APT</a></li>
-<li class="chapter" data-level="2.4" data-path="ufw.html"><a href="ufw.html"><i class="fa fa-check"></i><b>2.4</b> UFW</a></li>
-</ul></li>
-<li class="part"><span><b>II 軟體安裝</b></span></li>
-<li class="chapter" data-level="3" data-path="lamp-程式集.html"><a href="lamp-程式集.html"><i class="fa fa-check"></i><b>3</b> LAMP 程式集</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="事前準備-2.html"><a href="事前準備-2.html"><i class="fa fa-check"></i><b>3.1</b> 事前準備</a></li>
-<li class="chapter" data-level="3.2" data-path="apache.html"><a href="apache.html"><i class="fa fa-check"></i><b>3.2</b> Apache</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="apache.html"><a href="apache.html#概述-1"><i class="fa fa-check"></i><b>3.2.1</b> 概述</a></li>
-<li class="chapter" data-level="3.2.2" data-path="apache.html"><a href="apache.html#step-1-安裝-apache"><i class="fa fa-check"></i><b>3.2.2</b> Step 1 — 安裝 Apache</a></li>
-<li class="chapter" data-level="3.2.3" data-path="apache.html"><a href="apache.html#step-2-調整防火牆-ufw-設定"><i class="fa fa-check"></i><b>3.2.3</b> Step 2 — 調整防火牆 UFW 設定</a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="mysql.html"><a href="mysql.html"><i class="fa fa-check"></i><b>3.3</b> MySQL</a>
-<ul>
-<li class="chapter" data-level="3.3.1" data-path="mysql.html"><a href="mysql.html#概述-2"><i class="fa fa-check"></i><b>3.3.1</b> 概述</a></li>
-<li class="chapter" data-level="3.3.2" data-path="mysql.html"><a href="mysql.html#step-1-安裝-mysql"><i class="fa fa-check"></i><b>3.3.2</b> Step 1 — 安裝 MySQL</a></li>
-<li class="chapter" data-level="3.3.3" data-path="mysql.html"><a href="mysql.html#step-2-設定-mysql"><i class="fa fa-check"></i><b>3.3.3</b> Step 2 — 設定 MySQL</a></li>
-</ul></li>
-<li class="chapter" data-level="3.4" data-path="php.html"><a href="php.html"><i class="fa fa-check"></i><b>3.4</b> PHP</a>
-<ul>
-<li class="chapter" data-level="3.4.1" data-path="php.html"><a href="php.html#概述-3"><i class="fa fa-check"></i><b>3.4.1</b> 概述</a></li>
-<li class="chapter" data-level="3.4.2" data-path="php.html"><a href="php.html#step-1-安裝-php-php-mysql-插件"><i class="fa fa-check"></i><b>3.4.2</b> Step 1 — 安裝 php &amp; php-mysql 插件</a></li>
-<li class="chapter" data-level="3.4.3" data-path="php.html"><a href="php.html#step-2-建立虛擬網站"><i class="fa fa-check"></i><b>3.4.3</b> Step 2 — 建立虛擬網站</a></li>
-</ul></li>
-<li class="chapter" data-level="3.5" data-path="phpmyadmin.html"><a href="phpmyadmin.html"><i class="fa fa-check"></i><b>3.5</b> phpMyAdmin</a>
-<ul>
-<li class="chapter" data-level="3.5.1" data-path="phpmyadmin.html"><a href="phpmyadmin.html#概述-4"><i class="fa fa-check"></i><b>3.5.1</b> 概述</a></li>
-<li class="chapter" data-level="3.5.2" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-1-安裝-phpmyadmin"><i class="fa fa-check"></i><b>3.5.2</b> Step 1 — 安裝 phpMyAdmin</a></li>
-<li class="chapter" data-level="3.5.3" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-2-使-phpmyadmin-更加安全"><i class="fa fa-check"></i><b>3.5.3</b> Step 2 — 使 phpMyAdmin 更加安全</a></li>
-<li class="chapter" data-level="3.5.4" data-path="phpmyadmin.html"><a href="phpmyadmin.html#step-3-再多一層存取的密碼保護-可跳過"><i class="fa fa-check"></i><b>3.5.4</b> Step 3 — 再多一層存取的密碼保護 [可跳過]</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="rstudio-rshiny-server.html"><a href="rstudio-rshiny-server.html"><i class="fa fa-check"></i><b>4</b> RStudio &amp; RShiny Server</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="事前準備-3.html"><a href="事前準備-3.html"><i class="fa fa-check"></i><b>4.1</b> 事前準備</a></li>
-<li class="chapter" data-level="4.2" data-path="r-base.html"><a href="r-base.html"><i class="fa fa-check"></i><b>4.2</b> R base</a>
-<ul>
-<li class="chapter" data-level="4.2.1" data-path="r-base.html"><a href="r-base.html#概述-5"><i class="fa fa-check"></i><b>4.2.1</b> 概述</a></li>
-<li class="chapter" data-level="4.2.2" data-path="r-base.html"><a href="r-base.html#step-1-安裝-r-base"><i class="fa fa-check"></i><b>4.2.2</b> Step 1 — 安裝 R Base</a></li>
-<li class="chapter" data-level="4.2.3" data-path="r-base.html"><a href="r-base.html#step-2-確認-r-base-是否成功安裝"><i class="fa fa-check"></i><b>4.2.3</b> Step 2 — 確認 R Base 是否成功安裝</a></li>
-</ul></li>
-<li class="chapter" data-level="4.3" data-path="rstudio-server.html"><a href="rstudio-server.html"><i class="fa fa-check"></i><b>4.3</b> RStudio Server</a>
-<ul>
-<li class="chapter" data-level="4.3.1" data-path="rstudio-server.html"><a href="rstudio-server.html#概述-6"><i class="fa fa-check"></i><b>4.3.1</b> 概述</a></li>
-<li class="chapter" data-level="4.3.2" data-path="rstudio-server.html"><a href="rstudio-server.html#step-1-安裝-rstudio-server-伺服器"><i class="fa fa-check"></i><b>4.3.2</b> Step 1 — 安裝 RStudio Server 伺服器</a></li>
-<li class="chapter" data-level="4.3.3" data-path="rstudio-server.html"><a href="rstudio-server.html#step-2-設定-apache-的反向代理reverse-proxy"><i class="fa fa-check"></i><b>4.3.3</b> Step 2 — 設定 Apache 的反向代理（Reverse Proxy）</a></li>
-</ul></li>
-<li class="chapter" data-level="4.4" data-path="r-shiny-server.html"><a href="r-shiny-server.html"><i class="fa fa-check"></i><b>4.4</b> R Shiny Server</a>
-<ul>
-<li class="chapter" data-level="4.4.1" data-path="r-shiny-server.html"><a href="r-shiny-server.html#概述-7"><i class="fa fa-check"></i><b>4.4.1</b> 概述</a></li>
-<li class="chapter" data-level="4.4.2" data-path="r-shiny-server.html"><a href="r-shiny-server.html#step-1-安裝-r-shiny-server"><i class="fa fa-check"></i><b>4.4.2</b> Step 1 — 安裝 R Shiny Server</a></li>
-<li class="chapter" data-level="4.4.3" data-path="r-shiny-server.html"><a href="r-shiny-server.html#step-2-設定-apache-的反向代理"><i class="fa fa-check"></i><b>4.4.3</b> Step 2 — 設定 Apache 的反向代理</a></li>
-<li class="chapter" data-level="4.4.4" data-path="r-shiny-server.html"><a href="r-shiny-server.html#step-3-r-shiny-server-進階設定"><i class="fa fa-check"></i><b>4.4.4</b> Step 3 — R Shiny Server 進階設定</a>
-<ul>
-<li class="chapter" data-level="4.4.4.1" data-path="r-shiny-server.html"><a href="r-shiny-server.html#佈置單一個-app"><i class="fa fa-check"></i><b>4.4.4.1</b> 佈置單一個 App</a></li>
-<li class="chapter" data-level="4.4.4.2" data-path="r-shiny-server.html"><a href="r-shiny-server.html#根據使用者群組佈置-app"><i class="fa fa-check"></i><b>4.4.4.2</b> 根據使用者群組佈置 App</a></li>
-<li class="chapter" data-level="4.4.4.3" data-path="r-shiny-server.html"><a href="r-shiny-server.html#重新導向頁面"><i class="fa fa-check"></i><b>4.4.4.3</b> 重新導向頁面</a></li>
-</ul></li>
-<li class="chapter" data-level="4.4.5" data-path="r-shiny-server.html"><a href="r-shiny-server.html#step-4-使用使用者測試設定是否有效"><i class="fa fa-check"></i><b>4.4.5</b> Step 4 — 使用使用者測試設定是否有效</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="jupyterlab-on-jupyterhub.html"><a href="jupyterlab-on-jupyterhub.html"><i class="fa fa-check"></i><b>5</b> JupyterLab on JupyterHub</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="事前準備-4.html"><a href="事前準備-4.html"><i class="fa fa-check"></i><b>5.1</b> 事前準備</a></li>
-<li class="chapter" data-level="5.2" data-path="設置-python-3-環境.html"><a href="設置-python-3-環境.html"><i class="fa fa-check"></i><b>5.2</b> 設置 Python 3 環境</a></li>
-<li class="chapter" data-level="5.3" data-path="jupyterlab-與-jupyterhub.html"><a href="jupyterlab-與-jupyterhub.html"><i class="fa fa-check"></i><b>5.3</b> JupyterLab 與 JupyterHub</a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="jupyterlab-與-jupyterhub.html"><a href="jupyterlab-與-jupyterhub.html#概述-8"><i class="fa fa-check"></i><b>5.3.1</b> 概述</a></li>
-<li class="chapter" data-level="5.3.2" data-path="jupyterlab-與-jupyterhub.html"><a href="jupyterlab-與-jupyterhub.html#於虛擬環境中設置-jupyterlab-與-jupyterhub"><i class="fa fa-check"></i><b>5.3.2</b> 於虛擬環境中設置 JupyterLab 與 JupyterHub</a></li>
-<li class="chapter" data-level="5.3.3" data-path="jupyterlab-與-jupyterhub.html"><a href="jupyterlab-與-jupyterhub.html#設定-jupyterhub"><i class="fa fa-check"></i><b>5.3.3</b> 設定 JupyterHub</a></li>
-<li class="chapter" data-level="5.3.4" data-path="jupyterlab-與-jupyterhub.html"><a href="jupyterlab-與-jupyterhub.html#新增開機自動啟動-jupyterhub-的服務"><i class="fa fa-check"></i><b>5.3.4</b> 新增開機自動啟動 JupyterHub 的服務</a></li>
-</ul></li>
-<li class="chapter" data-level="5.4" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html"><i class="fa fa-check"></i><b>5.4</b> JupyterHub 中的運算核心</a>
-<ul>
-<li class="chapter" data-level="5.4.1" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html#conda-的-python-環境"><i class="fa fa-check"></i><b>5.4.1</b> Conda 的 Python🐍 環境</a></li>
-<li class="chapter" data-level="5.4.2" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html#r-環境"><i class="fa fa-check"></i><b>5.4.2</b> R 環境</a></li>
-<li class="chapter" data-level="5.4.3" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html#c-與-c-環境"><i class="fa fa-check"></i><b>5.4.3</b> C 與 C++ 環境</a></li>
-<li class="chapter" data-level="5.4.4" data-path="jupyterhub-中的運算核心.html"><a href="jupyterhub-中的運算核心.html#sas-環境"><i class="fa fa-check"></i><b>5.4.4</b> SAS 環境</a></li>
-</ul></li>
-<li class="chapter" data-level="5.5" data-path="設置-apache-的反向代理.html"><a href="設置-apache-的反向代理.html"><i class="fa fa-check"></i><b>5.5</b> 設置 Apache 的反向代理</a></li>
-<li class="chapter" data-level="5.6" data-path="jupyterhub-擴充套件.html"><a href="jupyterhub-擴充套件.html"><i class="fa fa-check"></i><b>5.6</b> JupyterHub 擴充套件</a></li>
-</ul></li>
-<li class="appendix"><span><b>附錄</b></span></li>
-<li class="chapter" data-level="A" data-path="相關軟體.html"><a href="相關軟體.html"><i class="fa fa-check"></i><b>A</b> 相關軟體</a>
-<ul>
-<li class="chapter" data-level="A.1" data-path="putty.html"><a href="putty.html"><i class="fa fa-check"></i><b>A.1</b> PuTTY</a>
-<ul>
-<li class="chapter" data-level="A.1.1" data-path="putty.html"><a href="putty.html#以-putty-產生-key"><i class="fa fa-check"></i><b>A.1.1</b> 以 PuTTY 產生 key</a>
-<ul>
-<li class="chapter" data-level="A.1.1.1" data-path="putty.html"><a href="putty.html#step-1-安裝-putty"><i class="fa fa-check"></i><b>A.1.1.1</b> Step 1 — 安裝 PuTTY</a></li>
-<li class="chapter" data-level="A.1.1.2" data-path="putty.html"><a href="putty.html#step-2-經由-puttygen-產生-ssh-key-pairs"><i class="fa fa-check"></i><b>A.1.1.2</b> Step 2 — 經由 PuTTYgen 產生 ssh key pairs</a></li>
-<li class="chapter" data-level="A.1.1.3" data-path="putty.html"><a href="putty.html#step-3-妥善保存好產生的-key"><i class="fa fa-check"></i><b>A.1.1.3</b> Step 3 — 妥善保存好產生的 Key</a></li>
-</ul></li>
-<li class="chapter" data-level="A.1.2" data-path="putty.html"><a href="putty.html#上傳-ssh-key-pairs"><i class="fa fa-check"></i><b>A.1.2</b> 上傳 ssh key pairs</a></li>
-<li class="chapter" data-level="A.1.3" data-path="putty.html"><a href="putty.html#puttygen-產生的-key-pairs-的連線方式"><i class="fa fa-check"></i><b>A.1.3</b> PuTTYgen 產生的 key pairs 的連線方式:</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="B" data-path="帳號管理.html"><a href="帳號管理.html"><i class="fa fa-check"></i><b>B</b> 帳號管理</a>
-<ul>
-<li class="chapter" data-level="B.1" data-path="系統帳號.html"><a href="系統帳號.html"><i class="fa fa-check"></i><b>B.1</b> 系統帳號</a>
-<ul>
-<li class="chapter" data-level="B.1.1" data-path="系統帳號.html"><a href="系統帳號.html#概述-9"><i class="fa fa-check"></i><b>B.1.1</b> 概述</a></li>
-<li class="chapter" data-level="B.1.2" data-path="系統帳號.html"><a href="系統帳號.html#腳本運行"><i class="fa fa-check"></i><b>B.1.2</b> 腳本運行</a></li>
-<li class="chapter" data-level="B.1.3" data-path="系統帳號.html"><a href="系統帳號.html#指令說明"><i class="fa fa-check"></i><b>B.1.3</b> 指令說明</a>
-<ul>
-<li class="chapter" data-level="B.1.3.1" data-path="系統帳號.html"><a href="系統帳號.html#讀取選項的迴圈"><i class="fa fa-check"></i><b>B.1.3.1</b> 讀取選項的迴圈</a></li>
-<li class="chapter" data-level="B.1.3.2" data-path="系統帳號.html"><a href="系統帳號.html#讀取方法的-switch-case"><i class="fa fa-check"></i><b>B.1.3.2</b> 讀取方法的 Switch Case</a></li>
-<li class="chapter" data-level="B.1.3.3" data-path="系統帳號.html"><a href="系統帳號.html#建立使用者"><i class="fa fa-check"></i><b>B.1.3.3</b> 建立使用者</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="C" data-path="其他.html"><a href="其他.html"><i class="fa fa-check"></i><b>C</b> 其他</a>
-<ul>
-<li class="chapter" data-level="C.1" data-path="更改預設的文本編輯器.html"><a href="更改預設的文本編輯器.html"><i class="fa fa-check"></i><b>C.1</b> 更改預設的文本編輯器</a></li>
-<li class="chapter" data-level="C.2" data-path="mysql-8.0-root-密碼重設.html"><a href="mysql-8.0-root-密碼重設.html"><i class="fa fa-check"></i><b>C.2</b> Mysql 8.0 root 密碼重設</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="參考資料.html"><a href="參考資料.html"><i class="fa fa-check"></i>參考資料</a></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">引言</a></li>
+<li class="book-part">基礎建設</li>
+<li><a class="active" href="intro.html"><span class="header-section-number">1</span> 虛擬主機</a></li>
+<li><a class="" href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html"><span class="header-section-number">2</span> Ubuntu 的基本設定</a></li>
+<li class="book-part">軟體安裝</li>
+<li><a class="" href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html"><span class="header-section-number">3</span> LAMP 程式集</a></li>
+<li><a class="" href="rstudio-rshiny-server.html"><span class="header-section-number">4</span> RStudio &amp; RShiny Server</a></li>
+<li><a class="" href="jupyterlab-on-jupyterhub.html"><span class="header-section-number">5</span> JupyterLab on JupyterHub</a></li>
+<li class="book-part">附錄</li>
+<li><a class="" href="%E7%9B%B8%E9%97%9C%E8%BB%9F%E9%AB%94.html"><span class="header-section-number">A</span> 相關軟體</a></li>
+<li><a class="" href="%E5%B8%B3%E8%99%9F%E7%AE%A1%E7%90%86.html"><span class="header-section-number">B</span> 帳號管理</a></li>
+<li><a class="" href="%E5%85%B6%E4%BB%96.html"><span class="header-section-number">C</span> 其他</a></li>
+<li><a class="" href="%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99.html">參考資料</a></li>
 </ul>
 
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/exkuretrol/MCU-ASIS">View book source <i class="fab fa-github"></i></a></p>
+        </div>
       </nav>
-    </div>
-
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">MCU ASIS Ubuntu 系統安裝指南</a>
-          </h1>
-        </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="intro" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> 基礎建設<a href="intro.html#intro" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>因為使用者的經驗、能力會有所差異與解決問題的能力，在接觸新的系統之前，最好還是先在虛擬機器上先運行過一次，確認沒問題之後再把操作搬到實體電腦上去，才不會遇到預料之外的問題。 本書所使用運行虛擬機器的軟體為 VirtualBox。</p>
 </div>
-            </section>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="intro" class="section level1" number="1">
+<h1>
+<span class="header-section-number">章節 1</span> 虛擬主機<a class="anchor" aria-label="anchor" href="#intro"><i class="fas fa-link"></i></a>
+</h1>
+<p>因為使用者的經驗、能力與解決問題的能力會有所差異，在接觸新的系統之前，最好還是先在虛擬機器上先運行過一次，確認沒問題之後再把操作搬到實體電腦上去，才不會遇到預料之外的問題。本書所使用運行虛擬機器的軟體為 VirtualBox。</p>
+<div id="事前準備" class="section level2" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> 事前準備<a class="anchor" aria-label="anchor" href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99"><i class="fas fa-link"></i></a>
+</h2>
+<p>在開始教學之前，確定你的環境要能上網存取網路上的資源。 再來是檢查自己的電腦可不可以運行 VirtualBox（或是其他可以運行虛擬機器的軟體），要運行虛擬機器通常都要去 BIOS 打開一個叫做擬化功能（Virtualization Technology）的功能。</p>
+<p>下列是我所整理各廠牌虛擬化功能的開啟方式：</p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="2%">
+<col width="97%">
+</colgroup>
+<thead><tr class="header">
+<th>品牌</th>
+<th>連結</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Acer</td>
+<td><a href="https://community.acer.com/kb/articles/14750">How to Enable Virtualization Technology on Acer Products - Acer Community</a></td>
+</tr>
+<tr class="even">
+<td>Asus</td>
+<td><a href="https://www.asus.com/support/FAQ/1045141/" class="uri">[Motherboard]How to set VT(Virtualization Technology) in BIOS and install Virtual Machine in Windows | Official Support | ASUS Global</a></td>
+</tr>
+<tr class="odd">
+<td>Dell</td>
+<td><a href="https://www.dell.com/support/kbdoc/zh-tw/000195978/%E5%A6%82%E4%BD%95-%E5%9C%A8-dell-%E7%B3%BB%E7%B5%B1%E4%B8%8A-%E5%95%9F%E7%94%A8-%E6%88%96-%E5%81%9C%E7%94%A8-%E7%A1%AC%E9%AB%94-%E8%99%9B%E6%93%AC%E5%8C%96">如何在 Dell 系統上啟用或停用硬體虛擬化 | Dell 台灣</a></td>
+</tr>
+<tr class="even">
+<td>HP</td>
+<td><a href="https://support.hp.com/us-en/document/ish_5637142-5637191-16">HP PCs - Enable Virtualization Technology in the BIOS | HP® Customer Support</a></td>
+</tr>
+<tr class="odd">
+<td>Lenovo</td>
+<td><a href="https://support.lenovo.com/tw/en/solutions/ht500006">How to enable Virtualization Technology on Lenovo PC computers - Lenovo Support TW</a></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="安裝-virtualbox" class="section level2" number="1.2">
+<h2>
+<span class="header-section-number">1.2</span> 安裝 VirtualBox<a class="anchor" aria-label="anchor" href="#%E5%AE%89%E8%A3%9D-virtualbox"><i class="fas fa-link"></i></a>
+</h2>
+<p>首先到 <a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox 官方網站</a>的下載頁面，下載適合你電腦系統的安裝執行檔，假如是 Windows 系統就點擊 「Windows hosts」的下載連結，如果是其他作業系統就根據你的作業系統下載對應的安裝程式。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-2"></span>
+<img src="figures/www.virtualbox.org-downloads-page.png" alt="www.virtualbox.org 的下載頁面" width="80%"><p class="caption">
+圖 1.1: www.virtualbox.org 的下載頁面
+</p>
+</div>
+<p>安裝的過程中只需使用預設的設定即可，預設設定做了安裝虛擬機器的驅動程式、關聯檔案…等等，正常安裝不需要變更它。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-3"></span>
+<img src="figures/virtual-box-installer.png" alt="virtualbox 安裝程式（安裝中）" width="80%"><p class="caption">
+圖 1.2: virtualbox 安裝程式（安裝中）
+</p>
+</div>
+</div>
+<div id="於虛擬機器安裝作業系統" class="section level2" number="1.3">
+<h2>
+<span class="header-section-number">1.3</span> 於虛擬機器安裝作業系統<a class="anchor" aria-label="anchor" href="#%E6%96%BC%E8%99%9B%E6%93%AC%E6%A9%9F%E5%99%A8%E5%AE%89%E8%A3%9D%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1"><i class="fas fa-link"></i></a>
+</h2>
+<p>在安裝完 VirtualBox 後，打開並不會有預先安裝好的作業系統，需要在 VirtualBox 內自行新增虛擬機器後，再將作業系統安裝至虛擬機器內；又或是匯入已經含有作業系統的虛擬機器（*.ova、*.ovf 格式）。</p>
+<p>首先介紹 VirtualBox 的使用者介面:</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:virtualbox-menu"></span>
+<img src="figures/virtualbox-menu.png" alt="VirtualBox 的操作介面" width="80%"><p class="caption">
+圖 1.3: VirtualBox 的操作介面
+</p>
+</div>
+<p>如圖 <a href="intro.html#fig:virtualbox-menu">1.3</a> 所示，右邊主要功能圖示由左而右的功能分別是:</p>
+<ol style="list-style-type: decimal">
+<li>
+<code>喜好設定</code>: 設定 VirtualBox 的整體設定，像是軟體語言、虛擬機器預設存放位置…等等</li>
+<li>
+<code>匯入</code>: 匯入虛擬機器檔案 (.ovf)</li>
+<li>
+<code>匯出</code>: 匯出虛擬機器檔案</li>
+<li>
+<code>新增</code>: 新增<em>新的</em>虛擬機器</li>
+<li>
+<code>加入</code>: 加入<em>已經存在的</em>虛擬機器</li>
+</ol>
+<div id="新增-ubuntu-作業系統設定" class="section level3" number="1.3.1">
+<h3>
+<span class="header-section-number">1.3.1</span> 新增 Ubuntu 作業系統設定<a class="anchor" aria-label="anchor" href="#%E6%96%B0%E5%A2%9E-ubuntu-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1%E8%A8%AD%E5%AE%9A"><i class="fas fa-link"></i></a>
+</h3>
+<p>所以要新增新的虛擬機器是按「新增」。</p>
+<p>這裡先點選「專家模式」，專家模式可以一併設定虛擬機器的所有設定。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-4"></span>
+<img src="figures/new-virtual-machine_0.png" alt="建立虛擬機器，設定虛擬名稱與存放位置" width="80%"><p class="caption">
+圖 1.4: 建立虛擬機器，設定虛擬名稱與存放位置
+</p>
+</div>
+<p>記憶體大小根據每個人電腦的性能做調整，虛擬機器沒用來做什麼事最多4Gb (4 * 1024Mb) 就很夠用了。這裡要注意的一點是，虛擬機器的存放位置，當你要轉移虛擬機器時才不會找不到。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-5"></span>
+<img src="figures/new-virtual-machine_1.png" alt="建立虛擬機器，設定記憶體大小與選擇系統" width="80%"><p class="caption">
+圖 1.5: 建立虛擬機器，設定記憶體大小與選擇系統
+</p>
+</div>
+<p>預設的虛擬機器存放位置位於使用者資料夾中的<code>Virtual VMs</code>資料夾，像我的使用者是qaz85，那虛擬機器就位於:</p>
+<pre><code>C:\Users\qaz85\VirtualBox VMs</code></pre>
+<p>從列程式碼輸出的硬碟配置，可以看到伺服器的磁碟配置是由兩個 1Tb 的硬碟組成，且用<a href="http://linux.vbird.org/linux_basic/0420quota.php#raid1">Raid-1</a> (映射模式) 將伺服器同時映射備份至另一個硬碟。</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb2-1"><a href="intro.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lsblk</span></span></code></pre></div>
+<pre class="console_output"><code>NAME                       MAJ:MIN RM   SIZE RO TYPE   MOUNTPOINT
+sdb                          8:16   0 931.5G  0 disk
+├─sdb2                       8:18   0 852.5G  0 part
+├─sdb3                       8:19   0    32G  0 part
+├─sdb1                       8:17   0   512M  0 part
+└─isw_ecbbadhihd_Raid1     253:0    0   885G  0 dmraid
+  ├─isw_ecbbadhihd_Raid1p1 253:1    0   512M  0 part   /boot/efi
+  ├─isw_ecbbadhihd_Raid1p2 253:2    0 852.5G  0 part   /
+  └─isw_ecbbadhihd_Raid1p3 253:3    0    32G  0 part   [SWAP]
+sr0                         11:0    1  1024M  0 rom
+sda                          8:0    0 931.5G  0 disk
+├─sda2                       8:2    0 852.5G  0 part
+├─sda3                       8:3    0    32G  0 part
+├─sda1                       8:1    0   512M  0 part
+└─isw_ecbbadhihd_Raid1     253:0    0   885G  0 dmraid
+  ├─isw_ecbbadhihd_Raid1p1 253:1    0   512M  0 part   /boot/efi
+  ├─isw_ecbbadhihd_Raid1p2 253:2    0 852.5G  0 part   /
+  └─isw_ecbbadhihd_Raid1p3 253:3    0    32G  0 part   [SWAP]</code></pre>
+<p>所以這裡也選擇跟伺服器一樣的1000Gb做為系統硬碟，類型與版本記得設定為 Linux 與 Ubuntu 64位元 版本。完成之後點擊「建立」。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-6"></span>
+<img src="figures/new-virtual-machine_1.png" alt="建立虛擬機器，完成建立" width="80%"><p class="caption">
+圖 1.6: 建立虛擬機器，完成建立
+</p>
+</div>
+<p>這裡我會選 VMDK 格式的原因是因為，如果要轉移虛擬機器檔案時，單一個檔案會輕易地超過 4Gb，而超過此上限得檔案在複製時，如果目的地的裝置格式不是 ntfs 的話，會沒有辦法複製。為了免去到時候分割虛擬機器的麻煩，我在這邊先選擇 VMDK 作為我虛擬機器的檔案格式。</p>
+<div class="rmdtip infobox">
+<p>這裡如果選擇「固定大小」會新增一個跟你設定的檔案大小一樣大的虛擬機器檔案，除非你的硬碟很大，否則不建議這麼做。</p>
+</div>
+<!--# TODO: 這邊可以再加如果虛擬機器已經是 VDI 格式怎麼轉換成 VMDK 格式的教學 -->
+<p>完成後，會在 Virtual Machine 的選單左邊看見剛剛新建的虛擬機器，不過此時的虛擬機器內還沒有作業系統。</p>
+<p>為了要使用跟伺服器一樣的設定，需要再新增另一顆跟原本硬碟一樣大小的硬碟做鏡像備份。點選右邊橘色的齒輪「設定⚙」。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-7"></span>
+<img src="figures/virtual-machine-created.png" alt="完成建立虛擬機器" width="80%"><p class="caption">
+圖 1.7: 完成建立虛擬機器
+</p>
+</div>
+<p>在儲存裝置的「控制器：SATA」部分，點選硬碟圖案（有綠色加符號的）新增新的硬碟。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-8"></span>
+<img src="figures/virtual-machine-setting-storage.png" alt="虛擬機器存放裝置設定" width="80%"><p class="caption">
+圖 1.8: 虛擬機器存放裝置設定
+</p>
+</div>
+<p>點選「建立」建立與第一顆硬碟條件一樣的硬碟。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-9"></span>
+<img src="figures/virtual-machine-setting-storage-new.png" alt="虛擬機器，管理存放裝置" width="80%"><p class="caption">
+圖 1.9: 虛擬機器，管理存放裝置
+</p>
+</div>
+<p>這次把硬碟取名為 <code>MCU-ASIS_1</code> 作為區分原本的硬碟與新增的硬碟。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-10"></span>
+<img src="figures/virtual-machine-setting-storage-new_1.png" alt="虛擬機器新增硬碟" width="80%"><p class="caption">
+圖 1.10: 虛擬機器新增硬碟
+</p>
+</div>
+<p>完成後，點擊「確定」儲存。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-11"></span>
+<img src="figures/virtual-machine-setting-storage-new_2.png" alt="虛擬機器完成存放裝置設定" width="80%"><p class="caption">
+圖 1.11: 虛擬機器完成存放裝置設定
+</p>
+</div>
+</div>
+<div id="於-virtualbox-安裝作業系統" class="section level3" number="1.3.2">
+<h3>
+<span class="header-section-number">1.3.2</span> 於 VirtualBox 安裝作業系統<a class="anchor" aria-label="anchor" href="#%E6%96%BC-virtualbox-%E5%AE%89%E8%A3%9D%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1"><i class="fas fa-link"></i></a>
+</h3>
+<p>在安裝作業系統之前，要先下載作業系統，因為目前的院伺服器系統是 Ubuntu、我自己的 VPS 也是 Ubuntu，而且我摸得比較熟的也是 Ubuntu，所以這裡我也以 Ubuntu作為我們伺服器主要的系統。</p>
+<p>進到 Ubuntu 官方網站的下載介面，這次我們選擇伺服器版本（Ubuntu Server）代替以往的桌面版本（Ubuntu Desktop）。因為如果是伺服器，不需要圖形介面就可以管理了，相對於桌面版本也較節省伺服器資源。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-12"></span>
+<img src="figures/ubuntu.com-download-page.png" alt="ubuntu.com 官方下載頁面" width="80%"><p class="caption">
+圖 1.12: ubuntu.com 官方下載頁面
+</p>
+</div>
+<p>選擇「Option 2 - Manual server Installation」選項之後，按上面的綠色按鈕「Download Ubuntu Server 20.04.2 LTS」會跳轉到下載頁面，開始下載 Ubuntu 系統映像檔案 (*.iso)。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-13"></span>
+<img src="figures/ubuntu.com-download-server-page.png" alt="ubuntu.com Ubuntu 伺服器版本下載" width="80%"><p class="caption">
+圖 1.13: ubuntu.com Ubuntu 伺服器版本下載
+</p>
+</div>
+<p>其他選項的簡易說明:</p>
+<ul>
+<li><p><code>Option 1 - Instant Ubuntu VMs</code>: Multipass 是快速部屬虛擬機器的軟體，詳細說明可以看<a href="https://github.com/canonical/multipass">這裡</a>，而這裡我們已經選用 VirtualBox 了所以不會用到</p></li>
+<li><p><code>Option 2 - Manual server installation</code>: 傳統的下載映像檔案</p></li>
+<li><p><code>Option 3 - Automated server provisioning</code>: 利用 <a href="https://maas.io/">MaaS</a> (Metal-as-a-Service) 安裝虛擬機。MaaS是管理數台虛擬機器用的服務，並不局限於 Ubuntu，Windows、CentOS 與 ESXi都可以在上面部屬。</p></li>
+</ul>
+<p>待下載完成後，點擊兩下開啟剛剛創建的「MCU-ASIS」虛擬機器，會跳出一個選擇啟動磁碟的訊息提示視窗，這裡我們點擊右下角的資料夾📁。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-14"></span>
+<img src="figures/ubuntu-install-select-iso.png" alt="虛擬主機，選擇開機位置" width="80%"><p class="caption">
+圖 1.14: 虛擬主機，選擇開機位置
+</p>
+</div>
+<p>按「加入」並選擇剛剛下載下來的映像檔案 (ubuntu-20.04.2-live-server-amd64.iso)。加入完成後按「選擇」，接著按「開始」掛載映像檔案至虛擬機器中開始安裝。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-15"></span>
+<img src="figures/select-iso.png" alt="選擇映像檔案載入" width="80%"><p class="caption">
+圖 1.15: 選擇映像檔案載入
+</p>
+</div>
+<div id="語言" class="section level4" number="1.3.2.1">
+<h4>
+<span class="header-section-number">1.3.2.1</span> 語言<a class="anchor" aria-label="anchor" href="#%E8%AA%9E%E8%A8%80"><i class="fas fa-link"></i></a>
+</h4>
+<p>稍待 Ubuntu 作業系統映像檔載入後，安裝程式會跳出選擇語言的畫面，在這裡選擇適合你的語言。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-16"></span>
+<img src="figures/ubuntu-configuration-select-lang.png" alt="Ubuntu 安裝畫面，選擇系統語言" width="80%"><p class="caption">
+圖 1.16: Ubuntu 安裝畫面，選擇系統語言
+</p>
+</div>
+<p>在安裝過程中使用方向鍵⬆️⬇️⬅️➡️（選擇）、Enter↪️（確認）與 Esc（返回）操控安裝程式介面。</p>
+</div>
+<div id="鍵盤配置" class="section level4" number="1.3.2.2">
+<h4>
+<span class="header-section-number">1.3.2.2</span> 鍵盤配置<a class="anchor" aria-label="anchor" href="#%E9%8D%B5%E7%9B%A4%E9%85%8D%E7%BD%AE"><i class="fas fa-link"></i></a>
+</h4>
+<p>這裡可以設定鍵盤的:</p>
+<ul>
+<li><p><code>Layout</code> (布局): 鍵盤的語言</p></li>
+<li><p><code>Variant</code> (鍵位): 一般在台灣都是用 QWERTY 配置，詳細說明可以在<a href="https://zh.wikipedia.org/wiki/%E9%94%AE%E7%9B%98%E5%B8%83%E5%B1%80">這</a>找到</p></li>
+</ul>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-17"></span>
+<img src="figures/installer-keyboard.png" alt="Ubuntu 安裝畫面，選擇鍵盤配置" width="80%"><p class="caption">
+圖 1.17: Ubuntu 安裝畫面，選擇鍵盤配置
+</p>
+</div>
+</div>
+<div id="網路連線" class="section level4" number="1.3.2.3">
+<h4>
+<span class="header-section-number">1.3.2.3</span> 網路連線<a class="anchor" aria-label="anchor" href="#%E7%B6%B2%E8%B7%AF%E9%80%A3%E7%B7%9A"><i class="fas fa-link"></i></a>
+</h4>
+<p>這裡可以設定 Ubuntu 的網路連線，預設是由 DHCP 設定，通常不用變更，如果這裡連線失敗，也可以等開機後再做設定。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-18"></span>
+<img src="figures/installer-network.png" alt="Ubuntu 安裝畫面，網路連線設定" width="80%"><p class="caption">
+圖 1.18: Ubuntu 安裝畫面，網路連線設定
+</p>
+</div>
+</div>
+<div id="proxy" class="section level4" number="1.3.2.4">
+<h4>
+<span class="header-section-number">1.3.2.4</span> Proxy<a class="anchor" aria-label="anchor" href="#proxy"><i class="fas fa-link"></i></a>
+</h4>
+<p>除非網路需要設定 proxy（代理伺服器），否則不需要設定。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-19"></span>
+<img src="figures/installer-proxy.png" alt="Ubuntu 安裝畫面，proxy 設定" width="80%"><p class="caption">
+圖 1.19: Ubuntu 安裝畫面，proxy 設定
+</p>
+</div>
+</div>
+<div id="鏡像-mirror" class="section level4" number="1.3.2.5">
+<h4>
+<span class="header-section-number">1.3.2.5</span> 鏡像 (Mirror)<a class="anchor" aria-label="anchor" href="#%E9%8F%A1%E5%83%8F-mirror"><i class="fas fa-link"></i></a>
+</h4>
+<p>同上，不需要特別設定 mirror (鏡像)，安裝程式會自動判斷選擇哪個地方的鏡像網址更新。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-20"></span>
+<img src="figures/installer-mirror.png" alt="Ubuntu 安裝畫面，套件鏡像位置設定" width="80%"><p class="caption">
+圖 1.20: Ubuntu 安裝畫面，套件鏡像位置設定
+</p>
+</div>
+</div>
+<div id="安裝程式更新" class="section level4" number="1.3.2.6">
+<h4>
+<span class="header-section-number">1.3.2.6</span> 安裝程式更新<a class="anchor" aria-label="anchor" href="#%E5%AE%89%E8%A3%9D%E7%A8%8B%E5%BC%8F%E6%9B%B4%E6%96%B0"><i class="fas fa-link"></i></a>
+</h4>
+<p>當 Ubuntu 在安裝過程中，如果有連上網路，安裝程式會偵測當前的安裝程式是否需要更新，如果出現了這個畫面代表安裝程式有新的版本，可以在安裝時順便更新，當然，也可以在系統安裝完後更新。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-21"></span>
+<img src="figures/installer-update.png" alt="Ubuntu 安裝畫面" width="80%"><p class="caption">
+圖 1.21: Ubuntu 安裝畫面
+</p>
+</div>
+</div>
+<div id="系統空間配置" class="section level4" number="1.3.2.7">
+<h4>
+<span class="header-section-number">1.3.2.7</span> 系統空間配置<a class="anchor" aria-label="anchor" href="#%E7%B3%BB%E7%B5%B1%E7%A9%BA%E9%96%93%E9%85%8D%E7%BD%AE"><i class="fas fa-link"></i></a>
+</h4>
+<!-- TODO: 本頁面書要更新，現在 2022 搞不好修好了 -->
+<!-- TODO: 補充 raid 說明 -->
+<p>這裡選擇下面的「Custom storage layout」，因為伺服器硬碟不是使用尋常的設定。以下 Raid-1 相關的設定是參考 <span class="citation">(<a href="%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99.html#ref-evangelou_2020" role="doc-biblioref">Evangelou 2020</a>)</span> 的 Gist 翻譯成中文寫的。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-22"></span>
+<img src="figures/installer-storage.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%"><p class="caption">
+圖 1.22: Ubuntu 安裝程式，磁碟配置導覽
+</p>
+</div>
+<ul>
+<li>如果選錯了、或是硬碟中有已經分割好的磁區也沒關係，從 AVAILABLE DEVICES 下面選擇硬碟 ➜ 「Reformat」 ➜ 「Reformat」，這會把硬碟格式化。</li>
+</ul>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-23"></span>
+<img src="figures/installer-storage_1.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%"><p class="caption">
+圖 1.23: Ubuntu 安裝程式，磁碟配置導覽
+</p>
+</div>
+<ul>
+<li>選擇第一個磁碟 ➜ 「Use As Boot Device」 當作開機磁碟</li>
+</ul>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-24"></span>
+<img src="figures/installer-storage_2.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%"><p class="caption">
+圖 1.24: Ubuntu 安裝程式，磁碟配置導覽
+</p>
+</div>
+<ul>
+<li>對第二個磁碟「VBOX_HARDDISK_VBdc8cc122-e9b43569」也做同樣的事情。</li>
+</ul>
+<div class="infobox rmdcaution">
+<p>目前版本 20.04.2 live server 有個 bug，當你要新增為開機硬碟 (Boot Device) 時，要在建立其他三個分區 (<code>/</code> 、 <code>/boot</code> 和 <code>[SWAP]</code>)之前，先設定好，不然 1Mb 的 grub 分區會消失。(我只有從現過錯誤一次 2021.07.21)</p>
+</div>
+<ul>
+<li>
+<p>接著為 <code>/</code> 、 <code>/boot</code> 和 <code>[SWAP]</code> 做分區。</p>
+<ul>
+<li><p><code>/</code>: 系統根目錄磁區</p></li>
+<li><p><code>/boot</code>: 開機磁區</p></li>
+<li><p><code>[SWAP]</code>: <a href="http://linux.vbird.org/linux_basic/0230filesystem.php#swap">SWAP</a> (記憶體置換空間) 主要功能是當記憶體滿載時，會把現在沒有用到的程序先放到 SWAP 中，空給目前正在運行的程式使用</p></li>
+</ul>
+</li>
+<li>
+<p>首先為 <code>/boot</code> 分區，通常開機磁區 512 Mb ~ 1Gb 就很夠用了，看你喜好，這裡我選擇 1Gb。選擇第一個磁碟 ➜ 「Add GPT Partitation」，照下面的設定設定後，按「Create」。</p>
+<ul>
+<li><p>Size: <code>1G</code></p></li>
+<li><p>Format: <code>[ Leave unformatted ▾ ]</code></p></li>
+</ul>
+</li>
+<li><p>對第二顆硬碟做同樣的事。</p></li>
+</ul>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-25"></span>
+<img src="figures/installer-storage_3.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%"><p class="caption">
+圖 1.25: Ubuntu 安裝程式，磁碟配置導覽
+</p>
+</div>
+<ul>
+<li>
+<p>再來是 <code>[SWAP]</code> 磁區，一般來說會用實體記憶體容量 ⨉ 2 作為 <code>[SWAP]</code> 磁區的容量，這裡我怕空間太少先用 32Gb。選擇第一個磁碟 ➜ 「Add GPT Partitation」，照下面的設定設定後，按「Create」。</p>
+<ul>
+<li><p>Size: <code>32G</code></p></li>
+<li><p>Format: <code>[ Leave unformatted ▾ ]</code></p></li>
+</ul>
+</li>
+<li><p>對第二顆硬碟做同樣的事。</p></li>
+</ul>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-26"></span>
+<img src="figures/installer-storage_4.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%"><p class="caption">
+圖 1.26: Ubuntu 安裝程式，磁碟配置導覽
+</p>
+</div>
+<ul>
+<li>
+<p>最後才是系統硬碟 <code>/</code> ，系統硬碟使用 <code>/boot</code> 、<code>[SWAP]</code> 與 <code>grub</code> 剩下來的空間。選擇第一個磁碟 ➜ 「Add GPT Partitation」，照下面的設定設定後，按「Create」。</p>
+<ul>
+<li><p>Size: <code>留空</code> 預設為剩下硬碟的容量，正是我們所要的</p></li>
+<li><p>Format: <code>[ Leave unformatted ▾ ]</code></p></li>
+</ul>
+</li>
+<li><p>對第二顆硬碟做同樣的事。</p></li>
+</ul>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-27"></span>
+<img src="figures/installer-storage_5.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%"><p class="caption">
+圖 1.27: Ubuntu 安裝程式，磁碟配置導覽
+</p>
+</div>
+<ul>
+<li>接著設定 Raid-1。選取「[ Create software RAID (md) ▸ ]」，選取兩個「partition 2」建立 <code>md0</code> softRaid 磁區</li>
+</ul>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-28"></span>
+<img src="figures/installer-storage_6.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%"><p class="caption">
+圖 1.28: Ubuntu 安裝程式，磁碟配置導覽
+</p>
+</div>
+<ul>
+<li><p>同上，選取「[ Create software RAID (md) ▸ ]」，選取兩個「partition 3」建立 <code>md1</code> softRaid 磁區</p></li>
+<li><p>同上，選取「[ Create software RAID (md) ▸ ]」，選取兩個「partition 4」建立 <code>md2</code> softRaid 磁區</p></li>
+</ul>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-29"></span>
+<img src="figures/installer-storage_7.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%"><p class="caption">
+圖 1.29: Ubuntu 安裝程式，磁碟配置導覽
+</p>
+</div>
+<ul>
+<li><p>選擇 <code>md0 (new)</code> ➜ format ➜ Format: 選擇 <code>ext4</code> 格式 ➜ Mount: 掛載於 <code>/boot</code> ➜ 完成後選擇 Done</p></li>
+<li><p>選擇 <code>md1 (new)</code> ➜ format ➜ Format: 選擇 <code>swap</code> 格式 ➜ 完成後選擇 Done</p></li>
+<li><p>選擇 <code>md2 (new)</code> ➜ format ➜ Format: 選擇 <code>ext4</code> 格式 ➜ Mount: 掛載於 <code>/</code> ➜ 完成後選擇 Done</p></li>
+<li><p>設定完成🎉，整體設定截圖:<br></p></li>
+</ul>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-30"></span>
+<img src="figures/installer-storage_8.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%"><p class="caption">
+圖 1.30: Ubuntu 安裝程式，磁碟配置導覽
+</p>
+</div>
+<ul>
+<li>截圖（續）</li>
+</ul>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-31"></span>
+<img src="figures/installer-storage_9.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%"><p class="caption">
+圖 1.31: Ubuntu 安裝程式，磁碟配置導覽
+</p>
+</div>
+<ul>
+<li>在最下面選擇「Done」，至下一步。</li>
+</ul>
+</div>
+<div id="使用者設定" class="section level4" number="1.3.2.8">
+<h4>
+<span class="header-section-number">1.3.2.8</span> 使用者設定<a class="anchor" aria-label="anchor" href="#%E4%BD%BF%E7%94%A8%E8%80%85%E8%A8%AD%E5%AE%9A"><i class="fas fa-link"></i></a>
+</h4>
+<p>在這邊設定自己的使用者名稱與電腦名稱。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-32"></span>
+<img src="figures/installer-profile-configuration.png" alt="Ubuntu 安裝程式，使用者設定" width="80%"><p class="caption">
+圖 1.32: Ubuntu 安裝程式，使用者設定
+</p>
+</div>
+<ul>
+<li><p>Your name: <code>asis</code></p></li>
+<li><p>Your server’s name: <code>asis01</code></p></li>
+<li><p>Pick a username: <code>asis</code></p></li>
+<li><p>Choose a password: <code>asis</code></p></li>
+<li><p>Confirm your password: <code>asis</code></p></li>
+</ul>
+</div>
+<div id="openssh-設定-可跳過" class="section level4" number="1.3.2.9">
+<h4>
+<span class="header-section-number">1.3.2.9</span> OpenSSH 設定 [可跳過]<a class="anchor" aria-label="anchor" href="#openssh-%E8%A8%AD%E5%AE%9A-%E5%8F%AF%E8%B7%B3%E9%81%8E"><i class="fas fa-link"></i></a>
+</h4>
+<p>OpenSSH 是使用 SSH 通訊協定來遠端連線電腦的工具。防止連線中被竊聽、劫持或是其他攻擊。如果沒有擁有 Github 帳號這裡可以先跳過，於第二章會重新介紹怎麼設定 OpenSSH 伺服器。</p>
+<div id="從-github-匯入已經儲存的-public-key" class="section level5" number="1.3.2.9.1">
+<h5>
+<span class="header-section-number">1.3.2.9.1</span> 從 Github 匯入已經儲存的 public key<a class="anchor" aria-label="anchor" href="#%E5%BE%9E-github-%E5%8C%AF%E5%85%A5%E5%B7%B2%E7%B6%93%E5%84%B2%E5%AD%98%E7%9A%84-public-key"><i class="fas fa-link"></i></a>
+</h5>
+<p>這裡將 Allow password authentication over SSH 取消打勾，經由 SSH 連線至虛擬機器時，關閉使用者密碼認證，改由 SSH key pairs 登入。</p>
+<div class="infobox rmdtip">
+<p>如果沒有持有 Github 帳號儲存的 public key，請把 Allow password authentication over SSH 打勾，待上傳完 public key 再把使用密碼登入關閉。</p>
+</div>
+<p>另外，我已經透過 Github 儲存過我的 public key 副本，所以這邊可以直接從 Github 匯入 public key。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-33"></span>
+<img src="figures/installer-SSH.png" alt="Ubuntu 安裝程式，導入 SSH 公鑰" width="80%"><p class="caption">
+圖 1.33: Ubuntu 安裝程式，導入 SSH 公鑰
+</p>
+</div>
+<div class="infobox rmdtip">
+<p>如果這邊不匯入的話，也可以待稍後開機後再用指令 <code>ssh-import-id-gh &lt;username&gt;</code> 匯入。</p>
+</div>
+<p>點選「Yes」後開始匯入程序。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-34"></span>
+<img src="figures/installer-SSH_1.png" alt="Ubuntu 安裝程式，導入 SSH 公鑰" width="80%"><p class="caption">
+圖 1.34: Ubuntu 安裝程式，導入 SSH 公鑰
+</p>
+</div>
+<p>匯入成功後就能經由含有 Github 副本的 SSH key pairs 主機連線至虛擬機器</p>
+</div>
+</div>
+<div id="完成安裝" class="section level4" number="1.3.2.10">
+<h4>
+<span class="header-section-number">1.3.2.10</span> 完成安裝<a class="anchor" aria-label="anchor" href="#%E5%AE%8C%E6%88%90%E5%AE%89%E8%A3%9D"><i class="fas fa-link"></i></a>
+</h4>
+<p>這個頁面是預覽 Ubuntu 安裝程式做過了什麼，都會記錄在這裡，通常不會有什麼問題所以可以不用理他，待安裝完成即可。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-35"></span>
+<img src="figures/installer-installing-system.png" alt="Ubuntu 安裝程式，安裝紀錄" width="80%"><p class="caption">
+圖 1.35: Ubuntu 安裝程式，安裝紀錄
+</p>
+</div>
+<p>安裝完成後選擇「Reboot Now」重新啟動</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-36"></span>
+<img src="figures/installer-install-complete.png" alt="Ubuntu安裝程式，完成安裝" width="80%"><p class="caption">
+圖 1.36: Ubuntu安裝程式，完成安裝
+</p>
+</div>
 
-          </div>
-        </div>
-      </div>
-<a href="關於我.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="事前準備.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+</div>
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html">引言</a></div>
+<div class="next"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html"><span class="header-section-number">2</span> Ubuntu 的基本設定</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#intro"><span class="header-section-number">1</span> 虛擬主機</a></li>
+<li><a class="nav-link" href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99"><span class="header-section-number">1.1</span> 事前準備</a></li>
+<li><a class="nav-link" href="#%E5%AE%89%E8%A3%9D-virtualbox"><span class="header-section-number">1.2</span> 安裝 VirtualBox</a></li>
+<li>
+<a class="nav-link" href="#%E6%96%BC%E8%99%9B%E6%93%AC%E6%A9%9F%E5%99%A8%E5%AE%89%E8%A3%9D%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1"><span class="header-section-number">1.3</span> 於虛擬機器安裝作業系統</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%E6%96%B0%E5%A2%9E-ubuntu-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1%E8%A8%AD%E5%AE%9A"><span class="header-section-number">1.3.1</span> 新增 Ubuntu 作業系統設定</a></li>
+<li><a class="nav-link" href="#%E6%96%BC-virtualbox-%E5%AE%89%E8%A3%9D%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1"><span class="header-section-number">1.3.2</span> 於 VirtualBox 安裝作業系統</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/exkuretrol/MCU-ASIS/blob/main/01-prerequisites.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/exkuretrol/MCU-ASIS/edit/main/01-prerequisites.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-07-18.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["twitter", "facebook"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/exkuretrol/MCU-ASIS/edit/main/01-prerequisites.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": "https://github.com/exkuretrol/MCU-ASIS/blob/main/01-prerequisites.Rmd",
-"text": null
-},
-"download": ["MCU-ASIS.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
-});
-});
-</script>
 
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
 </body>
-
 </html>
