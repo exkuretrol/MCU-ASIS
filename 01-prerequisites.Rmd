@@ -203,42 +203,63 @@ knitr::include_graphics(path = 'figures/virtual-machine-setting-storage-new-4.pn
 knitr::include_graphics(path = './figures/virtual-machine-setting-storage-finished.png')
 ```
 
-會看到「控制器：SATA」裡面有兩個磁碟。到這裡虛擬主機的設定就完成了。
+會看到「控制器：SATA」裡面有兩個磁碟。到這裡虛擬主機的設定就完成啦。
 
 ## 安裝作業系統
 
-在安裝作業系統之前，點擊兩下開啟剛剛創建的「MCU-ASIS」虛擬主機，會跳出一個選擇啟動磁碟的訊息提示視窗，這裡我們點擊右下角的資料夾📁。
+看到這個畫面點擊「啟動」，啟動剛才設定的作業系統。
 
-```{r, fig.cap='虛擬主機，選擇開機位置'}
-knitr::include_graphics(path = 'figures/ubuntu-install-select-iso.png')
+```{r, fig.cap='設定完成畫面'}
+knitr::include_graphics(path = './figures/ubuntu-activate.png')
 ```
 
-按「加入」並選擇剛剛下載下來的映像檔案 (ubuntu-20.04.2-live-server-amd64.iso)。加入完成後按「選擇」，接著按「開始」掛載映像檔案至虛擬主機中開始安裝。
+接下來應該會進到作業系統的安裝畫面。進到安裝畫面後，如果是第一次啟動會出現主機鍵的訊息，這裡先按「擷取」按鈕擷取。
 
-```{r, fig.cap='選擇映像檔案載入'}
-knitr::include_graphics(path = './figures/select-iso.png')
+主機鍵在安裝作成中很重要，這裡要先記下來目前的主機鍵被定義成什麼按鈕，預設為右 Ctrl。擷取按鈕後將會無法切回 Windows 操作，即在退出擷取模式前都無法操作虛擬主機以外的視窗。退出擷取模式按下主機鍵即可退出。 
+
+```{r, fig.cap='安裝過程中提示的主機鍵'}
+knitr::include_graphics(path = './figures/virtual-machine-mouse-integration.png')
 ```
+
+在安裝過程中使用方向鍵⬆️⬇️⬅️➡️（選擇）、Enter↪️（確認）與 Esc（返回）操控安裝程式介面。
+
+擷取後用方向鍵選取「Try or install Ubuntu」進到下一個畫面。
 
 ### 語言
 
 稍待 Ubuntu 作業系統映像檔載入後，安裝程式會跳出選擇語言的畫面，在這裡選擇適合你的語言。
 
 ```{r, fig.cap='Ubuntu 安裝畫面，選擇系統語言'}
-knitr::include_graphics(path = './figures/ubuntu-configuration-select-lang.png')
+knitr::include_graphics(path = './figures/ubuntu-installer-select-lang.png')
 ```
 
-在安裝過程中使用方向鍵⬆️⬇️⬅️➡️（選擇）、Enter↪️（確認）與 Esc（返回）操控安裝程式介面。
+### 更新提示
+
+
+當 Ubuntu 在安裝過程中，如果有連上網路，安裝程式會偵測當前的安裝程式是否需要更新，如果出現了這個畫面代表安裝程式有新的版本，可以選擇「Update to the new installer」將安裝程式更新至最新版本。當然，也可以在系統安裝完後更新。
+
+```{r, fig.cap='Ubuntu 安裝畫面，安裝程式更新'}
+knitr::include_graphics(path = './figures/ubuntu-installer-update-installer.png')
+```
 
 ### 鍵盤配置
 
-這裡可以設定鍵盤的:
+這裡可以設定鍵盤的：
 
--   `Layout` (布局): 鍵盤的語言
+-   `Layout`（布局）：鍵盤的語言
 
--   `Variant` (鍵位): 一般在台灣都是用 QWERTY 配置，詳細說明可以在[這](https://zh.wikipedia.org/wiki/%E9%94%AE%E7%9B%98%E5%B8%83%E5%B1%80)找到
+-   `Variant`（鍵位）：一般在台灣都是用 QWERTY 配置與預設的 English（US）相同。詳細說明可以在[這](https://zh.wikipedia.org/wiki/%E9%94%AE%E7%9B%98%E5%B8%83%E5%B1%80)找到
 
 ```{r, fig.cap='Ubuntu 安裝畫面，選擇鍵盤配置'}
-knitr::include_graphics(path = './figures/installer-keyboard.png')
+knitr::include_graphics(path = './figures/ubuntu-installer-keyboard.png')
+```
+
+### 安裝類型
+
+在安裝類型選擇 Ubuntu Server 就好，minimized 版本會少一些我們之後會用到的功能，到時候還是要自己裝回來。
+
+```{r, fig.cap='Ubuntu 安裝畫面，系統安裝類型'}
+knitr::include_graphics(path = './figures/ubuntu-installer-install-type.png')
 ```
 
 ### 網路連線
@@ -246,84 +267,74 @@ knitr::include_graphics(path = './figures/installer-keyboard.png')
 這裡可以設定 Ubuntu 的網路連線，預設是由 DHCP 設定，通常不用變更，如果這裡連線失敗，也可以等開機後再做設定。
 
 ```{r, fig.cap='Ubuntu 安裝畫面，網路連線設定'}
-knitr::include_graphics(path = './figures/installer-network.png')
+knitr::include_graphics(path = './figures/ubuntu-installer-network.png')
 ```
 
 ### Proxy
 
-除非網路需要設定 proxy（代理伺服器），否則不需要設定。
+除非當前的網路環境需要設定 proxy（代理伺服器），否則不需要設定。
 
 ```{r, fig.cap='Ubuntu 安裝畫面，proxy 設定'}
-knitr::include_graphics(path = 'figures/installer-proxy.png')
+knitr::include_graphics(path = 'figures/ubuntu-installer-proxy.png')
 ```
 
-### 鏡像 (Mirror)
+### 鏡像
 
-同上，不需要特別設定 mirror (鏡像)，安裝程式會自動判斷選擇哪個地方的鏡像網址更新。
+同上，不需要特別設定 mirror（鏡像），安裝程式會自動判斷選擇哪個地方的鏡像網址更新。
 
 ```{r, fig.cap='Ubuntu 安裝畫面，套件鏡像位置設定'}
-knitr::include_graphics(path = './figures/installer-mirror.png')
-```
-
-### 安裝程式更新
-
-當 Ubuntu 在安裝過程中，如果有連上網路，安裝程式會偵測當前的安裝程式是否需要更新，如果出現了這個畫面代表安裝程式有新的版本，可以在安裝時順便更新，當然，也可以在系統安裝完後更新。
-
-```{r, fig.cap='Ubuntu 安裝畫面'}
-knitr::include_graphics(path = './figures/installer-update.png')
+knitr::include_graphics(path = './figures/ubuntu-installer-mirror.png')
 ```
 
 ### 系統空間配置
 
-<!-- TODO: 本頁面書要更新，現在 2022 搞不好修好了 -->
+以下 Raid-1 相關的設定是參考 [@evangelou_2020] 的 Gist 翻譯成中文文章。
 
-<!-- TODO: 補充 raid 說明 -->
+-     這裡選擇下面的「Custom storage layout」來製作 [Raid-1](https://linux.vbird.org/linux_basic_train/centos8/unit14.php#14.1)。
 
-這裡選擇下面的「Custom storage layout」，因為伺服器硬碟不是使用尋常的設定。以下 Raid-1 相關的設定是參考 [@evangelou_2020] 的 Gist 翻譯成中文寫的。
-
-```{r, fig.cap='Ubuntu 安裝程式，磁碟配置導覽'}
-knitr::include_graphics(path = 'figures/installer-storage.png')
+```{r, fig.cap='Ubuntu 安裝程式，磁碟配置設定'}
+knitr::include_graphics(path = 'figures/ubuntu-installer-storage-0.png')
 ```
 
--   如果選錯了、或是硬碟中有已經分割好的磁區也沒關係，從 AVAILABLE DEVICES 下面選擇硬碟 ➜ 「Reformat」 ➜ 「Reformat」，這會把硬碟格式化。
+-   如果分割錯了、或是硬碟中有已經分割好的磁區也沒關係，從 AVAILABLE DEVICES 下面選擇要變更的硬碟 ➜「Reformat」➜「Reformat」，這會把硬碟的分割表刪除。
 
-```{r, fig.cap='Ubuntu 安裝程式，磁碟配置導覽'}
-knitr::include_graphics(path = 'figures/installer-storage_1.png')
+```{r, fig.cap='Ubuntu 安裝程式，磁碟配置重新格式化'}
+knitr::include_graphics(path = 'figures/ubuntu-installer-storage-1.png')
 ```
 
 -   選擇第一個磁碟 ➜ 「Use As Boot Device」 當作開機磁碟
 
-```{r, fig.cap='Ubuntu 安裝程式，磁碟配置導覽'}
-knitr::include_graphics(path = 'figures/installer-storage_2.png')
+```{r, fig.cap='Ubuntu 安裝程式，磁碟配置選擇開機磁碟'}
+knitr::include_graphics(path = 'figures/ubuntu-installer-storage-2.png')
 ```
 
--   對第二個磁碟「VBOX_HARDDISK_VBdc8cc122-e9b43569」也做同樣的事情。
-
-::: {.infobox .rmdcaution}
-目前版本 20.04.2 live server 有個 bug，當你要新增為開機硬碟 (Boot Device) 時，要在建立其他三個分區 (`/` 、 `/boot` 和 `[SWAP]`)之前，先設定好，不然 1Mb 的 grub 分區會消失。(我只有從現過錯誤一次 2021.07.21)
-:::
+-   對第二個磁碟「VBOX_HARDDISK_VBf5d43868-04077409」也做同樣的事情，「Add As Another Boot Device」。
 
 -   接著為 `/` 、 `/boot` 和 `[SWAP]` 做分區。
 
-    -   `/`: 系統根目錄磁區
+    -   `/boot`：開機磁區
 
-    -   `/boot`: 開機磁區
+    -   `[SWAP]`：[SWAP](http://linux.vbird.org/linux_basic/0230filesystem.php#swap)（記憶體置換空間）主要功能是當記憶體滿載時，會把現在沒有用到的程式先放到 SWAP 中，空給目前正在運行的程式使用
+    
+    -   `/`：系統根目錄磁區
 
-    -   `[SWAP]`: [SWAP](http://linux.vbird.org/linux_basic/0230filesystem.php#swap) (記憶體置換空間) 主要功能是當記憶體滿載時，會把現在沒有用到的程序先放到 SWAP 中，空給目前正在運行的程式使用
-
--   首先為 `/boot` 分區，通常開機磁區 512 Mb \~ 1Gb 就很夠用了，看你喜好，這裡我選擇 1Gb。選擇第一個磁碟 ➜ 「Add GPT Partitation」，照下面的設定設定後，按「Create」。
+-   選擇第一個磁碟的「free space」 ➜「Add GPT Partitation」，照下面的設定設定後，按「Create」建立。再來為 `/boot` 分區，通常開機磁區 512 Mb \~ 1Gb 就很夠用了，這裡我選擇 1Gb。
 
     -   Size: `1G`
 
     -   Format: `[ Leave unformatted ▾ ]`
+    
+```{r, fig.cap='Ubuntu 安裝程式，磁碟配置開機磁區'}
+knitr::include_graphics(path = 'figures/ubuntu-installer-storage-3.png')
+```
 
 -   對第二顆硬碟做同樣的事。
 
-```{r, fig.cap='Ubuntu 安裝程式，磁碟配置導覽'}
-knitr::include_graphics(path = 'figures/installer-storage_3.png')
+```{r, fig.cap='Ubuntu 安裝程式，磁碟配置開機磁區'}
+knitr::include_graphics(path = 'figures/ubuntu-installer-storage-4.png')
 ```
 
--   再來是 `[SWAP]` 磁區，一般來說會用實體記憶體容量 ⨉ 2 作為 `[SWAP]` 磁區的容量，這裡我怕空間太少先用 32Gb。選擇第一個磁碟 ➜ 「Add GPT Partitation」，照下面的設定設定後，按「Create」。
+-   再來是 `[SWAP]` 磁區，一般來說會用實體記憶體容量除以 2 或與記憶體相同容量作為 `[SWAP]` 磁區的容量，這裡我使用 32 Gb。選擇第一個磁碟 ➜「Add GPT Partitation」，照以下的設定設定後，按「Create」。
 
     -   Size: `32G`
 
@@ -331,8 +342,8 @@ knitr::include_graphics(path = 'figures/installer-storage_3.png')
 
 -   對第二顆硬碟做同樣的事。
 
-```{r, fig.cap='Ubuntu 安裝程式，磁碟配置導覽'}
-knitr::include_graphics(path = 'figures/installer-storage_4.png')
+```{r, fig.cap='Ubuntu 安裝程式，磁碟配置 SWAP'}
+knitr::include_graphics(path = 'figures/ubuntu-installer-storage-5.png')
 ```
 
 -   最後才是系統硬碟 `/` ，系統硬碟使用 `/boot` 、`[SWAP]` 與 `grub` 剩下來的空間。選擇第一個磁碟 ➜ 「Add GPT Partitation」，照下面的設定設定後，按「Create」。
@@ -343,22 +354,22 @@ knitr::include_graphics(path = 'figures/installer-storage_4.png')
 
 -   對第二顆硬碟做同樣的事。
 
-```{r, fig.cap='Ubuntu 安裝程式，磁碟配置導覽'}
-knitr::include_graphics(path = 'figures/installer-storage_5.png')
+```{r, fig.cap='Ubuntu 安裝程式，磁碟配置系統'}
+knitr::include_graphics(path = 'figures/ubuntu-installer-storage-6.png')
 ```
 
 -   接著設定 Raid-1。選取「[ Create software RAID (md) ▸ ]」，選取兩個「partition 2」建立 `md0` softRaid 磁區
 
-```{r, fig.cap='Ubuntu 安裝程式，磁碟配置導覽'}
-knitr::include_graphics(path = 'figures/installer-storage_6.png')
+```{r, fig.cap='Ubuntu 安裝程式，磁碟配置 md-0'}
+knitr::include_graphics(path = 'figures/ubuntu-installer-storage-7.png')
 ```
 
 -   同上，選取「[ Create software RAID (md) ▸ ]」，選取兩個「partition 3」建立 `md1` softRaid 磁區
 
 -   同上，選取「[ Create software RAID (md) ▸ ]」，選取兩個「partition 4」建立 `md2` softRaid 磁區
 
-```{r, fig.cap='Ubuntu 安裝程式，磁碟配置導覽'}
-knitr::include_graphics(path = 'figures/installer-storage_7.png')
+```{r, fig.cap='Ubuntu 安裝程式，磁碟配置完成 raid-1 配置'}
+knitr::include_graphics(path = 'figures/ubuntu-installer-storage-8.png')
 ```
 
 -   選擇 `md0 (new)` ➜ format ➜ Format: 選擇 `ext4` 格式 ➜ Mount: 掛載於 `/boot` ➜ 完成後選擇 Done
@@ -367,18 +378,16 @@ knitr::include_graphics(path = 'figures/installer-storage_7.png')
 
 -   選擇 `md2 (new)` ➜ format ➜ Format: 選擇 `ext4` 格式 ➜ Mount: 掛載於 `/` ➜ 完成後選擇 Done
 
--   設定完成🎉，整體設定截圖:\
+-   設定完成🎉
 
-```{r, fig.cap='Ubuntu 安裝程式，磁碟配置導覽'}
-knitr::include_graphics(path = 'figures/installer-storage_8.png')
+```{r, fig.cap='Ubuntu 安裝程式，磁碟配置總覽'}
+knitr::include_graphics(path = 'figures/ubuntu-installer-storage-9.png')
 ```
-
-<!-- -->
 
 -   截圖（續）
 
-```{r, fig.cap='Ubuntu 安裝程式，磁碟配置導覽'}
-knitr::include_graphics(path = 'figures/installer-storage_9.png')
+```{r, fig.cap='Ubuntu 安裝程式，磁碟配置總覽'}
+knitr::include_graphics(path = 'figures/ubuntu-installer-storage-10.png')
 ```
 
 -   在最下面選擇「Done」，至下一步。
@@ -388,12 +397,12 @@ knitr::include_graphics(path = 'figures/installer-storage_9.png')
 在這邊設定自己的使用者名稱與電腦名稱。
 
 ```{r, fig.cap='Ubuntu 安裝程式，使用者設定'}
-knitr::include_graphics(path = 'figures/installer-profile-configuration.png')
+knitr::include_graphics(path = 'figures/ubuntu-installer-profile.png')
 ```
 
 -   Your name: `asis`
 
--   Your server's name: `asis01`
+-   Your server's name: `asis0721`
 
 -   Pick a username: `asis`
 
@@ -401,46 +410,42 @@ knitr::include_graphics(path = 'figures/installer-profile-configuration.png')
 
 -   Confirm your password: `asis`
 
-### OpenSSH 設定 [可跳過]
+### Ubuntu Pro
 
-OpenSSH 是使用 SSH 通訊協定來遠端連線電腦的工具。防止連線中被竊聽、劫持或是其他攻擊。如果沒有擁有 Github 帳號這裡可以先跳過，於第二章會重新介紹怎麼設定 OpenSSH 伺服器。
+跳過。
 
-### 從 Github 匯入已經儲存的 public key
-
-這裡將 Allow password authentication over SSH 取消打勾，經由 SSH 連線至虛擬主機時，關閉使用者密碼認證，改由 SSH key pairs 登入。
-
-::: {.infobox .rmdtip}
-如果沒有持有 Github 帳號儲存的 public key，請把 Allow password authentication over SSH 打勾，待上傳完 public key 再把使用密碼登入關閉。
-:::
-
-另外，我已經透過 Github 儲存過我的 public key 副本，所以這邊可以直接從 Github 匯入 public key。
-
-```{r, fig.cap='Ubuntu 安裝程式，導入 SSH 公鑰'}
-knitr::include_graphics(path = 'figures/installer-SSH.png')
+```{r, fig.cap='Ubuntu 安裝程式，Ubuntu Pro'}
+knitr::include_graphics(path = 'figures/ubuntu-installer-pro.png')
 ```
+
+### SSH
+
+OpenSSH 是使用 SSH 通訊協定來遠端連線電腦的工具。防止連線中被竊聽、劫持或是其他攻擊。這裡先勾選「Install OpenSSH Server」讓安裝程式安裝。
+
+如果擁有 Github 帳號，且有設定過 SSH，即可藉 Github 匯入綁定在 Github 的公鑰。
 
 ::: {.infobox .rmdtip}
 如果這邊不匯入的話，也可以待稍後開機後再用指令 `ssh-import-id-gh <username>` 匯入。
 :::
 
-點選「Yes」後開始匯入程序。
+### Snaps
 
-```{r, fig.cap='Ubuntu 安裝程式，導入 SSH 公鑰'}
-knitr::include_graphics(path = 'figures/installer-SSH_1.png')
+這裡會列出一些伺服器常用的應用程式，如果沒有需求可以跳過。
+
+```{r, fig.cap='Ubuntu 安裝程式，伺服器常用應用程式'}
+knitr::include_graphics(path = 'figures/ubuntu-installer-pro.png')
 ```
-
-匯入成功後就能經由含有 Github 副本的 SSH key pairs 主機連線至虛擬主機
 
 ## 完成安裝
 
 這個頁面是預覽 Ubuntu 安裝程式做過了什麼，都會記錄在這裡，通常不會有什麼問題所以可以不用理他，待安裝完成即可。
 
-```{r, fig.cap='Ubuntu 安裝程式，安裝紀錄'}
-knitr::include_graphics(path = 'figures/installer-installing-system.png')
+```{r, fig.cap='Ubuntu 安裝程式，安裝中'}
+knitr::include_graphics(path = 'figures/ubuntu-installer-installing.png')
 ```
 
 安裝完成後選擇「Reboot Now」重新啟動
 
 ```{r, fig.cap='Ubuntu安裝程式，完成安裝'}
-knitr::include_graphics(path = 'figures/installer-install-complete.png')
+knitr::include_graphics(path = 'figures/ubuntu-installer-install-completed.png')
 ```
