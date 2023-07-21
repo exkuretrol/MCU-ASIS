@@ -356,27 +356,30 @@
 圖 1.22: 虛擬主機完成存放裝置設定
 </p>
 </div>
-<p>會看到「控制器：SATA」裡面有兩個磁碟。到這裡虛擬主機的設定就完成了。</p>
+<p>會看到「控制器：SATA」裡面有兩個磁碟。到這裡虛擬主機的設定就完成啦。</p>
 </div>
 </div>
 <div id="安裝作業系統" class="section level2" number="1.6">
 <h2>
 <span class="header-section-number">1.6</span> 安裝作業系統<a class="anchor" aria-label="anchor" href="#%E5%AE%89%E8%A3%9D%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1"><i class="fas fa-link"></i></a>
 </h2>
-<p>在安裝作業系統之前，點擊兩下開啟剛剛創建的「MCU-ASIS」虛擬主機，會跳出一個選擇啟動磁碟的訊息提示視窗，這裡我們點擊右下角的資料夾📁。</p>
+<p>看到這個畫面點擊「啟動」，啟動剛才設定的作業系統。</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-23"></span>
-<img src="figures/ubuntu-install-select-iso.png" alt="虛擬主機，選擇開機位置" width="80%"><p class="caption">
-圖 1.23: 虛擬主機，選擇開機位置
+<img src="figures/ubuntu-activate.png" alt="設定完成畫面" width="80%"><p class="caption">
+圖 1.23: 設定完成畫面
 </p>
 </div>
-<p>按「加入」並選擇剛剛下載下來的映像檔案 (ubuntu-20.04.2-live-server-amd64.iso)。加入完成後按「選擇」，接著按「開始」掛載映像檔案至虛擬主機中開始安裝。</p>
+<p>接下來應該會進到作業系統的安裝畫面。進到安裝畫面後，如果是第一次啟動會出現主機鍵的訊息，這裡先按「擷取」按鈕擷取。</p>
+<p>主機鍵在安裝作成中很重要，這裡要先記下來目前的主機鍵被定義成什麼按鈕，預設為右 Ctrl。擷取按鈕後將會無法切回 Windows 操作，即在退出擷取模式前都無法操作虛擬主機以外的視窗。退出擷取模式按下主機鍵即可退出。</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-24"></span>
-<img src="figures/select-iso.png" alt="選擇映像檔案載入" width="80%"><p class="caption">
-圖 1.24: 選擇映像檔案載入
+<img src="figures/virtual-machine-mouse-integration.png" alt="安裝過程中提示的主機鍵" width="80%"><p class="caption">
+圖 1.24: 安裝過程中提示的主機鍵
 </p>
 </div>
+<p>在安裝過程中使用方向鍵⬆️⬇️⬅️➡️（選擇）、Enter↪️（確認）與 Esc（返回）操控安裝程式介面。</p>
+<p>擷取後用方向鍵選取「Try or install Ubuntu」進到下一個畫面。</p>
 <div id="語言" class="section level3" number="1.6.1">
 <h3>
 <span class="header-section-number">1.6.1</span> 語言<a class="anchor" aria-label="anchor" href="#%E8%AA%9E%E8%A8%80"><i class="fas fa-link"></i></a>
@@ -384,140 +387,155 @@
 <p>稍待 Ubuntu 作業系統映像檔載入後，安裝程式會跳出選擇語言的畫面，在這裡選擇適合你的語言。</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-25"></span>
-<img src="figures/ubuntu-configuration-select-lang.png" alt="Ubuntu 安裝畫面，選擇系統語言" width="80%"><p class="caption">
+<img src="figures/ubuntu-installer-select-lang.png" alt="Ubuntu 安裝畫面，選擇系統語言" width="80%"><p class="caption">
 圖 1.25: Ubuntu 安裝畫面，選擇系統語言
 </p>
 </div>
-<p>在安裝過程中使用方向鍵⬆️⬇️⬅️➡️（選擇）、Enter↪️（確認）與 Esc（返回）操控安裝程式介面。</p>
 </div>
-<div id="鍵盤配置" class="section level3" number="1.6.2">
+<div id="更新提示" class="section level3" number="1.6.2">
 <h3>
-<span class="header-section-number">1.6.2</span> 鍵盤配置<a class="anchor" aria-label="anchor" href="#%E9%8D%B5%E7%9B%A4%E9%85%8D%E7%BD%AE"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.6.2</span> 更新提示<a class="anchor" aria-label="anchor" href="#%E6%9B%B4%E6%96%B0%E6%8F%90%E7%A4%BA"><i class="fas fa-link"></i></a>
 </h3>
-<p>這裡可以設定鍵盤的:</p>
-<ul>
-<li><p><code>Layout</code> (布局): 鍵盤的語言</p></li>
-<li><p><code>Variant</code> (鍵位): 一般在台灣都是用 QWERTY 配置，詳細說明可以在<a href="https://zh.wikipedia.org/wiki/%E9%94%AE%E7%9B%98%E5%B8%83%E5%B1%80">這</a>找到</p></li>
-</ul>
+<p>當 Ubuntu 在安裝過程中，如果有連上網路，安裝程式會偵測當前的安裝程式是否需要更新，如果出現了這個畫面代表安裝程式有新的版本，可以選擇「Update to the new installer」將安裝程式更新至最新版本。當然，也可以在系統安裝完後更新。</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-26"></span>
-<img src="figures/installer-keyboard.png" alt="Ubuntu 安裝畫面，選擇鍵盤配置" width="80%"><p class="caption">
-圖 1.26: Ubuntu 安裝畫面，選擇鍵盤配置
+<img src="figures/ubuntu-installer-update-installer.png" alt="Ubuntu 安裝畫面，安裝程式更新" width="80%"><p class="caption">
+圖 1.26: Ubuntu 安裝畫面，安裝程式更新
 </p>
 </div>
 </div>
-<div id="網路連線" class="section level3" number="1.6.3">
+<div id="鍵盤配置" class="section level3" number="1.6.3">
 <h3>
-<span class="header-section-number">1.6.3</span> 網路連線<a class="anchor" aria-label="anchor" href="#%E7%B6%B2%E8%B7%AF%E9%80%A3%E7%B7%9A"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.6.3</span> 鍵盤配置<a class="anchor" aria-label="anchor" href="#%E9%8D%B5%E7%9B%A4%E9%85%8D%E7%BD%AE"><i class="fas fa-link"></i></a>
+</h3>
+<p>這裡可以設定鍵盤的：</p>
+<ul>
+<li><p><code>Layout</code>（布局）：鍵盤的語言</p></li>
+<li><p><code>Variant</code>（鍵位）：一般在台灣都是用 QWERTY 配置與預設的 English（US）相同。詳細說明可以在<a href="https://zh.wikipedia.org/wiki/%E9%94%AE%E7%9B%98%E5%B8%83%E5%B1%80">這</a>找到</p></li>
+</ul>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-27"></span>
+<img src="figures/ubuntu-installer-keyboard.png" alt="Ubuntu 安裝畫面，選擇鍵盤配置" width="80%"><p class="caption">
+圖 1.27: Ubuntu 安裝畫面，選擇鍵盤配置
+</p>
+</div>
+</div>
+<div id="安裝類型" class="section level3" number="1.6.4">
+<h3>
+<span class="header-section-number">1.6.4</span> 安裝類型<a class="anchor" aria-label="anchor" href="#%E5%AE%89%E8%A3%9D%E9%A1%9E%E5%9E%8B"><i class="fas fa-link"></i></a>
+</h3>
+<p>在安裝類型選擇 Ubuntu Server 就好，minimized 版本會少一些我們之後會用到的功能，到時候還是要自己裝回來。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-28"></span>
+<img src="figures/ubuntu-installer-install-type.png" alt="Ubuntu 安裝畫面，系統安裝類型" width="80%"><p class="caption">
+圖 1.28: Ubuntu 安裝畫面，系統安裝類型
+</p>
+</div>
+</div>
+<div id="網路連線" class="section level3" number="1.6.5">
+<h3>
+<span class="header-section-number">1.6.5</span> 網路連線<a class="anchor" aria-label="anchor" href="#%E7%B6%B2%E8%B7%AF%E9%80%A3%E7%B7%9A"><i class="fas fa-link"></i></a>
 </h3>
 <p>這裡可以設定 Ubuntu 的網路連線，預設是由 DHCP 設定，通常不用變更，如果這裡連線失敗，也可以等開機後再做設定。</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-27"></span>
-<img src="figures/installer-network.png" alt="Ubuntu 安裝畫面，網路連線設定" width="80%"><p class="caption">
-圖 1.27: Ubuntu 安裝畫面，網路連線設定
-</p>
-</div>
-</div>
-<div id="proxy" class="section level3" number="1.6.4">
-<h3>
-<span class="header-section-number">1.6.4</span> Proxy<a class="anchor" aria-label="anchor" href="#proxy"><i class="fas fa-link"></i></a>
-</h3>
-<p>除非網路需要設定 proxy（代理伺服器），否則不需要設定。</p>
-<div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-28"></span>
-<img src="figures/installer-proxy.png" alt="Ubuntu 安裝畫面，proxy 設定" width="80%"><p class="caption">
-圖 1.28: Ubuntu 安裝畫面，proxy 設定
-</p>
-</div>
-</div>
-<div id="鏡像-mirror" class="section level3" number="1.6.5">
-<h3>
-<span class="header-section-number">1.6.5</span> 鏡像 (Mirror)<a class="anchor" aria-label="anchor" href="#%E9%8F%A1%E5%83%8F-mirror"><i class="fas fa-link"></i></a>
-</h3>
-<p>同上，不需要特別設定 mirror (鏡像)，安裝程式會自動判斷選擇哪個地方的鏡像網址更新。</p>
-<div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-29"></span>
-<img src="figures/installer-mirror.png" alt="Ubuntu 安裝畫面，套件鏡像位置設定" width="80%"><p class="caption">
-圖 1.29: Ubuntu 安裝畫面，套件鏡像位置設定
+<img src="figures/ubuntu-installer-network.png" alt="Ubuntu 安裝畫面，網路連線設定" width="80%"><p class="caption">
+圖 1.29: Ubuntu 安裝畫面，網路連線設定
 </p>
 </div>
 </div>
-<div id="安裝程式更新" class="section level3" number="1.6.6">
+<div id="proxy" class="section level3" number="1.6.6">
 <h3>
-<span class="header-section-number">1.6.6</span> 安裝程式更新<a class="anchor" aria-label="anchor" href="#%E5%AE%89%E8%A3%9D%E7%A8%8B%E5%BC%8F%E6%9B%B4%E6%96%B0"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.6.6</span> Proxy<a class="anchor" aria-label="anchor" href="#proxy"><i class="fas fa-link"></i></a>
 </h3>
-<p>當 Ubuntu 在安裝過程中，如果有連上網路，安裝程式會偵測當前的安裝程式是否需要更新，如果出現了這個畫面代表安裝程式有新的版本，可以在安裝時順便更新，當然，也可以在系統安裝完後更新。</p>
+<p>除非當前的網路環境需要設定 proxy（代理伺服器），否則不需要設定。</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-30"></span>
-<img src="figures/installer-update.png" alt="Ubuntu 安裝畫面" width="80%"><p class="caption">
-圖 1.30: Ubuntu 安裝畫面
+<img src="figures/ubuntu-installer-proxy.png" alt="Ubuntu 安裝畫面，proxy 設定" width="80%"><p class="caption">
+圖 1.30: Ubuntu 安裝畫面，proxy 設定
 </p>
 </div>
 </div>
-<div id="系統空間配置" class="section level3" number="1.6.7">
+<div id="鏡像" class="section level3" number="1.6.7">
 <h3>
-<span class="header-section-number">1.6.7</span> 系統空間配置<a class="anchor" aria-label="anchor" href="#%E7%B3%BB%E7%B5%B1%E7%A9%BA%E9%96%93%E9%85%8D%E7%BD%AE"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.6.7</span> 鏡像<a class="anchor" aria-label="anchor" href="#%E9%8F%A1%E5%83%8F"><i class="fas fa-link"></i></a>
 </h3>
-<!-- TODO: 本頁面書要更新，現在 2022 搞不好修好了 -->
-<!-- TODO: 補充 raid 說明 -->
-<p>這裡選擇下面的「Custom storage layout」，因為伺服器硬碟不是使用尋常的設定。以下 Raid-1 相關的設定是參考 <span class="citation">(<a href="%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99.html#ref-evangelou_2020" role="doc-biblioref">Evangelou 2020</a>)</span> 的 Gist 翻譯成中文寫的。</p>
+<p>同上，不需要特別設定 mirror（鏡像），安裝程式會自動判斷選擇哪個地方的鏡像網址更新。</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-31"></span>
-<img src="figures/installer-storage.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%"><p class="caption">
-圖 1.31: Ubuntu 安裝程式，磁碟配置導覽
+<img src="figures/ubuntu-installer-mirror.png" alt="Ubuntu 安裝畫面，套件鏡像位置設定" width="80%"><p class="caption">
+圖 1.31: Ubuntu 安裝畫面，套件鏡像位置設定
 </p>
 </div>
+</div>
+<div id="系統空間配置" class="section level3" number="1.6.8">
+<h3>
+<span class="header-section-number">1.6.8</span> 系統空間配置<a class="anchor" aria-label="anchor" href="#%E7%B3%BB%E7%B5%B1%E7%A9%BA%E9%96%93%E9%85%8D%E7%BD%AE"><i class="fas fa-link"></i></a>
+</h3>
+<p>以下 Raid-1 相關的設定是參考 <span class="citation">(<a href="%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99.html#ref-evangelou_2020" role="doc-biblioref">Evangelou 2020</a>)</span> 的 Gist 翻譯成中文文章。</p>
 <ul>
-<li>如果選錯了、或是硬碟中有已經分割好的磁區也沒關係，從 AVAILABLE DEVICES 下面選擇硬碟 ➜ 「Reformat」 ➜ 「Reformat」，這會把硬碟格式化。</li>
+<li><pre><code>這裡選擇下面的「Custom storage layout」來製作 [Raid-1](https://linux.vbird.org/linux_basic_train/centos8/unit14.php#14.1)。</code></pre></li>
 </ul>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-32"></span>
-<img src="figures/installer-storage_1.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%"><p class="caption">
-圖 1.32: Ubuntu 安裝程式，磁碟配置導覽
+<img src="figures/ubuntu-installer-storage-0.png" alt="Ubuntu 安裝程式，磁碟配置設定" width="80%"><p class="caption">
+圖 1.32: Ubuntu 安裝程式，磁碟配置設定
+</p>
+</div>
+<ul>
+<li>如果分割錯了、或是硬碟中有已經分割好的磁區也沒關係，從 AVAILABLE DEVICES 下面選擇要變更的硬碟 ➜「Reformat」➜「Reformat」，這會把硬碟的分割表刪除。</li>
+</ul>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-33"></span>
+<img src="figures/ubuntu-installer-storage-1.png" alt="Ubuntu 安裝程式，磁碟配置重新格式化" width="80%"><p class="caption">
+圖 1.33: Ubuntu 安裝程式，磁碟配置重新格式化
 </p>
 </div>
 <ul>
 <li>選擇第一個磁碟 ➜ 「Use As Boot Device」 當作開機磁碟</li>
 </ul>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-33"></span>
-<img src="figures/installer-storage_2.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%"><p class="caption">
-圖 1.33: Ubuntu 安裝程式，磁碟配置導覽
+<span style="display:block;" id="fig:unnamed-chunk-34"></span>
+<img src="figures/ubuntu-installer-storage-2.png" alt="Ubuntu 安裝程式，磁碟配置選擇開機磁碟" width="80%"><p class="caption">
+圖 1.34: Ubuntu 安裝程式，磁碟配置選擇開機磁碟
 </p>
 </div>
 <ul>
-<li>對第二個磁碟「VBOX_HARDDISK_VBdc8cc122-e9b43569」也做同樣的事情。</li>
-</ul>
-<div class="infobox rmdcaution">
-<p>目前版本 20.04.2 live server 有個 bug，當你要新增為開機硬碟 (Boot Device) 時，要在建立其他三個分區 (<code>/</code> 、 <code>/boot</code> 和 <code>[SWAP]</code>)之前，先設定好，不然 1Mb 的 grub 分區會消失。(我只有從現過錯誤一次 2021.07.21)</p>
-</div>
-<ul>
+<li><p>對第二個磁碟「VBOX_HARDDISK_VBf5d43868-04077409」也做同樣的事情，「Add As Another Boot Device」。</p></li>
 <li>
 <p>接著為 <code>/</code> 、 <code>/boot</code> 和 <code>[SWAP]</code> 做分區。</p>
 <ul>
-<li><p><code>/</code>: 系統根目錄磁區</p></li>
-<li><p><code>/boot</code>: 開機磁區</p></li>
-<li><p><code>[SWAP]</code>: <a href="http://linux.vbird.org/linux_basic/0230filesystem.php#swap">SWAP</a> (記憶體置換空間) 主要功能是當記憶體滿載時，會把現在沒有用到的程序先放到 SWAP 中，空給目前正在運行的程式使用</p></li>
+<li><p><code>/boot</code>：開機磁區</p></li>
+<li><p><code>[SWAP]</code>：<a href="http://linux.vbird.org/linux_basic/0230filesystem.php#swap">SWAP</a>（記憶體置換空間）主要功能是當記憶體滿載時，會把現在沒有用到的程式先放到 SWAP 中，空給目前正在運行的程式使用</p></li>
+<li><p><code>/</code>：系統根目錄磁區</p></li>
 </ul>
 </li>
 <li>
-<p>首先為 <code>/boot</code> 分區，通常開機磁區 512 Mb ~ 1Gb 就很夠用了，看你喜好，這裡我選擇 1Gb。選擇第一個磁碟 ➜ 「Add GPT Partitation」，照下面的設定設定後，按「Create」。</p>
+<p>選擇第一個磁碟的「free space」 ➜「Add GPT Partitation」，照下面的設定設定後，按「Create」建立。再來為 <code>/boot</code> 分區，通常開機磁區 512 Mb ~ 1Gb 就很夠用了，這裡我選擇 1Gb。</p>
 <ul>
 <li><p>Size: <code>1G</code></p></li>
 <li><p>Format: <code>[ Leave unformatted ▾ ]</code></p></li>
 </ul>
 </li>
-<li><p>對第二顆硬碟做同樣的事。</p></li>
 </ul>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-34"></span>
-<img src="figures/installer-storage_3.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%"><p class="caption">
-圖 1.34: Ubuntu 安裝程式，磁碟配置導覽
+<span style="display:block;" id="fig:unnamed-chunk-35"></span>
+<img src="figures/ubuntu-installer-storage-3.png" alt="Ubuntu 安裝程式，磁碟配置開機磁區" width="80%"><p class="caption">
+圖 1.35: Ubuntu 安裝程式，磁碟配置開機磁區
+</p>
+</div>
+<ul>
+<li>對第二顆硬碟做同樣的事。</li>
+</ul>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-36"></span>
+<img src="figures/ubuntu-installer-storage-4.png" alt="Ubuntu 安裝程式，磁碟配置開機磁區" width="80%"><p class="caption">
+圖 1.36: Ubuntu 安裝程式，磁碟配置開機磁區
 </p>
 </div>
 <ul>
 <li>
-<p>再來是 <code>[SWAP]</code> 磁區，一般來說會用實體記憶體容量 ⨉ 2 作為 <code>[SWAP]</code> 磁區的容量，這裡我怕空間太少先用 32Gb。選擇第一個磁碟 ➜ 「Add GPT Partitation」，照下面的設定設定後，按「Create」。</p>
+<p>再來是 <code>[SWAP]</code> 磁區，一般來說會用實體記憶體容量除以 2 或與記憶體相同容量作為 <code>[SWAP]</code> 磁區的容量，這裡我使用 32 Gb。選擇第一個磁碟 ➜「Add GPT Partitation」，照以下的設定設定後，按「Create」。</p>
 <ul>
 <li><p>Size: <code>32G</code></p></li>
 <li><p>Format: <code>[ Leave unformatted ▾ ]</code></p></li>
@@ -526,9 +544,9 @@
 <li><p>對第二顆硬碟做同樣的事。</p></li>
 </ul>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-35"></span>
-<img src="figures/installer-storage_4.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%"><p class="caption">
-圖 1.35: Ubuntu 安裝程式，磁碟配置導覽
+<span style="display:block;" id="fig:unnamed-chunk-37"></span>
+<img src="figures/ubuntu-installer-storage-5.png" alt="Ubuntu 安裝程式，磁碟配置 SWAP" width="80%"><p class="caption">
+圖 1.37: Ubuntu 安裝程式，磁碟配置 SWAP
 </p>
 </div>
 <ul>
@@ -542,18 +560,18 @@
 <li><p>對第二顆硬碟做同樣的事。</p></li>
 </ul>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-36"></span>
-<img src="figures/installer-storage_5.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%"><p class="caption">
-圖 1.36: Ubuntu 安裝程式，磁碟配置導覽
+<span style="display:block;" id="fig:unnamed-chunk-38"></span>
+<img src="figures/ubuntu-installer-storage-6.png" alt="Ubuntu 安裝程式，磁碟配置系統" width="80%"><p class="caption">
+圖 1.38: Ubuntu 安裝程式，磁碟配置系統
 </p>
 </div>
 <ul>
 <li>接著設定 Raid-1。選取「[ Create software RAID (md) ▸ ]」，選取兩個「partition 2」建立 <code>md0</code> softRaid 磁區</li>
 </ul>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-37"></span>
-<img src="figures/installer-storage_6.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%"><p class="caption">
-圖 1.37: Ubuntu 安裝程式，磁碟配置導覽
+<span style="display:block;" id="fig:unnamed-chunk-39"></span>
+<img src="figures/ubuntu-installer-storage-7.png" alt="Ubuntu 安裝程式，磁碟配置 md-0" width="80%"><p class="caption">
+圖 1.39: Ubuntu 安裝程式，磁碟配置 md-0
 </p>
 </div>
 <ul>
@@ -561,88 +579,88 @@
 <li><p>同上，選取「[ Create software RAID (md) ▸ ]」，選取兩個「partition 4」建立 <code>md2</code> softRaid 磁區</p></li>
 </ul>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-38"></span>
-<img src="figures/installer-storage_7.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%"><p class="caption">
-圖 1.38: Ubuntu 安裝程式，磁碟配置導覽
+<span style="display:block;" id="fig:unnamed-chunk-40"></span>
+<img src="figures/ubuntu-installer-storage-8.png" alt="Ubuntu 安裝程式，磁碟配置完成 raid-1 配置" width="80%"><p class="caption">
+圖 1.40: Ubuntu 安裝程式，磁碟配置完成 raid-1 配置
 </p>
 </div>
 <ul>
 <li><p>選擇 <code>md0 (new)</code> ➜ format ➜ Format: 選擇 <code>ext4</code> 格式 ➜ Mount: 掛載於 <code>/boot</code> ➜ 完成後選擇 Done</p></li>
 <li><p>選擇 <code>md1 (new)</code> ➜ format ➜ Format: 選擇 <code>swap</code> 格式 ➜ 完成後選擇 Done</p></li>
 <li><p>選擇 <code>md2 (new)</code> ➜ format ➜ Format: 選擇 <code>ext4</code> 格式 ➜ Mount: 掛載於 <code>/</code> ➜ 完成後選擇 Done</p></li>
-<li><p>設定完成🎉，整體設定截圖:<br></p></li>
+<li><p>設定完成🎉</p></li>
 </ul>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-39"></span>
-<img src="figures/installer-storage_8.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%"><p class="caption">
-圖 1.39: Ubuntu 安裝程式，磁碟配置導覽
+<span style="display:block;" id="fig:unnamed-chunk-41"></span>
+<img src="figures/ubuntu-installer-storage-9.png" alt="Ubuntu 安裝程式，磁碟配置總覽" width="80%"><p class="caption">
+圖 1.41: Ubuntu 安裝程式，磁碟配置總覽
 </p>
 </div>
-<!-- -->
 <ul>
 <li>截圖（續）</li>
 </ul>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-40"></span>
-<img src="figures/installer-storage_9.png" alt="Ubuntu 安裝程式，磁碟配置導覽" width="80%"><p class="caption">
-圖 1.40: Ubuntu 安裝程式，磁碟配置導覽
+<span style="display:block;" id="fig:unnamed-chunk-42"></span>
+<img src="figures/ubuntu-installer-storage-10.png" alt="Ubuntu 安裝程式，磁碟配置總覽" width="80%"><p class="caption">
+圖 1.42: Ubuntu 安裝程式，磁碟配置總覽
 </p>
 </div>
 <ul>
 <li>在最下面選擇「Done」，至下一步。</li>
 </ul>
 </div>
-<div id="使用者設定" class="section level3" number="1.6.8">
+<div id="使用者設定" class="section level3" number="1.6.9">
 <h3>
-<span class="header-section-number">1.6.8</span> 使用者設定<a class="anchor" aria-label="anchor" href="#%E4%BD%BF%E7%94%A8%E8%80%85%E8%A8%AD%E5%AE%9A"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.6.9</span> 使用者設定<a class="anchor" aria-label="anchor" href="#%E4%BD%BF%E7%94%A8%E8%80%85%E8%A8%AD%E5%AE%9A"><i class="fas fa-link"></i></a>
 </h3>
 <p>在這邊設定自己的使用者名稱與電腦名稱。</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-41"></span>
-<img src="figures/installer-profile-configuration.png" alt="Ubuntu 安裝程式，使用者設定" width="80%"><p class="caption">
-圖 1.41: Ubuntu 安裝程式，使用者設定
+<span style="display:block;" id="fig:unnamed-chunk-43"></span>
+<img src="figures/ubuntu-installer-profile.png" alt="Ubuntu 安裝程式，使用者設定" width="80%"><p class="caption">
+圖 1.43: Ubuntu 安裝程式，使用者設定
 </p>
 </div>
 <ul>
 <li><p>Your name: <code>asis</code></p></li>
-<li><p>Your server’s name: <code>asis01</code></p></li>
+<li><p>Your server’s name: <code>asis0721</code></p></li>
 <li><p>Pick a username: <code>asis</code></p></li>
 <li><p>Choose a password: <code>asis</code></p></li>
 <li><p>Confirm your password: <code>asis</code></p></li>
 </ul>
 </div>
-<div id="openssh-設定-可跳過" class="section level3" number="1.6.9">
+<div id="ubuntu-pro" class="section level3" number="1.6.10">
 <h3>
-<span class="header-section-number">1.6.9</span> OpenSSH 設定 [可跳過]<a class="anchor" aria-label="anchor" href="#openssh-%E8%A8%AD%E5%AE%9A-%E5%8F%AF%E8%B7%B3%E9%81%8E"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.6.10</span> Ubuntu Pro<a class="anchor" aria-label="anchor" href="#ubuntu-pro"><i class="fas fa-link"></i></a>
 </h3>
-<p>OpenSSH 是使用 SSH 通訊協定來遠端連線電腦的工具。防止連線中被竊聽、劫持或是其他攻擊。如果沒有擁有 Github 帳號這裡可以先跳過，於第二章會重新介紹怎麼設定 OpenSSH 伺服器。</p>
-</div>
-<div id="從-github-匯入已經儲存的-public-key" class="section level3" number="1.6.10">
-<h3>
-<span class="header-section-number">1.6.10</span> 從 Github 匯入已經儲存的 public key<a class="anchor" aria-label="anchor" href="#%E5%BE%9E-github-%E5%8C%AF%E5%85%A5%E5%B7%B2%E7%B6%93%E5%84%B2%E5%AD%98%E7%9A%84-public-key"><i class="fas fa-link"></i></a>
-</h3>
-<p>這裡將 Allow password authentication over SSH 取消打勾，經由 SSH 連線至虛擬主機時，關閉使用者密碼認證，改由 SSH key pairs 登入。</p>
-<div class="infobox rmdtip">
-<p>如果沒有持有 Github 帳號儲存的 public key，請把 Allow password authentication over SSH 打勾，待上傳完 public key 再把使用密碼登入關閉。</p>
-</div>
-<p>另外，我已經透過 Github 儲存過我的 public key 副本，所以這邊可以直接從 Github 匯入 public key。</p>
+<p>跳過。</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-42"></span>
-<img src="figures/installer-SSH.png" alt="Ubuntu 安裝程式，導入 SSH 公鑰" width="80%"><p class="caption">
-圖 1.42: Ubuntu 安裝程式，導入 SSH 公鑰
+<span style="display:block;" id="fig:unnamed-chunk-44"></span>
+<img src="figures/ubuntu-installer-pro.png" alt="Ubuntu 安裝程式，Ubuntu Pro" width="80%"><p class="caption">
+圖 1.44: Ubuntu 安裝程式，Ubuntu Pro
 </p>
 </div>
+</div>
+<div id="ssh" class="section level3" number="1.6.11">
+<h3>
+<span class="header-section-number">1.6.11</span> SSH<a class="anchor" aria-label="anchor" href="#ssh"><i class="fas fa-link"></i></a>
+</h3>
+<p>OpenSSH 是使用 SSH 通訊協定來遠端連線電腦的工具。防止連線中被竊聽、劫持或是其他攻擊。這裡先勾選「Install OpenSSH Server」讓安裝程式安裝。</p>
+<p>如果擁有 Github 帳號，且有設定過 SSH，即可藉 Github 匯入綁定在 Github 的公鑰。</p>
 <div class="infobox rmdtip">
 <p>如果這邊不匯入的話，也可以待稍後開機後再用指令 <code>ssh-import-id-gh &lt;username&gt;</code> 匯入。</p>
 </div>
-<p>點選「Yes」後開始匯入程序。</p>
+</div>
+<div id="snaps" class="section level3" number="1.6.12">
+<h3>
+<span class="header-section-number">1.6.12</span> Snaps<a class="anchor" aria-label="anchor" href="#snaps"><i class="fas fa-link"></i></a>
+</h3>
+<p>這裡會列出一些伺服器常用的應用程式，如果沒有需求可以跳過。</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-43"></span>
-<img src="figures/installer-SSH_1.png" alt="Ubuntu 安裝程式，導入 SSH 公鑰" width="80%"><p class="caption">
-圖 1.43: Ubuntu 安裝程式，導入 SSH 公鑰
+<span style="display:block;" id="fig:unnamed-chunk-45"></span>
+<img src="figures/ubuntu-installer-pro.png" alt="Ubuntu 安裝程式，伺服器常用應用程式" width="80%"><p class="caption">
+圖 1.45: Ubuntu 安裝程式，伺服器常用應用程式
 </p>
 </div>
-<p>匯入成功後就能經由含有 Github 副本的 SSH key pairs 主機連線至虛擬主機</p>
 </div>
 </div>
 <div id="完成安裝" class="section level2" number="1.7">
@@ -651,16 +669,16 @@
 </h2>
 <p>這個頁面是預覽 Ubuntu 安裝程式做過了什麼，都會記錄在這裡，通常不會有什麼問題所以可以不用理他，待安裝完成即可。</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-44"></span>
-<img src="figures/installer-installing-system.png" alt="Ubuntu 安裝程式，安裝紀錄" width="80%"><p class="caption">
-圖 1.44: Ubuntu 安裝程式，安裝紀錄
+<span style="display:block;" id="fig:unnamed-chunk-46"></span>
+<img src="figures/ubuntu-installer-installing.png" alt="Ubuntu 安裝程式，安裝中" width="80%"><p class="caption">
+圖 1.46: Ubuntu 安裝程式，安裝中
 </p>
 </div>
 <p>安裝完成後選擇「Reboot Now」重新啟動</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-45"></span>
-<img src="figures/installer-install-complete.png" alt="Ubuntu安裝程式，完成安裝" width="80%"><p class="caption">
-圖 1.45: Ubuntu安裝程式，完成安裝
+<span style="display:block;" id="fig:unnamed-chunk-47"></span>
+<img src="figures/ubuntu-installer-install-completed.png" alt="Ubuntu安裝程式，完成安裝" width="80%"><p class="caption">
+圖 1.47: Ubuntu安裝程式，完成安裝
 </p>
 </div>
 
@@ -688,15 +706,17 @@
 <li>
 <a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1"><span class="header-section-number">1.6</span> 安裝作業系統</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#%E8%AA%9E%E8%A8%80"><span class="header-section-number">1.6.1</span> 語言</a></li>
-<li><a class="nav-link" href="#%E9%8D%B5%E7%9B%A4%E9%85%8D%E7%BD%AE"><span class="header-section-number">1.6.2</span> 鍵盤配置</a></li>
-<li><a class="nav-link" href="#%E7%B6%B2%E8%B7%AF%E9%80%A3%E7%B7%9A"><span class="header-section-number">1.6.3</span> 網路連線</a></li>
-<li><a class="nav-link" href="#proxy"><span class="header-section-number">1.6.4</span> Proxy</a></li>
-<li><a class="nav-link" href="#%E9%8F%A1%E5%83%8F-mirror"><span class="header-section-number">1.6.5</span> 鏡像 (Mirror)</a></li>
-<li><a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E7%A8%8B%E5%BC%8F%E6%9B%B4%E6%96%B0"><span class="header-section-number">1.6.6</span> 安裝程式更新</a></li>
-<li><a class="nav-link" href="#%E7%B3%BB%E7%B5%B1%E7%A9%BA%E9%96%93%E9%85%8D%E7%BD%AE"><span class="header-section-number">1.6.7</span> 系統空間配置</a></li>
-<li><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%80%85%E8%A8%AD%E5%AE%9A"><span class="header-section-number">1.6.8</span> 使用者設定</a></li>
-<li><a class="nav-link" href="#openssh-%E8%A8%AD%E5%AE%9A-%E5%8F%AF%E8%B7%B3%E9%81%8E"><span class="header-section-number">1.6.9</span> OpenSSH 設定 [可跳過]</a></li>
-<li><a class="nav-link" href="#%E5%BE%9E-github-%E5%8C%AF%E5%85%A5%E5%B7%B2%E7%B6%93%E5%84%B2%E5%AD%98%E7%9A%84-public-key"><span class="header-section-number">1.6.10</span> 從 Github 匯入已經儲存的 public key</a></li>
+<li><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%8F%90%E7%A4%BA"><span class="header-section-number">1.6.2</span> 更新提示</a></li>
+<li><a class="nav-link" href="#%E9%8D%B5%E7%9B%A4%E9%85%8D%E7%BD%AE"><span class="header-section-number">1.6.3</span> 鍵盤配置</a></li>
+<li><a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E9%A1%9E%E5%9E%8B"><span class="header-section-number">1.6.4</span> 安裝類型</a></li>
+<li><a class="nav-link" href="#%E7%B6%B2%E8%B7%AF%E9%80%A3%E7%B7%9A"><span class="header-section-number">1.6.5</span> 網路連線</a></li>
+<li><a class="nav-link" href="#proxy"><span class="header-section-number">1.6.6</span> Proxy</a></li>
+<li><a class="nav-link" href="#%E9%8F%A1%E5%83%8F"><span class="header-section-number">1.6.7</span> 鏡像</a></li>
+<li><a class="nav-link" href="#%E7%B3%BB%E7%B5%B1%E7%A9%BA%E9%96%93%E9%85%8D%E7%BD%AE"><span class="header-section-number">1.6.8</span> 系統空間配置</a></li>
+<li><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%80%85%E8%A8%AD%E5%AE%9A"><span class="header-section-number">1.6.9</span> 使用者設定</a></li>
+<li><a class="nav-link" href="#ubuntu-pro"><span class="header-section-number">1.6.10</span> Ubuntu Pro</a></li>
+<li><a class="nav-link" href="#ssh"><span class="header-section-number">1.6.11</span> SSH</a></li>
+<li><a class="nav-link" href="#snaps"><span class="header-section-number">1.6.12</span> Snaps</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#%E5%AE%8C%E6%88%90%E5%AE%89%E8%A3%9D"><span class="header-section-number">1.7</span> 完成安裝</a></li>
@@ -717,7 +737,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-07-18.</p>
+    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-07-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

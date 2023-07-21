@@ -106,11 +106,11 @@
 </li>
 <li>
 <p><code>$</code>: 終端機指令前綴（一般使用者）</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb3-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-al</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb4-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-al</span></span></code></pre></div>
 </li>
 <li>
 <p><code>#</code>: 終端機指令前綴（超級使用者）</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb4-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rm <span class="at">-rf</span> ~/Downloads</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb5-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rm <span class="at">-rf</span> ~/Downloads</span></code></pre></div>
 </li>
 <li>
 <p><code>OUTPUT</code>: 終端機輸出</p>
@@ -132,7 +132,7 @@ drwxrwxr-x  6 kuaz kuaz 4096 Oct  6 14:06 School/</code></pre>
 </h3>
 <p>OpenSSH 是 SSH（Secure Shell）一個開源的版本。SSH 是一種透過 SSH 傳輸協定來管理系統、傳輸檔案的一個系統套件。它現在被廣泛的使用在各個資料中心與大企業中。</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-46"></span>
+<span style="display:block;" id="fig:unnamed-chunk-48"></span>
 <img src="figures/SSH_simplified_protocol_diagram-2.png" alt="SSH 傳輸協定驗證流程 圖片來源：https://www.ssh.com/academy/ssh" width="80%"><p class="caption">
 圖 2.1: SSH 傳輸協定驗證流程 圖片來源：<a href="https://www.ssh.com/academy/ssh" class="uri">https://www.ssh.com/academy/ssh</a>
 </p>
@@ -188,7 +188,7 @@ drwxrwxr-x  6 kuaz kuaz 4096 Oct  6 14:06 School/</code></pre>
 <p>在 Windows 要產生 ssh key pairs 有兩種辦法，第一種是經由內建的 OpenSSH Client 產生，另一種是經由 PuTTY 所附的工具產生（可以參考附錄的 <a href="%E7%9B%B8%E9%97%9C%E8%BB%9F%E9%AB%94.html#putty">PuTTY</a> 介紹）。</p>
 <div class="infobox info">
 <p>Linux 的使用者可以使用套件管理程式安裝 <code>openssh-server</code>， 指令如下：</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb6-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install openssh-server</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb7-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install openssh-server</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -209,7 +209,7 @@ drwxrwxr-x  6 kuaz kuaz 4096 Oct  6 14:06 School/</code></pre>
 </li>
 </ul>
 <p>安裝完成後，你可以打開「命令提示字元」或是「PowerShell」輸入 ssh 來確認是否安裝完成。</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb7-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb7-1" aria-hidden="true" tabindex="-1"></a>ssh</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb8-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb8-1" aria-hidden="true" tabindex="-1"></a>ssh</span></code></pre></div>
 <pre class="console_output"><code>usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]
            [-b bind_address] [-c cipher_spec] [-D [bind_address:]port]
            [-E log_file] [-e escape_char] [-F configfile] [-I pkcs11]
@@ -223,7 +223,7 @@ drwxrwxr-x  6 kuaz kuaz 4096 Oct  6 14:06 School/</code></pre>
 <span class="header-section-number">2.2.4</span> Step 2 — 產生 ssh key pairs<a class="anchor" aria-label="anchor" href="#step-2-%E7%94%A2%E7%94%9F-ssh-key-pairs"><i class="fas fa-link"></i></a>
 </h3>
 <p>接著，可以使用 <code>ssh-keygen</code> 指令產生 key pairs，加密方式有 dsa、ecdsa、ecdsa-sk、ed25519、ed25519-sk 與 rsa，預設的加密方式是 rsa ，詳細指令用法可以透過 <code>ssh-keygen --help</code> 指令查詢，這裡我們用最簡單的 <code>ssh-keygen</code> 指令。</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb9-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb9-1" aria-hidden="true" tabindex="-1"></a>ssh<span class="op">-</span>keygen</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb10-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb10-1" aria-hidden="true" tabindex="-1"></a>ssh<span class="op">-</span>keygen</span></code></pre></div>
 <p>Windows 的用戶預設會把 key pair 儲存在 <code>C:\Users\&lt;USERNAME&gt;\.ssh\</code> 的位置，而 Linux 的用戶會儲存在 <code>~/.ssh/</code> 的位置。</p>
 <p>這裡是詢問你要不要把產生的 ssh key 重新命名，一般不會動到它的名字，按 Enter↩︎，接續下一步。</p>
 <pre class="console_output"><code>Generating public/private rsa key pair.
@@ -258,13 +258,13 @@ The key's randomart image is:
 <h3>
 <span class="header-section-number">2.2.5</span> Step 3 — 將新增的 key pairs 上傳至目的地主機<a class="anchor" aria-label="anchor" href="#step-3-%E5%B0%87%E6%96%B0%E5%A2%9E%E7%9A%84-key-pairs-%E4%B8%8A%E5%82%B3%E8%87%B3%E7%9B%AE%E7%9A%84%E5%9C%B0%E4%B8%BB%E6%A9%9F"><i class="fas fa-link"></i></a>
 </h3>
-<p>當你擁有了 <a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#step-2-%E7%94%A2%E7%94%9F-ssh-key-pairs">Step 2 — 產生 ssh key pairs</a>，接下來要把 public key 上傳至虛擬機器。另外公鑰給別人看到是沒問題的，前面第一章的 <a href="intro.html#openssh-%E8%A8%AD%E5%AE%9A-%E5%8F%AF%E8%B7%B3%E9%81%8E">OpenSSH 設定 [可跳過]</a> 就已經有出現過我的公鑰了，公鑰並不能用來產生私鑰，它是用來認證這個 key 是否跟你所持有的私鑰相呼應。</p>
+<p>當你擁有了 <a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#step-2-%E7%94%A2%E7%94%9F-ssh-key-pairs">Step 2 — 產生 ssh key pairs</a>，接下來要把 public key 上傳至虛擬機器。另外公鑰給別人看到是沒問題的，前面第一章的 [OpenSSH 設定 [可跳過]] 就已經有出現過我的公鑰了，公鑰並不能用來產生私鑰，它是用來認證這個 key 是否跟你所持有的私鑰相呼應。</p>
 <div id="linux-系統" class="section level4" number="2.2.5.1">
 <h4>
 <span class="header-section-number">2.2.5.1</span> Linux 系統<a class="anchor" aria-label="anchor" href="#linux-%E7%B3%BB%E7%B5%B1"><i class="fas fa-link"></i></a>
 </h4>
 <p>如果你是的系統是 Linux 那指令會稍微短一些，上傳至遠端電腦的指令如下:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb13-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ssh-copy-id</span> <span class="at">-i</span> ~/.ssh/id_ed25519.pub <span class="at">-p</span> 22 asis@192.168.0.13</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb14-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ssh-copy-id</span> <span class="at">-i</span> ~/.ssh/id_ed25519.pub <span class="at">-p</span> 22 asis@192.168.0.13</span></code></pre></div>
 <ul>
 <li><p><code>-i</code>: i flag 代表的是你要上傳的 public key 檔案路徑</p></li>
 <li><p><code>-p</code>: p flag 則是目的地主機的 OpenSSH 伺服器的埠號</p></li>
@@ -282,7 +282,7 @@ Number of key(s) added: 1
 Now try logging into the machine, with:   "ssh -p '22' 'asis@192.168.0.13'"
 and check to make sure that only the key(s) you wanted were added.</code></pre>
 <p>如果你是 Windows 的使用者也不用擔心多複雜，一樣一行指令就能搞定，這裡我是參考<span class="citation">(<a href="%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99.html#ref-christopher_2020" role="doc-biblioref">Christopher 2020</a>)</span>的教學，指令如下:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb15-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">$env</span><span class="op">:</span>USERPROFILE\<span class="op">.</span><span class="fu">ssh</span>\id_rsa<span class="op">.</span><span class="fu">pub</span> <span class="op">|</span> ssh asis@192<span class="op">.</span><span class="fu">168</span><span class="op">.</span><span class="fu">0</span><span class="op">.</span><span class="fu">13</span> <span class="st">"cat &gt;&gt; ~/.ssh/authorized_keys"</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb16-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">$env</span><span class="op">:</span>USERPROFILE\<span class="op">.</span><span class="fu">ssh</span>\id_rsa<span class="op">.</span><span class="fu">pub</span> <span class="op">|</span> ssh asis@192<span class="op">.</span><span class="fu">168</span><span class="op">.</span><span class="fu">0</span><span class="op">.</span><span class="fu">13</span> <span class="st">"cat &gt;&gt; ~/.ssh/authorized_keys"</span></span></code></pre></div>
 <ul>
 <li><p>這裡的 <code>$env:USERPROFILE</code> 為 Windows 內建環境變數，會根據現在的使用者變更，如果我的使用者名稱為 <code>qaz855175b</code> 那 <code>$env:USERPROFILE</code> 對應的路徑就為 <code>C:\Users\qaz855175b\</code>，當然你可以直接把指令的 public key 路徑替換為 <code>C:\Users\qaz855175b\.ssh\id_rsa.pub</code></p></li>
 <li><p><code>id_rsa.pub</code> 為產生的 public key 預設名稱</p></li>
@@ -311,10 +311,10 @@ and check to make sure that only the key(s) you wanted were added.</code></pre>
 <div class="infobox info">
 <p>flag 通常會在指令後面隨後出現，flag前面會插入 <code>-</code>，而 flag 後面有時會需要加入詳細的設定，有時不用。flag 與 flag 之間用空格隔開，詳細指令的使用方法可以在 Linux 系統用 <code>man &lt;指令名稱&gt;</code> 查詢</p>
 <p>假如我們要看連線的詳細訊息，且指定伺服器 port 為 60000與指定 private key 檔案位址等等，組合起來就是:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-v</span> <span class="at">-p</span> 60000 <span class="at">-i</span> ~/.ssh/id_rsa asis@192.168.0.13</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-v</span> <span class="at">-p</span> 60000 <span class="at">-i</span> ~/.ssh/id_rsa asis@192.168.0.13</span></code></pre></div>
 </div>
 <p>目前不需要加上任何 flag，連線指令為：</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash prefixed_powershell"><code class="sourceCode bash"><span id="cb18-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> asis@192.168.0.13</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash prefixed_powershell"><code class="sourceCode bash"><span id="cb19-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> asis@192.168.0.13</span></code></pre></div>
 <p>一樣地，<code>asis</code> 是使用者名稱，而<code>192.168.0.13</code> 是 OpenSSH 伺服器的 ip 位置，輸入完後按 Enter↩︎。</p>
 <p>這邊打 <code>yes</code> 即可，確認連接目的地沒有錯之後，會把 fingerprint 寫入 <code>~/.ssh/known_hosts</code> 中，以後不再詢問。</p>
 <pre class="console_output"><code>The authenticity of host '192.168.0.13 (192.168.0.13)' can't be established.
@@ -325,14 +325,14 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre
 </div>
 <p>連接成功!</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-47"></span>
+<span style="display:block;" id="fig:unnamed-chunk-49"></span>
 <img src="figures/ssh-connection-success.png" alt="Windows Terminal 下的 SSH 連接成功畫面" width="80%"><p class="caption">
 圖 2.2: Windows Terminal 下的 SSH 連接成功畫面
 </p>
 </div>
 <p>測試完確認沒問題就可以把虛擬機晾在一旁了～</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-48"></span>
+<span style="display:block;" id="fig:unnamed-chunk-50"></span>
 <img src="figures/virtualbox-ubuntu-login.png" alt="VirtualBox 的虛擬主機終端機畫面" width="80%"><p class="caption">
 圖 2.3: VirtualBox 的虛擬主機終端機畫面
 </p>
@@ -346,33 +346,33 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre
 <h4>
 <span class="header-section-number">2.2.7.1</span> 變更 SSH 伺服器預設的埠號<a class="anchor" aria-label="anchor" href="#%E8%AE%8A%E6%9B%B4-ssh-%E4%BC%BA%E6%9C%8D%E5%99%A8%E9%A0%90%E8%A8%AD%E7%9A%84%E5%9F%A0%E8%99%9F"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb20-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/ssh/sshd_config</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb21-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/ssh/sshd_config</span></code></pre></div>
 <p>將 <code>#Port 22</code> 取消註解，並把 <code>22</code> 改成其他介於 1-65535 之間的數字。</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#       $OpenBSD: sshd_config,v 1.103 2018/04/09 20:41:22 tj Exp $</span></span>
-<span id="cb21-2"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># This is the sshd server system-wide configuration file.  See </span></span>
-<span id="cb21-4"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># sshd_config(5) for more information.</span></span>
-<span id="cb21-5"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># This sshd was compiled with PATH=/usr/bin:/bin:/usr/sbin:/sbin</span></span>
-<span id="cb21-7"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-8"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># The strategy used for options in the default sshd_config shipped with</span></span>
-<span id="cb21-9"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co"># OpenSSH is to specify options with their default value where</span></span>
-<span id="cb21-10"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co"># possible, but leave them commented.  Uncommented options override the</span></span>
-<span id="cb21-11"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="co"># default value.</span></span>
-<span id="cb21-12"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-13"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Include</span> /etc/ssh/sshd_config.d/<span class="pp">*</span>.conf</span>
-<span id="cb21-14"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb21-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-15"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Port</span> 60000</span>
-<span id="cb21-16"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="co">#AddressFamily any</span></span>
-<span id="cb21-17"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb21-17" aria-hidden="true" tabindex="-1"></a><span class="co">#ListenAddress 0.0.0.0</span></span>
-<span id="cb21-18"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="co">#ListenAddress ::</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#       $OpenBSD: sshd_config,v 1.103 2018/04/09 20:41:22 tj Exp $</span></span>
+<span id="cb22-2"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># This is the sshd server system-wide configuration file.  See </span></span>
+<span id="cb22-4"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># sshd_config(5) for more information.</span></span>
+<span id="cb22-5"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># This sshd was compiled with PATH=/usr/bin:/bin:/usr/sbin:/sbin</span></span>
+<span id="cb22-7"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co"># The strategy used for options in the default sshd_config shipped with</span></span>
+<span id="cb22-9"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># OpenSSH is to specify options with their default value where</span></span>
+<span id="cb22-10"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co"># possible, but leave them commented.  Uncommented options override the</span></span>
+<span id="cb22-11"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co"># default value.</span></span>
+<span id="cb22-12"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Include</span> /etc/ssh/sshd_config.d/<span class="pp">*</span>.conf</span>
+<span id="cb22-14"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-15"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Port</span> 60000</span>
+<span id="cb22-16"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="co">#AddressFamily any</span></span>
+<span id="cb22-17"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="co">#ListenAddress 0.0.0.0</span></span>
+<span id="cb22-18"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="co">#ListenAddress ::</span></span></code></pre></div>
 </div>
 <div id="關閉密碼驗證" class="section level4" number="2.2.7.2">
 <h4>
 <span class="header-section-number">2.2.7.2</span> 關閉密碼驗證<a class="anchor" aria-label="anchor" href="#%E9%97%9C%E9%96%89%E5%AF%86%E7%A2%BC%E9%A9%97%E8%AD%89"><i class="fas fa-link"></i></a>
 </h4>
 <p>將 PasswordAuthentication（以密碼驗證）設為 no。使用 SSH 連線時，如果沒有指定 SSH key pair，如果 OpenSSH 伺服器的設定沒有關閉，接著會要求你輸入使用者密碼以密碼驗證。通常這個設定會開啟是因為要<a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#step-3-%E5%B0%87%E6%96%B0%E5%A2%9E%E7%9A%84-key-pairs-%E4%B8%8A%E5%82%B3%E8%87%B3%E7%9B%AE%E7%9A%84%E5%9C%B0%E4%B8%BB%E6%A9%9F">Step 3 — 將新增的 key pairs 上傳至目的地主機</a>。</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PasswordAuthentication</span> no</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PasswordAuthentication</span> no</span></code></pre></div>
 <p>當然如果密碼驗證為 no，且同時遺失 SSH 的 pair key 時，你就無法以 SSH 連線至遠端主機，需要實際的使用圖形介面操作虛擬機器。</p>
 </div>
 <div id="關閉遠端-root-登入" class="section level4" number="2.2.7.3">
@@ -380,21 +380,21 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre
 <span class="header-section-number">2.2.7.3</span> 關閉遠端 root 登入<a class="anchor" aria-label="anchor" href="#%E9%97%9C%E9%96%89%E9%81%A0%E7%AB%AF-root-%E7%99%BB%E5%85%A5"><i class="fas fa-link"></i></a>
 </h4>
 <p>避免 root 登入可以使系統避免過大的權限暴露。</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PermitRootLogin</span> no</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PermitRootLogin</span> no</span></code></pre></div>
 </div>
 <div id="限制能使用-ssh-連線的使用者" class="section level4" number="2.2.7.4">
 <h4>
 <span class="header-section-number">2.2.7.4</span> 限制能使用 SSH 連線的使用者<a class="anchor" aria-label="anchor" href="#%E9%99%90%E5%88%B6%E8%83%BD%E4%BD%BF%E7%94%A8-ssh-%E9%80%A3%E7%B7%9A%E7%9A%84%E4%BD%BF%E7%94%A8%E8%80%85"><i class="fas fa-link"></i></a>
 </h4>
 <p>只允許特定的使用者使用 SSH 連線可大大降低風險。</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">AllowUsers</span> asis</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">AllowUsers</span> asis</span></code></pre></div>
 </div>
 <div id="關閉無密碼的使用者使用-ssh" class="section level4" number="2.2.7.5">
 <h4>
 <span class="header-section-number">2.2.7.5</span> 關閉無密碼的使用者使用 SSH<a class="anchor" aria-label="anchor" href="#%E9%97%9C%E9%96%89%E7%84%A1%E5%AF%86%E7%A2%BC%E7%9A%84%E4%BD%BF%E7%94%A8%E8%80%85%E4%BD%BF%E7%94%A8-ssh"><i class="fas fa-link"></i></a>
 </h4>
 <p>將沒有密碼就可以登入的使用者撤銷 SSH 連線的權限。</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PermitEmptyPasswords</span> no</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PermitEmptyPasswords</span> no</span></code></pre></div>
 </div>
 </div>
 <div id="step-6-測試-sshd_config-是否有效" class="section level3" number="2.2.8">
@@ -402,11 +402,11 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre
 <span class="header-section-number">2.2.8</span> Step 6 — 測試 <code>sshd_config</code> 是否有效<a class="anchor" aria-label="anchor" href="#step-6-%E6%B8%AC%E8%A9%A6-sshd_config-%E6%98%AF%E5%90%A6%E6%9C%89%E6%95%88"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>-t</code> 旗標可以測試 SSH 的設定是否有效，可以避免一些錯字造成的錯誤。</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb26-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> sshd <span class="at">-t</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb27-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> sshd <span class="at">-t</span></span></code></pre></div>
 <p>將系統上的 SSH daemon 重新啟動，重新啟動 SSH 服務。</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb27-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart sshd</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb28-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart sshd</span></code></pre></div>
 <p>確認 SSH 服務正常運行，沒有出現錯誤。</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb28-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status sshd</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb29-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status sshd</span></code></pre></div>
 <pre class="console_output"><code>● ssh.service - OpenBSD Secure Shell server
      Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)
      Active: active (running) since Sun 2021-08-15 16:08:55 UTC; 19h ago
@@ -424,7 +424,7 @@ Aug 15 16:08:55 asis01 sshd[893]: Server listening on 0.0.0.0 port 60000.
 Aug 15 16:08:55 asis01 sshd[893]: Server listening on :: port 60000.
 Aug 15 16:08:55 asis01 systemd[1]: Started OpenBSD Secure Shell server.</code></pre>
 <p>最後指令 <code>exit</code> 斷開連線，再重新測試 ssh 遠端連線至伺服器，使用公鑰與私鑰驗證登入。</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash prefixed_powershell"><code class="sourceCode bash"><span id="cb30-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-p</span> 60000 asis@192.168.0.13</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash prefixed_powershell"><code class="sourceCode bash"><span id="cb31-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-p</span> 60000 asis@192.168.0.13</span></code></pre></div>
 <pre class="console_output"><code>Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-81-generic x86_64)
 
  * Documentation:  https://help.ubuntu.com
@@ -459,7 +459,7 @@ Last login: Mon Aug 16 12:31:35 2021 from 192.168.0.11</code></pre>
 <span class="header-section-number">2.3</span> APT<a class="anchor" aria-label="anchor" href="#apt"><i class="fas fa-link"></i></a>
 </h2>
 <p>在 Ubuntu 上安裝任何程式大多都是用 APT (Advanced Packaging Tools) 安裝，這裡有兩個指令，用 <code>&amp;&amp;</code> 串接在一起:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb32-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt upgrade <span class="at">-y</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb33-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt upgrade <span class="at">-y</span></span></code></pre></div>
 <ul>
 <li><p><code>apt update</code>: 更新可安裝的套件列表或版本</p></li>
 <li><p><code>apt upgrade</code>: 安裝程式</p></li>
@@ -473,18 +473,18 @@ Last login: Mon Aug 16 12:31:35 2021 from 192.168.0.11</code></pre>
 </h2>
 <p>UFW（Uncomplicated Firewall）是預設在 Ubuntu 系統上的防火牆，這裡先為了 OpenSSH 伺服器而打開埠號 <code>60000</code>。</p>
 <p>首先用 status 查詢 UFW 的狀態，這裡需要輸入超級使用者 (sudo) 的密碼。</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb33-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb34-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
 <p>看來預設的 UFW 是關閉的</p>
 <pre class="console_output"><code>Status: inactive</code></pre>
 <p>接著用 <code>systemctl</code> 打開防火牆</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb35-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable ufw</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb36-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable ufw</span></code></pre></div>
 <p>查詢防火牆狀態</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb36-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb37-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
 <pre class="console_output"><code>Status: active</code></pre>
 <p>允許埠號 <code>60000</code> 從任何地方連入</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb38-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow 60000</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb39-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow 60000</span></code></pre></div>
 <p>查詢防火牆狀態</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb39-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb40-1"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
 <p>目前只有兩條規則，分別是 從任何地方連入埠號 60000 與 ipv6 從任何地方連入埠號 60000</p>
 <pre class="console_output"><code>Status: active
 
@@ -537,7 +537,7 @@ To                         Action      From
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-07-18.</p>
+    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-07-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
