@@ -71,7 +71,7 @@
 <li><a class="" href="index.html">引言</a></li>
 <li class="book-part">基礎建設</li>
 <li><a class="" href="intro.html"><span class="header-section-number">1</span> 虛擬主機</a></li>
-<li><a class="" href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html"><span class="header-section-number">2</span> Ubuntu 的基本設定</a></li>
+<li><a class="" href="ubuntu-basic-configuration.html"><span class="header-section-number">2</span> Ubuntu 的基本設定</a></li>
 <li class="book-part">軟體安裝</li>
 <li><a class="" href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html"><span class="header-section-number">3</span> LAMP 程式集</a></li>
 <li><a class="" href="rstudio-rshiny-server.html"><span class="header-section-number">4</span> RStudio &amp; RShiny Server</a></li>
@@ -144,10 +144,10 @@
 <p>接著按「Load」把剛剛產生的 *.ppk 檔案讀取進來。會看到一行字「Public key for pasting into OpenSSH authorized_keys file」下面的可複製區域就是 public key，把它整段複製起來。</p>
 <div class="inline-figure"><img src="figures/puttygen-load-ppk.png" class="figure"></div>
 <p>接著打開「PowerShell」或是「命令提示字元」，輸入:</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb257-1"><a href="%E7%9B%B8%E9%97%9C%E8%BB%9F%E9%AB%94.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">echo</span> <span class="st">"&lt;YOUR_PUBLIC_KEY&gt;"</span> <span class="op">|</span> ssh asis@192<span class="op">.</span><span class="fu">168</span><span class="op">.</span><span class="fu">0</span><span class="op">.</span><span class="fu">13</span> <span class="st">"cat &gt;&gt; ~/.ssh/authorized_keys"</span></span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb268-1"><a href="%E7%9B%B8%E9%97%9C%E8%BB%9F%E9%AB%94.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="fu">echo</span> <span class="st">"&lt;YOUR_PUBLIC_KEY&gt;"</span> <span class="op">|</span> ssh asis@192<span class="op">.</span><span class="fu">168</span><span class="op">.</span><span class="fu">0</span><span class="op">.</span><span class="fu">13</span> <span class="st">"cat &gt;&gt; ~/.ssh/authorized_keys"</span></span></code></pre></div>
 <ul>
 <li><p>將 <code>&lt;YOUR_PUBLIC_KEY&gt;</code> 替換成自己的 public key</p></li>
-<li><p>這裡的 <code>asis</code> 為第一章的<a href="intro.html#%E4%BD%BF%E7%94%A8%E8%80%85%E8%A8%AD%E5%AE%9A">使用者設定</a>的預設使用者</p></li>
+<li><p>這裡的 <code>asis</code> 為第一章的<a href="#%E4%BD%BF%E7%94%A8%E8%80%85%E8%A8%AD%E5%AE%9A">使用者設定</a>的預設使用者</p></li>
 <li><p><code>192.168.0.13</code> 為我虛擬主機的 ip 位址，查詢 ip 位址可以先手動登入虛擬主機後，用 <code>hostname -I</code> 或是 <code>ip addr show</code> 指令查詢</p></li>
 </ul>
 <p>接著按 Enter↩︎，跳出輸入密碼提示，這裡輸入預設的使用者密碼 <code>asis</code></p>
@@ -212,7 +212,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-07-21.</p>
+    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-08-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

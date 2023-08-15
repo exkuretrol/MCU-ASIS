@@ -71,7 +71,7 @@
 <li><a class="" href="index.html">引言</a></li>
 <li class="book-part">基礎建設</li>
 <li><a class="" href="intro.html"><span class="header-section-number">1</span> 虛擬主機</a></li>
-<li><a class="" href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html"><span class="header-section-number">2</span> Ubuntu 的基本設定</a></li>
+<li><a class="" href="ubuntu-basic-configuration.html"><span class="header-section-number">2</span> Ubuntu 的基本設定</a></li>
 <li class="book-part">軟體安裝</li>
 <li><a class="active" href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html"><span class="header-section-number">3</span> LAMP 程式集</a></li>
 <li><a class="" href="rstudio-rshiny-server.html"><span class="header-section-number">4</span> RStudio &amp; RShiny Server</a></li>
@@ -94,9 +94,9 @@
 </h1>
 <p>LAMP 是由 4 個單字開頭的字組成的詞。 LAMP 讓你可以在一台系統為 <strong>L</strong>inux 的電腦上，用 <strong>A</strong>pache 架設網站伺服器，其中資料儲存在 <strong>M</strong>ySQL 裡面，最後用 <strong>P</strong>HP 執行動態的網站。</p>
 <p>這章會教你怎麼安裝 LAMP 程式集。</p>
-<div id="事前準備-2" class="section level2" number="3.1">
+<div id="事前準備" class="section level2" number="3.1">
 <h2>
-<span class="header-section-number">3.1</span> 事前準備<a class="anchor" aria-label="anchor" href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.1</span> 事前準備<a class="anchor" aria-label="anchor" href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99"><i class="fas fa-link"></i></a>
 </h2>
 <p>在安裝軟體之前，你需要有一個可以執行 <code>sudo</code> 指令的使用者。 如果你是照著先前的教學做的話，這個使用者為安裝時的預設使用者 <code>asis</code>。</p>
 </div>
@@ -105,9 +105,9 @@
 <span class="header-section-number">3.2</span> Apache<a class="anchor" aria-label="anchor" href="#apache"><i class="fas fa-link"></i></a>
 </h2>
 <p>Apache HTTP Server（簡稱 Apache），是一個開放原始碼的程式，被用來當作網頁的伺服器，是目前流行的網頁伺服器之一。</p>
-<div id="概述-1" class="section level3" number="3.2.1">
+<div id="概述" class="section level3" number="3.2.1">
 <h3>
-<span class="header-section-number">3.2.1</span> 概述<a class="anchor" aria-label="anchor" href="#%E6%A6%82%E8%BF%B0-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.2.1</span> 概述<a class="anchor" aria-label="anchor" href="#%E6%A6%82%E8%BF%B0"><i class="fas fa-link"></i></a>
 </h3>
 <p>本章節會講述 Apache 網頁伺服器的安裝與防火牆的安全性設定。</p>
 </div>
@@ -116,9 +116,9 @@
 <span class="header-section-number">3.2.2</span> Step 1 — 安裝 Apache<a class="anchor" aria-label="anchor" href="#step-1-%E5%AE%89%E8%A3%9D-apache"><i class="fas fa-link"></i></a>
 </h3>
 <p>首先先更新套件管理程式（APT）的來源：</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb42-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb53-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span></code></pre></div>
 <p>確認是否是我們要安裝的 Apache 版本</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb43-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info apache2</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb54-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info apache2</span></code></pre></div>
 <pre class="console_output"><code>Package: apache2
 Version: 2.4.41-4ubuntu3.4
 Priority: optional
@@ -148,7 +148,7 @@ Description: Apache HTTP Server
  Installing this package results in a full installation, including the
  configuration files, init scripts and support scripts.</code></pre>
 <p>可以從套件的描述看到，確實是我們要的 Apache HTTP Server。接著進行安裝 Apache2。</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb45-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install apache2</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb56-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install apache2</span></code></pre></div>
 <pre class="console_output"><code>Reading package lists... Done
 Building dependency tree       
 Reading state information... Done
@@ -167,7 +167,7 @@ Do you want to continue? [Y/n] </code></pre>
 <p>這裡用鍵盤輸入 y 後按 Enter↩︎ 送出。</p>
 <div class="info infobox">
 <p>也可以在安裝時加上 <code>--yes</code> 略過確認安裝提示。</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode bash console_output"><code class="sourceCode bash"><span id="cb47-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install apache2 <span class="at">--yes</span></span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode bash console_output"><code class="sourceCode bash"><span id="cb58-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install apache2 <span class="at">--yes</span></span></code></pre></div>
 </div>
 </div>
 <div id="step-2-調整防火牆-ufw-設定" class="section level3" number="3.2.3">
@@ -176,7 +176,7 @@ Do you want to continue? [Y/n] </code></pre>
 </h3>
 <p>有些程式會自動把設定檔加入 UFW 中，這樣就可以透過設定檔啟用/關閉設定防火牆允許的埠號，不用再特別記下該軟體的設定，像是 Apache 就是其中之一。</p>
 <p>透過指令顯示有什麼可用的應用程式設定檔。</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb48-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw app list</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb59-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw app list</span></code></pre></div>
 <p>下列是目前可用的設定檔：</p>
 <pre class="console_output"><code>Available applications:
   Apache
@@ -189,11 +189,11 @@ Do you want to continue? [Y/n] </code></pre>
 <li><p><strong>Apache Secure</strong>：在防火牆新增一個允許從任何地方連線至埠號 <code>443</code> 的規則。<br></p></li>
 </ul>
 <p>使用方式很簡單，跟允許埠號時的指令一樣，把埠號改成設定檔名稱即可。</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb50-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow <span class="st">"Apache"</span></span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb61-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow <span class="st">"Apache"</span></span></code></pre></div>
 <pre class="console_output"><code>Rule added
 Rule added (v6)</code></pre>
 <p>確認剛才有沒有新增成功：</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb52-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb63-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
 <pre class="console_output"><code>Status: active
 
 To                         Action      From
@@ -205,7 +205,7 @@ Apache (v6)                ALLOW       Anywhere (v6) </code></pre>
 <p>接著可以透過瀏覽器連線到下列網址：</p>
 <pre><code>http://&lt;虛擬主機的 ip 位址&gt;/</code></pre>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-51"></span>
+<span style="display:block;" id="fig:unnamed-chunk-54"></span>
 <img src="figures/apache-main-page.png" alt="Apache 安裝後，預設的首頁" width="80%"><p class="caption">
 圖 3.1: Apache 安裝後，預設的首頁
 </p>
@@ -247,9 +247,9 @@ Apache (v6)                ALLOW       Anywhere (v6) </code></pre>
 <span class="header-section-number">3.3</span> MySQL<a class="anchor" aria-label="anchor" href="#mysql"><i class="fas fa-link"></i></a>
 </h2>
 <p>MySQL（讀作 My-S-Q-L）因為其效能高、成本低、可信賴的原因，被廣大企業所使用，目前也是最受歡迎的開放原始碼資料庫系統。</p>
-<div id="概述-2" class="section level3" number="3.3.1">
+<div id="概述-1" class="section level3" number="3.3.1">
 <h3>
-<span class="header-section-number">3.3.1</span> 概述<a class="anchor" aria-label="anchor" href="#%E6%A6%82%E8%BF%B0-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.3.1</span> 概述<a class="anchor" aria-label="anchor" href="#%E6%A6%82%E8%BF%B0-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>這個小節會說明怎麼安裝 MySQL，與做簡易的安裝後設定。</p>
 </div>
@@ -258,7 +258,7 @@ Apache (v6)                ALLOW       Anywhere (v6) </code></pre>
 <span class="header-section-number">3.3.2</span> Step 1 — 安裝 MySQL<a class="anchor" aria-label="anchor" href="#step-1-%E5%AE%89%E8%A3%9D-mysql"><i class="fas fa-link"></i></a>
 </h3>
 <p>首先，透過 Apt 安裝 MySQL：</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb58-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install mysql-server <span class="at">-y</span></span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb69-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install mysql-server <span class="at">-y</span></span></code></pre></div>
 </div>
 <div id="step-2-設定-mysql" class="section level3" number="3.3.3">
 <h3>
@@ -272,7 +272,7 @@ Apache (v6)                ALLOW       Anywhere (v6) </code></pre>
 <li><p>你可以移除預設的 <code>test</code> 資料庫（這個資料庫任何人都可以存取，甚至是匿名帳號），和任何使用者名稱是 <code>test_</code> 開頭的使用者帳號可以存取任何資料庫的權限。</p></li>
 </ul>
 <p>安裝完成後，打下面這段指令啟動 MySQL 安全安裝程序。</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb59-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mysql_secure_installation</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb70-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mysql_secure_installation</span></code></pre></div>
 <p>建議這裡選 <code>No</code>。如果這裡選了 <code>Yes</code>，那之後只要是創建使用者都會要求你使用密碼強度很高的密碼，因為要設定複雜的密碼，所以不適合給學生使用。</p>
 <pre class="console_output"><code>Securing the MySQL server deployment.
 
@@ -318,7 +318,7 @@ Success.
 
 All done! </code></pre>
 <p>最後使用指令測試 MySQL 連線：</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb65-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb76-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
 <ul>
 <li><p><code>--user, -u</code>：使用者帳號</p></li>
 <li><p><code>--password, -p</code>：使用者密碼</p></li>
@@ -330,9 +330,9 @@ All done! </code></pre>
 <span class="header-section-number">3.4</span> PHP<a class="anchor" aria-label="anchor" href="#php"><i class="fas fa-link"></i></a>
 </h2>
 <p>PHP（Hypertext PreProcessor，超文字預處理器），允許網頁開發人員開發動態網頁，截至2021年被世界上至少70%以上的網頁所使用。</p>
-<div id="概述-3" class="section level3" number="3.4.1">
+<div id="概述-2" class="section level3" number="3.4.1">
 <h3>
-<span class="header-section-number">3.4.1</span> 概述<a class="anchor" aria-label="anchor" href="#%E6%A6%82%E8%BF%B0-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.4.1</span> 概述<a class="anchor" aria-label="anchor" href="#%E6%A6%82%E8%BF%B0-2"><i class="fas fa-link"></i></a>
 </h3>
 <p>在本小節會說明怎麼安裝 PHP 與 PHP 與 MySQL 溝通的插件。</p>
 </div>
@@ -341,7 +341,7 @@ All done! </code></pre>
 <span class="header-section-number">3.4.2</span> Step 1 — 安裝 php &amp; php-mysql 插件<a class="anchor" aria-label="anchor" href="#step-1-%E5%AE%89%E8%A3%9D-php-php-mysql-%E6%8F%92%E4%BB%B6"><i class="fas fa-link"></i></a>
 </h3>
 <p>先確認 <code>php</code> 是不是我們要安裝的版本</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb66-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info php</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb77-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info php</span></code></pre></div>
 <p>可以看到，目前 <code>php</code> 的依賴套件是 <code>php7.4</code>，代表將安裝的版本為 <code>php7.4</code></p>
 <pre class="console_output"><code>Package: php
 Version: 2:7.4+75
@@ -364,7 +364,7 @@ Description: server-side, HTML-embedded scripting language (default)
  This package is a dependency package, which depends on latest stable
  PHP version (currently 7.4).</code></pre>
 <p>接著，我們再查詢一次 <code>php7.4</code> 會安裝什麼東西</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb68-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info php7.4</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb79-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info php7.4</span></code></pre></div>
 <p>這裡可以看到 <code>php7.4</code> 安裝了會安裝一些使 php7.4 順利運作的依賴套件，像是 <code>libapache2-mod-php7.4</code>、<code>php7.4-fpm</code>、<code>php7.4-cgi</code> 與 <code>php7.4-common</code></p>
 <pre class="console_output"><code>Package: php7.4
 Version: 7.4.3-4ubuntu2.5
@@ -416,14 +416,14 @@ Description: MySQL module for PHP [default]
  This package is a dependency package, which depends on Debian's default
  PHP version (currently 7.4).</code></pre>
 <p>確認完我們要安裝的版本是否正確後，用套件管理程式 <code>apt</code> 安裝套件。</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb72-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install php php-mysql <span class="at">--yes</span></span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb83-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install php php-mysql <span class="at">--yes</span></span></code></pre></div>
 <p>確認 <code>php</code> 是否安裝完成，可以用 <code>which</code> 指令確認：</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb73-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> php</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb84-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> php</span></code></pre></div>
 <p>當系統中有安裝複數個版本的 php 時，php 執行檔的位置可能會有所不同。同樣地在第 5 章<a href="jupyterlab-on-jupyterhub.html#%E8%A8%AD%E7%BD%AE-python-3-%E7%92%B0%E5%A2%83">設置 Python 3 環境</a>時也會遇到。</p>
 TODO: 連結至第五章 python 說明 which -A 指令 --&gt;
 <pre class="console_output"><code>/usr/bin/php</code></pre>
 <p>確認剛才安裝的 <code>php</code> 版本：</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode bash bash"><code class="sourceCode bash"><span id="cb75-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="ex">php</span> <span class="at">--version</span></span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode bash bash"><code class="sourceCode bash"><span id="cb86-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="ex">php</span> <span class="at">--version</span></span></code></pre></div>
 <pre class="console_output"><code>PHP 7.4.3 (cli) (built: Jul  5 2021 15:13:35) ( NTS )
 Copyright (c) The PHP Group
 Zend Engine v3.4.0, Copyright (c) Zend Technologies
@@ -435,17 +435,17 @@ Zend Engine v3.4.0, Copyright (c) Zend Technologies
 </h3>
 <p>虛擬網站（Virtual Host）可以讓你在一台電腦同時架設多個網站，擁有不同的域名。</p>
 <p>首先，於 apache2 的設定資料夾中，新建一個叫做 asis.conf 的設定檔：</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb77-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/sites-available/asis.conf</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb88-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/sites-available/asis.conf</span></code></pre></div>
 <p>寫入測試用的設定</p>
 <div class="code-label">
 <p>/etc/apache2/sites-available/asis.conf</p>
 </div>
-<div class="sourceCode" id="cb78"><pre class="sourceCode apache"><code class="sourceCode apache"><span id="cb78-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;VirtualHost</span><span class="at"> *:80</span><span class="fu">&gt;</span></span>
-<span id="cb78-2"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb78-2" aria-hidden="true" tabindex="-1"></a>    ServerAdmin<span class="st"> webmaster@localhost</span></span>
-<span id="cb78-3"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb78-3" aria-hidden="true" tabindex="-1"></a>    DocumentRoot<span class="st"> /var/www/asis</span></span>
-<span id="cb78-4"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb78-4" aria-hidden="true" tabindex="-1"></a>    ErrorLog<span class="st"> ${APACHE_LOG_DIR}/error.log</span></span>
-<span id="cb78-5"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb78-5" aria-hidden="true" tabindex="-1"></a>    CustomLog<span class="st"> ${APACHE_LOG_DIR}/access.log combined</span></span>
-<span id="cb78-6"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb78-6" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;/VirtualHost&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode apache"><code class="sourceCode apache"><span id="cb89-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;VirtualHost</span><span class="at"> *:80</span><span class="fu">&gt;</span></span>
+<span id="cb89-2"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb89-2" aria-hidden="true" tabindex="-1"></a>    ServerAdmin<span class="st"> webmaster@localhost</span></span>
+<span id="cb89-3"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb89-3" aria-hidden="true" tabindex="-1"></a>    DocumentRoot<span class="st"> /var/www/asis</span></span>
+<span id="cb89-4"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb89-4" aria-hidden="true" tabindex="-1"></a>    ErrorLog<span class="st"> ${APACHE_LOG_DIR}/error.log</span></span>
+<span id="cb89-5"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb89-5" aria-hidden="true" tabindex="-1"></a>    CustomLog<span class="st"> ${APACHE_LOG_DIR}/access.log combined</span></span>
+<span id="cb89-6"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb89-6" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;/VirtualHost&gt;</span></span></code></pre></div>
 <ul>
 <li><p><code>ServerAdmin</code>：現在這個變數已經被棄用了，在 Apache 先前的版本當伺服器出錯時會顯示聯絡管理員的方式。而現階段版本還是有點用的，你可以在 PHP 中呼叫 <code>$_SERVER['SERVER_ADMIN']</code> 變數會顯示 <code>ServerAdmin</code> 所設定的 Email。</p></li>
 <li><p><code>DocumentRoot</code>：網站的根目錄</p></li>
@@ -453,50 +453,50 @@ Zend Engine v3.4.0, Copyright (c) Zend Technologies
 <li><p><code>CustomLog</code>：設定 Log 的檔案名稱與格式，詳細說明<a href="https://httpd.apache.org/docs/2.4/mod/mod_log_config.html#logformat">在此</a></p></li>
 </ul>
 <p>透過 list 指令可以看到，資料夾的擁有者是 root。 我們在安裝 Apache2 的部分從 <code>http://&lt;虛擬主機的 ip 地址&gt;/</code> 看到的就是位於 <code>/var/www/html/</code> 中的首頁，接下來我們要刪除 Apache2 預設的設定，並測試自己建立的虛擬網站（VirtualHost）。</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb79-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-al</span> /var/www/</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb90-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-al</span> /var/www/</span></code></pre></div>
 <pre class="console_output"><code>total 12
 drwxr-xr-x  3 root root 4096 Sep  1 06:51 ./
 drwxr-xr-x 14 root root 4096 Sep  1 06:51 ../
 drwxr-xr-x  2 root root 4096 Sep  1 06:51 html/</code></pre>
 <p>一樣地，以同樣地方法建立 <code>asis</code> 資料夾</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb81-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir /var/www/asis</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb92-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir /var/www/asis</span></code></pre></div>
 <p>產生一個測試用的首頁</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb82-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /var/www/asis/index.html</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb93-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /var/www/asis/index.html</span></code></pre></div>
 <div class="code-label">
 <p>/var/www/asis/index.html</p>
 </div>
-<div class="sourceCode" id="cb83"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb83-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></span>
-<span id="cb83-2"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html</span> <span class="er">lang</span><span class="ot">=</span><span class="st">"zh-TW"</span><span class="kw">&gt;</span></span>
-<span id="cb83-3"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb83-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;head&gt;</span></span>
-<span id="cb83-4"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb83-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;meta</span> <span class="er">charset</span><span class="ot">=</span><span class="st">"UTF-8"</span><span class="kw">&gt;</span></span>
-<span id="cb83-5"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb83-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;meta</span> <span class="er">http-equiv</span><span class="ot">=</span><span class="st">"X-UA-Compatible"</span> <span class="er">content</span><span class="ot">=</span><span class="st">"IE=edge"</span><span class="kw">&gt;</span></span>
-<span id="cb83-6"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb83-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">"viewport"</span> <span class="er">content</span><span class="ot">=</span><span class="st">"width=device-width, initial-scale=1.0"</span><span class="kw">&gt;</span></span>
-<span id="cb83-7"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb83-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;title&gt;</span>Apache VirtualHost config test<span class="kw">&lt;/title&gt;</span></span>
-<span id="cb83-8"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb83-8" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/head&gt;</span></span>
-<span id="cb83-9"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb83-9" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;body&gt;</span></span>
-<span id="cb83-10"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb83-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;h1&gt;</span>成功!<span class="kw">&lt;/h1&gt;</span></span>
-<span id="cb83-11"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb83-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;p&gt;</span>您的 Apache2 虛擬網站的設定順利運作中。<span class="kw">&lt;/p&gt;</span></span>
-<span id="cb83-12"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb83-12" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/body&gt;</span></span>
-<span id="cb83-13"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb83-13" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb94-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></span>
+<span id="cb94-2"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html</span> <span class="er">lang</span><span class="ot">=</span><span class="st">"zh-TW"</span><span class="kw">&gt;</span></span>
+<span id="cb94-3"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;head&gt;</span></span>
+<span id="cb94-4"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb94-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;meta</span> <span class="er">charset</span><span class="ot">=</span><span class="st">"UTF-8"</span><span class="kw">&gt;</span></span>
+<span id="cb94-5"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb94-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;meta</span> <span class="er">http-equiv</span><span class="ot">=</span><span class="st">"X-UA-Compatible"</span> <span class="er">content</span><span class="ot">=</span><span class="st">"IE=edge"</span><span class="kw">&gt;</span></span>
+<span id="cb94-6"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb94-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">"viewport"</span> <span class="er">content</span><span class="ot">=</span><span class="st">"width=device-width, initial-scale=1.0"</span><span class="kw">&gt;</span></span>
+<span id="cb94-7"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb94-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;title&gt;</span>Apache VirtualHost config test<span class="kw">&lt;/title&gt;</span></span>
+<span id="cb94-8"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb94-8" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/head&gt;</span></span>
+<span id="cb94-9"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb94-9" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;body&gt;</span></span>
+<span id="cb94-10"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb94-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;h1&gt;</span>成功!<span class="kw">&lt;/h1&gt;</span></span>
+<span id="cb94-11"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb94-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;p&gt;</span>您的 Apache2 虛擬網站的設定順利運作中。<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb94-12"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb94-12" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/body&gt;</span></span>
+<span id="cb94-13"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb94-13" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
 <p>使用 <code>a2dissite</code> 指令關閉預設的設定檔（有興趣可以看一下預設的設定檔 000-default.conf，有助於了解設定檔案怎麼編寫）</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb84-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> a2dissite 000-default.conf</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb95-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> a2dissite 000-default.conf</span></code></pre></div>
 <pre class="console_output"><code>Site 000-default disabled.
 To activate the new configuration, you need to run:
   systemctl reload apache2</code></pre>
 <p>接著，啟用剛才創立的設定檔 <code>asis.conf</code></p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb86-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> a2ensite asis.conf</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb97-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> a2ensite asis.conf</span></code></pre></div>
 <p>重新讀取剛才變更的設定，使新的設定生效</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb87-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl reload apache2</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb98-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl reload apache2</span></code></pre></div>
 <p>接著至瀏覽器打上虛擬機器的 ip 位址</p>
 <pre><code>http://&lt;虛擬主機的 ip 地址&gt;/</code></pre>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-52"></span>
+<span style="display:block;" id="fig:unnamed-chunk-55"></span>
 <img src="figures/apache2-test-virtualhost-conf.png" alt="Apache2 測試虛擬網站設定" width="80%"><p class="caption">
 圖 3.2: Apache2 測試虛擬網站設定
 </p>
 </div>
 <p>或是直接在終端機中使用指令 <code>curl</code> 測試 <code>asis.conf</code> 設定檔：</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb89-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://<span class="op">&lt;</span>虛擬主機的 ip 地址<span class="op">&gt;</span>/</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb100-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://<span class="op">&lt;</span>虛擬主機的 ip 地址<span class="op">&gt;</span>/</span></code></pre></div>
 <pre class="console_output"><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="zh-TW"&gt;
 &lt;head&gt;
@@ -517,9 +517,9 @@ To activate the new configuration, you need to run:
 <span class="header-section-number">3.5</span> phpMyAdmin<a class="anchor" aria-label="anchor" href="#phpmyadmin"><i class="fas fa-link"></i></a>
 </h2>
 <p>phpMyAdmin 是一個以 PHP 為基礎撰寫的一個軟體，可以讓使用者以簡易的方式新增、查詢、修改、刪除資料庫裡面的紀錄。</p>
-<div id="概述-4" class="section level3" number="3.5.1">
+<div id="概述-3" class="section level3" number="3.5.1">
 <h3>
-<span class="header-section-number">3.5.1</span> 概述<a class="anchor" aria-label="anchor" href="#%E6%A6%82%E8%BF%B0-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.5.1</span> 概述<a class="anchor" aria-label="anchor" href="#%E6%A6%82%E8%BF%B0-3"><i class="fas fa-link"></i></a>
 </h3>
 <p>本小節會說明怎麼安裝 phpMyAdmin 與基礎的安全性設定。</p>
 </div>
@@ -528,7 +528,7 @@ To activate the new configuration, you need to run:
 <span class="header-section-number">3.5.2</span> Step 1 — 安裝 phpMyAdmin<a class="anchor" aria-label="anchor" href="#step-1-%E5%AE%89%E8%A3%9D-phpmyadmin"><i class="fas fa-link"></i></a>
 </h3>
 <p>一樣地，確認 <code>phpmyadmin</code> 的版本</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb91-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info phpmyadmin</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb102-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info phpmyadmin</span></code></pre></div>
 <pre class="console_output"><code>Package: phpmyadmin
 Version: 4:4.9.5+dfsg1-2
 Priority: optional
@@ -554,24 +554,24 @@ Download-Size: 4,426 kB
 
 [...]</code></pre>
 <p>確認完畢後安裝</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb93-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install phpmyadmin <span class="at">--yes</span></span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb104-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install phpmyadmin <span class="at">--yes</span></span></code></pre></div>
 <p>這裏用空白鍵勾選 <code>apache2</code> 使中括號中變成星號 <code>*</code></p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-53"></span>
+<span style="display:block;" id="fig:unnamed-chunk-56"></span>
 <img src="figures/phpmyadmin-installation_0.png" alt="phpMyAdmin 安裝導覽" width="80%"><p class="caption">
 圖 3.3: phpMyAdmin 安裝導覽
 </p>
 </div>
 <p>這裏選擇 <code>Yes</code> 即可除非你想對 <code>phpmyadmin</code> 做更詳細的設定</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-54"></span>
+<span style="display:block;" id="fig:unnamed-chunk-57"></span>
 <img src="figures/phpmyadmin-installation_1.png" alt="phpMyAdmin 安裝導覽" width="80%"><p class="caption">
 圖 3.4: phpMyAdmin 安裝導覽
 </p>
 </div>
 <p>留空會自動產生供 <code>phpmyadmin</code> 連線至 MySQL 用的密碼，所以這裡直接按 <code>Ok</code></p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-55"></span>
+<span style="display:block;" id="fig:unnamed-chunk-58"></span>
 <img src="figures/phpmyadmin-installation_2.png" alt="phpMyAdmin 安裝導覽" width="80%"><p class="caption">
 圖 3.5: phpMyAdmin 安裝導覽
 </p>
@@ -579,47 +579,47 @@ Download-Size: 4,426 kB
 <div class="infobox caution">
 <p>當出現此錯誤時不用太慌張，是因為安裝 MySQL 時，有開啟 <code>Validate Password</code> 插件導致的，只需要透過下列指令暫時關閉即可。</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-56"></span>
+<span style="display:block;" id="fig:unnamed-chunk-59"></span>
 <img src="figures/phpmyadmin-installation-error.png" alt="phpMyAdmin 安裝導覽，錯誤訊息" width="80%"><p class="caption">
 圖 3.6: phpMyAdmin 安裝導覽，錯誤訊息
 </p>
 </div>
 <p>以 root 登入資料庫</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb94-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb105-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
 <p>解除安裝插件 valid password</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode sqlmysql prefixed_mysql"><code class="sourceCode sqlmysql"><span id="cb95-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb95-1" aria-hidden="true" tabindex="-1"></a>uninstall component <span class="st">'file://component_valid_password'</span>;</span></code></pre></div>
-<div class="sourceCode" id="cb96"><pre class="sourceCode sqlmysql prefixed_mysql"><code class="sourceCode sqlmysql"><span id="cb96-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb96-1" aria-hidden="true" tabindex="-1"></a>exit;</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode sqlmysql prefixed_mysql"><code class="sourceCode sqlmysql"><span id="cb106-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb106-1" aria-hidden="true" tabindex="-1"></a>uninstall component <span class="st">'file://component_valid_password'</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode sqlmysql prefixed_mysql"><code class="sourceCode sqlmysql"><span id="cb107-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb107-1" aria-hidden="true" tabindex="-1"></a>exit;</span></code></pre></div>
 <p>在安裝一次 <code>phpmyadmin</code></p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb97-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install phpmyadmin <span class="at">--yes</span></span></code></pre></div>
-<div class="sourceCode" id="cb98"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb98-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb108-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install phpmyadmin <span class="at">--yes</span></span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb109-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
 <p>將 valid password 裝回去</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode sqlmysql prefixed_mysql"><code class="sourceCode sqlmysql"><span id="cb99-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb99-1" aria-hidden="true" tabindex="-1"></a>install component <span class="st">'file://component_valid_password'</span></span></code></pre></div>
-<div class="sourceCode" id="cb100"><pre class="sourceCode sqlmysql prefixed_mysql"><code class="sourceCode sqlmysql"><span id="cb100-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb100-1" aria-hidden="true" tabindex="-1"></a>exit;</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode sqlmysql prefixed_mysql"><code class="sourceCode sqlmysql"><span id="cb110-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb110-1" aria-hidden="true" tabindex="-1"></a>install component <span class="st">'file://component_valid_password'</span></span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode sqlmysql prefixed_mysql"><code class="sourceCode sqlmysql"><span id="cb111-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb111-1" aria-hidden="true" tabindex="-1"></a>exit;</span></code></pre></div>
 </div>
 <p>啟動 phpMyAdmin 的依賴插件</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb101-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> phpenmod mbstring</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb112-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> phpenmod mbstring</span></code></pre></div>
 <p>重新啟動 Apache2</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb102-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart apache2</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb113-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart apache2</span></code></pre></div>
 <p>從網站進入 phpMyAdmin 操作介面</p>
 <pre><code>http://&lt;虛擬主機的 ip 地址&gt;/phpmyadmin/</code></pre>
 <p>如果找不到是正常的（如下圖），在 Ubuntu 20.04 安裝 phpMyAdmin 時，沒有正確的設定到 phpMyAdmin。 可以參考<a href="https://askubuntu.com/questions/387062/how-to-solve-the-phpmyadmin-not-found-issue-after-upgrading-php-and-apache">這裡</a>三樓的解法：</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-57"></span>
+<span style="display:block;" id="fig:unnamed-chunk-60"></span>
 <img src="figures/phpmyadmin-main-page-failed.png" alt="phpMyAdmin 沒有成功設定的頁面" width="80%"><p class="caption">
 圖 3.7: phpMyAdmin 沒有成功設定的頁面
 </p>
 </div>
 <p>手動軟連結到 Apache2 的設定資料夾</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb104-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb115-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf</span></code></pre></div>
 <p>接著啟動 phpMyAdmin 的設定檔</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb105-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> a2enconf phpmyadmin</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb116-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> a2enconf phpmyadmin</span></code></pre></div>
 <p>重新啟動 Apache2</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb106-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart apache2</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb117-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart apache2</span></code></pre></div>
 <p>再從瀏覽器嘗試一次連線</p>
 <pre><code>http://&lt;虛擬主機的 ip 地址&gt;/phpmyadmin/</code></pre>
 <p>成功～ 🎊</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-58"></span>
+<span style="display:block;" id="fig:unnamed-chunk-61"></span>
 <img src="figures/phpmyadmin-main-page-successed.png" alt="phpMyAdmin 頁面" width="80%"><p class="caption">
 圖 3.8: phpMyAdmin 頁面
 </p>
@@ -630,33 +630,33 @@ Download-Size: 4,426 kB
 <span class="header-section-number">3.5.3</span> Step 2 — 使 phpMyAdmin 更加安全<a class="anchor" aria-label="anchor" href="#step-2-%E4%BD%BF-phpmyadmin-%E6%9B%B4%E5%8A%A0%E5%AE%89%E5%85%A8"><i class="fas fa-link"></i></a>
 </h3>
 <p>預設的網址 <code>http://&lt;虛擬機器的 ip 位置&gt;/phpmyadmin</code> 實在是太危險了，如果有人有意破壞，又被猜到管理員的密碼，那將會一發不可收拾，所以接下來要改的是 phpMyAdmin 在 Apache2 中的設定，將預設的位置改掉至少會安全一點。</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb108-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/phpmyadmin/apache.conf</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb119-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/phpmyadmin/apache.conf</span></code></pre></div>
 <div class="code-label">
 <p>/etc/phpmyadmin/apache.conf</p>
 </div>
-<div class="sourceCode" id="cb109"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb109-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co"># phpMyAdmin default Apache configuration</span></span>
-<span id="cb109-2"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb109-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb109-3"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb109-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Alias</span> /sql /usr/share/phpmyadmin <span class="co"># 變更這裡</span></span>
-<span id="cb109-4"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb109-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb109-5"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb109-5" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>Directory <span class="ex">/usr/share/phpmyadmin</span><span class="op">&gt;</span></span>
-<span id="cb109-6"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb109-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Options</span> SymLinksIfOwnerMatch</span>
-<span id="cb109-7"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb109-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">DirectoryIndex</span> index.php</span>
-<span id="cb109-8"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb109-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">AllowOverride</span> All <span class="co"># 新增這行</span></span>
-<span id="cb109-9"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb109-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb109-10"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb109-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
-<span id="cb109-11"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb109-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb109-12"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb109-12" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>/Directory<span class="op">&gt;</span></span>
-<span id="cb109-13"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb109-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb109-14"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb109-14" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb120-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co"># phpMyAdmin default Apache configuration</span></span>
+<span id="cb120-2"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb120-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-3"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb120-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Alias</span> /sql /usr/share/phpmyadmin <span class="co"># 變更這裡</span></span>
+<span id="cb120-4"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb120-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-5"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb120-5" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>Directory <span class="ex">/usr/share/phpmyadmin</span><span class="op">&gt;</span></span>
+<span id="cb120-6"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb120-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Options</span> SymLinksIfOwnerMatch</span>
+<span id="cb120-7"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb120-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">DirectoryIndex</span> index.php</span>
+<span id="cb120-8"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb120-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">AllowOverride</span> All <span class="co"># 新增這行</span></span>
+<span id="cb120-9"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb120-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-10"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb120-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
+<span id="cb120-11"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb120-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-12"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb120-12" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>/Directory<span class="op">&gt;</span></span>
+<span id="cb120-13"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb120-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-14"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb120-14" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span></code></pre></div>
 <div class="infobox info">
 <p>因為 <code>/etc/phpmyadmin/apache.conf</code> 已軟連結（soft-link）至 <code>/etc/apache2/conf-available/phpmyadmin.conf</code> 所以變更<code>apache.conf</code> 時，位於 Apache2 中的設定檔也會跟著變更。</p>
 </div>
 <p>重新啟動 Apache2</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb110-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart apache2</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb121-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart apache2</span></code></pre></div>
 <p>從新的 ip 位址進入</p>
 <pre><code>http://&lt;虛擬機器的 ip 位址&gt;/sql/</code></pre>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-59"></span>
+<span style="display:block;" id="fig:unnamed-chunk-62"></span>
 <img src="figures/phpmyadmin-main-page-successed.png" alt="剛才更新的路由" width="80%"><p class="caption">
 圖 3.9: 剛才更新的路由
 </p>
@@ -667,21 +667,21 @@ Download-Size: 4,426 kB
 <span class="header-section-number">3.5.4</span> Step 3 — 再多一層存取的密碼保護 [可跳過]<a class="anchor" aria-label="anchor" href="#step-3-%E5%86%8D%E5%A4%9A%E4%B8%80%E5%B1%A4%E5%AD%98%E5%8F%96%E7%9A%84%E5%AF%86%E7%A2%BC%E4%BF%9D%E8%AD%B7-%E5%8F%AF%E8%B7%B3%E9%81%8E"><i class="fas fa-link"></i></a>
 </h3>
 <p>新增一個叫做 <code>.htaccess</code> 的檔案</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb112-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /usr/share/phpmyadmin/.htaccess</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb123-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /usr/share/phpmyadmin/.htaccess</span></code></pre></div>
 <p>放入設定</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb113-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="ex">AuthType</span> Basic</span>
-<span id="cb113-2"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb113-2" aria-hidden="true" tabindex="-1"></a><span class="ex">AuthName</span> <span class="st">"限制存取的檔案"</span></span>
-<span id="cb113-3"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb113-3" aria-hidden="true" tabindex="-1"></a><span class="ex">AuthUserFile</span> /etc/phpmyadmin/.htpasswd</span>
-<span id="cb113-4"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb113-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Require</span> valid-user</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb124-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="ex">AuthType</span> Basic</span>
+<span id="cb124-2"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb124-2" aria-hidden="true" tabindex="-1"></a><span class="ex">AuthName</span> <span class="st">"限制存取的檔案"</span></span>
+<span id="cb124-3"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb124-3" aria-hidden="true" tabindex="-1"></a><span class="ex">AuthUserFile</span> /etc/phpmyadmin/.htpasswd</span>
+<span id="cb124-4"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb124-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Require</span> valid-user</span></code></pre></div>
 <p>用 <code>htpasswd</code> 指令以 <code>.htpasswd</code> 生成帳號，這個帳號叫做 asis，此時會提示你輸入密碼。</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb114-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> htpasswd <span class="at">-c</span> /etc/phpmyadmin/.htpasswd asis</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb125-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> htpasswd <span class="at">-c</span> /etc/phpmyadmin/.htpasswd asis</span></code></pre></div>
 <div class="infobox info">
 <p>如果要新增其他使用者，請將 <code>-c</code> 參數移除</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb115-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> htpasswd /etc/phpmyadmin/.htpasswd otheruser</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb126-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> htpasswd /etc/phpmyadmin/.htpasswd otheruser</span></code></pre></div>
 </div>
 <p>再進入一次 phpMyAdmin 的位址嘗試：</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-60"></span>
+<span style="display:block;" id="fig:unnamed-chunk-63"></span>
 <img src="figures/htaccess-prompt-login-panel.png" alt="phpMyAdmin 登入提示" width="80%"><p class="caption">
 圖 3.10: phpMyAdmin 登入提示
 </p>
@@ -692,37 +692,37 @@ Download-Size: 4,426 kB
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html"><span class="header-section-number">2</span> Ubuntu 的基本設定</a></div>
+<div class="prev"><a href="ubuntu-basic-configuration.html"><span class="header-section-number">2</span> Ubuntu 的基本設定</a></div>
 <div class="next"><a href="rstudio-rshiny-server.html"><span class="header-section-number">4</span> RStudio &amp; RShiny Server</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86"><span class="header-section-number">3</span> LAMP 程式集</a></li>
-<li><a class="nav-link" href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99-2"><span class="header-section-number">3.1</span> 事前準備</a></li>
+<li><a class="nav-link" href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99"><span class="header-section-number">3.1</span> 事前準備</a></li>
 <li>
 <a class="nav-link" href="#apache"><span class="header-section-number">3.2</span> Apache</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-1"><span class="header-section-number">3.2.1</span> 概述</a></li>
+<li><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="header-section-number">3.2.1</span> 概述</a></li>
 <li><a class="nav-link" href="#step-1-%E5%AE%89%E8%A3%9D-apache"><span class="header-section-number">3.2.2</span> Step 1 — 安裝 Apache</a></li>
 <li><a class="nav-link" href="#step-2-%E8%AA%BF%E6%95%B4%E9%98%B2%E7%81%AB%E7%89%86-ufw-%E8%A8%AD%E5%AE%9A"><span class="header-section-number">3.2.3</span> Step 2 — 調整防火牆 UFW 設定</a></li>
 </ul>
 </li>
 <li>
 <a class="nav-link" href="#mysql"><span class="header-section-number">3.3</span> MySQL</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-2"><span class="header-section-number">3.3.1</span> 概述</a></li>
+<li><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-1"><span class="header-section-number">3.3.1</span> 概述</a></li>
 <li><a class="nav-link" href="#step-1-%E5%AE%89%E8%A3%9D-mysql"><span class="header-section-number">3.3.2</span> Step 1 — 安裝 MySQL</a></li>
 <li><a class="nav-link" href="#step-2-%E8%A8%AD%E5%AE%9A-mysql"><span class="header-section-number">3.3.3</span> Step 2 — 設定 MySQL</a></li>
 </ul>
 </li>
 <li>
 <a class="nav-link" href="#php"><span class="header-section-number">3.4</span> PHP</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-3"><span class="header-section-number">3.4.1</span> 概述</a></li>
+<li><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-2"><span class="header-section-number">3.4.1</span> 概述</a></li>
 <li><a class="nav-link" href="#step-1-%E5%AE%89%E8%A3%9D-php-php-mysql-%E6%8F%92%E4%BB%B6"><span class="header-section-number">3.4.2</span> Step 1 — 安裝 php &amp; php-mysql 插件</a></li>
 <li><a class="nav-link" href="#step-2-%E5%BB%BA%E7%AB%8B%E8%99%9B%E6%93%AC%E7%B6%B2%E7%AB%99"><span class="header-section-number">3.4.3</span> Step 2 — 建立虛擬網站</a></li>
 </ul>
 </li>
 <li>
 <a class="nav-link" href="#phpmyadmin"><span class="header-section-number">3.5</span> phpMyAdmin</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-4"><span class="header-section-number">3.5.1</span> 概述</a></li>
+<li><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-3"><span class="header-section-number">3.5.1</span> 概述</a></li>
 <li><a class="nav-link" href="#step-1-%E5%AE%89%E8%A3%9D-phpmyadmin"><span class="header-section-number">3.5.2</span> Step 1 — 安裝 phpMyAdmin</a></li>
 <li><a class="nav-link" href="#step-2-%E4%BD%BF-phpmyadmin-%E6%9B%B4%E5%8A%A0%E5%AE%89%E5%85%A8"><span class="header-section-number">3.5.3</span> Step 2 — 使 phpMyAdmin 更加安全</a></li>
 <li><a class="nav-link" href="#step-3-%E5%86%8D%E5%A4%9A%E4%B8%80%E5%B1%A4%E5%AD%98%E5%8F%96%E7%9A%84%E5%AF%86%E7%A2%BC%E4%BF%9D%E8%AD%B7-%E5%8F%AF%E8%B7%B3%E9%81%8E"><span class="header-section-number">3.5.4</span> Step 3 — 再多一層存取的密碼保護 [可跳過]</a></li>
@@ -745,7 +745,7 @@ Download-Size: 4,426 kB
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-07-21.</p>
+    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-08-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

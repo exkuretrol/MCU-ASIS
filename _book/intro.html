@@ -71,7 +71,7 @@
 <li><a class="" href="index.html">引言</a></li>
 <li class="book-part">基礎建設</li>
 <li><a class="active" href="intro.html"><span class="header-section-number">1</span> 虛擬主機</a></li>
-<li><a class="" href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html"><span class="header-section-number">2</span> Ubuntu 的基本設定</a></li>
+<li><a class="" href="ubuntu-basic-configuration.html"><span class="header-section-number">2</span> Ubuntu 的基本設定</a></li>
 <li class="book-part">軟體安裝</li>
 <li><a class="" href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html"><span class="header-section-number">3</span> LAMP 程式集</a></li>
 <li><a class="" href="rstudio-rshiny-server.html"><span class="header-section-number">4</span> RStudio &amp; RShiny Server</a></li>
@@ -93,9 +93,9 @@
 <span class="header-section-number">章節 1</span> 虛擬主機<a class="anchor" aria-label="anchor" href="#intro"><i class="fas fa-link"></i></a>
 </h1>
 <p>因為使用者的經驗、能力與解決問題的能力會有所差異，在接觸新的系統之前，最好還是先在虛擬主機上先運行過一次，確認沒問題之後再把操作搬到實體電腦上去，才不會遇到預料之外的問題。本書所使用運行虛擬主機的軟體為 VirtualBox。</p>
-<div id="事前準備" class="section level2" number="1.1">
+<div id="preparing" class="section level2" number="1.1">
 <h2>
-<span class="header-section-number">1.1</span> 事前準備<a class="anchor" aria-label="anchor" href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.1</span> 事前準備<a class="anchor" aria-label="anchor" href="#preparing"><i class="fas fa-link"></i></a>
 </h2>
 <p>在開始教學之前，確定你的環境要能上網存取網路上的資源。 再來是檢查自己的電腦可不可以運行 VirtualBox（或是其他可以運行虛擬主機的軟體），要運行虛擬主機通常都要去 BIOS 打開一個叫做擬化功能（Virtualization Technology）的功能。</p>
 <p>下列是我所整理各廠牌虛擬化功能的開啟方式：</p>
@@ -132,9 +132,9 @@
 </tbody>
 </table></div>
 </div>
-<div id="下載-ubuntu-映像檔" class="section level2" number="1.2">
+<div id="downloading-ubuntu-image" class="section level2" number="1.2">
 <h2>
-<span class="header-section-number">1.2</span> 下載 Ubuntu 映像檔<a class="anchor" aria-label="anchor" href="#%E4%B8%8B%E8%BC%89-ubuntu-%E6%98%A0%E5%83%8F%E6%AA%94"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.2</span> 下載 Ubuntu 映像檔<a class="anchor" aria-label="anchor" href="#downloading-ubuntu-image"><i class="fas fa-link"></i></a>
 </h2>
 <p>進到 Ubuntu 官方網站後，點選右上角的「Download」展開下載頁面。</p>
 <div class="figure" style="text-align: center">
@@ -164,9 +164,9 @@
 <li><p><code>Option 3 - Automated server provisioning</code>: 利用 <a href="https://maas.io/">MaaS</a> (Metal-as-a-Service) 安裝虛擬機。MaaS是管理數台虛擬主機用的服務，並不局限於 Ubuntu，Windows、CentOS 與 ESXi都可以在上面部屬。</p></li>
 </ul>
 </div>
-<div id="安裝-virtualbox" class="section level2" number="1.3">
+<div id="installing-virtualbox" class="section level2" number="1.3">
 <h2>
-<span class="header-section-number">1.3</span> 安裝 VirtualBox<a class="anchor" aria-label="anchor" href="#%E5%AE%89%E8%A3%9D-virtualbox"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.3</span> 安裝 VirtualBox<a class="anchor" aria-label="anchor" href="#installing-virtualbox"><i class="fas fa-link"></i></a>
 </h2>
 <p>首先到 <a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox 官方網站</a>的下載頁面，下載適合你電腦系統的安裝執行檔，假如是 Windows 系統就點擊 「Windows hosts」的下載連結，如果是其他作業系統就根據你的作業系統下載對應的安裝程式。</p>
 <div class="figure" style="text-align: center">
@@ -211,9 +211,9 @@
 </p>
 </div>
 </div>
-<div id="virtualbox-介面簡介" class="section level2" number="1.4">
+<div id="virtualbox-interface" class="section level2" number="1.4">
 <h2>
-<span class="header-section-number">1.4</span> VirtualBox 介面簡介<a class="anchor" aria-label="anchor" href="#virtualbox-%E4%BB%8B%E9%9D%A2%E7%B0%A1%E4%BB%8B"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.4</span> VirtualBox 介面簡介<a class="anchor" aria-label="anchor" href="#virtualbox-interface"><i class="fas fa-link"></i></a>
 </h2>
 <p>在安裝完 VirtualBox 後，打開並不會有預先安裝好的作業系統，需要在 VirtualBox 內自行新增虛擬主機後，再將作業系統安裝至虛擬主機內；又或是匯入現有的虛擬主機映像檔（*.ova、*.ovf 格式）。</p>
 <p>首先介紹 VirtualBox 的使用者介面:</p>
@@ -237,9 +237,9 @@
 <code>加入</code>: 加入<em>已經存在的</em>虛擬主機</li>
 </ol>
 </div>
-<div id="新增虛擬主機設定" class="section level2" number="1.5">
+<div id="adding-vm-configuration" class="section level2" number="1.5">
 <h2>
-<span class="header-section-number">1.5</span> 新增虛擬主機設定<a class="anchor" aria-label="anchor" href="#%E6%96%B0%E5%A2%9E%E8%99%9B%E6%93%AC%E4%B8%BB%E6%A9%9F%E8%A8%AD%E5%AE%9A"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.5</span> 新增虛擬主機設定<a class="anchor" aria-label="anchor" href="#adding-vm-configuration"><i class="fas fa-link"></i></a>
 </h2>
 <p>按「新增」新增新的虛擬主機。這裡先點選「專家模式」，專家模式可以一併設定虛擬主機的所有設定。</p>
 <div class="figure" style="text-align: center">
@@ -248,9 +248,9 @@
 圖 1.11: 建立虛擬主機
 </p>
 </div>
-<div id="名稱和作業系統" class="section level3" number="1.5.1">
+<div id="name-and-operating-system" class="section level3" number="1.5.1">
 <h3>
-<span class="header-section-number">1.5.1</span> 名稱和作業系統<a class="anchor" aria-label="anchor" href="#%E5%90%8D%E7%A8%B1%E5%92%8C%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.5.1</span> 名稱和作業系統<a class="anchor" aria-label="anchor" href="#name-and-operating-system"><i class="fas fa-link"></i></a>
 </h3>
 <p>名稱填入「Ubuntu」，ISO 映像選擇剛才下載下來的 Ubuntu 映像檔。這裡請勾選「略過無人值守安裝」。</p>
 <div class="figure" style="text-align: center">
@@ -260,9 +260,9 @@
 </p>
 </div>
 </div>
-<div id="無人值守安裝" class="section level3" number="1.5.2">
+<div id="unattended-installation" class="section level3" number="1.5.2">
 <h3>
-<span class="header-section-number">1.5.2</span> 無人值守安裝<a class="anchor" aria-label="anchor" href="#%E7%84%A1%E4%BA%BA%E5%80%BC%E5%AE%88%E5%AE%89%E8%A3%9D"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.5.2</span> 無人值守安裝<a class="anchor" aria-label="anchor" href="#unattended-installation"><i class="fas fa-link"></i></a>
 </h3>
 <p>如果上一步有勾選略過無人值守安裝，畫面會像下圖一樣：</p>
 <div class="figure" style="text-align: center">
@@ -272,9 +272,9 @@
 </p>
 </div>
 </div>
-<div id="硬體" class="section level3" number="1.5.3">
+<div id="hardware" class="section level3" number="1.5.3">
 <h3>
-<span class="header-section-number">1.5.3</span> 硬體<a class="anchor" aria-label="anchor" href="#%E7%A1%AC%E9%AB%94"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.5.3</span> 硬體<a class="anchor" aria-label="anchor" href="#hardware"><i class="fas fa-link"></i></a>
 </h3>
 <p>記憶體大小根據每個人電腦的性能做調整，虛擬主機沒用來做什麼事那設定 4 GB 很夠用了。處理器可以設定為 2 或是更高，但是建議不要超過圖上的綠色指示，不然電腦會負荷不了。</p>
 <div class="figure" style="text-align: center">
@@ -287,9 +287,9 @@
 <p>因為我寫教學時是使用虛擬主機撰寫，電腦資源沒有那麼多，所以上圖才會只有設定 2 GB，自己安裝時照上面說明建議的就可以了</p>
 </div>
 </div>
-<div id="硬碟" class="section level3" number="1.5.4">
+<div id="disk" class="section level3" number="1.5.4">
 <h3>
-<span class="header-section-number">1.5.4</span> 硬碟<a class="anchor" aria-label="anchor" href="#%E7%A1%AC%E7%A2%9F"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.5.4</span> 硬碟<a class="anchor" aria-label="anchor" href="#disk"><i class="fas fa-link"></i></a>
 </h3>
 <p>將虛擬硬碟設定為 1.0 TB，且將硬碟類型變更為「VMDK」格式，並勾選「分割成 2 GB 部分」，如下圖：</p>
 <div class="figure" style="text-align: center">
@@ -359,9 +359,9 @@
 <p>會看到「控制器：SATA」裡面有兩個磁碟。到這裡虛擬主機的設定就完成啦。</p>
 </div>
 </div>
-<div id="安裝作業系統" class="section level2" number="1.6">
+<div id="installing-operating-system" class="section level2" number="1.6">
 <h2>
-<span class="header-section-number">1.6</span> 安裝作業系統<a class="anchor" aria-label="anchor" href="#%E5%AE%89%E8%A3%9D%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.6</span> 安裝作業系統<a class="anchor" aria-label="anchor" href="#installing-operating-system"><i class="fas fa-link"></i></a>
 </h2>
 <p>看到這個畫面點擊「啟動」，啟動剛才設定的作業系統。</p>
 <div class="figure" style="text-align: center">
@@ -380,9 +380,9 @@
 </div>
 <p>在安裝過程中使用方向鍵⬆️⬇️⬅️➡️（選擇）、Enter↪️（確認）與 Esc（返回）操控安裝程式介面。</p>
 <p>擷取後用方向鍵選取「Try or install Ubuntu」進到下一個畫面。</p>
-<div id="語言" class="section level3" number="1.6.1">
+<div id="language" class="section level3" number="1.6.1">
 <h3>
-<span class="header-section-number">1.6.1</span> 語言<a class="anchor" aria-label="anchor" href="#%E8%AA%9E%E8%A8%80"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.6.1</span> 語言<a class="anchor" aria-label="anchor" href="#language"><i class="fas fa-link"></i></a>
 </h3>
 <p>稍待 Ubuntu 作業系統映像檔載入後，安裝程式會跳出選擇語言的畫面，在這裡選擇適合你的語言。</p>
 <div class="figure" style="text-align: center">
@@ -392,9 +392,9 @@
 </p>
 </div>
 </div>
-<div id="更新提示" class="section level3" number="1.6.2">
+<div id="update-prompt" class="section level3" number="1.6.2">
 <h3>
-<span class="header-section-number">1.6.2</span> 更新提示<a class="anchor" aria-label="anchor" href="#%E6%9B%B4%E6%96%B0%E6%8F%90%E7%A4%BA"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.6.2</span> 更新提示<a class="anchor" aria-label="anchor" href="#update-prompt"><i class="fas fa-link"></i></a>
 </h3>
 <p>當 Ubuntu 在安裝過程中，如果有連上網路，安裝程式會偵測當前的安裝程式是否需要更新，如果出現了這個畫面代表安裝程式有新的版本，可以選擇「Update to the new installer」將安裝程式更新至最新版本。當然，也可以在系統安裝完後更新。</p>
 <div class="figure" style="text-align: center">
@@ -404,9 +404,9 @@
 </p>
 </div>
 </div>
-<div id="鍵盤配置" class="section level3" number="1.6.3">
+<div id="keyboard-configuration" class="section level3" number="1.6.3">
 <h3>
-<span class="header-section-number">1.6.3</span> 鍵盤配置<a class="anchor" aria-label="anchor" href="#%E9%8D%B5%E7%9B%A4%E9%85%8D%E7%BD%AE"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.6.3</span> 鍵盤配置<a class="anchor" aria-label="anchor" href="#keyboard-configuration"><i class="fas fa-link"></i></a>
 </h3>
 <p>這裡可以設定鍵盤的：</p>
 <ul>
@@ -420,9 +420,9 @@
 </p>
 </div>
 </div>
-<div id="安裝類型" class="section level3" number="1.6.4">
+<div id="installation-type" class="section level3" number="1.6.4">
 <h3>
-<span class="header-section-number">1.6.4</span> 安裝類型<a class="anchor" aria-label="anchor" href="#%E5%AE%89%E8%A3%9D%E9%A1%9E%E5%9E%8B"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.6.4</span> 安裝類型<a class="anchor" aria-label="anchor" href="#installation-type"><i class="fas fa-link"></i></a>
 </h3>
 <p>在安裝類型選擇 Ubuntu Server 就好，minimized 版本會少一些我們之後會用到的功能，到時候還是要自己裝回來。</p>
 <div class="figure" style="text-align: center">
@@ -432,9 +432,9 @@
 </p>
 </div>
 </div>
-<div id="網路連線" class="section level3" number="1.6.5">
+<div id="network-connection" class="section level3" number="1.6.5">
 <h3>
-<span class="header-section-number">1.6.5</span> 網路連線<a class="anchor" aria-label="anchor" href="#%E7%B6%B2%E8%B7%AF%E9%80%A3%E7%B7%9A"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.6.5</span> 網路連線<a class="anchor" aria-label="anchor" href="#network-connection"><i class="fas fa-link"></i></a>
 </h3>
 <p>這裡可以設定 Ubuntu 的網路連線，預設是由 DHCP 設定，通常不用變更，如果這裡連線失敗，也可以等開機後再做設定。</p>
 <div class="figure" style="text-align: center">
@@ -456,9 +456,9 @@
 </p>
 </div>
 </div>
-<div id="鏡像" class="section level3" number="1.6.7">
+<div id="mirror" class="section level3" number="1.6.7">
 <h3>
-<span class="header-section-number">1.6.7</span> 鏡像<a class="anchor" aria-label="anchor" href="#%E9%8F%A1%E5%83%8F"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.6.7</span> 鏡像<a class="anchor" aria-label="anchor" href="#mirror"><i class="fas fa-link"></i></a>
 </h3>
 <p>同上，不需要特別設定 mirror（鏡像），安裝程式會自動判斷選擇哪個地方的鏡像網址更新。</p>
 <div class="figure" style="text-align: center">
@@ -468,9 +468,9 @@
 </p>
 </div>
 </div>
-<div id="系統空間配置" class="section level3" number="1.6.8">
+<div id="system-space-configuration" class="section level3" number="1.6.8">
 <h3>
-<span class="header-section-number">1.6.8</span> 系統空間配置<a class="anchor" aria-label="anchor" href="#%E7%B3%BB%E7%B5%B1%E7%A9%BA%E9%96%93%E9%85%8D%E7%BD%AE"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.6.8</span> 系統空間配置<a class="anchor" aria-label="anchor" href="#system-space-configuration"><i class="fas fa-link"></i></a>
 </h3>
 <p>以下 Raid-1 相關的設定是參考 <span class="citation">(<a href="%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99.html#ref-evangelou_2020" role="doc-biblioref">Evangelou 2020</a>)</span> 的 Gist 翻譯成中文文章。</p>
 <ul>
@@ -609,9 +609,9 @@
 <li>在最下面選擇「Done」，至下一步。</li>
 </ul>
 </div>
-<div id="使用者設定" class="section level3" number="1.6.9">
+<div id="user-configuration" class="section level3" number="1.6.9">
 <h3>
-<span class="header-section-number">1.6.9</span> 使用者設定<a class="anchor" aria-label="anchor" href="#%E4%BD%BF%E7%94%A8%E8%80%85%E8%A8%AD%E5%AE%9A"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.6.9</span> 使用者設定<a class="anchor" aria-label="anchor" href="#user-configuration"><i class="fas fa-link"></i></a>
 </h3>
 <p>在這邊設定自己的使用者名稱與電腦名稱。</p>
 <div class="figure" style="text-align: center">
@@ -663,9 +663,9 @@
 </div>
 </div>
 </div>
-<div id="完成安裝" class="section level2" number="1.7">
+<div id="completion" class="section level2" number="1.7">
 <h2>
-<span class="header-section-number">1.7</span> 完成安裝<a class="anchor" aria-label="anchor" href="#%E5%AE%8C%E6%88%90%E5%AE%89%E8%A3%9D"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.7</span> 完成安裝<a class="anchor" aria-label="anchor" href="#completion"><i class="fas fa-link"></i></a>
 </h2>
 <p>這個頁面是預覽 Ubuntu 安裝程式做過了什麼，都會記錄在這裡，通常不會有什麼問題所以可以不用理他，待安裝完成即可。</p>
 <div class="figure" style="text-align: center">
@@ -686,40 +686,40 @@
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="index.html">引言</a></div>
-<div class="next"><a href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html"><span class="header-section-number">2</span> Ubuntu 的基本設定</a></div>
+<div class="next"><a href="ubuntu-basic-configuration.html"><span class="header-section-number">2</span> Ubuntu 的基本設定</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#intro"><span class="header-section-number">1</span> 虛擬主機</a></li>
-<li><a class="nav-link" href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99"><span class="header-section-number">1.1</span> 事前準備</a></li>
-<li><a class="nav-link" href="#%E4%B8%8B%E8%BC%89-ubuntu-%E6%98%A0%E5%83%8F%E6%AA%94"><span class="header-section-number">1.2</span> 下載 Ubuntu 映像檔</a></li>
-<li><a class="nav-link" href="#%E5%AE%89%E8%A3%9D-virtualbox"><span class="header-section-number">1.3</span> 安裝 VirtualBox</a></li>
-<li><a class="nav-link" href="#virtualbox-%E4%BB%8B%E9%9D%A2%E7%B0%A1%E4%BB%8B"><span class="header-section-number">1.4</span> VirtualBox 介面簡介</a></li>
+<li><a class="nav-link" href="#preparing"><span class="header-section-number">1.1</span> 事前準備</a></li>
+<li><a class="nav-link" href="#downloading-ubuntu-image"><span class="header-section-number">1.2</span> 下載 Ubuntu 映像檔</a></li>
+<li><a class="nav-link" href="#installing-virtualbox"><span class="header-section-number">1.3</span> 安裝 VirtualBox</a></li>
+<li><a class="nav-link" href="#virtualbox-interface"><span class="header-section-number">1.4</span> VirtualBox 介面簡介</a></li>
 <li>
-<a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E8%99%9B%E6%93%AC%E4%B8%BB%E6%A9%9F%E8%A8%AD%E5%AE%9A"><span class="header-section-number">1.5</span> 新增虛擬主機設定</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#%E5%90%8D%E7%A8%B1%E5%92%8C%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1"><span class="header-section-number">1.5.1</span> 名稱和作業系統</a></li>
-<li><a class="nav-link" href="#%E7%84%A1%E4%BA%BA%E5%80%BC%E5%AE%88%E5%AE%89%E8%A3%9D"><span class="header-section-number">1.5.2</span> 無人值守安裝</a></li>
-<li><a class="nav-link" href="#%E7%A1%AC%E9%AB%94"><span class="header-section-number">1.5.3</span> 硬體</a></li>
-<li><a class="nav-link" href="#%E7%A1%AC%E7%A2%9F"><span class="header-section-number">1.5.4</span> 硬碟</a></li>
+<a class="nav-link" href="#adding-vm-configuration"><span class="header-section-number">1.5</span> 新增虛擬主機設定</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#name-and-operating-system"><span class="header-section-number">1.5.1</span> 名稱和作業系統</a></li>
+<li><a class="nav-link" href="#unattended-installation"><span class="header-section-number">1.5.2</span> 無人值守安裝</a></li>
+<li><a class="nav-link" href="#hardware"><span class="header-section-number">1.5.3</span> 硬體</a></li>
+<li><a class="nav-link" href="#disk"><span class="header-section-number">1.5.4</span> 硬碟</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1"><span class="header-section-number">1.6</span> 安裝作業系統</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#%E8%AA%9E%E8%A8%80"><span class="header-section-number">1.6.1</span> 語言</a></li>
-<li><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%8F%90%E7%A4%BA"><span class="header-section-number">1.6.2</span> 更新提示</a></li>
-<li><a class="nav-link" href="#%E9%8D%B5%E7%9B%A4%E9%85%8D%E7%BD%AE"><span class="header-section-number">1.6.3</span> 鍵盤配置</a></li>
-<li><a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E9%A1%9E%E5%9E%8B"><span class="header-section-number">1.6.4</span> 安裝類型</a></li>
-<li><a class="nav-link" href="#%E7%B6%B2%E8%B7%AF%E9%80%A3%E7%B7%9A"><span class="header-section-number">1.6.5</span> 網路連線</a></li>
+<a class="nav-link" href="#installing-operating-system"><span class="header-section-number">1.6</span> 安裝作業系統</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#language"><span class="header-section-number">1.6.1</span> 語言</a></li>
+<li><a class="nav-link" href="#update-prompt"><span class="header-section-number">1.6.2</span> 更新提示</a></li>
+<li><a class="nav-link" href="#keyboard-configuration"><span class="header-section-number">1.6.3</span> 鍵盤配置</a></li>
+<li><a class="nav-link" href="#installation-type"><span class="header-section-number">1.6.4</span> 安裝類型</a></li>
+<li><a class="nav-link" href="#network-connection"><span class="header-section-number">1.6.5</span> 網路連線</a></li>
 <li><a class="nav-link" href="#proxy"><span class="header-section-number">1.6.6</span> Proxy</a></li>
-<li><a class="nav-link" href="#%E9%8F%A1%E5%83%8F"><span class="header-section-number">1.6.7</span> 鏡像</a></li>
-<li><a class="nav-link" href="#%E7%B3%BB%E7%B5%B1%E7%A9%BA%E9%96%93%E9%85%8D%E7%BD%AE"><span class="header-section-number">1.6.8</span> 系統空間配置</a></li>
-<li><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%80%85%E8%A8%AD%E5%AE%9A"><span class="header-section-number">1.6.9</span> 使用者設定</a></li>
+<li><a class="nav-link" href="#mirror"><span class="header-section-number">1.6.7</span> 鏡像</a></li>
+<li><a class="nav-link" href="#system-space-configuration"><span class="header-section-number">1.6.8</span> 系統空間配置</a></li>
+<li><a class="nav-link" href="#user-configuration"><span class="header-section-number">1.6.9</span> 使用者設定</a></li>
 <li><a class="nav-link" href="#ubuntu-pro"><span class="header-section-number">1.6.10</span> Ubuntu Pro</a></li>
 <li><a class="nav-link" href="#ssh"><span class="header-section-number">1.6.11</span> SSH</a></li>
 <li><a class="nav-link" href="#snaps"><span class="header-section-number">1.6.12</span> Snaps</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#%E5%AE%8C%E6%88%90%E5%AE%89%E8%A3%9D"><span class="header-section-number">1.7</span> 完成安裝</a></li>
+<li><a class="nav-link" href="#completion"><span class="header-section-number">1.7</span> 完成安裝</a></li>
 </ul>
 
       <div class="book-extra">
@@ -737,7 +737,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-07-21.</p>
+    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-08-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

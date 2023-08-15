@@ -71,7 +71,7 @@
 <li><a class="" href="index.html">引言</a></li>
 <li class="book-part">基礎建設</li>
 <li><a class="" href="intro.html"><span class="header-section-number">1</span> 虛擬主機</a></li>
-<li><a class="" href="ubuntu-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A.html"><span class="header-section-number">2</span> Ubuntu 的基本設定</a></li>
+<li><a class="" href="ubuntu-basic-configuration.html"><span class="header-section-number">2</span> Ubuntu 的基本設定</a></li>
 <li class="book-part">軟體安裝</li>
 <li><a class="" href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html"><span class="header-section-number">3</span> LAMP 程式集</a></li>
 <li><a class="" href="rstudio-rshiny-server.html"><span class="header-section-number">4</span> RStudio &amp; RShiny Server</a></li>
@@ -97,7 +97,7 @@
 <span class="header-section-number">C.1</span> 更改預設的文本編輯器<a class="anchor" aria-label="anchor" href="#%E6%9B%B4%E6%94%B9%E9%A0%90%E8%A8%AD%E7%9A%84%E6%96%87%E6%9C%AC%E7%B7%A8%E8%BC%AF%E5%99%A8"><i class="fas fa-link"></i></a>
 </h2>
 <p>這個指令可以變更系統編輯文件所用的程式</p>
-<div class="sourceCode" id="cb285"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb285-1"><a href="%E5%85%B6%E4%BB%96.html#cb285-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> update-alternatives <span class="at">--config</span> editor</span></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb296-1"><a href="%E5%85%B6%E4%BB%96.html#cb296-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> update-alternatives <span class="at">--config</span> editor</span></code></pre></div>
 <p>按了 Enter↩︎ 之後，會出現現在可用的編輯器，輸入對應的編號即可變更。有標 <code>*</code> 號的編輯器為目前設定的預設編輯器。</p>
 <pre class="console_output"><code>There are 4 choices for the alternative editor (providing /usr/bin/editor).
 
@@ -117,20 +117,20 @@ Press &lt;enter&gt; to keep the current choice[*], or type selection number: 3</
 <span class="header-section-number">C.2</span> Mysql 8.0 root 密碼重設<a class="anchor" aria-label="anchor" href="#mysql-8.0-root-%E5%AF%86%E7%A2%BC%E9%87%8D%E8%A8%AD"><i class="fas fa-link"></i></a>
 </h2>
 <p>先建立一個含有改變 root 密碼的 sql 語法文字檔案</p>
-<div class="sourceCode" id="cb287"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb287-1"><a href="%E5%85%B6%E4%BB%96.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> mysql-init</span></code></pre></div>
-<div class="sourceCode" id="cb288"><pre class="sourceCode sqlmysql"><code class="sourceCode sqlmysql"><span id="cb288-1"><a href="%E5%85%B6%E4%BB%96.html#cb288-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="fu">USER</span> <span class="st">'root'</span>@<span class="st">'localhost'</span> IDENTIFIED <span class="kw">with</span> caching_sha2_password <span class="kw">by</span> <span class="st">'&lt;新的 root 密碼&gt;'</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb298"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb298-1"><a href="%E5%85%B6%E4%BB%96.html#cb298-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> mysql-init</span></code></pre></div>
+<div class="sourceCode" id="cb299"><pre class="sourceCode sqlmysql"><code class="sourceCode sqlmysql"><span id="cb299-1"><a href="%E5%85%B6%E4%BB%96.html#cb299-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="fu">USER</span> <span class="st">'root'</span>@<span class="st">'localhost'</span> IDENTIFIED <span class="kw">with</span> caching_sha2_password <span class="kw">by</span> <span class="st">'&lt;新的 root 密碼&gt;'</span>;</span></code></pre></div>
 <p>如存好後將擁有者與使用者群組改成 <code>mysql</code> 後，移至 <code>/tmp</code> 資料夾，使 mysql 使用者可以存取。</p>
-<div class="sourceCode" id="cb289"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb289-1"><a href="%E5%85%B6%E4%BB%96.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> mysql.mysql mysql-init <span class="kw">&amp;&amp;</span> <span class="fu">mv</span> mysql-init /tmp</span></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb300-1"><a href="%E5%85%B6%E4%BB%96.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> mysql.mysql mysql-init <span class="kw">&amp;&amp;</span> <span class="fu">mv</span> mysql-init /tmp</span></code></pre></div>
 <p>切換至 root 使用者進行後續操作</p>
-<div class="sourceCode" id="cb290"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb290-1"><a href="%E5%85%B6%E4%BB%96.html#cb290-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span></span></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb301-1"><a href="%E5%85%B6%E4%BB%96.html#cb301-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span></span></code></pre></div>
 <p>將目前的 mysql 關閉</p>
-<div class="sourceCode" id="cb291"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb291-1"><a href="%E5%85%B6%E4%BB%96.html#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="fu">killall</span> <span class="at">-9</span> mysqld</span></code></pre></div>
+<div class="sourceCode" id="cb302"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb302-1"><a href="%E5%85%B6%E4%BB%96.html#cb302-1" aria-hidden="true" tabindex="-1"></a><span class="fu">killall</span> <span class="at">-9</span> mysqld</span></code></pre></div>
 <p>或是使用 <code>systemctl</code> 指令關閉 mysql 服務</p>
 <p><code>{.bash prefixed} systemctl stop mysql.service</code></p>
 <p>接著使用 mysqld 指令啟動 mysql 並指定 <code>--user</code>、<code>--defaults-file</code> 與 <code>--init-file</code> 參數。</p>
-<div class="sourceCode" id="cb292"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb292-1"><a href="%E5%85%B6%E4%BB%96.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysqld</span> <span class="at">--defaults-file</span><span class="op">=</span>/etc/mysql/mysql.conf.d/mysqld.cnf <span class="dt">\ </span></span>
-<span id="cb292-2"><a href="%E5%85%B6%E4%BB%96.html#cb292-2" aria-hidden="true" tabindex="-1"></a><span class="ex">--user=mysql</span> <span class="dt">\ </span></span>
-<span id="cb292-3"><a href="%E5%85%B6%E4%BB%96.html#cb292-3" aria-hidden="true" tabindex="-1"></a><span class="ex">--init-file=/tmp/mysql-init</span> <span class="kw">&amp;</span></span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb303-1"><a href="%E5%85%B6%E4%BB%96.html#cb303-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysqld</span> <span class="at">--defaults-file</span><span class="op">=</span>/etc/mysql/mysql.conf.d/mysqld.cnf <span class="dt">\ </span></span>
+<span id="cb303-2"><a href="%E5%85%B6%E4%BB%96.html#cb303-2" aria-hidden="true" tabindex="-1"></a><span class="ex">--user=mysql</span> <span class="dt">\ </span></span>
+<span id="cb303-3"><a href="%E5%85%B6%E4%BB%96.html#cb303-3" aria-hidden="true" tabindex="-1"></a><span class="ex">--init-file=/tmp/mysql-init</span> <span class="kw">&amp;</span></span></code></pre></div>
 <ul>
 <li><p><code>--defaults-file</code>: MySQL 預設啟動的設定檔案</p></li>
 <li><p><code>--user</code>: 以使用者 <code>mysql</code> 執行</p></li>
@@ -141,14 +141,14 @@ Press &lt;enter&gt; to keep the current choice[*], or type selection number: 3</
 <div class="infobox caution">
 <p>如果不行的話，請檢查位於 <code>/var/log/mysql/error.log</code> 的錯誤紀錄，如果有看到類似 <code>/var/run/mysqld</code> 的錯誤，需要手動建立資料夾，並把權限變更為 <code>mysql</code> 用戶的權限。 操作完之後再從關閉 mysql 服務開始，再嘗試一次。</p>
 <p>參考指令如下：</p>
-<div class="sourceCode" id="cb293"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb293-1"><a href="%E5%85%B6%E4%BB%96.html#cb293-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> /var/run/mysqld <span class="kw">&amp;&amp;</span> <span class="fu">chown</span> mysql.mysql /var/run/mysqld</span></code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb304-1"><a href="%E5%85%B6%E4%BB%96.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> /var/run/mysqld <span class="kw">&amp;&amp;</span> <span class="fu">chown</span> mysql.mysql /var/run/mysqld</span></code></pre></div>
 </div>
 <p>最後以正常的服務啟動 mysql：</p>
-<div class="sourceCode" id="cb294"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb294-1"><a href="%E5%85%B6%E4%BB%96.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> restart mysql.service</span></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb305-1"><a href="%E5%85%B6%E4%BB%96.html#cb305-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> restart mysql.service</span></code></pre></div>
 <p>退出 root 帳號</p>
-<div class="sourceCode" id="cb295"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb295-1"><a href="%E5%85%B6%E4%BB%96.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span></span></code></pre></div>
+<div class="sourceCode" id="cb306"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb306-1"><a href="%E5%85%B6%E4%BB%96.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span></span></code></pre></div>
 <p>試以新密碼登入 mysql root 帳號：</p>
-<div class="sourceCode" id="cb296"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb296-1"><a href="%E5%85%B6%E4%BB%96.html#cb296-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
+<div class="sourceCode" id="cb307"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb307-1"><a href="%E5%85%B6%E4%BB%96.html#cb307-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
 <p>成功 🎊</p>
 <pre class="console_output"><code>Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 17
@@ -192,7 +192,7 @@ mysql&gt; </code></pre>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-07-21.</p>
+    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-08-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>章節 2 Ubuntu 的基本設定 | MCU ASIS Ubuntu 系統安裝指南</title>
+<meta name="author" content="Chiawei Chen">
+<meta name="generator" content="bookdown 0.28 with bs4_book()">
+<meta property="og:title" content="章節 2 Ubuntu 的基本設定 | MCU ASIS Ubuntu 系統安裝指南">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="章節 2 Ubuntu 的基本設定 | MCU ASIS Ubuntu 系統安裝指南">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Noto_Sans_TC-0.4.2/font.css" rel="stylesheet">
+<link href="libs/Source_Code_Pro-0.4.2/font.css" rel="stylesheet">
+<link href="libs/Noto_Serif_TC-0.4.2/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="bs4_style.css">
+<meta name="description" content="本章主要會說明如何透過 SSH 存取虛擬機器與虛擬機器基本設定。  2.1 事前準備 從這個章節開始會出現一些特殊前綴的方框（如下表）表示，不同的前綴代表不同種類的終端機，或是使用終端機的身份，請多多注意。 PS: powershell 指令前綴 dir  $: 終端機指令前綴（一般使用者） ls -al  #: 終端機指令前綴（超級使用者） sudo rm -rf ~/Downloads...">
+<meta property="og:description" content="本章主要會說明如何透過 SSH 存取虛擬機器與虛擬機器基本設定。  2.1 事前準備 從這個章節開始會出現一些特殊前綴的方框（如下表）表示，不同的前綴代表不同種類的終端機，或是使用終端機的身份，請多多注意。 PS: powershell 指令前綴 dir  $: 終端機指令前綴（一般使用者） ls -al  #: 終端機指令前綴（超級使用者） sudo rm -rf ~/Downloads...">
+<meta name="twitter:description" content="本章主要會說明如何透過 SSH 存取虛擬機器與虛擬機器基本設定。  2.1 事前準備 從這個章節開始會出現一些特殊前綴的方框（如下表）表示，不同的前綴代表不同種類的終端機，或是使用終端機的身份，請多多注意。 PS: powershell 指令前綴 dir  $: 終端機指令前綴（一般使用者） ls -al  #: 終端機指令前綴（超級使用者） sudo rm -rf ~/Downloads...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">MCU ASIS Ubuntu 系統安裝指南</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">引言</a></li>
+<li class="book-part">基礎建設</li>
+<li><a class="" href="intro.html"><span class="header-section-number">1</span> 虛擬主機</a></li>
+<li><a class="active" href="ubuntu-basic-configuration.html"><span class="header-section-number">2</span> Ubuntu 的基本設定</a></li>
+<li class="book-part">軟體安裝</li>
+<li><a class="" href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html"><span class="header-section-number">3</span> LAMP 程式集</a></li>
+<li><a class="" href="rstudio-rshiny-server.html"><span class="header-section-number">4</span> RStudio &amp; RShiny Server</a></li>
+<li><a class="" href="jupyterlab-on-jupyterhub.html"><span class="header-section-number">5</span> JupyterLab on JupyterHub</a></li>
+<li class="book-part">附錄</li>
+<li><a class="" href="%E7%9B%B8%E9%97%9C%E8%BB%9F%E9%AB%94.html"><span class="header-section-number">A</span> 相關軟體</a></li>
+<li><a class="" href="%E5%B8%B3%E8%99%9F%E7%AE%A1%E7%90%86.html"><span class="header-section-number">B</span> 帳號管理</a></li>
+<li><a class="" href="%E5%85%B6%E4%BB%96.html"><span class="header-section-number">C</span> 其他</a></li>
+<li><a class="" href="%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99.html">參考資料</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/exkuretrol/MCU-ASIS">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="ubuntu-basic-configuration" class="section level1" number="2">
+<h1>
+<span class="header-section-number">章節 2</span> Ubuntu 的基本設定<a class="anchor" aria-label="anchor" href="#ubuntu-basic-configuration"><i class="fas fa-link"></i></a>
+</h1>
+<p>本章主要會說明如何透過 SSH 存取虛擬機器與虛擬機器基本設定。</p>
+<div id="preparing" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> 事前準備<a class="anchor" aria-label="anchor" href="#preparing"><i class="fas fa-link"></i></a>
+</h2>
+<p>從這個章節開始會出現一些特殊前綴的方框（如下表）表示，不同的前綴代表不同種類的終端機，或是使用終端機的身份，請多多注意。</p>
+<ul>
+<li>
+<p><code>PS</code>: powershell 指令前綴</p>
+<pre class="prefixed_powershell"><code>dir</code></pre>
+</li>
+<li>
+<p><code>$</code>: 終端機指令前綴（一般使用者）</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb4-1"><a href="ubuntu-basic-configuration.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-al</span></span></code></pre></div>
+</li>
+<li>
+<p><code>#</code>: 終端機指令前綴（超級使用者）</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb5-1"><a href="ubuntu-basic-configuration.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rm <span class="at">-rf</span> ~/Downloads</span></code></pre></div>
+</li>
+<li>
+<p><code>OUTPUT</code>: 終端機輸出</p>
+<pre class="console_output"><code>total 12
+drwxrwxr-x  3 kuaz kuaz 4096 Sep 22 02:11 ./
+drwxr-x--- 15 kuaz kuaz 4096 Oct 10 22:30 ../
+drwxrwxr-x  6 kuaz kuaz 4096 Oct  6 14:06 School/</code></pre>
+</li>
+</ul>
+</div>
+<div id="安裝驅動程式" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> 安裝驅動程式<a class="anchor" aria-label="anchor" href="#%E5%AE%89%E8%A3%9D%E9%A9%85%E5%8B%95%E7%A8%8B%E5%BC%8F"><i class="fas fa-link"></i></a>
+</h2>
+<p>在安裝驅動程式之前，需要從上面的設定將 Guest Additions 的光碟映像檔掛載至虛擬主機上面。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-48"></span>
+<img src="figures/insert-guest-additions-iso.png" alt="VirtualBox 插入 Guest Additions ISO" width="80%"><p class="caption">
+圖 2.1: VirtualBox 插入 Guest Additions ISO
+</p>
+</div>
+<p>掛載後先再 <code>/media/</code> 資料夾建立新的 <code>iso</code> 資料夾</p>
+<p><code>.bash .prefixed sudo mkdir /media/iso</code></p>
+<p>查詢目前掛載的位置</p>
+<p><code>.bash .prefixed lsblk</code></p>
+<p>掛載光碟至指定資料夾</p>
+<p><code>.bash .prefixed sudo mount /dev/sr0 /media/iso</code></p>
+<p>安裝安裝程式所需的依賴套件
+<code>.bash .prefixed sudo apt update &amp;&amp; sudo apt install bzip2 gcc make perl -y</code></p>
+<p>安裝驅動程式</p>
+<p><code>.bash .prefixed sudo /media/iso/VBoxLinuxAdditions.run</code></p>
+</div>
+<div id="access-virtual-machine-network" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> 存取虛擬主機的網路<a class="anchor" aria-label="anchor" href="#access-virtual-machine-network"><i class="fas fa-link"></i></a>
+</h2>
+<p>首先將虛擬主機關閉電源，關閉電源後要新增一張「僅限主機」的網路卡。對虛擬主機右鍵後點選設定。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-49"></span>
+<img src="figures/virtualbox-right-click.png" alt="VirtualBox 對虛擬主機右鍵" width="80%"><p class="caption">
+圖 2.2: VirtualBox 對虛擬主機右鍵
+</p>
+</div>
+<p>接著，依序點選「網路」 → 「介面卡 2」 → 「僅限主機」介面卡 → 「進階」，記下目前的 mac 位址。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-50"></span>
+<img src="figures/virtualbox-host-only-network-mac.png" alt="VirtualBox 對虛擬主機右鍵" width="80%"><p class="caption">
+圖 2.3: VirtualBox 對虛擬主機右鍵
+</p>
+</div>
+<p>在來回到虛擬主機安裝 net-tools</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb7-1"><a href="ubuntu-basic-configuration.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install net-tools</span></code></pre></div>
+<p>確認目前的裝置名稱，可以看到 <code>08:00:27:59:b3:11</code> 與剛才新增的介面卡 mac 位址相同。<code>enp0s8</code> 即為剛才插入的新的「僅限主機」網路卡。</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb8-1"><a href="ubuntu-basic-configuration.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ifconfig</span> <span class="at">-a</span></span></code></pre></div>
+<pre class="console_output"><code>enp0s3: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+        inet 10.0.2.15  netmask 255.255.255.0  broadcast 10.0.2.255
+        inet6 fe80::a00:27ff:fed3:c805  prefixlen 64  scopeid 0x20&lt;link&gt;
+        ether 08:00:27:d3:c8:05  txqueuelen 1000  (Ethernet)
+        RX packets 28  bytes 5374 (5.3 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 56  bytes 6063 (6.0 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+enp0s8: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+        inet6 fe80::a00:27ff:fe59:b311  prefixlen 64  scopeid 0x20&lt;link&gt;
+        ether 08:00:27:59:b3:11  txqueuelen 1000  (Ethernet)
+        RX packets 870  bytes 79177 (79.1 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 630  bytes 111436 (111.4 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 84  bytes 6368 (6.3 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 84  bytes 6368 (6.3 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</code></pre>
+<p>可以看到剛才新增的的網路卡沒有 ip 位址，這是因為系統沒有為這張網卡打開 dhcp 的設定。</p>
+<p>我們可以透過修改 netplan 的設定將 dhcp 伺服器打開。</p>
+<pre><code>sudo vim /etc/netplan/00-installer-config.yaml</code></pre>
+<pre class="console_output"><code># This is the network config written by 'subiquity'
+network:
+  ethernets:
+    enp0s3:
+      dhcp4: true
+    enp0s8:
+      dhcp4: true
+  version: 2</code></pre>
+<p>套用剛才的設定</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb12-1"><a href="ubuntu-basic-configuration.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> netplan apply</span></code></pre></div>
+<p>再次確認目前虛擬主機的 ip 位置</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb13-1"><a href="ubuntu-basic-configuration.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ifconfig</span></span></code></pre></div>
+<pre class="console_output"><code>enp0s3: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+        inet 10.0.2.15  netmask 255.255.255.0  broadcast 10.0.2.255
+        inet6 fe80::a00:27ff:fed3:c805  prefixlen 64  scopeid 0x20&lt;link&gt;
+        ether 08:00:27:d3:c8:05  txqueuelen 1000  (Ethernet)
+        RX packets 32  bytes 7734 (7.7 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 71  bytes 8490 (8.4 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+enp0s8: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+        inet 192.168.56.101  netmask 255.255.255.0  broadcast 192.168.56.255
+        inet6 fe80::a00:27ff:fe59:b311  prefixlen 64  scopeid 0x20&lt;link&gt;
+        ether 08:00:27:59:b3:11  txqueuelen 1000  (Ethernet)
+        RX packets 1068  bytes 98415 (98.4 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 791  bytes 132687 (132.6 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 84  bytes 6368 (6.3 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 84  bytes 6368 (6.3 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</code></pre>
+<p>後續我們就可以透過虛擬主機的 ip 位址 <code>192.168.56.101</code> 存取上面的服務。</p>
+</div>
+<div id="openssh" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> OpenSSH<a class="anchor" aria-label="anchor" href="#openssh"><i class="fas fa-link"></i></a>
+</h2>
+<p>在前第一章的安裝過程中，也有碰到 OpenSSH 的小節，不過那並不是給第一次要使用 OpenSSH 的使用者用的，而是給已經有在使用 SSH 金鑰的使用者看的。在這個小節會逐步解釋 OpenSSH 的使用方法，從 OpenSSH 客戶端安裝、產生 SSH 金鑰再來是連線。</p>
+<div id="overview" class="section level3" number="2.4.1">
+<h3>
+<span class="header-section-number">2.4.1</span> 概述<a class="anchor" aria-label="anchor" href="#overview"><i class="fas fa-link"></i></a>
+</h3>
+<p>OpenSSH 是 SSH（Secure Shell）一個開源的版本。SSH 是一種透過 SSH 傳輸協定來管理系統、傳輸檔案的一個系統套件。它現在被廣泛的使用在各個資料中心與大企業中。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-51"></span>
+<img src="figures/SSH_simplified_protocol_diagram-2.png" alt="SSH 傳輸協定驗證流程 圖片來源：https://www.ssh.com/academy/ssh" width="80%"><p class="caption">
+圖 2.4: SSH 傳輸協定驗證流程 圖片來源：<a href="https://www.ssh.com/academy/ssh" class="uri">https://www.ssh.com/academy/ssh</a>
+</p>
+</div>
+</div>
+<div id="installing-openssh-client" class="section level3" number="2.4.2">
+<h3>
+<span class="header-section-number">2.4.2</span> 安裝 OpenSSH 客戶端<a class="anchor" aria-label="anchor" href="#installing-openssh-client"><i class="fas fa-link"></i></a>
+</h3>
+<p>要連接到虛擬機器的 OpenSSH 伺服器之前，你需要有一個可以讓你連接的 OpenSSH 用戶端。</p>
+<p>如果你是 Linux 或是 MacOS，通常都有內建 OpenSSH 用戶端，可以直接跳至下一節。如果是 Windows 系統，需要在選用功能裡面啟用 OpenSSH 用戶端。</p>
+<ul>
+<li>MacOS 或 其他 Unix-like 系統</li>
+</ul>
+<p>可以用指令 <code>which ssh</code> 查詢 ssh 客戶端有無安裝，如沒有安裝可以使用<a href="https://zh.wikipedia.org/zh-tw/%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F">套件管理程式</a>安裝 <code>openssh-server</code>，以 Ubuntu 為例：</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb15-1"><a href="ubuntu-basic-configuration.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install openssh-server</span></code></pre></div>
+<ul>
+<li>Windows 系統</li>
+</ul>
+<p>Windows 11 已經有內建 OpenSSH 客戶端，要確認有無安裝一樣可以打開 PowerShell 並輸入 <code>ssh</code> 檢查指令有無安裝。</p>
+<p>如沒有安裝可以使用下列流程進行安裝</p>
+<ol style="list-style-type: decimal">
+<li><p>點擊「開始」</p></li>
+<li><p>打開「設定⚙」</p></li>
+<li><p>選取「應用程式」 ➜ 點選「選用功能」</p></li>
+<li><p>請在頁面頂端點選「檢視功能」，然後在搜尋列中搜尋「OpenSSH 用戶端」，點選安裝</p></li>
+</ol>
+<p>安裝完成後，你可以打開命令提示字元或是 PowerShell 輸入指令 <code>ssh</code> 來確認是否安裝完成。</p>
+<pre class="prefixed_powershell"><code>ssh</code></pre>
+<pre class="console_output"><code>usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]
+           [-b bind_address] [-c cipher_spec] [-D [bind_address:]port]
+           [-E log_file] [-e escape_char] [-F configfile] [-I pkcs11]
+           [-i identity_file] [-J [user@]host[:port]] [-L address]
+           [-l login_name] [-m mac_spec] [-O ctl_cmd] [-o option] [-p port]
+           [-Q query_option] [-R address] [-S ctl_path] [-W host:port]
+           [-w local_tun[:remote_tun]] destination [command]</code></pre>
+</div>
+<div id="generating-ssh-keys" class="section level3" number="2.4.3">
+<h3>
+<span class="header-section-number">2.4.3</span> 產生 SSH 金鑰<a class="anchor" aria-label="anchor" href="#generating-ssh-keys"><i class="fas fa-link"></i></a>
+</h3>
+<p>接著，可以使用 <code>ssh-keygen</code> 指令產生 key pairs，加密方式有 dsa、ecdsa、ecdsa-sk、ed25519、ed25519-sk 與 rsa，預設的加密方式是 rsa ，詳細指令用法可以透過 <code>ssh-keygen --help</code> 指令查詢，這裡我們用最簡單的 <code>ssh-keygen</code> 指令。</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb18-1"><a href="ubuntu-basic-configuration.html#cb18-1" aria-hidden="true" tabindex="-1"></a>ssh<span class="op">-</span>keygen</span></code></pre></div>
+<p>Windows 的用戶預設會把 key pair 儲存在 <code>C:\Users\&lt;USERNAME&gt;\.ssh\</code> 的位置，而 Linux 的用戶會儲存在 <code>~/.ssh/</code> 的位置。</p>
+<p>這裡會詢問你要不要把產生的 ssh 金鑰重新命名，如果沒有複數的金鑰一般不會動到它的名字，按 Enter↩︎，接續下一步。</p>
+<pre class="console_output"><code>Generating public/private rsa key pair.
+Enter file in which to save the key (C:\Users\&lt;USERNAME&gt;/.ssh/id_rsa):</code></pre>
+<p>這一步再詢問你需不需要將 SSH key pairs 加密，如果加密了，每次連線都需要輸入密碼。如果怕麻煩不想設定密碼就留空按 Enter↩︎ 進入下一步。</p>
+<pre class="console_output"><code>Created directory 'C:\Users\&lt;USERNAME&gt;/.ssh'.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:</code></pre>
+<p>產生 Key 會順帶產生這個 Key 的指紋。</p>
+<pre class="console_output"><code>Your identification has been saved in C:\Users\&lt;USERNAME&gt;/.ssh/id_rsa.
+Your public key has been saved in C:\Users\&lt;USERNAME&gt;/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:8NE76AD294Tjze76pEPtvZgqaqw9OuCF7T8HWPo6fUc qaz85@DESKTOP-OH6HA84
+The key's randomart image is:
++---[RSA 3072]----+
+|                 |
+|         .       |
+|    o . . .      |
+|   . + o + .     |
+|  o + o S.+      |
+|.. = . =.E..     |
+|..o.o ..+.=.     |
+| ..+++.o.=.o.    |
+|  o**++.=** ..   |
++----[SHA256]-----+</code></pre>
+<p>產生完畢，儲存在 <code>C:\Users\&lt;USERNAME&gt;\.ssh\id_rsa</code> 的檔案是私鑰（private key），而另一個 <code>id_rsa.pub</code> 的檔案是公鑰（public key）。</p>
+<div class="infobox caution">
+<p>當你丟失了遠端主機的金鑰，你再也不能透過遠端存取遠端的伺服器，只能透過直接接觸那台主機來更新 SSH 金鑰，所以要妥善保存。</p>
+</div>
+</div>
+<div id="uploading-ssh-keys" class="section level3" number="2.4.4">
+<h3>
+<span class="header-section-number">2.4.4</span> 上傳 SSH 金鑰<a class="anchor" aria-label="anchor" href="#uploading-ssh-keys"><i class="fas fa-link"></i></a>
+</h3>
+<p>當你擁有了 SSH 金鑰，接下來要將公鑰上傳至遠端的伺服器。另外公鑰給別人看到是沒問題的，公鑰並不能用來產生私鑰，它是用來認證是否跟你所持有的私鑰相吻合。</p>
+<ul>
+<li>Linux 系統</li>
+</ul>
+<p>如果你是的系統是 Linux 那上傳的指令會稍微短一些，上傳至遠端電腦的指令如下:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb22-1"><a href="ubuntu-basic-configuration.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ssh-copy-id</span> <span class="at">-i</span> ~/.ssh/id_ed25519.pub <span class="at">-p</span> 22 asis@192.168.56.101</span></code></pre></div>
+<ul>
+<li><p><code>-i</code>: i 參數代表的是你要上傳的公鑰的檔案路徑</p></li>
+<li><p><code>-p</code>: p 參數則是目的地主機 OpenSSH 伺服器的埠號</p></li>
+<li><p><code>id_ed25519.pub</code> 為我產生的公鑰，如果你前面是照著我的步驟產生，這裡應該改為 <code>id_rsa.pub</code></p></li>
+<li><p>這裡的 <code>asis</code> 為第一章 <a href="intro.html#user-configuration">使用者設定</a> 的使用者</p></li>
+<li><p><code>192.168.56.101</code> 為我虛擬主機的 ip 位址，查詢 ip 位址可以先手動登入虛擬主機後，用 <code>hostname -I</code> 或是 <code>ip addr show</code> 指令查詢</p></li>
+</ul>
+<p>完成後會提示你已經可以使用 ssh 連線</p>
+<pre class="console_output"><code>/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/kuaz/.ssh/id_ed25519.pub"
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh -p '22' 'asis@192.168.56.101'"
+and check to make sure that only the key(s) you wanted were added.</code></pre>
+<p>如果你是 Windows 的使用者也不用擔心有多複雜，一樣一行指令就能搞定，這裡我是參考<span class="citation">(<a href="%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99.html#ref-christopher_2020" role="doc-biblioref">Christopher 2020</a>)</span>的教學，指令如下:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb24-1"><a href="ubuntu-basic-configuration.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">$env</span><span class="op">:</span>USERPROFILE\<span class="op">.</span><span class="fu">ssh</span>\id_rsa<span class="op">.</span><span class="fu">pub</span> <span class="op">|</span> ssh asis@192<span class="op">.</span><span class="fu">168</span><span class="op">.</span><span class="fu">0</span><span class="op">.</span><span class="fu">13</span> <span class="st">"cat &gt;&gt; ~/.ssh/authorized_keys"</span></span></code></pre></div>
+<ul>
+<li><p>這裡的 <code>$env:USERPROFILE</code> 為 Windows 內建環境變數，會根據現在的使用者變更。如果我的使用者名稱為 <code>qaz855175b</code> 那 <code>$env:USERPROFILE</code> 就會產生 <code>C:\Users\qaz855175b\</code> 的字串，當然你可以直接把這行指令的公鑰路徑替換為 <code>C:\Users\qaz855175b\.ssh\id_rsa.pub</code></p></li>
+<li><p><code>id_rsa.pub</code> 為剛剛產生的公鑰名稱</p></li>
+<li><p>這裡的 <code>asis</code> 為 [user-configuration] 的預設使用者</p></li>
+<li><p><code>192.168.56.101</code> 為我虛擬主機的 ip 位址，查詢 ip 位址可以先手動登入虛擬主機後，用 <code>hostname -I</code> 或是 <code>ip addr show</code> 指令查詢</p></li>
+</ul>
+<div class="infobox info">
+<p>其實 Linux 的 <code>ssh-copy-id</code>、和第一章的從 Github 匯入 public key <code>ssh-import-id-gh</code> 與這裡的 <code>cat file &gt;&gt; ~/.ssh/authorized_keys</code> 都是在做同一件事情，就是把公鑰貼到遠端伺服器的使用者家目錄的 <code>authorized_keys</code> 檔案裡面。</p>
+</div>
+<p>接著按 Enter↩︎，跳出輸入密碼提示，這裡輸入預設的使用者密碼 <code>asis</code></p>
+<pre class="console_output"><code>asis@192.168.56.101's password:</code></pre>
+<p>輸入完後雖然沒有任何提示訊息，但其實已經可以使用 ssh 連線至遠端主機啦～</p>
+</div>
+<div id="testing-ssh-connection" class="section level3" number="2.4.5">
+<h3>
+<span class="header-section-number">2.4.5</span> 測試 SSH 連線<a class="anchor" aria-label="anchor" href="#testing-ssh-connection"><i class="fas fa-link"></i></a>
+</h3>
+<p>最後，使用 ssh 指令連接至遠端主機。</p>
+<p>使用 OpenSSH Client 產生的 pair keys 可以直接使用這個方法連線。這裡介紹幾個常常與 ssh 一起出現的參數：</p>
+<ul>
+<li><p><code>-v</code>：verbose，顯示連接時更詳細的訊息，除錯時常用</p></li>
+<li><p><code>-p</code>port，遠端伺服器的埠號</p></li>
+<li><p><code>-i</code>：手動指定私鑰位置</p></li>
+</ul>
+<div class="infobox info">
+<p>指令參數通常會在指令後面隨後出現，參數名稱前面前面會插入 <code>-</code>，而參數名稱後面有時會需要加入詳細的設定，有時不用。參數與參數之間用空格隔開，詳細指令的使用方法可以在 Linux 系統用 <code>man &lt;指令名稱&gt;</code> 查詢</p>
+<p>假如我們要看連線的詳細訊息，且指定伺服器埠號為 60000 與指定私鑰檔案位置等等，組合起來就是:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb26-1"><a href="ubuntu-basic-configuration.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-v</span> <span class="at">-p</span> 60000 <span class="at">-i</span> ~/.ssh/id_rsa asis@192.168.56.101</span></code></pre></div>
+</div>
+<p>目前連線不需要加上任何參數，連線指令為：</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash prefixed_powershell"><code class="sourceCode bash"><span id="cb27-1"><a href="ubuntu-basic-configuration.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> asis@192.168.56.101</span></code></pre></div>
+<p>一樣地，<code>asis</code> 是使用者名稱，而 <code>192.168.56.101</code> 是 OpenSSH 伺服器的 ip 位址，輸入完後按 Enter↩︎。</p>
+<p>這邊打 <code>yes</code> 即可，確認連接目的地沒有錯之後，會把 fingerprint 寫入 <code>~/.ssh/known_hosts</code> 中，以後不再詢問。</p>
+<pre class="console_output"><code>The authenticity of host '192.168.56.101 (192.168.56.101)' can't be established.
+ECDSA key fingerprint is SHA256:/HoocrLXe63zycdlmkh/+U3RuUfkawNq/xA0gTJmqmM.
+Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre>
+<div class="infobox info">
+<p>這裡不用指定私鑰的原因是因為，當你用 ssh 連線至目的地伺服器且你沒有指定認證檔案（私鑰）時，<code>ssh</code> 會在將金鑰一個一個拿去詢問這個金鑰可不可以使用。</p>
+</div>
+<p>連接成功！</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-52"></span>
+<img src="figures/ssh-connection-success.png" alt="Windows Terminal 下的 SSH 連接成功畫面" width="80%"><p class="caption">
+圖 2.5: Windows Terminal 下的 SSH 連接成功畫面
+</p>
+</div>
+<p>測試完確認沒問題就可以把虛擬機晾在一旁了～</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-53"></span>
+<img src="figures/virtualbox-ubuntu-login.png" alt="VirtualBox 的虛擬主機終端機畫面" width="80%"><p class="caption">
+圖 2.6: VirtualBox 的虛擬主機終端機畫面
+</p>
+</div>
+</div>
+<div id="openssh-server-configuration" class="section level3" number="2.4.6">
+<h3>
+<span class="header-section-number">2.4.6</span> OpenSSH 伺服器設定<a class="anchor" aria-label="anchor" href="#openssh-server-configuration"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>變更 SSH 伺服器預設的埠號</li>
+</ul>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb29-1"><a href="ubuntu-basic-configuration.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/ssh/sshd_config</span></code></pre></div>
+<p>將 <code>#Port 22</code> 取消註解，並把 <code>22</code> 改成其他介於 1-65535 之間的數字。這裡我使用 <code>60000</code>。</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="ubuntu-basic-configuration.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Port</span> 60000</span></code></pre></div>
+<ul>
+<li>關閉密碼驗證</li>
+</ul>
+<p>將 PasswordAuthentication（以密碼驗證）設為 no。使用 SSH 連線時，允許使用者密碼以輸入密碼驗證。</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="ubuntu-basic-configuration.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PasswordAuthentication</span> no</span></code></pre></div>
+<p>當然如果密碼驗證為 no，且同時遺失 SSH 的 pair key 時，你就無法以 SSH 連線至遠端主機，需要使用其他方法補救。</p>
+<ul>
+<li>關閉遠端 root 登入</li>
+</ul>
+<p>避免 root 登入可以使系統避免過大的權限暴露。</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="ubuntu-basic-configuration.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PermitRootLogin</span> no</span></code></pre></div>
+<ul>
+<li>限制能使用 SSH 連線的使用者</li>
+</ul>
+<p>只允許特定的使用者使用 SSH 連線可大大降低風險。</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="ubuntu-basic-configuration.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">AllowUsers</span> asis</span></code></pre></div>
+<ul>
+<li>關閉無密碼的使用者使用 SSH</li>
+</ul>
+<p>將沒有密碼就可以登入的使用者撤銷 SSH 連線的權限。</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="ubuntu-basic-configuration.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PermitEmptyPasswords</span> no</span></code></pre></div>
+<p><code>-t</code> 參數可以測試 SSH 的設定是否有效，可以避免一些錯字造成的錯誤。</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb35-1"><a href="ubuntu-basic-configuration.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> sshd <span class="at">-t</span></span></code></pre></div>
+<p>將系統上的 SSH daemon 重新啟動，重新啟動 SSH 服務。</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb36-1"><a href="ubuntu-basic-configuration.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart sshd</span></code></pre></div>
+<p>確認 SSH 服務正常運行，沒有出現錯誤。</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb37-1"><a href="ubuntu-basic-configuration.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status sshd</span></code></pre></div>
+<pre class="console_output"><code>● ssh.service - OpenBSD Secure Shell server
+     Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sun 2021-08-15 16:08:55 UTC; 19h ago
+       Docs: man:sshd(8)
+             man:sshd_config(5)
+    Process: 850 ExecStartPre=/usr/sbin/sshd -t (code=exited, status=0/SUCCESS)
+   Main PID: 893 (sshd)
+      Tasks: 1 (limit: 4617)
+     Memory: 5.4M
+     CGroup: /system.slice/ssh.service
+             └─893 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+
+Aug 15 16:08:54 asis01 systemd[1]: Starting OpenBSD Secure Shell server...
+Aug 15 16:08:55 asis01 sshd[893]: Server listening on 0.0.0.0 port 60000.
+Aug 15 16:08:55 asis01 sshd[893]: Server listening on :: port 60000.
+Aug 15 16:08:55 asis01 systemd[1]: Started OpenBSD Secure Shell server.</code></pre>
+<p>最後指令 <code>exit</code> 斷開連線，再重新測試 ssh 遠端連線至伺服器，使用公鑰與私鑰驗證登入。</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash prefixed_powershell"><code class="sourceCode bash"><span id="cb39-1"><a href="ubuntu-basic-configuration.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-p</span> 60000 asis@192.168.56.101</span></code></pre></div>
+<pre class=".console_output"><code>Welcome to Ubuntu 22.04.3 LTS (GNU/Linux 5.15.0-79-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Aug 15 06:04:51 AM UTC 2023
+
+  System load:  0.173828125        Processes:               131
+  Usage of /:   0.3% of 974.24GB   Users logged in:         0
+  Memory usage: 13%                IPv4 address for enp0s3: 10.0.2.15
+  Swap usage:   0%                 IPv4 address for enp0s8: 192.168.56.101
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+Expanded Security Maintenance for Applications is not enabled.
+
+3 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Tue Aug 15 06:04:51 2023 from 192.168.56.1</code></pre>
+<p>連線成功。</p>
+<p>最後可以用 PowerShell 將設定檔寫入設定中</p>
+<p>切換資料夾至使用者資料夾中的 <code>.ssh</code></p>
+<pre class="prefixed_powershell"><code>cd $env:USERPROFILE\.ssh</code></pre>
+<p>使用筆記本編輯設定</p>
+<pre class="prefixed_powershell"><code>notepad config.
+
+``` {.console_output}
+Host vm
+    Hostname 192.168.56.101
+    User asis
+    Port 60000</code></pre>
+<p>接下來用別名 <code>vm</code> 就能連線了</p>
+<pre class="prefixed_powershell"><code>ssh vm</code></pre>
+</div>
+</div>
+<div id="apt" class="section level2" number="2.5">
+<h2>
+<span class="header-section-number">2.5</span> APT<a class="anchor" aria-label="anchor" href="#apt"><i class="fas fa-link"></i></a>
+</h2>
+<p>在 Ubuntu 上安裝任何程式大多都是用 APT (Advanced Packaging Tools) 安裝，這裡有兩個指令，用 <code>&amp;&amp;</code> 串接在一起:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb44-1"><a href="ubuntu-basic-configuration.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt upgrade <span class="at">-y</span></span></code></pre></div>
+<ul>
+<li><p><code>apt update</code>: 更新可安裝的套件列表或版本</p></li>
+<li><p><code>apt upgrade</code>: 安裝程式</p></li>
+<li><p><code>&amp;&amp;</code>: <code>&amp;&amp;</code> 之前的指令執行成功才會接續執行 <code>&amp;&amp;</code> 後面的指令</p></li>
+<li><p><code>-y, --yes, --assume-yes</code>: 自動對安裝提示回答 yes，安裝時會提示是否確認要安裝該軟體，因為我們清楚自己在做什麼為了方便而把提示關掉</p></li>
+</ul>
+</div>
+<div id="ufw" class="section level2" number="2.6">
+<h2>
+<span class="header-section-number">2.6</span> UFW<a class="anchor" aria-label="anchor" href="#ufw"><i class="fas fa-link"></i></a>
+</h2>
+<p>UFW（Uncomplicated Firewall）是預設在 Ubuntu 系統上的防火牆，這裡先為了 OpenSSH 伺服器而打開埠號 <code>60000</code>。</p>
+<p>首先用 status 查詢 UFW 的狀態，這裡需要輸入超級使用者 (sudo) 的密碼。</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb45-1"><a href="ubuntu-basic-configuration.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
+<p>看來預設的 UFW 是關閉的</p>
+<pre class="console_output"><code>Status: inactive</code></pre>
+<p>接著用 <code>systemctl</code> 打開防火牆</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb47-1"><a href="ubuntu-basic-configuration.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable ufw</span></code></pre></div>
+<p>查詢防火牆狀態</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb48-1"><a href="ubuntu-basic-configuration.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
+<pre class="console_output"><code>Status: active</code></pre>
+<p>允許埠號 <code>60000</code> 從任何地方連入</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb50-1"><a href="ubuntu-basic-configuration.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow 60000</span></code></pre></div>
+<p>查詢防火牆狀態</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb51-1"><a href="ubuntu-basic-configuration.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status</span></code></pre></div>
+<p>目前只有兩條規則，分別是 從任何地方連入埠號 60000 與 ipv6 從任何地方連入埠號 60000</p>
+<pre class="console_output"><code>Status: active
+
+To                         Action      From
+--                         ------      ----
+60000                      ALLOW       Anywhere
+60000 (v6)                 ALLOW       Anywhere (v6)</code></pre>
+
+</div>
+</div>
+
+
+
+  <div class="chapter-nav">
+<div class="prev"><a href="intro.html"><span class="header-section-number">1</span> 虛擬主機</a></div>
+<div class="next"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html"><span class="header-section-number">3</span> LAMP 程式集</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#ubuntu-basic-configuration"><span class="header-section-number">2</span> Ubuntu 的基本設定</a></li>
+<li><a class="nav-link" href="#preparing"><span class="header-section-number">2.1</span> 事前準備</a></li>
+<li><a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E9%A9%85%E5%8B%95%E7%A8%8B%E5%BC%8F"><span class="header-section-number">2.2</span> 安裝驅動程式</a></li>
+<li><a class="nav-link" href="#access-virtual-machine-network"><span class="header-section-number">2.3</span> 存取虛擬主機的網路</a></li>
+<li>
+<a class="nav-link" href="#openssh"><span class="header-section-number">2.4</span> OpenSSH</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#overview"><span class="header-section-number">2.4.1</span> 概述</a></li>
+<li><a class="nav-link" href="#installing-openssh-client"><span class="header-section-number">2.4.2</span> 安裝 OpenSSH 客戶端</a></li>
+<li><a class="nav-link" href="#generating-ssh-keys"><span class="header-section-number">2.4.3</span> 產生 SSH 金鑰</a></li>
+<li><a class="nav-link" href="#uploading-ssh-keys"><span class="header-section-number">2.4.4</span> 上傳 SSH 金鑰</a></li>
+<li><a class="nav-link" href="#testing-ssh-connection"><span class="header-section-number">2.4.5</span> 測試 SSH 連線</a></li>
+<li><a class="nav-link" href="#openssh-server-configuration"><span class="header-section-number">2.4.6</span> OpenSSH 伺服器設定</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#apt"><span class="header-section-number">2.5</span> APT</a></li>
+<li><a class="nav-link" href="#ufw"><span class="header-section-number">2.6</span> UFW</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/exkuretrol/MCU-ASIS/blob/main/02-ubuntu.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/exkuretrol/MCU-ASIS/edit/main/02-ubuntu.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-08-15.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>
