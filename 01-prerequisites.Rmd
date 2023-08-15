@@ -4,7 +4,7 @@
 
 因為使用者的經驗、能力與解決問題的能力會有所差異，在接觸新的系統之前，最好還是先在虛擬主機上先運行過一次，確認沒問題之後再把操作搬到實體電腦上去，才不會遇到預料之外的問題。本書所使用運行虛擬主機的軟體為 VirtualBox。
 
-## 事前準備
+## 事前準備 {#preparing}
 
 在開始教學之前，確定你的環境要能上網存取網路上的資源。 再來是檢查自己的電腦可不可以運行 VirtualBox（或是其他可以運行虛擬主機的軟體），要運行虛擬主機通常都要去 BIOS 打開一個叫做擬化功能（Virtualization Technology）的功能。
 
@@ -18,7 +18,8 @@
 | HP     | [HP PCs - Enable Virtualization Technology in the BIOS \| HP® Customer Support](https://support.hp.com/us-en/document/ish_5637142-5637191-16)                                                                                                                          |
 | Lenovo | [How to enable Virtualization Technology on Lenovo PC computers - Lenovo Support TW](https://support.lenovo.com/tw/en/solutions/ht500006)                                                                                                                              |
 
-## 下載 Ubuntu 映像檔
+## 下載 Ubuntu 映像檔 {#downloading-ubuntu-image}
+
 
 進到 Ubuntu 官方網站後，點選右上角的「Download」展開下載頁面。
 
@@ -46,7 +47,7 @@ knitr::include_graphics(path = 'figures/ubuntu-download-server-page.png')
 
 -   `Option 3 - Automated server provisioning`: 利用 [MaaS](https://maas.io/) (Metal-as-a-Service) 安裝虛擬機。MaaS是管理數台虛擬主機用的服務，並不局限於 Ubuntu，Windows、CentOS 與 ESXi都可以在上面部屬。
 
-## 安裝 VirtualBox
+## 安裝 VirtualBox {#installing-virtualbox}
 
 首先到 [VirtualBox 官方網站](https://www.virtualbox.org/wiki/Downloads)的下載頁面，下載適合你電腦系統的安裝執行檔，假如是 Windows 系統就點擊 「Windows hosts」的下載連結，如果是其他作業系統就根據你的作業系統下載對應的安裝程式。
 
@@ -84,7 +85,7 @@ knitr::include_graphics(path = "./figures/virtualbox-installer-4.png")
 knitr::include_graphics(path = "./figures/virtualbox-installer-5.png")
 ```
 
-## VirtualBox 介面簡介
+## VirtualBox 介面簡介 {#virtualbox-interface   }
 
 在安裝完 VirtualBox 後，打開並不會有預先安裝好的作業系統，需要在 VirtualBox 內自行新增虛擬主機後，再將作業系統安裝至虛擬主機內；又或是匯入現有的虛擬主機映像檔（\*.ova、\*.ovf 格式）。
 
@@ -102,7 +103,7 @@ knitr::include_graphics("./figures/virtualbox-menu.png", dpi = NA)
 4.  `新增`: 新增*新的*虛擬主機
 5.  `加入`: 加入*已經存在的*虛擬主機
 
-## 新增虛擬主機設定
+## 新增虛擬主機設定 {#adding-vm-configuration}
 
 按「新增」新增新的虛擬主機。這裡先點選「專家模式」，專家模式可以一併設定虛擬主機的所有設定。
 
@@ -110,7 +111,7 @@ knitr::include_graphics("./figures/virtualbox-menu.png", dpi = NA)
 knitr::include_graphics(path = "./figures/new-virtual-machine-0.png")
 ```
 
-### 名稱和作業系統
+### 名稱和作業系統 {#name-and-operating-system}
 
 名稱填入「Ubuntu」，ISO 映像選擇剛才下載下來的 Ubuntu 映像檔。這裡請勾選「略過無人值守安裝」。
 
@@ -118,7 +119,7 @@ knitr::include_graphics(path = "./figures/new-virtual-machine-0.png")
 knitr::include_graphics(path = "./figures/new-virtual-machine-1.png")
 ```
 
-### 無人值守安裝
+### 無人值守安裝 {#unattended-installation}
 
 如果上一步有勾選略過無人值守安裝，畫面會像下圖一樣：
 
@@ -126,7 +127,7 @@ knitr::include_graphics(path = "./figures/new-virtual-machine-1.png")
 knitr::include_graphics(path = "./figures/new-virtual-machine-2.png")
 ```
 
-### 硬體
+### 硬體 {#hardware}
 
 記憶體大小根據每個人電腦的性能做調整，虛擬主機沒用來做什麼事那設定 4 GB 很夠用了。處理器可以設定為 2 或是更高，但是建議不要超過圖上的綠色指示，不然電腦會負荷不了。
 
@@ -138,7 +139,7 @@ knitr::include_graphics(path = "./figures/new-virtual-machine-3.png")
 因為我寫教學時是使用虛擬主機撰寫，電腦資源沒有那麼多，所以上圖才會只有設定 2 GB，自己安裝時照上面說明建議的就可以了
 :::
 
-### 硬碟
+### 硬碟 {#disk}
 
 將虛擬硬碟設定為 1.0 TB，且將硬碟類型變更為「VMDK」格式，並勾選「分割成 2 GB 部分」，如下圖：
 
@@ -205,7 +206,7 @@ knitr::include_graphics(path = './figures/virtual-machine-setting-storage-finish
 
 會看到「控制器：SATA」裡面有兩個磁碟。到這裡虛擬主機的設定就完成啦。
 
-## 安裝作業系統
+## 安裝作業系統 {#installing-operating-system}
 
 看到這個畫面點擊「啟動」，啟動剛才設定的作業系統。
 
@@ -225,7 +226,7 @@ knitr::include_graphics(path = './figures/virtual-machine-mouse-integration.png'
 
 擷取後用方向鍵選取「Try or install Ubuntu」進到下一個畫面。
 
-### 語言
+### 語言 {#language}
 
 稍待 Ubuntu 作業系統映像檔載入後，安裝程式會跳出選擇語言的畫面，在這裡選擇適合你的語言。
 
@@ -233,7 +234,7 @@ knitr::include_graphics(path = './figures/virtual-machine-mouse-integration.png'
 knitr::include_graphics(path = './figures/ubuntu-installer-select-lang.png')
 ```
 
-### 更新提示
+### 更新提示 {#update-prompt}
 
 
 當 Ubuntu 在安裝過程中，如果有連上網路，安裝程式會偵測當前的安裝程式是否需要更新，如果出現了這個畫面代表安裝程式有新的版本，可以選擇「Update to the new installer」將安裝程式更新至最新版本。當然，也可以在系統安裝完後更新。
@@ -242,7 +243,7 @@ knitr::include_graphics(path = './figures/ubuntu-installer-select-lang.png')
 knitr::include_graphics(path = './figures/ubuntu-installer-update-installer.png')
 ```
 
-### 鍵盤配置
+### 鍵盤配置 {#keyboard-configuration}
 
 這裡可以設定鍵盤的：
 
@@ -254,7 +255,7 @@ knitr::include_graphics(path = './figures/ubuntu-installer-update-installer.png'
 knitr::include_graphics(path = './figures/ubuntu-installer-keyboard.png')
 ```
 
-### 安裝類型
+### 安裝類型 {#installation-type}
 
 在安裝類型選擇 Ubuntu Server 就好，minimized 版本會少一些我們之後會用到的功能，到時候還是要自己裝回來。
 
@@ -262,7 +263,7 @@ knitr::include_graphics(path = './figures/ubuntu-installer-keyboard.png')
 knitr::include_graphics(path = './figures/ubuntu-installer-install-type.png')
 ```
 
-### 網路連線
+### 網路連線 {#network-connection}
 
 這裡可以設定 Ubuntu 的網路連線，預設是由 DHCP 設定，通常不用變更，如果這裡連線失敗，也可以等開機後再做設定。
 
@@ -270,7 +271,7 @@ knitr::include_graphics(path = './figures/ubuntu-installer-install-type.png')
 knitr::include_graphics(path = './figures/ubuntu-installer-network.png')
 ```
 
-### Proxy
+### Proxy {#proxy}
 
 除非當前的網路環境需要設定 proxy（代理伺服器），否則不需要設定。
 
@@ -278,7 +279,7 @@ knitr::include_graphics(path = './figures/ubuntu-installer-network.png')
 knitr::include_graphics(path = 'figures/ubuntu-installer-proxy.png')
 ```
 
-### 鏡像
+### 鏡像 {#mirror}
 
 同上，不需要特別設定 mirror（鏡像），安裝程式會自動判斷選擇哪個地方的鏡像網址更新。
 
@@ -286,7 +287,7 @@ knitr::include_graphics(path = 'figures/ubuntu-installer-proxy.png')
 knitr::include_graphics(path = './figures/ubuntu-installer-mirror.png')
 ```
 
-### 系統空間配置
+### 系統空間配置 {#system-space-configuration}
 
 以下 Raid-1 相關的設定是參考 [@evangelou_2020] 的 Gist 翻譯成中文文章。
 
@@ -392,7 +393,7 @@ knitr::include_graphics(path = 'figures/ubuntu-installer-storage-10.png')
 
 -   在最下面選擇「Done」，至下一步。
 
-### 使用者設定
+### 使用者設定 {#user-configuration}
 
 在這邊設定自己的使用者名稱與電腦名稱。
 
@@ -410,7 +411,7 @@ knitr::include_graphics(path = 'figures/ubuntu-installer-profile.png')
 
 -   Confirm your password: `asis`
 
-### Ubuntu Pro
+### Ubuntu Pro {#ubuntu-pro}
 
 跳過。
 
@@ -418,7 +419,7 @@ knitr::include_graphics(path = 'figures/ubuntu-installer-profile.png')
 knitr::include_graphics(path = 'figures/ubuntu-installer-pro.png')
 ```
 
-### SSH
+### SSH {#ssh}
 
 OpenSSH 是使用 SSH 通訊協定來遠端連線電腦的工具。防止連線中被竊聽、劫持或是其他攻擊。這裡先勾選「Install OpenSSH Server」讓安裝程式安裝。
 
@@ -428,7 +429,7 @@ OpenSSH 是使用 SSH 通訊協定來遠端連線電腦的工具。防止連線�
 如果這邊不匯入的話，也可以待稍後開機後再用指令 `ssh-import-id-gh <username>` 匯入。
 :::
 
-### Snaps
+### Snaps {#snaps}
 
 這裡會列出一些伺服器常用的應用程式，如果沒有需求可以跳過。
 
@@ -436,7 +437,7 @@ OpenSSH 是使用 SSH 通訊協定來遠端連線電腦的工具。防止連線�
 knitr::include_graphics(path = 'figures/ubuntu-installer-pro.png')
 ```
 
-## 完成安裝
+## 完成安裝 {#completion}
 
 這個頁面是預覽 Ubuntu 安裝程式做過了什麼，都會記錄在這裡，通常不會有什麼問題所以可以不用理他，待安裝完成即可。
 
