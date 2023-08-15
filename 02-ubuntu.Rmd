@@ -1,16 +1,14 @@
-# Ubuntu 的基本設定
+# Ubuntu 的基本設定 {#ubuntu-basic-configuration}
 
-<!--# TODO: https://superuser.com/questions/1200355/wsl-is-it-possible-to-access-and-manipulate-a-virtual-linux-machine-with-wsl -->
+本章主要會說明如何透過 SSH 存取虛擬機器與虛擬機器基本設定。
 
-本章主要會說明如何透過遠端連線存取虛擬機器與虛擬機器基本設定。
-
-## 事前準備
+## 事前準備 {#preparing}
 
 從這個章節開始會出現一些特殊前綴的方框（如下表）表示，不同的前綴代表不同種類的終端機，或是使用終端機的身份，請多多注意。
 
 -   `PS`: powershell 指令前綴
 
-    ``` prefixed_powershell
+    ``` {.prefixed_powershell}
     dir
     ```
 
@@ -35,11 +33,166 @@
     drwxrwxr-x  6 kuaz kuaz 4096 Oct  6 14:06 School/
     ```
 
-## OpenSSH
+## 安裝驅動程式
 
-前面第一章在安裝時，也有碰到 OpenSSH 伺服器設定的小節，不過那並不完整，是給已經擁有 ssh key pairs 的使用者看的。在這個小節會逐步解釋 OpenSSH 的使用方法，從 OpenSSH 客戶端安裝、產生 ssh key pairs 最後到連線。
+在安裝驅動程式之前，需要從上面的設定將 Guest Additions 的光碟映像檔掛載至虛擬主機上面。
 
-### 概述
+```{r, fig.cap='VirtualBox 插入 Guest Additions ISO'}
+knitr::include_graphics(path = 'figures/insert-guest-additions-iso.png')
+```
+
+掛載後先再 `/media/` 資料夾建立新的 `iso` 資料夾
+
+``` .bash .prefixed
+sudo mkdir /media/iso
+```
+
+查詢目前掛載的位置
+
+``` .bash .prefixed
+lsblk
+```
+
+掛載光碟至指定資料夾
+
+``` .bash .prefixed
+sudo mount /dev/sr0 /media/iso
+```
+
+安裝安裝程式所需的依賴套件
+``` .bash .prefixed
+sudo apt update && sudo apt install bzip2 gcc make perl -y
+```
+
+安裝驅動程式
+
+``` .bash .prefixed
+sudo /media/iso/VBoxLinuxAdditions.run
+```
+
+## 存取虛擬主機的網路 {#access-virtual-machine-network}
+
+首先將虛擬主機關閉電源，關閉電源後要新增一張「僅限主機」的網路卡。對虛擬主機右鍵後點選設定。
+
+```{r, fig.cap='VirtualBox 對虛擬主機右鍵'}
+knitr::include_graphics(path = 'figures/virtualbox-right-click.png')
+```
+
+接著，依序點選「網路」 → 「介面卡 2」 → 「僅限主機」介面卡 → 「進階」，記下目前的 mac 位址。
+
+```{r, fig.cap='VirtualBox 對虛擬主機右鍵'}
+knitr::include_graphics(path = 'figures/virtualbox-host-only-network-mac.png')
+```
+
+
+在來回到虛擬主機安裝 net-tools
+
+``` {.bash .prefixed}
+sudo apt install net-tools
+```
+
+確認目前的裝置名稱，可以看到 `08:00:27:59:b3:11` 與剛才新增的介面卡 mac 位址相同。`enp0s8` 即為剛才插入的新的「僅限主機」網路卡。
+
+``` {.bash .prefixed}
+ifconfig -a
+```
+
+``` {.console_output}
+enp0s3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.0.2.15  netmask 255.255.255.0  broadcast 10.0.2.255
+        inet6 fe80::a00:27ff:fed3:c805  prefixlen 64  scopeid 0x20<link>
+        ether 08:00:27:d3:c8:05  txqueuelen 1000  (Ethernet)
+        RX packets 28  bytes 5374 (5.3 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 56  bytes 6063 (6.0 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+enp0s8: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet6 fe80::a00:27ff:fe59:b311  prefixlen 64  scopeid 0x20<link>
+        ether 08:00:27:59:b3:11  txqueuelen 1000  (Ethernet)
+        RX packets 870  bytes 79177 (79.1 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 630  bytes 111436 (111.4 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 84  bytes 6368 (6.3 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 84  bytes 6368 (6.3 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+```
+
+可以看到剛才新增的的網路卡沒有 ip 位址，這是因為系統沒有為這張網卡打開 dhcp 的設定。
+
+我們可以透過修改 netplan 的設定將 dhcp 伺服器打開。
+
+```
+sudo vim /etc/netplan/00-installer-config.yaml
+```
+
+``` {.console_output}
+# This is the network config written by 'subiquity'
+network:
+  ethernets:
+    enp0s3:
+      dhcp4: true
+    enp0s8:
+      dhcp4: true
+  version: 2
+```
+
+套用剛才的設定
+
+``` {.bash .prefixed}
+sudo netplan apply
+```
+
+再次確認目前虛擬主機的 ip 位置
+
+``` {.bash .prefixed}
+ifconfig
+```
+
+``` {.console_output}
+enp0s3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.0.2.15  netmask 255.255.255.0  broadcast 10.0.2.255
+        inet6 fe80::a00:27ff:fed3:c805  prefixlen 64  scopeid 0x20<link>
+        ether 08:00:27:d3:c8:05  txqueuelen 1000  (Ethernet)
+        RX packets 32  bytes 7734 (7.7 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 71  bytes 8490 (8.4 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+enp0s8: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.56.101  netmask 255.255.255.0  broadcast 192.168.56.255
+        inet6 fe80::a00:27ff:fe59:b311  prefixlen 64  scopeid 0x20<link>
+        ether 08:00:27:59:b3:11  txqueuelen 1000  (Ethernet)
+        RX packets 1068  bytes 98415 (98.4 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 791  bytes 132687 (132.6 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 84  bytes 6368 (6.3 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 84  bytes 6368 (6.3 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+```
+
+後續我們就可以透過虛擬主機的 ip 位址 `192.168.56.101` 存取上面的服務。
+
+
+## OpenSSH {#openssh}
+
+在前第一章的安裝過程中，也有碰到 OpenSSH 的小節，不過那並不是給第一次要使用 OpenSSH 的使用者用的，而是給已經有在使用 SSH 金鑰的使用者看的。在這個小節會逐步解釋 OpenSSH 的使用方法，從 OpenSSH 客戶端安裝、產生 SSH 金鑰再來是連線。
+
+### 概述 {#overview}
 
 OpenSSH 是 SSH（Secure Shell）一個開源的版本。SSH 是一種透過 SSH 傳輸協定來管理系統、傳輸檔案的一個系統套件。它現在被廣泛的使用在各個資料中心與大企業中。
 
@@ -47,73 +200,37 @@ OpenSSH 是 SSH（Secure Shell）一個開源的版本。SSH 是一種透過 SSH
 knitr::include_graphics(path = './figures/SSH_simplified_protocol_diagram-2.png')
 ```
 
-### 適合各個系統的連線流程
+### 安裝 OpenSSH 客戶端 {#installing-openssh-client}
 
 要連接到虛擬機器的 OpenSSH 伺服器之前，你需要有一個可以讓你連接的 OpenSSH 用戶端。
 
-#### MacOS 或 其他 Unix-like 系統
+如果你是 Linux 或是 MacOS，通常都有內建 OpenSSH 用戶端，可以直接跳至下一節。如果是 Windows 系統，需要在選用功能裡面啟用 OpenSSH 用戶端。
 
-如果你是 Linux 或是 MacOS 系統，通常都有內建 OpenSSH 用戶端，可以直接跳至以 [Step 2 --- 產生 ssh key pairs] 的章節，但是 Windows 系統需要先安裝一些軟體，或是從 Windows 更新功能裡面啟用 OpenSSH 伺服器與用戶端，將於下一小節會解釋。
+- MacOS 或 其他 Unix-like 系統
 
-#### Windows 系統
-
-Windows 用戶連線至 OpenSSH 伺服器的方法有很多種，方法如下:
-
-1.  已經擁有 SSH key pairs 的前提下，可以使用 SSH 通訊協定連線的軟體，如:
-
-    -   PuTTY
-
-    -   Chrome 瀏覽器的任何一個 SSH 擴充套件\
-
-    **優點:**
-
-    -   很快，安裝完就能設定 SSH 連線
-
-2.  直接在 Windows 10 內啟動 OpenSSH 用戶端，透過內建的 PowerShell SSH 連線至虛擬主機。\
-    \
-    **優點:**
-
-    -   與第一個方法差不多快
-    -   可搭配 Windows Terminal 客製化終端機主題（很好看）
-    -   不用安裝任何第三方軟體
-
-3.  在 Windows 10 內安裝 Windows 子系統 (Windows Subsystem for Linux; WSL)，然後直接在 Linux 環境透過 OpenSSH 連線至虛擬主機。\
-    \
-    **優點:**
-
-    -   可以學習到很多東西， Linux 可以用的在 Windows 的 WSL 內都可以使用，操作可以照搬到 WSL 上面。
-
-    **缺點:**
-
-    -   安裝過程所需的時間會根據每個人的經驗有所差異，需要從頭開始設定 Linux。
-
-在 Windows 要產生 ssh key pairs 有兩種辦法，第一種是經由內建的 OpenSSH Client 產生，另一種是經由 PuTTY 所附的工具產生（可以參考附錄的 [PuTTY] 介紹）。
-
-::: {.infobox .info}
-Linux 的使用者可以使用套件管理程式安裝 `openssh-server`， 指令如下：
+可以用指令 `which ssh` 查詢 ssh 客戶端有無安裝，如沒有安裝可以使用[套件管理程式](https://zh.wikipedia.org/zh-tw/%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F)安裝 `openssh-server`，以 Ubuntu 為例：
 
 ``` {.bash .prefixed}
 sudo apt install openssh-server
 ```
-:::
 
-### Step 1 --- 安裝 OpenSSH Client
+- Windows 系統
 
-Windows 10 已經有內建在 Windows 的「應用程式與功能」內，預設是沒有安裝的。啟動流程如下:
+Windows 11 已經有內建 OpenSSH 客戶端，要確認有無安裝一樣可以打開 PowerShell 並輸入 `ssh` 檢查指令有無安裝。
 
--   點擊「開始」
+如沒有安裝可以使用下列流程進行安裝
 
--   打開「設定⚙」
+1.   點擊「開始」
 
--   選取「應用程式」 ➜ 「應用程式與功能」 ➜ 找到黑體字「程式與功能」，並點選下面的「選用功能」
+2.   打開「設定⚙」
 
--   在已安裝的篩選列上面篩選 `ssh` ，如果沒有，請在頁面頂端點選「新增功能」，然後:
+3.   選取「應用程式」 ➜ 點選「選用功能」
 
-    -   找到「OpenSSH 用戶端」後，點選安裝
+4.   請在頁面頂端點選「檢視功能」，然後在搜尋列中搜尋「OpenSSH 用戶端」，點選安裝
 
-安裝完成後，你可以打開「命令提示字元」或是「PowerShell」輸入 ssh 來確認是否安裝完成。
+安裝完成後，你可以打開命令提示字元或是 PowerShell 輸入指令 `ssh` 來確認是否安裝完成。
 
-``` {.powershell .prefixed_powershell}
+``` {.prefixed_powershell}
 ssh
 ```
 
@@ -127,7 +244,7 @@ usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]
            [-w local_tun[:remote_tun]] destination [command]
 ```
 
-### Step 2 --- 產生 ssh key pairs
+### 產生 SSH 金鑰 {#generating-ssh-keys}
 
 接著，可以使用 `ssh-keygen` 指令產生 key pairs，加密方式有 dsa、ecdsa、ecdsa-sk、ed25519、ed25519-sk 與 rsa，預設的加密方式是 rsa ，詳細指令用法可以透過 `ssh-keygen --help` 指令查詢，這裡我們用最簡單的 `ssh-keygen` 指令。
 
@@ -137,14 +254,14 @@ ssh-keygen
 
 Windows 的用戶預設會把 key pair 儲存在 `C:\Users\<USERNAME>\.ssh\` 的位置，而 Linux 的用戶會儲存在 `~/.ssh/` 的位置。
 
-這裡是詢問你要不要把產生的 ssh key 重新命名，一般不會動到它的名字，按 Enter↩，接續下一步。
+這裡會詢問你要不要把產生的 ssh 金鑰重新命名，如果沒有複數的金鑰一般不會動到它的名字，按 Enter↩，接續下一步。
 
 ``` console_output
 Generating public/private rsa key pair.
 Enter file in which to save the key (C:\Users\<USERNAME>/.ssh/id_rsa):
 ```
 
-這一步再詢問你需不需要將 SSH key pairs 加密，如果加密了，每次連線都需要打密碼。如果不想設定密碼就留空按 Enter↩ 進入下一步。
+這一步再詢問你需不需要將 SSH key pairs 加密，如果加密了，每次連線都需要輸入密碼。如果怕麻煩不想設定密碼就留空按 Enter↩ 進入下一步。
 
 ``` console_output
 Created directory 'C:\Users\<USERNAME>/.ssh'.
@@ -176,30 +293,30 @@ The key's randomart image is:
 產生完畢，儲存在 `C:\Users\<USERNAME>\.ssh\id_rsa` 的檔案是私鑰（private key），而另一個 `id_rsa.pub` 的檔案是公鑰（public key）。
 
 ::: {.infobox .caution}
-當你遺失了遠端主機的 key pairs，你再也不能透過遠端存取有使用過該 key pairs 的主機，只能透過直接接觸那台主機來更新的 key pairs，所以要妥善保存。
+當你丟失了遠端主機的金鑰，你再也不能透過遠端存取遠端的伺服器，只能透過直接接觸那台主機來更新 SSH 金鑰，所以要妥善保存。
 :::
 
-### Step 3 --- 將新增的 key pairs 上傳至目的地主機
+### 上傳 SSH 金鑰 {#uploading-ssh-keys}
 
-當你擁有了 [Step 2 --- 產生 ssh key pairs]，接下來要把 public key 上傳至虛擬機器。另外公鑰給別人看到是沒問題的，前面第一章的 [OpenSSH 設定 [可跳過]] 就已經有出現過我的公鑰了，公鑰並不能用來產生私鑰，它是用來認證這個 key 是否跟你所持有的私鑰相呼應。
+當你擁有了 SSH 金鑰，接下來要將公鑰上傳至遠端的伺服器。另外公鑰給別人看到是沒問題的，公鑰並不能用來產生私鑰，它是用來認證是否跟你所持有的私鑰相吻合。
 
-#### Linux 系統
+- Linux 系統
 
-如果你是的系統是 Linux 那指令會稍微短一些，上傳至遠端電腦的指令如下:
+如果你是的系統是 Linux 那上傳的指令會稍微短一些，上傳至遠端電腦的指令如下:
 
 ``` {.bash .prefixed}
-ssh-copy-id -i ~/.ssh/id_ed25519.pub -p 22 asis@192.168.0.13
+ssh-copy-id -i ~/.ssh/id_ed25519.pub -p 22 asis@192.168.56.101
 ```
 
--   `-i`: i flag 代表的是你要上傳的 public key 檔案路徑
+-   `-i`: i 參數代表的是你要上傳的公鑰的檔案路徑
 
--   `-p`: p flag 則是目的地主機的 OpenSSH 伺服器的埠號
+-   `-p`: p 參數則是目的地主機 OpenSSH 伺服器的埠號
 
--   `id_ed25519.pub` 為我產生的其他的 key pair，如果你前面是照著我的步驟產生，這裡應該改為 `id_rsa.pub`
+-   `id_ed25519.pub` 為我產生的公鑰，如果你前面是照著我的步驟產生，這裡應該改為 `id_rsa.pub`
 
--   這裡的 `asis` 為第一章 [使用者設定] 的預設使用者
+-   這裡的 `asis` 為第一章 [使用者設定] 的使用者
 
--   `192.168.0.13` 為我虛擬主機的 ip 位址，查詢 ip 位址可以先手動登入虛擬主機後，用 `hostname -I` 或是 `ip addr show` 指令查詢
+-   `192.168.56.101` 為我虛擬主機的 ip 位址，查詢 ip 位址可以先手動登入虛擬主機後，用 `hostname -I` 或是 `ip addr show` 指令查詢
 
 完成後會提示你已經可以使用 ssh 連線
 
@@ -210,79 +327,79 @@ ssh-copy-id -i ~/.ssh/id_ed25519.pub -p 22 asis@192.168.0.13
 
 Number of key(s) added: 1
 
-Now try logging into the machine, with:   "ssh -p '22' 'asis@192.168.0.13'"
+Now try logging into the machine, with:   "ssh -p '22' 'asis@192.168.56.101'"
 and check to make sure that only the key(s) you wanted were added.
 ```
 
-如果你是 Windows 的使用者也不用擔心多複雜，一樣一行指令就能搞定，這裡我是參考[@christopher_2020]的教學，指令如下:
+如果你是 Windows 的使用者也不用擔心有多複雜，一樣一行指令就能搞定，這裡我是參考[@christopher_2020]的教學，指令如下:
 
 ``` {.powershell .prefixed_powershell}
 cat $env:USERPROFILE\.ssh\id_rsa.pub | ssh asis@192.168.0.13 "cat >> ~/.ssh/authorized_keys"
 ```
 
--   這裡的 `$env:USERPROFILE` 為 Windows 內建環境變數，會根據現在的使用者變更，如果我的使用者名稱為 `qaz855175b` 那 `$env:USERPROFILE` 對應的路徑就為 `C:\Users\qaz855175b\`，當然你可以直接把指令的 public key 路徑替換為 `C:\Users\qaz855175b\.ssh\id_rsa.pub`
+-   這裡的 `$env:USERPROFILE` 為 Windows 內建環境變數，會根據現在的使用者變更。如果我的使用者名稱為 `qaz855175b` 那 `$env:USERPROFILE` 就會產生 `C:\Users\qaz855175b\` 的字串，當然你可以直接把這行指令的公鑰路徑替換為 `C:\Users\qaz855175b\.ssh\id_rsa.pub`
 
--   `id_rsa.pub` 為產生的 public key 預設名稱
+-   `id_rsa.pub` 為剛剛產生的公鑰名稱
 
--   這裡的 `asis` 為第一章 [使用者設定] 的預設使用者
+-   這裡的 `asis` 為 [user-configuration] 的預設使用者
 
--   `192.168.0.13` 為我虛擬主機的 ip 位址，查詢 ip 位址可以先手動登入虛擬主機後，用 `hostname -I` 或是 `ip addr show` 指令查詢
+-   `192.168.56.101` 為我虛擬主機的 ip 位址，查詢 ip 位址可以先手動登入虛擬主機後，用 `hostname -I` 或是 `ip addr show` 指令查詢
 
 ::: {.infobox .info}
-其實 Linux 的 `ssh-copy-id`、和第一章的從 Github 匯入 public key `ssh-import-id-gh` 與這裡的 `cat file >> ~/.ssh/authorized_keys` 都是在做同一件事情，把 public key 貼到遠端伺服器的使用者的 `authorized_keys` 檔案裡面。
+其實 Linux 的 `ssh-copy-id`、和第一章的從 Github 匯入 public key `ssh-import-id-gh` 與這裡的 `cat file >> ~/.ssh/authorized_keys` 都是在做同一件事情，就是把公鑰貼到遠端伺服器的使用者家目錄的 `authorized_keys` 檔案裡面。
 :::
 
 接著按 Enter↩，跳出輸入密碼提示，這裡輸入預設的使用者密碼 `asis`
 
 ``` console_output
-asis@192.168.0.13's password:
+asis@192.168.56.101's password:
 ```
 
 輸入完後雖然沒有任何提示訊息，但其實已經可以使用 ssh 連線至遠端主機啦～
 
-### Step 4 --- 測試 SSH 連線，使用 SSH 連線至遠端主機
+### 測試 SSH 連線 {#testing-ssh-connection}
 
 最後，使用 ssh 指令連接至遠端主機。
 
-使用 OpenSSH Client 產生的 pair keys 可以直接使用這個方法連線。這裡介紹幾個常常與 ssh 一起出現的 flag :
+使用 OpenSSH Client 產生的 pair keys 可以直接使用這個方法連線。這裡介紹幾個常常與 ssh 一起出現的參數：
 
--   `-v`: verbose，顯示連接時更詳細的訊息，除錯時常用
+-   `-v`：verbose，顯示連接時更詳細的訊息，除錯時常用
 
--   `-p`: port;，遠端伺服器的埠號
+-   `-p`port，遠端伺服器的埠號
 
--   `-i`: 手動指定私鑰位置
+-   `-i`：手動指定私鑰位置
 
 ::: {.infobox .info}
-flag 通常會在指令後面隨後出現，flag前面會插入 `-`，而 flag 後面有時會需要加入詳細的設定，有時不用。flag 與 flag 之間用空格隔開，詳細指令的使用方法可以在 Linux 系統用 `man <指令名稱>` 查詢
+指令參數通常會在指令後面隨後出現，參數名稱前面前面會插入 `-`，而參數名稱後面有時會需要加入詳細的設定，有時不用。參數與參數之間用空格隔開，詳細指令的使用方法可以在 Linux 系統用 `man <指令名稱>` 查詢
 
-假如我們要看連線的詳細訊息，且指定伺服器 port 為 60000與指定 private key 檔案位址等等，組合起來就是:
+假如我們要看連線的詳細訊息，且指定伺服器埠號為 60000 與指定私鑰檔案位置等等，組合起來就是:
 
-``` bash
-ssh -v -p 60000 -i ~/.ssh/id_rsa asis@192.168.0.13
+``` {.bash .prefixed}
+ssh -v -p 60000 -i ~/.ssh/id_rsa asis@192.168.56.101
 ```
 :::
 
-目前不需要加上任何 flag，連線指令為：
+目前連線不需要加上任何參數，連線指令為：
 
 ``` {.bash .prefixed_powershell}
-ssh asis@192.168.0.13
+ssh asis@192.168.56.101
 ```
 
-一樣地，`asis` 是使用者名稱，而`192.168.0.13` 是 OpenSSH 伺服器的 ip 位置，輸入完後按 Enter↩。
+一樣地，`asis` 是使用者名稱，而 `192.168.56.101` 是 OpenSSH 伺服器的 ip 位址，輸入完後按 Enter↩。
 
 這邊打 `yes` 即可，確認連接目的地沒有錯之後，會把 fingerprint 寫入 `~/.ssh/known_hosts` 中，以後不再詢問。
 
 ``` console_output
-The authenticity of host '192.168.0.13 (192.168.0.13)' can't be established.
+The authenticity of host '192.168.56.101 (192.168.56.101)' can't be established.
 ECDSA key fingerprint is SHA256:/HoocrLXe63zycdlmkh/+U3RuUfkawNq/xA0gTJmqmM.
 Are you sure you want to continue connecting (yes/no/[fingerprint])?
 ```
 
 ::: {.infobox .info}
-這裡不用指定 private key 的原因是因為，當你用 ssh 連線至目的地伺服器且你沒有指定認證檔案（私鑰）時，`ssh` 會一個 key 一個 key 拿去問伺服器這個 key 可不可以使用。
+這裡不用指定私鑰的原因是因為，當你用 ssh 連線至目的地伺服器且你沒有指定認證檔案（私鑰）時，`ssh` 會在將金鑰一個一個拿去詢問這個金鑰可不可以使用。
 :::
 
-連接成功!
+連接成功！
 
 ```{r, fig.cap='Windows Terminal 下的 SSH 連接成功畫面'}
 knitr::include_graphics(path = 'figures/ssh-connection-success.png')
@@ -294,48 +411,31 @@ knitr::include_graphics(path = 'figures/ssh-connection-success.png')
 knitr::include_graphics(path = 'figures/virtualbox-ubuntu-login.png')
 ```
 
-### Step 5 --- 使遠端的 OpenSSH 伺服器更加安全 [可跳過]
+### OpenSSH 伺服器設定 {#openssh-server-configuration}
 
-#### 變更 SSH 伺服器預設的埠號
+- 變更 SSH 伺服器預設的埠號
 
 ``` {.bash .prefixed}
 sudo vim /etc/ssh/sshd_config
 ```
 
-將 `#Port 22` 取消註解，並把 `22` 改成其他介於 1-65535 之間的數字。
+將 `#Port 22` 取消註解，並把 `22` 改成其他介於 1-65535 之間的數字。這裡我使用 `60000`。
 
 ``` bash
-#       $OpenBSD: sshd_config,v 1.103 2018/04/09 20:41:22 tj Exp $
-
-# This is the sshd server system-wide configuration file.  See 
-# sshd_config(5) for more information.
-
-# This sshd was compiled with PATH=/usr/bin:/bin:/usr/sbin:/sbin
-
-# The strategy used for options in the default sshd_config shipped with
-# OpenSSH is to specify options with their default value where
-# possible, but leave them commented.  Uncommented options override the
-# default value.
-
-Include /etc/ssh/sshd_config.d/*.conf
-
 Port 60000
-#AddressFamily any
-#ListenAddress 0.0.0.0
-#ListenAddress ::
 ```
 
-#### 關閉密碼驗證
+- 關閉密碼驗證
 
-將 PasswordAuthentication（以密碼驗證）設為 no。使用 SSH 連線時，如果沒有指定 SSH key pair，如果 OpenSSH 伺服器的設定沒有關閉，接著會要求你輸入使用者密碼以密碼驗證。通常這個設定會開啟是因為要[Step 3 --- 將新增的 key pairs 上傳至目的地主機]。
+將 PasswordAuthentication（以密碼驗證）設為 no。使用 SSH 連線時，允許使用者密碼以輸入密碼驗證。
 
 ``` bash
 PasswordAuthentication no
 ```
 
-當然如果密碼驗證為 no，且同時遺失 SSH 的 pair key 時，你就無法以 SSH 連線至遠端主機，需要實際的使用圖形介面操作虛擬機器。
+當然如果密碼驗證為 no，且同時遺失 SSH 的 pair key 時，你就無法以 SSH 連線至遠端主機，需要使用其他方法補救。
 
-#### 關閉遠端 root 登入
+- 關閉遠端 root 登入
 
 避免 root 登入可以使系統避免過大的權限暴露。
 
@@ -343,7 +443,7 @@ PasswordAuthentication no
 PermitRootLogin no
 ```
 
-#### 限制能使用 SSH 連線的使用者
+- 限制能使用 SSH 連線的使用者
 
 只允許特定的使用者使用 SSH 連線可大大降低風險。
 
@@ -351,7 +451,7 @@ PermitRootLogin no
 AllowUsers asis
 ```
 
-#### 關閉無密碼的使用者使用 SSH
+- 關閉無密碼的使用者使用 SSH
 
 將沒有密碼就可以登入的使用者撤銷 SSH 連線的權限。
 
@@ -359,9 +459,7 @@ AllowUsers asis
 PermitEmptyPasswords no
 ```
 
-### Step 6 --- 測試 `sshd_config` 是否有效
-
-`-t` 旗標可以測試 SSH 的設定是否有效，可以避免一些錯字造成的錯誤。
+`-t` 參數可以測試 SSH 的設定是否有效，可以避免一些錯字造成的錯誤。
 
 ``` {.bash .prefixed}
 sudo sshd -t
@@ -401,41 +499,69 @@ Aug 15 16:08:55 asis01 systemd[1]: Started OpenBSD Secure Shell server.
 最後指令 `exit` 斷開連線，再重新測試 ssh 遠端連線至伺服器，使用公鑰與私鑰驗證登入。
 
 ``` {.bash .prefixed_powershell}
-ssh -p 60000 asis@192.168.0.13
+ssh -p 60000 asis@192.168.56.101
 ```
 
-``` console_output
-Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-81-generic x86_64)
+``` .console_output
+Welcome to Ubuntu 22.04.3 LTS (GNU/Linux 5.15.0-79-generic x86_64)
 
  * Documentation:  https://help.ubuntu.com
  * Management:     https://landscape.canonical.com
  * Support:        https://ubuntu.com/advantage
 
-  System information as of Mon 16 Aug 2021 12:32:20 PM UTC
+  System information as of Tue Aug 15 06:04:51 AM UTC 2023
 
-  System load:             0.0
-  Usage of /:              0.7% of 974.32GB
-  Memory usage:            5%
-  Swap usage:              0%
-  Processes:               124
-  Users logged in:         0
-  IPv4 address for enp0s3: 192.168.0.13
-  IPv6 address for enp0s3: fd00:1cab:c0bb:acc2:a00:27ff:fed3:8136
+  System load:  0.173828125        Processes:               131
+  Usage of /:   0.3% of 974.24GB   Users logged in:         0
+  Memory usage: 13%                IPv4 address for enp0s3: 10.0.2.15
+  Swap usage:   0%                 IPv4 address for enp0s8: 192.168.56.101
 
- * Super-optimized for small spaces - read how we shrank the memory
-   footprint of MicroK8s to make it the smallest full K8s around.
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
 
-   https://ubuntu.com/blog/microk8s-memory-optimisation
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
 
-0 updates can be applied immediately.
+Expanded Security Maintenance for Applications is not enabled.
+
+3 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
 
 
-Last login: Mon Aug 16 12:31:35 2021 from 192.168.0.11
+Last login: Tue Aug 15 06:04:51 2023 from 192.168.56.1
 ```
 
-連線成功～🖼
+連線成功。
 
-## APT
+最後可以用 PowerShell 將設定檔寫入設定中
+
+切換資料夾至使用者資料夾中的 `.ssh`
+
+``` {.prefixed_powershell}
+cd $env:USERPROFILE\.ssh
+```
+
+使用筆記本編輯設定
+
+``` {.prefixed_powershell}
+notepad config.
+
+``` {.console_output}
+Host vm
+    Hostname 192.168.56.101
+    User asis
+    Port 60000
+```
+
+接下來用別名 `vm` 就能連線了
+
+``` {.prefixed_powershell}
+ssh vm
+```
+
+## APT {#apt}
 
 在 Ubuntu 上安裝任何程式大多都是用 APT (Advanced Packaging Tools) 安裝，這裡有兩個指令，用 `&&` 串接在一起:
 
@@ -451,7 +577,7 @@ sudo apt update && sudo apt upgrade -y
 
 -   `-y, --yes, --assume-yes`: 自動對安裝提示回答 yes，安裝時會提示是否確認要安裝該軟體，因為我們清楚自己在做什麼為了方便而把提示關掉
 
-## UFW
+## UFW {#ufw}
 
 UFW（Uncomplicated Firewall）是預設在 Ubuntu 系統上的防火牆，這裡先為了 OpenSSH 伺服器而打開埠號 `60000`。
 
