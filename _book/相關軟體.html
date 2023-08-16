@@ -144,7 +144,7 @@
 <p>接著按「Load」把剛剛產生的 *.ppk 檔案讀取進來。會看到一行字「Public key for pasting into OpenSSH authorized_keys file」下面的可複製區域就是 public key，把它整段複製起來。</p>
 <div class="inline-figure"><img src="figures/puttygen-load-ppk.png" class="figure"></div>
 <p>接著打開「PowerShell」或是「命令提示字元」，輸入:</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb268-1"><a href="%E7%9B%B8%E9%97%9C%E8%BB%9F%E9%AB%94.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="fu">echo</span> <span class="st">"&lt;YOUR_PUBLIC_KEY&gt;"</span> <span class="op">|</span> ssh asis@192<span class="op">.</span><span class="fu">168</span><span class="op">.</span><span class="fu">0</span><span class="op">.</span><span class="fu">13</span> <span class="st">"cat &gt;&gt; ~/.ssh/authorized_keys"</span></span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb274-1"><a href="%E7%9B%B8%E9%97%9C%E8%BB%9F%E9%AB%94.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="fu">echo</span> <span class="st">"&lt;YOUR_PUBLIC_KEY&gt;"</span> <span class="op">|</span> ssh asis@192<span class="op">.</span><span class="fu">168</span><span class="op">.</span><span class="fu">0</span><span class="op">.</span><span class="fu">13</span> <span class="st">"cat &gt;&gt; ~/.ssh/authorized_keys"</span></span></code></pre></div>
 <ul>
 <li><p>將 <code>&lt;YOUR_PUBLIC_KEY&gt;</code> 替換成自己的 public key</p></li>
 <li><p>這裡的 <code>asis</code> 為第一章的<a href="#%E4%BD%BF%E7%94%A8%E8%80%85%E8%A8%AD%E5%AE%9A">使用者設定</a>的預設使用者</p></li>
@@ -212,7 +212,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-08-15.</p>
+    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-08-16.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
