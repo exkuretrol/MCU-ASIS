@@ -2,7 +2,7 @@
 
 本章主要會說明如何透過 SSH 存取虛擬機器與虛擬機器基本設定。
 
-## 事前準備 {#preparing}
+## 事前準備 {#preparing-2}
 
 從這個章節開始會出現一些特殊前綴的方框（如下表）表示，不同的前綴代表不同種類的終端機，或是使用終端機的身份，請多多注意。
 
@@ -33,7 +33,7 @@
     drwxrwxr-x  6 kuaz kuaz 4096 Oct  6 14:06 School/
     ```
 
-## 安裝驅動程式
+## 安裝驅動程式 {#install-guest-additions}
 
 在安裝驅動程式之前，需要從上面的設定將 Guest Additions 的光碟映像檔掛載至虛擬主機上面。
 
@@ -41,32 +41,32 @@
 knitr::include_graphics(path = 'figures/insert-guest-additions-iso.png')
 ```
 
-掛載後先再 `/media/` 資料夾建立新的 `iso` 資料夾
+掛載後先在 `/media/` 資料夾建立新的 `iso` 資料夾
 
-``` .bash .prefixed
+``` {.bash .prefixed}
 sudo mkdir /media/iso
 ```
 
 查詢目前掛載的位置
 
-``` .bash .prefixed
+``` {.bash .prefixed}
 lsblk
 ```
 
 掛載光碟至指定資料夾
 
-``` .bash .prefixed
+``` {.bash .prefixed}
 sudo mount /dev/sr0 /media/iso
 ```
 
 安裝安裝程式所需的依賴套件
-``` .bash .prefixed
+``` {.bash .prefixed}
 sudo apt update && sudo apt install bzip2 gcc make perl -y
 ```
 
 安裝驅動程式
 
-``` .bash .prefixed
+``` {.bash .prefixed}
 sudo /media/iso/VBoxLinuxAdditions.run
 ```
 
@@ -133,7 +133,7 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
 sudo vim /etc/netplan/00-installer-config.yaml
 ```
 
-``` {.console_output}
+``` {.yaml .console_output}
 # This is the network config written by 'subiquity'
 network:
   ethernets:
@@ -334,7 +334,7 @@ and check to make sure that only the key(s) you wanted were added.
 如果你是 Windows 的使用者也不用擔心有多複雜，一樣一行指令就能搞定，這裡我是參考[@christopher_2020]的教學，指令如下:
 
 ``` {.powershell .prefixed_powershell}
-cat $env:USERPROFILE\.ssh\id_rsa.pub | ssh asis@192.168.0.13 "cat >> ~/.ssh/authorized_keys"
+cat $env:USERPROFILE\.ssh\id_rsa.pub | ssh asis@192.168.56.101 "cat >> ~/.ssh/authorized_keys"
 ```
 
 -   這裡的 `$env:USERPROFILE` 為 Windows 內建環境變數，會根據現在的使用者變更。如果我的使用者名稱為 `qaz855175b` 那 `$env:USERPROFILE` 就會產生 `C:\Users\qaz855175b\` 的字串，當然你可以直接把這行指令的公鑰路徑替換為 `C:\Users\qaz855175b\.ssh\id_rsa.pub`
@@ -365,7 +365,7 @@ asis@192.168.56.101's password:
 
 -   `-v`：verbose，顯示連接時更詳細的訊息，除錯時常用
 
--   `-p`port，遠端伺服器的埠號
+-   `-p`：port，遠端伺服器的埠號
 
 -   `-i`：手動指定私鑰位置
 
@@ -547,6 +547,9 @@ cd $env:USERPROFILE\.ssh
 
 ``` {.prefixed_powershell}
 notepad config.
+```
+
+將下列設定檔加入設定。
 
 ``` {.console_output}
 Host vm
@@ -555,7 +558,7 @@ Host vm
     Port 60000
 ```
 
-接下來用別名 `vm` 就能連線了
+接下來就可以用別名 `vm` 進行連線了
 
 ``` {.prefixed_powershell}
 ssh vm
