@@ -450,3 +450,33 @@ knitr::include_graphics(path = 'figures/ubuntu-installer-installing.png')
 ```{r, fig.cap='Ubuntu安裝程式，完成安裝'}
 knitr::include_graphics(path = 'figures/ubuntu-installer-install-completed.png')
 ```
+
+## VirtualBox 管理虛擬主機 {#virtual-machine-managment}
+
+### 啟動虛擬主機 {#boot-virtual-machine}
+
+依序選擇欲啟動的虛擬主機 → 「啟動」啟動虛擬主機。
+
+```{r, fig.cap='VirtualBox 將虛擬主機開機'}
+knitr::include_graphics(path = 'figures/virtualbox-boot-virtual-machine.png')
+```
+
+### 關閉虛擬主機 {#shutdown-virtual-machine}
+
+虛擬主機的導覽列 → 「檔案」 → 「關閉電源」 → 「傳送關機訊號」正常關閉虛擬主機電源。
+
+```{r, fig.cap='VirtualBox 將虛擬主機關機'}
+knitr::include_graphics(path = 'figures/virtualbox-shutdown-virtual-machine_1.png')
+```
+
+```{r, fig.cap='VirtualBox 將虛擬主機關機'}
+knitr::include_graphics(path = 'figures/virtualbox-shutdown-virtual-machine_2.png')
+```
+
+### 虛擬主機設定 {#configure-virtual-machine}
+
+依序選擇欲編輯的虛擬主機 → 「⚙️設定」編輯虛擬主機。
+
+```{r, fig.cap='VirtualBox 設定虛擬主機'}
+knitr::include_graphics(path = 'figures/virtualbox-configure-virtual-machine.png')
+```
