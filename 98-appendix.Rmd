@@ -6,9 +6,41 @@
 
 <!-- 因為內容太多，書本篇收錄的會變得太混雜，所以我把一些內容放到這裡。 -->
 
-<!-- ## 由 Windows 10 系統進入 BIOS {.unnumbered .hidden} -->
+## Windows 終端機（Windows Terminal） {#windows-terminal}
 
-<!-- ## Windows Terminal -->
+Windows 終端機是一個屬於 Windows 系統由微軟提供的終端機程式。可以支援像是 Windows 子系統或是提供內建的命令提示字元或 PowerShell 使用。
+
+首先至「[Windows 終端機商店](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701)」頁面下載終端機
+
+```{r, fig.cap='終端機商店官方介紹頁面'}
+knitr::include_graphics(path = './figures/windows-terminal-page.png')
+```
+
+接著，畫面上應該會出現一個新的視窗，點選[取得]
+
+```{r, fig.cap='終端機安裝'}
+knitr::include_graphics(path = './figures/get-windows-terminal.png')
+```
+
+安裝完成後，自開始功能表搜尋「終端機」的字樣。
+
+```{r, fig.cap='打開終端機'}
+knitr::include_graphics(path = './figures/open-windows-terminal.png')
+```
+
+打開終端機後我們要進行設定，將 Windows 終端機設成預設終端機的啟動程式。點擊分頁旁邊的 `ᵛ` 展開選單，接著點選「設定」。
+
+```{r, fig.cap='打開終端機'}
+knitr::include_graphics(path = './figures/configure-windows-terminal_1.png')
+```
+
+找到「啟動」分頁後，將預設終端應用程式調整成「Windows 終端機」並儲存。
+
+```{r, fig.cap='打開終端機'}
+knitr::include_graphics(path = './figures/configure-windows-terminal_2.png')
+```
+
+接下來只要打開命令提示字元（cmd）或是 PowerShell 都會自動以 Windows 終端機打開。
 
 ## PuTTY
 

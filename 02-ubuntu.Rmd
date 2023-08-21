@@ -33,6 +33,22 @@
     drwxrwxr-x  6 kuaz kuaz 4096 Oct  6 14:06 School/
     ```
 
+## APT {#apt}
+
+在 Ubuntu 上安裝任何程式大多都是用 APT (Advanced Packaging Tools) 安裝，這裡有兩個指令，用 `&&` 串接在一起:
+
+``` {.bash .prefixed}
+sudo apt update && sudo apt upgrade -y
+```
+
+-   `apt update`: 更新可安裝的套件列表或版本
+
+-   `apt upgrade`: 安裝程式
+
+-   `&&`: `&&` 之前的指令執行成功才會接續執行 `&&` 後面的指令
+
+-   `-y, --yes, --assume-yes`: 自動對安裝提示回答 yes，安裝時會提示是否確認要安裝該軟體，因為我們清楚自己在做什麼為了方便而把提示關掉
+
 ## 安裝驅動程式 {#install-guest-additions}
 
 在安裝驅動程式之前，需要從上面的設定將 Guest Additions 的光碟映像檔掛載至虛擬主機上面。
@@ -80,18 +96,20 @@ knitr::include_graphics(path = 'figures/virtualbox-right-click.png')
 
 接著，依序點選「網路」 → 「介面卡 2」 → 「僅限主機」介面卡 → 「進階」，記下目前的 mac 位址。
 
-```{r, fig.cap='VirtualBox 對虛擬主機右鍵'}
+```{r, fig.cap='VirtualBox 虛擬主機位址'}
 knitr::include_graphics(path = 'figures/virtualbox-host-only-network-mac.png')
 ```
 
 
-在來回到虛擬主機安裝 net-tools
+再來回到虛擬主機安裝 net-tools
 
 ``` {.bash .prefixed}
 sudo apt install net-tools
 ```
 
-確認目前的裝置名稱，可以看到 `08:00:27:59:b3:11` 與剛才新增的介面卡 mac 位址相同。`enp0s8` 即為剛才插入的新的「僅限主機」網路卡。
+確認目前的裝置名稱，可以看到 `08:00:27:59:b3:11` 與剛才新增的介面卡 mac 位址相同。這裡 `enp0s8` 即為剛才插入的新的「僅限主機」網路卡，這個裝置名稱需要把它記下來。
+
+另外一張網路卡 `enp0s3` 的網路卡是預設 NAT 介面的虛擬主機網路卡。
 
 ``` {.bash .prefixed}
 ifconfig -a
@@ -127,7 +145,7 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
 
 可以看到剛才新增的的網路卡沒有 ip 位址，這是因為系統沒有為這張網卡打開 dhcp 的設定。
 
-我們可以透過修改 netplan 的設定將 dhcp 伺服器打開。
+我們可以透過修改 netplan 的設定將 dhcp 伺服器打開。將 `enp0s8` 的設定添加在 `enp0s3` 下面。
 
 ```
 sudo vim /etc/netplan/00-installer-config.yaml
@@ -185,12 +203,82 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 ```
 
-後續我們就可以透過虛擬主機的 ip 位址 `192.168.56.101` 存取上面的服務。
+後續我們就可以透過剛才新增的網路卡 ip 位址 `192.168.56.101` 存取這台虛擬主機。
 
+## UFW {#ufw}
+
+UFW（Uncomplicated Firewall）是預設在 Ubuntu 系統上的防火牆，這裡先為了下一節 OpenSSH 而打開埠號 `60000`。
+
+首先用 status 查詢 UFW 服務的狀態，這裡需要輸入超級使用者 (sudo) 的密碼。
+
+``` {.bash .prefixed}
+sudo systemctl status ufw
+```
+
+如果服務沒有啟用，使用指令 `enable` 啟動。
+
+``` {.bash .prefixed}
+sudo systemctl enable ufw
+```
+
+用 `status` 確認防火牆狀態
+
+``` {.bash .prefixed}
+sudo ufw status
+```
+
+看來預設的 UFW 是關閉的
+
+``` {.console_output}
+Status: inactive
+```
+
+接著用 `enable` 指令打開防火牆
+
+``` {.bash .prefixed}
+sudo ufw enable
+```
+
+查詢防火牆狀態
+
+``` {.bash .prefixed}
+sudo ufw status
+```
+
+``` console_output
+Status: active
+```
+
+允許埠號 `60000` 從任何地方連入
+
+``` {.bash .prefixed}
+sudo ufw allow 60000
+```
+
+查詢防火牆狀態
+
+``` {.bash .prefixed}
+sudo ufw status
+```
+
+目前只有兩條規則，分別是 從任何地方連入埠號 60000 與 ipv6 從任何地方連入埠號 60000
+
+``` {.console_output}
+Status: active
+
+To                         Action      From
+--                         ------      ----
+60000                      ALLOW       Anywhere
+60000 (v6)                 ALLOW       Anywhere (v6)
+```
+
+## Windows 終端機
+
+Windows 的用戶建議可以安裝 Windows 終端機。可以參考附錄的 [Windows 終端機](#windows-terminal) 介紹。
 
 ## OpenSSH {#openssh}
 
-在前第一章的安裝過程中，也有碰到 OpenSSH 的小節，不過那並不是給第一次要使用 OpenSSH 的使用者用的，而是給已經有在使用 SSH 金鑰的使用者看的。在這個小節會逐步解釋 OpenSSH 的使用方法，從 OpenSSH 客戶端安裝、產生 SSH 金鑰再來是連線。
+在這個小節會逐步解釋 OpenSSH 的使用方法，從 OpenSSH 客戶端安裝、產生 SSH 金鑰再來是連線。
 
 ### 概述 {#overview}
 
@@ -220,6 +308,8 @@ Windows 11 已經有內建 OpenSSH 客戶端，要確認有無安裝一樣可以
 
 如沒有安裝可以使用下列流程進行安裝
 
+Windows 11 的安裝流程：
+
 1.   點擊「開始」
 
 2.   打開「設定⚙」
@@ -228,13 +318,23 @@ Windows 11 已經有內建 OpenSSH 客戶端，要確認有無安裝一樣可以
 
 4.   請在頁面頂端點選「檢視功能」，然後在搜尋列中搜尋「OpenSSH 用戶端」，點選安裝
 
-安裝完成後，你可以打開命令提示字元或是 PowerShell 輸入指令 `ssh` 來確認是否安裝完成。
+Windows 10 的安裝流程：
 
-``` {.prefixed_powershell}
+1.   點擊「開始」
+
+2.   打開「設定⚙」
+
+3.   選取「應用程式」 ➜ 「應用程式與功能」 ➜ 找到黑體字「程式與功能」，並點選下面的「選用功能」
+
+4.   在已安裝的篩選列上面篩選 `ssh` ，如果沒有，請在頁面頂端點選「新增功能」，找到「OpenSSH 用戶端」後，點選安裝
+
+安裝完成後，你可以打開命令提示字元或是 PowerShell 輸入指令 `ssh` 來確認是否安裝完成。如果正常出現指令描述，代表成功安裝。
+
+``` {.powershell .prefixed_powershell}
 ssh
 ```
 
-``` console_output
+``` {.console_output}
 usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]
            [-b bind_address] [-c cipher_spec] [-D [bind_address:]port]
            [-E log_file] [-e escape_char] [-F configfile] [-I pkcs11]
@@ -246,32 +346,32 @@ usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]
 
 ### 產生 SSH 金鑰 {#generating-ssh-keys}
 
-接著，可以使用 `ssh-keygen` 指令產生 key pairs，加密方式有 dsa、ecdsa、ecdsa-sk、ed25519、ed25519-sk 與 rsa，預設的加密方式是 rsa ，詳細指令用法可以透過 `ssh-keygen --help` 指令查詢，這裡我們用最簡單的 `ssh-keygen` 指令。
+使用 `ssh-keygen` 指令產生金鑰，加密方式有 dsa、ecdsa、ecdsa-sk、ed25519、ed25519-sk 與 rsa，預設的加密方式是 rsa，詳細指令用法可以透過 `ssh-keygen --help` 指令查詢，這裡我們用最簡單的 `ssh-keygen` 指令。
 
 ``` {.powershell .prefixed_powershell}
 ssh-keygen
 ```
 
-Windows 的用戶預設會把 key pair 儲存在 `C:\Users\<USERNAME>\.ssh\` 的位置，而 Linux 的用戶會儲存在 `~/.ssh/` 的位置。
+產生後，Windows 的用戶預設會把金鑰儲存在 `C:\Users\<USERNAME>\.ssh\` 的位置，而 Linux 的用戶會儲存在 `~/.ssh/` 的位置。
 
-這裡會詢問你要不要把產生的 ssh 金鑰重新命名，如果沒有複數的金鑰一般不會動到它的名字，按 Enter↩，接續下一步。
+這裡會詢問你要不要把產生的 SSH 金鑰重新命名，如果沒有複數的金鑰一般不會動到它的名字，按 Enter↩，接續下一步。
 
-``` console_output
+``` {.console_output}
 Generating public/private rsa key pair.
 Enter file in which to save the key (C:\Users\<USERNAME>/.ssh/id_rsa):
 ```
 
-這一步再詢問你需不需要將 SSH key pairs 加密，如果加密了，每次連線都需要輸入密碼。如果怕麻煩不想設定密碼就留空按 Enter↩ 進入下一步。
+這一步再詢問你需不需要將 SSH 金鑰加密，如果加密了，每次連線都需要輸入密碼。如果怕麻煩不想設定密碼就留空按 Enter↩ 進入下一步。
 
-``` console_output
+``` {.console_output}
 Created directory 'C:\Users\<USERNAME>/.ssh'.
 Enter passphrase (empty for no passphrase):
 Enter same passphrase again:
 ```
 
-產生 Key 會順帶產生這個 Key 的指紋。
+產生金鑰會順帶產生這個金鑰的指紋。
 
-``` console_output
+``` {.console_output}
 Your identification has been saved in C:\Users\<USERNAME>/.ssh/id_rsa.
 Your public key has been saved in C:\Users\<USERNAME>/.ssh/id_rsa.pub.
 The key fingerprint is:
@@ -320,7 +420,7 @@ ssh-copy-id -i ~/.ssh/id_ed25519.pub -p 22 asis@192.168.56.101
 
 完成後會提示你已經可以使用 ssh 連線
 
-``` console_output
+``` {.console_output}
 /usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/kuaz/.ssh/id_ed25519.pub"
 /usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
 /usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
@@ -331,27 +431,27 @@ Now try logging into the machine, with:   "ssh -p '22' 'asis@192.168.56.101'"
 and check to make sure that only the key(s) you wanted were added.
 ```
 
-如果你是 Windows 的使用者也不用擔心有多複雜，一樣一行指令就能搞定，這裡我是參考[@christopher_2020]的教學，指令如下:
+如果你是 Windows 的使用者也不用擔心有多複雜，一樣一行指令就能搞定，這裡我是參考[@christopher_2020]的教學，指令如下：
 
 ``` {.powershell .prefixed_powershell}
 cat $env:USERPROFILE\.ssh\id_rsa.pub | ssh asis@192.168.56.101 "cat >> ~/.ssh/authorized_keys"
 ```
 
--   這裡的 `$env:USERPROFILE` 為 Windows 內建環境變數，會根據現在的使用者變更。如果我的使用者名稱為 `qaz855175b` 那 `$env:USERPROFILE` 就會產生 `C:\Users\qaz855175b\` 的字串，當然你可以直接把這行指令的公鑰路徑替換為 `C:\Users\qaz855175b\.ssh\id_rsa.pub`
+-   `$env:USERPROFILE` 為 Windows 內建環境變數，會根據現在的使用者變更。如果我的使用者名稱為 `qaz855175b` 那 `$env:USERPROFILE` 就會產生 `C:\Users\qaz855175b\` 的字串，當然你可以直接把這行指令的公鑰路徑替換為 `C:\Users\qaz855175b\.ssh\id_rsa.pub`
 
 -   `id_rsa.pub` 為剛剛產生的公鑰名稱
 
--   這裡的 `asis` 為 [user-configuration] 的預設使用者
+-   `asis` 為 [user-configuration] 的預設使用者
 
 -   `192.168.56.101` 為我虛擬主機的 ip 位址，查詢 ip 位址可以先手動登入虛擬主機後，用 `hostname -I` 或是 `ip addr show` 指令查詢
 
 ::: {.infobox .info}
-其實 Linux 的 `ssh-copy-id`、和第一章的從 Github 匯入 public key `ssh-import-id-gh` 與這裡的 `cat file >> ~/.ssh/authorized_keys` 都是在做同一件事情，就是把公鑰貼到遠端伺服器的使用者家目錄的 `authorized_keys` 檔案裡面。
+其實 Linux 的 `ssh-copy-id`、和第一章安裝程式 [ssh] 環節的「由 Github 匯入（`ssh-import-id-gh`）」選項與這裡的 `cat file >> ~/.ssh/authorized_keys` 都是在做同一件事情，就是把公鑰貼到遠端伺服器的使用者家目錄的 `authorized_keys` 檔案裡面。
 :::
 
 接著按 Enter↩，跳出輸入密碼提示，這裡輸入預設的使用者密碼 `asis`
 
-``` console_output
+``` {.console_output}
 asis@192.168.56.101's password:
 ```
 
@@ -361,7 +461,7 @@ asis@192.168.56.101's password:
 
 最後，使用 ssh 指令連接至遠端主機。
 
-使用 OpenSSH Client 產生的 pair keys 可以直接使用這個方法連線。這裡介紹幾個常常與 ssh 一起出現的參數：
+使用 `ssh-keygen` 產生的金鑰可以直接使用 `ssh` 指令連線。這裡介紹幾個常常與 `ssh` 一起出現的參數：
 
 -   `-v`：verbose，顯示連接時更詳細的訊息，除錯時常用
 
@@ -389,7 +489,7 @@ ssh asis@192.168.56.101
 
 這邊打 `yes` 即可，確認連接目的地沒有錯之後，會把 fingerprint 寫入 `~/.ssh/known_hosts` 中，以後不再詢問。
 
-``` console_output
+``` {.console_output}
 The authenticity of host '192.168.56.101 (192.168.56.101)' can't be established.
 ECDSA key fingerprint is SHA256:/HoocrLXe63zycdlmkh/+U3RuUfkawNq/xA0gTJmqmM.
 Are you sure you want to continue connecting (yes/no/[fingerprint])?
@@ -405,7 +505,7 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])?
 knitr::include_graphics(path = 'figures/ssh-connection-success.png')
 ```
 
-測試完確認沒問題就可以把虛擬機晾在一旁了～
+測試完確認沒問題在下個章節會介紹一些設定，使 OpenSSH 伺服器更加安全。
 
 ```{r, fig.cap='VirtualBox 的虛擬主機終端機畫面'}
 knitr::include_graphics(path = 'figures/virtualbox-ubuntu-login.png')
@@ -421,7 +521,7 @@ sudo vim /etc/ssh/sshd_config
 
 將 `#Port 22` 取消註解，並把 `22` 改成其他介於 1-65535 之間的數字。這裡我使用 `60000`。
 
-``` bash
+``` {.bash}
 Port 60000
 ```
 
@@ -429,7 +529,7 @@ Port 60000
 
 將 PasswordAuthentication（以密碼驗證）設為 no。使用 SSH 連線時，允許使用者密碼以輸入密碼驗證。
 
-``` bash
+``` {.bash}
 PasswordAuthentication no
 ```
 
@@ -439,7 +539,7 @@ PasswordAuthentication no
 
 避免 root 登入可以使系統避免過大的權限暴露。
 
-``` bash
+``` {.bash}
 PermitRootLogin no
 ```
 
@@ -447,7 +547,7 @@ PermitRootLogin no
 
 只允許特定的使用者使用 SSH 連線可大大降低風險。
 
-``` bash
+``` {.bash}
 AllowUsers asis
 ```
 
@@ -455,7 +555,7 @@ AllowUsers asis
 
 將沒有密碼就可以登入的使用者撤銷 SSH 連線的權限。
 
-``` bash
+``` {.bash}
 PermitEmptyPasswords no
 ```
 
@@ -477,7 +577,7 @@ sudo systemctl restart sshd
 sudo systemctl status sshd
 ```
 
-``` console_output
+``` {.console_output}
 ● ssh.service - OpenBSD Secure Shell server
      Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)
      Active: active (running) since Sun 2021-08-15 16:08:55 UTC; 19h ago
@@ -502,7 +602,7 @@ Aug 15 16:08:55 asis01 systemd[1]: Started OpenBSD Secure Shell server.
 ssh -p 60000 asis@192.168.56.101
 ```
 
-``` .console_output
+``` {.console_output}
 Welcome to Ubuntu 22.04.3 LTS (GNU/Linux 5.15.0-79-generic x86_64)
 
  * Documentation:  https://help.ubuntu.com
@@ -539,13 +639,13 @@ Last login: Tue Aug 15 06:04:51 2023 from 192.168.56.1
 
 切換資料夾至使用者資料夾中的 `.ssh`
 
-``` {.prefixed_powershell}
+``` {.powershell .prefixed_powershell}
 cd $env:USERPROFILE\.ssh
 ```
 
 使用筆記本編輯設定
 
-``` {.prefixed_powershell}
+``` {.powershell .prefixed_powershell}
 notepad config.
 ```
 
@@ -560,77 +660,6 @@ Host vm
 
 接下來就可以用別名 `vm` 進行連線了
 
-``` {.prefixed_powershell}
+``` {.powershell .prefixed_powershell}
 ssh vm
-```
-
-## APT {#apt}
-
-在 Ubuntu 上安裝任何程式大多都是用 APT (Advanced Packaging Tools) 安裝，這裡有兩個指令，用 `&&` 串接在一起:
-
-``` {.bash .prefixed}
-sudo apt update && sudo apt upgrade -y
-```
-
--   `apt update`: 更新可安裝的套件列表或版本
-
--   `apt upgrade`: 安裝程式
-
--   `&&`: `&&` 之前的指令執行成功才會接續執行 `&&` 後面的指令
-
--   `-y, --yes, --assume-yes`: 自動對安裝提示回答 yes，安裝時會提示是否確認要安裝該軟體，因為我們清楚自己在做什麼為了方便而把提示關掉
-
-## UFW {#ufw}
-
-UFW（Uncomplicated Firewall）是預設在 Ubuntu 系統上的防火牆，這裡先為了 OpenSSH 伺服器而打開埠號 `60000`。
-
-首先用 status 查詢 UFW 的狀態，這裡需要輸入超級使用者 (sudo) 的密碼。
-
-``` {.bash .prefixed}
-sudo ufw status
-```
-
-看來預設的 UFW 是關閉的
-
-``` console_output
-Status: inactive
-```
-
-接著用 `systemctl` 打開防火牆
-
-``` {.bash .prefixed}
-sudo systemctl enable ufw
-```
-
-查詢防火牆狀態
-
-``` {.bash .prefixed}
-sudo ufw status
-```
-
-``` console_output
-Status: active
-```
-
-允許埠號 `60000` 從任何地方連入
-
-``` {.bash .prefixed}
-sudo ufw allow 60000
-```
-
-查詢防火牆狀態
-
-``` {.bash .prefixed}
-sudo ufw status
-```
-
-目前只有兩條規則，分別是 從任何地方連入埠號 60000 與 ipv6 從任何地方連入埠號 60000
-
-``` console_output
-Status: active
-
-To                         Action      From
---                         ------      ----
-60000                      ALLOW       Anywhere
-60000 (v6)                 ALLOW       Anywhere (v6)
 ```
