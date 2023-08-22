@@ -44,9 +44,9 @@
     }
   </style>
 <link rel="stylesheet" href="bs4_style.css">
-<meta name="description" content="本章節會說明怎麼安裝 RStudio 與 RShiny Server 到系統上。  4.1 事前準備 先確認目前的使用者 asis 擁有 sudo 的權限。  4.2 R base R 是一個跨平台的統計繪圖開放原始碼軟體。除了 R 基本的功能之外，還有龐大的社群一起合作創造新的功能，使 R 的功能更為豐富。  4.2.1 概述 本小節會介紹怎麼安裝 R Base。  4.2.2 Step...">
-<meta property="og:description" content="本章節會說明怎麼安裝 RStudio 與 RShiny Server 到系統上。  4.1 事前準備 先確認目前的使用者 asis 擁有 sudo 的權限。  4.2 R base R 是一個跨平台的統計繪圖開放原始碼軟體。除了 R 基本的功能之外，還有龐大的社群一起合作創造新的功能，使 R 的功能更為豐富。  4.2.1 概述 本小節會介紹怎麼安裝 R Base。  4.2.2 Step...">
-<meta name="twitter:description" content="本章節會說明怎麼安裝 RStudio 與 RShiny Server 到系統上。  4.1 事前準備 先確認目前的使用者 asis 擁有 sudo 的權限。  4.2 R base R 是一個跨平台的統計繪圖開放原始碼軟體。除了 R 基本的功能之外，還有龐大的社群一起合作創造新的功能，使 R 的功能更為豐富。  4.2.1 概述 本小節會介紹怎麼安裝 R Base。  4.2.2 Step...">
+<meta name="description" content="本章節會說明怎麼安裝 RStudio 與 RShiny Server 到系統上。  4.1 事前準備 先確認目前的使用者 asis 擁有 sudo 的權限。  4.2 R R 是一個跨平台的統計繪圖開放原始碼軟體。除了 R 基本的功能之外，還有龐大的社群一起合作創造新的功能，使 R 的功能更為豐富。  4.2.1 安裝 R Base 安裝軟體之前，先更新套件管理程式的來源 sudo apt...">
+<meta property="og:description" content="本章節會說明怎麼安裝 RStudio 與 RShiny Server 到系統上。  4.1 事前準備 先確認目前的使用者 asis 擁有 sudo 的權限。  4.2 R R 是一個跨平台的統計繪圖開放原始碼軟體。除了 R 基本的功能之外，還有龐大的社群一起合作創造新的功能，使 R 的功能更為豐富。  4.2.1 安裝 R Base 安裝軟體之前，先更新套件管理程式的來源 sudo apt...">
+<meta name="twitter:description" content="本章節會說明怎麼安裝 RStudio 與 RShiny Server 到系統上。  4.1 事前準備 先確認目前的使用者 asis 擁有 sudo 的權限。  4.2 R R 是一個跨平台的統計繪圖開放原始碼軟體。除了 R 基本的功能之外，還有龐大的社群一起合作創造新的功能，使 R 的功能更為豐富。  4.2.1 安裝 R Base 安裝軟體之前，先更新套件管理程式的來源 sudo apt...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -99,20 +99,14 @@
 </h2>
 <p>先確認目前的使用者 asis 擁有 sudo 的權限。</p>
 </div>
-<div id="r-base" class="section level2" number="4.2">
+<div id="r" class="section level2" number="4.2">
 <h2>
-<span class="header-section-number">4.2</span> R base<a class="anchor" aria-label="anchor" href="#r-base"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.2</span> R<a class="anchor" aria-label="anchor" href="#r"><i class="fas fa-link"></i></a>
 </h2>
 <p>R 是一個跨平台的統計繪圖開放原始碼軟體。除了 R 基本的功能之外，還有龐大的社群一起合作創造新的功能，使 R 的功能更為豐富。</p>
-<div id="概述-3" class="section level3" number="4.2.1">
+<div id="安裝-r-base" class="section level3" number="4.2.1">
 <h3>
-<span class="header-section-number">4.2.1</span> 概述<a class="anchor" aria-label="anchor" href="#%E6%A6%82%E8%BF%B0-3"><i class="fas fa-link"></i></a>
-</h3>
-<p>本小節會介紹怎麼安裝 R Base。</p>
-</div>
-<div id="step-1-安裝-r-base" class="section level3" number="4.2.2">
-<h3>
-<span class="header-section-number">4.2.2</span> Step 1 — 安裝 R Base<a class="anchor" aria-label="anchor" href="#step-1-%E5%AE%89%E8%A3%9D-r-base"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.2.1</span> 安裝 R Base<a class="anchor" aria-label="anchor" href="#%E5%AE%89%E8%A3%9D-r-base"><i class="fas fa-link"></i></a>
 </h3>
 <p>安裝軟體之前，先更新套件管理程式的來源</p>
 <div class="sourceCode" id="cb133"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb133-1"><a href="rstudio-rshiny-server.html#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span></code></pre></div>
@@ -123,39 +117,36 @@
 <span id="cb135-2"><a href="rstudio-rshiny-server.html#cb135-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">wget</span> <span class="at">-qO-</span> https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc <span class="dt">\</span></span>
 <span id="cb135-3"><a href="rstudio-rshiny-server.html#cb135-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">|</span> <span class="fu">sudo</span> tee <span class="at">-a</span> /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc</span></code></pre></div>
 <p>添加 apt 來源</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb136-1"><a href="rstudio-rshiny-server.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> add-apt-repository <span class="dt">\ </span></span>
-<span id="cb136-2"><a href="rstudio-rshiny-server.html#cb136-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"deb https://cloud.r-project.org/bin/linux/ubuntu </span><span class="va">$(</span><span class="ex">lsb_release</span> <span class="at">-cs</span><span class="va">)</span><span class="st">-cran40/"</span></span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb136-1"><a href="rstudio-rshiny-server.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> add-apt-repository <span class="st">"deb https://cloud.r-project.org/bin/linux/ubuntu </span><span class="va">$(</span><span class="ex">lsb_release</span> <span class="at">-cs</span><span class="va">)</span><span class="st">-cran40/"</span> <span class="at">-y</span></span></code></pre></div>
 <p>安裝 r-base</p>
 <div class="sourceCode" id="cb137"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb137-1"><a href="rstudio-rshiny-server.html#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install r-base <span class="at">--yes</span></span></code></pre></div>
 </div>
-<div id="step-2-確認-r-base-是否成功安裝" class="section level3" number="4.2.3">
+<div id="確認-r-base-是否成功安裝" class="section level3" number="4.2.2">
 <h3>
-<span class="header-section-number">4.2.3</span> Step 2 — 確認 R Base 是否成功安裝<a class="anchor" aria-label="anchor" href="#step-2-%E7%A2%BA%E8%AA%8D-r-base-%E6%98%AF%E5%90%A6%E6%88%90%E5%8A%9F%E5%AE%89%E8%A3%9D"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.2.2</span> 確認 R Base 是否成功安裝<a class="anchor" aria-label="anchor" href="#%E7%A2%BA%E8%AA%8D-r-base-%E6%98%AF%E5%90%A6%E6%88%90%E5%8A%9F%E5%AE%89%E8%A3%9D"><i class="fas fa-link"></i></a>
 </h3>
 <p>在命令列介面下要確認 R 有無正常安裝很簡單，輸入一個大寫 R 就可以進到 R 的 Console。</p>
 <div class="sourceCode" id="cb138"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb138-1"><a href="rstudio-rshiny-server.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="ex">R</span></span></code></pre></div>
 <p>輸入下列指令查看 R 的相關訊息。</p>
 <div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre class="console_output"><code>R version 4.2.0 (2022-04-22)
+<pre class="console_output"><code>R version 4.3.1 (2023-06-16) -- "Beagle Scouts"
+Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 21.10
 
-Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
-LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
 
-locale:
- [1] LC_CTYPE=en_US.UTF-8   LC_NUMERIC=C           LC_TIME=C.UTF-8
- [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8
- [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C
-[10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C
+  Natural language support but running in an English locale
 
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
 
-loaded via a namespace (and not attached):
-[1] compiler_4.2.0 pbdZMQ_0.3-7</code></pre>
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.</code></pre>
 <p>確認沒問題後使用指令 <code>q</code> 退出。</p>
 <div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/quit.html">q</a></span><span class="op">(</span>save<span class="op">=</span><span class="st">'no'</span><span class="op">)</span></span></code></pre></div>
@@ -166,36 +157,22 @@ loaded via a namespace (and not attached):
 <span class="header-section-number">4.3</span> RStudio Server<a class="anchor" aria-label="anchor" href="#rstudio-server"><i class="fas fa-link"></i></a>
 </h2>
 <p>RStudio Server 是 RStudio 的網頁版本，使用者可以透過網頁存取一個位於網路上的 RStudio。</p>
-<div id="概述-4" class="section level3" number="4.3.1">
+<div id="安裝-rstudio-server" class="section level3" number="4.3.1">
 <h3>
-<span class="header-section-number">4.3.1</span> 概述<a class="anchor" aria-label="anchor" href="#%E6%A6%82%E8%BF%B0-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.3.1</span> 安裝 RStudio Server<a class="anchor" aria-label="anchor" href="#%E5%AE%89%E8%A3%9D-rstudio-server"><i class="fas fa-link"></i></a>
 </h3>
 <p>本小節會介紹怎麼安裝 RStudio Server 與設定 Apache 的反向代理。</p>
-</div>
-<div id="step-1-安裝-rstudio-server-伺服器" class="section level3" number="4.3.2">
-<h3>
-<span class="header-section-number">4.3.2</span> Step 1 — 安裝 RStudio Server 伺服器<a class="anchor" aria-label="anchor" href="#step-1-%E5%AE%89%E8%A3%9D-rstudio-server-%E4%BC%BA%E6%9C%8D%E5%99%A8"><i class="fas fa-link"></i></a>
-</h3>
-<div class="sourceCode" id="cb142"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb142-1"><a href="rstudio-rshiny-server.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install gdebi-core</span></code></pre></div>
-<p>切到暫存資料夾後，自官網下載 rstudio 伺服器的安裝程式。</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb142-1"><a href="rstudio-rshiny-server.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install gdebi-core <span class="at">-y</span></span></code></pre></div>
+<p>切到暫存資料夾後，自<a href="">官網</a>下載 rstudio 伺服器的安裝程式。</p>
 <div class="sourceCode" id="cb143"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb143-1"><a href="rstudio-rshiny-server.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /tmp <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
-<span id="cb143-2"><a href="rstudio-rshiny-server.html#cb143-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.4.1717-amd64.deb</span></code></pre></div>
-<p>這個指令會下載當前撰寫這個頁面的最新版本 RStudio Server。如果你想要下載最新版本請到<a href="https://www.rstudio.com/products/rstudio/download-server/">官方的下載頁面</a>確認。</p>
-<p>透過 ubuntu 的密鑰伺服器取回對應的簽名</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb144-1"><a href="rstudio-rshiny-server.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gpg</span> <span class="at">--keyserver</span> keyserver.ubuntu.com <span class="at">--recv-keys</span> 3F32EE77E331692F</span></code></pre></div>
-<p>安裝確認檔案簽名所需要的程式</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb145-1"><a href="rstudio-rshiny-server.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install dpkg-sig <span class="at">--yes</span></span></code></pre></div>
-<p>檢查檔案簽名，加上 <code>--verify</code> 選項驗證檔案簽名</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb146-1"><a href="rstudio-rshiny-server.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dpkg-sig</span> <span class="at">--verify</span> rstudio-server-1.4.1717-amd64.deb</span></code></pre></div>
-<p>出現 <code>GOODSIG</code> 字樣代表該檔案沒有問題，檔案於下載圖中沒有被修改過，可以繼續安裝</p>
-<pre class="console_output"><code>Processing rstudio-server-1.4.1717-amd64.deb...
-GOODSIG _gpgbuilder FE8564CFF1AB93F1728645193F32EE77E331692F 1621900692</code></pre>
-<p>最後再使用 <code>gdebi</code> 指令安裝 .deb 格式安裝程式</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb148-1"><a href="rstudio-rshiny-server.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> gdebi rstudio-server-1.4.1717-amd64.deb</span></code></pre></div>
+<span id="cb143-2"><a href="rstudio-rshiny-server.html#cb143-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">wget</span> wget https://download2.rstudio.org/server/jammy/amd64/rstudio-server-2023.06.1-524-amd64.deb</span></code></pre></div>
+<p>這個指令會下載當前撰寫這個頁面的最新版本 RStudio Server。如果你想要下載最新版本請到<a href="https://posit.co/download/rstudio-server/">官方的下載頁面</a>確認。</p>
+<p>使用 <code>gdebi</code> 指令安裝 .deb 格式安裝程式</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb144-1"><a href="rstudio-rshiny-server.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> gdebi rstudio-server-2023.06.1-524-amd64.deb</span></code></pre></div>
 <p>將防火牆的 8787 埠號打開</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb149-1"><a href="rstudio-rshiny-server.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow 8787</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb145-1"><a href="rstudio-rshiny-server.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow 8787</span></code></pre></div>
 <p>接著用瀏覽器進入下列網址</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb150-1"><a href="rstudio-rshiny-server.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="ex">http://</span><span class="op">&lt;</span>虛擬主機的 ip 位址<span class="op">&gt;</span>:8787</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb146-1"><a href="rstudio-rshiny-server.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="ex">http://</span><span class="op">&lt;</span>虛擬主機的 ip 位址<span class="op">&gt;</span>:8787</span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-69"></span>
 <img src="figures/apache2-rstudio-server-login-page.png" alt="RStudio 登入頁面" width="100%"><p class="caption">
@@ -203,88 +180,85 @@ GOODSIG _gpgbuilder FE8564CFF1AB93F1728645193F32EE77E331692F 1621900692</code></
 </p>
 </div>
 <p>或是在shell中直接使用 <code>curl</code> 指令查看</p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb151-1"><a href="rstudio-rshiny-server.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="op">&lt;</span>虛擬主機的 ip 位址<span class="op">&gt;</span>:8787</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb147-1"><a href="rstudio-rshiny-server.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="op">&lt;</span>虛擬主機的 ip 位址<span class="op">&gt;</span>:8787</span></code></pre></div>
 </div>
-<div id="step-2-設定-apache-的反向代理reverse-proxy" class="section level3" number="4.3.3">
+<div id="設定-apache-的反向代理" class="section level3" number="4.3.2">
 <h3>
-<span class="header-section-number">4.3.3</span> Step 2 — 設定 Apache 的反向代理（Reverse Proxy）<a class="anchor" aria-label="anchor" href="#step-2-%E8%A8%AD%E5%AE%9A-apache-%E7%9A%84%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86reverse-proxy"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.3.2</span> 設定 Apache 的反向代理<a class="anchor" aria-label="anchor" href="#%E8%A8%AD%E5%AE%9A-apache-%E7%9A%84%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><i class="fas fa-link"></i></a>
 </h3>
-<!--# TODO: 說明何謂反向代理？ -->
+<!--# TODO: 說明何謂反向代理（Reverse Proxy）？ -->
 <p>用指令 <code>a2enmod</code> 將 Apache 內建的插件啟用</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb152-1"><a href="rstudio-rshiny-server.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> a2enmod proxy <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> a2enmod proxy_http <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> a2enmod proxy_wstunnel</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb148-1"><a href="rstudio-rshiny-server.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> a2enmod proxy <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb148-2"><a href="rstudio-rshiny-server.html#cb148-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> a2enmod proxy_http <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb148-3"><a href="rstudio-rshiny-server.html#cb148-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> a2enmod proxy_wstunnel <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb148-4"><a href="rstudio-rshiny-server.html#cb148-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sudo</span> a2enmod rewrite</span></code></pre></div>
 <p>繼續編輯[Step 2 — 建立虛擬網站]所建立的 <code>asis.conf</code></p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb153-1"><a href="rstudio-rshiny-server.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/sites-available/asis.conf</span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb149-1"><a href="rstudio-rshiny-server.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/sites-available/asis.conf</span></code></pre></div>
 <p>在 VirtualHost 節點下面新增 RStudio Proxy 的區塊</p>
 <div class="code-label">
 <p>/etc/apache2/sites-available/asis.conf</p>
 </div>
-<div class="sourceCode" id="cb154"><pre class="sourceCode apache"><code class="sourceCode apache"><span id="cb154-1"><a href="rstudio-rshiny-server.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;VirtualHost</span><span class="at"> *:80</span><span class="fu">&gt;</span></span>
-<span id="cb154-2"><a href="rstudio-rshiny-server.html#cb154-2" aria-hidden="true" tabindex="-1"></a>    ServerAdmin<span class="st"> webmaster@localhost</span></span>
-<span id="cb154-3"><a href="rstudio-rshiny-server.html#cb154-3" aria-hidden="true" tabindex="-1"></a>    DocumentRoot<span class="st"> /var/www/asis</span></span>
-<span id="cb154-4"><a href="rstudio-rshiny-server.html#cb154-4" aria-hidden="true" tabindex="-1"></a>    ErrorLog<span class="st"> ${APACHE_LOG_DIR}/error.log</span></span>
-<span id="cb154-5"><a href="rstudio-rshiny-server.html#cb154-5" aria-hidden="true" tabindex="-1"></a>    CustomLog<span class="st"> ${APACHE_LOG_DIR}/access.log combined</span></span>
-<span id="cb154-6"><a href="rstudio-rshiny-server.html#cb154-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb154-7"><a href="rstudio-rshiny-server.html#cb154-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
-<span id="cb154-8"><a href="rstudio-rshiny-server.html#cb154-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># RStudio Proxy</span></span>
-<span id="cb154-9"><a href="rstudio-rshiny-server.html#cb154-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
-<span id="cb154-10"><a href="rstudio-rshiny-server.html#cb154-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">&lt;proxy</span><span class="at"> *</span><span class="fu">&gt;</span></span>
-<span id="cb154-11"><a href="rstudio-rshiny-server.html#cb154-11" aria-hidden="true" tabindex="-1"></a>    Allow<span class="st"> from localhost</span></span>
-<span id="cb154-12"><a href="rstudio-rshiny-server.html#cb154-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">&lt;/proxy&gt;</span></span>
-<span id="cb154-13"><a href="rstudio-rshiny-server.html#cb154-13" aria-hidden="true" tabindex="-1"></a>    RedirectMatch<span class="st"> permanent ^/rstudio$ /rstudio/</span></span>
-<span id="cb154-14"><a href="rstudio-rshiny-server.html#cb154-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb154-15"><a href="rstudio-rshiny-server.html#cb154-15" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteEngine</span><span class="ch"> </span><span class="kw">on</span></span>
-<span id="cb154-16"><a href="rstudio-rshiny-server.html#cb154-16" aria-hidden="true" tabindex="-1"></a>    RewriteCond<span class="st"> %{HTTP:Upgrade} =websocket</span></span>
-<span id="cb154-17"><a href="rstudio-rshiny-server.html#cb154-17" aria-hidden="true" tabindex="-1"></a>    RewriteRule<span class="st"> /rstudio/(.*)     ws://localhost:8787/$1  [P,L]</span></span>
-<span id="cb154-18"><a href="rstudio-rshiny-server.html#cb154-18" aria-hidden="true" tabindex="-1"></a>    RewriteCond<span class="st"> %{HTTP:Upgrade} !=websocket</span></span>
-<span id="cb154-19"><a href="rstudio-rshiny-server.html#cb154-19" aria-hidden="true" tabindex="-1"></a>    RewriteRule<span class="st"> /rstudio/(.*)     http://localhost:8787/$1 [P,L]</span></span>
-<span id="cb154-20"><a href="rstudio-rshiny-server.html#cb154-20" aria-hidden="true" tabindex="-1"></a>    ProxyPass<span class="st"> /rstudio/ http://localhost:8787/</span></span>
-<span id="cb154-21"><a href="rstudio-rshiny-server.html#cb154-21" aria-hidden="true" tabindex="-1"></a>    ProxyPassReverse<span class="st"> /rstudio/ http://localhost:8787/</span></span>
-<span id="cb154-22"><a href="rstudio-rshiny-server.html#cb154-22" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ProxyRequests</span><span class="ch"> </span><span class="kw">Off</span></span>
-<span id="cb154-23"><a href="rstudio-rshiny-server.html#cb154-23" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;/VirtualHost&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode apache"><code class="sourceCode apache"><span id="cb150-1"><a href="rstudio-rshiny-server.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;VirtualHost</span><span class="at"> *:80</span><span class="fu">&gt;</span></span>
+<span id="cb150-2"><a href="rstudio-rshiny-server.html#cb150-2" aria-hidden="true" tabindex="-1"></a>    ServerAdmin<span class="st"> webmaster@localhost</span></span>
+<span id="cb150-3"><a href="rstudio-rshiny-server.html#cb150-3" aria-hidden="true" tabindex="-1"></a>    DocumentRoot<span class="st"> /var/www/asis</span></span>
+<span id="cb150-4"><a href="rstudio-rshiny-server.html#cb150-4" aria-hidden="true" tabindex="-1"></a>    ErrorLog<span class="st"> ${APACHE_LOG_DIR}/error.log</span></span>
+<span id="cb150-5"><a href="rstudio-rshiny-server.html#cb150-5" aria-hidden="true" tabindex="-1"></a>    CustomLog<span class="st"> ${APACHE_LOG_DIR}/access.log combined</span></span>
+<span id="cb150-6"><a href="rstudio-rshiny-server.html#cb150-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb150-7"><a href="rstudio-rshiny-server.html#cb150-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
+<span id="cb150-8"><a href="rstudio-rshiny-server.html#cb150-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># RStudio Proxy</span></span>
+<span id="cb150-9"><a href="rstudio-rshiny-server.html#cb150-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
+<span id="cb150-10"><a href="rstudio-rshiny-server.html#cb150-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">&lt;proxy</span><span class="at"> *</span><span class="fu">&gt;</span></span>
+<span id="cb150-11"><a href="rstudio-rshiny-server.html#cb150-11" aria-hidden="true" tabindex="-1"></a>    Allow<span class="st"> from localhost</span></span>
+<span id="cb150-12"><a href="rstudio-rshiny-server.html#cb150-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">&lt;/proxy&gt;</span></span>
+<span id="cb150-13"><a href="rstudio-rshiny-server.html#cb150-13" aria-hidden="true" tabindex="-1"></a>    RedirectMatch<span class="st"> permanent ^/rstudio$ /rstudio/</span></span>
+<span id="cb150-14"><a href="rstudio-rshiny-server.html#cb150-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb150-15"><a href="rstudio-rshiny-server.html#cb150-15" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteEngine</span><span class="ch"> </span><span class="kw">on</span></span>
+<span id="cb150-16"><a href="rstudio-rshiny-server.html#cb150-16" aria-hidden="true" tabindex="-1"></a>    RewriteCond<span class="st"> %{HTTP:Upgrade} =websocket</span></span>
+<span id="cb150-17"><a href="rstudio-rshiny-server.html#cb150-17" aria-hidden="true" tabindex="-1"></a>    RewriteRule<span class="st"> /rstudio/(.*)     ws://localhost:8787/$1  [P,L]</span></span>
+<span id="cb150-18"><a href="rstudio-rshiny-server.html#cb150-18" aria-hidden="true" tabindex="-1"></a>    RewriteCond<span class="st"> %{HTTP:Upgrade} !=websocket</span></span>
+<span id="cb150-19"><a href="rstudio-rshiny-server.html#cb150-19" aria-hidden="true" tabindex="-1"></a>    RewriteRule<span class="st"> /rstudio/(.*)     http://localhost:8787/$1 [P,L]</span></span>
+<span id="cb150-20"><a href="rstudio-rshiny-server.html#cb150-20" aria-hidden="true" tabindex="-1"></a>    ProxyPass<span class="st"> /rstudio/ http://localhost:8787/</span></span>
+<span id="cb150-21"><a href="rstudio-rshiny-server.html#cb150-21" aria-hidden="true" tabindex="-1"></a>    ProxyPassReverse<span class="st"> /rstudio/ http://localhost:8787/</span></span>
+<span id="cb150-22"><a href="rstudio-rshiny-server.html#cb150-22" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ProxyRequests</span><span class="ch"> </span><span class="kw">Off</span></span>
+<span id="cb150-23"><a href="rstudio-rshiny-server.html#cb150-23" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;/VirtualHost&gt;</span></span></code></pre></div>
 <!--# TODO: 說明 Apache 設定上面的選項 -->
 <p>完成後需要重新啟動 Apache</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb155-1"><a href="rstudio-rshiny-server.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart apache2</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb151-1"><a href="rstudio-rshiny-server.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart apache2</span></code></pre></div>
 <p>最後以瀏覽器打開下面的連結會發現，可以直接使用具有名字的路徑，透過反向代理，連結到目的地 8787 埠號。</p>
 <pre><code>http://&lt;虛擬主機的 ip 位址&gt;/rstudio/</code></pre>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-70"></span>
-<img src="figures/apache2-rstudio-server-login-page.png" alt="透過剛才更新的路由，所看到的 RStudio 登入頁面" width="100%"><p class="caption">
+<img src="figures/apache2-rstudio-server-login-page_2.png" alt="透過剛才更新的路由，所看到的 RStudio 登入頁面" width="100%"><p class="caption">
 圖 4.2: 透過剛才更新的路由，所看到的 RStudio 登入頁面
 </p>
 </div>
-<p>在<a href="rstudio-rshiny-server.html#step-1-%E5%AE%89%E8%A3%9D-rstudio-server-%E4%BC%BA%E6%9C%8D%E5%99%A8">Step 1 — 安裝 RStudio Server 伺服器</a>開的 8787 埠號可以關掉了。在 status 的後面加上 numbered 可以將設定的編號也一起列出來，再藉由編號編輯該設定。</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb157-1"><a href="rstudio-rshiny-server.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status numbered</span></code></pre></div>
+<p>在前面開的 8787 埠號可以關掉了。我們可以在 status 的後面加上 numbered 可以將設定的編號也一起列出來，再藉由編號編輯該設定。</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb153-1"><a href="rstudio-rshiny-server.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw status numbered</span></code></pre></div>
 <pre class="console_output"><code>Status: active
 
      To                         Action      From
      --                         ------      ----
-[ 1] 60000                      ALLOW IN    Anywhere                  
-[ 2] mosh                       ALLOW IN    Anywhere                  
-[ 3] Apache                     ALLOW IN    Anywhere                  
-[ 4] Apache Secure              ALLOW IN    Anywhere                  
-[ 5] 8787                       ALLOW IN    Anywhere                  
-[ 6] 60000 (v6)                 ALLOW IN    Anywhere (v6)             
-[ 7] mosh (v6)                  ALLOW IN    Anywhere (v6)             
-[ 8] Apache (v6)                ALLOW IN    Anywhere (v6)             
-[ 9] Apache Secure (v6)         ALLOW IN    Anywhere (v6)             
-[10] 8787 (v6)                  ALLOW IN    Anywhere (v6)</code></pre>
-<p>刪除第 5 個設定（8787）</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb159-1"><a href="rstudio-rshiny-server.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw delete 5</span></code></pre></div>
-<p>刪除第 9 個設定（8787 (v6)），因為第 5 個設定刪除之後，第 10 順位的設定就會往前移，重新編號。</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb160-1"><a href="rstudio-rshiny-server.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw delete 9</span></code></pre></div>
+[ 1] 60000                      ALLOW IN    Anywhere
+[ 2] Apache Full                ALLOW IN    Anywhere
+[ 3] 8787                       ALLOW IN    Anywhere
+[ 4] 60000 (v6)                 ALLOW IN    Anywhere (v6)
+[ 5] Apache Full (v6)           ALLOW IN    Anywhere (v6)
+[ 6] 8787 (v6)                  ALLOW IN    Anywhere (v6)
+</code></pre>
+<p>刪除第 3 個設定（8787）</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb155-1"><a href="rstudio-rshiny-server.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw delete 3</span></code></pre></div>
+<p>刪除第 5 個設定（8787 (v6)），因為第 3 個設定刪除之後，原本在第 6 順位的設定就會往前移，重新編號。</p>
+<div class="sourceCode" id="cb156"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb156-1"><a href="rstudio-rshiny-server.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw delete 5</span></code></pre></div>
 <p>更動後的設定。</p>
 <pre class="console_output"><code>Status: active
 
-To                         Action      From
---                         ------      ----
-60000                      ALLOW       Anywhere                  
-mosh                       ALLOW       Anywhere                  
-Apache                     ALLOW       Anywhere                  
-Apache Secure              ALLOW       Anywhere                  
-60000 (v6)                 ALLOW       Anywhere (v6)             
-mosh (v6)                  ALLOW       Anywhere (v6)             
-Apache (v6)                ALLOW       Anywhere (v6)             
-Apache Secure (v6)         ALLOW       Anywhere (v6)</code></pre>
+     To                         Action      From
+     --                         ------      ----
+[ 1] 60000                      ALLOW IN    Anywhere
+[ 2] Apache Full                ALLOW IN    Anywhere
+[ 3] 60000 (v6)                 ALLOW IN    Anywhere (v6)
+[ 4] Apache Full (v6)           ALLOW IN    Anywhere (v6)
+</code></pre>
 </div>
 </div>
 <div id="r-shiny-server" class="section level2" number="4.4">
@@ -292,19 +266,18 @@ Apache Secure (v6)         ALLOW       Anywhere (v6)</code></pre>
 <span class="header-section-number">4.4</span> R Shiny Server<a class="anchor" aria-label="anchor" href="#r-shiny-server"><i class="fas fa-link"></i></a>
 </h2>
 <p>RShiny Server 是一個可以讓 Shiny App 部署在伺服器上，透過特定的網址啟動特定的 Shiny App。</p>
-<div id="概述-5" class="section level3" number="4.4.1">
+<div id="概述-3" class="section level3" number="4.4.1">
 <h3>
-<span class="header-section-number">4.4.1</span> 概述<a class="anchor" aria-label="anchor" href="#%E6%A6%82%E8%BF%B0-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.1</span> 概述<a class="anchor" aria-label="anchor" href="#%E6%A6%82%E8%BF%B0-3"><i class="fas fa-link"></i></a>
 </h3>
 <p>本小節會說明怎麼安裝 R Shiny Server 在 Ubuntu 上、設定 Apache 的反向代理、再來對 R Shiny Server 做更進階的設定，最後驗證剛才的設定是否有效。</p>
 </div>
-<div id="step-1-安裝-r-shiny-server" class="section level3" number="4.4.2">
+<div id="安裝-r-shiny-server" class="section level3" number="4.4.2">
 <h3>
-<span class="header-section-number">4.4.2</span> Step 1 — 安裝 R Shiny Server<a class="anchor" aria-label="anchor" href="#step-1-%E5%AE%89%E8%A3%9D-r-shiny-server"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.2</span> 安裝 R Shiny Server<a class="anchor" aria-label="anchor" href="#%E5%AE%89%E8%A3%9D-r-shiny-server"><i class="fas fa-link"></i></a>
 </h3>
 <p>首先透過一行指令用 root 權限安裝 <code>shiny</code> 套件。</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb162-1"><a href="rstudio-rshiny-server.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span> <span class="dt">\</span></span>
-<span id="cb162-2"><a href="rstudio-rshiny-server.html#cb162-2" aria-hidden="true" tabindex="-1"></a>-c <span class="st">"R -e </span><span class="dt">\"</span><span class="st">install.packages('shiny', repos='https://cran.rstudio.com/')</span><span class="dt">\"</span><span class="st">"</span></span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb158-1"><a href="rstudio-rshiny-server.html#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span> <span class="at">-c</span> <span class="st">"R -e </span><span class="dt">\"</span><span class="st">install.packages('shiny', repos='https://cran.rstudio.com/')</span><span class="dt">\"</span><span class="st">"</span></span></code></pre></div>
 <p><code>su</code> 指令可以用來切換使用者，不過我們這裡的用法是切換到 root 並執行指令的指令。</p>
 <ul>
 <li><p><code>- [使用者]</code>：如果不指定使用者，將會以 <code>root</code> 代替</p></li>
@@ -312,30 +285,21 @@ Apache Secure (v6)         ALLOW       Anywhere (v6)</code></pre>
 </ul>
 <p><code>R</code> 除了可以開啟互動式的 R Console 之外，也可以使用 <code>-e</code> 參數讓 R 僅執行 R 指令，完成後即退出。</p>
 <p>接下來切換目錄到 <code>/tmp</code> 資料夾並下載 R Shiny Server 安裝程式。</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb163-1"><a href="rstudio-rshiny-server.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /tmp <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
-<span id="cb163-2"><a href="rstudio-rshiny-server.html#cb163-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">wget</span> https://download3.rstudio.org/ubuntu-14.04/x86_64/shiny-server-1.5.16.958-amd64.deb</span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb159-1"><a href="rstudio-rshiny-server.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /tmp <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb159-2"><a href="rstudio-rshiny-server.html#cb159-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">wget</span> https://download3.rstudio.org/ubuntu-18.04/x86_64/shiny-server-1.5.20.1002-amd64.deb</span></code></pre></div>
 <p>這個指令會下載當前撰寫這個頁面的最新版本 R Shiny Server。如果你想要下載最新版本請到<a href="https://www.rstudio.com/products/shiny/download-server/ubuntu/">官方的下載頁面</a>確認。</p>
-<p>使用 <code>sha256sum</code> 計算安裝程式的 sha256，並在網站上確認有沒有相同。</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb164-1"><a href="rstudio-rshiny-server.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sha256sum</span> shiny-server-1.5.16.958-amd64.deb </span></code></pre></div>
-<div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-71"></span>
-<img src="figures/shiny-server-sha-256-match.png" alt="R Shiny Server 官方下載頁面的 sha256" width="100%"><p class="caption">
-圖 4.3: R Shiny Server 官方下載頁面的 sha256
-</p>
-</div>
 <p>依樣地，使用 <code>gdebi</code> 指令安裝 .deb 格式安裝程式</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb165-1"><a href="rstudio-rshiny-server.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> gdebi shiny-server-1.5.16.958-amd64.deb</span></code></pre></div>
 <p>最後從 <code>http://&lt;虛擬機器的 ip 位址&gt;:3838</code> 進入 R Shiny Server 首頁</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-72"></span>
+<span style="display:block;" id="fig:unnamed-chunk-71"></span>
 <img src="figures/apache2-shiny-server-main-page.png" alt="R Shiny Server 首頁" width="100%"><p class="caption">
-圖 4.4: R Shiny Server 首頁
+圖 4.3: R Shiny Server 首頁
 </p>
 </div>
 <div class="infobox info">
 <p>如果右下角顯示的是錯誤訊息，代表伺服器沒有安裝 r<code>markdown</code> 套件，下列指令安裝即可：</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb166-1"><a href="rstudio-rshiny-server.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span> <span class="dt">\</span></span>
-<span id="cb166-2"><a href="rstudio-rshiny-server.html#cb166-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">-c</span> <span class="st">"R -e </span><span class="dt">\"</span><span class="st">install.packages('rmarkdown')</span><span class="dt">\"</span><span class="st">"</span></span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb160-1"><a href="rstudio-rshiny-server.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span> <span class="dt">\</span></span>
+<span id="cb160-2"><a href="rstudio-rshiny-server.html#cb160-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">-c</span> <span class="st">"R -e </span><span class="dt">\"</span><span class="st">install.packages('rmarkdown')</span><span class="dt">\"</span><span class="st">"</span></span></code></pre></div>
 </div>
 </div>
 <div id="step-2-設定-apache-的反向代理" class="section level3" number="4.4.3">
@@ -343,39 +307,39 @@ Apache Secure (v6)         ALLOW       Anywhere (v6)</code></pre>
 <span class="header-section-number">4.4.3</span> Step 2 — 設定 Apache 的反向代理<a class="anchor" aria-label="anchor" href="#step-2-%E8%A8%AD%E5%AE%9A-apache-%E7%9A%84%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><i class="fas fa-link"></i></a>
 </h3>
 <p>繼續編輯 Apache 的網頁設定文件 <code>asis.conf</code></p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb167-1"><a href="rstudio-rshiny-server.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/sites-available/asis.conf</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb161-1"><a href="rstudio-rshiny-server.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/sites-available/asis.conf</span></code></pre></div>
 <p>一樣地，將 R Shiny Server 的設定也一同放入設定檔案中。</p>
 <div class="code-label">
 <p>/etc/apache2/sites-available/asis.conf</p>
 </div>
-<div class="sourceCode" id="cb168"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb168-1"><a href="rstudio-rshiny-server.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>VirtualHost <span class="ex">*:80</span><span class="op">&gt;</span></span>
-<span id="cb168-2"><a href="rstudio-rshiny-server.html#cb168-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
-<span id="cb168-3"><a href="rstudio-rshiny-server.html#cb168-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb168-4"><a href="rstudio-rshiny-server.html#cb168-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
-<span id="cb168-5"><a href="rstudio-rshiny-server.html#cb168-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># RStudio Proxy</span></span>
-<span id="cb168-6"><a href="rstudio-rshiny-server.html#cb168-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
-<span id="cb168-7"><a href="rstudio-rshiny-server.html#cb168-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
-<span id="cb168-8"><a href="rstudio-rshiny-server.html#cb168-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb168-9"><a href="rstudio-rshiny-server.html#cb168-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
-<span id="cb168-10"><a href="rstudio-rshiny-server.html#cb168-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># RShiny Server Proxy</span></span>
-<span id="cb168-11"><a href="rstudio-rshiny-server.html#cb168-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
-<span id="cb168-12"><a href="rstudio-rshiny-server.html#cb168-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RedirectMatch</span> permanent ^/shiny$ /shiny/</span>
-<span id="cb168-13"><a href="rstudio-rshiny-server.html#cb168-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb168-14"><a href="rstudio-rshiny-server.html#cb168-14" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteCond</span> %{HTTP:Upgrade} =websocket</span>
-<span id="cb168-15"><a href="rstudio-rshiny-server.html#cb168-15" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteRule</span> /shiny/<span class="er">(</span><span class="bu">.</span><span class="pp">*</span><span class="kw">)</span> <span class="ex">ws://localhost:3838/</span><span class="va">$1</span> [P,L]</span>
-<span id="cb168-16"><a href="rstudio-rshiny-server.html#cb168-16" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteCond</span> %{HTTP:Upgrade} !=websocket</span>
-<span id="cb168-17"><a href="rstudio-rshiny-server.html#cb168-17" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteRule</span> /shiny/<span class="er">(</span><span class="bu">.</span><span class="pp">*</span><span class="kw">)</span> <span class="ex">http://localhost:3838/</span><span class="va">$1</span> [P,L]</span>
-<span id="cb168-18"><a href="rstudio-rshiny-server.html#cb168-18" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ProxyPass</span> /shiny/ http://localhost:3838/</span>
-<span id="cb168-19"><a href="rstudio-rshiny-server.html#cb168-19" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ProxyPassReverse</span> /shiny/ http://localhost:3838/</span>
-<span id="cb168-20"><a href="rstudio-rshiny-server.html#cb168-20" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>/VirtualHost<span class="op">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb162-1"><a href="rstudio-rshiny-server.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>VirtualHost <span class="ex">*:80</span><span class="op">&gt;</span></span>
+<span id="cb162-2"><a href="rstudio-rshiny-server.html#cb162-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
+<span id="cb162-3"><a href="rstudio-rshiny-server.html#cb162-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb162-4"><a href="rstudio-rshiny-server.html#cb162-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
+<span id="cb162-5"><a href="rstudio-rshiny-server.html#cb162-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># RStudio Proxy</span></span>
+<span id="cb162-6"><a href="rstudio-rshiny-server.html#cb162-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
+<span id="cb162-7"><a href="rstudio-rshiny-server.html#cb162-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
+<span id="cb162-8"><a href="rstudio-rshiny-server.html#cb162-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb162-9"><a href="rstudio-rshiny-server.html#cb162-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
+<span id="cb162-10"><a href="rstudio-rshiny-server.html#cb162-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># RShiny Server Proxy</span></span>
+<span id="cb162-11"><a href="rstudio-rshiny-server.html#cb162-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
+<span id="cb162-12"><a href="rstudio-rshiny-server.html#cb162-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RedirectMatch</span> permanent ^/shiny$ /shiny/</span>
+<span id="cb162-13"><a href="rstudio-rshiny-server.html#cb162-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb162-14"><a href="rstudio-rshiny-server.html#cb162-14" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteCond</span> %{HTTP:Upgrade} =websocket</span>
+<span id="cb162-15"><a href="rstudio-rshiny-server.html#cb162-15" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteRule</span> /shiny/<span class="er">(</span><span class="bu">.</span><span class="pp">*</span><span class="kw">)</span> <span class="ex">ws://localhost:3838/</span><span class="va">$1</span> [P,L]</span>
+<span id="cb162-16"><a href="rstudio-rshiny-server.html#cb162-16" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteCond</span> %{HTTP:Upgrade} !=websocket</span>
+<span id="cb162-17"><a href="rstudio-rshiny-server.html#cb162-17" aria-hidden="true" tabindex="-1"></a>    <span class="ex">RewriteRule</span> /shiny/<span class="er">(</span><span class="bu">.</span><span class="pp">*</span><span class="kw">)</span> <span class="ex">http://localhost:3838/</span><span class="va">$1</span> [P,L]</span>
+<span id="cb162-18"><a href="rstudio-rshiny-server.html#cb162-18" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ProxyPass</span> /shiny/ http://localhost:3838/</span>
+<span id="cb162-19"><a href="rstudio-rshiny-server.html#cb162-19" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ProxyPassReverse</span> /shiny/ http://localhost:3838/</span>
+<span id="cb162-20"><a href="rstudio-rshiny-server.html#cb162-20" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>/VirtualHost<span class="op">&gt;</span></span></code></pre></div>
 <p>編輯完成後，須重新啟動 Apache2</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb169-1"><a href="rstudio-rshiny-server.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart apache2</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb163-1"><a href="rstudio-rshiny-server.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart apache2</span></code></pre></div>
 <p>最後使用已命名的網址進入 R Shiny Server 首頁</p>
 <pre><code>http://&lt;虛擬機器的 ip 地址&gt;/shiny/</code></pre>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:shiny-main-page"></span>
 <img src="figures/apache2-shiny-server-main-page.png" alt="透過 Apache 反向代理進入的R Shiny Server 首頁" width="100%"><p class="caption">
-圖 4.5: 透過 Apache 反向代理進入的R Shiny Server 首頁
+圖 4.4: 透過 Apache 反向代理進入的R Shiny Server 首頁
 </p>
 </div>
 </div>
@@ -385,50 +349,50 @@ Apache Secure (v6)         ALLOW       Anywhere (v6)</code></pre>
 </h3>
 <p>這個步驟會編輯 R Shiny Server 的設定，可以根據需求去區分 Shiny App，例如我想要使用者群組為學生的放在一起，為教師的使用者群組放在一起，都是做得到的。更詳盡的設定可以看 R Shiny Server <a href="https://docs.rstudio.com/shiny-server/">官方的說明文件</a>設定。</p>
 <p>首先我們先編輯 Shiny Server 的設定檔案：</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb171-1"><a href="rstudio-rshiny-server.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/shiny-server/shiny-server.conf</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb165-1"><a href="rstudio-rshiny-server.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/shiny-server/shiny-server.conf</span></code></pre></div>
 <div class="code-label">
 <p>/etc/shiny-server/shiny-server.conf</p>
 </div>
-<div class="sourceCode" id="cb172"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb172-1"><a href="rstudio-rshiny-server.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 主要執行 App 為的使用者為該 App 的擁有者，沒有擁有者的 App 將由備取使用者 shiny 執行。</span></span>
-<span id="cb172-2"><a href="rstudio-rshiny-server.html#cb172-2" aria-hidden="true" tabindex="-1"></a><span class="ex">run_as</span> :HOME_USER: shiny<span class="kw">;</span></span>
-<span id="cb172-3"><a href="rstudio-rshiny-server.html#cb172-3" aria-hidden="true" tabindex="-1"></a><span class="ex">access_log</span> /var/log/shiny-server/access.log tiny<span class="kw">;</span></span>
-<span id="cb172-4"><a href="rstudio-rshiny-server.html#cb172-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb172-5"><a href="rstudio-rshiny-server.html#cb172-5" aria-hidden="true" tabindex="-1"></a><span class="ex">server</span> {</span>
-<span id="cb172-6"><a href="rstudio-rshiny-server.html#cb172-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">listen</span> 3838<span class="kw">;</span></span>
-<span id="cb172-7"><a href="rstudio-rshiny-server.html#cb172-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb172-8"><a href="rstudio-rshiny-server.html#cb172-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 110.09.21 跟明輝老師的結果是只留下 '老師' 與 '學生群組'</span></span>
-<span id="cb172-9"><a href="rstudio-rshiny-server.html#cb172-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 重新導向舊群組 /asisstuc 至學生群組 /stu</span></span>
-<span id="cb172-10"><a href="rstudio-rshiny-server.html#cb172-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> /asisstuc {</span>
-<span id="cb172-11"><a href="rstudio-rshiny-server.html#cb172-11" aria-hidden="true" tabindex="-1"></a>      <span class="ex">redirect</span> <span class="st">"https://&lt;虛擬主機 ip 位址&gt;/shiny/stu/"</span> 302 true<span class="kw">;</span></span>
-<span id="cb172-12"><a href="rstudio-rshiny-server.html#cb172-12" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
-<span id="cb172-13"><a href="rstudio-rshiny-server.html#cb172-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb172-14"><a href="rstudio-rshiny-server.html#cb172-14" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> /defstu {</span>
-<span id="cb172-15"><a href="rstudio-rshiny-server.html#cb172-15" aria-hidden="true" tabindex="-1"></a>      <span class="ex">redirect</span> <span class="st">"https://&lt;虛擬主機 ip 位址&gt;/shiny/stu/"</span> 302 true<span class="kw">;</span></span>
-<span id="cb172-16"><a href="rstudio-rshiny-server.html#cb172-16" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
-<span id="cb172-17"><a href="rstudio-rshiny-server.html#cb172-17" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb172-18"><a href="rstudio-rshiny-server.html#cb172-18" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> /asisstuc {</span>
-<span id="cb172-19"><a href="rstudio-rshiny-server.html#cb172-19" aria-hidden="true" tabindex="-1"></a>      <span class="ex">redirect</span> <span class="st">"https://&lt;虛擬主機 ip 位址&gt;/shiny/stu/"</span> 302 true<span class="kw">;</span></span>
-<span id="cb172-20"><a href="rstudio-rshiny-server.html#cb172-20" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
-<span id="cb172-21"><a href="rstudio-rshiny-server.html#cb172-21" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb172-22"><a href="rstudio-rshiny-server.html#cb172-22" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> /stu {</span>
-<span id="cb172-23"><a href="rstudio-rshiny-server.html#cb172-23" aria-hidden="true" tabindex="-1"></a>        <span class="ex">user_dirs</span><span class="kw">;</span></span>
-<span id="cb172-24"><a href="rstudio-rshiny-server.html#cb172-24" aria-hidden="true" tabindex="-1"></a>        <span class="ex">members_of</span> stu<span class="kw">;</span></span>
-<span id="cb172-25"><a href="rstudio-rshiny-server.html#cb172-25" aria-hidden="true" tabindex="-1"></a>        <span class="ex">directory_index</span> on<span class="kw">;</span></span>
-<span id="cb172-26"><a href="rstudio-rshiny-server.html#cb172-26" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
-<span id="cb172-27"><a href="rstudio-rshiny-server.html#cb172-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb172-28"><a href="rstudio-rshiny-server.html#cb172-28" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> /teacher {</span>
-<span id="cb172-29"><a href="rstudio-rshiny-server.html#cb172-29" aria-hidden="true" tabindex="-1"></a>        <span class="ex">user_dirs</span><span class="kw">;</span></span>
-<span id="cb172-30"><a href="rstudio-rshiny-server.html#cb172-30" aria-hidden="true" tabindex="-1"></a>        <span class="ex">members_of</span> teacher<span class="kw">;</span></span>
-<span id="cb172-31"><a href="rstudio-rshiny-server.html#cb172-31" aria-hidden="true" tabindex="-1"></a>        <span class="ex">directory_index</span> off<span class="kw">;</span></span>
-<span id="cb172-32"><a href="rstudio-rshiny-server.html#cb172-32" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
-<span id="cb172-33"><a href="rstudio-rshiny-server.html#cb172-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb172-34"><a href="rstudio-rshiny-server.html#cb172-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Shiny 首頁</span></span>
-<span id="cb172-35"><a href="rstudio-rshiny-server.html#cb172-35" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> / {</span>
-<span id="cb172-36"><a href="rstudio-rshiny-server.html#cb172-36" aria-hidden="true" tabindex="-1"></a>        <span class="ex">site_dir</span> /srv/shiny-server<span class="kw">;</span></span>
-<span id="cb172-37"><a href="rstudio-rshiny-server.html#cb172-37" aria-hidden="true" tabindex="-1"></a>        <span class="ex">log_dir</span> /var/log/shiny-server<span class="kw">;</span></span>
-<span id="cb172-38"><a href="rstudio-rshiny-server.html#cb172-38" aria-hidden="true" tabindex="-1"></a>        <span class="ex">directory_index</span> on<span class="kw">;</span></span>
-<span id="cb172-39"><a href="rstudio-rshiny-server.html#cb172-39" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
-<span id="cb172-40"><a href="rstudio-rshiny-server.html#cb172-40" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb166-1"><a href="rstudio-rshiny-server.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 主要執行 App 為的使用者為該 App 的擁有者，沒有擁有者的 App 將由備取使用者 shiny 執行。</span></span>
+<span id="cb166-2"><a href="rstudio-rshiny-server.html#cb166-2" aria-hidden="true" tabindex="-1"></a><span class="ex">run_as</span> :HOME_USER: shiny<span class="kw">;</span></span>
+<span id="cb166-3"><a href="rstudio-rshiny-server.html#cb166-3" aria-hidden="true" tabindex="-1"></a><span class="ex">access_log</span> /var/log/shiny-server/access.log tiny<span class="kw">;</span></span>
+<span id="cb166-4"><a href="rstudio-rshiny-server.html#cb166-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb166-5"><a href="rstudio-rshiny-server.html#cb166-5" aria-hidden="true" tabindex="-1"></a><span class="ex">server</span> {</span>
+<span id="cb166-6"><a href="rstudio-rshiny-server.html#cb166-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">listen</span> 3838<span class="kw">;</span></span>
+<span id="cb166-7"><a href="rstudio-rshiny-server.html#cb166-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb166-8"><a href="rstudio-rshiny-server.html#cb166-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 110.09.21 跟明輝老師的結果是只留下 '老師' 與 '學生群組'</span></span>
+<span id="cb166-9"><a href="rstudio-rshiny-server.html#cb166-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 重新導向舊群組 /asisstuc 至學生群組 /stu</span></span>
+<span id="cb166-10"><a href="rstudio-rshiny-server.html#cb166-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> /asisstuc {</span>
+<span id="cb166-11"><a href="rstudio-rshiny-server.html#cb166-11" aria-hidden="true" tabindex="-1"></a>      <span class="ex">redirect</span> <span class="st">"https://&lt;虛擬主機 ip 位址&gt;/shiny/stu/"</span> 302 true<span class="kw">;</span></span>
+<span id="cb166-12"><a href="rstudio-rshiny-server.html#cb166-12" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
+<span id="cb166-13"><a href="rstudio-rshiny-server.html#cb166-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb166-14"><a href="rstudio-rshiny-server.html#cb166-14" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> /defstu {</span>
+<span id="cb166-15"><a href="rstudio-rshiny-server.html#cb166-15" aria-hidden="true" tabindex="-1"></a>      <span class="ex">redirect</span> <span class="st">"https://&lt;虛擬主機 ip 位址&gt;/shiny/stu/"</span> 302 true<span class="kw">;</span></span>
+<span id="cb166-16"><a href="rstudio-rshiny-server.html#cb166-16" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
+<span id="cb166-17"><a href="rstudio-rshiny-server.html#cb166-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb166-18"><a href="rstudio-rshiny-server.html#cb166-18" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> /asisstuc {</span>
+<span id="cb166-19"><a href="rstudio-rshiny-server.html#cb166-19" aria-hidden="true" tabindex="-1"></a>      <span class="ex">redirect</span> <span class="st">"https://&lt;虛擬主機 ip 位址&gt;/shiny/stu/"</span> 302 true<span class="kw">;</span></span>
+<span id="cb166-20"><a href="rstudio-rshiny-server.html#cb166-20" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
+<span id="cb166-21"><a href="rstudio-rshiny-server.html#cb166-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb166-22"><a href="rstudio-rshiny-server.html#cb166-22" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> /stu {</span>
+<span id="cb166-23"><a href="rstudio-rshiny-server.html#cb166-23" aria-hidden="true" tabindex="-1"></a>        <span class="ex">user_dirs</span><span class="kw">;</span></span>
+<span id="cb166-24"><a href="rstudio-rshiny-server.html#cb166-24" aria-hidden="true" tabindex="-1"></a>        <span class="ex">members_of</span> stu<span class="kw">;</span></span>
+<span id="cb166-25"><a href="rstudio-rshiny-server.html#cb166-25" aria-hidden="true" tabindex="-1"></a>        <span class="ex">directory_index</span> on<span class="kw">;</span></span>
+<span id="cb166-26"><a href="rstudio-rshiny-server.html#cb166-26" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
+<span id="cb166-27"><a href="rstudio-rshiny-server.html#cb166-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb166-28"><a href="rstudio-rshiny-server.html#cb166-28" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> /teacher {</span>
+<span id="cb166-29"><a href="rstudio-rshiny-server.html#cb166-29" aria-hidden="true" tabindex="-1"></a>        <span class="ex">user_dirs</span><span class="kw">;</span></span>
+<span id="cb166-30"><a href="rstudio-rshiny-server.html#cb166-30" aria-hidden="true" tabindex="-1"></a>        <span class="ex">members_of</span> teacher<span class="kw">;</span></span>
+<span id="cb166-31"><a href="rstudio-rshiny-server.html#cb166-31" aria-hidden="true" tabindex="-1"></a>        <span class="ex">directory_index</span> off<span class="kw">;</span></span>
+<span id="cb166-32"><a href="rstudio-rshiny-server.html#cb166-32" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
+<span id="cb166-33"><a href="rstudio-rshiny-server.html#cb166-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb166-34"><a href="rstudio-rshiny-server.html#cb166-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Shiny 首頁</span></span>
+<span id="cb166-35"><a href="rstudio-rshiny-server.html#cb166-35" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> / {</span>
+<span id="cb166-36"><a href="rstudio-rshiny-server.html#cb166-36" aria-hidden="true" tabindex="-1"></a>        <span class="ex">site_dir</span> /srv/shiny-server<span class="kw">;</span></span>
+<span id="cb166-37"><a href="rstudio-rshiny-server.html#cb166-37" aria-hidden="true" tabindex="-1"></a>        <span class="ex">log_dir</span> /var/log/shiny-server<span class="kw">;</span></span>
+<span id="cb166-38"><a href="rstudio-rshiny-server.html#cb166-38" aria-hidden="true" tabindex="-1"></a>        <span class="ex">directory_index</span> on<span class="kw">;</span></span>
+<span id="cb166-39"><a href="rstudio-rshiny-server.html#cb166-39" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
+<span id="cb166-40"><a href="rstudio-rshiny-server.html#cb166-40" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code></pre></div>
 <p>這裡的 <code>run_as</code> 設定的 <code>:HOME_USER:</code> 會將符合 <code>members_of</code> 所指定的群組的使用者家目錄底下的資料夾（<code>~/ShinyApps</code>）有效，會以該使用者所安裝的 R 套件為第一優先執行 Shiny Apps，如果使用者家目錄沒有安裝該套件才會落到 R 的系統套件。這個方法能讓系統不用常常以管理員的權限安裝套件，讓使用者可以自己安裝所需的套件，達到減少管理員工作的目的。而緊接在 <code>:HOME_USER:</code> 後面的使用者是 shiny 預設執行 Shiny Apps 的使用者。</p>
 <p><code>access_log</code> 是存放任何人透過網址執行 Shiny Apps 的所有訊息的位置，而後面的 <code>tiny</code> 字樣是設定紀錄的詳細程度，詳細的說明可以參考<a href="https://docs.rstudio.com/shiny-server/">官方的說明文件</a>。</p>
 <p>在開始設定之前要知道一件事，所有的路由設定都是放在 <code>server { }</code> 之中，不會跑到大括號外面。<code>listen</code> 後面設定的數字是 R Shiny Server 佈置 Apps 的埠號，不要重複即可。</p>
@@ -436,19 +400,19 @@ Apache Secure (v6)         ALLOW       Anywhere (v6)</code></pre>
 <h4>
 <span class="header-section-number">4.4.4.1</span> 佈置單一個 App<a class="anchor" aria-label="anchor" href="#%E4%BD%88%E7%BD%AE%E5%96%AE%E4%B8%80%E5%80%8B-app"><i class="fas fa-link"></i></a>
 </h4>
-<p>單一個 App 可以看預設首頁（如圖<a href="rstudio-rshiny-server.html#fig:shiny-main-page">4.5</a>所示）的設置，首頁的設定如下：</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb173-1"><a href="rstudio-rshiny-server.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span>
-<span id="cb173-2"><a href="rstudio-rshiny-server.html#cb173-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb173-3"><a href="rstudio-rshiny-server.html#cb173-3" aria-hidden="true" tabindex="-1"></a><span class="ex">server</span> {</span>
-<span id="cb173-4"><a href="rstudio-rshiny-server.html#cb173-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
-<span id="cb173-5"><a href="rstudio-rshiny-server.html#cb173-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb173-6"><a href="rstudio-rshiny-server.html#cb173-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Shiny 首頁</span></span>
-<span id="cb173-7"><a href="rstudio-rshiny-server.html#cb173-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> / {</span>
-<span id="cb173-8"><a href="rstudio-rshiny-server.html#cb173-8" aria-hidden="true" tabindex="-1"></a>        <span class="ex">site_dir</span> /srv/shiny-server<span class="kw">;</span></span>
-<span id="cb173-9"><a href="rstudio-rshiny-server.html#cb173-9" aria-hidden="true" tabindex="-1"></a>        <span class="ex">log_dir</span> /var/log/shiny-server<span class="kw">;</span></span>
-<span id="cb173-10"><a href="rstudio-rshiny-server.html#cb173-10" aria-hidden="true" tabindex="-1"></a>        <span class="ex">directory_index</span> on<span class="kw">;</span></span>
-<span id="cb173-11"><a href="rstudio-rshiny-server.html#cb173-11" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
-<span id="cb173-12"><a href="rstudio-rshiny-server.html#cb173-12" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code></pre></div>
+<p>單一個 App 可以看預設首頁（如圖<a href="rstudio-rshiny-server.html#fig:shiny-main-page">4.4</a>所示）的設置，首頁的設定如下：</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb167-1"><a href="rstudio-rshiny-server.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span>
+<span id="cb167-2"><a href="rstudio-rshiny-server.html#cb167-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb167-3"><a href="rstudio-rshiny-server.html#cb167-3" aria-hidden="true" tabindex="-1"></a><span class="ex">server</span> {</span>
+<span id="cb167-4"><a href="rstudio-rshiny-server.html#cb167-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
+<span id="cb167-5"><a href="rstudio-rshiny-server.html#cb167-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb167-6"><a href="rstudio-rshiny-server.html#cb167-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Shiny 首頁</span></span>
+<span id="cb167-7"><a href="rstudio-rshiny-server.html#cb167-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> / {</span>
+<span id="cb167-8"><a href="rstudio-rshiny-server.html#cb167-8" aria-hidden="true" tabindex="-1"></a>        <span class="ex">site_dir</span> /srv/shiny-server<span class="kw">;</span></span>
+<span id="cb167-9"><a href="rstudio-rshiny-server.html#cb167-9" aria-hidden="true" tabindex="-1"></a>        <span class="ex">log_dir</span> /var/log/shiny-server<span class="kw">;</span></span>
+<span id="cb167-10"><a href="rstudio-rshiny-server.html#cb167-10" aria-hidden="true" tabindex="-1"></a>        <span class="ex">directory_index</span> on<span class="kw">;</span></span>
+<span id="cb167-11"><a href="rstudio-rshiny-server.html#cb167-11" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
+<span id="cb167-12"><a href="rstudio-rshiny-server.html#cb167-12" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code></pre></div>
 <p><code>location /</code> 設定的是這個頁面的位置，<code>/</code> 代表的是根頁面，跟網址加在一起就變成 <code>http://&lt;虛擬機器的 ip 位置&gt;/shiny/</code> 。而 <code>site_dir</code> 指的是這個頁面的網頁檔案位置，<code>/srv/shiny-server/</code> 的目錄結構如下：</p>
 <pre class="console_output"><code>total 8
 drwxr-xr-x 2 root root 4096 Jul  4 19:44 ./
@@ -465,16 +429,16 @@ lrwxrwxrwx 1 root root   37 Feb  1 03:43 sample-apps -&gt; /opt/shiny-server/sam
     └── index.Rmd</code></pre>
 <p>hello 資料夾底下是一個 Shiny App，而 rmd 資料夾底下是一個 R Markdown 檔案。兩者皆可以透過首頁下的 <code>sample-apps/</code> 路由存取。以 hello 的 Shiny App 為例，App 的路由為：<code>http://&lt;虛擬機器的 ip 位置&gt;/shiny/sample-apps/hello</code>。</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-73"></span>
+<span style="display:block;" id="fig:unnamed-chunk-72"></span>
 <img src="figures/shiny_sample-apps_hello.png" alt="透過 http://&lt;虛擬機器的 ip 位置&gt;/shiny/sample-apps/hello 訪問的 Shiny App" width="100%"><p class="caption">
-圖 4.6: 透過 <a href="http://" class="uri">http://</a>/shiny/sample-apps/hello 訪問的 Shiny App
+圖 4.5: 透過 <a href="http://" class="uri">http://</a>/shiny/sample-apps/hello 訪問的 Shiny App
 </p>
 </div>
 <p>而 <code>directory_index</code> 設定為 <code>on</code> ，且該路由沒有首頁檔案（index.html）、Shiny Apps 或是 R Markdown 時，會將資料夾與檔案顯示出來。這裡同樣的以 <code>/srv/shiny-server</code> 底下的 <code>/sample-apps</code> 為例，如下圖所示：</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-74"></span>
+<span style="display:block;" id="fig:unnamed-chunk-73"></span>
 <img src="figures/shiny_sample-apps.png" alt="/shiny/sample-apps 的頁面" width="100%"><p class="caption">
-圖 4.7: /shiny/sample-apps 的頁面
+圖 4.6: /shiny/sample-apps 的頁面
 </p>
 </div>
 </div>
@@ -483,18 +447,18 @@ lrwxrwxrwx 1 root root   37 Feb  1 03:43 sample-apps -&gt; /opt/shiny-server/sam
 <span class="header-section-number">4.4.4.2</span> 根據使用者群組佈置 App<a class="anchor" aria-label="anchor" href="#%E6%A0%B9%E6%93%9A%E4%BD%BF%E7%94%A8%E8%80%85%E7%BE%A4%E7%B5%84%E4%BD%88%E7%BD%AE-app"><i class="fas fa-link"></i></a>
 </h4>
 <p>R Shiny Server 可以根據使用者群組創建對應的路由，像是規定學生只能從 <code>/stu</code> 存取他們自己的 Shiny App。具體設定如下：</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb176-1"><a href="rstudio-rshiny-server.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span>
-<span id="cb176-2"><a href="rstudio-rshiny-server.html#cb176-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb176-3"><a href="rstudio-rshiny-server.html#cb176-3" aria-hidden="true" tabindex="-1"></a><span class="ex">server{</span></span>
-<span id="cb176-4"><a href="rstudio-rshiny-server.html#cb176-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
-<span id="cb176-5"><a href="rstudio-rshiny-server.html#cb176-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb176-6"><a href="rstudio-rshiny-server.html#cb176-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 學生頁面</span></span>
-<span id="cb176-7"><a href="rstudio-rshiny-server.html#cb176-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> /stu {</span>
-<span id="cb176-8"><a href="rstudio-rshiny-server.html#cb176-8" aria-hidden="true" tabindex="-1"></a>        <span class="ex">user_dirs</span><span class="kw">;</span></span>
-<span id="cb176-9"><a href="rstudio-rshiny-server.html#cb176-9" aria-hidden="true" tabindex="-1"></a>        <span class="ex">members_of</span> stu<span class="kw">;</span></span>
-<span id="cb176-10"><a href="rstudio-rshiny-server.html#cb176-10" aria-hidden="true" tabindex="-1"></a>        <span class="ex">directory_index</span> on<span class="kw">;</span></span>
-<span id="cb176-11"><a href="rstudio-rshiny-server.html#cb176-11" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
-<span id="cb176-12"><a href="rstudio-rshiny-server.html#cb176-12" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb170-1"><a href="rstudio-rshiny-server.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span>
+<span id="cb170-2"><a href="rstudio-rshiny-server.html#cb170-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb170-3"><a href="rstudio-rshiny-server.html#cb170-3" aria-hidden="true" tabindex="-1"></a><span class="ex">server{</span></span>
+<span id="cb170-4"><a href="rstudio-rshiny-server.html#cb170-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
+<span id="cb170-5"><a href="rstudio-rshiny-server.html#cb170-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb170-6"><a href="rstudio-rshiny-server.html#cb170-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 學生頁面</span></span>
+<span id="cb170-7"><a href="rstudio-rshiny-server.html#cb170-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> /stu {</span>
+<span id="cb170-8"><a href="rstudio-rshiny-server.html#cb170-8" aria-hidden="true" tabindex="-1"></a>        <span class="ex">user_dirs</span><span class="kw">;</span></span>
+<span id="cb170-9"><a href="rstudio-rshiny-server.html#cb170-9" aria-hidden="true" tabindex="-1"></a>        <span class="ex">members_of</span> stu<span class="kw">;</span></span>
+<span id="cb170-10"><a href="rstudio-rshiny-server.html#cb170-10" aria-hidden="true" tabindex="-1"></a>        <span class="ex">directory_index</span> on<span class="kw">;</span></span>
+<span id="cb170-11"><a href="rstudio-rshiny-server.html#cb170-11" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
+<span id="cb170-12"><a href="rstudio-rshiny-server.html#cb170-12" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code></pre></div>
 <p>這個設定會限制使用者群組為 <code>stu</code> 的使用者從 <code>http://&lt;虛擬機器的 ip 位置&gt;/shiny/&lt;使用者名稱&gt;</code> 存取他們存放位於家目錄底下名為<code>ShinyApps</code>（<code>~/ShinyApps</code>）資料夾內的 Shiny Apps。</p>
 </div>
 <div id="重新導向頁面" class="section level4" number="4.4.4.3">
@@ -502,16 +466,16 @@ lrwxrwxrwx 1 root root   37 Feb  1 03:43 sample-apps -&gt; /opt/shiny-server/sam
 <span class="header-section-number">4.4.4.3</span> 重新導向頁面<a class="anchor" aria-label="anchor" href="#%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91%E9%A0%81%E9%9D%A2"><i class="fas fa-link"></i></a>
 </h4>
 <p>重新導向頁面可以將舊的網址導向至新的網址，一般的設定如下：</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb177-1"><a href="rstudio-rshiny-server.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span>
-<span id="cb177-2"><a href="rstudio-rshiny-server.html#cb177-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb177-3"><a href="rstudio-rshiny-server.html#cb177-3" aria-hidden="true" tabindex="-1"></a><span class="ex">server</span> {</span>
-<span id="cb177-4"><a href="rstudio-rshiny-server.html#cb177-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
-<span id="cb177-5"><a href="rstudio-rshiny-server.html#cb177-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb177-6"><a href="rstudio-rshiny-server.html#cb177-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 將網址為 /asisstuc 的路由重新導向至新的網址</span></span>
-<span id="cb177-7"><a href="rstudio-rshiny-server.html#cb177-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> /asisstuc {</span>
-<span id="cb177-8"><a href="rstudio-rshiny-server.html#cb177-8" aria-hidden="true" tabindex="-1"></a>      <span class="ex">redirect</span> <span class="st">"https://&lt;虛擬主機 ip 位址&gt;/shiny/stu/"</span> 302 true<span class="kw">;</span></span>
-<span id="cb177-9"><a href="rstudio-rshiny-server.html#cb177-9" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
-<span id="cb177-10"><a href="rstudio-rshiny-server.html#cb177-10" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb171-1"><a href="rstudio-rshiny-server.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span>
+<span id="cb171-2"><a href="rstudio-rshiny-server.html#cb171-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb171-3"><a href="rstudio-rshiny-server.html#cb171-3" aria-hidden="true" tabindex="-1"></a><span class="ex">server</span> {</span>
+<span id="cb171-4"><a href="rstudio-rshiny-server.html#cb171-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
+<span id="cb171-5"><a href="rstudio-rshiny-server.html#cb171-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb171-6"><a href="rstudio-rshiny-server.html#cb171-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 將網址為 /asisstuc 的路由重新導向至新的網址</span></span>
+<span id="cb171-7"><a href="rstudio-rshiny-server.html#cb171-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">location</span> /asisstuc {</span>
+<span id="cb171-8"><a href="rstudio-rshiny-server.html#cb171-8" aria-hidden="true" tabindex="-1"></a>      <span class="ex">redirect</span> <span class="st">"https://&lt;虛擬主機 ip 位址&gt;/shiny/stu/"</span> 302 true<span class="kw">;</span></span>
+<span id="cb171-9"><a href="rstudio-rshiny-server.html#cb171-9" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
+<span id="cb171-10"><a href="rstudio-rshiny-server.html#cb171-10" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code></pre></div>
 <p><code>redirect</code> 後面第一個參數是目的地網址，第二個參數是網頁重新導向的種類（<code>301</code> 為永久，<code>302</code> 為暫時），最後一個參數是否要套用完全一樣的路由，如果設為 <code>true</code>，路由為 <code>/asisstuc</code> 才會重新導向。如果設為 <code>false</code> ，則它的路由只要包含 <code>/asisstuc</code>，不管它底下才有沒有其他路由（例如：<code>/asisstuc/08170875/example</code>），都會重新導向至指定的網頁。</p>
 <div class="infobox caution">
 <p>這裏要先跳至<a href="rstudio-rshiny-server.html#step-4-%E4%BD%BF%E7%94%A8%E4%BD%BF%E7%94%A8%E8%80%85%E6%B8%AC%E8%A9%A6%E8%A8%AD%E5%AE%9A%E6%98%AF%E5%90%A6%E6%9C%89%E6%95%88">Step 4 — 使用使用者測試設定是否有效</a>先建立使用者群組後再重新啟動 R Shiny Server。因為設定檔中設有使用者群組（<code>MCU</code>、<code>teacher</code>）而沒有創建的話，重新啟動 R Shiny Server 會因為找不到該使用者群組而出現錯誤。</p>
@@ -524,55 +488,55 @@ lrwxrwxrwx 1 root root   37 Feb  1 03:43 sample-apps -&gt; /opt/shiny-server/sam
 </h3>
 <p>這裡會大概講一下怎麼創建使用者群組、使用者帳戶，以及在創建使用者帳戶的同時，也一起於家目錄創建 <code>ShinyApps</code> 資料夾。詳細的說明會於附錄的<a href="%E5%B8%B3%E8%99%9F%E7%AE%A1%E7%90%86.html#%E5%B8%B3%E8%99%9F%E7%AE%A1%E7%90%86">帳號管理</a>說明。</p>
 <p>首先用下面的指令創建兩個使用者群組，分別是 <code>stu</code> 與 <code>teacher</code>。</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb178-1"><a href="rstudio-rshiny-server.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> groupadd MCU <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> groupadd teacher</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb172-1"><a href="rstudio-rshiny-server.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> groupadd MCU <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> groupadd teacher</span></code></pre></div>
 <p>接著編輯使用指令 <code>useradd</code> 創建使用者時，預設的使用者設定，後續建立使用者才不會多打很多指令。</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb179-1"><a href="rstudio-rshiny-server.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/default/useradd</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb173-1"><a href="rstudio-rshiny-server.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/default/useradd</span></code></pre></div>
 <div class="code-label">
 <p>/etc/default/useradd</p>
 </div>
-<div class="sourceCode" id="cb180"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb180-1"><a href="rstudio-rshiny-server.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Default values for useradd(8)</span></span>
-<span id="cb180-2"><a href="rstudio-rshiny-server.html#cb180-2" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb180-3"><a href="rstudio-rshiny-server.html#cb180-3" aria-hidden="true" tabindex="-1"></a><span class="co"># The SHELL variable specifies the default login shell on your</span></span>
-<span id="cb180-4"><a href="rstudio-rshiny-server.html#cb180-4" aria-hidden="true" tabindex="-1"></a><span class="co"># system.</span></span>
-<span id="cb180-5"><a href="rstudio-rshiny-server.html#cb180-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Similar to DSHELL in adduser. However, we use "sh" here because</span></span>
-<span id="cb180-6"><a href="rstudio-rshiny-server.html#cb180-6" aria-hidden="true" tabindex="-1"></a><span class="co"># useradd is a low level utility and should be as general</span></span>
-<span id="cb180-7"><a href="rstudio-rshiny-server.html#cb180-7" aria-hidden="true" tabindex="-1"></a><span class="co"># as possible</span></span>
-<span id="cb180-8"><a href="rstudio-rshiny-server.html#cb180-8" aria-hidden="true" tabindex="-1"></a><span class="va">SHELL</span><span class="op">=</span>/usr/bin/bash</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb174-1"><a href="rstudio-rshiny-server.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Default values for useradd(8)</span></span>
+<span id="cb174-2"><a href="rstudio-rshiny-server.html#cb174-2" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb174-3"><a href="rstudio-rshiny-server.html#cb174-3" aria-hidden="true" tabindex="-1"></a><span class="co"># The SHELL variable specifies the default login shell on your</span></span>
+<span id="cb174-4"><a href="rstudio-rshiny-server.html#cb174-4" aria-hidden="true" tabindex="-1"></a><span class="co"># system.</span></span>
+<span id="cb174-5"><a href="rstudio-rshiny-server.html#cb174-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Similar to DSHELL in adduser. However, we use "sh" here because</span></span>
+<span id="cb174-6"><a href="rstudio-rshiny-server.html#cb174-6" aria-hidden="true" tabindex="-1"></a><span class="co"># useradd is a low level utility and should be as general</span></span>
+<span id="cb174-7"><a href="rstudio-rshiny-server.html#cb174-7" aria-hidden="true" tabindex="-1"></a><span class="co"># as possible</span></span>
+<span id="cb174-8"><a href="rstudio-rshiny-server.html#cb174-8" aria-hidden="true" tabindex="-1"></a><span class="va">SHELL</span><span class="op">=</span>/usr/bin/bash</span></code></pre></div>
 <p>將 SHELL 的部分取消註解，並把 bash 的程式路徑填上去。只要變更這一行就好，如果不清楚路徑可以參考下面的說明。</p>
 <p>這裡的 SHELL 就是指 linux 與使用者之間的溝通方式，指定 <code>bash</code> 為我們使用者預設的 SHELL。</p>
 <div class="infobox info">
 <p>如果不知道 bash 程式的位置，可以使用 <code>which</code> 指令查詢後，再來做這一步，例如：</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb181-1"><a href="rstudio-rshiny-server.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> bash</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb175-1"><a href="rstudio-rshiny-server.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> bash</span></code></pre></div>
 <pre class="console_output"><code>/usr/bin/bash</code></pre>
 </div>
 <p>接著於 <code>/etc/skel</code> 的路徑創建一個叫做 <code>ShinyApps</code> 的資料夾。位於此路徑的<strong>所有檔案</strong>都會在創建使用者時複製一份到使用者的家目錄。</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb183-1"><a href="rstudio-rshiny-server.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir /etc/skel/ShinyApps/</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb177-1"><a href="rstudio-rshiny-server.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir /etc/skel/ShinyApps/</span></code></pre></div>
 <p>創建完後，再將範例的 <code>sample-apps</code> 連結到模板資料夾 <code>/etc/skel</code> 的 <code>ShinyApps</code> 資料夾中。讓新創立的使用者有測試用的 Shiny App。</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb184-1"><a href="rstudio-rshiny-server.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /srv/shiny-server/sample-apps <span class="dt">\</span></span>
-<span id="cb184-2"><a href="rstudio-rshiny-server.html#cb184-2" aria-hidden="true" tabindex="-1"></a>/etc/skel/ShinyApps/example</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb178-1"><a href="rstudio-rshiny-server.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /srv/shiny-server/sample-apps <span class="dt">\</span></span>
+<span id="cb178-2"><a href="rstudio-rshiny-server.html#cb178-2" aria-hidden="true" tabindex="-1"></a>/etc/skel/ShinyApps/example</span></code></pre></div>
 <p>最後再用 <code>useradd</code> 指令隨意創建兩個帳戶</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb185-1"><a href="rstudio-rshiny-server.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> useradd <span class="at">--badnames</span> <span class="at">-N</span> <span class="at">-g</span> stu <span class="at">-m</span> 08170875</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb179-1"><a href="rstudio-rshiny-server.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> useradd <span class="at">--badnames</span> <span class="at">-N</span> <span class="at">-g</span> stu <span class="at">-m</span> 08170875</span></code></pre></div>
 <ul>
 <li><p><code>--badnames</code>：新版的 <code>useradd</code> 指令新增的參數，讓不安全的使用者（例如全部都是數字的使用者）可以創建。</p></li>
 <li><p><code>-N, --no-user-group</code>：預設 <code>useradd</code> 在創建使用者帳戶時，會根據使用者名稱再創立一個主要的使用者群組。</p></li>
 <li><p><code>-g, --gid GROUP</code>：直接指定使用者的主要的使用者群組。</p></li>
 <li><p><code>-m, --create-home</code>：建立使用者時，順帶建立家目錄。</p></li>
 </ul>
-<div class="sourceCode" id="cb186"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb186-1"><a href="rstudio-rshiny-server.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> useradd <span class="at">--badnames</span> <span class="at">-N</span> <span class="at">-g</span> teacher <span class="at">-m</span> ms00000000</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb180-1"><a href="rstudio-rshiny-server.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> useradd <span class="at">--badnames</span> <span class="at">-N</span> <span class="at">-g</span> teacher <span class="at">-m</span> ms00000000</span></code></pre></div>
 <p>新增完成後，為了使剛才 R Shiny Server 的設定生效，重新啟動 R Shiny Server。</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb187-1"><a href="rstudio-rshiny-server.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart shiny-server</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb181-1"><a href="rstudio-rshiny-server.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart shiny-server</span></code></pre></div>
 <p>最後再從剛才設定的路由進入使用者的 Shiny Apps 目錄，網址為：<code>http://&lt;虛擬機器 ip 位址&gt;/shiny/stu/08170875/</code></p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-75"></span>
+<span style="display:block;" id="fig:unnamed-chunk-74"></span>
 <img src="figures/shiny-server-group-test-successed.png" alt="Shiny Server 使用者 08170875 的 Shiny Apps" width="100%"><p class="caption">
-圖 4.8: Shiny Server 使用者 08170875 的 Shiny Apps
+圖 4.7: Shiny Server 使用者 08170875 的 Shiny Apps
 </p>
 </div>
 <p>如果輸入了 <code>http://&lt;虛擬機器 ip 位址&gt;/shiny/stu</code> 是不會出現所有使用者的，這點要注意。不過我們也可以根據這個路由，利用 <code>site_dir</code> 參數設計一個專屬於使用者群組 <code>stu</code> 的網頁。</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-76"></span>
+<span style="display:block;" id="fig:unnamed-chunk-75"></span>
 <img src="figures/shiny-server-group-test-failed.png" alt="路由 /stu 的網頁（找不到網頁）" width="100%"><p class="caption">
-圖 4.9: 路由 /stu 的網頁（找不到網頁）
+圖 4.8: 路由 /stu 的網頁（找不到網頁）
 </p>
 </div>
 
@@ -588,23 +552,21 @@ lrwxrwxrwx 1 root root   37 Feb  1 03:43 sample-apps -&gt; /opt/shiny-server/sam
 <li><a class="nav-link" href="#rstudio-rshiny-server"><span class="header-section-number">4</span> RStudio &amp; RShiny Server</a></li>
 <li><a class="nav-link" href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99-1"><span class="header-section-number">4.1</span> 事前準備</a></li>
 <li>
-<a class="nav-link" href="#r-base"><span class="header-section-number">4.2</span> R base</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-3"><span class="header-section-number">4.2.1</span> 概述</a></li>
-<li><a class="nav-link" href="#step-1-%E5%AE%89%E8%A3%9D-r-base"><span class="header-section-number">4.2.2</span> Step 1 — 安裝 R Base</a></li>
-<li><a class="nav-link" href="#step-2-%E7%A2%BA%E8%AA%8D-r-base-%E6%98%AF%E5%90%A6%E6%88%90%E5%8A%9F%E5%AE%89%E8%A3%9D"><span class="header-section-number">4.2.3</span> Step 2 — 確認 R Base 是否成功安裝</a></li>
+<a class="nav-link" href="#r"><span class="header-section-number">4.2</span> R</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%E5%AE%89%E8%A3%9D-r-base"><span class="header-section-number">4.2.1</span> 安裝 R Base</a></li>
+<li><a class="nav-link" href="#%E7%A2%BA%E8%AA%8D-r-base-%E6%98%AF%E5%90%A6%E6%88%90%E5%8A%9F%E5%AE%89%E8%A3%9D"><span class="header-section-number">4.2.2</span> 確認 R Base 是否成功安裝</a></li>
 </ul>
 </li>
 <li>
 <a class="nav-link" href="#rstudio-server"><span class="header-section-number">4.3</span> RStudio Server</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-4"><span class="header-section-number">4.3.1</span> 概述</a></li>
-<li><a class="nav-link" href="#step-1-%E5%AE%89%E8%A3%9D-rstudio-server-%E4%BC%BA%E6%9C%8D%E5%99%A8"><span class="header-section-number">4.3.2</span> Step 1 — 安裝 RStudio Server 伺服器</a></li>
-<li><a class="nav-link" href="#step-2-%E8%A8%AD%E5%AE%9A-apache-%E7%9A%84%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86reverse-proxy"><span class="header-section-number">4.3.3</span> Step 2 — 設定 Apache 的反向代理（Reverse Proxy）</a></li>
+<li><a class="nav-link" href="#%E5%AE%89%E8%A3%9D-rstudio-server"><span class="header-section-number">4.3.1</span> 安裝 RStudio Server</a></li>
+<li><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A-apache-%E7%9A%84%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="header-section-number">4.3.2</span> 設定 Apache 的反向代理</a></li>
 </ul>
 </li>
 <li>
 <a class="nav-link" href="#r-shiny-server"><span class="header-section-number">4.4</span> R Shiny Server</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-5"><span class="header-section-number">4.4.1</span> 概述</a></li>
-<li><a class="nav-link" href="#step-1-%E5%AE%89%E8%A3%9D-r-shiny-server"><span class="header-section-number">4.4.2</span> Step 1 — 安裝 R Shiny Server</a></li>
+<li><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-3"><span class="header-section-number">4.4.1</span> 概述</a></li>
+<li><a class="nav-link" href="#%E5%AE%89%E8%A3%9D-r-shiny-server"><span class="header-section-number">4.4.2</span> 安裝 R Shiny Server</a></li>
 <li><a class="nav-link" href="#step-2-%E8%A8%AD%E5%AE%9A-apache-%E7%9A%84%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="header-section-number">4.4.3</span> Step 2 — 設定 Apache 的反向代理</a></li>
 <li><a class="nav-link" href="#step-3-r-shiny-server-%E9%80%B2%E9%9A%8E%E8%A8%AD%E5%AE%9A"><span class="header-section-number">4.4.4</span> Step 3 — R Shiny Server 進階設定</a></li>
 <li><a class="nav-link" href="#step-4-%E4%BD%BF%E7%94%A8%E4%BD%BF%E7%94%A8%E8%80%85%E6%B8%AC%E8%A9%A6%E8%A8%AD%E5%AE%9A%E6%98%AF%E5%90%A6%E6%9C%89%E6%95%88"><span class="header-section-number">4.4.5</span> Step 4 — 使用使用者測試設定是否有效</a></li>
