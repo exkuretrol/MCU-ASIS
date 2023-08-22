@@ -6,15 +6,12 @@
 
 先確認目前的使用者 asis 擁有 sudo 的權限。
 
-## R base
+## R
 
 R 是一個跨平台的統計繪圖開放原始碼軟體。除了 R 基本的功能之外，還有龐大的社群一起合作創造新的功能，使 R 的功能更為豐富。
 
-### 概述
 
-本小節會介紹怎麼安裝 R Base。
-
-### Step 1 --- 安裝 R Base
+### 安裝 R Base
 
 安裝軟體之前，先更新套件管理程式的來源
 
@@ -39,8 +36,7 @@ cd /tmp && \
 添加 apt 來源
 
 ``` {.bash .prefixed}
-sudo add-apt-repository \ 
-    "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
+sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" -y
 ```
 
 安裝 r-base
@@ -49,7 +45,7 @@ sudo add-apt-repository \
 sudo apt install r-base --yes
 ```
 
-### Step 2 --- 確認 R Base 是否成功安裝
+### 確認 R Base 是否成功安裝
 
 在命令列介面下要確認 R 有無正常安裝很簡單，輸入一個大寫 R 就可以進到 R 的 Console。
 
@@ -64,25 +60,23 @@ sessionInfo()
 ```
 
 ``` console_output
-R version 4.2.0 (2022-04-22)
+R version 4.3.1 (2023-06-16) -- "Beagle Scouts"
+Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 21.10
 
-Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
-LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
 
-locale:
- [1] LC_CTYPE=en_US.UTF-8   LC_NUMERIC=C           LC_TIME=C.UTF-8
- [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8
- [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C
-[10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C
+  Natural language support but running in an English locale
 
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
 
-loaded via a namespace (and not attached):
-[1] compiler_4.2.0 pbdZMQ_0.3-7
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
 ```
 
 確認沒問題後使用指令 `q` 退出。
@@ -95,54 +89,27 @@ q(save='no')
 
 RStudio Server 是 RStudio 的網頁版本，使用者可以透過網頁存取一個位於網路上的 RStudio。
 
-### 概述
+### 安裝 RStudio Server
 
 本小節會介紹怎麼安裝 RStudio Server 與設定 Apache 的反向代理。
 
-### Step 1 --- 安裝 RStudio Server 伺服器
-
 ``` {.bash .prefixed}
-sudo apt install gdebi-core
+sudo apt install gdebi-core -y
 ```
 
-切到暫存資料夾後，自官網下載 rstudio 伺服器的安裝程式。
+切到暫存資料夾後，自[官網]()下載 rstudio 伺服器的安裝程式。
 
 ``` {.bash .prefixed}
 cd /tmp && \
-wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.4.1717-amd64.deb
+    wget wget https://download2.rstudio.org/server/jammy/amd64/rstudio-server-2023.06.1-524-amd64.deb
 ```
 
-這個指令會下載當前撰寫這個頁面的最新版本 RStudio Server。如果你想要下載最新版本請到[官方的下載頁面](https://www.rstudio.com/products/rstudio/download-server/)確認。
+這個指令會下載當前撰寫這個頁面的最新版本 RStudio Server。如果你想要下載最新版本請到[官方的下載頁面](https://posit.co/download/rstudio-server/)確認。
 
-透過 ubuntu 的密鑰伺服器取回對應的簽名
+使用 `gdebi` 指令安裝 .deb 格式安裝程式
 
 ``` {.bash .prefixed}
-gpg --keyserver keyserver.ubuntu.com --recv-keys 3F32EE77E331692F
-```
-
-安裝確認檔案簽名所需要的程式
-
-``` {.bash .prefixed}
-sudo apt install dpkg-sig --yes
-```
-
-檢查檔案簽名，加上 `--verify` 選項驗證檔案簽名
-
-``` {.bash .prefixed}
-dpkg-sig --verify rstudio-server-1.4.1717-amd64.deb
-```
-
-出現 `GOODSIG` 字樣代表該檔案沒有問題，檔案於下載圖中沒有被修改過，可以繼續安裝
-
-``` console_output
-Processing rstudio-server-1.4.1717-amd64.deb...
-GOODSIG _gpgbuilder FE8564CFF1AB93F1728645193F32EE77E331692F 1621900692
-```
-
-最後再使用 `gdebi` 指令安裝 .deb 格式安裝程式
-
-``` {.bash .prefixed}
-sudo gdebi rstudio-server-1.4.1717-amd64.deb
+sudo gdebi rstudio-server-2023.06.1-524-amd64.deb
 ```
 
 將防火牆的 8787 埠號打開
@@ -167,14 +134,17 @@ knitr::include_graphics(path = 'figures/apache2-rstudio-server-login-page.png')
 curl <虛擬主機的 ip 位址>:8787
 ```
 
-### Step 2 --- 設定 Apache 的反向代理（Reverse Proxy）
+### 設定 Apache 的反向代理
 
-<!--# TODO: 說明何謂反向代理？ -->
+<!--# TODO: 說明何謂反向代理（Reverse Proxy）？ -->
 
 用指令 `a2enmod` 將 Apache 內建的插件啟用
 
 ``` {.bash .prefixed}
-sudo a2enmod proxy && sudo a2enmod proxy_http && sudo a2enmod proxy_wstunnel
+sudo a2enmod proxy && \
+    sudo a2enmod proxy_http && \
+    sudo a2enmod proxy_wstunnel && \
+    sudo a2enmod rewrite
 ```
 
 繼續編輯[Step 2 --- 建立虛擬網站]所建立的 `asis.conf`
@@ -228,59 +198,53 @@ sudo systemctl restart apache2
     http://<虛擬主機的 ip 位址>/rstudio/
 
 ```{r, fig.cap='透過剛才更新的路由，所看到的 RStudio 登入頁面'}
-knitr::include_graphics(path = 'figures/apache2-rstudio-server-login-page.png')
+knitr::include_graphics(path = 'figures/apache2-rstudio-server-login-page_2.png')
 ```
 
-在[Step 1 --- 安裝 RStudio Server 伺服器]開的 8787 埠號可以關掉了。在 status 的後面加上 numbered 可以將設定的編號也一起列出來，再藉由編號編輯該設定。
+在前面開的 8787 埠號可以關掉了。我們可以在 status 的後面加上 numbered 可以將設定的編號也一起列出來，再藉由編號編輯該設定。
 
 ``` {.bash .prefixed}
 sudo ufw status numbered
 ```
 
-``` console_output
+``` {.console_output}
 Status: active
 
      To                         Action      From
      --                         ------      ----
-[ 1] 60000                      ALLOW IN    Anywhere                  
-[ 2] mosh                       ALLOW IN    Anywhere                  
-[ 3] Apache                     ALLOW IN    Anywhere                  
-[ 4] Apache Secure              ALLOW IN    Anywhere                  
-[ 5] 8787                       ALLOW IN    Anywhere                  
-[ 6] 60000 (v6)                 ALLOW IN    Anywhere (v6)             
-[ 7] mosh (v6)                  ALLOW IN    Anywhere (v6)             
-[ 8] Apache (v6)                ALLOW IN    Anywhere (v6)             
-[ 9] Apache Secure (v6)         ALLOW IN    Anywhere (v6)             
-[10] 8787 (v6)                  ALLOW IN    Anywhere (v6)
+[ 1] 60000                      ALLOW IN    Anywhere
+[ 2] Apache Full                ALLOW IN    Anywhere
+[ 3] 8787                       ALLOW IN    Anywhere
+[ 4] 60000 (v6)                 ALLOW IN    Anywhere (v6)
+[ 5] Apache Full (v6)           ALLOW IN    Anywhere (v6)
+[ 6] 8787 (v6)                  ALLOW IN    Anywhere (v6)
+
 ```
 
-刪除第 5 個設定（8787）
+刪除第 3 個設定（8787）
+
+``` {.bash .prefixed}
+sudo ufw delete 3
+```
+
+刪除第 5 個設定（8787 (v6)），因為第 3 個設定刪除之後，原本在第 6 順位的設定就會往前移，重新編號。
 
 ``` {.bash .prefixed}
 sudo ufw delete 5
 ```
 
-刪除第 9 個設定（8787 (v6)），因為第 5 個設定刪除之後，第 10 順位的設定就會往前移，重新編號。
-
-``` {.bash .prefixed}
-sudo ufw delete 9
-```
-
 更動後的設定。
 
-``` console_output
+``` {.console_output}
 Status: active
 
-To                         Action      From
---                         ------      ----
-60000                      ALLOW       Anywhere                  
-mosh                       ALLOW       Anywhere                  
-Apache                     ALLOW       Anywhere                  
-Apache Secure              ALLOW       Anywhere                  
-60000 (v6)                 ALLOW       Anywhere (v6)             
-mosh (v6)                  ALLOW       Anywhere (v6)             
-Apache (v6)                ALLOW       Anywhere (v6)             
-Apache Secure (v6)         ALLOW       Anywhere (v6)
+     To                         Action      From
+     --                         ------      ----
+[ 1] 60000                      ALLOW IN    Anywhere
+[ 2] Apache Full                ALLOW IN    Anywhere
+[ 3] 60000 (v6)                 ALLOW IN    Anywhere (v6)
+[ 4] Apache Full (v6)           ALLOW IN    Anywhere (v6)
+
 ```
 
 ## R Shiny Server
@@ -291,13 +255,12 @@ RShiny Server 是一個可以讓 Shiny App 部署在伺服器上，透過特定�
 
 本小節會說明怎麼安裝 R Shiny Server 在 Ubuntu 上、設定 Apache 的反向代理、再來對 R Shiny Server 做更進階的設定，最後驗證剛才的設定是否有效。
 
-### Step 1 --- 安裝 R Shiny Server
+### 安裝 R Shiny Server
 
 首先透過一行指令用 root 權限安裝 `shiny` 套件。
 
 ``` {.bash .prefixed}
-sudo su - \
--c "R -e \"install.packages('shiny', repos='https://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('shiny', repos='https://cran.rstudio.com/')\""
 ```
 
 `su` 指令可以用來切換使用者，不過我們這裡的用法是切換到 root 並執行指令的指令。
@@ -312,26 +275,13 @@ sudo su - \
 
 ``` {.bash .prefixed}
 cd /tmp && \
-    wget https://download3.rstudio.org/ubuntu-14.04/x86_64/shiny-server-1.5.16.958-amd64.deb
+    wget https://download3.rstudio.org/ubuntu-18.04/x86_64/shiny-server-1.5.20.1002-amd64.deb
 ```
 
 這個指令會下載當前撰寫這個頁面的最新版本 R Shiny Server。如果你想要下載最新版本請到[官方的下載頁面](https://www.rstudio.com/products/shiny/download-server/ubuntu/)確認。
 
-使用 `sha256sum` 計算安裝程式的 sha256，並在網站上確認有沒有相同。
-
-``` {.bash .prefixed}
-sha256sum shiny-server-1.5.16.958-amd64.deb 
-```
-
-```{r, fig.cap='R Shiny Server 官方下載頁面的 sha256'}
-knitr::include_graphics(path = './figures/shiny-server-sha-256-match.png')
-```
-
 依樣地，使用 `gdebi` 指令安裝 .deb 格式安裝程式
 
-``` {.bash .prefixed}
-sudo gdebi shiny-server-1.5.16.958-amd64.deb
-```
 
 最後從 `http://<虛擬機器的 ip 位址>:3838` 進入 R Shiny Server 首頁
 
