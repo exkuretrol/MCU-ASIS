@@ -18,7 +18,7 @@ Apache HTTP Server（簡稱 Apache），是一個開放原始碼的程式，被�
 
 本章節會講述 Apache 網頁伺服器的安裝與防火牆的安全性設定。
 
-### Step 1 --- 安裝 Apache
+### 安裝 Apache
 
 首先先更新套件管理程式（APT）的來源：
 
@@ -90,7 +90,7 @@ Do you want to continue? [Y/n]
 
 這裡用鍵盤輸入 y 後按 Enter↩ 送出。
 
-::: {.info .infobox}
+::: {.rmdnote .infobox}
 也可以在安裝時加上 `--yes` 或是 `-y` 略過確認安裝提示。
 
 ``` {.bash .console_output}
@@ -98,7 +98,7 @@ sudo apt install apache2 -y
 ```
 :::
 
-### Step 2 --- 調整防火牆 UFW 設定
+### 調整防火牆設定
 
 有些程式會自動把設定檔加入 UFW 中，這樣就可以透過設定檔啟用/關閉設定防火牆允許的埠號，不用再特別記下該軟體的設定，像是 Apache 就是其中之一。
 
@@ -110,7 +110,7 @@ sudo ufw app list
 
 下列是目前可用的設定檔：
 
-``` console_output
+``` {.console_output}
 Available applications:
   Apache
   Apache Full
@@ -130,7 +130,7 @@ Available applications:
 sudo ufw allow "Apache"
 ```
 
-``` console_output
+``` {.console_output}
 Rule added
 Rule added (v6)
 ```
@@ -141,7 +141,7 @@ Rule added (v6)
 sudo ufw status
 ```
 
-``` console_output
+``` {.console_output}
 Status: active
 
 To                         Action      From
@@ -156,11 +156,13 @@ Apache (v6)                ALLOW       Anywhere (v6)
 
     http://<虛擬主機的 ip 位址>/
 
+就是前一章記下來的 `192.168.56.1`
+
 ```{r, fig.cap='Apache 安裝後，預設的首頁'}
 knitr::include_graphics(path = 'figures/apache-main-page.png')
 ```
 
-::: {.infobox .info}
+::: {.infobox .rmdnote}
 忘記怎麼找 ip 可以用下列的方法找到：
 
 1.  `ip addr show | grep -B 2 "inet "`
@@ -187,6 +189,8 @@ knitr::include_graphics(path = 'figures/apache-main-page.png')
 10.0.2.15 192.168.56.1
 ```
 
+:::
+
 同樣地，`192.168.56.1` 才是我們需要的 IP。
 
 ## MySQL
@@ -197,7 +201,42 @@ MySQL（讀作 My-S-Q-L）因為其效能高、成本低、可信賴的原因，
 
 這個小節會說明怎麼安裝 MySQL，與做簡易的安裝後設定。
 
-### Step 1 --- 安裝 MySQL
+### 安裝 MySQL
+
+``` {.bash .prefixed}
+sudo apt info mysql-server
+```
+
+``` {.console_output}
+Package: mysql-server
+Version: 8.0.34-0ubuntu0.22.04.1
+Priority: optional
+Section: database
+Source: mysql-8.0
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian MySQL Maintainers <pkg-mysql-maint@lists.alioth.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 35.8 kB
+Depends: mysql-server-8.0
+Homepage: http://dev.mysql.com/
+Task: lamp-server
+Download-Size: 9,460 B
+APT-Sources: http://tw.archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages
+Description: MySQL database server (metapackage depending on the latest version)
+ This is an empty package that depends on the current "best" version of
+ mysql-server (currently mysql-server-8.0), as determined by the MySQL
+ maintainers. Install this package if in doubt about which MySQL
+ version you need. That will install the version recommended by the
+ package maintainers.
+ .
+ MySQL is a fast, stable and true multi-user, multi-threaded SQL database
+ server. SQL (Structured Query Language) is the most popular database query
+ language in the world. The main goals of MySQL are speed, robustness and
+ ease of use.
+
+N: There is 1 additional record. Please use the '-a' switch to see it
+```
 
 首先，透過 Apt 安裝 MySQL：
 
@@ -205,7 +244,7 @@ MySQL（讀作 My-S-Q-L）因為其效能高、成本低、可信賴的原因，
 sudo apt install mysql-server -y
 ```
 
-### Step 2 --- 設定 MySQL
+### 設定 MySQL
 
 指令 `mysql_secure_installation` 會做以下幾件事（詳細的說明可以在[這裡](https://dev.mysql.com/doc/refman/8.0/en/mysql-secure-installation.html)找到）：
 
@@ -235,13 +274,15 @@ and improve security. It checks the strength of password
 and allows the users to set only those passwords which are
 secure enough. Would you like to setup VALIDATE PASSWORD component?
 
-Press y|Y for Yes, any other key for No: No
+Press y|Y for Yes, any other key for No:
 ```
 
-變更 root 密碼，這裡輸入 `Yes`
+這個版本預設是使用 `auth_socket` 插件驗證，如果系統檢測到你的使用者名稱與 MySQL 中的使用者名稱相同，則允許登入。例如：`sudo mysql` 會以 root 的使用者執行指令，此時使用者會是 root，且 root 在資料庫中有帳號，最終會允許 root 登入資料庫。
 
 ``` console_output
-Change the password for root ? ((Press y|Y for Yes, any other key for No) : Yes
+Skipping password set for root as authentication with auth_socket is used by default.
+If you would like to use password authentication instead, this can be done with the "ALTER_USER" command.
+See https://dev.mysql.com/doc/refman/8.0/en/alter-user.html#alter-user-password-management for more information.
 ```
 
 這個階段是問你要不要刪除匿名帳號，輸入 `Yes`
@@ -254,7 +295,7 @@ testing, and to make the installation go a bit smoother.
 You should remove them before moving into a production
 environment.
 
-Remove anonymous users? (Press y|Y for Yes, any other key for No) : Y
+Remove anonymous users? (Press y|Y for Yes, any other key for No) : y
 ```
 
 這裏是問你要不要讓 `root` 帳號可以從任何地方連入，這裡當然是選 `No`
@@ -264,14 +305,28 @@ Normally, root should only be allowed to connect from
 'localhost'. This ensures that someone cannot guess at
 the root password from the network.
 
-Disallow root login remotely? (Press y|Y for Yes, any other key for No) : Y
+Disallow root login remotely? (Press y|Y for Yes, any other key for No) :
 ```
 
-::: {.infobox .info}
+::: {.infobox .rmdnote}
 如果選擇`Yes`，會將使用者帳號的可連線網域設為 `％`，代表任何地方都可以連入的意思
 :::
 
-``` console_output
+MySQL 安裝後，有內建一個叫做 `test` 的資料庫，用於學習怎麼使用 MySQL。這裡可以選擇將它移除或是保留。
+
+``` {.console_output}
+By default, MySQL comes with a database named 'test' that
+anyone can access. This is also intended only for testing,
+and should be removed before moving into a production
+environment.
+
+
+Remove test database and access to it? (Press y|Y for Yes, any other key for No) :
+```
+
+這裡會詢問要不要重新讀取權限表，選 `Y` 即可。
+
+``` {.console_output}
  - Dropping test database...
 Success.
 
@@ -281,167 +336,41 @@ Success.
 Reloading the privilege tables will ensure that all changes
 made so far will take effect immediately.
 
-Reload privilege tables now? (Press y|Y for Yes, any other key for No) : Y
+Reload privilege tables now? (Press y|Y for Yes, any other key for No) :
+```
+
+完成！
+
+``` {.console_output}
 Success.
 
-All done! 
+All done!
 ```
 
 最後使用指令測試 MySQL 連線：
 
 ``` {.bash .prefixed}
-mysql -u root -p
+sudo mysql -u root
 ```
 
 -   `--user, -u`：使用者帳號
-
--   `--password, -p`：使用者密碼
 
 ## PHP
 
 PHP（Hypertext PreProcessor，超文字預處理器），允許網頁開發人員開發動態網頁，截至2021年被世界上至少70%以上的網頁所使用。
 
-### 概述
+### 安裝 PHP
 
-在本小節會說明怎麼安裝 PHP 與 PHP 與 MySQL 溝通的插件。
-
-### Step 1 --- 安裝 php & php-mysql 插件
-
-先確認 `php` 是不是我們要安裝的版本
-
-``` {.bash .prefixed}
-sudo apt info php
-```
-
-可以看到，目前 `php` 的依賴套件是 `php7.4`，代表將安裝的版本為 `php7.4`
-
-``` console_output
-Package: php
-Version: 2:7.4+75
-Priority: optional
-Section: php
-Source: php-defaults (75)
-Origin: Ubuntu
-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
-Original-Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
-Bugs: https://bugs.launchpad.net/ubuntu/+filebug
-Installed-Size: 13.3 kB
-Depends: php7.4
-Download-Size: 2,712 B
-APT-Sources: http://tw.archive.ubuntu.com/ubuntu focal/main amd64 Packages
-Description: server-side, HTML-embedded scripting language (default)
- PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
- open source general-purpose scripting language that is especially suited
- for web development and can be embedded into HTML.
- .
- This package is a dependency package, which depends on latest stable
- PHP version (currently 7.4).
-```
-
-接著，我們再查詢一次 `php7.4` 會安裝什麼東西
-
-``` {.bash .prefixed}
-sudo apt info php7.4
-```
-
-這裡可以看到 `php7.4` 安裝了會安裝一些使 php7.4 順利運作的依賴套件，像是 `libapache2-mod-php7.4`、`php7.4-fpm`、`php7.4-cgi` 與 `php7.4-common`
-
-``` console_output
-Package: php7.4
-Version: 7.4.3-4ubuntu2.5
-Priority: optional
-Section: php
-Origin: Ubuntu
-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
-Original-Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
-Bugs: https://bugs.launchpad.net/ubuntu/+filebug
-Installed-Size: 73.7 kB
-Provides: php
-Depends: libapache2-mod-php7.4 | php7.4-fpm | php7.4-cgi, php7.4-common
-Homepage: http://www.php.net/
-Download-Size: 9,244 B
-APT-Sources: http://tw.archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages
-Description: server-side, HTML-embedded scripting language (metapackage)
- This package is a metapackage that, when installed, guarantees that you
- have at least one of the four server-side versions of the PHP interpreter
- installed. Removing this package won't remove PHP from your system, however
- it may remove other packages that depend on this one.
- .
- PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
- open source general-purpose scripting language that is especially suited
- for web development and can be embedded into HTML.
-```
-
-一樣地，這裡也用相同的指令查詢 `php-mysql` 套件
-
-``` console_output
-sudo apt info php-mysql
-```
-
-因為 `php` 已經有 `php-common` 依賴的，所以待會兩個套件一起安裝時，只會安裝一個 `php-common`
-
-``` console_output
-Package: php-mysql
-Version: 2:7.4+75
-Priority: optional
-Section: php
-Source: php-defaults (75)
-Origin: Ubuntu
-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
-Original-Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
-Bugs: https://bugs.launchpad.net/ubuntu/+filebug
-Installed-Size: 13.3 kB
-Depends: php-common, php7.4-mysql
-Task: lamp-server
-Download-Size: 2,000 B
-APT-Sources: http://tw.archive.ubuntu.com/ubuntu focal/main amd64 Packages
-Description: MySQL module for PHP [default]
- This package provides a MySQL module for PHP.
- .
- PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
- open source general-purpose scripting language that is especially suited
- for web development and can be embedded into HTML.
- .
- This package is a dependency package, which depends on Debian's default
- PHP version (currently 7.4).
-```
-
-確認完我們要安裝的版本是否正確後，用套件管理程式 `apt` 安裝套件。
-
-``` {.bash .prefixed}
-sudo apt install php php-mysql --yes
-```
-
-確認 `php` 是否安裝完成，可以用 `which` 指令確認：
-
-``` {.bash .prefixed}
-which php
-```
-
-當系統中有安裝複數個版本的 php 時，php 執行檔的位置可能會有所不同。同樣地在第 5 章[設置 Python 3 環境]時也會遇到。
-
+除了 `php` 套件之外，`libapache2-mod-php` 套件是讓 apache2 認識 php 這個檔案，而 `php-mysql` 是讓 PHP 與 MySQL 溝通的套件。
 <!--# TODO: 連結至第五章 python 說明 which -A 指令 -->
 
-``` console_output
-/usr/bin/php
+``` {.bash .prefixed}
+sudo apt install php libapache2-mod-php php-mysql
 ```
 
-確認剛才安裝的 `php` 版本：
+### 建立虛擬網站
 
-``` {.bash .bash}
-php --version
-```
-
-``` console_output
-PHP 7.4.3 (cli) (built: Jul  5 2021 15:13:35) ( NTS )
-Copyright (c) The PHP Group
-Zend Engine v3.4.0, Copyright (c) Zend Technologies
-    with Zend OPcache v7.4.3, Copyright (c), by Zend Technologies
-```
-
-### Step 2 --- 建立虛擬網站
-
-虛擬網站（Virtual Host）可以讓你在一台電腦同時架設多個網站，擁有不同的域名。
+虛擬網站（Virtual Host）可以讓你在一台電腦同時架設多個網站，擁有不同的域名。在這裡的用處就是建立一個新的網站。
 
 首先，於 apache2 的設定資料夾中，新建一個叫做 asis.conf 的設定檔：
 
@@ -479,10 +408,10 @@ ls -al /var/www/
 ```
 
 ``` console_output
-total 12
-drwxr-xr-x  3 root root 4096 Sep  1 06:51 ./
-drwxr-xr-x 14 root root 4096 Sep  1 06:51 ../
-drwxr-xr-x  2 root root 4096 Sep  1 06:51 html/
+total 16
+drwxr-xr-x  4 root root 4096 Aug 22 02:50 .
+drwxr-xr-x 14 root root 4096 Aug 21 05:16 ..
+drwxr-xr-x  2 root root 4096 Aug 21 05:16 html
 ```
 
 一樣地，以同樣地方法建立 `asis` 資料夾
@@ -496,10 +425,6 @@ sudo mkdir /var/www/asis
 ``` {.bash .prefixed}
 sudo vim /var/www/asis/index.html
 ```
-
-::: code-label
-/var/www/asis/index.html
-:::
 
 ``` html
 <!DOCTYPE html>
@@ -517,7 +442,8 @@ sudo vim /var/www/asis/index.html
 </html>
 ```
 
-使用 `a2dissite` 指令關閉預設的設定檔（有興趣可以看一下預設的設定檔 000-default.conf，有助於了解設定檔案怎麼編寫）
+使用 `a2dissite` 指令關閉預設的設定檔。
+<!-- （有興趣可以看一下預設的設定檔 000-default.conf，有助於了解設定檔案怎麼編寫）-->
 
 ``` {.bash .prefixed}
 sudo a2dissite 000-default.conf
@@ -555,7 +481,7 @@ knitr::include_graphics(path = 'figures/apache2-test-virtualhost-conf.png')
 curl http://<虛擬主機的 ip 地址>/
 ```
 
-``` console_output
+``` .{console_output}
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -571,15 +497,43 @@ curl http://<虛擬主機的 ip 地址>/
 </html>
 ```
 
+### 測試 PHP
+
+在網站資料夾中新增一個 `info.php` 檔案
+
+``` {.bash .prefixed}
+sudo vim /var/www/asis/info.php
+```
+
+貼入以下程式碼
+
+``` {.console_output}
+<?php
+phpinfo();
+
+```
+
+進到網站 `http://192.168.56.101/info.php`
+
+```{r, fig.cap='Apache2 測試 PHP'}
+knitr::include_graphics(path = 'figures/apache2-test-php.png')
+```
+
+成功顯示目前 PHP 的所有設定。測試完後記得要刪除 `info.php`。
+
+``` {.bash .prefixed}
+sudo rm /var/www/asis/info.php
+```
+
 ## phpMyAdmin
 
-phpMyAdmin 是一個以 PHP 為基礎撰寫的一個軟體，可以讓使用者以簡易的方式新增、查詢、修改、刪除資料庫裡面的紀錄。
+phpMyAdmin 是一個以 PHP 為基礎撰寫的一個軟體，可以讓使用者以簡易的方式新增、查詢、修改或是刪除資料庫裡面的紀錄。
 
 ### 概述
 
 本小節會說明怎麼安裝 phpMyAdmin 與基礎的安全性設定。
 
-### Step 1 --- 安裝 phpMyAdmin
+### 安裝 phpMyAdmin
 
 一樣地，確認 `phpmyadmin` 的版本
 
@@ -587,30 +541,16 @@ phpMyAdmin 是一個以 PHP 為基礎撰寫的一個軟體，可以讓使用者�
 sudo apt info phpmyadmin
 ```
 
-``` console_output
+``` {.console_output}
 Package: phpmyadmin
-Version: 4:4.9.5+dfsg1-2
+Version: 4:5.1.1+dfsg1-5ubuntu1
 Priority: optional
 Section: universe/web
 Origin: Ubuntu
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 Original-Maintainer: phpMyAdmin Packaging Team <team+phpmyadmin@tracker.debian.org>
 Bugs: https://bugs.launchpad.net/ubuntu/+filebug
-Installed-Size: 27.2 MB
-Depends: php, php-cli, php-mysql, php-json, php-mbstring, php-xml, debconf (>= 0.5) | debconf-2.0, lib
-js-sphinxdoc (>= 1.0), sensible-utils, dbconfig-mysql | dbconfig-no-thanks | dbconfig-common (<< 2.0.0
-), php-phpseclib (>= 2.0), php-common, php-phpmyadmin-sql-parser (>= 4.3.2), php-phpmyadmin-sql-parser
- (<< 5~~), php-phpmyadmin-motranslator (>= 5.0), php-phpmyadmin-motranslator (<< 6~~), php-phpmyadmin-
-shapefile (>= 2.0), php-phpmyadmin-shapefile (<< 3~~), php-phpseclib (<< 3~~), php-google-recaptcha (>
-= 1.1), php-google-recaptcha (<< 2~~), php-psr-container (>= 1.0), php-psr-container (<< 2~~), php-twi
-g (>= 2.9), php-twig (<< 3~~), php-twig-extensions (>= 1.5.1), php-twig-extensions (<< 1.6~~), php-sym
-fony-expression-language, libjs-openlayers, ucf (>= 0.28)
-Recommends: apache2 | lighttpd | httpd, php-curl, php-gd, php-bz2, php-zip, php-tcpdf
-Suggests: default-mysql-server | virtual-mysql-server, www-browser, php-recode, php-opcache, php-gd2, 
-php-pragmarx-google2fa, php-bacon-qr-code, php-samyoul-u2f-php-server
-Homepage: https://www.phpmyadmin.net/
-Download-Size: 4,426 kB
-
+Installed-Size: 36.5 MB
 [...]
 ```
 
@@ -638,7 +578,7 @@ knitr::include_graphics(path = 'figures/phpmyadmin-installation_1.png')
 knitr::include_graphics(path = 'figures/phpmyadmin-installation_2.png')
 ```
 
-::: {.infobox .caution}
+::: {.infobox .rmdnote}
 當出現此錯誤時不用太慌張，是因為安裝 MySQL 時，有開啟 `Validate Password` 插件導致的，只需要透過下列指令暫時關閉即可。
 
 ```{r, fig.cap='phpMyAdmin 安裝導覽，錯誤訊息'}
@@ -682,12 +622,6 @@ exit;
 ```
 :::
 
-啟動 phpMyAdmin 的依賴插件
-
-``` {.bash .prefixed}
-sudo phpenmod mbstring
-```
-
 重新啟動 Apache2
 
 ``` {.bash .prefixed}
@@ -716,7 +650,7 @@ sudo ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.co
 sudo a2enconf phpmyadmin
 ```
 
-重新啟動 Apache2
+重新啟動 Apache2
 
 ``` {.bash .prefixed}
 sudo systemctl restart apache2
@@ -732,7 +666,59 @@ sudo systemctl restart apache2
 knitr::include_graphics(path = 'figures/phpmyadmin-main-page-successed.png')
 ```
 
-### Step 2 --- 使 phpMyAdmin 更加安全
+因為目前 MySQL 的版本 root 帳號驗證方式是使用 socket_auth。但是，phpMyAdmin 預設帳戶需要有密碼當入，所以這裡有兩個做法：
+
+1. 創建一個新的擁有所有權限的使用者
+
+用 root 權限進入 MySQL 指令介面
+
+``` {.bash .prefixed}
+sudo mysql
+```
+
+建立一個使用密碼 `asis0721` 驗證的使用者 `asis`
+
+``` {.bash .prefixed_mysql}
+CREATE USER 'asis'@'localhost' IDENTIFIED BY 'asis0721';
+```
+
+賦予所有權限在 `asis` 使用者上
+
+``` {.sqlmysql .prefixed_mysql}
+GRANT ALL PRIVILEGES ON *.* TO 'asis'@'localhost';
+```
+
+立刻刷新權限，使權限立即生效
+
+``` {.sqlmysql .prefixed_mysql}
+FLUSH PRIVILEGES;
+```
+
+2. 將原本的帳號認證方式改掉
+
+用 root 權限進入 MySQL 指令介面
+
+``` {.bash .prefixed}
+sudo mysql
+```
+
+將 root 使用者改為使用密碼 `notSecureChangeMe` 驗證
+
+``` {.sqlmysql .prefixed_mysql}
+ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'notSecureChangeMe';
+```
+
+::: {.rmdwarning .infobox}
+一旦將 root 使用者的驗證方式改成用密碼驗證，那往後登入 MySQL 的指令介面都需要加上提供密碼參數 `-p`
+
+``` {.bash .prefixed}
+mysql -u root -p
+```
+
+:::
+
+
+### 設定 phpMyAdmin
 
 預設的網址 `http://<虛擬機器的 ip 位置>/phpmyadmin` 實在是太危險了，如果有人有意破壞，又被猜到管理員的密碼，那將會一發不可收拾，所以接下來要改的是 phpMyAdmin 在 Apache2 中的設定，將預設的位置改掉至少會安全一點。
 
@@ -779,7 +765,7 @@ sudo systemctl restart apache2
 knitr::include_graphics(path = "figures/phpmyadmin-main-page-successed.png")
 ```
 
-### Step 3 --- 再多一層存取的密碼保護 [可跳過]
+<!-- ### Step 3 --- 再多一層存取的密碼保護 [可跳過]
 
 新增一個叫做 `.htaccess` 的檔案
 
@@ -817,3 +803,4 @@ knitr::include_graphics(path = "figures/htaccess-prompt-login-panel.png")
 ```
 
 此時會跳出一個登入介面，需要輸入密碼才能進入 phpMyAdmin 的頁面。 如果不需要此設定，直接刪除位於 `/etc/phpmyadmin/.htpasswd` 的檔案即可。
+-->
