@@ -97,7 +97,7 @@
 <span class="header-section-number">C.1</span> 更改預設的文本編輯器<a class="anchor" aria-label="anchor" href="#%E6%9B%B4%E6%94%B9%E9%A0%90%E8%A8%AD%E7%9A%84%E6%96%87%E6%9C%AC%E7%B7%A8%E8%BC%AF%E5%99%A8"><i class="fas fa-link"></i></a>
 </h2>
 <p>這個指令可以變更系統編輯文件所用的程式</p>
-<div class="sourceCode" id="cb303"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb303-1"><a href="%E5%85%B6%E4%BB%96.html#cb303-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> update-alternatives <span class="at">--config</span> editor</span></code></pre></div>
+<div class="sourceCode" id="cb302"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb302-1"><a href="%E5%85%B6%E4%BB%96.html#cb302-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> update-alternatives <span class="at">--config</span> editor</span></code></pre></div>
 <p>按了 Enter↩︎ 之後，會出現現在可用的編輯器，輸入對應的編號即可變更。有標 <code>*</code> 號的編輯器為目前設定的預設編輯器。</p>
 <pre class="console_output"><code>There are 4 choices for the alternative editor (providing /usr/bin/editor).
 
@@ -113,25 +113,115 @@ Press &lt;enter&gt; to keep the current choice[*], or type selection number: 3</
 <!--# TODO: 利用 SSH  傳輸檔案 -->
 <!--## sharedfolder-->
 </div>
-<div id="mysql-8.0-root-密碼重設" class="section level2" number="8.2">
+<div id="關於套件版本" class="section level2" number="8.2">
 <h2>
-<span class="header-section-number">C.2</span> Mysql 8.0 root 密碼重設<a class="anchor" aria-label="anchor" href="#mysql-8.0-root-%E5%AF%86%E7%A2%BC%E9%87%8D%E8%A8%AD"><i class="fas fa-link"></i></a>
+<span class="header-section-number">C.2</span> 關於套件版本<a class="anchor" aria-label="anchor" href="#%E9%97%9C%E6%96%BC%E5%A5%97%E4%BB%B6%E7%89%88%E6%9C%AC"><i class="fas fa-link"></i></a>
+</h2>
+<div id="step-1-安裝-php-php-mysql-插件" class="section level3" number="8.2.1">
+<h3>
+<span class="header-section-number">C.2.1</span> Step 1 — 安裝 php &amp; php-mysql 插件<a class="anchor" aria-label="anchor" href="#step-1-%E5%AE%89%E8%A3%9D-php-php-mysql-%E6%8F%92%E4%BB%B6"><i class="fas fa-link"></i></a>
+</h3>
+<p>先確認 <code>php</code> 是不是我們要安裝的版本</p>
+<div class="sourceCode" id="cb304"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb304-1"><a href="%E5%85%B6%E4%BB%96.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info php</span></code></pre></div>
+<p>可以看到，目前 <code>php</code> 的依賴套件是 <code>php7.4</code>，代表將安裝的版本為 <code>php7.4</code></p>
+<pre class="console_output"><code>Package: php
+Version: 2:7.4+75
+Priority: optional
+Section: php
+Source: php-defaults (75)
+Origin: Ubuntu
+Maintainer: Ubuntu Developers &lt;ubuntu-devel-discuss@lists.ubuntu.com&gt;
+Original-Maintainer: Debian PHP Maintainers &lt;team+pkg-php@tracker.debian.org&gt;
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 13.3 kB
+Depends: php7.4
+Download-Size: 2,712 B
+APT-Sources: http://tw.archive.ubuntu.com/ubuntu focal/main amd64 Packages
+Description: server-side, HTML-embedded scripting language (default)
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+ .
+ This package is a dependency package, which depends on latest stable
+ PHP version (currently 7.4).</code></pre>
+<p>接著，我們再查詢一次 <code>php7.4</code> 會安裝什麼東西</p>
+<div class="sourceCode" id="cb306"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb306-1"><a href="%E5%85%B6%E4%BB%96.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info php7.4</span></code></pre></div>
+<p>這裡可以看到 <code>php7.4</code> 安裝了會安裝一些使 php7.4 順利運作的依賴套件，像是 <code>libapache2-mod-php7.4</code>、<code>php7.4-fpm</code>、<code>php7.4-cgi</code> 與 <code>php7.4-common</code></p>
+<pre class="console_output"><code>Package: php7.4
+Version: 7.4.3-4ubuntu2.5
+Priority: optional
+Section: php
+Origin: Ubuntu
+Maintainer: Ubuntu Developers &lt;ubuntu-devel-discuss@lists.ubuntu.com&gt;
+Original-Maintainer: Debian PHP Maintainers &lt;team+pkg-php@tracker.debian.org&gt;
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 73.7 kB
+Provides: php
+Depends: libapache2-mod-php7.4 | php7.4-fpm | php7.4-cgi, php7.4-common
+Homepage: http://www.php.net/
+Download-Size: 9,244 B
+APT-Sources: http://tw.archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages
+Description: server-side, HTML-embedded scripting language (metapackage)
+ This package is a metapackage that, when installed, guarantees that you
+ have at least one of the four server-side versions of the PHP interpreter
+ installed. Removing this package won't remove PHP from your system, however
+ it may remove other packages that depend on this one.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.</code></pre>
+<p>一樣地，這裡也用相同的指令查詢 <code>php-mysql</code> 套件</p>
+<pre class="console_output"><code>sudo apt info php-mysql</code></pre>
+<p>因為 <code>php</code> 已經有 <code>php-common</code> 依賴的，所以待會兩個套件一起安裝時，只會安裝一個 <code>php-common</code></p>
+<pre class="console_output"><code>Package: php-mysql
+Version: 2:7.4+75
+Priority: optional
+Section: php
+Source: php-defaults (75)
+Origin: Ubuntu
+Maintainer: Ubuntu Developers &lt;ubuntu-devel-discuss@lists.ubuntu.com&gt;
+Original-Maintainer: Debian PHP Maintainers &lt;team+pkg-php@tracker.debian.org&gt;
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 13.3 kB
+Depends: php-common, php7.4-mysql
+Task: lamp-server
+Download-Size: 2,000 B
+APT-Sources: http://tw.archive.ubuntu.com/ubuntu focal/main amd64 Packages
+Description: MySQL module for PHP [default]
+ This package provides a MySQL module for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+ .
+ This package is a dependency package, which depends on Debian's default
+ PHP version (currently 7.4).</code></pre>
+<p>確認完我們要安裝的版本是否正確後，用套件管理程式 <code>apt</code> 安裝套件。</p>
+<div class="sourceCode" id="cb310"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb310-1"><a href="%E5%85%B6%E4%BB%96.html#cb310-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install php php-mysql <span class="at">--yes</span></span></code></pre></div>
+<p>確認 <code>php</code> 是否安裝完成，可以用 <code>which</code> 指令確認：</p>
+<div class="sourceCode" id="cb311"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb311-1"><a href="%E5%85%B6%E4%BB%96.html#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> php</span></code></pre></div>
+<p>當系統中有安裝複數個版本的 php 時，php 執行檔的位置可能會有所不同。同樣地在第 5 章<a href="jupyterlab-on-jupyterhub.html#%E8%A8%AD%E7%BD%AE-python-3-%E7%92%B0%E5%A2%83">設置 Python 3 環境</a>時也會遇到。</p>
+</div>
+</div>
+<div id="mysql-8.0-root-密碼重設" class="section level2" number="8.3">
+<h2>
+<span class="header-section-number">C.3</span> Mysql 8.0 root 密碼重設<a class="anchor" aria-label="anchor" href="#mysql-8.0-root-%E5%AF%86%E7%A2%BC%E9%87%8D%E8%A8%AD"><i class="fas fa-link"></i></a>
 </h2>
 <p>先建立一個含有改變 root 密碼的 sql 語法文字檔案</p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb305-1"><a href="%E5%85%B6%E4%BB%96.html#cb305-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> mysql-init</span></code></pre></div>
-<div class="sourceCode" id="cb306"><pre class="sourceCode sqlmysql"><code class="sourceCode sqlmysql"><span id="cb306-1"><a href="%E5%85%B6%E4%BB%96.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="fu">USER</span> <span class="st">'root'</span>@<span class="st">'localhost'</span> IDENTIFIED <span class="kw">with</span> caching_sha2_password <span class="kw">by</span> <span class="st">'&lt;新的 root 密碼&gt;'</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb312"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb312-1"><a href="%E5%85%B6%E4%BB%96.html#cb312-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> mysql-init</span></code></pre></div>
+<div class="sourceCode" id="cb313"><pre class="sourceCode sqlmysql"><code class="sourceCode sqlmysql"><span id="cb313-1"><a href="%E5%85%B6%E4%BB%96.html#cb313-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="fu">USER</span> <span class="st">'root'</span>@<span class="st">'localhost'</span> IDENTIFIED <span class="kw">with</span> caching_sha2_password <span class="kw">by</span> <span class="st">'&lt;新的 root 密碼&gt;'</span>;</span></code></pre></div>
 <p>如存好後將擁有者與使用者群組改成 <code>mysql</code> 後，移至 <code>/tmp</code> 資料夾，使 mysql 使用者可以存取。</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb307-1"><a href="%E5%85%B6%E4%BB%96.html#cb307-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> mysql.mysql mysql-init <span class="kw">&amp;&amp;</span> <span class="fu">mv</span> mysql-init /tmp</span></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb314-1"><a href="%E5%85%B6%E4%BB%96.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> mysql.mysql mysql-init <span class="kw">&amp;&amp;</span> <span class="fu">mv</span> mysql-init /tmp</span></code></pre></div>
 <p>切換至 root 使用者進行後續操作</p>
-<div class="sourceCode" id="cb308"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb308-1"><a href="%E5%85%B6%E4%BB%96.html#cb308-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span></span></code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb315-1"><a href="%E5%85%B6%E4%BB%96.html#cb315-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span></span></code></pre></div>
 <p>將目前的 mysql 關閉</p>
-<div class="sourceCode" id="cb309"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb309-1"><a href="%E5%85%B6%E4%BB%96.html#cb309-1" aria-hidden="true" tabindex="-1"></a><span class="fu">killall</span> <span class="at">-9</span> mysqld</span></code></pre></div>
+<div class="sourceCode" id="cb316"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb316-1"><a href="%E5%85%B6%E4%BB%96.html#cb316-1" aria-hidden="true" tabindex="-1"></a><span class="fu">killall</span> <span class="at">-9</span> mysqld</span></code></pre></div>
 <p>或是使用 <code>systemctl</code> 指令關閉 mysql 服務</p>
 <p><code>{.bash prefixed} systemctl stop mysql.service</code></p>
 <p>接著使用 mysqld 指令啟動 mysql 並指定 <code>--user</code>、<code>--defaults-file</code> 與 <code>--init-file</code> 參數。</p>
-<div class="sourceCode" id="cb310"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb310-1"><a href="%E5%85%B6%E4%BB%96.html#cb310-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysqld</span> <span class="at">--defaults-file</span><span class="op">=</span>/etc/mysql/mysql.conf.d/mysqld.cnf <span class="dt">\ </span></span>
-<span id="cb310-2"><a href="%E5%85%B6%E4%BB%96.html#cb310-2" aria-hidden="true" tabindex="-1"></a><span class="ex">--user=mysql</span> <span class="dt">\ </span></span>
-<span id="cb310-3"><a href="%E5%85%B6%E4%BB%96.html#cb310-3" aria-hidden="true" tabindex="-1"></a><span class="ex">--init-file=/tmp/mysql-init</span> <span class="kw">&amp;</span></span></code></pre></div>
+<div class="sourceCode" id="cb317"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb317-1"><a href="%E5%85%B6%E4%BB%96.html#cb317-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysqld</span> <span class="at">--defaults-file</span><span class="op">=</span>/etc/mysql/mysql.conf.d/mysqld.cnf <span class="dt">\ </span></span>
+<span id="cb317-2"><a href="%E5%85%B6%E4%BB%96.html#cb317-2" aria-hidden="true" tabindex="-1"></a><span class="ex">--user=mysql</span> <span class="dt">\ </span></span>
+<span id="cb317-3"><a href="%E5%85%B6%E4%BB%96.html#cb317-3" aria-hidden="true" tabindex="-1"></a><span class="ex">--init-file=/tmp/mysql-init</span> <span class="kw">&amp;</span></span></code></pre></div>
 <ul>
 <li><p><code>--defaults-file</code>: MySQL 預設啟動的設定檔案</p></li>
 <li><p><code>--user</code>: 以使用者 <code>mysql</code> 執行</p></li>
@@ -142,14 +232,14 @@ Press &lt;enter&gt; to keep the current choice[*], or type selection number: 3</
 <div class="infobox caution">
 <p>如果不行的話，請檢查位於 <code>/var/log/mysql/error.log</code> 的錯誤紀錄，如果有看到類似 <code>/var/run/mysqld</code> 的錯誤，需要手動建立資料夾，並把權限變更為 <code>mysql</code> 用戶的權限。 操作完之後再從關閉 mysql 服務開始，再嘗試一次。</p>
 <p>參考指令如下：</p>
-<div class="sourceCode" id="cb311"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb311-1"><a href="%E5%85%B6%E4%BB%96.html#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> /var/run/mysqld <span class="kw">&amp;&amp;</span> <span class="fu">chown</span> mysql.mysql /var/run/mysqld</span></code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb318-1"><a href="%E5%85%B6%E4%BB%96.html#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> /var/run/mysqld <span class="kw">&amp;&amp;</span> <span class="fu">chown</span> mysql.mysql /var/run/mysqld</span></code></pre></div>
 </div>
 <p>最後以正常的服務啟動 mysql：</p>
-<div class="sourceCode" id="cb312"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb312-1"><a href="%E5%85%B6%E4%BB%96.html#cb312-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> restart mysql.service</span></code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb319-1"><a href="%E5%85%B6%E4%BB%96.html#cb319-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> restart mysql.service</span></code></pre></div>
 <p>退出 root 帳號</p>
-<div class="sourceCode" id="cb313"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb313-1"><a href="%E5%85%B6%E4%BB%96.html#cb313-1" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span></span></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb320-1"><a href="%E5%85%B6%E4%BB%96.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span></span></code></pre></div>
 <p>試以新密碼登入 mysql root 帳號：</p>
-<div class="sourceCode" id="cb314"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb314-1"><a href="%E5%85%B6%E4%BB%96.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
+<div class="sourceCode" id="cb321"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb321-1"><a href="%E5%85%B6%E4%BB%96.html#cb321-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
 <p>成功 🎊</p>
 <pre class="console_output"><code>Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 17
@@ -175,7 +265,10 @@ mysql&gt; </code></pre>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="header-section-number">C</span> 其他</a></li>
 <li><a class="nav-link" href="#%E6%9B%B4%E6%94%B9%E9%A0%90%E8%A8%AD%E7%9A%84%E6%96%87%E6%9C%AC%E7%B7%A8%E8%BC%AF%E5%99%A8"><span class="header-section-number">C.1</span> 更改預設的文本編輯器</a></li>
-<li><a class="nav-link" href="#mysql-8.0-root-%E5%AF%86%E7%A2%BC%E9%87%8D%E8%A8%AD"><span class="header-section-number">C.2</span> Mysql 8.0 root 密碼重設</a></li>
+<li>
+<a class="nav-link" href="#%E9%97%9C%E6%96%BC%E5%A5%97%E4%BB%B6%E7%89%88%E6%9C%AC"><span class="header-section-number">C.2</span> 關於套件版本</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#step-1-%E5%AE%89%E8%A3%9D-php-php-mysql-%E6%8F%92%E4%BB%B6"><span class="header-section-number">C.2.1</span> Step 1 — 安裝 php &amp; php-mysql 插件</a></li></ul>
+</li>
+<li><a class="nav-link" href="#mysql-8.0-root-%E5%AF%86%E7%A2%BC%E9%87%8D%E8%A8%AD"><span class="header-section-number">C.3</span> Mysql 8.0 root 密碼重設</a></li>
 </ul>
 
       <div class="book-extra">
@@ -193,7 +286,7 @@ mysql&gt; </code></pre>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-08-21.</p>
+    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-08-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -1,20 +1,55 @@
 /* information box */
 
+:root {
+   --slate-200: #e2e8f0;
+   --slate-500: #64748b;
+   --slate-700: #334155;
+   --green-200: #bbf7d0;
+   --green-500: #22c55e;
+   --green-700: #15803d;
+   --red-200: #fecaca;
+   --red-500: #ef4444;
+   --red-700: #b91c1c;
+   --amber-200: #fde68a;
+   --amber-500: #f59e0b;
+   --amber-700: #b45309;
+}
+
 .infobox {
-  padding: 1em 1em 1em 4em;
-  margin-bottom: 10px;
   border-radius: 4px;
-  background: #ffffff 5px center/3em no-repeat;
+  background: #ffffff;
 }
 
 /* information */
 .rmdtip {
-  background-image: url("figures/icons/post-it.png");
+   border-color: var(--green-700);
+   color: var(--green-500);
+   background-color: var(--green-200);
 }
 
 /* caution */
 .rmdcaution {
-  background-image: url("figures/icons/caution.png");
+   border-color: var(--red-700);
+   color: var(--red-500);
+   background-color: var(--red-200);
+}
+
+/* note */
+.rmdnote {
+   border-color: var(--slate-700);
+   color: var(--slate-500);
+   background-color: var(--slate-200);
+}
+
+/* important */
+/* .rmdimportant {
+} */
+
+/* rmdwarning */
+.rmdwarning {
+   border-color: var(--amber-700);
+   color: var(--amber-500);
+   background-color: var(--amber-200);
 }
 
 
