@@ -1106,6 +1106,123 @@ Press <enter> to keep the current choice[*], or type selection number: 3
 
 <!--## sharedfolder-->
 
+## 關於套件版本
+
+### Step 1 --- 安裝 php & php-mysql 插件
+
+先確認 `php` 是不是我們要安裝的版本
+
+``` {.bash .prefixed}
+sudo apt info php
+```
+
+可以看到，目前 `php` 的依賴套件是 `php7.4`，代表將安裝的版本為 `php7.4`
+
+``` console_output
+Package: php
+Version: 2:7.4+75
+Priority: optional
+Section: php
+Source: php-defaults (75)
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 13.3 kB
+Depends: php7.4
+Download-Size: 2,712 B
+APT-Sources: http://tw.archive.ubuntu.com/ubuntu focal/main amd64 Packages
+Description: server-side, HTML-embedded scripting language (default)
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+ .
+ This package is a dependency package, which depends on latest stable
+ PHP version (currently 7.4).
+```
+
+接著，我們再查詢一次 `php7.4` 會安裝什麼東西
+
+``` {.bash .prefixed}
+sudo apt info php7.4
+```
+
+這裡可以看到 `php7.4` 安裝了會安裝一些使 php7.4 順利運作的依賴套件，像是 `libapache2-mod-php7.4`、`php7.4-fpm`、`php7.4-cgi` 與 `php7.4-common`
+
+``` console_output
+Package: php7.4
+Version: 7.4.3-4ubuntu2.5
+Priority: optional
+Section: php
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 73.7 kB
+Provides: php
+Depends: libapache2-mod-php7.4 | php7.4-fpm | php7.4-cgi, php7.4-common
+Homepage: http://www.php.net/
+Download-Size: 9,244 B
+APT-Sources: http://tw.archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages
+Description: server-side, HTML-embedded scripting language (metapackage)
+ This package is a metapackage that, when installed, guarantees that you
+ have at least one of the four server-side versions of the PHP interpreter
+ installed. Removing this package won't remove PHP from your system, however
+ it may remove other packages that depend on this one.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+```
+
+一樣地，這裡也用相同的指令查詢 `php-mysql` 套件
+
+``` console_output
+sudo apt info php-mysql
+```
+
+因為 `php` 已經有 `php-common` 依賴的，所以待會兩個套件一起安裝時，只會安裝一個 `php-common`
+
+``` console_output
+Package: php-mysql
+Version: 2:7.4+75
+Priority: optional
+Section: php
+Source: php-defaults (75)
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 13.3 kB
+Depends: php-common, php7.4-mysql
+Task: lamp-server
+Download-Size: 2,000 B
+APT-Sources: http://tw.archive.ubuntu.com/ubuntu focal/main amd64 Packages
+Description: MySQL module for PHP [default]
+ This package provides a MySQL module for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+ .
+ This package is a dependency package, which depends on Debian's default
+ PHP version (currently 7.4).
+```
+
+確認完我們要安裝的版本是否正確後，用套件管理程式 `apt` 安裝套件。
+
+``` {.bash .prefixed}
+sudo apt install php php-mysql --yes
+```
+
+確認 `php` 是否安裝完成，可以用 `which` 指令確認：
+
+``` {.bash .prefixed}
+which php
+```
+
+當系統中有安裝複數個版本的 php 時，php 執行檔的位置可能會有所不同。同樣地在第 5 章[設置 Python 3 環境]時也會遇到。
+
 ## Mysql 8.0 root 密碼重設
 
 先建立一個含有改變 root 密碼的 sql 語法文字檔案
