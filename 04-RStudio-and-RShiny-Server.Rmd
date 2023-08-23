@@ -251,11 +251,9 @@ Status: active
 
 RShiny Server 是一個可以讓 Shiny App 部署在伺服器上，透過特定的網址啟動特定的 Shiny App。
 
-### 概述
+### 安裝 R Shiny Server
 
 本小節會說明怎麼安裝 R Shiny Server 在 Ubuntu 上、設定 Apache 的反向代理、再來對 R Shiny Server 做更進階的設定，最後驗證剛才的設定是否有效。
-
-### 安裝 R Shiny Server
 
 首先透過一行指令用 root 權限安裝 `shiny` 套件。
 
@@ -278,10 +276,19 @@ cd /tmp && \
     wget https://download3.rstudio.org/ubuntu-18.04/x86_64/shiny-server-1.5.20.1002-amd64.deb
 ```
 
-這個指令會下載當前撰寫這個頁面的最新版本 R Shiny Server。如果你想要下載最新版本請到[官方的下載頁面](https://www.rstudio.com/products/shiny/download-server/ubuntu/)確認。
+這個指令會下載當前撰寫的最新版本 R Shiny Server。如果你想要下載最新版本請到[官方的下載頁面](https://www.rstudio.com/products/shiny/download-server/ubuntu/)確認。
 
-依樣地，使用 `gdebi` 指令安裝 .deb 格式安裝程式
+一樣地，使用 `gdebi` 指令安裝 .deb 格式安裝程式
 
+``` {.bash .prefixed}
+sudo gdebi shiny-server-1.5.20.1002-amd64.deb
+```
+
+將防火牆的 8787 埠號打開
+
+``` {.bash .prefixed}
+sudo ufw allow 8787
+```
 
 最後從 `http://<虛擬機器的 ip 位址>:3838` 進入 R Shiny Server 首頁
 
@@ -289,16 +296,15 @@ cd /tmp && \
 knitr::include_graphics(path = 'figures/apache2-shiny-server-main-page.png')
 ```
 
-::: {.infobox .info}
+::: {.infobox .rmdwarning}
 如果右下角顯示的是錯誤訊息，代表伺服器沒有安裝 r`markdown` 套件，下列指令安裝即可：
 
 ``` {.bash .prefixed}
-sudo su - \
-    -c "R -e \"install.packages('rmarkdown')\""
+sudo su - -c "R -e \"install.packages('rmarkdown')\""
 ```
 :::
 
-### Step 2 --- 設定 Apache 的反向代理
+### 設定 Apache 的反向代理
 
 繼續編輯 Apache 的網頁設定文件 `asis.conf`
 
@@ -349,7 +355,31 @@ sudo systemctl restart apache2
 knitr::include_graphics(path = 'figures/apache2-shiny-server-main-page.png')
 ```
 
-### Step 3 --- R Shiny Server 進階設定
+關閉剛才開啟的埠號 `3838`
+
+``` {.bash .prefixed}
+sudo ufw status numbered
+```
+
+``` {.console_output}
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] 60000                      ALLOW IN    Anywhere
+[ 2] Apache Full                ALLOW IN    Anywhere
+[ 3] 3838                       ALLOW IN    Anywhere
+[ 4] 60000 (v6)                 ALLOW IN    Anywhere (v6)
+[ 5] Apache Full (v6)           ALLOW IN    Anywhere (v6)
+[ 6] 3838 (v6)                  ALLOW IN    Anywhere (v6)
+```
+
+``` {.bash .prefixed}
+sudo ufw delete 3 && \ 
+    sudo ufw delete 5
+```
+
+### R Shiny Server 進階設定
 
 這個步驟會編輯 R Shiny Server 的設定，可以根據需求去區分 Shiny App，例如我想要使用者群組為學生的放在一起，為教師的使用者群組放在一起，都是做得到的。更詳盡的設定可以看 R Shiny Server [官方的說明文件](https://docs.rstudio.com/shiny-server/)設定。
 
@@ -371,20 +401,6 @@ access_log /var/log/shiny-server/access.log tiny;
 server {
     listen 3838;
 
-    # 110.09.21 跟明輝老師的結果是只留下 '老師' 與 '學生群組'
-    # 重新導向舊群組 /asisstuc 至學生群組 /stu
-    location /asisstuc {
-      redirect "https://<虛擬主機 ip 位址>/shiny/stu/" 302 true;
-    }
-    
-    location /defstu {
-      redirect "https://<虛擬主機 ip 位址>/shiny/stu/" 302 true;
-    }
-    
-    location /asisstuc {
-      redirect "https://<虛擬主機 ip 位址>/shiny/stu/" 302 true;
-    }
-    
     location /stu {
         user_dirs;
         members_of stu;
@@ -410,7 +426,11 @@ server {
 
 `access_log` 是存放任何人透過網址執行 Shiny Apps 的所有訊息的位置，而後面的 `tiny` 字樣是設定紀錄的詳細程度，詳細的說明可以參考[官方的說明文件](https://docs.rstudio.com/shiny-server/)。
 
-在開始設定之前要知道一件事，所有的路由設定都是放在 `server { }` 之中，不會跑到大括號外面。`listen` 後面設定的數字是 R Shiny Server 佈置 Apps 的埠號，不要重複即可。
+在開始設定之前要知道一件事，所有的路由設定都是放在 `server { }` 之中，不會跑到大括號外面。`listen` 後面設定的數字是 R Shiny Server 佈置 Apps 的埠號。
+
+::: {.infobox .rmdnote}
+110.09.21 跟明輝老師的結果是只留下 '老師' 與 '學生群組'
+:::
 
 #### 佈置單一個 App
 
@@ -506,18 +526,18 @@ server {
 
 `redirect` 後面第一個參數是目的地網址，第二個參數是網頁重新導向的種類（`301` 為永久，`302` 為暫時），最後一個參數是否要套用完全一樣的路由，如果設為 `true`，路由為 `/asisstuc` 才會重新導向。如果設為 `false` ，則它的路由只要包含 `/asisstuc`，不管它底下才有沒有其他路由（例如：`/asisstuc/08170875/example`），都會重新導向至指定的網頁。
 
-::: {.infobox .caution}
+::: {.infobox .rmdcaution}
 這裏要先跳至[Step 4 --- 使用使用者測試設定是否有效]先建立使用者群組後再重新啟動 R Shiny Server。因為設定檔中設有使用者群組（`MCU`、`teacher`）而沒有創建的話，重新啟動 R Shiny Server 會因為找不到該使用者群組而出現錯誤。
 :::
 
-### Step 4 --- 使用使用者測試設定是否有效
+### 使用使用者測試設定是否有效
 
 這裡會大概講一下怎麼創建使用者群組、使用者帳戶，以及在創建使用者帳戶的同時，也一起於家目錄創建 `ShinyApps` 資料夾。詳細的說明會於附錄的[帳號管理]說明。
 
 首先用下面的指令創建兩個使用者群組，分別是 `stu` 與 `teacher`。
 
 ``` {.bash .prefixed}
-sudo groupadd MCU && sudo groupadd teacher
+sudo groupadd stu && sudo groupadd teacher
 ```
 
 接著編輯使用指令 `useradd` 創建使用者時，預設的使用者設定，後續建立使用者才不會多打很多指令。

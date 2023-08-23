@@ -525,6 +525,82 @@ knitr::include_graphics(path = 'figures/apache2-test-php.png')
 sudo rm /var/www/asis/info.php
 ```
 
+
+### 使用者目錄網站
+
+要開啟 apache2 的使用者目錄功能需要先確認 `userdir` 模組有沒有打開
+
+``` {.bash .prefixed}
+apachectl -M | grep userdir
+```
+
+如果像下圖一樣沒有找到 `userdir_module` 就是沒有開啟使用者目錄的功能
+
+``` {.console_output}
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.1.1. Set the 'ServerName' directive globally to suppress this message
+ authz_user_module (shared)
+```
+
+透過指令將使用者目錄模組啟動
+
+``` {.bash .prefixed}
+sudo a2enmod userdir
+```
+
+啟動後，還要確定 `userdir` 模組的 `UserDir` 有無正確設定
+
+``` {.bash .prefixed}
+sudo vim /etc/apache2/mods-available/userdir.conf
+```
+
+``` {.apache}
+<IfModule mod_userdir.c>
+        # 確認 UserDir 是否有取消註解
+        UserDir public_html
+        UserDir disabled root
+
+        <Directory /home/*/public_html>
+                AllowOverride FileInfo AuthConfig Limit Indexes
+                Options MultiViews Indexes SymLinksIfOwnerMatch IncludesNoExec
+                Require method GET POST OPTIONS
+        </Directory>
+</IfModule>
+```
+
+變更目錄權限，使 apache2 有權限可以進入使用者家目錄
+
+``` {.bash .prefixed}
+sudo chmod 711 /home/<使用者名稱>
+sudo chmod 755 /home/<使用者名稱>/public_html
+```
+
+如果要使使用者家目錄運行 `.php` 類型的檔案，還需要將 `php_admin_flag engine Off` 註解
+
+``` {.bash .prefixed}
+sudo vim /etc/apache2/mods-available/php8.1.conf
+```
+
+``` {.apache}
+[...]
+
+# Running PHP scripts in user directories is disabled by default
+#
+# To re-enable PHP in user directories comment the following lines
+# (from <IfModule ...> to </IfModule>.) Do NOT set it to On as it
+# prevents .htaccess files from disabling it.
+<IfModule mod_userdir.c>
+    <Directory /home/*/public_html>
+        # php_admin_flag engine Off
+    </Directory>
+</IfModule>
+```
+
+變更玩設定後，重新啟動 apache2 伺服器
+
+``` {.bash .prefixed}
+sudo systemctl restart apache2
+```
+
 ## phpMyAdmin
 
 phpMyAdmin 是一個以 PHP 為基礎撰寫的一個軟體，可以讓使用者以簡易的方式新增、查詢、修改或是刪除資料庫裡面的紀錄。
