@@ -474,6 +474,50 @@ phpinfo();
 <p>成功顯示目前 PHP 的所有設定。測試完後記得要刪除 <code>info.php</code>。</p>
 <div class="sourceCode" id="cb105"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb105-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> rm /var/www/asis/info.php</span></code></pre></div>
 </div>
+<div id="使用者目錄網站" class="section level3" number="3.4.4">
+<h3>
+<span class="header-section-number">3.4.4</span> 使用者目錄網站<a class="anchor" aria-label="anchor" href="#%E4%BD%BF%E7%94%A8%E8%80%85%E7%9B%AE%E9%8C%84%E7%B6%B2%E7%AB%99"><i class="fas fa-link"></i></a>
+</h3>
+<p>要開啟 apache2 的使用者目錄功能需要先確認 <code>userdir</code> 模組有沒有打開</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb106-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="ex">apachectl</span> <span class="at">-M</span> <span class="kw">|</span> <span class="fu">grep</span> userdir</span></code></pre></div>
+<p>如果像下圖一樣沒有找到 <code>userdir_module</code> 就是沒有開啟使用者目錄的功能</p>
+<pre class="console_output"><code>AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.1.1. Set the 'ServerName' directive globally to suppress this message
+ authz_user_module (shared)</code></pre>
+<p>透過指令將使用者目錄模組啟動</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb108-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> a2enmod userdir</span></code></pre></div>
+<p>啟動後，還要確定 <code>userdir</code> 模組的 <code>UserDir</code> 有無正確設定</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb109-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/mods-available/userdir.conf</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode apache"><code class="sourceCode apache"><span id="cb110-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;IfModule</span><span class="at"> mod_userdir.c</span><span class="fu">&gt;</span></span>
+<span id="cb110-2"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb110-2" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 確認 UserDir 是否有取消註解</span></span>
+<span id="cb110-3"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb110-3" aria-hidden="true" tabindex="-1"></a>        UserDir<span class="st"> public_html</span></span>
+<span id="cb110-4"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb110-4" aria-hidden="true" tabindex="-1"></a>        UserDir<span class="st"> disabled root</span></span>
+<span id="cb110-5"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb110-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-6"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb110-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">&lt;Directory</span><span class="at"> /home/*/public_html</span><span class="fu">&gt;</span></span>
+<span id="cb110-7"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb110-7" aria-hidden="true" tabindex="-1"></a>                <span class="ex">AllowOverride</span><span class="ch"> </span><span class="kw">FileInfo</span><span class="ch"> </span><span class="kw">AuthConfig</span><span class="ch"> </span><span class="kw">Limit</span><span class="ch"> </span><span class="kw">Indexes</span></span>
+<span id="cb110-8"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb110-8" aria-hidden="true" tabindex="-1"></a>                <span class="ex">Options</span><span class="ch"> </span><span class="kw">MultiViews</span><span class="ch"> </span><span class="kw">Indexes</span><span class="ch"> </span><span class="kw">SymLinksIfOwnerMatch</span><span class="ch"> </span><span class="kw">IncludesNoExec</span></span>
+<span id="cb110-9"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb110-9" aria-hidden="true" tabindex="-1"></a>                Require<span class="st"> method GET POST OPTIONS</span></span>
+<span id="cb110-10"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb110-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">&lt;/Directory&gt;</span></span>
+<span id="cb110-11"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb110-11" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;/IfModule&gt;</span></span></code></pre></div>
+<p>變更目錄權限，使 apache2 有權限可以進入使用者家目錄</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb111-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chmod 711 /home/<span class="op">&lt;</span>使用者名稱<span class="op">&gt;</span></span>
+<span id="cb111-2"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb111-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chmod 755 /home/<span class="op">&lt;</span>使用者名稱<span class="op">&gt;</span>/public_html</span></code></pre></div>
+<p>如果要使使用者家目錄運行 <code>.php</code> 類型的檔案，還需要將 <code>php_admin_flag engine Off</code> 註解</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb112-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/mods-available/php8.1.conf</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode apache"><code class="sourceCode apache"><span id="cb113-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb113-1" aria-hidden="true" tabindex="-1"></a>[...]</span>
+<span id="cb113-2"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb113-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-3"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb113-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Running PHP scripts in user directories is disabled by default</span></span>
+<span id="cb113-4"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb113-4" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb113-5"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb113-5" aria-hidden="true" tabindex="-1"></a><span class="co"># To re-enable PHP in user directories comment the following lines</span></span>
+<span id="cb113-6"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb113-6" aria-hidden="true" tabindex="-1"></a><span class="co"># (from &lt;IfModule ...&gt; to &lt;/IfModule&gt;.) Do NOT set it to On as it</span></span>
+<span id="cb113-7"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb113-7" aria-hidden="true" tabindex="-1"></a><span class="co"># prevents .htaccess files from disabling it.</span></span>
+<span id="cb113-8"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb113-8" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;IfModule</span><span class="at"> mod_userdir.c</span><span class="fu">&gt;</span></span>
+<span id="cb113-9"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb113-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">&lt;Directory</span><span class="at"> /home/*/public_html</span><span class="fu">&gt;</span></span>
+<span id="cb113-10"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb113-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># php_admin_flag engine Off</span></span>
+<span id="cb113-11"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb113-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">&lt;/Directory&gt;</span></span>
+<span id="cb113-12"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb113-12" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;/IfModule&gt;</span></span></code></pre></div>
+<p>變更玩設定後，重新啟動 apache2 伺服器</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb114-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart apache2</span></code></pre></div>
+</div>
 </div>
 <div id="phpmyadmin" class="section level2" number="3.5">
 <h2>
@@ -491,7 +535,7 @@ phpinfo();
 <span class="header-section-number">3.5.2</span> 安裝 phpMyAdmin<a class="anchor" aria-label="anchor" href="#%E5%AE%89%E8%A3%9D-phpmyadmin"><i class="fas fa-link"></i></a>
 </h3>
 <p>一樣地，確認 <code>phpmyadmin</code> 的版本</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb106-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info phpmyadmin</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb115-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info phpmyadmin</span></code></pre></div>
 <pre class="console_output"><code>Package: phpmyadmin
 Version: 4:5.1.1+dfsg1-5ubuntu1
 Priority: optional
@@ -503,7 +547,7 @@ Bugs: https://bugs.launchpad.net/ubuntu/+filebug
 Installed-Size: 36.5 MB
 [...]</code></pre>
 <p>確認完畢後安裝</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb108-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install phpmyadmin <span class="at">--yes</span></span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb117-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install phpmyadmin <span class="at">--yes</span></span></code></pre></div>
 <p>這裏用空白鍵勾選 <code>apache2</code> 使中括號中變成星號 <code>*</code></p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-61"></span>
@@ -534,19 +578,19 @@ Installed-Size: 36.5 MB
 </p>
 </div>
 <p>以 root 登入資料庫</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb109-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb118-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
 <p>解除安裝插件 valid password</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode sqlmysql prefixed_mysql"><code class="sourceCode sqlmysql"><span id="cb110-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb110-1" aria-hidden="true" tabindex="-1"></a>uninstall component <span class="st">'file://component_valid_password'</span>;</span></code></pre></div>
-<div class="sourceCode" id="cb111"><pre class="sourceCode sqlmysql prefixed_mysql"><code class="sourceCode sqlmysql"><span id="cb111-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb111-1" aria-hidden="true" tabindex="-1"></a>exit;</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode sqlmysql prefixed_mysql"><code class="sourceCode sqlmysql"><span id="cb119-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb119-1" aria-hidden="true" tabindex="-1"></a>uninstall component <span class="st">'file://component_valid_password'</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode sqlmysql prefixed_mysql"><code class="sourceCode sqlmysql"><span id="cb120-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb120-1" aria-hidden="true" tabindex="-1"></a>exit;</span></code></pre></div>
 <p>在安裝一次 <code>phpmyadmin</code></p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb112-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install phpmyadmin <span class="at">--yes</span></span></code></pre></div>
-<div class="sourceCode" id="cb113"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb113-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb121-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install phpmyadmin <span class="at">--yes</span></span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb122-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
 <p>將 valid password 裝回去</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode sqlmysql prefixed_mysql"><code class="sourceCode sqlmysql"><span id="cb114-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb114-1" aria-hidden="true" tabindex="-1"></a>install component <span class="st">'file://component_valid_password'</span></span></code></pre></div>
-<div class="sourceCode" id="cb115"><pre class="sourceCode sqlmysql prefixed_mysql"><code class="sourceCode sqlmysql"><span id="cb115-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb115-1" aria-hidden="true" tabindex="-1"></a>exit;</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode sqlmysql prefixed_mysql"><code class="sourceCode sqlmysql"><span id="cb123-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb123-1" aria-hidden="true" tabindex="-1"></a>install component <span class="st">'file://component_valid_password'</span></span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode sqlmysql prefixed_mysql"><code class="sourceCode sqlmysql"><span id="cb124-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb124-1" aria-hidden="true" tabindex="-1"></a>exit;</span></code></pre></div>
 </div>
 <p>重新啟動 Apache2</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb116-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart apache2</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb125-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart apache2</span></code></pre></div>
 <p>從網站進入 phpMyAdmin 操作介面</p>
 <pre><code>http://&lt;虛擬主機的 ip 地址&gt;/phpmyadmin/</code></pre>
 <p>如果找不到是正常的（如下圖），在 Ubuntu 20.04 安裝 phpMyAdmin 時，沒有正確的設定到 phpMyAdmin。 可以參考<a href="https://askubuntu.com/questions/387062/how-to-solve-the-phpmyadmin-not-found-issue-after-upgrading-php-and-apache">這裡</a>三樓的解法：</p>
@@ -557,11 +601,11 @@ Installed-Size: 36.5 MB
 </p>
 </div>
 <p>手動軟連結到 Apache2 的設定資料夾</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb118-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf</span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb127-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf</span></code></pre></div>
 <p>接著啟動 phpMyAdmin 的設定檔</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb119-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> a2enconf phpmyadmin</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb128-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> a2enconf phpmyadmin</span></code></pre></div>
 <p>重新啟動 Apache2</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb120-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart apache2</span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb129-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart apache2</span></code></pre></div>
 <p>再從瀏覽器嘗試一次連線</p>
 <pre><code>http://&lt;虛擬主機的 ip 地址&gt;/phpmyadmin/</code></pre>
 <p>成功～ 🎊</p>
@@ -576,23 +620,23 @@ Installed-Size: 36.5 MB
 <li>創建一個新的擁有所有權限的使用者</li>
 </ol>
 <p>用 root 權限進入 MySQL 指令介面</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb122-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mysql</span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb131-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mysql</span></code></pre></div>
 <p>建立一個使用密碼 <code>asis0721</code> 驗證的使用者 <code>asis</code></p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode bash prefixed_mysql"><code class="sourceCode bash"><span id="cb123-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="ex">CREATE</span> USER <span class="st">'asis'</span>@<span class="st">'localhost'</span> IDENTIFIED BY <span class="st">'asis0721'</span><span class="kw">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode bash prefixed_mysql"><code class="sourceCode bash"><span id="cb132-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="ex">CREATE</span> USER <span class="st">'asis'</span>@<span class="st">'localhost'</span> IDENTIFIED BY <span class="st">'asis0721'</span><span class="kw">;</span></span></code></pre></div>
 <p>賦予所有權限在 <code>asis</code> 使用者上</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode sqlmysql prefixed_mysql"><code class="sourceCode sqlmysql"><span id="cb124-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="kw">ALL</span> <span class="kw">PRIVILEGES</span> <span class="kw">ON</span> <span class="op">*</span><span class="ch">.</span><span class="op">*</span> <span class="kw">TO</span> <span class="st">'asis'</span>@<span class="st">'localhost'</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode sqlmysql prefixed_mysql"><code class="sourceCode sqlmysql"><span id="cb133-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="kw">ALL</span> <span class="kw">PRIVILEGES</span> <span class="kw">ON</span> <span class="op">*</span><span class="ch">.</span><span class="op">*</span> <span class="kw">TO</span> <span class="st">'asis'</span>@<span class="st">'localhost'</span>;</span></code></pre></div>
 <p>立刻刷新權限，使權限立即生效</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode sqlmysql prefixed_mysql"><code class="sourceCode sqlmysql"><span id="cb125-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb125-1" aria-hidden="true" tabindex="-1"></a>FLUSH <span class="kw">PRIVILEGES</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode sqlmysql prefixed_mysql"><code class="sourceCode sqlmysql"><span id="cb134-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb134-1" aria-hidden="true" tabindex="-1"></a>FLUSH <span class="kw">PRIVILEGES</span>;</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>將原本的帳號認證方式改掉</li>
 </ol>
 <p>用 root 權限進入 MySQL 指令介面</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb126-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mysql</span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb135-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mysql</span></code></pre></div>
 <p>將 root 使用者改為使用密碼 <code>notSecureChangeMe</code> 驗證</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode sqlmysql prefixed_mysql"><code class="sourceCode sqlmysql"><span id="cb127-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="fu">USER</span> <span class="st">'root'</span>@<span class="st">'localhost'</span> IDENTIFIED <span class="kw">WITH</span> caching_sha2_password <span class="kw">BY</span> <span class="st">'notSecureChangeMe'</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode sqlmysql prefixed_mysql"><code class="sourceCode sqlmysql"><span id="cb136-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="fu">USER</span> <span class="st">'root'</span>@<span class="st">'localhost'</span> IDENTIFIED <span class="kw">WITH</span> caching_sha2_password <span class="kw">BY</span> <span class="st">'notSecureChangeMe'</span>;</span></code></pre></div>
 <div class="rmdwarning infobox">
 <p>一旦將 root 使用者的驗證方式改成用密碼驗證，那往後登入 MySQL 的指令介面都需要加上提供密碼參數 <code>-p</code></p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb128-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb137-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
 </div>
 </div>
 <div id="設定-phpmyadmin" class="section level3" number="3.5.3">
@@ -600,29 +644,29 @@ Installed-Size: 36.5 MB
 <span class="header-section-number">3.5.3</span> 設定 phpMyAdmin<a class="anchor" aria-label="anchor" href="#%E8%A8%AD%E5%AE%9A-phpmyadmin"><i class="fas fa-link"></i></a>
 </h3>
 <p>預設的網址 <code>http://&lt;虛擬機器的 ip 位置&gt;/phpmyadmin</code> 實在是太危險了，如果有人有意破壞，又被猜到管理員的密碼，那將會一發不可收拾，所以接下來要改的是 phpMyAdmin 在 Apache2 中的設定，將預設的位置改掉至少會安全一點。</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb129-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/phpmyadmin/apache.conf</span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb138-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/phpmyadmin/apache.conf</span></code></pre></div>
 <div class="code-label">
 <p>/etc/phpmyadmin/apache.conf</p>
 </div>
-<div class="sourceCode" id="cb130"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb130-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="co"># phpMyAdmin default Apache configuration</span></span>
-<span id="cb130-2"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb130-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb130-3"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb130-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Alias</span> /sql /usr/share/phpmyadmin <span class="co"># 變更這裡</span></span>
-<span id="cb130-4"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb130-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb130-5"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb130-5" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>Directory <span class="ex">/usr/share/phpmyadmin</span><span class="op">&gt;</span></span>
-<span id="cb130-6"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb130-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Options</span> SymLinksIfOwnerMatch</span>
-<span id="cb130-7"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb130-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">DirectoryIndex</span> index.php</span>
-<span id="cb130-8"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb130-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">AllowOverride</span> All <span class="co"># 新增這行</span></span>
-<span id="cb130-9"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb130-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb130-10"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb130-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
-<span id="cb130-11"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb130-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb130-12"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb130-12" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>/Directory<span class="op">&gt;</span></span>
-<span id="cb130-13"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb130-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb130-14"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb130-14" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb139-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="co"># phpMyAdmin default Apache configuration</span></span>
+<span id="cb139-2"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb139-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb139-3"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb139-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Alias</span> /sql /usr/share/phpmyadmin <span class="co"># 變更這裡</span></span>
+<span id="cb139-4"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb139-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb139-5"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb139-5" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>Directory <span class="ex">/usr/share/phpmyadmin</span><span class="op">&gt;</span></span>
+<span id="cb139-6"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb139-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Options</span> SymLinksIfOwnerMatch</span>
+<span id="cb139-7"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb139-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">DirectoryIndex</span> index.php</span>
+<span id="cb139-8"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb139-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">AllowOverride</span> All <span class="co"># 新增這行</span></span>
+<span id="cb139-9"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb139-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb139-10"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb139-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
+<span id="cb139-11"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb139-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb139-12"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb139-12" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>/Directory<span class="op">&gt;</span></span>
+<span id="cb139-13"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb139-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb139-14"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb139-14" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span></code></pre></div>
 <div class="infobox info">
 <p>因為 <code>/etc/phpmyadmin/apache.conf</code> 已軟連結（soft-link）至 <code>/etc/apache2/conf-available/phpmyadmin.conf</code> 所以變更<code>apache.conf</code> 時，位於 Apache2 中的設定檔也會跟著變更。</p>
 </div>
 <p>重新啟動 Apache2</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb131-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart apache2</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb140-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart apache2</span></code></pre></div>
 <p>從新的 ip 位址進入</p>
 <pre><code>http://&lt;虛擬機器的 ip 位址&gt;/sql/</code></pre>
 <div class="figure" style="text-align: center">
@@ -702,6 +746,7 @@ sudo htpasswd /etc/phpmyadmin/.htpasswd otheruser
 <li><a class="nav-link" href="#%E5%AE%89%E8%A3%9D-php"><span class="header-section-number">3.4.1</span> 安裝 PHP</a></li>
 <li><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E8%99%9B%E6%93%AC%E7%B6%B2%E7%AB%99"><span class="header-section-number">3.4.2</span> 建立虛擬網站</a></li>
 <li><a class="nav-link" href="#%E6%B8%AC%E8%A9%A6-php"><span class="header-section-number">3.4.3</span> 測試 PHP</a></li>
+<li><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%80%85%E7%9B%AE%E9%8C%84%E7%B6%B2%E7%AB%99"><span class="header-section-number">3.4.4</span> 使用者目錄網站</a></li>
 </ul>
 </li>
 <li>
@@ -728,7 +773,7 @@ sudo htpasswd /etc/phpmyadmin/.htpasswd otheruser
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-08-22.</p>
+    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-08-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
