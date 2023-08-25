@@ -11,16 +11,16 @@
 首先，一樣地，只要安裝套件都需要先更新套件來源。這裡我們用 `&&` 連接兩個指令，讓更新與安裝依序執行。
 
 ``` {.bash .prefixed}
-sudo apt update && sudo apt install python3-dev python3-pip --yes
+sudo apt update && sudo apt install python3-pip --yes
 ```
 
 安裝 `python3-venv` ，後續建立 python 虛擬環境時會用到
 
 ``` {.bash .prefixed}
-sudo apt install python3-venv
+sudo apt install python3-venv --yes
 ```
 
-因為目前 Ubuntu 內建的 python 版本通常都是 python 2.X，所以我們還要再多裝一個叫做 `python-is-python3` 的套件，將 `python` 設為 `python3` 的別名，這個會使你以後呼叫 `python` 指令確保 python 的版本是 python 3。
+目前 Ubuntu 22.04 系統內建的 Python 為 Python 3.10，我們還是可以多裝一個叫做 `python-is-python3` 的套件，將 `python` 設為 `python3` 的別名，打指令時不用多打一個 3。
 
 ``` {.bash .prefixed}
 sudo apt install python-is-python3 --yes
@@ -33,7 +33,7 @@ sudo apt install python-is-python3 --yes
 ### 於虛擬環境中設置 JupyterLab 與 JupyterHub
 
 ``` {.bash .prefixed}
-sudo python3 -m venv /opt/jupyterhub
+sudo python -m venv /opt/jupyterhub
 ```
 
 ``` {.bash .prefixed}
@@ -84,7 +84,6 @@ c.JupyterHub.bind_url = 'http://:8000/jhub'
 c.Spawner.default_url = '/lab'
 c.Authenticator.admin_users = {'asis'}
 c.Spawner.cmd = ['jupyter-labhub']
-c.Spawner.args = ['--collaborative']
 ```
 
 ### 新增開機自動啟動 JupyterHub 的服務
@@ -140,40 +139,115 @@ sudo systemctl status jupyterhub.service
 
 ### Conda 的 Python🐍 環境
 
-``` {.bash .prefixed}
-cd ~
-```
+到[官方下載頁面](https://www.anaconda.com/download#downloads)複製最新的安裝程式的連結
 
 ``` {.bash .prefixed}
-curl https://repo.anaconda.com/pkgs/misc/gpgkeys/anaconda.asc \
-    | gpg --dearmor > conda.gpg
+cd /tmp && \ 
+    wget https://repo.anaconda.com/archive/Anaconda3-2023.07-2-Linux-x86_64.sh
 ```
 
-``` {.bash .prefixed}
-sudo install -o root -g root -m 644 conda.gpg /etc/apt/trusted.gpg.d/
-```
+將下載下來的腳本加上執行權限
 
 ``` {.bash .prefixed}
-rm conda.gpg
+chmod +x  Anaconda3-2023.07-2-Linux-x86_64.sh
 ```
 
-``` {.bash .prefixed}
-echo \
-    "deb [arch=amd64] https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main" \
-    | sudo tee /etc/apt/sources.list.d/conda.list
-```
+以超級使用者執行
 
 ``` {.bash .prefixed}
-sudo apt update && sudo apt install conda --yes
+sudo ./Anaconda3-2023.07-2-Linux-x86_64.sh
 ```
+
+執行後，會要求你先閱讀使用者授權條款
+
+``` {.console_output}
+
+Welcome to Anaconda3 2023.07-2
+
+In order to continue the installation process, please review the license
+agreement.
+Please, press ENTER to continue
+>>>
+```
+
+這裡按 Enter
+
+``` {.bash .prefixed}
+==================================================
+End User License Agreement - Anaconda Distribution
+==================================================
+
+Copyright 2015-2023, Anaconda, Inc.
+
+All rights reserved under the 3-clause BSD License:
+
+This End User License Agreement (the "Agreement") is a legal agreement between you and Anaconda, Inc. ("Anaconda") and g
+overns your use of Anaconda Distribution (which was formerly known as Anaconda Individual Edition).
+
+Subject to the terms of this Agreement, Anaconda hereby grants you a non-exclusive, non-transferable license to:
+
+  * Install and use the Anaconda Distribution (which was formerly known as Anaconda Individual Edition),
+  * Modify and create derivative works of sample source code delivered in Anaconda Distribution from Anaconda's reposito
+ry, and;
+  * Redistribute code files in source (if provided to you by Anaconda as source) and binary forms, with or without modif
+ication subject to the requirements set forth below, and;
+
+Anaconda may, at its option, make available patches, workarounds or other updates to Anaconda Distribution. Unless the u
+pdates are provided with their separate governing terms, they are deemed part of Anaconda Distribution licensed to you a
+s provided in this Agreement.  This Agreement does not entitle you to any support for Anaconda Distribution.
+
+Anaconda reserves all rights not expressly granted to you in this Agreement.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the followi
+ng conditions are met:
+
+  * Redistributions of source code must retain the above copyright notice, this list of conditions and the following dis
+--More--
+```
+
+閱讀完後鍵入 `q` 退出
+
+``` {.console_output}
+Do you accept the license terms? [yes|no]
+[no] >>>
+```
+
+這裡輸入 `yes` 同意使用者授權合約
+
+``` {.console_output}
+Anaconda3 will now be installed into this location:
+/root/anaconda3
+
+  - Press ENTER to confirm the location
+  - Press CTRL-C to abort the installation
+  - Or specify a different location below
+
+[/root/anaconda3] >>>
+```
+
+將 `/opt/conda` 指定為安裝路徑，並等待安裝程式安裝
 
 ``` {.bash .prefixed}
 sudo mkdir /opt/conda/envs
 ```
 
+完成後，會問你要不要當你執行 shell 之後，自動關聯 `conda` 的指令至終端機，這裡填入 `no`。因為並不是每次開終端機都會用到 `conda`
+
+``` {.console_output}
+done
+installation finished.
+Do you wish the installer to initialize Anaconda3
+by running conda init? [yes|no]
+[no] >>>
+```
+
+接下來切換至 `/opt/conda/envs/` 資料夾，新增給 jupyterhub 的 python 核心
+
 ``` {.bash .prefixed}
 cd /opt/conda/envs/ && sudo vim environment.yml
 ```
+
+填入以下設定
 
 ::: code-label
 /opt/conda/envs/environment.yml
@@ -184,28 +258,30 @@ name: python
 channels:
   - defaults
 dependencies:
-  - python=3.9
+  - python=3.10
   - ipykernel
   - pip:
     - ipython-sql
     - PyMySQL
     - matplotlib
     - plotly
-    - dash
     - pandas
 prefix: /opt/conda/envs/python
 ```
 
+以剛才新增的設定檔建立 python 運算核心
+
 ``` {.bash .prefixed}
 sudo /opt/conda/bin/conda env create -f environment.yml
 ```
+
 
 ``` {.bash .prefixed}
 sudo /opt/conda/envs/python/bin/python -m \
     ipykernel install \
     --prefix=/opt/jupyterhub/ \
     --name 'python3' \
-    --display-name "Python (default)"
+    --display-name "Python (預設)"
 ```
 
 ```{r, fig.cap='jupyterhub 登入後的頁面'}
@@ -221,8 +297,8 @@ sudo su - -c "R -e \"install.packages('IRkernel')\""
 ``` {.bash .prefixed}
 sudo su - -c "R -e \"
     IRkernel::installspec(
-        name='ir41', 
-        displayname='R 4.1',
+        name='ir43',
+        displayname='R 4.3',
         user=FALSE,
         prefix='/opt/jupyterhub'
     )
@@ -285,7 +361,7 @@ ls -al $(which jupyter)
 ```
 
 ``` console_output
-lrwxrwxrwx 1 root root 27 Sep 17 16:23 /usr/local/bin/jupyter -> /opt/jupyterhub/bin/jupyter*
+lrwxrwxrwx 1 root root 27 Sep 17 16:23 /usr/local/bin/jupyter -> /opt/jupyterhub/bin/jupyter
 ```
 
 可以看到指令 `jupyter` 之所以會存在是因為軟連結至 `/opt/jupyterhub/bin/jupyter` 後，因為 `/usr/local/bin` 在變數 `path` 內，讓系統找得到，才可以使用這個指令。
@@ -309,117 +385,12 @@ jupyter kernelspec list
 
 ``` console_output
 Available kernels:
-  ir41       /opt/jupyterhub/share/jupyter/kernels/ir41
+  ir43       /opt/jupyterhub/share/jupyter/kernels/ir43
   python3    /opt/jupyterhub/share/jupyter/kernels/python3
 ```
 
 ```{r, fig.cap='jupyterhub 安裝完 R 核心與預設 Python 的頁面'}
 knitr::include_graphics(path = 'figures/jupyterhub-main-page-kernel-R.png')
-```
-
-### C 與 C++ 環境
-
-``` {.bash .prefixed}
-sudo vim /opt/conda/envs/c_cpp.yml
-```
-
-::: code-label
-/opt/conda/envs/c_cpp.yml
-:::
-
-``` yaml
-name: c-cpp
-channels:
-  - defaults
-  - conda-forge
-dependencies:
-  - xeus-cling
-  - python=3.*
-  - pip
-  - ipykernel
-prefix: /opt/conda/envs/c-cpp
-```
-
-``` {.bash .prefixed}
-sudo conda env create -f c_cpp.yml
-```
-
-``` {.bash .prefixed}
-sudo jupyter kernelspec install \
-    /opt/conda/envs/c-cpp/share/jupyter/kernels/xcpp11 --sys-prefix
-```
-
-``` {.bash .prefixed}
-sudo jupyter kernelspec install \
-    /opt/conda/envs/c-cpp/share/jupyter/kernels/xcpp14 --sys-prefix
-```
-
-``` {.bash .prefixed}
-sudo jupyter kernelspec install \
-    /opt/conda/envs/c-cpp/share/jupyter/kernels/xcpp17 --sys-prefix
-```
-
-<!--# Scanf() problem https://github.com/brendan-rius/jupyter-c-kernel/issues/3 -->
-
-``` {.bash .prefixed}
-sudo /opt/conda/envs/c-cpp/bin/python3.9 -m \
-    pip install git+https://github.com/XaverKlemenschits/jupyter-c-kernel.git
-```
-
-``` {.bash .prefixed}
-sudo vim /opt/conda/envs/c-cpp/share/jupyter/kernels/c/kernel.json
-```
-
-::: code-label
-/opt/conda/envs/c-cpp/share/jupyter/kernels/c/kernel.json
-:::
-
-``` json
-{
-  "display_name": "C",
-  "argv": [
-      "/opt/conda/envs/c-cpp/bin/python3",
-      "-m",
-      "jupyter_c_kernel",
-      "-f",
-      "{connection_file}"
-  ],
-  "language": "C"
-}
-```
-
-``` {.bash .prefixed}
-sudo mv ~/Downloads/logo** /opt/conda/envs/c-cpp/share/jupyter/c/
-```
-
-::: flex-columns
-```{r, fig.cap='C 語言核心圖標，32x32', out.width="", echo=FALSE}
-knitr::include_graphics(path = "figures/icons/logo-32x32.png")
-```
-
-```{r, fig.cap='C 語言核心圖標，64x64', out.width="", echo=FALSE}
-knitr::include_graphics(path = "figures/icons/logo-64x64.png")
-```
-:::
-
-``` {.bash .prefixed}
-ls -al /opt/conda/envs/c-cpp/share/jupyter/kernels/c
-```
-
-``` console_output
-drwxrwxr-x 2 root root 4096 Oct 23 17:20 ./
-drwxrwxr-x 7 root root 4096 Oct 23 15:31 ../
--rw-rw-r-- 1 root root  181 Oct 23 15:26 kernel.json
--rw-r--r-- 1 root root 1536 Oct 23 17:02 logo-32x32.png
--rw-r--r-- 1 root root 4079 Oct 23 17:02 logo-64x64.png
-```
-
-``` {.bash .prefixed}
-sudo jupyter kernelspec install /opt/conda/envs/c-cpp/share/jupyter/c --sys-prefix
-```
-
-```{r, fig.cap='jupyterhub 加上了 C 與 CPP 核心的頁面'}
-knitr::include_graphics(path = 'figures/jupyterlab_c_cpp_kernel.png')
 ```
 
 ### SAS 環境
@@ -440,14 +411,18 @@ channels:
   - anaconda
 dependencies:
   - sas_kernel
-  - python=3.*
+  - python=3.10
   - pip
   - ipykernel
 prefix: /opt/conda/envs/sas
 ```
 
 ``` {.bash .prefixed}
-sudo conda env create -f sas.yml
+sudo /opt/conda/bin/conda env create -f sas.yml
+```
+
+``` {.bash .prefixed}
+sudo mkdir /opt/conda/envs/sas/share/jupyter/kernels/sas
 ```
 
 ``` {.bash .prefixed}
@@ -476,8 +451,14 @@ sudo vim /opt/conda/envs/sas/share/jupyter/kernels/sas/kernel.json
 
 ``` {.bash .prefixed}
 sudo cp \
-    /opt/conda/envs/sas/lib/python3.9/site-packages/sas_kernel/data/logo-64x64.png \
+    /opt/conda/envs/sas/lib/python3.10/site-packages/sas_kernel/data/logo-64x64.png \
     /opt/conda/envs/sas/share/jupyter/kernels/sas
+```
+
+
+``` {.bash .prefixed}
+sudo jupyter kernelspec install \
+    /opt/conda/envs/sas/share/jupyter/kernels/sas --sys-prefix
 ```
 
 ## 設置 Apache 的反向代理
@@ -497,6 +478,7 @@ sudo vim /etc/apache2/sites-available/asis.conf
     ###
     # JupyterHub Reverse Proxy
     ###
+    RedirectMatch permanent ^/jhub$ /jhub/
     RewriteCond %{HTTP:Connection} Upgrade [NC]
     RewriteCond %{HTTP:Upgrade} websocket [NC]
     RewriteRule /jhub/(.*) ws://127.0.0.1:8000/jhub/$1 [NE,P,L]

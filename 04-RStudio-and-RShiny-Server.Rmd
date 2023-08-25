@@ -524,10 +524,10 @@ server {
 }
 ```
 
-`redirect` 後面第一個參數是目的地網址，第二個參數是網頁重新導向的種類（`301` 為永久，`302` 為暫時），最後一個參數是否要套用完全一樣的路由，如果設為 `true`，路由為 `/asisstuc` 才會重新導向。如果設為 `false` ，則它的路由只要包含 `/asisstuc`，不管它底下才有沒有其他路由（例如：`/asisstuc/08170875/example`），都會重新導向至指定的網頁。
+`redirect` 後面第一個參數是目的地網址，第二個參數是網頁重新導向的種類（`301` 為永久，`302` 為暫時）。最後一個參數是否要套用完全一樣的路由，如果設為 `true`，路由為 `/asisstuc` 才會重新導向。如果設為 `false` ，則它的路由只要包含 `/asisstuc`，不管它底下才有沒有其他路由（例如：`/asisstuc/08170875/example`），都會重新導向至指定的網頁。
 
 ::: {.infobox .rmdcaution}
-這裏要先跳至[Step 4 --- 使用使用者測試設定是否有效]先建立使用者群組後再重新啟動 R Shiny Server。因為設定檔中設有使用者群組（`MCU`、`teacher`）而沒有創建的話，重新啟動 R Shiny Server 會因為找不到該使用者群組而出現錯誤。
+這裏要至下一節先建立使用者群組後再重新啟動 R Shiny Server。因為設定檔中設有使用者群組（`stu`、`teacher`）而沒有創建的話，重新啟動 R Shiny Server 會因為找不到該使用者群組而出現錯誤。
 :::
 
 ### 使用使用者測試設定是否有效
@@ -550,7 +550,7 @@ sudo vim /etc/default/useradd
 /etc/default/useradd
 :::
 
-``` bash
+``` {.bash}
 # Default values for useradd(8)
 #
 # The SHELL variable specifies the default login shell on your
