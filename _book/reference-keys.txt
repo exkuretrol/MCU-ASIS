@@ -80,11 +80,11 @@ fig:unnamed-chunk-79
 fig:unnamed-chunk-80
 fig:unnamed-chunk-81
 fig:unnamed-chunk-82
+fig:manage-users-sh
+fig:create-users
 fig:unnamed-chunk-83
 fig:unnamed-chunk-84
 fig:unnamed-chunk-85
-fig:manage-users-sh
-fig:create-users
 intro
 preparing
 downloading-ubuntu-image
@@ -173,7 +173,6 @@ jupyterlab-與-jupyterhub
 jupyterhub-中的運算核心
 conda-的-python-環境
 r-環境
-c-與-c-環境
 sas-環境
 設置-apache-的反向代理
 jupyterhub-擴充套件

@@ -476,9 +476,9 @@ lrwxrwxrwx 1 root root   37 Feb  1 03:43 sample-apps -&gt; /opt/shiny-server/sam
 <span id="cb185-8"><a href="rstudio-rshiny-server.html#cb185-8" aria-hidden="true" tabindex="-1"></a>      <span class="ex">redirect</span> <span class="st">"https://&lt;虛擬主機 ip 位址&gt;/shiny/stu/"</span> 302 true<span class="kw">;</span></span>
 <span id="cb185-9"><a href="rstudio-rshiny-server.html#cb185-9" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
 <span id="cb185-10"><a href="rstudio-rshiny-server.html#cb185-10" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code></pre></div>
-<p><code>redirect</code> 後面第一個參數是目的地網址，第二個參數是網頁重新導向的種類（<code>301</code> 為永久，<code>302</code> 為暫時），最後一個參數是否要套用完全一樣的路由，如果設為 <code>true</code>，路由為 <code>/asisstuc</code> 才會重新導向。如果設為 <code>false</code> ，則它的路由只要包含 <code>/asisstuc</code>，不管它底下才有沒有其他路由（例如：<code>/asisstuc/08170875/example</code>），都會重新導向至指定的網頁。</p>
+<p><code>redirect</code> 後面第一個參數是目的地網址，第二個參數是網頁重新導向的種類（<code>301</code> 為永久，<code>302</code> 為暫時）。最後一個參數是否要套用完全一樣的路由，如果設為 <code>true</code>，路由為 <code>/asisstuc</code> 才會重新導向。如果設為 <code>false</code> ，則它的路由只要包含 <code>/asisstuc</code>，不管它底下才有沒有其他路由（例如：<code>/asisstuc/08170875/example</code>），都會重新導向至指定的網頁。</p>
 <div class="infobox rmdcaution">
-<p>這裏要先跳至[Step 4 — 使用使用者測試設定是否有效]先建立使用者群組後再重新啟動 R Shiny Server。因為設定檔中設有使用者群組（<code>MCU</code>、<code>teacher</code>）而沒有創建的話，重新啟動 R Shiny Server 會因為找不到該使用者群組而出現錯誤。</p>
+<p>這裏要至下一節先建立使用者群組後再重新啟動 R Shiny Server。因為設定檔中設有使用者群組（<code>stu</code>、<code>teacher</code>）而沒有創建的話，重新啟動 R Shiny Server 會因為找不到該使用者群組而出現錯誤。</p>
 </div>
 </div>
 </div>
@@ -588,7 +588,7 @@ lrwxrwxrwx 1 root root   37 Feb  1 03:43 sample-apps -&gt; /opt/shiny-server/sam
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-08-23.</p>
+    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-08-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

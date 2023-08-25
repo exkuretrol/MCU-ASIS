@@ -97,7 +97,7 @@
 <span class="header-section-number">C.1</span> 更改預設的文本編輯器<a class="anchor" aria-label="anchor" href="#%E6%9B%B4%E6%94%B9%E9%A0%90%E8%A8%AD%E7%9A%84%E6%96%87%E6%9C%AC%E7%B7%A8%E8%BC%AF%E5%99%A8"><i class="fas fa-link"></i></a>
 </h2>
 <p>這個指令可以變更系統編輯文件所用的程式</p>
-<div class="sourceCode" id="cb310"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb310-1"><a href="%E5%85%B6%E4%BB%96.html#cb310-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> update-alternatives <span class="at">--config</span> editor</span></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb301-1"><a href="%E5%85%B6%E4%BB%96.html#cb301-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> update-alternatives <span class="at">--config</span> editor</span></code></pre></div>
 <p>按了 Enter↩︎ 之後，會出現現在可用的編輯器，輸入對應的編號即可變更。有標 <code>*</code> 號的編輯器為目前設定的預設編輯器。</p>
 <pre class="console_output"><code>There are 4 choices for the alternative editor (providing /usr/bin/editor).
 
@@ -122,7 +122,7 @@ Press &lt;enter&gt; to keep the current choice[*], or type selection number: 3</
 <span class="header-section-number">C.2.1</span> Step 1 — 安裝 php &amp; php-mysql 插件<a class="anchor" aria-label="anchor" href="#step-1-%E5%AE%89%E8%A3%9D-php-php-mysql-%E6%8F%92%E4%BB%B6"><i class="fas fa-link"></i></a>
 </h3>
 <p>先確認 <code>php</code> 是不是我們要安裝的版本</p>
-<div class="sourceCode" id="cb312"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb312-1"><a href="%E5%85%B6%E4%BB%96.html#cb312-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info php</span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb303-1"><a href="%E5%85%B6%E4%BB%96.html#cb303-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info php</span></code></pre></div>
 <p>可以看到，目前 <code>php</code> 的依賴套件是 <code>php7.4</code>，代表將安裝的版本為 <code>php7.4</code></p>
 <pre class="console_output"><code>Package: php
 Version: 2:7.4+75
@@ -145,7 +145,7 @@ Description: server-side, HTML-embedded scripting language (default)
  This package is a dependency package, which depends on latest stable
  PHP version (currently 7.4).</code></pre>
 <p>接著，我們再查詢一次 <code>php7.4</code> 會安裝什麼東西</p>
-<div class="sourceCode" id="cb314"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb314-1"><a href="%E5%85%B6%E4%BB%96.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info php7.4</span></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb305-1"><a href="%E5%85%B6%E4%BB%96.html#cb305-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt info php7.4</span></code></pre></div>
 <p>這裡可以看到 <code>php7.4</code> 安裝了會安裝一些使 php7.4 順利運作的依賴套件，像是 <code>libapache2-mod-php7.4</code>、<code>php7.4-fpm</code>、<code>php7.4-cgi</code> 與 <code>php7.4-common</code></p>
 <pre class="console_output"><code>Package: php7.4
 Version: 7.4.3-4ubuntu2.5
@@ -197,9 +197,9 @@ Description: MySQL module for PHP [default]
  This package is a dependency package, which depends on Debian's default
  PHP version (currently 7.4).</code></pre>
 <p>確認完我們要安裝的版本是否正確後，用套件管理程式 <code>apt</code> 安裝套件。</p>
-<div class="sourceCode" id="cb318"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb318-1"><a href="%E5%85%B6%E4%BB%96.html#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install php php-mysql <span class="at">--yes</span></span></code></pre></div>
+<div class="sourceCode" id="cb309"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb309-1"><a href="%E5%85%B6%E4%BB%96.html#cb309-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install php php-mysql <span class="at">--yes</span></span></code></pre></div>
 <p>確認 <code>php</code> 是否安裝完成，可以用 <code>which</code> 指令確認：</p>
-<div class="sourceCode" id="cb319"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb319-1"><a href="%E5%85%B6%E4%BB%96.html#cb319-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> php</span></code></pre></div>
+<div class="sourceCode" id="cb310"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb310-1"><a href="%E5%85%B6%E4%BB%96.html#cb310-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> php</span></code></pre></div>
 <p>當系統中有安裝複數個版本的 php 時，php 執行檔的位置可能會有所不同。同樣地在第 5 章<a href="jupyterlab-on-jupyterhub.html#%E8%A8%AD%E7%BD%AE-python-3-%E7%92%B0%E5%A2%83">設置 Python 3 環境</a>時也會遇到。</p>
 </div>
 </div>
@@ -208,20 +208,20 @@ Description: MySQL module for PHP [default]
 <span class="header-section-number">C.3</span> Mysql 8.0 root 密碼重設<a class="anchor" aria-label="anchor" href="#mysql-8.0-root-%E5%AF%86%E7%A2%BC%E9%87%8D%E8%A8%AD"><i class="fas fa-link"></i></a>
 </h2>
 <p>先建立一個含有改變 root 密碼的 sql 語法文字檔案</p>
-<div class="sourceCode" id="cb320"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb320-1"><a href="%E5%85%B6%E4%BB%96.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> mysql-init</span></code></pre></div>
-<div class="sourceCode" id="cb321"><pre class="sourceCode sqlmysql"><code class="sourceCode sqlmysql"><span id="cb321-1"><a href="%E5%85%B6%E4%BB%96.html#cb321-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="fu">USER</span> <span class="st">'root'</span>@<span class="st">'localhost'</span> IDENTIFIED <span class="kw">with</span> caching_sha2_password <span class="kw">by</span> <span class="st">'&lt;新的 root 密碼&gt;'</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb311"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb311-1"><a href="%E5%85%B6%E4%BB%96.html#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> mysql-init</span></code></pre></div>
+<div class="sourceCode" id="cb312"><pre class="sourceCode sqlmysql"><code class="sourceCode sqlmysql"><span id="cb312-1"><a href="%E5%85%B6%E4%BB%96.html#cb312-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="fu">USER</span> <span class="st">'root'</span>@<span class="st">'localhost'</span> IDENTIFIED <span class="kw">with</span> caching_sha2_password <span class="kw">by</span> <span class="st">'&lt;新的 root 密碼&gt;'</span>;</span></code></pre></div>
 <p>如存好後將擁有者與使用者群組改成 <code>mysql</code> 後，移至 <code>/tmp</code> 資料夾，使 mysql 使用者可以存取。</p>
-<div class="sourceCode" id="cb322"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb322-1"><a href="%E5%85%B6%E4%BB%96.html#cb322-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> mysql.mysql mysql-init <span class="kw">&amp;&amp;</span> <span class="fu">mv</span> mysql-init /tmp</span></code></pre></div>
+<div class="sourceCode" id="cb313"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb313-1"><a href="%E5%85%B6%E4%BB%96.html#cb313-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> mysql.mysql mysql-init <span class="kw">&amp;&amp;</span> <span class="fu">mv</span> mysql-init /tmp</span></code></pre></div>
 <p>切換至 root 使用者進行後續操作</p>
-<div class="sourceCode" id="cb323"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb323-1"><a href="%E5%85%B6%E4%BB%96.html#cb323-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span></span></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb314-1"><a href="%E5%85%B6%E4%BB%96.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span></span></code></pre></div>
 <p>將目前的 mysql 關閉</p>
-<div class="sourceCode" id="cb324"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb324-1"><a href="%E5%85%B6%E4%BB%96.html#cb324-1" aria-hidden="true" tabindex="-1"></a><span class="fu">killall</span> <span class="at">-9</span> mysqld</span></code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb315-1"><a href="%E5%85%B6%E4%BB%96.html#cb315-1" aria-hidden="true" tabindex="-1"></a><span class="fu">killall</span> <span class="at">-9</span> mysqld</span></code></pre></div>
 <p>或是使用 <code>systemctl</code> 指令關閉 mysql 服務</p>
 <p><code>{.bash prefixed} systemctl stop mysql.service</code></p>
 <p>接著使用 mysqld 指令啟動 mysql 並指定 <code>--user</code>、<code>--defaults-file</code> 與 <code>--init-file</code> 參數。</p>
-<div class="sourceCode" id="cb325"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb325-1"><a href="%E5%85%B6%E4%BB%96.html#cb325-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysqld</span> <span class="at">--defaults-file</span><span class="op">=</span>/etc/mysql/mysql.conf.d/mysqld.cnf <span class="dt">\ </span></span>
-<span id="cb325-2"><a href="%E5%85%B6%E4%BB%96.html#cb325-2" aria-hidden="true" tabindex="-1"></a><span class="ex">--user=mysql</span> <span class="dt">\ </span></span>
-<span id="cb325-3"><a href="%E5%85%B6%E4%BB%96.html#cb325-3" aria-hidden="true" tabindex="-1"></a><span class="ex">--init-file=/tmp/mysql-init</span> <span class="kw">&amp;</span></span></code></pre></div>
+<div class="sourceCode" id="cb316"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb316-1"><a href="%E5%85%B6%E4%BB%96.html#cb316-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysqld</span> <span class="at">--defaults-file</span><span class="op">=</span>/etc/mysql/mysql.conf.d/mysqld.cnf <span class="dt">\ </span></span>
+<span id="cb316-2"><a href="%E5%85%B6%E4%BB%96.html#cb316-2" aria-hidden="true" tabindex="-1"></a><span class="ex">--user=mysql</span> <span class="dt">\ </span></span>
+<span id="cb316-3"><a href="%E5%85%B6%E4%BB%96.html#cb316-3" aria-hidden="true" tabindex="-1"></a><span class="ex">--init-file=/tmp/mysql-init</span> <span class="kw">&amp;</span></span></code></pre></div>
 <ul>
 <li><p><code>--defaults-file</code>: MySQL 預設啟動的設定檔案</p></li>
 <li><p><code>--user</code>: 以使用者 <code>mysql</code> 執行</p></li>
@@ -232,14 +232,14 @@ Description: MySQL module for PHP [default]
 <div class="infobox caution">
 <p>如果不行的話，請檢查位於 <code>/var/log/mysql/error.log</code> 的錯誤紀錄，如果有看到類似 <code>/var/run/mysqld</code> 的錯誤，需要手動建立資料夾，並把權限變更為 <code>mysql</code> 用戶的權限。 操作完之後再從關閉 mysql 服務開始，再嘗試一次。</p>
 <p>參考指令如下：</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb326-1"><a href="%E5%85%B6%E4%BB%96.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> /var/run/mysqld <span class="kw">&amp;&amp;</span> <span class="fu">chown</span> mysql.mysql /var/run/mysqld</span></code></pre></div>
+<div class="sourceCode" id="cb317"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb317-1"><a href="%E5%85%B6%E4%BB%96.html#cb317-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> /var/run/mysqld <span class="kw">&amp;&amp;</span> <span class="fu">chown</span> mysql.mysql /var/run/mysqld</span></code></pre></div>
 </div>
 <p>最後以正常的服務啟動 mysql：</p>
-<div class="sourceCode" id="cb327"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb327-1"><a href="%E5%85%B6%E4%BB%96.html#cb327-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> restart mysql.service</span></code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb318-1"><a href="%E5%85%B6%E4%BB%96.html#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> restart mysql.service</span></code></pre></div>
 <p>退出 root 帳號</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb328-1"><a href="%E5%85%B6%E4%BB%96.html#cb328-1" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span></span></code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="sourceCode bash prefixed_root"><code class="sourceCode bash"><span id="cb319-1"><a href="%E5%85%B6%E4%BB%96.html#cb319-1" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span></span></code></pre></div>
 <p>試以新密碼登入 mysql root 帳號：</p>
-<div class="sourceCode" id="cb329"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb329-1"><a href="%E5%85%B6%E4%BB%96.html#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb320-1"><a href="%E5%85%B6%E4%BB%96.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
 <p>成功 🎊</p>
 <pre class="console_output"><code>Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 17
@@ -253,7 +253,83 @@ owners.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
-mysql&gt; </code></pre>
+mysql&gt; 
+
+
+## jupyterhub C/C++ 運算核心
+
+
+### C 與 C++ 環境
+
+``` {.bash .prefixed}
+sudo vim /opt/conda/envs/c_cpp.yml</code></pre>
+<div class="code-label">
+<p>/opt/conda/envs/c_cpp.yml</p>
+</div>
+<div class="sourceCode" id="cb322"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb322-1"><a href="%E5%85%B6%E4%BB%96.html#cb322-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> c-cpp</span></span>
+<span id="cb322-2"><a href="%E5%85%B6%E4%BB%96.html#cb322-2" aria-hidden="true" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span></span>
+<span id="cb322-3"><a href="%E5%85%B6%E4%BB%96.html#cb322-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> defaults</span></span>
+<span id="cb322-4"><a href="%E5%85%B6%E4%BB%96.html#cb322-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> conda-forge</span></span>
+<span id="cb322-5"><a href="%E5%85%B6%E4%BB%96.html#cb322-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
+<span id="cb322-6"><a href="%E5%85%B6%E4%BB%96.html#cb322-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> xeus-cling</span></span>
+<span id="cb322-7"><a href="%E5%85%B6%E4%BB%96.html#cb322-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> python=3.*</span></span>
+<span id="cb322-8"><a href="%E5%85%B6%E4%BB%96.html#cb322-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> pip</span></span>
+<span id="cb322-9"><a href="%E5%85%B6%E4%BB%96.html#cb322-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> ipykernel</span></span>
+<span id="cb322-10"><a href="%E5%85%B6%E4%BB%96.html#cb322-10" aria-hidden="true" tabindex="-1"></a><span class="fu">prefix</span><span class="kw">:</span><span class="at"> /opt/conda/envs/c-cpp</span></span></code></pre></div>
+<div class="sourceCode" id="cb323"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb323-1"><a href="%E5%85%B6%E4%BB%96.html#cb323-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> conda env create <span class="at">-f</span> c_cpp.yml</span></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb324-1"><a href="%E5%85%B6%E4%BB%96.html#cb324-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> jupyter kernelspec install <span class="dt">\</span></span>
+<span id="cb324-2"><a href="%E5%85%B6%E4%BB%96.html#cb324-2" aria-hidden="true" tabindex="-1"></a>    /opt/conda/envs/c-cpp/share/jupyter/kernels/xcpp11 <span class="at">--sys-prefix</span></span></code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb325-1"><a href="%E5%85%B6%E4%BB%96.html#cb325-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> jupyter kernelspec install <span class="dt">\</span></span>
+<span id="cb325-2"><a href="%E5%85%B6%E4%BB%96.html#cb325-2" aria-hidden="true" tabindex="-1"></a>    /opt/conda/envs/c-cpp/share/jupyter/kernels/xcpp14 <span class="at">--sys-prefix</span></span></code></pre></div>
+<div class="sourceCode" id="cb326"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb326-1"><a href="%E5%85%B6%E4%BB%96.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> jupyter kernelspec install <span class="dt">\</span></span>
+<span id="cb326-2"><a href="%E5%85%B6%E4%BB%96.html#cb326-2" aria-hidden="true" tabindex="-1"></a>    /opt/conda/envs/c-cpp/share/jupyter/kernels/xcpp17 <span class="at">--sys-prefix</span></span></code></pre></div>
+<!--# Scanf() problem https://github.com/brendan-rius/jupyter-c-kernel/issues/3 -->
+<div class="sourceCode" id="cb327"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb327-1"><a href="%E5%85%B6%E4%BB%96.html#cb327-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/conda/envs/c-cpp/bin/python3.9 <span class="at">-m</span> <span class="dt">\</span></span>
+<span id="cb327-2"><a href="%E5%85%B6%E4%BB%96.html#cb327-2" aria-hidden="true" tabindex="-1"></a>    pip install git+https://github.com/XaverKlemenschits/jupyter-c-kernel.git</span></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb328-1"><a href="%E5%85%B6%E4%BB%96.html#cb328-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /opt/conda/envs/c-cpp/share/jupyter/kernels/c/kernel.json</span></code></pre></div>
+<div class="code-label">
+<p>/opt/conda/envs/c-cpp/share/jupyter/kernels/c/kernel.json</p>
+</div>
+<div class="sourceCode" id="cb329"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb329-1"><a href="%E5%85%B6%E4%BB%96.html#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb329-2"><a href="%E5%85%B6%E4%BB%96.html#cb329-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"display_name"</span><span class="fu">:</span> <span class="st">"C"</span><span class="fu">,</span></span>
+<span id="cb329-3"><a href="%E5%85%B6%E4%BB%96.html#cb329-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"argv"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb329-4"><a href="%E5%85%B6%E4%BB%96.html#cb329-4" aria-hidden="true" tabindex="-1"></a>      <span class="st">"/opt/conda/envs/c-cpp/bin/python3"</span><span class="ot">,</span></span>
+<span id="cb329-5"><a href="%E5%85%B6%E4%BB%96.html#cb329-5" aria-hidden="true" tabindex="-1"></a>      <span class="st">"-m"</span><span class="ot">,</span></span>
+<span id="cb329-6"><a href="%E5%85%B6%E4%BB%96.html#cb329-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">"jupyter_c_kernel"</span><span class="ot">,</span></span>
+<span id="cb329-7"><a href="%E5%85%B6%E4%BB%96.html#cb329-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">"-f"</span><span class="ot">,</span></span>
+<span id="cb329-8"><a href="%E5%85%B6%E4%BB%96.html#cb329-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">"{connection_file}"</span></span>
+<span id="cb329-9"><a href="%E5%85%B6%E4%BB%96.html#cb329-9" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb329-10"><a href="%E5%85%B6%E4%BB%96.html#cb329-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"language"</span><span class="fu">:</span> <span class="st">"C"</span></span>
+<span id="cb329-11"><a href="%E5%85%B6%E4%BB%96.html#cb329-11" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb330-1"><a href="%E5%85%B6%E4%BB%96.html#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mv ~/Downloads/logo<span class="pp">**</span> /opt/conda/envs/c-cpp/share/jupyter/c/</span></code></pre></div>
+<div class="flex-columns">
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-83"></span>
+<img src="figures/icons/logo-32x32.png" alt="C 語言核心圖標，32x32" width=""><p class="caption">
+圖 C.1: C 語言核心圖標，32x32
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-84"></span>
+<img src="figures/icons/logo-64x64.png" alt="C 語言核心圖標，64x64" width=""><p class="caption">
+圖 C.2: C 語言核心圖標，64x64
+</p>
+</div>
+</div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb331-1"><a href="%E5%85%B6%E4%BB%96.html#cb331-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-al</span> /opt/conda/envs/c-cpp/share/jupyter/kernels/c</span></code></pre></div>
+<pre class="console_output"><code>drwxrwxr-x 2 root root 4096 Oct 23 17:20 ./
+drwxrwxr-x 7 root root 4096 Oct 23 15:31 ../
+-rw-rw-r-- 1 root root  181 Oct 23 15:26 kernel.json
+-rw-r--r-- 1 root root 1536 Oct 23 17:02 logo-32x32.png
+-rw-r--r-- 1 root root 4079 Oct 23 17:02 logo-64x64.png</code></pre>
+<div class="sourceCode" id="cb333"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb333-1"><a href="%E5%85%B6%E4%BB%96.html#cb333-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> jupyter kernelspec install /opt/conda/envs/c-cpp/share/jupyter/c <span class="at">--sys-prefix</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-85"></span>
+<img src="figures/jupyterlab_c_cpp_kernel.png" alt="jupyterhub 加上了 C 與 CPP 核心的頁面" width="100%"><p class="caption">
+圖 C.3: jupyterhub 加上了 C 與 CPP 核心的頁面
+</p>
+</div>
+<p>```</p>
 
 </div>
 </div>
@@ -286,7 +362,7 @@ mysql&gt; </code></pre>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-08-23.</p>
+    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-08-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
