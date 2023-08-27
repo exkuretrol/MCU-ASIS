@@ -155,7 +155,7 @@ sudo vim /etc/apache2/sites-available/asis.conf
 
 在 VirtualHost 節點下面新增 RStudio Proxy 的區塊
 
-::: code-label
+::: {.code-label}
 /etc/apache2/sites-available/asis.conf
 :::
 
@@ -314,7 +314,7 @@ sudo vim /etc/apache2/sites-available/asis.conf
 
 一樣地，將 R Shiny Server 的設定也一同放入設定檔案中。
 
-::: code-label
+::: {.code-label}
 /etc/apache2/sites-available/asis.conf
 :::
 
@@ -389,7 +389,7 @@ sudo ufw delete 3 && \
 sudo vim /etc/shiny-server/shiny-server.conf
 ```
 
-::: code-label
+::: {.code-label}
 /etc/shiny-server/shiny-server.conf
 :::
 
@@ -546,7 +546,7 @@ sudo groupadd stu && sudo groupadd teacher
 sudo vim /etc/default/useradd
 ```
 
-::: code-label
+::: {.code-label}
 /etc/default/useradd
 :::
 

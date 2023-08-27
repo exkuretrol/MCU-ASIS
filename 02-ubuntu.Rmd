@@ -151,6 +151,10 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
 sudo vim /etc/netplan/00-installer-config.yaml
 ```
 
+::: {.code-label}
+/etc/netplan/00-installer-config.yaml
+:::
+
 ``` {.yaml .console_output}
 # This is the network config written by 'subiquity'
 network:
@@ -521,7 +525,12 @@ sudo vim /etc/ssh/sshd_config
 
 將 `#Port 22` 取消註解，並把 `22` 改成其他介於 1-65535 之間的數字。這裡我使用 `60000`。
 
+::: {.code-label}
+/etc/ssh/sshd_config
+:::
+
 ``` {.bash}
+[...]
 Port 60000
 ```
 
@@ -529,7 +538,12 @@ Port 60000
 
 將 PasswordAuthentication（以密碼驗證）設為 no。使用 SSH 連線時，允許使用者密碼以輸入密碼驗證。
 
+::: {.code-label}
+/etc/ssh/sshd_config
+:::
+
 ``` {.bash}
+[...]
 PasswordAuthentication no
 ```
 
@@ -539,7 +553,12 @@ PasswordAuthentication no
 
 避免 root 登入可以使系統避免過大的權限暴露。
 
+::: {.code-label}
+/etc/ssh/sshd_config
+:::
+
 ``` {.bash}
+[...]
 PermitRootLogin no
 ```
 
@@ -547,7 +566,12 @@ PermitRootLogin no
 
 只允許特定的使用者使用 SSH 連線可大大降低風險。
 
+::: {.code-label}
+/etc/ssh/sshd_config
+:::
+
 ``` {.bash}
+[...]
 AllowUsers asis
 ```
 
@@ -555,7 +579,12 @@ AllowUsers asis
 
 將沒有密碼就可以登入的使用者撤銷 SSH 連線的權限。
 
+::: {.code-label}
+/etc/ssh/sshd_config
+:::
+
 ``` {.bash}
+[...]
 PermitEmptyPasswords no
 ```
 

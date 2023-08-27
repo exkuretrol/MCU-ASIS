@@ -380,7 +380,7 @@ sudo vim /etc/apache2/sites-available/asis.conf
 
 寫入測試用的設定
 
-::: code-label
+::: {.code-label}
 /etc/apache2/sites-available/asis.conf
 :::
 
@@ -425,6 +425,10 @@ sudo mkdir /var/www/asis
 ``` {.bash .prefixed}
 sudo vim /var/www/asis/index.html
 ```
+
+::: {.code-label}
+/var/www/asis/index.html
+:::
 
 ``` html
 <!DOCTYPE html>
@@ -507,6 +511,10 @@ sudo vim /var/www/asis/info.php
 
 貼入以下程式碼
 
+::: {.code-label}
+/var/www/asis/info.php
+:::
+
 ``` {.console_output}
 <?php
 phpinfo();
@@ -553,6 +561,10 @@ sudo a2enmod userdir
 sudo vim /etc/apache2/mods-available/userdir.conf
 ```
 
+::: {.code-label}
+/etc/apache2/mods-available/userdir.conf
+:::
+
 ``` {.apache}
 <IfModule mod_userdir.c>
         # 確認 UserDir 是否有取消註解
@@ -579,6 +591,10 @@ sudo chmod 755 /home/<使用者名稱>/public_html
 ``` {.bash .prefixed}
 sudo vim /etc/apache2/mods-available/php8.1.conf
 ```
+
+::: {.code-label}
+/etc/apache2/mods-available/php8.1.conf
+:::
 
 ``` {.apache}
 [...]
@@ -802,7 +818,7 @@ mysql -u root -p
 sudo vim /etc/phpmyadmin/apache.conf
 ```
 
-::: code-label
+::: {.code-label}
 /etc/phpmyadmin/apache.conf
 :::
 
