@@ -407,6 +407,9 @@ drwxr-xr-x  2 root root 4096 Aug 21 05:16 html</code></pre>
 <div class="sourceCode" id="cb93"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb93-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir /var/www/asis</span></code></pre></div>
 <p>產生一個測試用的首頁</p>
 <div class="sourceCode" id="cb94"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb94-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /var/www/asis/index.html</span></code></pre></div>
+<div class="code-label">
+<p>/var/www/asis/index.html</p>
+</div>
 <div class="sourceCode" id="cb95"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb95-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></span>
 <span id="cb95-2"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html</span> <span class="er">lang</span><span class="ot">=</span><span class="st">"zh-TW"</span><span class="kw">&gt;</span></span>
 <span id="cb95-3"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;head&gt;</span></span>
@@ -461,6 +464,9 @@ To activate the new configuration, you need to run:
 <p>在網站資料夾中新增一個 <code>info.php</code> 檔案</p>
 <div class="sourceCode" id="cb103"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb103-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /var/www/asis/info.php</span></code></pre></div>
 <p>貼入以下程式碼</p>
+<div class="code-label">
+<p>/var/www/asis/info.php</p>
+</div>
 <pre class="console_output"><code>&lt;?php
 phpinfo();
 </code></pre>
@@ -487,6 +493,9 @@ phpinfo();
 <div class="sourceCode" id="cb108"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb108-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> a2enmod userdir</span></code></pre></div>
 <p>啟動後，還要確定 <code>userdir</code> 模組的 <code>UserDir</code> 有無正確設定</p>
 <div class="sourceCode" id="cb109"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb109-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/mods-available/userdir.conf</span></code></pre></div>
+<div class="code-label">
+<p>/etc/apache2/mods-available/userdir.conf</p>
+</div>
 <div class="sourceCode" id="cb110"><pre class="sourceCode apache"><code class="sourceCode apache"><span id="cb110-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;IfModule</span><span class="at"> mod_userdir.c</span><span class="fu">&gt;</span></span>
 <span id="cb110-2"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb110-2" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 確認 UserDir 是否有取消註解</span></span>
 <span id="cb110-3"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb110-3" aria-hidden="true" tabindex="-1"></a>        UserDir<span class="st"> public_html</span></span>
@@ -503,6 +512,9 @@ phpinfo();
 <span id="cb111-2"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb111-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chmod 755 /home/<span class="op">&lt;</span>使用者名稱<span class="op">&gt;</span>/public_html</span></code></pre></div>
 <p>如果要使使用者家目錄運行 <code>.php</code> 類型的檔案，還需要將 <code>php_admin_flag engine Off</code> 註解</p>
 <div class="sourceCode" id="cb112"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb112-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/mods-available/php8.1.conf</span></code></pre></div>
+<div class="code-label">
+<p>/etc/apache2/mods-available/php8.1.conf</p>
+</div>
 <div class="sourceCode" id="cb113"><pre class="sourceCode apache"><code class="sourceCode apache"><span id="cb113-1"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb113-1" aria-hidden="true" tabindex="-1"></a>[...]</span>
 <span id="cb113-2"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb113-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb113-3"><a href="lamp-%E7%A8%8B%E5%BC%8F%E9%9B%86.html#cb113-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Running PHP scripts in user directories is disabled by default</span></span>
@@ -773,7 +785,7 @@ sudo htpasswd /etc/phpmyadmin/.htpasswd otheruser
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-08-25.</p>
+    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-08-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

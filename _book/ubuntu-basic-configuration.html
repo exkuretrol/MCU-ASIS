@@ -206,6 +206,9 @@ lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536
 <p>可以看到剛才新增的的網路卡沒有 ip 位址，這是因為系統沒有為這張網卡打開 dhcp 的設定。</p>
 <p>我們可以透過修改 netplan 的設定將 dhcp 伺服器打開。將 <code>enp0s8</code> 的設定添加在 <code>enp0s3</code> 下面。</p>
 <pre><code>sudo vim /etc/netplan/00-installer-config.yaml</code></pre>
+<div class="code-label">
+<p>/etc/netplan/00-installer-config.yaml</p>
+</div>
 <div class="sourceCode" id="cb17"><pre class="sourceCode yaml console_output"><code class="sourceCode yaml"><span id="cb17-1"><a href="ubuntu-basic-configuration.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is the network config written by 'subiquity'</span></span>
 <span id="cb17-2"><a href="ubuntu-basic-configuration.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">network</span><span class="kw">:</span></span>
 <span id="cb17-3"><a href="ubuntu-basic-configuration.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">ethernets</span><span class="kw">:</span></span>
@@ -466,28 +469,48 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre
 </ul>
 <div class="sourceCode" id="cb45"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb45-1"><a href="ubuntu-basic-configuration.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/ssh/sshd_config</span></code></pre></div>
 <p>將 <code>#Port 22</code> 取消註解，並把 <code>22</code> 改成其他介於 1-65535 之間的數字。這裡我使用 <code>60000</code>。</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="ubuntu-basic-configuration.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Port</span> 60000</span></code></pre></div>
+<div class="code-label">
+<p>/etc/ssh/sshd_config</p>
+</div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="ubuntu-basic-configuration.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span>
+<span id="cb46-2"><a href="ubuntu-basic-configuration.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Port</span> 60000</span></code></pre></div>
 <ul>
 <li>關閉密碼驗證</li>
 </ul>
 <p>將 PasswordAuthentication（以密碼驗證）設為 no。使用 SSH 連線時，允許使用者密碼以輸入密碼驗證。</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb47-1"><a href="ubuntu-basic-configuration.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PasswordAuthentication</span> no</span></code></pre></div>
+<div class="code-label">
+<p>/etc/ssh/sshd_config</p>
+</div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb47-1"><a href="ubuntu-basic-configuration.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span>
+<span id="cb47-2"><a href="ubuntu-basic-configuration.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="ex">PasswordAuthentication</span> no</span></code></pre></div>
 <p>當然如果密碼驗證為 no，且同時遺失 SSH 的 pair key 時，你就無法以 SSH 連線至遠端主機，需要使用其他方法補救。</p>
 <ul>
 <li>關閉遠端 root 登入</li>
 </ul>
 <p>避免 root 登入可以使系統避免過大的權限暴露。</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="ubuntu-basic-configuration.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PermitRootLogin</span> no</span></code></pre></div>
+<div class="code-label">
+<p>/etc/ssh/sshd_config</p>
+</div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="ubuntu-basic-configuration.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span>
+<span id="cb48-2"><a href="ubuntu-basic-configuration.html#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="ex">PermitRootLogin</span> no</span></code></pre></div>
 <ul>
 <li>限制能使用 SSH 連線的使用者</li>
 </ul>
 <p>只允許特定的使用者使用 SSH 連線可大大降低風險。</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="ubuntu-basic-configuration.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="ex">AllowUsers</span> asis</span></code></pre></div>
+<div class="code-label">
+<p>/etc/ssh/sshd_config</p>
+</div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="ubuntu-basic-configuration.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span>
+<span id="cb49-2"><a href="ubuntu-basic-configuration.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="ex">AllowUsers</span> asis</span></code></pre></div>
 <ul>
 <li>關閉無密碼的使用者使用 SSH</li>
 </ul>
 <p>將沒有密碼就可以登入的使用者撤銷 SSH 連線的權限。</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb50-1"><a href="ubuntu-basic-configuration.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PermitEmptyPasswords</span> no</span></code></pre></div>
+<div class="code-label">
+<p>/etc/ssh/sshd_config</p>
+</div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb50-1"><a href="ubuntu-basic-configuration.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span>
+<span id="cb50-2"><a href="ubuntu-basic-configuration.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="ex">PermitEmptyPasswords</span> no</span></code></pre></div>
 <p><code>-t</code> 參數可以測試 SSH 的設定是否有效，可以避免一些錯字造成的錯誤。</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb51-1"><a href="ubuntu-basic-configuration.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> sshd <span class="at">-t</span></span></code></pre></div>
 <p>將系統上的 SSH daemon 重新啟動，重新啟動 SSH 服務。</p>
@@ -600,7 +623,7 @@ Last login: Tue Aug 15 06:04:51 2023 from 192.168.56.1</code></pre>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-08-25.</p>
+    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-08-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
