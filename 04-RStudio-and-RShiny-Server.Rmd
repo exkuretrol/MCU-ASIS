@@ -1,17 +1,17 @@
-# RStudio & RShiny Server
+# RStudio & RShiny Server {#rstudio-and-rshiny-server}
 
 本章節會說明怎麼安裝 RStudio 與 RShiny Server 到系統上。
 
-## 事前準備
+## 事前準備 {#rstudio-shiny-preparation}
 
 先確認目前的使用者 asis 擁有 sudo 的權限。
 
-## R
+## R {#r}
 
 R 是一個跨平台的統計繪圖開放原始碼軟體。除了 R 基本的功能之外，還有龐大的社群一起合作創造新的功能，使 R 的功能更為豐富。
 
 
-### 安裝 R Base
+### 安裝 R Base {#install-r-base}
 
 安裝軟體之前，先更新套件管理程式的來源
 
@@ -45,7 +45,7 @@ sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_
 sudo apt install r-base --yes
 ```
 
-### 確認 R Base 是否成功安裝
+### 確認 R Base 是否成功安裝 {#verify-r-base-installation}
 
 在命令列介面下要確認 R 有無正常安裝很簡單，輸入一個大寫 R 就可以進到 R 的 Console。
 
@@ -85,11 +85,11 @@ Type 'q()' to quit R.
 q(save='no')
 ```
 
-## RStudio Server
+## RStudio Server {#rstudio-server}
 
 RStudio Server 是 RStudio 的網頁版本，使用者可以透過網頁存取一個位於網路上的 RStudio。
 
-### 安裝 RStudio Server
+### 安裝 RStudio Server {#install-rstudio-server}
 
 本小節會介紹怎麼安裝 RStudio Server 與設定 Apache 的反向代理。
 
@@ -134,7 +134,7 @@ knitr::include_graphics(path = 'figures/apache2-rstudio-server-login-page.png')
 curl <虛擬主機的 ip 位址>:8787
 ```
 
-### 設定 Apache 的反向代理
+### 設定 Apache 的反向代理 {#configure-rstudio-apache-reverse-proxy}
 
 <!--# TODO: 說明何謂反向代理（Reverse Proxy）？ -->
 
@@ -247,11 +247,11 @@ Status: active
 
 ```
 
-## R Shiny Server
+## R Shiny Server {#r-shiny-server}
 
 RShiny Server 是一個可以讓 Shiny App 部署在伺服器上，透過特定的網址啟動特定的 Shiny App。
 
-### 安裝 R Shiny Server
+### 安裝 R Shiny Server {#install-r-shiny-server}
 
 本小節會說明怎麼安裝 R Shiny Server 在 Ubuntu 上、設定 Apache 的反向代理、再來對 R Shiny Server 做更進階的設定，最後驗證剛才的設定是否有效。
 
@@ -304,7 +304,7 @@ sudo su - -c "R -e \"install.packages('rmarkdown')\""
 ```
 :::
 
-### 設定 Apache 的反向代理
+### 設定 Apache 的反向代理 {#configure-shiny-apache-reverse-proxy}
 
 繼續編輯 Apache 的網頁設定文件 `asis.conf`
 
@@ -379,7 +379,7 @@ sudo ufw delete 3 && \
     sudo ufw delete 5
 ```
 
-### R Shiny Server 進階設定
+### R Shiny Server 進階設定 {#r-shiny-server-advanced-settings}
 
 這個步驟會編輯 R Shiny Server 的設定，可以根據需求去區分 Shiny App，例如我想要使用者群組為學生的放在一起，為教師的使用者群組放在一起，都是做得到的。更詳盡的設定可以看 R Shiny Server [官方的說明文件](https://docs.rstudio.com/shiny-server/)設定。
 
@@ -530,7 +530,7 @@ server {
 這裏要至下一節先建立使用者群組後再重新啟動 R Shiny Server。因為設定檔中設有使用者群組（`stu`、`teacher`）而沒有創建的話，重新啟動 R Shiny Server 會因為找不到該使用者群組而出現錯誤。
 :::
 
-### 使用使用者測試設定是否有效
+### 使用使用者測試設定是否有效 {#user-testing-to-verify-settings}
 
 這裡會大概講一下怎麼創建使用者群組、使用者帳戶，以及在創建使用者帳戶的同時，也一起於家目錄創建 `ShinyApps` 資料夾。詳細的說明會於附錄的[帳號管理]說明。
 

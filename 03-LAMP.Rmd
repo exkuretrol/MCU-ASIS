@@ -1,24 +1,24 @@
 # (PART) 軟體安裝 {-}
 
-# LAMP 程式集
+# LAMP 程式集 {#lamp-software-stack}
 
 LAMP 是由 4 個單字開頭的字組成的詞。 LAMP 讓你可以在一台系統為 **L**inux 的電腦上，用 **A**pache 架設網站伺服器，其中資料儲存在 **M**ySQL 裡面，最後用 **P**HP 執行動態的網站。
 
 這章會教你怎麼安裝 LAMP 程式集。
 
-## 事前準備
+## 事前準備 {#lamp-preparation}
 
 在安裝軟體之前，你需要有一個可以執行 `sudo` 指令的使用者。 如果你是照著先前的教學做的話，這個使用者為安裝時的預設使用者 `asis`。
 
-## Apache
+## Apache {#apache}
 
 Apache HTTP Server（簡稱 Apache），是一個開放原始碼的程式，被用來當作網頁的伺服器，是目前流行的網頁伺服器之一。
 
-### 概述
+### 概述 {#apache-overview}
 
 本章節會講述 Apache 網頁伺服器的安裝與防火牆的安全性設定。
 
-### 安裝 Apache
+### 安裝 Apache {#install-apache}
 
 首先先更新套件管理程式（APT）的來源：
 
@@ -98,7 +98,7 @@ sudo apt install apache2 -y
 ```
 :::
 
-### 調整防火牆設定
+### 調整防火牆設定 {#adjust-firewall-settings}
 
 有些程式會自動把設定檔加入 UFW 中，這樣就可以透過設定檔啟用/關閉設定防火牆允許的埠號，不用再特別記下該軟體的設定，像是 Apache 就是其中之一。
 
@@ -193,15 +193,15 @@ knitr::include_graphics(path = 'figures/apache-main-page.png')
 
 同樣地，`192.168.56.1` 才是我們需要的 IP。
 
-## MySQL
+## MySQL {#mysql}
 
 MySQL（讀作 My-S-Q-L）因為其效能高、成本低、可信賴的原因，被廣大企業所使用，目前也是受歡迎的開放原始碼資料庫系統之一。
 
-### 概述
+### 概述 {#mysql-overview}
 
 這個小節會說明怎麼安裝 MySQL，與做簡易的安裝後設定。
 
-### 安裝 MySQL
+### 安裝 MySQL {#install-mysql}
 
 ``` {.bash .prefixed}
 sudo apt info mysql-server
@@ -244,7 +244,7 @@ N: There is 1 additional record. Please use the '-a' switch to see it
 sudo apt install mysql-server -y
 ```
 
-### 設定 MySQL
+### 設定 MySQL {#configure-mysql}
 
 指令 `mysql_secure_installation` 會做以下幾件事（詳細的說明可以在[這裡](https://dev.mysql.com/doc/refman/8.0/en/mysql-secure-installation.html)找到）：
 
@@ -355,11 +355,11 @@ sudo mysql -u root
 
 -   `--user, -u`：使用者帳號
 
-## PHP
+## PHP {#php}
 
 PHP（Hypertext PreProcessor，超文字預處理器），允許網頁開發人員開發動態網頁，截至2021年被世界上至少70%以上的網頁所使用。
 
-### 安裝 PHP
+### 安裝 PHP {#install-php}
 
 除了 `php` 套件之外，`libapache2-mod-php` 套件是讓 apache2 認識 php 這個檔案，而 `php-mysql` 是讓 PHP 與 MySQL 溝通的套件。
 <!--# TODO: 連結至第五章 python 說明 which -A 指令 -->
@@ -368,7 +368,7 @@ PHP（Hypertext PreProcessor，超文字預處理器），允許網頁開發人�
 sudo apt install php libapache2-mod-php php-mysql
 ```
 
-### 建立虛擬網站
+### 建立虛擬網站 {#create-virtual-host}
 
 虛擬網站（Virtual Host）可以讓你在一台電腦同時架設多個網站，擁有不同的域名。在這裡的用處就是建立一個新的網站。
 
@@ -501,7 +501,7 @@ curl http://<虛擬主機的 ip 地址>/
 </html>
 ```
 
-### 測試 PHP
+### 測試 PHP {#test-php}
 
 在網站資料夾中新增一個 `info.php` 檔案
 
@@ -534,7 +534,7 @@ sudo rm /var/www/asis/info.php
 ```
 
 
-### 使用者目錄網站
+### 使用者目錄網站 {#user-directory-website}
 
 要開啟 apache2 的使用者目錄功能需要先確認 `userdir` 模組有沒有打開
 
@@ -617,15 +617,15 @@ sudo vim /etc/apache2/mods-available/php8.1.conf
 sudo systemctl restart apache2
 ```
 
-## phpMyAdmin
+## phpMyAdmin {#phpmyadmin}
 
 phpMyAdmin 是一個以 PHP 為基礎撰寫的一個軟體，可以讓使用者以簡易的方式新增、查詢、修改或是刪除資料庫裡面的紀錄。
 
-### 概述
+### 概述 {#phpmyadmin-overview}
 
 本小節會說明怎麼安裝 phpMyAdmin 與基礎的安全性設定。
 
-### 安裝 phpMyAdmin
+### 安裝 phpMyAdmin {#install-phpmyadmin}
 
 一樣地，確認 `phpmyadmin` 的版本
 
@@ -810,7 +810,7 @@ mysql -u root -p
 :::
 
 
-### 設定 phpMyAdmin
+### 設定 phpMyAdmin {#configure-phpmyadmin}
 
 預設的網址 `http://<虛擬機器的 ip 位置>/phpmyadmin` 實在是太危險了，如果有人有意破壞，又被猜到管理員的密碼，那將會一發不可收拾，所以接下來要改的是 phpMyAdmin 在 Apache2 中的設定，將預設的位置改掉至少會安全一點。
 

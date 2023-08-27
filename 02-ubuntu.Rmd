@@ -276,7 +276,7 @@ To                         Action      From
 60000 (v6)                 ALLOW       Anywhere (v6)
 ```
 
-## Windows 終端機
+## Windows 終端機 {#windows-terminal-0}
 
 Windows 的用戶建議可以安裝 Windows 終端機。可以參考附錄的 [Windows 終端機](#windows-terminal) 介紹。
 
@@ -284,7 +284,7 @@ Windows 的用戶建議可以安裝 Windows 終端機。可以參考附錄的 [W
 
 在這個小節會逐步解釋 OpenSSH 的使用方法，從 OpenSSH 客戶端安裝、產生 SSH 金鑰再來是連線。
 
-### 概述 {#overview}
+### 概述 {#openssh-overview}
 
 OpenSSH 是 SSH（Secure Shell）一個開源的版本。SSH 是一種透過 SSH 傳輸協定來管理系統、傳輸檔案的一個系統套件。它現在被廣泛的使用在各個資料中心與大企業中。
 

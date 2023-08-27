@@ -1,12 +1,12 @@
-# JupyterLab on JupyterHub
+# JupyterHub {#jupyterhub}
 
 本篇教學完全照著[@mangecoeur_elena_vuong_luria_rk_2021]所寫的教學操作。旨在建立 Jupyterhub 環境。
 
-## 事前準備
+## 事前準備 {#jupyterhub-preparation}
 
 先確認目前的使用者 `asis` 擁有 `sudo` 的權限。
 
-## 設置 Python 3 環境
+## 設置 Python 3 環境 {#setup-python-3-environment}
 
 首先，一樣地，只要安裝套件都需要先更新套件來源。這裡我們用 `&&` 連接兩個指令，讓更新與安裝依序執行。
 
@@ -26,11 +26,11 @@ sudo apt install python3-venv --yes
 sudo apt install python-is-python3 --yes
 ```
 
-## JupyterLab 與 JupyterHub
+## JupyterLab 與 JupyterHub {#jupyterlab-and-jupyterhub}
 
-### 概述
+### 概述 {#jupyterhub-overview}
 
-### 於虛擬環境中設置 JupyterLab 與 JupyterHub
+### 於虛擬環境中設置 JupyterLab 與 JupyterHub {#setup-jupyterlab-and-jupyterhub-in-virtual-environment}
 
 利用 Python 的 `venv` 插件建立 Python 虛擬環境
 
@@ -69,7 +69,7 @@ sudo apt-get install -y nodejs
 sudo npm install -g configurable-http-proxy
 ```
 
-### 設定 JupyterHub
+### 設定 JupyterHub {#configure-jupyterhub}
 
 於 `/opt/jupyterhub/etc/` 資料夾建立 jupyterhub 資料夾存放設定。
 
@@ -106,7 +106,7 @@ c.Authenticator.admin_users = {'asis'}
 c.Spawner.cmd = ['jupyter-labhub']
 ```
 
-### 新增開機自動啟動 JupyterHub 的服務
+### 新增開機自動啟動 JupyterHub 的服務 {#add-service-to-automatically-start-jupyterhub-on-boot}
 
 在剛才的設定資料夾裡面新增 `systemd` 資料夾
 
@@ -169,7 +169,7 @@ sudo systemctl start jupyterhub.service
 sudo systemctl status jupyterhub.service
 ```
 
-::: {.console_output}
+``` {.console_output}
 ● jupyterhub.service - JupyterHub
      Loaded: loaded (/etc/systemd/system/jupyterhub.service; enabled; vendor preset: enabled)
      Active: active (running) since Sun 2023-08-27 05:23:20 UTC; 2s ago
@@ -191,11 +191,11 @@ Aug 27 05:23:21 asis0721 jupyterhub[109126]: 05:23:21.801 [ConfigProxy] info: Ro
 Aug 27 05:23:21 asis0721 jupyterhub[109126]: 05:23:21.802 [ConfigProxy] info: 201 POST /api/routes/jhub
 Aug 27 05:23:21 asis0721 jupyterhub[109122]: [I 2023-08-27 05:23:21.803 JupyterHub app:3245] JupyterHub is now running >
 lines 1-21/21 (END)
-:::
+```
 
-## JupyterHub 中的運算核心
+## JupyterHub 中的運算核心 {#kernels-in-jupyterhub}
 
-### Conda 的 Python🐍 環境
+### Conda 的 Python🐍 環境 {#conda-python-environment}
 
 到[官方下載頁面](https://www.anaconda.com/download#downloads)複製最新的安裝程式的連結
 
@@ -230,7 +230,7 @@ Please, press ENTER to continue
 
 這裡按 Enter
 
-``` {.bash .prefixed}
+``` {.console_output}
 ==================================================
 End User License Agreement - Anaconda Distribution
 ==================================================
@@ -346,7 +346,7 @@ sudo /opt/conda/envs/python/bin/python -m \
 knitr::include_graphics(path = 'figures/jupyterhub-main-page-kernel-python.png')
 ```
 
-### R 環境
+### R 環境 {#r-environment}
 
 用 root 的身份為 R 安裝套件 `IRkernel`
 
@@ -380,14 +380,14 @@ Execution halted
 jupyter kernelspec --version
 ```
 
-::: {.console_output}
+``` {.console_output}
 Command 'jupyter' not found, but can be installed with:
 
 sudo snap install jupyter       # version 1.0.0, or
 sudo apt  install jupyter-core  # version 4.6.3-3
 
 See 'snap info jupyter' for additional versions.
-:::
+```
 
 找不到指令，出現了推薦安裝方式，不過這不是我們要的。
 
@@ -398,9 +398,9 @@ See 'snap info jupyter' for additional versions.
 echo $PATH
 ```
 
-::: {.console_output}
+``` {.console_output}
 /home/asis/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
-:::
+```
 
 放置於其中一個位置就行，注意不要放置在 /home 底下，執行 R 時事使用 root 權限，用 root 權限執行時，並不會翻 `/home/asis/` 底下的資料夾。 這裡我們選用 `/usr/local/bin` 作為軟連結放置 jupyter 執行檔。
 
@@ -420,9 +420,9 @@ which jupyter
 ls -al $(which jupyter)
 ```
 
-::: {.console_output}
+``` {.console_output}
 lrwxrwxrwx 1 root root 27 Sep 17 16:23 /usr/local/bin/jupyter -> /opt/jupyterhub/bin/jupyter
-:::
+```
 
 可以看到指令 `jupyter` 之所以會存在是因為軟連結至 `/opt/jupyterhub/bin/jupyter` 後，因為 `/usr/local/bin` 在變數 `path` 內，讓系統找得到，才可以使用這個指令。
 
@@ -445,17 +445,17 @@ sudo su - -c "R -e \"
 jupyter kernelspec list
 ```
 
-::: {.console_output}
+``` {.console_output}
 Available kernels:
   ir43       /opt/jupyterhub/share/jupyter/kernels/ir43
   python3    /opt/jupyterhub/share/jupyter/kernels/python3
-:::
+```
 
 ```{r, fig.cap='jupyterhub 安裝完 R 核心與預設 Python 的頁面'}
 knitr::include_graphics(path = 'figures/jupyterhub-main-page-kernel-R.png')
 ```
 
-### SAS 環境
+### SAS 環境 {#sas-environment}
 
 在 conda 的 `envs` 資料夾新增一個 `sas.yml` 設定
 
@@ -534,7 +534,7 @@ sudo jupyter kernelspec install \
     /opt/conda/envs/sas/share/jupyter/kernels/sas --sys-prefix
 ```
 
-## 設置 Apache 的反向代理
+## 設置 Apache 的反向代理 {#configure-apache-reverse-proxy}
 
 更新我們網站的設定
 
@@ -579,10 +579,10 @@ sudo systemctl restart apache2
 最後用網址 `http://<虛擬機器的 ip 位置>/jhub` 訪問首頁
 
 ```{r, fig.cap='透過 http://<虛擬機器的 ip 位置>/jhub 訪問的首頁'}
-knitr::include_graphics(path = './figures/apache2-main-page-proxy-test')
+knitr::include_graphics(path = './figures/apache2-main-page-proxy-test.png')
 ```
 
-## JupyterHub 擴充套件
+## 其他 JupyterHub 擴充套件 {#other-jupyterhub-extensions}
 
 安裝語言套件
 

@@ -2,7 +2,7 @@
 
 # (APPENDIX) 附錄 {-}
 
-# 相關軟體
+# 相關軟體 {#related-software}
 
 <!-- 因為內容太多，書本篇收錄的會變得太混雜，所以我把一些內容放到這裡。 -->
 
@@ -42,11 +42,11 @@ knitr::include_graphics(path = './figures/configure-windows-terminal_2.png')
 
 接下來只要打開命令提示字元（cmd）或是 PowerShell 都會自動以 Windows 終端機打開。
 
-## PuTTY
+## PuTTY {#putty}
 
 使用 PuTTY 連線至 OpenSSH 伺服器
 
-### 以 PuTTY 產生 key
+### 以 PuTTY 產生 key {#generate-key-with-putty}
 
 另一個方法不會需要你手動安裝 OpenSSH Client，不過、一樣地，要安裝PuTTY 程式。
 
@@ -80,7 +80,7 @@ knitr::include_graphics(path = './figures/configure-windows-terminal_2.png')
 
 分別按下「Save public key」與「Save private key」找到適合的地方儲存它。
 
-### 上傳 ssh key pairs
+### 上傳 ssh key pairs {#upload-ssh-key-pairs}
 
 PuTTY 產生的 public key 與 private key 格式比較特別，並不能直接把 public key 裡面的文字直接貼到遠端電腦的 `~/.ssh/authorized_keys` 檔案裡面，需要經由 PuTTYgen.exe 讀取 \*.ppk 才能得到正確格式的 public key。首先把 PuTTYgen 程式打開。
 
@@ -110,7 +110,7 @@ asis@192.168.0.13's password:
 
 輸入完成不會出現任何訊息是正常的，代表操作沒有問題且已經可以使用 PuTTY 連線了。
 
-### PuTTYgen 產生的 key pairs 的連線方式:
+### PuTTYgen 產生的 key pairs 的連線方式 {#connection-method-of-key-pairs-generated-by-puttygen}
 
 SSH 連線方式大同小異:
 
@@ -142,15 +142,15 @@ SSH 連線方式大同小異:
 
 <!-- ### nano -->
 
-# 帳號管理
+# 帳號管理 {#account-management}
 
 帳號管理分為兩個部分，一個部分是系統的帳號管理，另一個部分是 MySQL 資料庫的帳號管理。
 
-## 系統帳號
+## 系統帳號 {#system-account}
 
 這個小節會說明用來管理帳號的腳本的運作流程的活動圖、腳本運行，接著才是指令說明。如果要直接執行腳本請到 [腳本運行](#腳本運行) 的部分。
 
-### 概述
+### 概述 {#overview}
 
 本腳本（Bash Script）的活動圖，如圖 \@ref(fig:manage-users-sh) 所示。一開始會根據使用者設定的選項的設定環境，接著才會進到主要方法的部分。主要方法有兩種，分別是建立帳號（`create`）與刪除帳號（`delete`），這兩個方法隨後會另外說明。
 
@@ -158,7 +158,7 @@ SSH 連線方式大同小異:
 knitr::include_graphics(path = './figures/manage-users.sh.svg')
 ```
 
-### 腳本運行 {#腳本運行}
+### 腳本運行 {#script-execution}
 
 這個部分會說明怎麼執行腳本。
 
@@ -578,7 +578,7 @@ id: ‘08170875’: no such user
 id: ‘08220855’: no such user
 ```
 
-### 指令說明
+### 指令說明 {#command-description}
 
 #### 讀取選項的迴圈
 
@@ -1076,9 +1076,9 @@ create_users() {
 <!-- esac -->
 <!-- ``` -->
 
-# 其他
+# 其他 {#others}
 
-## 更改預設的文本編輯器
+## 更改預設的文本編輯器 {#change-default-text-editor}
 
 這個指令可以變更系統編輯文件所用的程式
 
@@ -1106,9 +1106,9 @@ Press <enter> to keep the current choice[*], or type selection number: 3
 
 <!--## sharedfolder-->
 
-## 關於套件版本
+## 關於套件版本 {#about-package-versions}
 
-### Step 1 --- 安裝 php & php-mysql 插件
+### 安裝 php & php-mysql 插件 {#install-php-and-php-mysql-plugin}
 
 先確認 `php` 是不是我們要安裝的版本
 
@@ -1223,7 +1223,7 @@ which php
 
 當系統中有安裝複數個版本的 php 時，php 執行檔的位置可能會有所不同。同樣地在第 5 章[設置 Python 3 環境]時也會遇到。
 
-## Mysql 8.0 root 密碼重設
+## Mysql 8.0 root 密碼重設 {#mysql-8-reset-root-password}
 
 先建立一個含有改變 root 密碼的 sql 語法文字檔案
 
@@ -1319,12 +1319,10 @@ owners.
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
 mysql> 
+```
 
 
-## jupyterhub C/C++ 運算核心
-
-
-### C 與 C++ 環境
+## jupyterhub C/C++ 運算核心 {#jupyterhub-cc-plus-plus-kernel}
 
 ``` {.bash .prefixed}
 sudo vim /opt/conda/envs/c_cpp.yml
