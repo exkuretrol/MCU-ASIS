@@ -4,7 +4,7 @@
 
 ## 事前準備
 
-先確認目前的使用者 asis 擁有 sudo 的權限。
+先確認目前的使用者 `asis` 擁有 `sudo` 的權限。
 
 ## 設置 Python 3 環境
 
@@ -32,26 +32,38 @@ sudo apt install python-is-python3 --yes
 
 ### 於虛擬環境中設置 JupyterLab 與 JupyterHub
 
+利用 Python 的 `venv` 插件建立 Python 虛擬環境
+
 ``` {.bash .prefixed}
 sudo python -m venv /opt/jupyterhub
 ```
+
+wheel 是一種 Python 安裝套件的格式，比傳統的安裝格式；tar.gz 快許多，以利減少安裝時間
 
 ``` {.bash .prefixed}
 sudo /opt/jupyterhub/bin/python -m pip install wheel
 ```
 
+這裡將 jupyterhub 安裝至 `/opt/jupyterhub` 的虛擬環境中
+
 ``` {.bash .prefixed}
 sudo /opt/jupyterhub/bin/python -m pip install jupyterlab jupyterhub
 ```
+
+套件 `ipywidget` 適用於 jupyter、jupyterhub 中，創建互動式工具，讓使用者更方便的以下拉式選單、按鈕等等與程式碼互動。
 
 ``` {.bash .prefixed}
 sudo /opt/jupyterhub/bin/python -m pip install ipywidgets
 ```
 
+這裡安裝 `nodejs` 的 LTS（Long-term Support；長期支援）版本
+
 ``` {.bash .prefixed}
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
+
+以全域的方式安裝 `configurable-http-proxy`，使 jupyter 可以順利找到程式
 
 ``` {.bash .prefixed}
 sudo npm install -g configurable-http-proxy
@@ -59,17 +71,25 @@ sudo npm install -g configurable-http-proxy
 
 ### 設定 JupyterHub
 
+於 `/opt/jupyterhub/etc/` 資料夾建立 jupyterhub 資料夾存放設定。
+
 ``` {.bash .prefixed}
 sudo mkdir -p /opt/jupyterhub/etc/jupyterhub/
 ```
+
+切換至設定 `jupyterhub` 資料夾
 
 ``` {.bash .prefixed}
 cd /opt/jupyterhub/etc/jupyterhub/
 ```
 
+產生預設的設定檔案
+
 ``` {.bash .prefixed}
 sudo /opt/jupyterhub/bin/jupyterhub --generate-config
 ```
+
+用編輯器編輯剛才產生的設定檔案
 
 ``` {.bash .prefixed}
 sudo vim jupyterhub_config.py
@@ -88,9 +108,13 @@ c.Spawner.cmd = ['jupyter-labhub']
 
 ### 新增開機自動啟動 JupyterHub 的服務
 
+在剛才的設定資料夾裡面新增 `systemd` 資料夾
+
 ``` {.bash .prefixed}
 sudo mkdir -p /opt/jupyterhub/etc/systemd
 ```
+
+寫入 JupyterHub 的服務設定
 
 ``` {.bash .prefixed}
 sudo vim /opt/jupyterhub/etc/systemd/jupyterhub.service
@@ -114,26 +138,60 @@ ExecStart=/opt/jupyterhub/bin/jupyterhub -f /opt/jupyterhub/etc/jupyterhub/jupyt
 WantedBy=multi-user.target
 ```
 
+最後軟連結至系統服務設定中
+
 ``` {.bash .prefixed}
 sudo ln -s /opt/jupyterhub/etc/systemd/jupyterhub.service \
     /etc/systemd/system/jupyterhub.service
 ```
 
+使 systemd 重新讀取設定，而不用重新啟動整個系統
+
 ``` {.bash .prefixed}
 sudo systemctl daemon-reload
 ```
+
+開啟 JupyterHub 系統服務設定
 
 ``` {.bash .prefixed}
 sudo systemctl enable jupyterhub.service
 ```
 
+手動啟動 Jupyterhub 服務
+
 ``` {.bash .prefixed}
 sudo systemctl start jupyterhub.service
 ```
 
+用 `status` 指令查詢運行狀態是否正常
+
 ``` {.bash .prefixed}
 sudo systemctl status jupyterhub.service
 ```
+
+::: {.console_output}
+● jupyterhub.service - JupyterHub
+     Loaded: loaded (/etc/systemd/system/jupyterhub.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sun 2023-08-27 05:23:20 UTC; 2s ago
+   Main PID: 109122 (jupyterhub)
+      Tasks: 9 (limit: 2218)
+     Memory: 78.2M
+        CPU: 728ms
+     CGroup: /system.slice/jupyterhub.service
+             ├─109122 /opt/jupyterhub/bin/python3 /opt/jupyterhub/bin/jupyterhub -f /opt/jupyterhub/etc/jupyterhub/jupy>
+             └─109126 node /bin/configurable-http-proxy --ip "" --port 8000 --api-ip 127.0.0.1 --api-port 8001 --error->
+Aug 27 05:23:21 asis0721 jupyterhub[109126]: 05:23:21.532 [ConfigProxy] info: Proxying http://*:8000 to (no default)
+Aug 27 05:23:21 asis0721 jupyterhub[109126]: 05:23:21.534 [ConfigProxy] info: Proxy API at http://127.0.0.1:8001/api/ro>
+Aug 27 05:23:21 asis0721 jupyterhub[109122]: [I 2023-08-27 05:23:21.794 JupyterHub app:3178] Hub API listening on http:>
+Aug 27 05:23:21 asis0721 jupyterhub[109126]: 05:23:21.794 [ConfigProxy] info: 200 GET /api/routes
+Aug 27 05:23:21 asis0721 jupyterhub[109126]: 05:23:21.796 [ConfigProxy] info: 200 GET /api/routes
+Aug 27 05:23:21 asis0721 jupyterhub[109122]: [I 2023-08-27 05:23:21.798 JupyterHub proxy:477] Adding route for Hub: /jh>
+Aug 27 05:23:21 asis0721 jupyterhub[109126]: 05:23:21.801 [ConfigProxy] info: Adding route /jhub -> http://127.0.0.1:80>
+Aug 27 05:23:21 asis0721 jupyterhub[109126]: 05:23:21.801 [ConfigProxy] info: Route added /jhub -> http://127.0.0.1:8081
+Aug 27 05:23:21 asis0721 jupyterhub[109126]: 05:23:21.802 [ConfigProxy] info: 201 POST /api/routes/jhub
+Aug 27 05:23:21 asis0721 jupyterhub[109122]: [I 2023-08-27 05:23:21.803 JupyterHub app:3245] JupyterHub is now running >
+lines 1-21/21 (END)
+:::
 
 ## JupyterHub 中的運算核心
 
@@ -290,6 +348,8 @@ knitr::include_graphics(path = 'figures/jupyterhub-main-page-kernel-python.png')
 
 ### R 環境
 
+用 root 的身份為 R 安裝套件 `IRkernel`
+
 ``` {.bash .prefixed}
 sudo su - -c "R -e \"install.packages('IRkernel')\""
 ```
@@ -305,7 +365,7 @@ sudo su - -c "R -e \"
 \""
 ```
 
-``` console_output
+``` {.console_output}
 Error in IRkernel::installspec(name = "ir41", displayname = "R 4.1") : 
   jupyter-client has to be installed but “jupyter kernelspec --version” exited with code 127.
 In addition: Warning message:
@@ -320,14 +380,14 @@ Execution halted
 jupyter kernelspec --version
 ```
 
-``` console_output
+::: {.console_output}
 Command 'jupyter' not found, but can be installed with:
 
 sudo snap install jupyter       # version 1.0.0, or
 sudo apt  install jupyter-core  # version 4.6.3-3
 
 See 'snap info jupyter' for additional versions.
-```
+:::
 
 找不到指令，出現了推薦安裝方式，不過這不是我們要的。
 
@@ -338,9 +398,9 @@ See 'snap info jupyter' for additional versions.
 echo $PATH
 ```
 
-``` console_output
+::: {.console_output}
 /home/asis/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
-```
+:::
 
 放置於其中一個位置就行，注意不要放置在 /home 底下，執行 R 時事使用 root 權限，用 root 權限執行時，並不會翻 `/home/asis/` 底下的資料夾。 這裡我們選用 `/usr/local/bin` 作為軟連結放置 jupyter 執行檔。
 
@@ -360,9 +420,9 @@ which jupyter
 ls -al $(which jupyter)
 ```
 
-``` console_output
+::: {.console_output}
 lrwxrwxrwx 1 root root 27 Sep 17 16:23 /usr/local/bin/jupyter -> /opt/jupyterhub/bin/jupyter
-```
+:::
 
 可以看到指令 `jupyter` 之所以會存在是因為軟連結至 `/opt/jupyterhub/bin/jupyter` 後，因為 `/usr/local/bin` 在變數 `path` 內，讓系統找得到，才可以使用這個指令。
 
@@ -379,15 +439,17 @@ sudo su - -c "R -e \"
 \""
 ```
 
+列出目前的核心，確定是否正常安裝
+
 ``` {.bash .prefixed}
 jupyter kernelspec list
 ```
 
-``` console_output
+::: {.console_output}
 Available kernels:
   ir43       /opt/jupyterhub/share/jupyter/kernels/ir43
   python3    /opt/jupyterhub/share/jupyter/kernels/python3
-```
+:::
 
 ```{r, fig.cap='jupyterhub 安裝完 R 核心與預設 Python 的頁面'}
 knitr::include_graphics(path = 'figures/jupyterhub-main-page-kernel-R.png')
@@ -395,11 +457,13 @@ knitr::include_graphics(path = 'figures/jupyterhub-main-page-kernel-R.png')
 
 ### SAS 環境
 
+在 conda 的 `envs` 資料夾新增一個 `sas.yml` 設定
+
 ``` {.bash .prefixed}
 sudo vim /opt/conda/envs/sas.yml
 ```
 
-::: code-label
+::: {.code-label}
 /opt/conda/envs/sas.yml
 :::
 
@@ -417,13 +481,19 @@ dependencies:
 prefix: /opt/conda/envs/sas
 ```
 
+讓 conda 以 `sas.yml` 建立虛擬環境
+
 ``` {.bash .prefixed}
 sudo /opt/conda/bin/conda env create -f sas.yml
 ```
 
+在 sas 的虛擬環境中建立 sas 的資料夾
+
 ``` {.bash .prefixed}
 sudo mkdir /opt/conda/envs/sas/share/jupyter/kernels/sas
 ```
+
+編輯 kernel 的 json 設定檔案，將下列 json 存入檔案
 
 ``` {.bash .prefixed}
 sudo vim /opt/conda/envs/sas/share/jupyter/kernels/sas/kernel.json
@@ -449,12 +519,15 @@ sudo vim /opt/conda/envs/sas/share/jupyter/kernels/sas/kernel.json
 }
 ```
 
+把 sas 核心 Logo 複製過去
+
 ``` {.bash .prefixed}
 sudo cp \
     /opt/conda/envs/sas/lib/python3.10/site-packages/sas_kernel/data/logo-64x64.png \
     /opt/conda/envs/sas/share/jupyter/kernels/sas
 ```
 
+最後用 jupyter 指令安裝核心
 
 ``` {.bash .prefixed}
 sudo jupyter kernelspec install \
@@ -463,15 +536,17 @@ sudo jupyter kernelspec install \
 
 ## 設置 Apache 的反向代理
 
+更新我們網站的設定
+
 ``` {.bash .prefixed}
 sudo vim /etc/apache2/sites-available/asis.conf
 ```
 
-::: code-label
+::: {.code-label}
 /etc/apache2/sites-available/asis.conf
 :::
 
-``` apache
+``` {.apache}
 <VirtualHost *:80>
     [...]
 
@@ -495,98 +570,51 @@ sudo vim /etc/apache2/sites-available/asis.conf
 </VirtualHost>
 ```
 
-    http://<虛擬主機的 ip 位址>/jhub
+重新啟動 Apache 以套用新的設定
+
+``` {.prefixed bash}
+sudo systemctl restart apache2
+```
+
+最後用網址 `http://<虛擬機器的 ip 位置>/jhub` 訪問首頁
+
+```{r, fig.cap='透過 http://<虛擬機器的 ip 位置>/jhub 訪問的首頁'}
+knitr::include_graphics(path = './figures/apache2-main-page-proxy-test')
+```
 
 ## JupyterHub 擴充套件
 
--   [jupyterlab-drawio](https://github.com/QuantStack/jupyterlab-drawio)
-
-    ``` {.bash .prefixed}
-    sudo /opt/jupyterhub/bin/pip install jupyterlab-drawio
-    ```
-
--   [jupyterlab-git](https://github.com/jupyterlab/jupyterlab-git)
-
-    ``` {.bash .prefixed}
-    sudo /opt/jupyterhub/bin/pip \
-        install --upgrade jupyterlab jupyterlab-git
-    ```
-
--   [jupyterlab-variable-inspector](https://github.com/lckr/jupyterlab-variableInspector)
-
-    ``` {.bash .prefixed}
-    sudo /opt/jupyterhub/bin/pip \
-        install lckr_jupyterlab_variableinspector
-    ```
-
-    ``` {.bash .prefixed}
-    sudo su - -c "R -e \"install.packages('repr')\""
-    ```
-
--   [jupyterext-text-shortcuts](https://github.com/techrah/jupyterext-text-shortcuts)
-
-    ``` {.bash .prefixed}
-    sudo jupyter labextension install @techrah/text-shortcuts
-    ```
-
--   [jupyterlab-spreadsheet](https://github.com/quigleyj97/jupyterlab-spreadsheet)
-
-    ``` {.bash .prefixed}
-    sudo jupyter labextension install jupyterlab-spreadsheet
-    ```
-
--   [ipympl](https://github.com/matplotlib/ipympl)
-
-    ``` {.bash .prefixed}
-    sudo /opt/jupyterhub/bin/pip install ipympl
-    ```
-
--   [jupyter-dash](https://github.com/plotly/jupyter-dash) (待更新，目前不能用 2021.09.18)
-
-    ``` {.bash .prefixed}
-    sudo /opt/jupyterhub/bin/pip install jupyter-dash
-    ```
-
--   [jupyterlab-link-share](https://github.com/jupyterlab-contrib/jupyterlab-link-share)
-
-    ``` {.bash .prefixed}
-    sudo /opt/jupyterhub/bin/pip install jupyterlab-link-share
-    ```
+安裝語言套件
 
 -   [language-packs](https://github.com/jupyterlab/language-packs/tree/master/language-packs/)
+
+    用 JupyterHub 內建的 Python 安裝語言擴充套件
 
     ``` {.bash .prefixed}
     sudo /opt/jupyterhub/bin/pip install jupyterlab-language-pack-zh-TW
     ```
 
+    順便簡體中文也一起裝
+
     ``` {.bash .prefixed}
     sudo /opt/jupyterhub/bin/pip install jupyterlab-language-pack-zh-CN
     ```
 
+    最後重新啟動 JupyterHub
+
+    ``` {.bash .prefixed}
+    sudo systemctl restart jupyterhub
+    ```
+
+其他推薦安裝的插件
+
+-   [jupyterlab-drawio](https://github.com/QuantStack/jupyterlab-drawio)
+-   [jupyterlab-git](https://github.com/jupyterlab/jupyterlab-git)
+-   [jupyterlab-variable-inspector](https://github.com/lckr/jupyterlab-variableInspector)
+-   [jupyterext-text-shortcuts](https://github.com/techrah/jupyterext-text-shortcuts)
+-   [jupyterlab-spreadsheet](https://github.com/quigleyj97/jupyterlab-spreadsheet)
+-   [ipympl](https://github.com/matplotlib/ipympl)
+-   [jupyter-dash](https://github.com/plotly/jupyter-dash)
+-   [jupyterlab-link-share](https://github.com/jupyterlab-contrib/jupyterlab-link-share)
 -   [jupyterlab-lsp](https://github.com/krassowski/jupyterlab-lsp)
-
-    ``` {.bash .prefixed}
-    sudo /opt/jupyterhub/bin/pip install 'jupyterlab>=3.0.0,<4.0.0a0' jupyterlab-lsp
-    ```
-
-    ``` {.bash .prefixed}
-    sudo apt install libcurl4-openssl-dev libxml2-dev --yes
-    ```
-
-    ``` {.bash .prefixed}
-    sudo su - -c "R -e \"install.packages('languageserver')\"""
-    ```
-
-    ``` {.bash .prefixed}
-    sudo /opt/jupyterhub/bin/pip install -U jedi-language-server
-    ```
-
 -   [nbgitpuller](https://github.com/jupyterhub/nbgitpuller)
-
-    ``` {.bash .prefixed}
-    sudo /opt/jupyterhub/bin/pip install nbgitpuller
-    ```
-
-``` {.bash .prefixed}
-sudo systemctl restart jupyterhub.service
-```
