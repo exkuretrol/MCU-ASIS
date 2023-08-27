@@ -80,7 +80,7 @@
 <li><a class="" href="related-software.html"><span class="header-section-number">A</span> 相關軟體</a></li>
 <li><a class="" href="account-management.html"><span class="header-section-number">B</span> 帳號管理</a></li>
 <li><a class="" href="others.html"><span class="header-section-number">C</span> 其他</a></li>
-<li><a class="" href="%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99.html">參考資料</a></li>
+<li><a class="" href="references.html">參考文獻</a></li>
 </ul>
 
         <div class="book-extra">
@@ -404,7 +404,7 @@ Number of key(s) added: 1
 
 Now try logging into the machine, with:   "ssh -p '22' 'asis@192.168.56.101'"
 and check to make sure that only the key(s) you wanted were added.</code></pre>
-<p>如果你是 Windows 的使用者也不用擔心有多複雜，一樣一行指令就能搞定，這裡我是參考<span class="citation">(<a href="%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99.html#ref-christopher_2020" role="doc-biblioref">Christopher 2020</a>)</span>的教學，指令如下：</p>
+<p>如果你是 Windows 的使用者也不用擔心有多複雜，一樣一行指令就能搞定，這裡我是參考<span class="citation">(<a href="references.html#ref-christopher_2020" role="doc-biblioref">Christopher 2020</a>)</span>的教學，指令如下：</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb40-1"><a href="ubuntu-basic-configuration.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">$env</span><span class="op">:</span>USERPROFILE\<span class="op">.</span><span class="fu">ssh</span>\id_rsa<span class="op">.</span><span class="fu">pub</span> <span class="op">|</span> ssh asis@192<span class="op">.</span><span class="fu">168</span><span class="op">.</span><span class="fu">56</span><span class="op">.</span><span class="fu">101</span> <span class="st">"cat &gt;&gt; ~/.ssh/authorized_keys"</span></span></code></pre></div>
 <ul>
 <li><p><code>$env:USERPROFILE</code> 為 Windows 內建環境變數，會根據現在的使用者變更。如果我的使用者名稱為 <code>qaz855175b</code> 那 <code>$env:USERPROFILE</code> 就會產生 <code>C:\Users\qaz855175b\</code> 的字串，當然你可以直接把這行指令的公鑰路徑替換為 <code>C:\Users\qaz855175b\.ssh\id_rsa.pub</code></p></li>
