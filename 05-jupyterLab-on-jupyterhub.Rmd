@@ -59,24 +59,24 @@ sudo /opt/jupyterhub/bin/python -m pip install ipywidgets
 這裡安裝 `nodejs`。首先將 Nodesource GPG 金鑰安裝至系統上
 
 ``` {.bash .prefixed}
-sudo apt-get update
-sudo apt-get install -y ca-certificates curl gnupg
-sudo mkdir -p /etc/apt/keyrings
-curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+sudo apt-get update && \
+  sudo apt-get install -y ca-certificates curl gnupg && \
+  sudo mkdir -p /etc/apt/keyrings && \
+  curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
 ```
 
 添加軟體來源
 
 ``` {.bash .prefixed}
-NODE_MAJOR=20
-echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+NODE_MAJOR=20 && \
+  echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
 ```
 
 更新並透過 APT 安裝 `nodejs`
 
 ``` {.bash .prefixed}
-sudo apt-get update
-sudo apt-get install nodejs -y
+sudo apt-get update && \
+  sudo apt-get install nodejs -y
 ```
 
 最後，以全域的方式安裝 `configurable-http-proxy`，使 jupyter 可以順利找到程式
@@ -359,6 +359,16 @@ sudo /opt/conda/envs/python/bin/python -m \
     --name 'python3' \
     --display-name "Python (預設)"
 ```
+
+完成後，測試 JupyterHub 的服務是否正常。JupyterHub 預設的埠號會開在 8000，所以如果要測試 JupyterHub 服務，需要設定防火牆使外部可以存取埠號 8000 的 JupyterHub。
+
+``` {.bash .prefixed}
+sudo ufw allow 8000
+```
+
+最後透過網址訪問 JupyterHub
+
+    http://<虛擬機器的 ip 地址>:8000
 
 ```{r, fig.cap='jupyterhub 登入後的頁面'}
 knitr::include_graphics(path = 'figures/jupyterhub-main-page-kernel-python.png')
