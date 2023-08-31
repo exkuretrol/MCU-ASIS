@@ -132,16 +132,16 @@
 <p>套件 <code>ipywidget</code> 適用於 jupyter、jupyterhub 中，創建互動式工具，讓使用者更方便的以下拉式選單、按鈕等等與程式碼互動。</p>
 <div class="sourceCode" id="cb202"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb202-1"><a href="jupyterhub.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/python <span class="at">-m</span> pip install ipywidgets</span></code></pre></div>
 <p>這裡安裝 <code>nodejs</code>。首先將 Nodesource GPG 金鑰安裝至系統上</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb203-1"><a href="jupyterhub.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update</span>
-<span id="cb203-2"><a href="jupyterhub.html#cb203-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install <span class="at">-y</span> ca-certificates curl gnupg</span>
-<span id="cb203-3"><a href="jupyterhub.html#cb203-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /etc/apt/keyrings</span>
-<span id="cb203-4"><a href="jupyterhub.html#cb203-4" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fsSL</span> https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key <span class="kw">|</span> <span class="fu">sudo</span> gpg <span class="at">--dearmor</span> <span class="at">-o</span> /etc/apt/keyrings/nodesource.gpg</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb203-1"><a href="jupyterhub.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb203-2"><a href="jupyterhub.html#cb203-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install <span class="at">-y</span> ca-certificates curl gnupg <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb203-3"><a href="jupyterhub.html#cb203-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> mkdir <span class="at">-p</span> /etc/apt/keyrings <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb203-4"><a href="jupyterhub.html#cb203-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">curl</span> <span class="at">-fsSL</span> https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key <span class="kw">|</span> <span class="fu">sudo</span> gpg <span class="at">--dearmor</span> <span class="at">-o</span> /etc/apt/keyrings/nodesource.gpg</span></code></pre></div>
 <p>添加軟體來源</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb204-1"><a href="jupyterhub.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="va">NODE_MAJOR</span><span class="op">=</span>20</span>
-<span id="cb204-2"><a href="jupyterhub.html#cb204-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_</span><span class="va">$NODE_MAJOR</span><span class="st">.x nodistro main"</span> <span class="kw">|</span> <span class="fu">sudo</span> tee /etc/apt/sources.list.d/nodesource.list</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb204-1"><a href="jupyterhub.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="va">NODE_MAJOR</span><span class="op">=</span>20 <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb204-2"><a href="jupyterhub.html#cb204-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_</span><span class="va">$NODE_MAJOR</span><span class="st">.x nodistro main"</span> <span class="kw">|</span> <span class="fu">sudo</span> tee /etc/apt/sources.list.d/nodesource.list</span></code></pre></div>
 <p>更新並透過 APT 安裝 <code>nodejs</code></p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb205-1"><a href="jupyterhub.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update</span>
-<span id="cb205-2"><a href="jupyterhub.html#cb205-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install nodejs <span class="at">-y</span></span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb205-1"><a href="jupyterhub.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update <span class="kw">&amp;&amp;</span> <span class="dt">\</span></span>
+<span id="cb205-2"><a href="jupyterhub.html#cb205-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install nodejs <span class="at">-y</span></span></code></pre></div>
 <p>最後，以全域的方式安裝 <code>configurable-http-proxy</code>，使 jupyter 可以順利找到程式</p>
 <div class="sourceCode" id="cb206"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb206-1"><a href="jupyterhub.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> npm install <span class="at">-g</span> configurable-http-proxy</span></code></pre></div>
 </div>
@@ -322,6 +322,10 @@ by running conda init? [yes|no]
 <span id="cb233-3"><a href="jupyterhub.html#cb233-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--prefix</span><span class="op">=</span>/opt/jupyterhub/ <span class="dt">\</span></span>
 <span id="cb233-4"><a href="jupyterhub.html#cb233-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">--name</span> <span class="st">'python3'</span> <span class="dt">\</span></span>
 <span id="cb233-5"><a href="jupyterhub.html#cb233-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--display-name</span> <span class="st">"Python (預設)"</span></span></code></pre></div>
+<p>完成後，測試 JupyterHub 的服務是否正常。JupyterHub 預設的埠號會開在 8000，所以如果要測試 JupyterHub 服務，需要設定防火牆使外部可以存取埠號 8000 的 JupyterHub。</p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb234-1"><a href="jupyterhub.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw allow 8000</span></code></pre></div>
+<p>最後透過網址訪問 JupyterHub</p>
+<pre><code>http://&lt;虛擬機器的 ip 地址&gt;:8000</code></pre>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-76"></span>
 <img src="figures/jupyterhub-main-page-kernel-python.png" alt="jupyterhub 登入後的頁面" width="100%"><p class="caption">
@@ -334,15 +338,15 @@ by running conda init? [yes|no]
 <span class="header-section-number">5.4.2</span> R 環境<a class="anchor" aria-label="anchor" href="#r-environment"><i class="fas fa-link"></i></a>
 </h3>
 <p>用 root 的身份為 R 安裝套件 <code>IRkernel</code></p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb234-1"><a href="jupyterhub.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span> <span class="at">-c</span> <span class="st">"R -e </span><span class="dt">\"</span><span class="st">install.packages('IRkernel')</span><span class="dt">\"</span><span class="st">"</span></span></code></pre></div>
-<div class="sourceCode" id="cb235"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb235-1"><a href="jupyterhub.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span> <span class="at">-c</span> <span class="st">"R -e </span><span class="dt">\"</span></span>
-<span id="cb235-2"><a href="jupyterhub.html#cb235-2" aria-hidden="true" tabindex="-1"></a><span class="st">    IRkernel::installspec(</span></span>
-<span id="cb235-3"><a href="jupyterhub.html#cb235-3" aria-hidden="true" tabindex="-1"></a><span class="st">        name='ir43',</span></span>
-<span id="cb235-4"><a href="jupyterhub.html#cb235-4" aria-hidden="true" tabindex="-1"></a><span class="st">        displayname='R 4.3',</span></span>
-<span id="cb235-5"><a href="jupyterhub.html#cb235-5" aria-hidden="true" tabindex="-1"></a><span class="st">        user=FALSE,</span></span>
-<span id="cb235-6"><a href="jupyterhub.html#cb235-6" aria-hidden="true" tabindex="-1"></a><span class="st">        prefix='/opt/jupyterhub'</span></span>
-<span id="cb235-7"><a href="jupyterhub.html#cb235-7" aria-hidden="true" tabindex="-1"></a><span class="st">    )</span></span>
-<span id="cb235-8"><a href="jupyterhub.html#cb235-8" aria-hidden="true" tabindex="-1"></a><span class="dt">\"</span><span class="st">"</span></span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb236-1"><a href="jupyterhub.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span> <span class="at">-c</span> <span class="st">"R -e </span><span class="dt">\"</span><span class="st">install.packages('IRkernel')</span><span class="dt">\"</span><span class="st">"</span></span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb237-1"><a href="jupyterhub.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span> <span class="at">-c</span> <span class="st">"R -e </span><span class="dt">\"</span></span>
+<span id="cb237-2"><a href="jupyterhub.html#cb237-2" aria-hidden="true" tabindex="-1"></a><span class="st">    IRkernel::installspec(</span></span>
+<span id="cb237-3"><a href="jupyterhub.html#cb237-3" aria-hidden="true" tabindex="-1"></a><span class="st">        name='ir43',</span></span>
+<span id="cb237-4"><a href="jupyterhub.html#cb237-4" aria-hidden="true" tabindex="-1"></a><span class="st">        displayname='R 4.3',</span></span>
+<span id="cb237-5"><a href="jupyterhub.html#cb237-5" aria-hidden="true" tabindex="-1"></a><span class="st">        user=FALSE,</span></span>
+<span id="cb237-6"><a href="jupyterhub.html#cb237-6" aria-hidden="true" tabindex="-1"></a><span class="st">        prefix='/opt/jupyterhub'</span></span>
+<span id="cb237-7"><a href="jupyterhub.html#cb237-7" aria-hidden="true" tabindex="-1"></a><span class="st">    )</span></span>
+<span id="cb237-8"><a href="jupyterhub.html#cb237-8" aria-hidden="true" tabindex="-1"></a><span class="dt">\"</span><span class="st">"</span></span></code></pre></div>
 <pre class="console_output"><code>Error in IRkernel::installspec(name = "ir41", displayname = "R 4.1") : 
   jupyter-client has to be installed but “jupyter kernelspec --version” exited with code 127.
 In addition: Warning message:
@@ -350,7 +354,7 @@ In system2("jupyter", c("kernelspec", "--version"), FALSE, FALSE) :
   error in running command
 Execution halted</code></pre>
 <p>主要原因是因為，系統找不到 <code>jupyter</code> 指令。可以自己在終端機重現一次：</p>
-<div class="sourceCode" id="cb237"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb237-1"><a href="jupyterhub.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> kernelspec <span class="at">--version</span></span></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb239-1"><a href="jupyterhub.html#cb239-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> kernelspec <span class="at">--version</span></span></code></pre></div>
 <pre class="console_output"><code>Command 'jupyter' not found, but can be installed with:
 
 sudo snap install jupyter       # version 1.0.0, or
@@ -360,27 +364,27 @@ See 'snap info jupyter' for additional versions.</code></pre>
 <p>找不到指令，出現了推薦安裝方式，不過這不是我們要的。</p>
 <p>這裡會用一個技巧讓系統找得到位於 <code>/opt/jupyter/bin/jupyter</code> 的指令。 藉由軟連結到系統的 <code>path</code> 變數中讓 R 找得到。<br>
 首先先印出 <code>PATH</code> 變數：</p>
-<div class="sourceCode" id="cb239"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb239-1"><a href="jupyterhub.html#cb239-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$PATH</span></span></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb241-1"><a href="jupyterhub.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$PATH</span></span></code></pre></div>
 <pre class="console_output"><code>/home/asis/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin</code></pre>
 <p>放置於其中一個位置就行，注意不要放置在 /home 底下，執行 R 時事使用 root 權限，用 root 權限執行時，並不會翻 <code>/home/asis/</code> 底下的資料夾。 這裡我們選用 <code>/usr/local/bin</code> 作為軟連結放置 jupyter 執行檔。</p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb241-1"><a href="jupyterhub.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /opt/jupyterhub/bin/jupyter /usr/local/bin</span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb243-1"><a href="jupyterhub.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /opt/jupyterhub/bin/jupyter /usr/local/bin</span></code></pre></div>
 <p>接著用 <code>which</code> 指令查詢指令是否存在：</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb242-1"><a href="jupyterhub.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> jupyter</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb244-1"><a href="jupyterhub.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> jupyter</span></code></pre></div>
 <p>列出二進制執行檔存在位置：</p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb243-1"><a href="jupyterhub.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-al</span> <span class="va">$(</span><span class="fu">which</span> jupyter<span class="va">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb245-1"><a href="jupyterhub.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-al</span> <span class="va">$(</span><span class="fu">which</span> jupyter<span class="va">)</span></span></code></pre></div>
 <pre class="console_output"><code>lrwxrwxrwx 1 root root 27 Sep 17 16:23 /usr/local/bin/jupyter -&gt; /opt/jupyterhub/bin/jupyter</code></pre>
 <p>可以看到指令 <code>jupyter</code> 之所以會存在是因為軟連結至 <code>/opt/jupyterhub/bin/jupyter</code> 後，因為 <code>/usr/local/bin</code> 在變數 <code>path</code> 內，讓系統找得到，才可以使用這個指令。</p>
 <p>再執行一次剛開始的指令：</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb245-1"><a href="jupyterhub.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span> <span class="at">-c</span> <span class="st">"R -e </span><span class="dt">\"</span></span>
-<span id="cb245-2"><a href="jupyterhub.html#cb245-2" aria-hidden="true" tabindex="-1"></a><span class="st">    IRkernel::installspec(</span></span>
-<span id="cb245-3"><a href="jupyterhub.html#cb245-3" aria-hidden="true" tabindex="-1"></a><span class="st">        name='ir41', </span></span>
-<span id="cb245-4"><a href="jupyterhub.html#cb245-4" aria-hidden="true" tabindex="-1"></a><span class="st">        displayname='R 4.1',</span></span>
-<span id="cb245-5"><a href="jupyterhub.html#cb245-5" aria-hidden="true" tabindex="-1"></a><span class="st">        user=FALSE,</span></span>
-<span id="cb245-6"><a href="jupyterhub.html#cb245-6" aria-hidden="true" tabindex="-1"></a><span class="st">        prefix='/opt/jupyterhub'</span></span>
-<span id="cb245-7"><a href="jupyterhub.html#cb245-7" aria-hidden="true" tabindex="-1"></a><span class="st">    )</span></span>
-<span id="cb245-8"><a href="jupyterhub.html#cb245-8" aria-hidden="true" tabindex="-1"></a><span class="dt">\"</span><span class="st">"</span></span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb247-1"><a href="jupyterhub.html#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> su <span class="at">-</span> <span class="at">-c</span> <span class="st">"R -e </span><span class="dt">\"</span></span>
+<span id="cb247-2"><a href="jupyterhub.html#cb247-2" aria-hidden="true" tabindex="-1"></a><span class="st">    IRkernel::installspec(</span></span>
+<span id="cb247-3"><a href="jupyterhub.html#cb247-3" aria-hidden="true" tabindex="-1"></a><span class="st">        name='ir41', </span></span>
+<span id="cb247-4"><a href="jupyterhub.html#cb247-4" aria-hidden="true" tabindex="-1"></a><span class="st">        displayname='R 4.1',</span></span>
+<span id="cb247-5"><a href="jupyterhub.html#cb247-5" aria-hidden="true" tabindex="-1"></a><span class="st">        user=FALSE,</span></span>
+<span id="cb247-6"><a href="jupyterhub.html#cb247-6" aria-hidden="true" tabindex="-1"></a><span class="st">        prefix='/opt/jupyterhub'</span></span>
+<span id="cb247-7"><a href="jupyterhub.html#cb247-7" aria-hidden="true" tabindex="-1"></a><span class="st">    )</span></span>
+<span id="cb247-8"><a href="jupyterhub.html#cb247-8" aria-hidden="true" tabindex="-1"></a><span class="dt">\"</span><span class="st">"</span></span></code></pre></div>
 <p>列出目前的核心，確定是否正常安裝</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb246-1"><a href="jupyterhub.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> kernelspec list</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb248-1"><a href="jupyterhub.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> kernelspec list</span></code></pre></div>
 <pre class="console_output"><code>Available kernels:
   ir43       /opt/jupyterhub/share/jupyter/kernels/ir43
   python3    /opt/jupyterhub/share/jupyter/kernels/python3</code></pre>
@@ -396,50 +400,50 @@ See 'snap info jupyter' for additional versions.</code></pre>
 <span class="header-section-number">5.4.3</span> SAS 環境<a class="anchor" aria-label="anchor" href="#sas-environment"><i class="fas fa-link"></i></a>
 </h3>
 <p>在 conda 的 <code>envs</code> 資料夾新增一個 <code>sas.yml</code> 設定</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb248-1"><a href="jupyterhub.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /opt/conda/envs/sas.yml</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb250-1"><a href="jupyterhub.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /opt/conda/envs/sas.yml</span></code></pre></div>
 <div class="code-label">
 <p>/opt/conda/envs/sas.yml</p>
 </div>
-<div class="sourceCode" id="cb249"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb249-1"><a href="jupyterhub.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> sas</span></span>
-<span id="cb249-2"><a href="jupyterhub.html#cb249-2" aria-hidden="true" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span></span>
-<span id="cb249-3"><a href="jupyterhub.html#cb249-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> defaults</span></span>
-<span id="cb249-4"><a href="jupyterhub.html#cb249-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> conda-forge</span></span>
-<span id="cb249-5"><a href="jupyterhub.html#cb249-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> anaconda</span></span>
-<span id="cb249-6"><a href="jupyterhub.html#cb249-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
-<span id="cb249-7"><a href="jupyterhub.html#cb249-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> sas_kernel</span></span>
-<span id="cb249-8"><a href="jupyterhub.html#cb249-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> python=3.10</span></span>
-<span id="cb249-9"><a href="jupyterhub.html#cb249-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> pip</span></span>
-<span id="cb249-10"><a href="jupyterhub.html#cb249-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> ipykernel</span></span>
-<span id="cb249-11"><a href="jupyterhub.html#cb249-11" aria-hidden="true" tabindex="-1"></a><span class="fu">prefix</span><span class="kw">:</span><span class="at"> /opt/conda/envs/sas</span></span></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb251-1"><a href="jupyterhub.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> sas</span></span>
+<span id="cb251-2"><a href="jupyterhub.html#cb251-2" aria-hidden="true" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span></span>
+<span id="cb251-3"><a href="jupyterhub.html#cb251-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> defaults</span></span>
+<span id="cb251-4"><a href="jupyterhub.html#cb251-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> conda-forge</span></span>
+<span id="cb251-5"><a href="jupyterhub.html#cb251-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> anaconda</span></span>
+<span id="cb251-6"><a href="jupyterhub.html#cb251-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
+<span id="cb251-7"><a href="jupyterhub.html#cb251-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> sas_kernel</span></span>
+<span id="cb251-8"><a href="jupyterhub.html#cb251-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> python=3.10</span></span>
+<span id="cb251-9"><a href="jupyterhub.html#cb251-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> pip</span></span>
+<span id="cb251-10"><a href="jupyterhub.html#cb251-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> ipykernel</span></span>
+<span id="cb251-11"><a href="jupyterhub.html#cb251-11" aria-hidden="true" tabindex="-1"></a><span class="fu">prefix</span><span class="kw">:</span><span class="at"> /opt/conda/envs/sas</span></span></code></pre></div>
 <p>讓 conda 以 <code>sas.yml</code> 建立虛擬環境</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb250-1"><a href="jupyterhub.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/conda/bin/conda env create <span class="at">-f</span> sas.yml</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb252-1"><a href="jupyterhub.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/conda/bin/conda env create <span class="at">-f</span> sas.yml</span></code></pre></div>
 <p>在 sas 的虛擬環境中建立 sas 的資料夾</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb251-1"><a href="jupyterhub.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir /opt/conda/envs/sas/share/jupyter/kernels/sas</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb253-1"><a href="jupyterhub.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir /opt/conda/envs/sas/share/jupyter/kernels/sas</span></code></pre></div>
 <p>編輯 kernel 的 json 設定檔案，將下列 json 存入檔案</p>
-<div class="sourceCode" id="cb252"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb252-1"><a href="jupyterhub.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /opt/conda/envs/sas/share/jupyter/kernels/sas/kernel.json</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb254-1"><a href="jupyterhub.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /opt/conda/envs/sas/share/jupyter/kernels/sas/kernel.json</span></code></pre></div>
 <div class="code-label">
 <p>/opt/conda/envs/sas/share/jupyter/kernels/sas/kernel.json</p>
 </div>
-<div class="sourceCode" id="cb253"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb253-1"><a href="jupyterhub.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb253-2"><a href="jupyterhub.html#cb253-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"argv"</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb253-3"><a href="jupyterhub.html#cb253-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"/opt/conda/envs/sas/bin/python"</span><span class="ot">,</span></span>
-<span id="cb253-4"><a href="jupyterhub.html#cb253-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"-m"</span><span class="ot">,</span></span>
-<span id="cb253-5"><a href="jupyterhub.html#cb253-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"sas_kernel"</span><span class="ot">,</span></span>
-<span id="cb253-6"><a href="jupyterhub.html#cb253-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"-f"</span><span class="ot">,</span></span>
-<span id="cb253-7"><a href="jupyterhub.html#cb253-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"{connection_file}"</span></span>
-<span id="cb253-8"><a href="jupyterhub.html#cb253-8" aria-hidden="true" tabindex="-1"></a>    <span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb253-9"><a href="jupyterhub.html#cb253-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"display_name"</span><span class="fu">:</span> <span class="st">"SAS"</span><span class="fu">,</span></span>
-<span id="cb253-10"><a href="jupyterhub.html#cb253-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"codemirror_mode"</span><span class="fu">:</span> <span class="st">"sas"</span><span class="fu">,</span></span>
-<span id="cb253-11"><a href="jupyterhub.html#cb253-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"language"</span><span class="fu">:</span> <span class="st">"sas"</span><span class="fu">,</span></span>
-<span id="cb253-12"><a href="jupyterhub.html#cb253-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"sas"</span></span>
-<span id="cb253-13"><a href="jupyterhub.html#cb253-13" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb255-1"><a href="jupyterhub.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb255-2"><a href="jupyterhub.html#cb255-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"argv"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb255-3"><a href="jupyterhub.html#cb255-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"/opt/conda/envs/sas/bin/python"</span><span class="ot">,</span></span>
+<span id="cb255-4"><a href="jupyterhub.html#cb255-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"-m"</span><span class="ot">,</span></span>
+<span id="cb255-5"><a href="jupyterhub.html#cb255-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"sas_kernel"</span><span class="ot">,</span></span>
+<span id="cb255-6"><a href="jupyterhub.html#cb255-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"-f"</span><span class="ot">,</span></span>
+<span id="cb255-7"><a href="jupyterhub.html#cb255-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"{connection_file}"</span></span>
+<span id="cb255-8"><a href="jupyterhub.html#cb255-8" aria-hidden="true" tabindex="-1"></a>    <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb255-9"><a href="jupyterhub.html#cb255-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"display_name"</span><span class="fu">:</span> <span class="st">"SAS"</span><span class="fu">,</span></span>
+<span id="cb255-10"><a href="jupyterhub.html#cb255-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"codemirror_mode"</span><span class="fu">:</span> <span class="st">"sas"</span><span class="fu">,</span></span>
+<span id="cb255-11"><a href="jupyterhub.html#cb255-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"language"</span><span class="fu">:</span> <span class="st">"sas"</span><span class="fu">,</span></span>
+<span id="cb255-12"><a href="jupyterhub.html#cb255-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"sas"</span></span>
+<span id="cb255-13"><a href="jupyterhub.html#cb255-13" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 <p>把 sas 核心 Logo 複製過去</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb254-1"><a href="jupyterhub.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp <span class="dt">\</span></span>
-<span id="cb254-2"><a href="jupyterhub.html#cb254-2" aria-hidden="true" tabindex="-1"></a>    /opt/conda/envs/sas/lib/python3.10/site-packages/sas_kernel/data/logo-64x64.png <span class="dt">\</span></span>
-<span id="cb254-3"><a href="jupyterhub.html#cb254-3" aria-hidden="true" tabindex="-1"></a>    /opt/conda/envs/sas/share/jupyter/kernels/sas</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb256-1"><a href="jupyterhub.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cp <span class="dt">\</span></span>
+<span id="cb256-2"><a href="jupyterhub.html#cb256-2" aria-hidden="true" tabindex="-1"></a>    /opt/conda/envs/sas/lib/python3.10/site-packages/sas_kernel/data/logo-64x64.png <span class="dt">\</span></span>
+<span id="cb256-3"><a href="jupyterhub.html#cb256-3" aria-hidden="true" tabindex="-1"></a>    /opt/conda/envs/sas/share/jupyter/kernels/sas</span></code></pre></div>
 <p>最後用 jupyter 指令安裝核心</p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb255-1"><a href="jupyterhub.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> jupyter kernelspec install <span class="dt">\</span></span>
-<span id="cb255-2"><a href="jupyterhub.html#cb255-2" aria-hidden="true" tabindex="-1"></a>    /opt/conda/envs/sas/share/jupyter/kernels/sas <span class="at">--sys-prefix</span></span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb257-1"><a href="jupyterhub.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> jupyter kernelspec install <span class="dt">\</span></span>
+<span id="cb257-2"><a href="jupyterhub.html#cb257-2" aria-hidden="true" tabindex="-1"></a>    /opt/conda/envs/sas/share/jupyter/kernels/sas <span class="at">--sys-prefix</span></span></code></pre></div>
 </div>
 </div>
 <div id="configure-apache-reverse-proxy" class="section level2" number="5.5">
@@ -447,31 +451,31 @@ See 'snap info jupyter' for additional versions.</code></pre>
 <span class="header-section-number">5.5</span> 設置 Apache 的反向代理<a class="anchor" aria-label="anchor" href="#configure-apache-reverse-proxy"><i class="fas fa-link"></i></a>
 </h2>
 <p>更新我們網站的設定</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb256-1"><a href="jupyterhub.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/sites-available/asis.conf</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb258-1"><a href="jupyterhub.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vim /etc/apache2/sites-available/asis.conf</span></code></pre></div>
 <div class="code-label">
 <p>/etc/apache2/sites-available/asis.conf</p>
 </div>
-<div class="sourceCode" id="cb257"><pre class="sourceCode apache"><code class="sourceCode apache"><span id="cb257-1"><a href="jupyterhub.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;VirtualHost</span><span class="at"> *:80</span><span class="fu">&gt;</span></span>
-<span id="cb257-2"><a href="jupyterhub.html#cb257-2" aria-hidden="true" tabindex="-1"></a>    [...]</span>
-<span id="cb257-3"><a href="jupyterhub.html#cb257-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb257-4"><a href="jupyterhub.html#cb257-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
-<span id="cb257-5"><a href="jupyterhub.html#cb257-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># JupyterHub Reverse Proxy</span></span>
-<span id="cb257-6"><a href="jupyterhub.html#cb257-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
-<span id="cb257-7"><a href="jupyterhub.html#cb257-7" aria-hidden="true" tabindex="-1"></a>    RedirectMatch<span class="st"> permanent ^/jhub$ /jhub/</span></span>
-<span id="cb257-8"><a href="jupyterhub.html#cb257-8" aria-hidden="true" tabindex="-1"></a>    RewriteCond<span class="st"> %{HTTP:Connection} Upgrade [NC]</span></span>
-<span id="cb257-9"><a href="jupyterhub.html#cb257-9" aria-hidden="true" tabindex="-1"></a>    RewriteCond<span class="st"> %{HTTP:Upgrade} websocket [NC]</span></span>
-<span id="cb257-10"><a href="jupyterhub.html#cb257-10" aria-hidden="true" tabindex="-1"></a>    RewriteRule<span class="st"> /jhub/(.*) ws://127.0.0.1:8000/jhub/$1 [NE,P,L]</span></span>
-<span id="cb257-11"><a href="jupyterhub.html#cb257-11" aria-hidden="true" tabindex="-1"></a>    RewriteRule<span class="st"> /jhub/(.*) http://127.0.0.1:8000/jhub/$1 [NE,P,L]</span></span>
-<span id="cb257-12"><a href="jupyterhub.html#cb257-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb257-13"><a href="jupyterhub.html#cb257-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">&lt;Location</span><span class="at"> "/jhub/"</span><span class="fu">&gt;</span></span>
-<span id="cb257-14"><a href="jupyterhub.html#cb257-14" aria-hidden="true" tabindex="-1"></a>      <span class="co"># preserve Host header to avoid cross-origin problems</span></span>
-<span id="cb257-15"><a href="jupyterhub.html#cb257-15" aria-hidden="true" tabindex="-1"></a>      <span class="ex">ProxyPreserveHost</span><span class="ch"> </span><span class="kw">on</span></span>
-<span id="cb257-16"><a href="jupyterhub.html#cb257-16" aria-hidden="true" tabindex="-1"></a>      <span class="co"># proxy to JupyterHub</span></span>
-<span id="cb257-17"><a href="jupyterhub.html#cb257-17" aria-hidden="true" tabindex="-1"></a>      ProxyPass<span class="st">         http://127.0.0.1:8000/</span></span>
-<span id="cb257-18"><a href="jupyterhub.html#cb257-18" aria-hidden="true" tabindex="-1"></a>      ProxyPassReverse<span class="st">  http://127.0.0.1:8000/</span></span>
-<span id="cb257-19"><a href="jupyterhub.html#cb257-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">&lt;/Location&gt;</span></span>
-<span id="cb257-20"><a href="jupyterhub.html#cb257-20" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb257-21"><a href="jupyterhub.html#cb257-21" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;/VirtualHost&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode apache"><code class="sourceCode apache"><span id="cb259-1"><a href="jupyterhub.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;VirtualHost</span><span class="at"> *:80</span><span class="fu">&gt;</span></span>
+<span id="cb259-2"><a href="jupyterhub.html#cb259-2" aria-hidden="true" tabindex="-1"></a>    [...]</span>
+<span id="cb259-3"><a href="jupyterhub.html#cb259-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb259-4"><a href="jupyterhub.html#cb259-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
+<span id="cb259-5"><a href="jupyterhub.html#cb259-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># JupyterHub Reverse Proxy</span></span>
+<span id="cb259-6"><a href="jupyterhub.html#cb259-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">###</span></span>
+<span id="cb259-7"><a href="jupyterhub.html#cb259-7" aria-hidden="true" tabindex="-1"></a>    RedirectMatch<span class="st"> permanent ^/jhub$ /jhub/</span></span>
+<span id="cb259-8"><a href="jupyterhub.html#cb259-8" aria-hidden="true" tabindex="-1"></a>    RewriteCond<span class="st"> %{HTTP:Connection} Upgrade [NC]</span></span>
+<span id="cb259-9"><a href="jupyterhub.html#cb259-9" aria-hidden="true" tabindex="-1"></a>    RewriteCond<span class="st"> %{HTTP:Upgrade} websocket [NC]</span></span>
+<span id="cb259-10"><a href="jupyterhub.html#cb259-10" aria-hidden="true" tabindex="-1"></a>    RewriteRule<span class="st"> /jhub/(.*) ws://127.0.0.1:8000/jhub/$1 [NE,P,L]</span></span>
+<span id="cb259-11"><a href="jupyterhub.html#cb259-11" aria-hidden="true" tabindex="-1"></a>    RewriteRule<span class="st"> /jhub/(.*) http://127.0.0.1:8000/jhub/$1 [NE,P,L]</span></span>
+<span id="cb259-12"><a href="jupyterhub.html#cb259-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb259-13"><a href="jupyterhub.html#cb259-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">&lt;Location</span><span class="at"> "/jhub/"</span><span class="fu">&gt;</span></span>
+<span id="cb259-14"><a href="jupyterhub.html#cb259-14" aria-hidden="true" tabindex="-1"></a>      <span class="co"># preserve Host header to avoid cross-origin problems</span></span>
+<span id="cb259-15"><a href="jupyterhub.html#cb259-15" aria-hidden="true" tabindex="-1"></a>      <span class="ex">ProxyPreserveHost</span><span class="ch"> </span><span class="kw">on</span></span>
+<span id="cb259-16"><a href="jupyterhub.html#cb259-16" aria-hidden="true" tabindex="-1"></a>      <span class="co"># proxy to JupyterHub</span></span>
+<span id="cb259-17"><a href="jupyterhub.html#cb259-17" aria-hidden="true" tabindex="-1"></a>      ProxyPass<span class="st">         http://127.0.0.1:8000/</span></span>
+<span id="cb259-18"><a href="jupyterhub.html#cb259-18" aria-hidden="true" tabindex="-1"></a>      ProxyPassReverse<span class="st">  http://127.0.0.1:8000/</span></span>
+<span id="cb259-19"><a href="jupyterhub.html#cb259-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">&lt;/Location&gt;</span></span>
+<span id="cb259-20"><a href="jupyterhub.html#cb259-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb259-21"><a href="jupyterhub.html#cb259-21" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;/VirtualHost&gt;</span></span></code></pre></div>
 <p>重新啟動 Apache 以套用新的設定</p>
 <p><code>{.prefixed bash} sudo systemctl restart apache2</code></p>
 <p>最後用網址 <code>http://&lt;虛擬機器的 ip 位置&gt;/jhub</code> 訪問首頁</p>
@@ -491,11 +495,11 @@ See 'snap info jupyter' for additional versions.</code></pre>
 <li>
 <p><a href="https://github.com/jupyterlab/language-packs/tree/master/language-packs/">language-packs</a></p>
 <p>用 JupyterHub 內建的 Python 安裝語言擴充套件</p>
-<div class="sourceCode" id="cb258"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb258-1"><a href="jupyterhub.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install jupyterlab-language-pack-zh-TW</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb260-1"><a href="jupyterhub.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install jupyterlab-language-pack-zh-TW</span></code></pre></div>
 <p>順便簡體中文也一起裝</p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb259-1"><a href="jupyterhub.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install jupyterlab-language-pack-zh-CN</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb261-1"><a href="jupyterhub.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install jupyterlab-language-pack-zh-CN</span></code></pre></div>
 <p>最後重新啟動 JupyterHub</p>
-<div class="sourceCode" id="cb260"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb260-1"><a href="jupyterhub.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart jupyterhub</span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb262-1"><a href="jupyterhub.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart jupyterhub</span></code></pre></div>
 </li>
 </ul>
 <p>其他推薦安裝的插件</p>
