@@ -1,0 +1,351 @@
+# 其他 {#others}
+
+## 更改預設的文本編輯器 {#change-default-text-editor}
+
+這個指令可以變更系統編輯文件所用的程式
+
+``` bash
+sudo update-alternatives --config editor
+```
+
+按了 Enter↩ 之後，會出現現在可用的編輯器，輸入對應的編號即可變更。有標 `*` 號的編輯器為目前設定的預設編輯器。
+
+``` console_output
+There are 4 choices for the alternative editor (providing /usr/bin/editor).
+
+  Selection    Path                Priority   Status
+------------------------------------------------------------
+  0            /bin/nano            40        auto mode
+  1            /bin/ed             -100       manual mode
+  2            /bin/nano            40        manual mode
+* 3            /usr/bin/vim.basic   30        manual mode
+  4            /usr/bin/vim.tiny    15        manual mode
+
+Press <enter> to keep the current choice[*], or type selection number: 3
+```
+
+<!--# TODO: 利用 SSH  傳輸檔案 -->
+
+<!--## sharedfolder-->
+
+## 關於套件版本 {#about-package-versions}
+
+### 安裝 php & php-mysql 插件 {#install-php-and-php-mysql-plugin}
+
+先確認 `php` 是不是我們要安裝的版本
+
+``` {.bash .prefixed}
+sudo apt info php
+```
+
+可以看到，目前 `php` 的依賴套件是 `php7.4`，代表將安裝的版本為 `php7.4`
+
+``` console_output
+Package: php
+Version: 2:7.4+75
+Priority: optional
+Section: php
+Source: php-defaults (75)
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 13.3 kB
+Depends: php7.4
+Download-Size: 2,712 B
+APT-Sources: http://tw.archive.ubuntu.com/ubuntu focal/main amd64 Packages
+Description: server-side, HTML-embedded scripting language (default)
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+ .
+ This package is a dependency package, which depends on latest stable
+ PHP version (currently 7.4).
+```
+
+接著，我們再查詢一次 `php7.4` 會安裝什麼東西
+
+``` {.bash .prefixed}
+sudo apt info php7.4
+```
+
+這裡可以看到 `php7.4` 安裝了會安裝一些使 php7.4 順利運作的依賴套件，像是 `libapache2-mod-php7.4`、`php7.4-fpm`、`php7.4-cgi` 與 `php7.4-common`
+
+``` console_output
+Package: php7.4
+Version: 7.4.3-4ubuntu2.5
+Priority: optional
+Section: php
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 73.7 kB
+Provides: php
+Depends: libapache2-mod-php7.4 | php7.4-fpm | php7.4-cgi, php7.4-common
+Homepage: http://www.php.net/
+Download-Size: 9,244 B
+APT-Sources: http://tw.archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages
+Description: server-side, HTML-embedded scripting language (metapackage)
+ This package is a metapackage that, when installed, guarantees that you
+ have at least one of the four server-side versions of the PHP interpreter
+ installed. Removing this package won't remove PHP from your system, however
+ it may remove other packages that depend on this one.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+```
+
+一樣地，這裡也用相同的指令查詢 `php-mysql` 套件
+
+``` console_output
+sudo apt info php-mysql
+```
+
+因為 `php` 已經有 `php-common` 依賴的，所以待會兩個套件一起安裝時，只會安裝一個 `php-common`
+
+``` console_output
+Package: php-mysql
+Version: 2:7.4+75
+Priority: optional
+Section: php
+Source: php-defaults (75)
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 13.3 kB
+Depends: php-common, php7.4-mysql
+Task: lamp-server
+Download-Size: 2,000 B
+APT-Sources: http://tw.archive.ubuntu.com/ubuntu focal/main amd64 Packages
+Description: MySQL module for PHP [default]
+ This package provides a MySQL module for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+ .
+ This package is a dependency package, which depends on Debian's default
+ PHP version (currently 7.4).
+```
+
+確認完我們要安裝的版本是否正確後，用套件管理程式 `apt` 安裝套件。
+
+``` {.bash .prefixed}
+sudo apt install php php-mysql --yes
+```
+
+確認 `php` 是否安裝完成，可以用 `which` 指令確認：
+
+``` {.bash .prefixed}
+which php
+```
+
+當系統中有安裝複數個版本的 php 時，php 執行檔的位置可能會有所不同。同樣地在第 5 章[設置 Python 3 環境]時也會遇到。
+
+## Mysql 8.0 root 密碼重設 {#mysql-8-reset-root-password}
+
+先建立一個含有改變 root 密碼的 sql 語法文字檔案
+
+``` {.bash .prefixed}
+vim mysql-init
+```
+
+``` sqlmysql
+ALTER USER 'root'@'localhost' IDENTIFIED with caching_sha2_password by '<新的 root 密碼>';
+```
+
+如存好後將擁有者與使用者群組改成 `mysql` 後，移至 `/tmp` 資料夾，使 mysql 使用者可以存取。
+
+``` {.bash .prefixed}
+chown mysql.mysql mysql-init && mv mysql-init /tmp
+```
+
+切換至 root 使用者進行後續操作
+
+``` {.bash .prefixed}
+sudo su -
+```
+
+將目前的 mysql 關閉
+
+``` {.bash .prefixed_root}
+killall -9 mysqld
+```
+
+或是使用 `systemctl` 指令關閉 mysql 服務
+
+`{.bash prefixed} systemctl stop mysql.service`
+
+接著使用 mysqld 指令啟動 mysql 並指定 `--user`、`--defaults-file` 與 `--init-file` 參數。
+
+``` {.bash .prefixed_root}
+mysqld --defaults-file=/etc/mysql/mysql.conf.d/mysqld.cnf \ 
+--user=mysql \ 
+--init-file=/tmp/mysql-init &
+```
+
+-   `--defaults-file`: MySQL 預設啟動的設定檔案
+
+-   `--user`: 以使用者 `mysql` 執行
+
+-   `--init-file`: 初始化時，執行 `/tmp/mysql-init` 指令，變更密碼
+
+-   `&`: 將 mysql deamon 放至背景執行。
+
+此時，應該可以正常登入了。
+
+::: {.infobox .caution}
+如果不行的話，請檢查位於 `/var/log/mysql/error.log` 的錯誤紀錄，如果有看到類似 `/var/run/mysqld` 的錯誤，需要手動建立資料夾，並把權限變更為 `mysql` 用戶的權限。 操作完之後再從關閉 mysql 服務開始，再嘗試一次。
+
+參考指令如下：
+
+``` {.bash .prefixed_root}
+mkdir /var/run/mysqld && chown mysql.mysql /var/run/mysqld
+```
+:::
+
+最後以正常的服務啟動 mysql：
+
+``` {.bash .prefixed_root}
+systemctl restart mysql.service
+```
+
+退出 root 帳號
+
+``` {.bash .prefixed_root}
+exit
+```
+
+試以新密碼登入 mysql root 帳號：
+
+``` {.bash .prefixed}
+mysql -u root -p
+```
+
+成功 🎊
+
+``` console_output
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 17
+Server version: 8.0.26-0ubuntu0.20.04.3 (Ubuntu)
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> 
+```
+
+
+## jupyterhub C/C++ 運算核心 {#jupyterhub-cc-plus-plus-kernel}
+
+``` {.bash .prefixed}
+sudo vim /opt/conda/envs/c_cpp.yml
+```
+
+::: code-label
+/opt/conda/envs/c_cpp.yml
+:::
+
+``` yaml
+name: c-cpp
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - xeus-cling
+  - python=3.*
+  - pip
+  - ipykernel
+prefix: /opt/conda/envs/c-cpp
+```
+
+``` {.bash .prefixed}
+sudo conda env create -f c_cpp.yml
+```
+
+``` {.bash .prefixed}
+sudo jupyter kernelspec install \
+    /opt/conda/envs/c-cpp/share/jupyter/kernels/xcpp11 --sys-prefix
+```
+
+``` {.bash .prefixed}
+sudo jupyter kernelspec install \
+    /opt/conda/envs/c-cpp/share/jupyter/kernels/xcpp14 --sys-prefix
+```
+
+``` {.bash .prefixed}
+sudo jupyter kernelspec install \
+    /opt/conda/envs/c-cpp/share/jupyter/kernels/xcpp17 --sys-prefix
+```
+
+<!--# Scanf() problem https://github.com/brendan-rius/jupyter-c-kernel/issues/3 -->
+
+``` {.bash .prefixed}
+sudo /opt/conda/envs/c-cpp/bin/python3.9 -m \
+    pip install git+https://github.com/XaverKlemenschits/jupyter-c-kernel.git
+```
+
+``` {.bash .prefixed}
+sudo vim /opt/conda/envs/c-cpp/share/jupyter/kernels/c/kernel.json
+```
+
+::: code-label
+/opt/conda/envs/c-cpp/share/jupyter/kernels/c/kernel.json
+:::
+
+``` json
+{
+  "display_name": "C",
+  "argv": [
+      "/opt/conda/envs/c-cpp/bin/python3",
+      "-m",
+      "jupyter_c_kernel",
+      "-f",
+      "{connection_file}"
+  ],
+  "language": "C"
+}
+```
+
+``` {.bash .prefixed}
+sudo mv ~/Downloads/logo** /opt/conda/envs/c-cpp/share/jupyter/c/
+```
+
+::: flex-columns
+```{r, fig.cap='C 語言核心圖標，32x32', out.width="", echo=FALSE}
+knitr::include_graphics(path = "figures/icons/logo-32x32.png")
+```
+
+```{r, fig.cap='C 語言核心圖標，64x64', out.width="", echo=FALSE}
+knitr::include_graphics(path = "figures/icons/logo-64x64.png")
+```
+:::
+
+``` {.bash .prefixed}
+ls -al /opt/conda/envs/c-cpp/share/jupyter/kernels/c
+```
+
+``` console_output
+drwxrwxr-x 2 root root 4096 Oct 23 17:20 ./
+drwxrwxr-x 7 root root 4096 Oct 23 15:31 ../
+-rw-rw-r-- 1 root root  181 Oct 23 15:26 kernel.json
+-rw-r--r-- 1 root root 1536 Oct 23 17:02 logo-32x32.png
+-rw-r--r-- 1 root root 4079 Oct 23 17:02 logo-64x64.png
+```
+
+``` {.bash .prefixed}
+sudo jupyter kernelspec install /opt/conda/envs/c-cpp/share/jupyter/c --sys-prefix
+```
+
+```{r, fig.cap='jupyterhub 加上了 C 與 CPP 核心的頁面'}
+knitr::include_graphics(path = 'figures/jupyterlab_c_cpp_kernel.png')
+```
+```
