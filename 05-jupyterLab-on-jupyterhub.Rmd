@@ -167,13 +167,13 @@ sudo ln -s /opt/jupyterhub/etc/systemd/jupyterhub.service \
 sudo systemctl daemon-reload
 ```
 
-開啟 JupyterHub 系統服務設定
+將 JupyterHub 服務設為在系統啟動時自動運行
 
 ``` {.bash .prefixed}
 sudo systemctl enable jupyterhub.service
 ```
 
-手動啟動 Jupyterhub 服務
+手動立即啟動 Jupyterhub 服務
 
 ``` {.bash .prefixed}
 sudo systemctl start jupyterhub.service
@@ -610,6 +610,12 @@ sudo systemctl restart apache2
 knitr::include_graphics(path = './figures/apache2-main-page-proxy-test.png')
 ```
 
+確認沒問題後，記得將防火牆的埠號 `8000` 規則刪除
+
+``` {.bash .prefixed}
+sudo ufw delete <規則編號>
+```
+
 ## 其他 JupyterHub 擴充套件 {#other-jupyterhub-extensions}
 
 安裝語言套件
@@ -633,6 +639,14 @@ knitr::include_graphics(path = './figures/apache2-main-page-proxy-test.png')
     ``` {.bash .prefixed}
     sudo systemctl restart jupyterhub
     ```
+    
+    回到 JupyterLab 後，可以由「settings」→「Language」切換 JupyterLab 顯示語言。
+
+    ```{r, fig.cap='jupyterhub 登入後的頁面'}
+    knitr::include_graphics(path = 'figures/jupyterlab-change-language.png')
+    ```
+
+    
 
 其他推薦安裝的插件
 
