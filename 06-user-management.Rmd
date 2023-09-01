@@ -1,13 +1,13 @@
 # (PART) 使用者管理 {-}
 
-## 系統使用者管理 {#system-user-management}
+# 系統使用者管理 {#system-user-management}
 
-### 新增使用者 {#system-add-user}
+## 新增使用者 {#system-add-user}
 
-### 刪除使用者 {#system-delete-user}
+## 刪除使用者 {#system-delete-user}
 
-## MySQL 使用者管理 {#mysql-user-management}
+# MySQL 使用者管理 {#mysql-user-management}
 
-### 新增使用者 {#mysql-add-user}
+## 新增使用者 {#mysql-add-user}
 
-### 刪除使用者 {#mysql-delete-user}
+## 刪除使用者 {#mysql-delete-user}
