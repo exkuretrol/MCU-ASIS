@@ -78,7 +78,7 @@
 <li><a class="active" href="jupyterhub.html"><span class="header-section-number">5</span> JupyterHub</a></li>
 <li class="book-part">附錄</li>
 <li><a class="" href="related-software.html"><span class="header-section-number">A</span> 相關軟體</a></li>
-<li><a class="" href="account-management.html"><span class="header-section-number">B</span> 帳號管理</a></li>
+<li><a class="" href="user-management-scripts.html"><span class="header-section-number">B</span> 使用者管理腳本</a></li>
 <li><a class="" href="others.html"><span class="header-section-number">C</span> 其他</a></li>
 <li><a class="" href="references.html">參考文獻</a></li>
 </ul>
@@ -192,9 +192,9 @@
 <span id="cb215-2"><a href="jupyterhub.html#cb215-2" aria-hidden="true" tabindex="-1"></a>    /etc/systemd/system/jupyterhub.service</span></code></pre></div>
 <p>使 systemd 重新讀取設定，而不用重新啟動整個系統</p>
 <div class="sourceCode" id="cb216"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb216-1"><a href="jupyterhub.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl daemon-reload</span></code></pre></div>
-<p>開啟 JupyterHub 系統服務設定</p>
+<p>將 JupyterHub 服務設為在系統啟動時自動運行</p>
 <div class="sourceCode" id="cb217"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb217-1"><a href="jupyterhub.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable jupyterhub.service</span></code></pre></div>
-<p>手動啟動 Jupyterhub 服務</p>
+<p>手動立即啟動 Jupyterhub 服務</p>
 <div class="sourceCode" id="cb218"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb218-1"><a href="jupyterhub.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl start jupyterhub.service</span></code></pre></div>
 <p>用 <code>status</code> 指令查詢運行狀態是否正常</p>
 <div class="sourceCode" id="cb219"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb219-1"><a href="jupyterhub.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status jupyterhub.service</span></code></pre></div>
@@ -485,6 +485,8 @@ See 'snap info jupyter' for additional versions.</code></pre>
 圖 5.3: 透過 <a href="http://" class="uri">http://</a>/jhub 訪問的首頁
 </p>
 </div>
+<p>確認沒問題後，記得將防火牆的埠號 <code>8000</code> 規則刪除</p>
+<div class="sourceCode" id="cb260"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb260-1"><a href="jupyterhub.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ufw delete <span class="op">&lt;</span>規則編號<span class="op">&gt;</span></span></code></pre></div>
 </div>
 <div id="other-jupyterhub-extensions" class="section level2" number="5.6">
 <h2>
@@ -495,11 +497,18 @@ See 'snap info jupyter' for additional versions.</code></pre>
 <li>
 <p><a href="https://github.com/jupyterlab/language-packs/tree/master/language-packs/">language-packs</a></p>
 <p>用 JupyterHub 內建的 Python 安裝語言擴充套件</p>
-<div class="sourceCode" id="cb260"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb260-1"><a href="jupyterhub.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install jupyterlab-language-pack-zh-TW</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb261-1"><a href="jupyterhub.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install jupyterlab-language-pack-zh-TW</span></code></pre></div>
 <p>順便簡體中文也一起裝</p>
-<div class="sourceCode" id="cb261"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb261-1"><a href="jupyterhub.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install jupyterlab-language-pack-zh-CN</span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb262-1"><a href="jupyterhub.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> /opt/jupyterhub/bin/pip install jupyterlab-language-pack-zh-CN</span></code></pre></div>
 <p>最後重新啟動 JupyterHub</p>
-<div class="sourceCode" id="cb262"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb262-1"><a href="jupyterhub.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart jupyterhub</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb263-1"><a href="jupyterhub.html#cb263-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart jupyterhub</span></code></pre></div>
+<p>回到 JupyterLab 後，可以由「settings」→「Language」切換 JupyterLab 顯示語言。</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-79"></span>
+<img src="figures/jupyterlab-change-language.png" alt="jupyterhub 登入後的頁面" width="100%"><p class="caption">
+圖 5.4: jupyterhub 登入後的頁面
+</p>
+</div>
 </li>
 </ul>
 <p>其他推薦安裝的插件</p>
@@ -563,7 +572,7 @@ See 'snap info jupyter' for additional versions.</code></pre>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-08-31.</p>
+    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-09-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

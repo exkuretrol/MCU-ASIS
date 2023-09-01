@@ -81,11 +81,12 @@ fig:unnamed-chunk-80
 fig:unnamed-chunk-81
 fig:unnamed-chunk-82
 fig:unnamed-chunk-83
+fig:unnamed-chunk-84
 fig:manage-users-sh
 fig:create-users
-fig:unnamed-chunk-84
 fig:unnamed-chunk-85
 fig:unnamed-chunk-86
+fig:unnamed-chunk-87
 intro
 intro-preparing
 downloading-ubuntu-image
@@ -186,8 +187,8 @@ step-2-經由-puttygen-產生-ssh-key-pairs
 step-3-妥善保存好產生的-key
 upload-ssh-key-pairs
 connection-method-of-key-pairs-generated-by-puttygen
-account-management
-system-account
+user-management-scripts
+system-user-management
 overview
 script-execution
 command-description
