@@ -1,0 +1,13 @@
+# (PART) 後續維護 {-}
+
+# JupyterHub {#maintaince-jupyterhub}
+
+## 更新套件
+
+1. 在 conda 對應的虛擬環境中編輯好 `.yml` 檔案，加入新增的套件。
+
+2. 執行更新指令
+
+``` {.bash .prefixed}
+conda env update --file <虛擬環境>.yml --prune
+```
