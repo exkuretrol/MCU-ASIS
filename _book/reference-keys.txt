@@ -178,6 +178,14 @@ r-environment
 sas-environment
 configure-apache-reverse-proxy
 other-jupyterhub-extensions
+system-user-management
+system-add-user
+system-delete-user
+mysql-user-management
+mysql-add-user-and-user-database
+mysql-delete-user
+maintaince-jupyterhub
+更新套件
 related-software
 windows-terminal
 putty
@@ -188,7 +196,6 @@ step-3-妥善保存好產生的-key
 upload-ssh-key-pairs
 connection-method-of-key-pairs-generated-by-puttygen
 user-management-scripts
-system-user-management
 overview
 script-execution
 command-description
@@ -199,6 +206,8 @@ command-description
 檢查系資料夾是否符合規範check_depts_dir
 建立使用者提示create_prompt
 建立使用者create_users
+資料庫mysql帳號
+概述
 others
 change-default-text-editor
 about-package-versions

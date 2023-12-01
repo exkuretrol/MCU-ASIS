@@ -4,13 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Page not found | MCU ASIS Ubuntu 系統安裝指南</title>
+<title>章節 7 MySQL 使用者管理 | MCU ASIS Ubuntu 系統安裝指南</title>
 <meta name="author" content="Chiawei Chen">
 <meta name="generator" content="bookdown 0.35 with bs4_book()">
-<meta property="og:title" content="Page not found | MCU ASIS Ubuntu 系統安裝指南">
+<meta property="og:title" content="章節 7 MySQL 使用者管理 | MCU ASIS Ubuntu 系統安裝指南">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Page not found | MCU ASIS Ubuntu 系統安裝指南">
+<meta name="twitter:title" content="章節 7 MySQL 使用者管理 | MCU ASIS Ubuntu 系統安裝指南">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Noto_Sans_TC-0.4.7/font.css" rel="stylesheet">
@@ -44,9 +44,9 @@
     }
   </style>
 <link rel="stylesheet" href="bs4_style.css">
-<meta name="description" content="The page you requested cannot be found (perhaps it was moved or renamed). You may want to try searching to find the page's new location, or use the table of contents to find the page you are...">
-<meta property="og:description" content="The page you requested cannot be found (perhaps it was moved or renamed). You may want to try searching to find the page's new location, or use the table of contents to find the page you are...">
-<meta name="twitter:description" content="The page you requested cannot be found (perhaps it was moved or renamed). You may want to try searching to find the page's new location, or use the table of contents to find the page you are...">
+<meta name="description" content="7.1 新增使用者與使用者資料庫 連線至 MySQL 的終端機。 sudo mysql 如果 root 的使用者帳號不是使用 auth_socket 的方式驗證的話，需要以帳號密碼登入。以下是登入用的指令 mysql -u root -p 創建以 密碼 驗證名為 使用者名稱 的使用者 create user '&lt;使用者名稱&gt;'@'localhost' identified by...">
+<meta property="og:description" content="7.1 新增使用者與使用者資料庫 連線至 MySQL 的終端機。 sudo mysql 如果 root 的使用者帳號不是使用 auth_socket 的方式驗證的話，需要以帳號密碼登入。以下是登入用的指令 mysql -u root -p 創建以 密碼 驗證名為 使用者名稱 的使用者 create user '&lt;使用者名稱&gt;'@'localhost' identified by...">
+<meta name="twitter:description" content="7.1 新增使用者與使用者資料庫 連線至 MySQL 的終端機。 sudo mysql 如果 root 的使用者帳號不是使用 auth_socket 的方式驗證的話，需要以帳號密碼登入。以下是登入用的指令 mysql -u root -p 創建以 密碼 驗證名為 使用者名稱 的使用者 create user '&lt;使用者名稱&gt;'@'localhost' identified by...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -78,7 +78,7 @@
 <li><a class="" href="jupyterhub.html"><span class="header-section-number">5</span> JupyterHub</a></li>
 <li class="book-part">使用者管理</li>
 <li><a class="" href="system-user-management.html"><span class="header-section-number">6</span> 系統使用者管理</a></li>
-<li><a class="" href="mysql-user-management.html"><span class="header-section-number">7</span> MySQL 使用者管理</a></li>
+<li><a class="active" href="mysql-user-management.html"><span class="header-section-number">7</span> MySQL 使用者管理</a></li>
 <li class="book-part">後續維護</li>
 <li><a class="" href="maintaince-jupyterhub.html"><span class="header-section-number">8</span> JupyterHub</a></li>
 <li class="book-part">附錄</li>
@@ -93,18 +93,61 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="page-not-found" class="section level1">
-<h1>Page not found<a class="anchor" aria-label="anchor" href="#page-not-found"><i class="fas fa-link"></i></a>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="mysql-user-management" class="section level1" number="7">
+<h1>
+<span class="header-section-number">章節 7</span> MySQL 使用者管理<a class="anchor" aria-label="anchor" href="#mysql-user-management"><i class="fas fa-link"></i></a>
 </h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="mysql-add-user-and-user-database" class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> 新增使用者與使用者資料庫<a class="anchor" aria-label="anchor" href="#mysql-add-user-and-user-database"><i class="fas fa-link"></i></a>
+</h2>
+<p>連線至 MySQL 的終端機。</p>
+<div class="sourceCode" id="cb264"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb264-1"><a href="mysql-user-management.html#cb264-1" tabindex="-1"></a><span class="fu">sudo</span> mysql</span></code></pre></div>
+<div class="rmdnote">
+<p>如果 root 的使用者帳號不是使用 <code>auth_socket</code> 的方式驗證的話，需要以帳號密碼登入。以下是登入用的指令</p>
+<div class="sourceCode" id="cb265"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb265-1"><a href="mysql-user-management.html#cb265-1" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span></span></code></pre></div>
 </div>
+<p>創建以 <code>密碼</code> 驗證名為 <code>使用者名稱</code> 的使用者</p>
+<pre class="mysql prefixed_mysql"><code>create user '&lt;使用者名稱&gt;'@'localhost' identified by '&lt;密碼&gt;';`
+
+創建以 `使用者名稱` 為名的資料庫
+
+``` {.mysql .prefixed_mysql}
+create database &lt;使用者名稱&gt; character set utf8mb4 collate utf8mb4_unicode_ci;</code></pre>
+<p>允許使用者 <code>使用者名稱</code> 的使用者擁有在資料庫 <code>使用者名稱</code> 的所有權限</p>
+<pre class="mysql prefixed_mysql"><code>grant all privileges on &lt;使用者名稱&gt;.* to '&lt;使用者名稱&gt;'@'localhost';</code></pre>
+</div>
+<div id="mysql-delete-user" class="section level2" number="7.2">
+<h2>
+<span class="header-section-number">7.2</span> 刪除使用者<a class="anchor" aria-label="anchor" href="#mysql-delete-user"><i class="fas fa-link"></i></a>
+</h2>
+<p>下列指令可以刪除名為 <code>使用者名稱</code> 的使用者</p>
+<pre class="mysql prefixed_mysql"><code>drop user '&lt;使用者名稱&gt;'@'localhost';</code></pre>
+
+</div>
+</div>
+
+
+
   <div class="chapter-nav">
-<div class="empty"></div>
-<div class="empty"></div>
+<div class="prev"><a href="system-user-management.html"><span class="header-section-number">6</span> 系統使用者管理</a></div>
+<div class="next"><a href="maintaince-jupyterhub.html"><span class="header-section-number">8</span> JupyterHub</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    </div>
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#mysql-user-management"><span class="header-section-number">7</span> MySQL 使用者管理</a></li>
+<li><a class="nav-link" href="#mysql-add-user-and-user-database"><span class="header-section-number">7.1</span> 新增使用者與使用者資料庫</a></li>
+<li><a class="nav-link" href="#mysql-delete-user"><span class="header-section-number">7.2</span> 刪除使用者</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/exkuretrol/MCU-ASIS/blob/main/06-user-management.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/exkuretrol/MCU-ASIS/edit/main/06-user-management.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
 
 </div>
 </div> <!-- .container -->
