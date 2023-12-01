@@ -44,9 +44,9 @@
     }
   </style>
 <link rel="stylesheet" href="bs4_style.css">
-<meta name="description" content="8.1 更新套件 在 conda 對應的虛擬環境中編輯好 .yml 檔案，加入新增的套件。 執行更新指令 conda env update --file &lt;虛擬環境&gt;.yml --prune">
-<meta property="og:description" content="8.1 更新套件 在 conda 對應的虛擬環境中編輯好 .yml 檔案，加入新增的套件。 執行更新指令 conda env update --file &lt;虛擬環境&gt;.yml --prune">
-<meta name="twitter:description" content="8.1 更新套件 在 conda 對應的虛擬環境中編輯好 .yml 檔案，加入新增的套件。 執行更新指令 conda env update --file &lt;虛擬環境&gt;.yml --prune">
+<meta name="description" content="8.1 更新套件 在 conda 對應的虛擬環境中編輯好 .yml 檔案，加入新增的套件。 執行更新指令 conda env update --file &lt;虛擬環境&gt;.yml --prune  8.2 新增供 JupyterHub 的 Python 環境 用超級使用者權限在 /opt/conda/envs/ 建立新環境的 yaml 檔案。 name: new_env channels: ...">
+<meta property="og:description" content="8.1 更新套件 在 conda 對應的虛擬環境中編輯好 .yml 檔案，加入新增的套件。 執行更新指令 conda env update --file &lt;虛擬環境&gt;.yml --prune  8.2 新增供 JupyterHub 的 Python 環境 用超級使用者權限在 /opt/conda/envs/ 建立新環境的 yaml 檔案。 name: new_env channels: ...">
+<meta name="twitter:description" content="8.1 更新套件 在 conda 對應的虛擬環境中編輯好 .yml 檔案，加入新增的套件。 執行更新指令 conda env update --file &lt;虛擬環境&gt;.yml --prune  8.2 新增供 JupyterHub 的 Python 環境 用超級使用者權限在 /opt/conda/envs/ 建立新環境的 yaml 檔案。 name: new_env channels: ...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -106,6 +106,39 @@
 <li><p>執行更新指令</p></li>
 </ol>
 <div class="sourceCode" id="cb269"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb269-1"><a href="maintaince-jupyterhub.html#cb269-1" tabindex="-1"></a><span class="ex">conda</span> env update <span class="at">--file</span> <span class="op">&lt;</span>虛擬環境<span class="op">&gt;</span>.yml <span class="at">--prune</span></span></code></pre></div>
+</div>
+<div id="新增供-jupyterhub-的-python-環境" class="section level2" number="8.2">
+<h2>
+<span class="header-section-number">8.2</span> 新增供 JupyterHub 的 Python 環境<a class="anchor" aria-label="anchor" href="#%E6%96%B0%E5%A2%9E%E4%BE%9B-jupyterhub-%E7%9A%84-python-%E7%92%B0%E5%A2%83"><i class="fas fa-link"></i></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>用超級使用者權限在 <code>/opt/conda/envs/</code> 建立新環境的 yaml 檔案。</li>
+</ol>
+<div class="sourceCode" id="cb270"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb270-1"><a href="maintaince-jupyterhub.html#cb270-1" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> new_env</span></span>
+<span id="cb270-2"><a href="maintaince-jupyterhub.html#cb270-2" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span></span>
+<span id="cb270-3"><a href="maintaince-jupyterhub.html#cb270-3" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> defaults</span></span>
+<span id="cb270-4"><a href="maintaince-jupyterhub.html#cb270-4" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> conda-forge</span></span>
+<span id="cb270-5"><a href="maintaince-jupyterhub.html#cb270-5" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
+<span id="cb270-6"><a href="maintaince-jupyterhub.html#cb270-6" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> python=3.11</span></span>
+<span id="cb270-7"><a href="maintaince-jupyterhub.html#cb270-7" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> ipykernel</span></span>
+<span id="cb270-8"><a href="maintaince-jupyterhub.html#cb270-8" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> plotly</span></span>
+<span id="cb270-9"><a href="maintaince-jupyterhub.html#cb270-9" tabindex="-1"></a><span class="fu">prefix</span><span class="kw">:</span><span class="at"> /opt/conda/envs/new_env</span></span></code></pre></div>
+<div class="rmdnote">
+<p>關於虛擬環境的撰寫可以參考<a href="https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-file-manually">conda官方文件</a>。</p>
+</div>
+<ol start="2" style="list-style-type: decimal">
+<li>使用 conda 指令安裝</li>
+</ol>
+<div class="sourceCode" id="cb271"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb271-1"><a href="maintaince-jupyterhub.html#cb271-1" tabindex="-1"></a><span class="fu">sudo</span> conda env create <span class="at">--file</span> /opt/conda/envs/new_env.yml</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>連結至 JupyterHub</li>
+</ol>
+<div class="sourceCode" id="cb272"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb272-1"><a href="maintaince-jupyterhub.html#cb272-1" tabindex="-1"></a><span class="fu">sudo</span> /opt/conda/envs/new_env/bin/python <span class="at">-m</span> <span class="dt">\</span></span>
+<span id="cb272-2"><a href="maintaince-jupyterhub.html#cb272-2" tabindex="-1"></a>    ipykernel install <span class="dt">\</span></span>
+<span id="cb272-3"><a href="maintaince-jupyterhub.html#cb272-3" tabindex="-1"></a>    <span class="at">--prefix</span><span class="op">=</span>/opt/jupyterhub/ <span class="dt">\</span></span>
+<span id="cb272-4"><a href="maintaince-jupyterhub.html#cb272-4" tabindex="-1"></a>    <span class="at">--name</span> <span class="st">'new_env'</span> <span class="dt">\</span></span>
+<span id="cb272-5"><a href="maintaince-jupyterhub.html#cb272-5" tabindex="-1"></a>    <span class="at">--display-name</span> <span class="st">"新的 Python"</span></span></code></pre></div>
+<p>後續可使用指令 <code>jupyter kernelspec</code> 來管理連結的 conda 環境。</p>
 
 </div>
 </div>
@@ -120,6 +153,7 @@
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#maintaince-jupyterhub"><span class="header-section-number">8</span> JupyterHub</a></li>
 <li><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E5%A5%97%E4%BB%B6"><span class="header-section-number">8.1</span> 更新套件</a></li>
+<li><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E4%BE%9B-jupyterhub-%E7%9A%84-python-%E7%92%B0%E5%A2%83"><span class="header-section-number">8.2</span> 新增供 JupyterHub 的 Python 環境</a></li>
 </ul>
 
       <div class="book-extra">

@@ -186,6 +186,7 @@ mysql-add-user-and-user-database
 mysql-delete-user
 maintaince-jupyterhub
 更新套件
+新增供-jupyterhub-的-python-環境
 related-software
 windows-terminal
 putty
