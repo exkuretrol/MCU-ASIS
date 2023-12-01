@@ -782,152 +782,152 @@ create_users() {
 
 -   第 **78** 行，輸出訊息
 
-<!-- ## 資料庫（MySQL）帳號 -->
+## 資料庫（MySQL）帳號
 
-<!-- ### 概述 -->
+### 概述
 
-<!-- ``` bash -->
-<!-- #!/bin/bash -->
-<!-- # author: kuaz -->
-<!-- # last modified: 2021.09.13 -->
-<!-- #  -->
-<!-- # 這個腳本被用來: -->
-<!-- # 1. 根據已知的帳號密碼建立 MySQL 帳戶 -->
-<!-- # 2. 根據帳號建立資料庫，編碼為 'utf8mb4' -->
-<!-- # 3. 以上指令會儲存在當前資料夾的 create-account.sql 裡面 -->
-<!-- # 4. 根據已知的帳號刪除該 MySQL 帳戶與資料庫 -->
-<!-- # 5. 若加上 -r, --run 即可順便執行該腳本 -->
+``` bash
+#!/bin/bash
+# author: kuaz
+# last modified: 2021.09.13
+# 
+# 這個腳本被用來:
+# 1. 根據已知的帳號密碼建立 MySQL 帳戶
+# 2. 根據帳號建立資料庫，編碼為 'utf8mb4'
+# 3. 以上指令會儲存在當前資料夾的 create-account.sql 裡面
+# 4. 根據已知的帳號刪除該 MySQL 帳戶與資料庫
+# 5. 若加上 -r, --run 即可順便執行該腳本
 
 
-<!-- # 環境變數 -->
-<!-- pass_dir='passwd'       # 放置密碼的資料夾，由另一個腳本 ./create-users.sh 產生 -->
-<!-- filename='-accounts.sql'  # create/drop-accounts.sql 檔案前綴會根據選項變化 -->
-<!-- run=false           # 預設產生腳本後不會執行 -->
+# 環境變數
+pass_dir='passwd'       # 放置密碼的資料夾，由另一個腳本 ./create-users.sh 產生
+filename='-accounts.sql'  # create/drop-accounts.sql 檔案前綴會根據選項變化
+run=false           # 預設產生腳本後不會執行
 
-<!-- check_pass_dir() { -->
-<!--   if [ -d ${pass_dir} ]; then -->
-<!--         grps="$(ls ${pass_dir} | grep ".csv" | cut -d "." -f 1)" -->
-<!--   else -->
-<!--         echo "密碼資料夾 ${pass_dir} 不存在！請先執行過建立帳號腳本（create-users.sh）後，再執行一次此腳本。" -->
-<!--         exit 1; -->
-<!--   fi -->
-<!-- } -->
+check_pass_dir() {
+  if [ -d ${pass_dir} ]; then
+        grps="$(ls ${pass_dir} | grep ".csv" | cut -d "." -f 1)"
+  else
+        echo "密碼資料夾 ${pass_dir} 不存在！請先執行過建立帳號腳本（create-users.sh）後，再執行一次此腳本。"
+        exit 1;
+  fi
+}
 
-<!-- write_to_mysql_db() { -->
-<!--   if [ ${run} = true ]; then -->
-<!--         echo "請輸入 MySQL 帳戶 root 的密碼: 👇" -->
-<!--         mysql -u root -p < ${filename} -->
-<!--         clean_sql_script -->
-<!--   else -->
-<!--         echo "已於 $(pwd) 產生 ${filename} 🎉" -->
-<!--   fi -->
-<!-- } -->
+write_to_mysql_db() {
+  if [ ${run} = true ]; then
+        echo "請輸入 MySQL 帳戶 root 的密碼: 👇"
+        mysql -u root -p < ${filename}
+        clean_sql_script
+  else
+        echo "已於 $(pwd) 產生 ${filename} 🎉"
+  fi
+}
 
-<!-- create_users_and_databases() { -->
-<!--   echo "set global validate_password.policy=LOW;" | tee -a ${filename} > /dev/null 2>&1; -->
-<!--   for grp in ${grps} -->
-<!--     do  -->
-<!--         while read line; -->
-<!--         do -->
-<!--             stu="$(echo ${line} | cut -d ',' -f 1)" -->
-<!--             pass="$(echo ${line} | cut -d ',' -f 2)" -->
-<!--             echo "create user '${stu}'@'localhost' identified by '${pass}';" \ -->
-<!--                 | tee -a ${filename} > /dev/null 2>&1 -->
-<!--             echo "create database \`${stu}\` character set utf8mb4 collate utf8mb4_unicode_ci;" \ -->
-<!--                 | tee -a ${filename} > /dev/null 2>&1 -->
-<!--             echo "grant all privileges on \`${stu}\`.* to '${stu}'@'localhost';" \ -->
-<!--                 | tee -a ${filename} > /dev/null 2>&1 -->
-<!--         done < ${pass_dir}/${grp}.csv -->
-<!--   done -->
-<!--   echo "flush privileges;" | tee -a ${filename} > /dev/null 2>&1; -->
-<!--   write_to_mysql_db -->
-<!-- } -->
+create_users_and_databases() {
+  echo "set global validate_password.policy=LOW;" | tee -a ${filename} > /dev/null 2>&1;
+  for grp in ${grps}
+    do 
+        while read line;
+        do
+            stu="$(echo ${line} | cut -d ',' -f 1)"
+            pass="$(echo ${line} | cut -d ',' -f 2)"
+            echo "create user '${stu}'@'localhost' identified by '${pass}';" \
+                | tee -a ${filename} > /dev/null 2>&1
+            echo "create database \`${stu}\` character set utf8mb4 collate utf8mb4_unicode_ci;" \
+                | tee -a ${filename} > /dev/null 2>&1
+            echo "grant all privileges on \`${stu}\`.* to '${stu}'@'localhost';" \
+                | tee -a ${filename} > /dev/null 2>&1
+        done < ${pass_dir}/${grp}.csv
+  done
+  echo "flush privileges;" | tee -a ${filename} > /dev/null 2>&1;
+  write_to_mysql_db
+}
 
-<!-- drop_users_and_databases() { -->
-<!--   for grp in ${grps} -->
-<!--     do  -->
-<!--         while read line; -->
-<!--         do -->
-<!--             stu="$(echo ${line} | cut -d ',' -f 1)" -->
-<!--             echo "drop user '${stu}'@'localhost';" \ -->
-<!--                 | tee -a ${filename} > /dev/null 2>&1 -->
-<!--             echo "drop database \`${stu}\`;" \ -->
-<!--                 | tee -a ${filename} > /dev/null 2>&1 -->
-<!--         done < ${pass_dir}/${grp}.csv -->
-<!--   done -->
-<!--   write_to_mysql_db -->
-<!-- } -->
+drop_users_and_databases() {
+  for grp in ${grps}
+    do 
+        while read line;
+        do
+            stu="$(echo ${line} | cut -d ',' -f 1)"
+            echo "drop user '${stu}'@'localhost';" \
+                | tee -a ${filename} > /dev/null 2>&1
+            echo "drop database \`${stu}\`;" \
+                | tee -a ${filename} > /dev/null 2>&1
+        done < ${pass_dir}/${grp}.csv
+  done
+  write_to_mysql_db
+}
 
-<!-- display_help() { -->
-<!--   echo "這個腳本被用來:" -->
-<!--   echo "1. 根據已知的帳號密碼建立 MySQL 帳戶" -->
-<!--   echo "2. 根據帳號建立資料庫，編碼為 'utf8mb4'" -->
-<!--   echo "3. 以上指令會儲存在當前資料夾的 create-account.sql 裡面" -->
-<!--   echo "4. 根據已知的帳號刪除該 MySQL 帳戶與資料庫" -->
-<!--   echo "5. 若加上 -r, --run 即可順便執行該腳本" -->
-<!--   echo -->
-<!--   echo "使用方法: $0 [option...] {create|drop}" -->
-<!--   echo -->
-<!--   echo "options: " -->
-<!--   echo "  -r, --run  執行腳本" -->
-<!--   echo "  -h, --help  顯示說明" -->
-<!--   echo "  沒有加任何選項: 僅產生 .sql 腳本" -->
-<!--   echo -->
-<!--   exit 0 -->
-<!-- } -->
+display_help() {
+  echo "這個腳本被用來:"
+  echo "1. 根據已知的帳號密碼建立 MySQL 帳戶"
+  echo "2. 根據帳號建立資料庫，編碼為 'utf8mb4'"
+  echo "3. 以上指令會儲存在當前資料夾的 create-account.sql 裡面"
+  echo "4. 根據已知的帳號刪除該 MySQL 帳戶與資料庫"
+  echo "5. 若加上 -r, --run 即可順便執行該腳本"
+  echo
+  echo "使用方法: $0 [option...] {create|drop}"
+  echo
+  echo "options: "
+  echo "  -r, --run  執行腳本"
+  echo "  -h, --help  顯示說明"
+  echo "  沒有加任何選項: 僅產生 .sql 腳本"
+  echo
+  exit 0
+}
 
-<!-- clean_sql_script() { -->
-<!--   read -p "是否要清除 ${filename}? (Yes/No)" yn -->
-<!--   case $yn in -->
-<!--         [Yy]* ) rm ${filename} ;; -->
-<!--         [Nn]* ) exit 0;; -->
-<!--   esac -->
-<!--   echo "DONE 🎉" -->
-<!-- } -->
+clean_sql_script() {
+  read -p "是否要清除 ${filename}? (Yes/No)" yn
+  case $yn in
+        [Yy]* ) rm ${filename} ;;
+        [Nn]* ) exit 0;;
+  esac
+  echo "DONE 🎉"
+}
 
-<!-- while : -->
-<!-- do -->
-<!--   case "$1" in -->
-<!--         -r | --run) -->
-<!--             run=true -->
-<!--             shift 1 -->
-<!--             ;; -->
-<!--         -h | --help) -->
-<!--             display_help -->
-<!--             exit 0 -->
-<!--             ;; -->
-<!--         --) -->
-<!--             shift -->
-<!--             break -->
-<!--             ;; -->
-<!--         -*) -->
-<!--             echo "錯誤: 未知的選項: $1" >&2 -->
-<!--             display_help -->
-<!--             exit 1 -->
-<!--             ;; -->
-<!--         *) -->
-<!--             break -->
-<!--             ;; -->
-<!--     esac -->
-<!-- done -->
-<!-- case "$1" in -->
-<!--   create) -->
-<!--         check_pass_dir -->
-<!--         if [ $? -ne 1 ]; then -->
-<!--             filename="$1$filename" -->
-<!--             create_users_and_databases -->
-<!--         fi -->
-<!--         ;; -->
-<!--     drop) -->
-<!--         check_pass_dir -->
-<!--         if [ $? -ne 1 ]; then -->
-<!--             filename="$1$filename" -->
-<!--             drop_users_and_databases -->
-<!--         fi -->
-<!--         ;; -->
-<!--     *) -->
-<!--         display_help -->
-<!--         exit 0 -->
-<!--         ;; -->
-<!-- esac -->
-<!-- ``` -->
+while :
+do
+  case "$1" in
+        -r | --run)
+            run=true
+            shift 1
+            ;;
+        -h | --help)
+            display_help
+            exit 0
+            ;;
+        --)
+            shift
+            break
+            ;;
+        -*)
+            echo "錯誤: 未知的選項: $1" >&2
+            display_help
+            exit 1
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+case "$1" in
+  create)
+        check_pass_dir
+        if [ $? -ne 1 ]; then
+            filename="$1$filename"
+            create_users_and_databases
+        fi
+        ;;
+    drop)
+        check_pass_dir
+        if [ $? -ne 1 ]; then
+            filename="$1$filename"
+            drop_users_and_databases
+        fi
+        ;;
+    *)
+        display_help
+        exit 0
+        ;;
+esac
+```
