@@ -8,6 +8,43 @@
 
 2. 執行更新指令
 
-``` {.bash .prefixed}
-conda env update --file <虛擬環境>.yml --prune
+  ``` {.bash .prefixed}
+  conda env update --file <虛擬環境>.yml --prune
+  ```
+
+## 新增供 JupyterHub 的 Python 環境
+
+1. 用超級使用者權限在 `/opt/conda/envs/` 建立新環境的 yaml 檔案。
+``` yaml
+name: new_env
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.11
+  - ipykernel
+  - plotly
+prefix: /opt/conda/envs/new_env
 ```
+
+::: {.rmdnote}
+關於虛擬環境的撰寫可以參考[conda官方文件](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-file-manually)。
+:::
+
+2. 使用 conda 指令安裝
+
+  ``` {.bash .prefixed}
+  sudo conda env create --file /opt/conda/envs/new_env.yml
+  ```
+  
+3. 連結至 JupyterHub
+```{.bash .prefixed}
+sudo /opt/conda/envs/new_env/bin/python -m \
+    ipykernel install \
+    --prefix=/opt/jupyterhub/ \
+    --name 'new_env' \
+    --display-name "新的 Python"
+```
+
+後續可使用指令 `jupyter kernelspec` 來管理連結的 conda 環境。
+
