@@ -48,3 +48,82 @@ sudo /opt/conda/envs/new_env/bin/python -m \
 
 後續可使用指令 `jupyter kernelspec` 來管理連結的 conda 環境。
 
+## matplotlib 中文顯示問題
+
+1. 安裝開源的 CJK 字體
+
+```{.bash .prefixed}
+sudo apt install fonts-noto-cjk -y
+```
+
+2. 搜尋 matplotlib 設定檔案位置
+
+```{.bash .prefixed}
+find /opt/conda/envs -type f -name matplotlibrc
+```
+
+::: {.console_output}
+/opt/conda/envs/default-python/lib/python3.10/site-packages/matplotlib/mpl-data/matplotlibrc
+
+:::
+
+3. 複製一份到虛擬環境資料夾中
+
+```{.bash .prefixed}
+sudo cp /opt/conda/envs/default-python/lib/python3.10/site-packages/matplotlib/mpl-data/matplotlibrc /opt/conda/envs
+```
+
+4. 編輯設定檔案，在設定檔案裡面的 `font.family` 設定為 `NotoSans CJK JP`。
+
+```{.bash .prefixed}
+sudo vim /opt/conda/envs/matplotlibrc
+```
+
+::: {.code-label}
+/opt/conda/envs/matplotlibrc
+:::
+
+``` bash
+font.family: "Noto Sans CJK JP"
+#font.style:   normal
+#font.variant: normal
+#font.weight:  normal
+#font.stretch: normal
+#font.size:    10.0
+```
+
+5. 刪除原本的檔案
+
+``` {.bash .prefixed}
+sudo rm /opt/conda/envs/default-python/lib/python3.10/site-packages/matplotlib/mpl-data/matplotlibrc
+```
+
+6. 把修改後的檔案軟連結回原處
+
+``` {.bash .prefixed}
+sudo ln -s /opt/conda/envs/matplotlibrc /opt/conda/envs/default-python/lib/python3.10/site-packages/matplotlib/mpl-data/
+```
+
+7. 測試中文
+
+``` py
+import matplotlib.pyplot as plt  
+y = [0,1,2,3,4,5] 
+x= [0,5,10,15,20,25] 
+plt.plot(x, y, color='green')  
+plt.xlabel('x')  
+plt.ylabel('y')  
+plt.title("中文顯示")   
+plt.show()
+```
+
+```{r, fig.cap='matplotlib 中文顯示測試'}
+knitr::include_graphics(path = './figures/matplotlib-cjk-font.png')
+```
+
+
+```{r, fig.cap='透過 http://<虛擬機器的 ip 位置>/jhub 訪問的首頁'}
+knitr::include_graphics(path = './figures/apache2-main-page-proxy-test.png')
+```
+
+
