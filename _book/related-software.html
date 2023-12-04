@@ -105,35 +105,35 @@
 <p>Windows 終端機是一個屬於 Windows 系統由微軟提供的終端機程式。可以支援像是 Windows 子系統或是提供內建的命令提示字元或 PowerShell 使用。</p>
 <p>首先至「<a href="https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701">Windows 終端機商店</a>」頁面下載終端機</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-80"></span>
+<span style="display:block;" id="fig:unnamed-chunk-81"></span>
 <img src="figures/windows-terminal-page.png" alt="終端機商店官方介紹頁面" width="100%"><p class="caption">
 圖 A.1: 終端機商店官方介紹頁面
 </p>
 </div>
 <p>接著，畫面上應該會出現一個新的視窗，點選[取得]</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-81"></span>
+<span style="display:block;" id="fig:unnamed-chunk-82"></span>
 <img src="figures/get-windows-terminal.png" alt="終端機安裝" width="100%"><p class="caption">
 圖 A.2: 終端機安裝
 </p>
 </div>
 <p>安裝完成後，自開始功能表搜尋「終端機」的字樣。</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-82"></span>
+<span style="display:block;" id="fig:unnamed-chunk-83"></span>
 <img src="figures/open-windows-terminal.png" alt="打開終端機" width="100%"><p class="caption">
 圖 A.3: 打開終端機
 </p>
 </div>
 <p>打開終端機後我們要進行設定，將 Windows 終端機設成預設終端機的啟動程式。點擊分頁旁邊的 <code>ᵛ</code> 展開選單，接著點選「設定」。</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-83"></span>
+<span style="display:block;" id="fig:unnamed-chunk-84"></span>
 <img src="figures/configure-windows-terminal_1.png" alt="打開終端機" width="100%"><p class="caption">
 圖 A.4: 打開終端機
 </p>
 </div>
 <p>找到「啟動」分頁後，將預設終端應用程式調整成「Windows 終端機」並儲存。</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-84"></span>
+<span style="display:block;" id="fig:unnamed-chunk-85"></span>
 <img src="figures/configure-windows-terminal_2.png" alt="打開終端機" width="100%"><p class="caption">
 圖 A.5: 打開終端機
 </p>
@@ -189,7 +189,7 @@
 <p>接著按「Load」把剛剛產生的 *.ppk 檔案讀取進來。會看到一行字「Public key for pasting into OpenSSH authorized_keys file」下面的可複製區域就是 public key，把它整段複製起來。</p>
 <div class="inline-figure"><img src="figures/puttygen-load-ppk.png" class="figure"></div>
 <p>接著打開「PowerShell」或是「命令提示字元」，輸入:</p>
-<div class="sourceCode" id="cb273"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb273-1"><a href="related-software.html#cb273-1" tabindex="-1"></a><span class="fu">echo</span> <span class="st">"&lt;YOUR_PUBLIC_KEY&gt;"</span> <span class="op">|</span> ssh asis@192<span class="op">.</span><span class="fu">168</span><span class="op">.</span><span class="fu">0</span><span class="op">.</span><span class="fu">13</span> <span class="st">"cat &gt;&gt; ~/.ssh/authorized_keys"</span></span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode powershell prefixed_powershell"><code class="sourceCode powershell"><span id="cb281-1"><a href="related-software.html#cb281-1" tabindex="-1"></a><span class="fu">echo</span> <span class="st">"&lt;YOUR_PUBLIC_KEY&gt;"</span> <span class="op">|</span> ssh asis@192<span class="op">.</span><span class="fu">168</span><span class="op">.</span><span class="fu">0</span><span class="op">.</span><span class="fu">13</span> <span class="st">"cat &gt;&gt; ~/.ssh/authorized_keys"</span></span></code></pre></div>
 <ul>
 <li><p>將 <code>&lt;YOUR_PUBLIC_KEY&gt;</code> 替換成自己的 public key</p></li>
 <li><p>這裡的 <code>asis</code> 為第一章的<a href="#%E4%BD%BF%E7%94%A8%E8%80%85%E8%A8%AD%E5%AE%9A">使用者設定</a>的預設使用者</p></li>
@@ -259,7 +259,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-12-01.</p>
+    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-12-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

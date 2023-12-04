@@ -139,6 +139,64 @@
 <span id="cb272-4"><a href="maintaince-jupyterhub.html#cb272-4" tabindex="-1"></a>    <span class="at">--name</span> <span class="st">'new_env'</span> <span class="dt">\</span></span>
 <span id="cb272-5"><a href="maintaince-jupyterhub.html#cb272-5" tabindex="-1"></a>    <span class="at">--display-name</span> <span class="st">"新的 Python"</span></span></code></pre></div>
 <p>後續可使用指令 <code>jupyter kernelspec</code> 來管理連結的 conda 環境。</p>
+</div>
+<div id="matplotlib-中文顯示問題" class="section level2" number="8.3">
+<h2>
+<span class="header-section-number">8.3</span> matplotlib 中文顯示問題<a class="anchor" aria-label="anchor" href="#matplotlib-%E4%B8%AD%E6%96%87%E9%A1%AF%E7%A4%BA%E5%95%8F%E9%A1%8C"><i class="fas fa-link"></i></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>安裝開源的 CJK 字體</li>
+</ol>
+<div class="sourceCode" id="cb273"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb273-1"><a href="maintaince-jupyterhub.html#cb273-1" tabindex="-1"></a><span class="fu">sudo</span> apt install fonts-noto-cjk <span class="at">-y</span></span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>搜尋 matplotlib 設定檔案位置</li>
+</ol>
+<div class="sourceCode" id="cb274"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb274-1"><a href="maintaince-jupyterhub.html#cb274-1" tabindex="-1"></a><span class="fu">find</span> /opt/conda/envs <span class="at">-type</span> f <span class="at">-name</span> matplotlibrc</span></code></pre></div>
+<div class="console_output">
+<p>/opt/conda/envs/default-python/lib/python3.10/site-packages/matplotlib/mpl-data/matplotlibrc</p>
+</div>
+<ol start="3" style="list-style-type: decimal">
+<li>複製一份到虛擬環境資料夾中</li>
+</ol>
+<div class="sourceCode" id="cb275"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb275-1"><a href="maintaince-jupyterhub.html#cb275-1" tabindex="-1"></a><span class="fu">sudo</span> cp /opt/conda/envs/default-python/lib/python3.10/site-packages/matplotlib/mpl-data/matplotlibrc /opt/conda/envs</span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>編輯設定檔案，在設定檔案裡面的 <code>font.family</code> 設定為 <code>NotoSans CJK JP</code>。</li>
+</ol>
+<div class="sourceCode" id="cb276"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb276-1"><a href="maintaince-jupyterhub.html#cb276-1" tabindex="-1"></a><span class="fu">sudo</span> vim /opt/conda/envs/matplotlibrc</span></code></pre></div>
+<div class="code-label">
+<p>/opt/conda/envs/matplotlibrc</p>
+</div>
+<div class="sourceCode" id="cb277"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb277-1"><a href="maintaince-jupyterhub.html#cb277-1" tabindex="-1"></a><span class="ex">font.family:</span> <span class="st">"Noto Sans CJK JP"</span></span>
+<span id="cb277-2"><a href="maintaince-jupyterhub.html#cb277-2" tabindex="-1"></a><span class="co">#font.style:   normal</span></span>
+<span id="cb277-3"><a href="maintaince-jupyterhub.html#cb277-3" tabindex="-1"></a><span class="co">#font.variant: normal</span></span>
+<span id="cb277-4"><a href="maintaince-jupyterhub.html#cb277-4" tabindex="-1"></a><span class="co">#font.weight:  normal</span></span>
+<span id="cb277-5"><a href="maintaince-jupyterhub.html#cb277-5" tabindex="-1"></a><span class="co">#font.stretch: normal</span></span>
+<span id="cb277-6"><a href="maintaince-jupyterhub.html#cb277-6" tabindex="-1"></a><span class="co">#font.size:    10.0</span></span></code></pre></div>
+<ol start="5" style="list-style-type: decimal">
+<li>刪除原本的檔案</li>
+</ol>
+<div class="sourceCode" id="cb278"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb278-1"><a href="maintaince-jupyterhub.html#cb278-1" tabindex="-1"></a><span class="fu">sudo</span> rm /opt/conda/envs/default-python/lib/python3.10/site-packages/matplotlib/mpl-data/matplotlibrc</span></code></pre></div>
+<ol start="6" style="list-style-type: decimal">
+<li>把修改後的檔案軟連結回原處</li>
+</ol>
+<div class="sourceCode" id="cb279"><pre class="sourceCode bash prefixed"><code class="sourceCode bash"><span id="cb279-1"><a href="maintaince-jupyterhub.html#cb279-1" tabindex="-1"></a><span class="fu">sudo</span> ln <span class="at">-s</span> /opt/conda/envs/matplotlibrc /opt/conda/envs/default-python/lib/python3.10/site-packages/matplotlib/mpl-data/</span></code></pre></div>
+<ol start="7" style="list-style-type: decimal">
+<li>測試中文</li>
+</ol>
+<div class="sourceCode" id="cb280"><pre class="sourceCode py"><code class="sourceCode python"><span id="cb280-1"><a href="maintaince-jupyterhub.html#cb280-1" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt  </span>
+<span id="cb280-2"><a href="maintaince-jupyterhub.html#cb280-2" tabindex="-1"></a>y <span class="op">=</span> [<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>] </span>
+<span id="cb280-3"><a href="maintaince-jupyterhub.html#cb280-3" tabindex="-1"></a>x<span class="op">=</span> [<span class="dv">0</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">15</span>,<span class="dv">20</span>,<span class="dv">25</span>] </span>
+<span id="cb280-4"><a href="maintaince-jupyterhub.html#cb280-4" tabindex="-1"></a>plt.plot(x, y, color<span class="op">=</span><span class="st">'green'</span>)  </span>
+<span id="cb280-5"><a href="maintaince-jupyterhub.html#cb280-5" tabindex="-1"></a>plt.xlabel(<span class="st">'x'</span>)  </span>
+<span id="cb280-6"><a href="maintaince-jupyterhub.html#cb280-6" tabindex="-1"></a>plt.ylabel(<span class="st">'y'</span>)  </span>
+<span id="cb280-7"><a href="maintaince-jupyterhub.html#cb280-7" tabindex="-1"></a>plt.title(<span class="st">"中文顯示"</span>)   </span>
+<span id="cb280-8"><a href="maintaince-jupyterhub.html#cb280-8" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-80"></span>
+<img src="figures/matplotlib-cjk-font.png" alt="matplotlib 中文顯示測試" width="100%"><p class="caption">
+圖 8.1: matplotlib 中文顯示測試
+</p>
+</div>
 
 </div>
 </div>
@@ -154,6 +212,7 @@
 <li><a class="nav-link" href="#maintaince-jupyterhub"><span class="header-section-number">8</span> JupyterHub</a></li>
 <li><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E5%A5%97%E4%BB%B6"><span class="header-section-number">8.1</span> 更新套件</a></li>
 <li><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E4%BE%9B-jupyterhub-%E7%9A%84-python-%E7%92%B0%E5%A2%83"><span class="header-section-number">8.2</span> 新增供 JupyterHub 的 Python 環境</a></li>
+<li><a class="nav-link" href="#matplotlib-%E4%B8%AD%E6%96%87%E9%A1%AF%E7%A4%BA%E5%95%8F%E9%A1%8C"><span class="header-section-number">8.3</span> matplotlib 中文顯示問題</a></li>
 </ul>
 
       <div class="book-extra">
@@ -171,7 +230,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-12-01.</p>
+    <p>"<strong>MCU ASIS Ubuntu 系統安裝指南</strong>" was written by Chiawei Chen. It was last built on 2023-12-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

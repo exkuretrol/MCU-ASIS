@@ -82,11 +82,12 @@ fig:unnamed-chunk-81
 fig:unnamed-chunk-82
 fig:unnamed-chunk-83
 fig:unnamed-chunk-84
+fig:unnamed-chunk-85
 fig:manage-users-sh
 fig:create-users
-fig:unnamed-chunk-85
 fig:unnamed-chunk-86
 fig:unnamed-chunk-87
+fig:unnamed-chunk-88
 intro
 intro-preparing
 downloading-ubuntu-image
@@ -187,6 +188,7 @@ mysql-delete-user
 maintaince-jupyterhub
 更新套件
 新增供-jupyterhub-的-python-環境
+matplotlib-中文顯示問題
 related-software
 windows-terminal
 putty
